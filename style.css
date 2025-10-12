@@ -2,8 +2,8 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   12/10/2025 02:04 PM AEDT (Mallacoota)
-# Version:     [25.10.005]
+# Timestamp:   12/10/2025 02:44 PM AEDT (Mallacoota)
+# Version:     [25.10.006]
 # File Name:   style.css
 # Description: Main stylesheet for the lovemallacoota.com.au portal.
 */
@@ -142,8 +142,13 @@ p {
 /* --- Portal Navigation Grid --- */
 .portal-nav-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr; /* Mobile first */
   gap: var(--spacing-unit);
+}
+@media (min-width: 769px) {
+  .portal-nav-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 .nav-card {
   display: block;
@@ -171,12 +176,28 @@ p {
   margin-bottom: 0;
 }
 
-/* --- Directory Listings Grid --- */
+/* --- Directory Listings Grid (Desktop First) --- */
 .listings-grid {
   display: grid;
-  grid-template-columns: 1fr;
   gap: var(--spacing-unit);
+  grid-template-columns: repeat(4, 1fr); /* Widescreen */
 }
+@media (max-width: 1919px) {
+  .listings-grid {
+    grid-template-columns: repeat(3, 1fr); /* Desktop */
+  }
+}
+@media (max-width: 1199px) {
+  .listings-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet */
+  }
+}
+@media (max-width: 768px) {
+  .listings-grid {
+    grid-template-columns: 1fr; /* Mobile */
+  }
+}
+
 .listing-card {
   background: rgba(0, 0, 0, 0.05);
   border-radius: calc(var(--border-radius) - 4px);
@@ -201,10 +222,10 @@ p {
   color: var(--text-color);
   opacity: 0.9;
   margin-bottom: 1rem;
-  flex-grow: 1; /* Pushes links to the bottom */
+  flex-grow: 1;
 }
 .listing-card .links {
-  margin-top: auto; /* Aligns to the bottom */
+  margin-top: auto;
 }
 .listing-card .links a {
   display: inline-block;
@@ -224,29 +245,6 @@ p {
   background: var(--link-color);
   color: var(--bg-color);
   text-decoration: none;
-}
-
-/* --- Responsive Grids --- */
-@media (max-width: 768px) {
-  .portal-nav-grid {
-    grid-template-columns: 1fr;
-  }
-}
-/* For Listings Grid */
-@media (min-width: 769px) {
-  .listings-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1200px) {
-  .listings-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (min-width: 1920px) {
-  .listings-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 /* --- Theme Toggle --- */

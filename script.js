@@ -2,14 +2,14 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   12/10/2025 02:10 PM AEDT (Mallacoota)
-# Version:     [25.10.005]
+# Timestamp:   12/10/2025 02:59 PM AEDT (Mallacoota)
+# Version:     [25.10.009]
 # File Name:   script.js
 # Description: Handles theming, backgrounds, and dynamic content rendering.
 */
 document.addEventListener("DOMContentLoaded", () => {
   // --- Version Info ---
-  const FILE_VERSION = "25.10.005";
+  const FILE_VERSION = "25.10.009";
   const FILE_DATE = "12 Oct 2025";
 
   // --- Theme Toggler ---
@@ -82,13 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
     card.className = "listing-card";
 
     let linksHTML = '<div class="links">';
-    if (business.website) {
-      let linkText = "Website";
-      if (business.website.includes("instagram.com")) linkText = "Instagram";
-      if (business.website.includes("facebook.com")) linkText = "Facebook";
-      if (business.website.includes("x.com")) linkText = "X (Twitter)";
-      if (business.website.includes("tiktok.com")) linkText = "TikTok";
-      linksHTML += `<a href="${business.website}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+    if (business.website && business.link_text) {
+      linksHTML += `<a href="${business.website}" target="_blank" rel="noopener noreferrer">${business.link_text}</a>`;
     }
     if (business.phone) {
       linksHTML += `<a href="tel:${business.phone}">Call</a>`;
@@ -117,16 +112,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const allBusinesses = await response.json();
 
       const filteredBusinesses = allBusinesses.filter((business) => {
-        if (Array.isArray(category)) {
-          return category.includes(business.category_primary);
-        }
-        return business.category_primary === category;
+        const pageCategories = Array.isArray(category) ? category : [category];
+        // A business is a match if any of its tags are in the list of page categories.
+        return business.category_tags.some((tag) =>
+          pageCategories.includes(tag)
+        );
       });
 
       if (filteredBusinesses.length === 0) {
         listingsGrid.innerHTML = "<p>No listings found for this category.</p>";
         return;
       }
+
+      listingsGrid.innerHTML = "";
 
       filteredBusinesses.forEach((business) => {
         const card = createListingCard(business);

@@ -1,0 +1,111 @@
+<!--
+# Project:     lovemallacoota.com.au
+# Author:      Colin Dixon BSc, DipEd, Cert IV TAE
+# Contact:     crdixon@gmail.com
+# Timestamp:   12/10/2025 11:12 PM AEDT (Mallacoota)
+# Version:     [25.10.001]
+# File Name:   contact.html
+# Description: Placeholder contact/report page (to be wired to EmailJS).
+-->
+<!DOCTYPE html>
+<html lang="en-AU" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suggest a Link or Update — Love Mallacoota</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .contact-wrap {
+        max-width: 720px;
+        margin: 6rem auto 2rem;
+      }
+      .field {
+        margin-bottom: 1rem;
+      }
+      .field label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      .field input,
+      .field textarea,
+      .field select {
+        width: 100%;
+        padding: 0.6rem 0.8rem;
+        border-radius: 10px;
+        border: 1px solid var(--glass-border);
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--text-color);
+      }
+      .pill-btn {
+        display: inline-block;
+        padding: 0.55rem 1rem;
+        border-radius: 999px;
+        border: 1px solid var(--glass-border);
+        background: rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="contact-wrap">
+      <div class="glass-card">
+        <h1>Suggest a Link or Update</h1>
+        <p>
+          Paste the correct link for a business, or let us know about mistakes,
+          closures, or new places.
+        </p>
+
+        <!-- Placeholder form; we’ll wire this to EmailJS next -->
+        <form id="contact-form">
+          <div class="field">
+            <label for="business">Business</label>
+            <input id="business" name="business" required />
+          </div>
+          <div class="field">
+            <label for="reason">Reason</label>
+            <select id="reason" name="reason">
+              <option>Add link</option>
+              <option>Incorrect info</option>
+              <option>Closed business</option>
+              <option>New business</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="url">URL</label>
+            <input id="url" name="url" type="url" placeholder="https://..." />
+          </div>
+          <div class="field">
+            <label for="notes">Notes (optional)</label>
+            <textarea id="notes" name="notes" rows="4"></textarea>
+          </div>
+          <button class="pill-btn" type="submit">Send (placeholder)</button>
+          <a href="index.html" class="pill-btn" style="margin-left: 0.5rem"
+            >Back</a
+          >
+        </form>
+
+        <p id="contact-hint" style="margin-top: 1rem; opacity: 0.8"></p>
+      </div>
+    </main>
+
+    <script>
+      // Prefill from querystring
+      const params = new URLSearchParams(location.search);
+      const b = params.get("business") || "";
+      const from = params.get("from") || "";
+      document.getElementById("business").value = b;
+      const hint = document.getElementById("contact-hint");
+      if (from) hint.textContent = `Submitted from: ${from}`;
+
+      // Placeholder handler
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert("Thanks! We will wire this form to EmailJS next.");
+        });
+    </script>
+  </body>
+</html>

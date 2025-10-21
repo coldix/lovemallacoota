@@ -2,8 +2,8 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   12/10/2025 09:36 PM AEDT (Mallacoota)
-# Version:     [25.10.012]
+# Timestamp:   21/10/2025 05:25 PM AEDT (Mallacoota)
+# Version:     [25.10.013]
 # File Name:   index.html
 # Description: Main landing page and portal for the lovemallacoota.com.au directory.
 -->
@@ -91,11 +91,12 @@
         height: 16px;
         display: block;
       }
+
       /* Header tidy */
       .main-header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center; /* Center the content */
       }
       .header-title-row {
         display: flex;
@@ -106,19 +107,22 @@
         height: 100px;
         width: auto;
       }
+      .social-links a svg {
+        fill: var(--text-color);
+        width: 24px;
+        height: 24px;
+        transition: opacity 0.2s;
+      }
+      .social-links a:hover svg {
+        opacity: 0.7;
+      }
     </style>
   </head>
   <body>
-    <!-- Left floating pill: Coota -->
-    <a
-      href="https://coota.au"
-      class="floating-pill pill-left"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Coota</a
-    >
+    <!-- Left floating pill: Calendar -->
+    <a href="calendar.html" class="floating-pill pill-left">Calendar</a>
 
-    <!-- Right floating pill: Theme toggle (sun/moon icon restored) -->
+    <!-- Right floating pill: Theme toggle -->
     <button
       id="theme-toggle"
       class="floating-pill pill-right"
@@ -129,13 +133,7 @@
     </button>
 
     <header class="main-header glass-card">
-      <nav aria-label="Primary">
-        <ul>
-          <li><a href="food.html">Eat &amp; Drink</a></li>
-          <li><a href="accom.html">Stay</a></li>
-          <li><a href="activity.html">Do &amp; See</a></li>
-        </ul>
-      </nav>
+      <!-- Nav removed as requested -->
     </header>
 
     <main>
@@ -190,6 +188,18 @@
       <div class="footer-content">
         <div class="footer-section social-links">
           <a
+            href="https://coota.au"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Coota website"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+              />
+            </svg>
+          </a>
+          <a
             href="https://www.facebook.com/lovemallacoota"
             target="_blank"
             rel="noopener noreferrer"
@@ -227,7 +237,7 @@
           </a>
         </div>
         <div class="footer-section copyright-section">
-          © 2025 Colin Dixon. All Rights Reserved. V: 25.10.004 • 12 Oct 2025
+          © 2025 Colin Dixon. All Rights Reserved. V: 25.10.013 • 21 Oct 2025
         </div>
         <div
           class="footer-section oze-logo-container"

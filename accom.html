@@ -2,13 +2,13 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   12/10/2025 01:38 PM AEDT (Mallacoota)
-# Version:     [25.10.001]
+# Timestamp:   21/10/2025 08:41 PM AEDT (Mallacoota)
+# Version:     [25.10.017]
 # File Name:   accom.html
 # Description: Accommodation Page for the lovemallacoota.com.au directory.
 -->
 <!DOCTYPE html>
-<html lang="en-AU" data-theme="dark">
+<html lang="en-AU" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,36 +20,82 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+
+    <style>
+      /* Floating pills for consistency */
+      .floating-pill {
+        position: fixed;
+        top: 1rem;
+        z-index: 1000;
+        background: var(--glass-fill);
+        color: var(--text-color);
+        border: 1px solid var(--glass-border);
+        border-radius: 999px;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .floating-pill:hover {
+        text-decoration: none;
+      }
+      .pill-left {
+        left: 1rem;
+      }
+      .pill-right {
+        right: 1rem;
+      }
+      #theme-icon svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+      }
+      /* Header layout */
+      .header-title-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+      }
+      .header-title-row img {
+        height: 100px;
+        width: auto;
+      }
+    </style>
   </head>
   <body>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-      <svg id="theme-icon" viewBox="0 0 24 24" aria-hidden="true"></svg>
-      <span id="theme-label">Dark</span>
+    <!-- Floating Pills -->
+    <a href="calendar.html" class="floating-pill pill-left">Calendar</a>
+    <button
+      id="theme-toggle"
+      class="floating-pill pill-right"
+      aria-pressed="false"
+    >
+      <span id="theme-icon" aria-hidden="true"></span>
+      <span id="theme-label">Light</span>
     </button>
 
     <main>
       <div class="glass-card hero-card">
-        <h1>Love Mallacoota: Stay</h1>
-        <p>
+        <div class="header-title-row">
+          <img src="images/logo145x100.webp" alt="Love Mallacoota logo" />
+          <h1 style="margin: 0">Stay</h1>
+        </div>
+        <p style="margin-top: 0.75rem">
           Whether you're looking for a waterfront lodge, a family-friendly
           caravan park, or a cozy B&B, find your perfect home away from home.
         </p>
       </div>
 
       <div class="glass-card">
-        <div id="listings-grid" class="listings-grid"></div>
-      </div>
-
-      <div class="glass-card video-card">
-        <div class="video-container">
-          <iframe
-            src="https://www.youtube.com/embed/placeholder_video_id"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          >
-          </iframe>
+        <div id="listings-grid" class="listings-grid">
+          <!-- JS will populate this section -->
         </div>
       </div>
 
@@ -67,6 +113,22 @@
             <h3>Do & See</h3>
             <p>Explore tours and shops.</p>
           </a>
+        </div>
+      </div>
+
+      <div class="glass-card video-card">
+        <h2>Experience Mallacoota</h2>
+        <div class="video-container">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/9V04NRArP5U?si=Lhy7mQz8Yq0WgCvN"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </main>
@@ -124,7 +186,5 @@
         </div>
       </div>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>

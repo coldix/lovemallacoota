@@ -2,10 +2,10 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   21/10/2025 08:35 PM AEDT (Mallacoota)
-# Version:     [25.10.016]
+# Timestamp:   23/10/2025 09:05 AM AEDT (Mallacoota)
+# Version:     [25.10.015]
 # File Name:   activity.html
-# Description: Activity Page for the lovemallacoota.com.au directory.
+# Description: “Do & See” page for lovemallacoota.com.au directory.
 -->
 <!DOCTYPE html>
 <html lang="en-AU" data-theme="light">
@@ -21,16 +21,45 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-CPTXSP8D3J");
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Do & See in Mallacoota - lovemallacoota.com.au</title>
-
+    <title>Do &amp; See in Mallacoota - lovemallacoota.com.au</title>
     <meta
       name="description"
       content="Discover things to do in Mallacoota. Explore local tours, boat hire, activities, and unique shopping experiences."
+    />
+    <link rel="canonical" href="https://lovemallacoota.com.au/activity.html" />
+    <meta name="robots" content="index,follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Do &amp; See — Mallacoota" />
+    <meta
+      property="og:description"
+      content="Tours, boat hire, kayaking, shopping and more in Mallacoota — your guide to what to do."
+    />
+    <meta
+      property="og:url"
+      content="https://lovemallacoota.com.au/activity.html"
+    />
+    <meta
+      property="og:image"
+      content="https://lovemallacoota.com.au/images/og-hero.jpg"
+    />
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Do & See — Mallacoota" />
+    <meta
+      name="twitter:description"
+      content="Explore tour ops, boat hire, local activities and shopping in Mallacoota."
+    />
+    <meta
+      name="twitter:image"
+      content="https://lovemallacoota.com.au/images/og-hero.jpg"
     />
 
     <link rel="stylesheet" href="style.css" />
@@ -70,12 +99,11 @@
         height: 16px;
         display: block;
       }
-      /* Header layout */
+      /* Header/hero layout */
       .header-title-row {
         display: flex;
         align-items: center;
         gap: 1rem;
-        justify-content: center;
       }
       .header-title-row img {
         height: 100px;
@@ -84,8 +112,9 @@
     </style>
   </head>
   <body>
-    <!-- Floating Pills -->
+    <!-- Left floating pill: Calendar -->
     <a href="calendar.html" class="floating-pill pill-left">Calendar</a>
+    <!-- Right floating pill: Theme toggle -->
     <button
       id="theme-toggle"
       class="floating-pill pill-right"
@@ -99,17 +128,17 @@
       <div class="glass-card hero-card">
         <div class="header-title-row">
           <img src="images/logo145x100.webp" alt="Love Mallacoota logo" />
-          <h1 style="margin: 0">Do & See</h1>
+          <h1 style="margin: 0">Do &amp; See</h1>
         </div>
         <p style="margin-top: 0.75rem">
           From tranquil inlet cruises and fishing adventures to unique local
-          shops, there's always something new to discover in Mallacoota.
+          shops, there’s always something new to discover in Mallacoota.
         </p>
       </div>
 
       <div class="glass-card">
         <div id="listings-grid" class="listings-grid">
-          <!-- JS will populate this section -->
+          <!-- JS will populate this section with cards -->
         </div>
       </div>
 
@@ -120,7 +149,7 @@
             <p>Return to the main page.</p>
           </a>
           <a href="food.html" class="nav-card">
-            <h3>Eat & Drink</h3>
+            <h3>Eat &amp; Drink</h3>
             <p>Explore cafes and restaurants.</p>
           </a>
           <a href="accom.html" class="nav-card">
@@ -139,6 +168,7 @@
             src="https://www.youtube.com/embed/qprjDolCxpw?si=oPhYY2aFbxQMmdUS"
             title="YouTube video player"
             frameborder="0"
+            loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
@@ -152,10 +182,12 @@
         <div class="footer-section footer-links-container">
           <a href="https://coota.au" target="_blank" rel="noopener noreferrer"
             >coota.au</a
-          ><span class="separator">&bull;</span>
+          >
+          <span class="separator">&bull;</span>
           <a href="https://dixon.au" target="_blank" rel="noopener noreferrer"
             >dixon.au</a
-          ><span class="separator">&bull;</span>
+          >
+          <span class="separator">&bull;</span>
           <a href="https://oze.au" target="_blank" rel="noopener noreferrer"
             >oze.au</a
           >
@@ -166,7 +198,8 @@
             target="_blank"
             rel="noopener noreferrer"
             aria-label="YouTube"
-            ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
                 d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"
               /></svg
@@ -176,7 +209,8 @@
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X (Twitter)"
-            ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
                 d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
               /></svg
@@ -186,7 +220,8 @@
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
                 d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
               /></svg

@@ -2,8 +2,8 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   22/10/2025 8:35 PM AEDT (Mallacoota)
-# Version:     [25.10.004]
+# Timestamp:   22/10/2025 9:10 PM AEDT (Mallacoota)
+# Version:     [25.10.005]
 # File Name:   contact.html
 # Description: Placeholder contact/report page (to be wired to EmailJS).
 -->
@@ -38,6 +38,11 @@
         }
       }
     </script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -174,10 +179,35 @@
         background: var(--link-color);
         color: var(--bg-color);
       }
+      .pill-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
       hr.form-divider {
         border: 0;
         border-top: 1px solid var(--glass-border);
         margin: 1.5rem 0;
+      }
+      .form-status {
+        font-weight: 600;
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border-radius: 10px;
+        display: none; /* Hidden by default */
+      }
+      .form-status.success {
+        background: rgba(40, 167, 69, 0.2);
+        color: #155724;
+      }
+      .form-status.error {
+        background: rgba(220, 53, 69, 0.2);
+        color: #721c24;
+      }
+      [data-theme="dark"] .form-status.success {
+        color: #c3e6cb;
+      }
+      [data-theme="dark"] .form-status.error {
+        color: #f5c6cb;
       }
     </style>
   </head>
@@ -249,13 +279,17 @@
             <input id="user_phone" name="user_phone" type="tel" />
           </div>
 
-          <button class="pill-btn" type="submit">Send Update</button>
+          <button class="pill-btn" type="submit" id="submit-btn">
+            Send Update
+          </button>
           <a href="index.html" class="pill-btn" style="margin-left: 0.5rem"
             >Back to Home</a
           >
         </form>
 
         <p id="contact-hint" style="margin-top: 1rem; opacity: 0.8"></p>
+
+        <div id="form-status" class="form-status"></div>
       </section>
     </main>
 
@@ -333,6 +367,58 @@
     </footer>
 
     <script>
+      // --- START: EmailJS Configuration ---
+      (function () {
+        // 1. Initialize EmailJS with your Public Key
+        emailjs.init({
+          publicKey: "GdEBEMDQA8_uN35yS", // <-- YOUR PUBLIC KEY IS SET
+        });
+      })();
+
+      // 2. Add the submit handler
+      const contactForm = document.getElementById("contact-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const statusMsg = document.getElementById("form-status");
+
+      contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Disable button to prevent double-send
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+        statusMsg.style.display = "none";
+
+        // 3. Send the form
+        emailjs
+          .sendForm(
+            "service_40hkcin", // <-- YOUR SERVICE ID IS SET
+            "YOUR_NEW_TEMPLATE_ID", // <-- PASTE YOUR NEW TEMPLATE ID HERE
+            this
+          )
+          .then(
+            () => {
+              // Success
+              statusMsg.textContent = "Thanks! Your update has been sent.";
+              statusMsg.className = "form-status success";
+              statusMsg.style.display = "block";
+              contactForm.reset();
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Send Update";
+            },
+            (err) => {
+              // Error
+              statusMsg.textContent =
+                "Oops! Something went wrong. Please try again.";
+              statusMsg.className = "form-status error";
+              statusMsg.style.display = "block";
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Send Update";
+              console.error("EmailJS Error:", JSON.stringify(err));
+            }
+          );
+      });
+      // --- END: EmailJS Configuration ---
+
       // Prefill from querystring
       const params = new URLSearchParams(location.search);
       const b = params.get("business") || "";
@@ -340,14 +426,6 @@
       document.getElementById("business").value = b;
       const hint = document.getElementById("contact-hint");
       if (from) hint.textContent = `Submitted from: ${from}`;
-
-      // Placeholder handler
-      document
-        .getElementById("contact-form")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          alert("Thanks! This form is a placeholder.");
-        });
     </script>
   </body>
 </html>

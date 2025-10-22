@@ -219,7 +219,7 @@
     "email": null,
     "links": [
       {
-        "url": "https://mallacoota.info/", // Note: This seems like a general info site, not specific park site. Verify link.
+        "url": "https://mallacoota.info/",
         "text": "Website"
       }
     ],
@@ -811,7 +811,7 @@
     },
     "geo": {
       "latitude": -37.55759,
-      "longitude": 1_49.75678_ // Corrected typo
+      "longitude": 149.75678
     },
     "opening_hours": [
         { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "08:00", "closes": "19:00" } // Verify closing time consistency

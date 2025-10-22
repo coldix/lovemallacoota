@@ -1,0 +1,30 @@
+# --- Permanent Redirects from old WordPress links ---
+
+# This permanently moves an old URL to a new one (301)
+
+# 22 Oct 2025 12:02pm
+
+# Main Pages
+
+Redirect 301 /eat-drink/ /food.html
+Redirect 301 /stay/ /accom.html
+Redirect 301 /do-see/ /activity.html
+Redirect 301 /calendar/ /calendar.html
+Redirect 301 /contact/ /contact.html
+
+# Also add common variations just in case
+
+Redirect 301 /food/ /food.html
+Redirect 301 /accommodation/ /accom.html
+Redirect 301 /activities/ /activity.html
+
+# --- Catch-all for old WP blog/directory structure ---
+
+Redirect 301 /listing/ /index.html
+Redirect 301 /category/ /index.html
+Redirect 301 /category/news/ /index.html
+Redirect 301 /category/how/ /index.html
+Redirect 301 /category/what/ /index.html
+Redirect 301 /category/where/ /index.html
+Redirect 301 /category/who/ /index.html
+Redirect 301 /category/why/ /index.html

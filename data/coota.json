@@ -283,15 +283,15 @@
       }
     ],
     "address": {
-      "street": "St Peter's Church, Genoa Rd", // Adjusted street based on description
+      "street": "St Peter's Church, Genoa Rd",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55835, // Approx location of church
-      "longitude": 149.75344 // Approx location of church
+      "latitude": -37.55835,
+      "longitude": 149.75344
     },
     "opening_hours": [],
     "notes_seasonal": "Check Instagram for current hours and days of operation."
@@ -533,15 +533,15 @@
     ],
     "social_links": [],
     "address": {
-      "street": null, // Address likely provided on booking
+      "street": null,
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.559, // Approximate
-      "longitude": 149.755 // Approximate
+      "latitude": -37.559,
+      "longitude": 149.755
     },
     "opening_hours": [
       {
@@ -556,7 +556,7 @@
         ],
         "opens": "09:00",
         "closes": "17:00"
-      } // Office hours placeholder
+      } 
     ],
     "notes_seasonal": "Bookings required."
   },
@@ -573,7 +573,7 @@
       "Cafe",
       "Restaurant"
     ],
-    "schema_type": "LodgingBusiness", // Primary is Accommodation
+    "schema_type": "LodgingBusiness", 
     "description_short": "Lodge accommodation at Gipsy Point with lake views. Also features a cafe/restaurant.",
     "description_long": "Tranquil lodge accommodation with restaurant and boat hire on the Genoa River. Located just outside Mallacoota at Gipsy Point, offering comfortable lodge rooms, self-contained cottages, an on-site restaurant, and boat hire for exploring the river and inlet system. A haven for birdwatchers and nature lovers. (Add more details here).",
     "images": [
@@ -595,13 +595,13 @@
       {
         "platform": "facebook",
         "url": "https://www.facebook.com/gipsypointlodge"
-      } // Added FB link
+      }
     ],
     "address": {
       "street": "35 Macdonald St",
       "locality": "Gipsy Point",
       "state": "VIC",
-      "postcode": "3891", // Gipsy Point postcode
+      "postcode": "3891",
       "country": "Australia"
     },
     "geo": {
@@ -621,7 +621,7 @@
         ],
         "opens": "09:00",
         "closes": "17:00"
-      } // Lodge/Office hours placeholder
+      } 
     ],
     "notes_seasonal": "Restaurant hours vary, booking recommended."
   },
@@ -631,7 +631,7 @@
     "business_name": "Gipsy Point Lodge Café-Restaurant",
     "category_primary": "Food & Drink",
     "category_tags": ["Food & Drink", "Cafe", "Restaurant", "Accommodation"],
-    "schema_type": "Restaurant", // Primary is Food
+    "schema_type": "Restaurant",
     "description_short": "Regional food and lake views at Gipsy Point. Also offers accommodation.",
     "description_long": "Enjoy breakfast, lunch, or dinner featuring regional produce with stunning views over the Genoa River. Located within Gipsy Point Lodge. Accommodation also available. (Add more details here).",
     "images": [
@@ -653,7 +653,7 @@
       {
         "platform": "facebook",
         "url": "https://www.facebook.com/gipsypointlodge"
-      } // Added FB link
+      }
     ],
     "address": {
       "street": "35 Macdonald St",
@@ -666,7 +666,7 @@
       "latitude": -37.51868,
       "longitude": 149.71887
     },
-    "opening_hours": [], // Needs specific restaurant hours
+    "opening_hours": [],
     "notes_seasonal": "Restaurant hours vary seasonally. Booking essential, especially for dinner."
   },
   {
@@ -727,7 +727,7 @@
     "slug": "harbour-lights-holiday-flats",
     "business_name": "Harbour Lights Holiday Flats",
     "category_primary": "Accommodation",
-    "category_tags": ["Accommodation", "Cottages"], // Original tags were Cottages
+    "category_tags": ["Accommodation", "Cottages"],
     "schema_type": "Accommodation",
     "description_short": "Well-maintained holiday flats offering a peaceful base for your Mallacoota adventures.",
     "description_long": "Comfortable self-contained holiday flats located slightly out of the main town centre, offering a quiet base to relax after exploring Mallacoota. (Add more details here).",
@@ -781,14 +781,14 @@
     "id": "mh17",
     "slug": "iga-local-grocer-mallacoota",
     "business_name": "IGA Local Grocer Mallacoota",
-    "category_primary": "Food & Drink", // Also Shopping
+    "category_primary": "Food & Drink",
     "category_tags": ["Food & Drink", "Shopping", "Groceries", "Deli", "Liquor"],
     "schema_type": "GroceryStore",
     "description_short": "Supermarket with a deli, liquor section, and a good selection of groceries. Often stocks fresh local fish.",
     "description_long": "Your local IGA supermarket offering a comprehensive range of groceries, fresh produce, meat, dairy, frozen foods, deli items, household goods, and a liquor section. Known for sometimes stocking fresh local fish catches. (Add more details here).",
     "images": [
       {
-        "url": "/images/bus/shop/mh17-iga-local-grocer-mallacoota1.webp", // Using shop category for image path
+        "url": "/images/bus/shop/mh17-iga-local-grocer-mallacoota1.webp",
         "alt_text": "IGA Local Grocer Mallacoota storefront.",
         "is_hero": true
       }
@@ -823,8 +823,8 @@
     "slug": "karbeethong-lodge",
     "business_name": "Karbeethong Lodge",
     "category_primary": "Accommodation",
-    "category_tags": ["Accommodation", "B&B"], // Your list says B&B, previous data said Lodge/Guest House
-    "schema_type": "BedAndBreakfast", // Based on B&B tag
+    "category_tags": ["Accommodation", "B&B"],
+    "schema_type": "BedAndBreakfast",
     "description_short": "Enjoy spectacular waterfront views at this historic lodge offering cosy, country-style ensuite rooms. Some rooms open onto the verandah overlooking the water, others to gardens. Ideal for couples, families (sleeps 24 total), celebrations, or small weddings.",
     "description_long": "Step back in time at the beautifully preserved Karbeethong Lodge. Enjoy unique guest rooms with ensuite bathrooms, shared lounge areas, expansive verandahs, and breathtaking views across the Mallacoota Inlet. Ideal for romantic getaways, family gatherings, small weddings, or special celebrations. Sleeps up to 24 guests total. (Add more details here).",
     "images": [
@@ -834,7 +834,7 @@
         "is_hero": true
       }
     ],
-    "phone": "03 5158 0411", // Your list has this number
+    "phone": "03 5158 0411",
     "email": "admin@karbeethonglodge.com.au",
     "links": [
       {
@@ -843,17 +843,17 @@
       }
     ],
     "social_links": [
-        {"platform": "instagram", "url": "https://www.instagram.com/karbeethong_lodge/"} // Added from previous data
+        {"platform": "instagram", "url": "https://www.instagram.com/karbeethong_lodge/"}
     ],
     "address": {
-      "street": "12 Schnapper Point Dr", // Your list has this address, different from previous data
+      "street": "12 Schnapper Point Dr",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55018, // Geo matches Karbeethong Ave location more closely, verify address
+      "latitude": -37.55018,
       "longitude": 149.72911
     },
     "opening_hours": [
@@ -867,7 +867,7 @@
     "business_name": "Kelpy’s Seafood",
     "category_primary": "Food & Drink",
     "category_tags": ["Food & Drink", "Seafood", "Takeaway"],
-    "schema_type": "FoodEstablishment", // Specific type like SeafoodRestaurant might fit if it's more than just takeaway
+    "schema_type": "FoodEstablishment", 
     "description_short": "Seasonal seafood vendor on the wharf, offering fresh local fish and oysters.",
     "description_long": "Located right on the main wharf, Kelpy's offers fresh, locally caught seafood, including fish, oysters, and sometimes prawns or crayfish, depending on the season and catch. Primarily takeaway. (Add more details here).",
     "images": [
@@ -882,15 +882,15 @@
     "links": [],
     "social_links": [],
     "address": {
-      "street": "The Wharf, Mallacoota", // More descriptive
+      "street": "The Wharf, Mallacoota",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.5593, // Approx Wharf location
-      "longitude": 149.7516 // Approx Wharf location
+      "latitude": -37.5593,
+      "longitude": 149.7516
     },
     "opening_hours": [],
     "notes_seasonal": "Highly seasonal operation, typically open during peak holiday periods and good weather. Check locally."
@@ -900,7 +900,7 @@
     "slug": "lakeside-at-mallacoota",
     "business_name": "Lakeside at Mallacoota",
     "category_primary": "Accommodation",
-    "category_tags": ["Accommodation", "Cottages"], // Your list says Cottages
+    "category_tags": ["Accommodation", "Cottages"],
     "schema_type": "Accommodation",
     "description_short": "Modern accommodation with beautiful lakeside views and easy access to town facilities.",
     "description_long": "Offers contemporary self-contained accommodation units enjoying views across the lake. Conveniently located for accessing town shops and waterfront walks. (Add more details here).",
@@ -911,11 +911,11 @@
         "is_hero": true
       }
     ],
-    "phone": "03 5158 0233", // Same as Beachcomber? Verify.
-    "email": "bccpark@bigpond.com", // Same as Beachcomber? Verify.
+    "phone": "03 5158 0233",
+    "email": "bccpark@bigpond.com",
     "links": [
       {
-        "url": "https://mallacoota.net.au", // Seems like a different general site? Verify link.
+        "url": "https://mallacoota.net.au",
         "text": "Website"
       }
     ],
@@ -932,7 +932,7 @@
       "longitude": 149.75549
     },
     "opening_hours": [
-      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Office hours placeholder
+      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" }
     ],
     "notes_seasonal": ""
   },
@@ -955,7 +955,7 @@
     "phone": null,
     "email": null,
     "links": [],
-    "social_links": [], // Check if they have Facebook/Insta
+    "social_links": [],
     "address": {
       "street": "Location Varies",
       "locality": "Mallacoota",
@@ -964,8 +964,8 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.559, // Approximate centre
-      "longitude": 149.755 // Approximate centre
+      "latitude": -37.559,
+      "longitude": 149.755
     },
     "opening_hours": [],
     "notes_seasonal": "Mobile vendor. Hours and location vary, check locally."
@@ -976,7 +976,7 @@
     "business_name": "Lee’s Pizza & Take Away",
     "category_primary": "Food & Drink",
     "category_tags": ["Food & Drink", "Pizza", "Takeaway", "Fish & Chips"],
-    "schema_type": "Restaurant", // Or FastFoodRestaurant
+    "schema_type": "Restaurant",
     "description_short": "Pizza, Fish & Chips, and tasty takeaways.",
     "description_long": "Popular takeaway spot offering a range of pizzas with various toppings, classic fish and chips, burgers, and other fast food options. (Add more details here).",
     "images": [
@@ -989,7 +989,7 @@
     "phone": "03 5158 0338",
     "email": null,
     "links": [],
-    "social_links": [], // Check for Facebook page
+    "social_links": [],
     "address": {
       "street": "42a Maurice Ave",
       "locality": "Mallacoota",
@@ -1002,8 +1002,8 @@
       "longitude": 149.75704
     },
     "opening_hours": [
-        { "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "17:00", "closes": "20:00" } // Example hours, verify locally
-    ],
+        { "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "17:00", "closes": "20:00" }
+    ],mple hours,
     "notes_seasonal": "Typically open evenings, hours vary seasonally. Check locally."
   },
   {
@@ -1022,8 +1022,8 @@
         "is_hero": true
       }
     ],
-    "phone": "03 5158 0600", // Same as Mallacoota Wise/Tideline? Verify booking contact.
-    "email": "holidays.mallacoota@gmail.com", // Same as Eagle View? Verify booking contact.
+    "phone": "03 5158 0600",
+    "email": "holidays.mallacoota@gmail.com",
     "links": [
       {
         "url": "https://www.lincottage.au/",
@@ -1032,15 +1032,15 @@
     ],
     "social_links": [],
     "address": {
-      "street": null, // Address likely provided on booking
+      "street": null,
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.560, // Approximate
-      "longitude": 149.756 // Approximate
+      "latitude": -37.560,
+      "longitude": 149.756
     },
     "opening_hours": [
         { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Booking hours placeholder
@@ -1067,7 +1067,7 @@
     "email": null,
     "links": [],
     "social_links": [
-        {"platform": "facebook", "url": "https://www.facebook.com/lucysmallacoota/"} // Same page as noodle house? Verify.
+        {"platform": "facebook", "url": "https://www.facebook.com/lucysmallacoota/"}
     ],
     "address": {
       "street": "44 Maurice Ave",
@@ -1081,7 +1081,7 @@
       "longitude": 149.75697
     },
     "opening_hours": [
-        { "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "17:00", "closes": "21:00" } // Example hours, verify locally
+        { "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "17:00", "closes": "21:00" }
     ],
     "notes_seasonal": "Typically open for dinner, closed Mondays. Hours may vary seasonally."
   },
@@ -1090,7 +1090,7 @@
     "slug": "mallamaurice-holiday-units",
     "business_name": "MallaMaurice Holiday Units",
     "category_primary": "Accommodation",
-    "category_tags": ["Accommodation", "Cottages"], // Your list says Cottages
+    "category_tags": ["Accommodation", "Cottages"],
     "schema_type": "Accommodation",
     "description_short": "Centrally located holiday units, perfect for exploring Mallacoota on foot.",
     "description_long": "Self-contained holiday units situated right in the heart of Mallacoota on the main street, offering easy walking access to shops, cafes, and the waterfront. (Add more details here).",
@@ -1122,7 +1122,7 @@
       "longitude": 149.75631
     },
     "opening_hours": [
-      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Office hours placeholder
+      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" }
     ],
     "notes_seasonal": ""
   },
@@ -1186,24 +1186,24 @@
       }
     ],
     "phone": "03 5158 0300",
-    "email": "info@mallacootaforeshore.com.au", // Your list had this email
+    "email": "info@mallacootaforeshore.com.au",
     "links": [
       {
         "url": "https://www.mallacootaforeshore.com.au/",
         "text": "Website"
       }
     ],
-    "social_links": [], // Check for Facebook page
+    "social_links": [], 
     "address": {
-      "street": "1 Allan Drive", // Main office address
+      "street": "1 Allan Drive",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55462, // Office location
-      "longitude": 149.75549 // Office location
+      "latitude": -37.55462,
+      "longitude": 149.75549
     },
     "opening_hours": [
       { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Office hours
@@ -1214,14 +1214,14 @@
     "id": "mh15",
     "slug": "mallacoota-foodworks",
     "business_name": "Mallacoota Foodworks",
-    "category_primary": "Food & Drink", // Also Shopping
+    "category_primary": "Food & Drink",
     "category_tags": ["Food & Drink", "Shopping", "Groceries", "Deli"],
     "schema_type": "GroceryStore",
     "description_short": "Full-service supermarket with a great deli offering sliced meats, cheeses, smoked fish, roasted chickens, and warm pies.",
     "description_long": "Mallacoota's main Foodworks supermarket providing a wide range of groceries, fresh fruit and vegetables, deli items (including sliced meats, cheeses, olives, smoked fish), hot roast chickens, warm pies, frozen foods, and general merchandise. (Add more details here).",
     "images": [
       {
-        "url": "/images/bus/shop/mh15-mallacoota-foodworks1.webp", // Use shop category for image path
+        "url": "/images/bus/shop/mh15-mallacoota-foodworks1.webp",
         "alt_text": "Mallacoota Foodworks storefront.",
         "is_hero": true
       }
@@ -1235,7 +1235,7 @@
       }
     ],
     "social_links": [
-         {"platform": "facebook", "url": "https://www.facebook.com/MallacootaFoodworks/"} // Added from previous data
+         {"platform": "facebook", "url": "https://www.facebook.com/MallacootaFoodworks/"}
     ],
     "address": {
       "street": "48-50 Maurice Ave",
@@ -1259,7 +1259,7 @@
     "slug": "mallacoota-golf-club-bistro",
     "business_name": "Mallacoota Golf Club Bistro",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Bistro", "Restaurant"], // Core is Food/Drink
+    "category_tags": ["Food & Drink", "Bistro", "Restaurant"],
     "schema_type": "Restaurant",
     "description_short": "Classic pub-style meals and drinks at the golf club.",
     "description_long": "Located within the Mallacoota Golf & Country Club, the bistro offers hearty pub-style meals, snacks, and drinks with views over the golf course. A relaxed dining option after a game or for a casual night out. Golf also available. (Add more details here).",
@@ -1271,15 +1271,15 @@
       }
     ],
     "phone": "03 5158 0277",
-    "email": null, // Your list had null, previous had mallacootagolf@gmail.com
+    "email": null,
     "links": [
       {
-        "url": "https://mallacootagolfclub.com.au", // Your list had this URL
+        "url": "https://mallacootagolfclub.com.au",
         "text": "Website"
       }
     ],
     "social_links": [
-        {"platform": "facebook", "url": "https://www.facebook.com/mallacootagolf/"} // Added from previous data
+        {"platform": "facebook", "url": "https://www.facebook.com/mallacootagolf/"}
     ],
     "address": {
       "street": "Nelson Drive",
@@ -1301,7 +1301,7 @@
     "business_name": "Mallacoota Hire Boats",
     "category_primary": "Tours & Activities",
     "category_tags": ["Tours & Activities", "Boating", "Fishing", "For Hire", "Kayak"],
-    "schema_type": "LocalBusiness", // SportsActivityLocation could also fit
+    "schema_type": "LocalBusiness",
     "description_short": "A wide range of hire boats and kayaks available for your fishing or exploring needs.",
     "description_long": "Hire various types of boats (tinnies, cruisers) and kayaks to explore the extensive Mallacoota Inlet system independently. Perfect for fishing, sightseeing, and reaching secluded spots. (Add more details here).",
     "images": [
@@ -1319,20 +1319,19 @@
         "text": "Website"
       }
     ],
-    "social_links": [], // Check for Facebook page
-    "address": {
-      "street": null, // Operates from jetties, specify if known e.g., Main Wharf
+    "social_links": [],
+      "street": null,
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.559, // Approx wharf/jetty area
-      "longitude": 149.751 // Approx wharf/jetty area
+      "latitude": -37.559,
+      "longitude": 149.751
     },
     "opening_hours": [
-        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "08:00", "closes": "17:00" } // Placeholder hours
+        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "08:00", "closes": "17:00" }
     ],
     "notes_seasonal": "Hours vary seasonally. Bookings recommended."
   },
@@ -1340,20 +1339,20 @@
     "id": "mh01",
     "slug": "mallacoota-hotel-motel-bistro",
     "business_name": "Mallacoota Hotel Motel & Bistro",
-    "category_primary": "Accommodation", // Primary from your list
+    "category_primary": "Accommodation",
     "category_tags": ["Accommodation", "Motel", "Food & Drink", "Pub", "Restaurant", "Bistro"],
-    "schema_type": "Hotel", // Hotel covers accommodation and food/bar
+    "schema_type": "Hotel",
     "description_short": "Offers motel accommodation alongside classic pub meals, fresh local seafood, daily specials, and a dog-friendly beer garden.",
     "description_long": "The iconic Mallacoota Hotel offers classic pub meals in the bistro, a public bar with TAB facilities, bottle shop, and comfortable motel rooms. Enjoy fresh local seafood, daily specials, and relax in the dog-friendly beer garden. A central hub for locals and visitors. (Add more details here).",
     "images": [
       {
-        "url": "/images/bus/acc/mh01-mallacoota-hotel-motel-bistro1.webp", // Use acc path as primary category
+        "url": "/images/bus/acc/mh01-mallacoota-hotel-motel-bistro1.webp",
         "alt_text": "Mallacoota Hotel Motel building exterior.",
         "is_hero": true
       }
     ],
     "phone": "03 5158 0455",
-    "email": "incoota@bigpond.net.au", // Your list had this email
+    "email": "incoota@bigpond.net.au",
     "links": [
       {
         "url": "https://mallacootahotel.com.au",
@@ -1361,10 +1360,10 @@
       }
     ],
     "social_links": [
-        {"platform": "facebook", "url": "https://www.facebook.com/mallacootahotel/"} // Added from previous data
+        {"platform": "facebook", "url": "https://www.facebook.com/mallacootahotel/"}
     ],
     "address": {
-      "street": "51-55 Maurice Ave", // Adjusted street number range
+      "street": "51-55 Maurice Ave",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
@@ -1375,7 +1374,7 @@
       "longitude": 149.75677
     },
     "opening_hours": [
-        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "10:00", "closes": "23:00" } // Placeholder, closing time varies
+        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "10:00", "closes": "23:00" }
     ],
     "notes_seasonal": "Bistro hours vary, check website or call. Bar open later. Motel reception hours may differ."
   },
@@ -1383,14 +1382,14 @@
     "id": "mh18",
     "slug": "mallacoota-meats",
     "business_name": "Mallacoota Meats",
-    "category_primary": "Food & Drink", // Also Shopping
+    "category_primary": "Food & Drink",
     "category_tags": ["Food & Drink", "Shopping", "Butcher", "Groceries"],
     "schema_type": "Butcher",
     "description_short": "Local butcher providing a great range of fresh meat, poultry, and BBQ supplies.",
     "description_long": "Traditional local butcher shop offering quality fresh cuts of beef, lamb, pork, and chicken, as well as sausages, smallgoods, and barbecue essentials. (Add more details here).",
     "images": [
       {
-        "url": "/images/bus/shop/mh18-mallacoota-meats1.webp", // Use shop path
+        "url": "/images/bus/shop/mh18-mallacoota-meats1.webp", 
         "alt_text": "Mallacoota Meats butcher shop counter.",
         "is_hero": true
       }
@@ -1398,7 +1397,7 @@
     "phone": "03 5158 0313",
     "email": null,
     "links": [],
-    "social_links": [], // Check for Facebook page
+    "social_links": [],
     "address": {
       "street": "42 Maurice Ave",
       "locality": "Mallacoota",
@@ -1411,7 +1410,7 @@
       "longitude": 149.75704
     },
     "opening_hours": [
-        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:00" }, // Example hours, verify locally
+        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:00" },
         { "dayOfWeek": ["Saturday"], "opens": "08:00", "closes": "12:00" }
     ],
     "notes_seasonal": "Closed Sundays. Hours may vary."
@@ -1422,7 +1421,7 @@
     "business_name": "Mallacoota Surf Shack",
     "category_primary": "Shopping",
     "category_tags": ["Shopping", "Apparel", "Surf"],
-    "schema_type": "Store", // SportingGoodsStore could also fit
+    "schema_type": "Store", 
     "description_short": "Your one-stop shop for surf gear, apparel, and beach essentials in Mallacoota.",
     "description_long": "Stocking a wide range of surfboards, wetsuits, surf hardware, beachwear, clothing, footwear, sunglasses, and local Mallacoota merchandise. Surf hire potentially available. (Add more details here).",
     "images": [
@@ -1432,7 +1431,7 @@
         "is_hero": true
       }
     ],
-    "phone": "03 5158 0909", // Your list had this number
+    "phone": "03 5158 0909",
     "email": "sales@surfshack.com.au",
     "links": [
       {
@@ -1441,10 +1440,10 @@
       }
     ],
     "social_links": [
-        {"platform": "facebook", "url": "https://www.facebook.com/mallacootasurfshack/"} // Added from previous data
+        {"platform": "facebook", "url": "https://www.facebook.com/mallacootasurfshack/"}
     ],
     "address": {
-      "street": "41 Maurice Ave", // Your list had this address
+      "street": "41 Maurice Ave",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
@@ -1465,7 +1464,7 @@
     "business_name": "MAPA Pearls",
     "category_primary": "Shopping",
     "category_tags": ["Shopping", "Jewellery"],
-    "schema_type": "Store", // JewelryStore specific type exists
+    "schema_type": "Store", 
     "description_short": "Exquisite, locally sourced pearls and fine jewellery from the Wilderness Coast.",
     "description_long": "Specialising in unique pearl jewellery featuring pearls sourced locally from the waters around Mallacoota. Offers necklaces, earrings, bracelets, and custom pieces. (Add more details here).",
     "images": [
@@ -1483,17 +1482,17 @@
         "text": "Website"
       }
     ],
-    "social_links": [], // Check for Facebook/Insta
+    "social_links": [],
     "address": {
-      "street": null, // Primarily online or studio? Verify if retail location exists.
+      "street": null,
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.559, // Approximate centre
-      "longitude": 149.755 // Approximate centre
+      "latitude": -37.559,
+      "longitude": 149.755
     },
     "opening_hours": [],
     "notes_seasonal": "Check website or contact for viewing/purchase options."
@@ -1504,7 +1503,7 @@
     "business_name": "MV Loch-Ard - Dale Winward",
     "category_primary": "Tours & Activities",
     "category_tags": ["Tours & Activities", "Cruises", "Fishing"],
-    "schema_type": "TouristAttraction", // Or BoatTrip, BoatTour
+    "schema_type": "TouristAttraction",
     "description_short": "Enjoy scenic cruises and fishing charters on the historic MV Loch-Ard with a local expert.",
     "description_long": "Take a scenic cruise or fishing charter aboard the historic vessel MV Loch-Ard, skippered by local expert Dale Winward. Explore the Mallacoota Inlet, learn about the area's history and wildlife. (Add more details here).",
     "images": [
@@ -1514,7 +1513,7 @@
         "is_hero": true
       }
     ],
-    "phone": "0438 580708", // Same as Kelpy's? Verify.
+    "phone": "0438 580708",
     "email": "aburchin@yahoo.com",
     "links": [
       {
@@ -1522,17 +1521,17 @@
         "text": "Website"
       }
     ],
-    "social_links": [], // Check for Facebook page
+    "social_links": [],
     "address": {
-      "street": "Departs from Main Wharf", // Departure point
+      "street": "Departs from Main Wharf",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.5593, // Approx Wharf location
-      "longitude": 149.7516 // Approx Wharf location
+      "latitude": -37.5593,
+      "longitude": 149.7516
     },
     "opening_hours": [],
     "notes_seasonal": "Operates seasonally based on demand and weather. Bookings essential."
@@ -1543,7 +1542,7 @@
     "slug": "origami-coffee",
     "business_name": "Origami Coffee",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Cafe", "Coffee"], // Removed Mobile Van as it's implicit
+    "category_tags": ["Food & Drink", "Cafe", "Coffee"],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "Excellent coffee, treats, and lake views.",
     "description_long": "Artisan coffee shop located in the MA space complex, offering expertly brewed coffee, specialty drinks, baked goods, and light snacks with views towards the lake. (Add more details here).",
@@ -1554,7 +1553,7 @@
         "is_hero": true
       }
     ],
-    "phone": null, // Your list had null, previous data had 0490 859 865 - verify correct number
+    "phone": null,
     "email": null,
     "links": [
       {
@@ -1566,18 +1565,18 @@
       {"platform": "instagram", "url": "https://www.instagram.com/origamicoffeemallacoota/"}
     ],
     "address": {
-      "street": "66 Maurice Ave", // MA Space location
+      "street": "66 Maurice Ave",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55836, // MA Space location
+      "latitude": -37.55836,
       "longitude": 149.75628
     },
     "opening_hours": [
-      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "07:30", "closes": "14:00" } // Example hours, verify via Instagram/locally
+      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "07:30", "closes": "14:00" }
     ],
     "notes_seasonal": "Check Instagram for current hours."
   },
@@ -1587,7 +1586,7 @@
     "business_name": "Scallywags Seafood & Winebar",
     "category_primary": "Food & Drink",
     "category_tags": ["Food & Drink", "Seafood", "Winebar", "Restaurant"],
-    "schema_type": "Restaurant", // SeafoodRestaurant could also fit
+    "schema_type": "Restaurant",
     "description_short": "Seafood, healthy meals, friendly faces, and local wine.",
     "description_long": "Focusing on fresh, local seafood dishes alongside other healthy meal options. Features a curated selection of local wines and offers a relaxed dining experience. (Add more details here).",
     "images": [
@@ -1605,7 +1604,7 @@
         "text": "Website"
       }
     ],
-    "social_links": [], // Check for Facebook/Insta
+    "social_links": [],
     "address": {
       "street": "14 Allan Drive",
       "locality": "Mallacoota",
@@ -1617,7 +1616,7 @@
       "latitude": -37.55648,
       "longitude": 149.75482
     },
-    "opening_hours": [], // Needs specific hours, check website/locally
+    "opening_hours": [],
     "notes_seasonal": "Hours vary seasonally. Bookings recommended. Check website for current times."
   },
   {
@@ -1640,24 +1639,24 @@
     "email": "info@shadygullycaravanpark.com",
     "links": [
       {
-        "url": "https://mallacootacaravanpark.com", // Your list had this URL
+        "url": "https://mallacootacaravanpark.com",
         "text": "Website"
       }
     ],
     "social_links": [],
     "address": {
-      "street": "Lot 5 Genoa Rd", // Adjusted street info based on common understanding
+      "street": "Lot 5 Genoa Rd",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.556, // Approximate Genoa Rd location near town
+      "latitude": -37.556,
       "longitude": 149.752
     },
     "opening_hours": [
-      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Office hours placeholder
+      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" }
     ],
     "notes_seasonal": ""
   },
@@ -1667,7 +1666,7 @@
     "business_name": "Silver Bream Motel & Flats",
     "category_primary": "Accommodation",
     "category_tags": ["Accommodation", "Motel", "Cottages", "Apartments"],
-    "schema_type": "Motel", // Primary seems Motel based on name
+    "schema_type": "Motel",
     "description_short": "Centrally located accommodation offering both motel rooms and self-contained flats.",
     "description_long": "Provides a choice of accommodation styles right in the heart of Mallacoota. Choose from standard motel rooms or larger, self-contained flats suitable for longer stays or families. (Add more details here).",
     "images": [
@@ -1679,8 +1678,8 @@
     ],
     "phone": "0419 151 771",
     "email": null,
-    "links": [], // No website listed
-    "social_links": [], // Check for Facebook page
+    "links": [], 
+    "social_links": [],
     "address": {
       "street": "32-34 Maurice Ave",
       "locality": "Mallacoota",
@@ -1693,7 +1692,7 @@
       "longitude": 149.75739
     },
     "opening_hours": [
-      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Reception hours placeholder
+      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" }
     ],
     "notes_seasonal": "Check-in times may vary."
   },
@@ -1725,14 +1724,14 @@
        {"platform": "instagram", "url": "https://www.instagram.com/s.u.n.dayss/"}
     ],
     "address": {
-      "street": "Maurice Ave (next to Bakery)", // Approx 60-62 Maurice Ave
+      "street": "Maurice Ave (next to Bakery)",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55815, // Approx next to bakery
+      "latitude": -37.55815,
       "longitude": 149.7563
     },
     "opening_hours": [],
@@ -1775,7 +1774,7 @@
       "longitude": 149.75896
     },
     "opening_hours": [
-      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Booking/contact hours placeholder
+      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" }
     ],
     "notes_seasonal": "Bookings essential."
   },
@@ -1803,17 +1802,17 @@
         "text": "Website"
       }
     ],
-    "social_links": [], // Check for Facebook/Insta
+    "social_links": [],
     "address": {
-      "street": null, // Primarily online/maker based?
+      "street": null,
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.559, // Approximate centre
-      "longitude": 149.755 // Approximate centre
+      "latitude": -37.559,
+      "longitude": 149.755
     },
     "opening_hours": [],
     "notes_seasonal": "Check website for purchase options and stockists."

@@ -2,10 +2,10 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   21/10/2025 05:25 PM AEDT (Mallacoota)
-# Version:     [25.10.013]
+# Timestamp:   22/10/2025 09:42 PM AEDT (Mallacoota)
+# Version:     [25.10.014]
 # File Name:   index.html
-# Description: Main landing page and portal for the lovemallacoota.com.au directory.
+# Description: Main landing page and portal for the lovemallacoota.com.au directory, now including Mallacoota map section.
 -->
 <!DOCTYPE html>
 <html lang="en-AU" data-theme="light">
@@ -21,7 +21,6 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-CPTXSP8D3J");
     </script>
 
@@ -111,7 +110,7 @@
       .main-header {
         display: flex;
         align-items: center;
-        justify-content: center; /* Center the content */
+        justify-content: center;
       }
       .header-title-row {
         display: flex;
@@ -130,6 +129,22 @@
       }
       .social-links a:hover svg {
         opacity: 0.7;
+      }
+
+      /* Map block */
+      .map-embed {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: calc(var(--border-radius) - 6px);
+        overflow: hidden;
+      }
+      .map-embed iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
       }
     </style>
   </head>
@@ -197,6 +212,20 @@
           ></iframe>
         </div>
       </section>
+
+      <!-- 🗺️ Mallacoota Map -->
+      <section class="glass-card">
+        <h2 style="margin-bottom: 0.75rem">Mallacoota Map</h2>
+        <div class="map-embed">
+          <iframe
+            title="Map of Mallacoota"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Mallacoota%20VIC%203892&z=13&output=embed"
+          >
+          </iframe>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -252,7 +281,7 @@
           </a>
         </div>
         <div class="footer-section copyright-section">
-          © 2025 Colin Dixon. All Rights Reserved. V: 25.10.013 • 21 Oct 2025
+          © 2025 Colin Dixon. All Rights Reserved. V: 25.10.014 • 22 Oct 2025
         </div>
         <div
           class="footer-section oze-logo-container"

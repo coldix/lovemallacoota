@@ -2,15 +2,14 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   12/10/2025 11:12 PM AEDT (Mallacoota)
-# Version:     [25.10.002]
+# Timestamp:   22/10/2025 8:22 PM AEDT (Mallacoota)
+# Version:     [25.10.003]
 # File Name:   contact.html
 # Description: Placeholder contact/report page (to be wired to EmailJS).
 -->
 <!DOCTYPE html>
 <html lang="en-AU" data-theme="light">
   <head>
-    <!-- Google tag (gtag.js) -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-CPTXSP8D3J"
@@ -24,14 +23,108 @@
 
       gtag("config", "G-CPTXSP8D3J");
     </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Love Mallacoota",
+        "url": "https://lovemallacoota.com.au",
+        "logo": "https://lovemallacoota.com.au/logo.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "col@dixon.net.au",
+          "contactType": "General Inquiries"
+        }
+      }
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Suggest a Link or Update — Love Mallacoota</title>
+
+    <title>Contact & Updates — Love Mallacoota</title>
+    <meta
+      name="description"
+      content="Suggest a new link, update business details, or report an error in the Love Mallacoota directory. We value your feedback."
+    />
+    <link rel="canonical" href="https://lovemallacoota.com.au/contact.html" />
+    <meta name="robots" content="index,follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Contact & Updates — Love Mallacoota" />
+    <meta
+      property="og:description"
+      content="Help keep the Love Mallacoota directory up-to-date. Suggest a link or report an error."
+    />
+    <meta
+      property="og:url"
+      content="https://lovemallacoota.com.au/contact.html"
+    />
+    <meta
+      property="og:image"
+      content="https://lovemallacoota.com.au/images/og-hero.jpg"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Contact & Updates — Love Mallacoota" />
+    <meta
+      name="twitter:description"
+      content="Help keep the Love Mallacoota directory up-to-date. Suggest a link or report an error."
+    />
+    <meta
+      name="twitter:image"
+      content="https://lovemallacoota.com.au/images/og-hero.jpg"
+    />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+
     <style>
+      /* Floating pills */
+      .floating-pill {
+        position: fixed;
+        top: 1rem;
+        z-index: 1000;
+        background: var(--glass-fill);
+        color: var(--text-color);
+        border: 1px solid var(--glass-border);
+        border-radius: 999px;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .floating-pill:hover {
+        text-decoration: none;
+      }
+      .pill-left {
+        left: 1rem;
+      }
+      .pill-right {
+        right: 1rem;
+      }
+      #theme-icon svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+      }
+
+      /* Contact Form Specifics */
       .contact-wrap {
-        max-width: 720px;
-        margin: 6rem auto 2rem;
+        max-width: 720px; /* Constrain form for readability */
       }
       .field {
         margin-bottom: 1rem;
@@ -50,6 +143,8 @@
         border: 1px solid var(--glass-border);
         background: rgba(0, 0, 0, 0.05);
         color: var(--text-color);
+        font-family: var(--font-family-sans);
+        font-size: 1rem;
       }
       .pill-btn {
         display: inline-block;
@@ -59,50 +154,150 @@
         background: rgba(0, 0, 0, 0.1);
         text-decoration: none;
         font-weight: 600;
+        font-family: var(--font-family-sans);
+        font-size: 1rem;
+        color: var(--text-color);
+        cursor: pointer;
+      }
+      .pill-btn:hover {
+        text-decoration: none;
+        background: var(--link-color);
+        color: var(--bg-color);
       }
     </style>
   </head>
   <body>
-    <main class="contact-wrap">
-      <div class="glass-card">
+    <a href="calendar.html" class="floating-pill pill-left">Calendar</a>
+
+    <button
+      id="theme-toggle"
+      class="floating-pill pill-right"
+      aria-pressed="false"
+    >
+      <span id="theme-icon" aria-hidden="true"></span>
+      <span id="theme-label">Light</span>
+    </button>
+
+    <header class="main-header glass-card"></header>
+
+    <main>
+      <section class="glass-card contact-wrap">
         <h1>Suggest a Link or Update</h1>
         <p>
-          Paste the correct link for a business, or let us know about mistakes,
-          closures, or new places.
+          See something wrong? Want to add a link? Let us know. This helps keep
+          the directory up-to-date for everyone.
         </p>
 
-        <!-- Placeholder form; we’ll wire this to EmailJS next -->
         <form id="contact-form">
           <div class="field">
-            <label for="business">Business</label>
+            <label for="business">Business Name</label>
             <input id="business" name="business" required />
           </div>
           <div class="field">
-            <label for="reason">Reason</label>
+            <label for="reason">Reason for Contact</label>
             <select id="reason" name="reason">
-              <option>Add link</option>
-              <option>Incorrect info</option>
-              <option>Closed business</option>
-              <option>New business</option>
+              <option>Add or update a link</option>
+              <option>Incorrect business info</option>
+              <option>Business has closed</option>
+              <option>Suggest a new business</option>
+              <option>Other</option>
             </select>
           </div>
           <div class="field">
-            <label for="url">URL</label>
+            <label for="url">URL (if any)</label>
             <input id="url" name="url" type="url" placeholder="https://..." />
           </div>
           <div class="field">
-            <label for="notes">Notes (optional)</label>
-            <textarea id="notes" name="notes" rows="4"></textarea>
+            <label for="notes">Notes</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="4"
+              placeholder="e.g., 'The phone number is wrong', 'This place is now called...'"
+            ></textarea>
           </div>
-          <button class="pill-btn" type="submit">Send (placeholder)</button>
+          <button class="pill-btn" type="submit">Send Update</button>
           <a href="index.html" class="pill-btn" style="margin-left: 0.5rem"
-            >Back</a
+            >Back to Home</a
           >
         </form>
 
         <p id="contact-hint" style="margin-top: 1rem; opacity: 0.8"></p>
-      </div>
+      </section>
     </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section social-links">
+          <a
+            href="https://coota.au"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Coota website"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.facebook.com/lovemallacoota"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.72 9-4.94 9-9.95z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.instagram.com/lovemallacoota"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M7.8 2H16.2C19.46 2 22 4.54 22 7.8V16.2C22 19.46 19.46 22 16.2 22H7.8C4.54 22 2 19.46 2 16.2V7.8C2 4.54 4.54 2 7.8 2ZM7.8 4C5.69 4 4 5.69 4 7.8V16.2C4 18.31 5.69 20 7.8 20H16.2C18.31 20 20 18.31 20 16.2V7.8C20 5.69 18.31 4 16.2 4H7.8ZM12 7.5C9.79 7.5 8 9.29 8 11.5C8 13.71 9.79 15.5 12 15.5C14.21 15.5 16 13.71 16 11.5C16 9.29 14.21 7.5 12 7.5ZM12 9.5C13.1 9.5 14 10.4 14 11.5C14 12.6 13.1 13.5 12 13.5C10.9 13.5 10 12.6 10 11.5C10 10.4 10.9 9.5 12 9.5ZM17.25 5.75C16.69 5.75 16.25 6.19 16.25 6.75C16.25 7.31 16.69 7.75 17.25 7.75C17.81 7.75 18.25 7.31 18.25 6.75C18.25 6.19 17.81 5.75 17.25 5.75Z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://x.com/lovemallacoota"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X (formerly Twitter)"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M18.244 2H21l-6.5 7.43L22.5 22h-7.03l-4.9-6.35L4.6 22H2l6.94-7.93L1.5 2h7.12l4.44 5.76L18.244 2zm-2.463 18h1.7L8.28 4H6.514l9.267 16z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <div class="footer-section copyright-section">
+          © <span id="copyright-year">2025</span> Colin Dixon. All Rights
+          Reserved. <span id="footer-version-info"></span>
+        </div>
+
+        <div
+          class="footer-section oze-logo-container"
+          style="display: flex; justify-content: center"
+        >
+          <a href="https://oze.au" target="_blank" rel="noopener noreferrer">
+            <img
+              src="images/oze-logo216x100.webp"
+              alt="Oze Parent Business Logo"
+              style="height: 100px; width: auto"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
 
     <script>
       // Prefill from querystring
@@ -118,7 +313,7 @@
         .getElementById("contact-form")
         .addEventListener("submit", (e) => {
           e.preventDefault();
-          alert("Thanks! We will wire this form to EmailJS next.");
+          alert("Thanks! This form is a placeholder.");
         });
     </script>
   </body>

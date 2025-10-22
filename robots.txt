@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Block development/system files that shouldn't be indexed
+Disallow: /.htaccess
+Disallow: /favicon.ico
+Disallow: /apple-touch-icon.png
+
+# Block any backup or temporary files
+Disallow: /*.bak$
+Disallow: /*.tmp$
+Disallow: /*.old$
+
+# Allow all HTML pages and resources
+Allow: /*.html
+Allow: /*.css
+Allow: /*.js
+Allow: /images/
+Allow: /data/
+
+# Sitemap location (fix the current incorrect URL)
+Sitemap: https://lovemallacoota.com.au/sitemap.xml

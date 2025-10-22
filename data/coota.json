@@ -212,14 +212,15 @@
   {
     "id": "mh01",
     "business_name": "Mallacoota Hotel Motel & Bistro",
-    "category_primary": "Food & Drink", // Primary still Food
+    "category_primary": "Accommodation", // Changed Primary to Accommodation for sorting
     "category_tags": [
+      "Accommodation",
+      "Motel",
       "Food & Drink",
       "Pub",
       "Restaurant",
-      "Bistro",
-      "Accommodation"
-    ], // Keep Accommodation tag
+      "Bistro"
+    ], // Reordered tags
     "street": "51-55 Maurice Ave",
     "locality": "Mallacoota",
     "state": "VIC",
@@ -228,7 +229,7 @@
     "email": "incoota@bigpond.net.au",
     "website": "https://mallacootahotel.com.au",
     "link_text": "Website",
-    "description": "Classic pub meals, fresh local seafood, daily specials, and a dog-friendly beer garden. Also offers motel accommodation."
+    "description": "Offers motel accommodation alongside classic pub meals, fresh local seafood, daily specials, and a dog-friendly beer garden." // Description updated slightly
   },
   {
     "id": "acc03",

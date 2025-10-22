@@ -2,16 +2,16 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   21/10/2025 08:29 PM AEDT (Mallacoota)
-# Version:     [25.10.011]
+# Timestamp:   22/10/2025 09:47 PM AEDT (Mallacoota)
+# Version:     [25.10.012]
 # File Name:   script.js
-# Description: Handles theming, backgrounds, and dynamic content rendering.
+# Description: Handles theming, backgrounds, and dynamic content rendering with improved card detail layout.
 */
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- Version Info ---
-  const FILE_VERSION = "25.10.011";
-  const FILE_DATE = "21 Oct 2025";
+  const FILE_VERSION = "25.10.012";
+  const FILE_DATE = "22 Oct 2025";
 
   // --- Theme Toggler ---
   const themeToggleButton = document.getElementById("theme-toggle");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const icons = {
     moon: '<svg viewBox="0 0 24 24"><path d="M11.2 2.01c.14-.04.28-.06.42-.06 2.06 0 3.92.83 5.28 2.19.14.13.26.28.37.43.49.68.86 1.45 1.1 2.28.24.83.33 1.7.28 2.56-.05.86-.25 1.71-.58 2.5-.33.79-.8 1.51-1.39 2.14-.59.63-1.3 1.16-2.11 1.56-.81.4-1.7.67-2.63.79-1.57.19-3.13-.15-4.47-.92-1.33-.77-2.42-2-3.1-3.46-.68-1.46-.94-3.08-.75-4.65.19-1.58.85-3.07 1.88-4.29C8.38 3.01 9.72 2.2 11.2 2.01m0-2.01C4.9 0 0 4.9 0 11.2s4.9 11.2 11.2 11.2c5.29 0 9.7-3.71 10.96-8.62.06-.23.1-.46.15-.69-.02.16-.04.32-.06.49-.49 4.34-4.14 7.7-8.59 7.7-4.97 0-9-4.03-9-9s4.03-9 9-9c.34 0 .67.02.99.06C11.53.02 11.37 0 11.2 0z"/></svg>',
-    sun: '<svg viewBox="0 0 24 24"><path d="M12 5c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1v2c0 .55.45 1 1 1zm7.78-.22c.39-.39 1.02-.39 1.41 0l1.41 1.41c.39.39.39 1.02 0 1.41-.39.39-1.02-.39-1.41 0l-1.41-1.41c-.39-.39-.39-1.02 0-1.41zm-1.41 15.18c.39.39.39 1.02 0 1.41l-1.41 1.41c-.39.39-1.02-.39-1.41 0-.39-.39-.39-1.02 0-1.41l1.41-1.41c.39-.39 1.03-.39 1.41 0zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM19 12c0-.55.45-1 1-1h2c.55 0 1 .45 1 1s-.45 1-1 1h-2c-.55 0-1-.45-1-1zM3 12c0-.55.45-1 1-1h2c.55 0 1 .45 1 1s-.45 1-1 1H4c-.55 0-1-.45-1-1zm2.22 6.78c-.39.39-1.02-.39-1.41 0-.39-.39-.39-1.02 0-1.41l1.41-1.41c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-1.41 1.41zM12 19c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1z"/></svg>',
+    sun: '<svg viewBox="0 0 24 24"><path d="M12 5c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1v2c0 .55.45 1 1 1zm7.78-.22c.39-.39 1.02-.39 1.41 0l1.41 1.41c.39.39.39 1.02 0 1.41-.39.39-1.02.39-1.41 0l-1.41-1.41c-.39-.39-.39-1.02 0-1.41zm-1.41 15.18c.39.39.39 1.02 0 1.41l-1.41 1.41c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41l1.41-1.41c.39-.39 1.03-.39 1.41 0zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM19 12c0-.55.45-1 1-1h2c.55 0 1 .45 1 1s-.45 1-1 1h-2c-.55 0-1-.45-1-1zM3 12c0-.55.45-1 1-1h2c.55 0 1 .45 1 1s-.45 1-1 1H4c-.55 0-1-.45-1-1zm2.22 6.78c-.39.39-1.02-.39-1.41 0-.39-.39-.39-1.02 0-1.41l1.41-1.41c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-1.41 1.41zM12 19c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1z"/></svg>',
   };
 
   const applyTheme = (theme) => {
@@ -30,23 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (theme === "dark") {
       if (themeLabel) themeLabel.textContent = "Dark";
       if (themeIcon) themeIcon.innerHTML = icons.moon;
-      if (themeToggleButton)
-        themeToggleButton.setAttribute("aria-pressed", "true");
+      themeToggleButton?.setAttribute("aria-pressed", "true");
     } else {
       if (themeLabel) themeLabel.textContent = "Light";
       if (themeIcon) themeIcon.innerHTML = icons.sun;
-      if (themeToggleButton)
-        themeToggleButton.setAttribute("aria-pressed", "false");
+      themeToggleButton?.setAttribute("aria-pressed", "false");
     }
   };
 
-  if (themeToggleButton) {
-    themeToggleButton.addEventListener("click", () => {
-      const newTheme =
-        htmlElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(newTheme);
-    });
-  }
+  themeToggleButton?.addEventListener("click", () => {
+    const newTheme =
+      htmlElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(newTheme);
+  });
 
   const initialTheme =
     localStorage.getItem("theme") ||
@@ -88,19 +84,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // --- helpers for link buttons ---
+  // --- Helper to build buttons ---
   function buildLinksHTML(business) {
     const links = [];
 
-    // Primary presence button (Website, Instagram, Facebook, etc.)
+    // Primary link (Website or booking)
     if (business.website) {
-      // Use the link_text from the JSON, or fallback to 'Website' if it's missing
       const label = business.link_text || "Website";
       links.push(
         `<a href="${business.website}" target="_blank" rel="noopener noreferrer">${label}</a>`
       );
-    } else {
-      // If no presence link at all, provide the “Let me know link” button
+    }
+
+    // Map button
+    if (business.geo?.latitude && business.geo?.longitude) {
+      const mapUrl = `https://www.google.com/maps?q=${business.geo.latitude},${business.geo.longitude}`;
+      links.push(
+        `<a href="${mapUrl}" target="_blank" rel="noopener noreferrer">Map</a>`
+      );
+      links.push(
+        `<a href="https://www.google.com/maps/dir/?api=1&destination=${business.geo.latitude},${business.geo.longitude}" target="_blank" rel="noopener noreferrer">Directions</a>`
+      );
+    }
+
+    // Call button
+    if (business.phone) {
+      const tel = String(business.phone).replace(/\s+/g, "");
+      links.push(`<a href="tel:${tel}">Call</a>`);
+    }
+
+    // Email button
+    if (business.email) {
+      links.push(`<a href="mailto:${business.email}">Email</a>`);
+    }
+
+    // If no links at all
+    if (links.length === 0) {
       const safeName = (business.business_name || "Business").replace(
         /"/g,
         "&quot;"
@@ -110,38 +129,55 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    // Call button if phone exists
-    if (business.phone) {
-      const tel = String(business.phone).replace(/\s+/g, "");
-      links.push(`<a href="tel:${tel}">Call</a>`);
-    }
-
     return `<div class="links">${links.join("")}</div>`;
   }
 
+  // --- Create card HTML ---
   const createListingCard = (business) => {
     const card = document.createElement("div");
     card.className = "listing-card";
 
+    // Address line
+    const addressParts = [
+      business.address?.street,
+      business.address?.locality,
+      business.address?.state,
+      business.address?.postcode,
+    ].filter(Boolean);
+    const addressText = addressParts.join(", ");
+
+    // Category chips
+    const tags =
+      Array.isArray(business.category_tags) && business.category_tags.length
+        ? `<div class="chips">${business.category_tags
+            .map((t) => `<span class="chip">${t}</span>`)
+            .join("")}</div>`
+        : "";
+
     const linksHTML = buildLinksHTML(business);
 
     card.innerHTML = `
-      <h3>${business.business_name}</h3>
+      <h3>${business.business_name || "Unnamed Business"}</h3>
+      ${tags}
       <p>${business.description || "No description available."}</p>
+      ${
+        addressText
+          ? `<p style="opacity:0.8;font-size:0.85rem;">${addressText}</p>`
+          : ""
+      }
       ${linksHTML}
     `;
     return card;
   };
 
+  // --- Render listings ---
   const renderListings = async () => {
     const category = getCategoryForPage();
     if (!category || !listingsGrid) return;
 
     try {
       const response = await fetch("data/coota.json");
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
+      if (!response.ok) throw new Error("Network response not ok.");
       const allBusinesses = await response.json();
 
       const filteredBusinesses = allBusinesses.filter((business) => {
@@ -161,11 +197,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       listingsGrid.innerHTML = "";
       filteredBusinesses.forEach((business) => {
-        const card = createListingCard(business);
-        listingsGrid.appendChild(card);
+        listingsGrid.appendChild(createListingCard(business));
       });
     } catch (error) {
-      console.error("Error fetching or parsing listings:", error);
+      console.error("Error loading listings:", error);
       listingsGrid.innerHTML =
         "<p>Sorry, there was an error loading the listings.</p>";
     }
@@ -173,15 +208,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderListings();
 
-  // Handle "Let me know link" prompt -> email
+  // --- Handle “Suggest Link” button ---
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".suggest-link");
     if (!btn) return;
-
     const bname = btn.getAttribute("data-bname") || "Business";
     const userLink = prompt(`Paste the correct link for "${bname}":`);
     if (!userLink) return;
-
     const subject = encodeURIComponent(`Directory link for ${bname}`);
     const body = encodeURIComponent(
       `Suggested URL: ${userLink}\n\n(Submitted from ${location.href})`
@@ -193,12 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const setFooterInfo = () => {
     const yearEl = document.getElementById("copyright-year");
     const versionEl = document.getElementById("footer-version-info");
-    if (yearEl) {
-      yearEl.textContent = new Date().getFullYear();
-    }
-    if (versionEl) {
-      versionEl.textContent = `V: ${FILE_VERSION} • ${FILE_DATE}`;
-    }
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    if (versionEl) versionEl.textContent = `V: ${FILE_VERSION} • ${FILE_DATE}`;
   };
   setFooterInfo();
 });

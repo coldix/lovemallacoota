@@ -503,7 +503,7 @@
         ],
         "opens": "08:00",
         "closes": "15:00"
-      } // Placeholder hours
+      }
     ],
     "notes_seasonal": "Check locally for current hours."
   },
@@ -814,7 +814,7 @@
       "longitude": 149.75678
     },
     "opening_hours": [
-        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "08:00", "closes": "19:00" } // Verify closing time consistency
+        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "08:00", "closes": "19:00" }
     ],
     "notes_seasonal": "Hours may vary on public holidays."
   },
@@ -857,7 +857,7 @@
       "longitude": 149.72911
     },
     "opening_hours": [
-      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Reception hours placeholder
+      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" }
     ],
     "notes_seasonal": "Bookings essential."
   },
@@ -1043,7 +1043,7 @@
       "longitude": 149.756
     },
     "opening_hours": [
-        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Booking hours placeholder
+        { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" }
     ],
     "notes_seasonal": "Bookings required."
   },
@@ -1206,7 +1206,7 @@
       "longitude": 149.75549
     },
     "opening_hours": [
-      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" } // Office hours
+      { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "17:00" }
     ],
     "notes_seasonal": ""
   },

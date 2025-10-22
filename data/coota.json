@@ -93,7 +93,14 @@
     "id": "acc07",
     "business_name": "Gipsy Point Lodge",
     "category_primary": "Accommodation",
-    "category_tags": ["Accommodation", "Lodge", "Apartments"],
+    "category_tags": [
+      "Accommodation",
+      "Lodge",
+      "Apartments",
+      "Food & Drink",
+      "Cafe",
+      "Restaurant"
+    ], // Added Food tags back
     "street": "35 Macdonald St",
     "locality": "Gipsy Point",
     "state": "VIC",
@@ -212,7 +219,7 @@
   {
     "id": "mh01",
     "business_name": "Mallacoota Hotel Motel & Bistro",
-    "category_primary": "Accommodation", // Changed Primary to Accommodation for sorting
+    "category_primary": "Accommodation", // CORRECTED: Ensure value is a string
     "category_tags": [
       "Accommodation",
       "Motel",
@@ -220,7 +227,7 @@
       "Pub",
       "Restaurant",
       "Bistro"
-    ], // Reordered tags
+    ],
     "street": "51-55 Maurice Ave",
     "locality": "Mallacoota",
     "state": "VIC",
@@ -229,7 +236,7 @@
     "email": "incoota@bigpond.net.au",
     "website": "https://mallacootahotel.com.au",
     "link_text": "Website",
-    "description": "Offers motel accommodation alongside classic pub meals, fresh local seafood, daily specials, and a dog-friendly beer garden." // Description updated slightly
+    "description": "Offers motel accommodation alongside classic pub meals, fresh local seafood, daily specials, and a dog-friendly beer garden."
   },
   {
     "id": "acc03",
@@ -325,7 +332,7 @@
     "id": "mh14",
     "business_name": "Gipsy Point Lodge Café-Restaurant",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Cafe", "Restaurant", "Accommodation"],
+    "category_tags": ["Food & Drink", "Cafe", "Restaurant", "Accommodation"], // Keep Accommodation tag here too
     "street": "35 Macdonald St",
     "locality": "Gipsy Point",
     "state": "VIC",

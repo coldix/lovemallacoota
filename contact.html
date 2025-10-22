@@ -2,8 +2,8 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   22/10/2025 8:22 PM AEDT (Mallacoota)
-# Version:     [25.10.003]
+# Timestamp:   22/10/2025 8:35 PM AEDT (Mallacoota)
+# Version:     [25.10.004]
 # File Name:   contact.html
 # Description: Placeholder contact/report page (to be wired to EmailJS).
 -->
@@ -122,6 +122,16 @@
         display: block;
       }
 
+      /* Logo */
+      .contact-logo-wrap {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .contact-logo-wrap img {
+        height: 100px;
+        width: auto;
+      }
+
       /* Contact Form Specifics */
       .contact-wrap {
         max-width: 720px; /* Constrain form for readability */
@@ -164,6 +174,11 @@
         background: var(--link-color);
         color: var(--bg-color);
       }
+      hr.form-divider {
+        border: 0;
+        border-top: 1px solid var(--glass-border);
+        margin: 1.5rem 0;
+      }
     </style>
   </head>
   <body>
@@ -178,10 +193,12 @@
       <span id="theme-label">Light</span>
     </button>
 
-    <header class="main-header glass-card"></header>
-
     <main>
       <section class="glass-card contact-wrap">
+        <div class="contact-logo-wrap">
+          <img src="images/logo145x100.webp" alt="Love Mallacoota logo" />
+        </div>
+
         <h1>Suggest a Link or Update</h1>
         <p>
           See something wrong? Want to add a link? Let us know. This helps keep
@@ -191,7 +208,7 @@
         <form id="contact-form">
           <div class="field">
             <label for="business">Business Name</label>
-            <input id="business" name="business" required />
+            <input id="business" name="business" type="text" required />
           </div>
           <div class="field">
             <label for="reason">Reason for Contact</label>
@@ -216,6 +233,22 @@
               placeholder="e.g., 'The phone number is wrong', 'This place is now called...'"
             ></textarea>
           </div>
+
+          <hr class="form-divider" />
+
+          <div class="field">
+            <label for="user_name">Your Name</label>
+            <input id="user_name" name="user_name" type="text" required />
+          </div>
+          <div class="field">
+            <label for="user_email">Your Email</label>
+            <input id="user_email" name="user_email" type="email" required />
+          </div>
+          <div class="field">
+            <label for="user_phone">Your Phone (Optional)</label>
+            <input id="user_phone" name="user_phone" type="tel" />
+          </div>
+
           <button class="pill-btn" type="submit">Send Update</button>
           <a href="index.html" class="pill-btn" style="margin-left: 0.5rem"
             >Back to Home</a

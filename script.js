@@ -2,7 +2,7 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Assistant:   Gemini
+# Assistant:   Gemini 2.5
 # Timestamp:   23/10/2025 01:58 PM AEDT (Mallacoota)
 # Version:     [25.10.017]
 # File Name:   script.js

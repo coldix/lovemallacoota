@@ -1,0 +1,744 @@
+[
+  {
+    "id": "food-001",
+    "slug": "alfs-pizza",
+    "business_name": "Alf\u2019s Pizza",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Pizza", "Takeaway"],
+    "schema_type": "Restaurant",
+    "description_short": "Seasonal brick oven pizzas.",
+    "description_long": "Delicious brick oven pizzas available seasonally. Check their Instagram for current operating times and menu. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh07-alfs-pizza1.webp",
+        "alt_text": "Alf's Pizza brick oven.",
+        "is_hero": true
+      }
+    ],
+    "phone": "0427 197 753",
+    "email": null,
+    "links": [
+      {
+        "url": "https://instagram.com/alfspizza",
+        "text": "Instagram"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "instagram",
+        "url": "https://instagram.com/alfspizza"
+      }
+    ],
+    "address": {
+      "street": "19 Dorron Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.56138,
+      "longitude": 149.75471
+    },
+    "opening_hours": [],
+    "notes_seasonal": "Seasonal operation. Check Instagram for hours."
+  },
+  {
+    "id": "food-002",
+    "slug": "beanie-coffee-van",
+    "business_name": "Beanie Coffee Van",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Coffee", "Mobile Van"],
+    "schema_type": "CafeOrCoffeeShop",
+    "description_short": "A meeting place at St Peter\u2019s Church, often with live music.",
+    "description_long": "Mobile coffee van located near St Peter's Church, serving great coffee and providing a community gathering spot, sometimes featuring live music. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh06-beanie-coffee-van1.webp",
+        "alt_text": "Beanie Coffee Van setup.",
+        "is_hero": true
+      }
+    ],
+    "phone": null,
+    "email": null,
+    "links": [
+      {
+        "url": "https://www.instagram.com/beanie_coffee_mallacoota_/",
+        "text": "Instagram"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/beanie_coffee_mallacoota_/"
+      }
+    ],
+    "address": {
+      "street": "St Peter's Church, Genoa Rd",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55835,
+      "longitude": 149.75344
+    },
+    "opening_hours": [],
+    "notes_seasonal": "Check Instagram for current hours and days of operation."
+  },
+  {
+    "id": "food-003",
+    "slug": "cafe-54",
+    "business_name": "Cafe 54",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Cafe"],
+    "schema_type": "CafeOrCoffeeShop",
+    "description_short": "A well-loved local caf\u00e9 with delicious, lovingly crafted food.",
+    "description_long": "Popular local cafe known for its welcoming atmosphere and delicious menu featuring breakfast, lunch, coffee, and homemade treats. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh10-cafe-541.webp",
+        "alt_text": "Cafe 54 storefront.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 0666",
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "54 Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55776,
+      "longitude": 149.75662
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "15:00"
+      }
+    ],
+    "notes_seasonal": "Check locally for current hours."
+  },
+  {
+    "id": "food-004",
+    "slug": "gipsy-point-lodge-cafe-restaurant",
+    "business_name": "Gipsy Point Lodge Caf\u00e9-Restaurant",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Cafe", "Restaurant", "Accommodation"],
+    "schema_type": "Restaurant",
+    "description_short": "Regional food and lake views at Gipsy Point. Also offers accommodation.",
+    "description_long": "Enjoy breakfast, lunch, or dinner featuring regional produce with stunning views over the Genoa River. Located within Gipsy Point Lodge. Accommodation also available. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh14-gipsy-point-lodge-cafe-restaurant1.webp",
+        "alt_text": "Dining area at Gipsy Point Lodge Cafe-Restaurant.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 8205",
+    "email": "info@gipsypointlodge.com.au",
+    "links": [
+      {
+        "url": "https://gipsypointlodge.com.au/cafe-restaurant",
+        "text": "Website"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/gipsypointlodge"
+      }
+    ],
+    "address": {
+      "street": "35 Macdonald St",
+      "locality": "Gipsy Point",
+      "state": "VIC",
+      "postcode": "3891",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.51868,
+      "longitude": 149.71887
+    },
+    "opening_hours": [],
+    "notes_seasonal": "Restaurant hours vary seasonally. Booking essential, especially for dinner."
+  },
+  {
+    "id": "food-005",
+    "slug": "iga-local-grocer-mallacoota",
+    "business_name": "IGA Local Grocer Mallacoota",
+    "category_primary": "Food & Drink",
+    "category_tags": [
+      "Food & Drink",
+      "Shopping",
+      "Groceries",
+      "Deli",
+      "Liquor"
+    ],
+    "schema_type": "GroceryStore",
+    "description_short": "Supermarket with a deli, liquor section, and a good selection of groceries. Often stocks fresh local fish.",
+    "description_long": "Your local IGA supermarket offering a comprehensive range of groceries, fresh produce, meat, dairy, frozen foods, deli items, household goods, and a liquor section. Known for sometimes stocking fresh local fish catches. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/shop/mh17-iga-local-grocer-mallacoota1.webp",
+        "alt_text": "IGA Local Grocer Mallacoota storefront.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 0604",
+    "email": null,
+    "links": [
+      {
+        "url": "https://www.iga.com.au/stores/iga-local-grocer-mallacoota-plus-liquor/",
+        "text": "Website"
+      }
+    ],
+    "social_links": [],
+    "address": {
+      "street": "49 Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55759,
+      "longitude": 149.75678
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "19:00"
+      }
+    ],
+    "notes_seasonal": "Hours may vary on public holidays."
+  },
+  {
+    "id": "food-006",
+    "slug": "kelpys-seafood",
+    "business_name": "Kelpy\u2019s Seafood",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Seafood", "Takeaway"],
+    "schema_type": "FoodEstablishment",
+    "description_short": "Seasonal seafood vendor on the wharf, offering fresh local fish and oysters.",
+    "description_long": "Located right on the main wharf, Kelpy's offers fresh, locally caught seafood, including fish, oysters, and sometimes prawns or crayfish, depending on the season and catch. Primarily takeaway. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh03-kelpys-seafood1.webp",
+        "alt_text": "Kelpy's Seafood stall on the Mallacoota wharf.",
+        "is_hero": true
+      }
+    ],
+    "phone": "0438 580 708",
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "The Wharf, Mallacoota",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.5593,
+      "longitude": 149.7516
+    },
+    "opening_hours": [],
+    "notes_seasonal": "Highly seasonal operation, typically open during peak holiday periods and good weather. Check locally."
+  },
+  {
+    "id": "food-007",
+    "slug": "larrys-coffee-van",
+    "business_name": "Larry\u2019s Coffee Van",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Coffee", "Mobile Van"],
+    "schema_type": "CafeOrCoffeeShop",
+    "description_short": "Mobile coffee van serving the Mallacoota area. Look for the van!",
+    "description_long": "Keep an eye out for Larry's Coffee Van around Mallacoota for your caffeine fix. Serving barista-made coffee and potentially other drinks or snacks. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh04-larrys-coffee-van1.webp",
+        "alt_text": "Larry's Coffee Van.",
+        "is_hero": true
+      }
+    ],
+    "phone": null,
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "Location Varies",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.559,
+      "longitude": 149.755
+    },
+    "opening_hours": [],
+    "notes_seasonal": "Mobile vendor. Hours and location vary, check locally."
+  },
+  {
+    "id": "food-008",
+    "slug": "lees-pizza-take-away",
+    "business_name": "Lee\u2019s Pizza & Take Away",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Pizza", "Takeaway", "Fish & Chips"],
+    "schema_type": "Restaurant",
+    "description_short": "Pizza, Fish & Chips, and tasty takeaways.",
+    "description_long": "Popular takeaway spot offering a range of pizzas with various toppings, classic fish and chips, burgers, and other fast food options. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh12-lees-pizza-take-away1.webp",
+        "alt_text": "Lee's Pizza & Take Away shop front.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 0338",
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "42a Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55706,
+      "longitude": 149.75704
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "17:00",
+        "closes": "20:00"
+      }
+    ],
+    "notes_seasonal": "Typically open evenings, hours vary seasonally. Check locally."
+  },
+  {
+    "id": "food-009",
+    "slug": "lucys-chinese-restaurant",
+    "business_name": "Lucy\u2019s Chinese Restaurant",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Restaurant", "Chinese"],
+    "schema_type": "Restaurant",
+    "description_short": "Vibrant Chinese fare, homemade noodles, and house specials.",
+    "description_long": "Authentic Chinese restaurant serving a wide variety of popular dishes, including homemade noodles, regional specialties, and banquet options. Dine-in and takeaway available. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh11-lucys-chinese-restaurant1.webp",
+        "alt_text": "Lucy's Chinese Restaurant interior.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 0198",
+    "email": null,
+    "links": [],
+    "social_links": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/lucysmallacoota/"
+      }
+    ],
+    "address": {
+      "street": "44 Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55716,
+      "longitude": 149.75697
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "17:00",
+        "closes": "21:00"
+      }
+    ],
+    "notes_seasonal": "Typically open for dinner, closed Mondays. Hours may vary seasonally."
+  },
+  {
+    "id": "food-010",
+    "slug": "mallacoota-bakery",
+    "business_name": "Mallacoota Bakery",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Bakery"],
+    "schema_type": "Bakery",
+    "description_short": "Iconic sausage rolls, breads, and fresh pastries.",
+    "description_long": "A traditional Australian bakery serving up a wide range of pies, sausage rolls, pasties, fresh bread, sandwiches, cakes, slices, and barista coffee. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh13-mallacoota-bakery1.webp",
+        "alt_text": "Mallacoota Bakery counter display.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 0304",
+    "email": null,
+    "links": [
+      {
+        "url": "https://www.facebook.com/mallacootabakery/",
+        "text": "Facebook"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/mallacootabakery/"
+      }
+    ],
+    "address": {
+      "street": "62 Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55823,
+      "longitude": 149.75626
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "07:00",
+        "closes": "16:00"
+      }
+    ],
+    "notes_seasonal": "May close earlier on weekends."
+  },
+  {
+    "id": "food-011",
+    "slug": "mallacoota-foodworks",
+    "business_name": "Mallacoota Foodworks",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Shopping", "Groceries", "Deli"],
+    "schema_type": "GroceryStore",
+    "description_short": "Full-service supermarket with a great deli offering sliced meats, cheeses, smoked fish, roasted chickens, and warm pies.",
+    "description_long": "Mallacoota's main Foodworks supermarket providing a wide range of groceries, fresh fruit and vegetables, deli items (including sliced meats, cheeses, olives, smoked fish), hot roast chickens, warm pies, frozen foods, and general merchandise. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/shop/mh15-mallacoota-foodworks1.webp",
+        "alt_text": "Mallacoota Foodworks storefront.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 0244",
+    "email": null,
+    "links": [
+      {
+        "url": "https://foodworks-mallacoota.myfoodworks.com.au/",
+        "text": "Website"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/MallacootaFoodworks/"
+      }
+    ],
+    "address": {
+      "street": "48-50 Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55749,
+      "longitude": 149.75685
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "19:00"
+      },
+      {
+        "dayOfWeek": ["Saturday", "Sunday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    ],
+    "notes_seasonal": "Hours may vary on public holidays."
+  },
+  {
+    "id": "food-012",
+    "slug": "mallacoota-golf-club-bistro",
+    "business_name": "Mallacoota Golf Club Bistro",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Bistro", "Restaurant"],
+    "schema_type": "Restaurant",
+    "description_short": "Classic pub-style meals and drinks at the golf club.",
+    "description_long": "Located within the Mallacoota Golf & Country Club, the bistro offers hearty pub-style meals, snacks, and drinks with views over the golf course. A relaxed dining option after a game or for a casual night out. Golf also available. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh08-mallacoota-golf-club-bistro1.webp",
+        "alt_text": "Mallacoota Golf Club clubhouse.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 0277",
+    "email": null,
+    "links": [
+      {
+        "url": "https://mallacootagolfclub.com.au",
+        "text": "Website"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/mallacootagolf/"
+      }
+    ],
+    "address": {
+      "street": "Nelson Drive",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.56844,
+      "longitude": 149.73489
+    },
+    "opening_hours": [],
+    "notes_seasonal": "Bistro hours vary seasonally and depend on club events. Check website or call for current times and bookings."
+  },
+  {
+    "id": "food-013",
+    "slug": "mallacoota-meats",
+    "business_name": "Mallacoota Meats",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Shopping", "Butcher", "Groceries"],
+    "schema_type": "Butcher",
+    "description_short": "Local butcher providing a great range of fresh meat, poultry, and BBQ supplies.",
+    "description_long": "Traditional local butcher shop offering quality fresh cuts of beef, lamb, pork, and chicken, as well as sausages, smallgoods, and barbecue essentials. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/shop/mh18-mallacoota-meats1.webp",
+        "alt_text": "Mallacoota Meats butcher shop counter.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 5158 0313",
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "42 Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55706,
+      "longitude": 149.75704
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "17:00"
+      },
+      {
+        "dayOfWeek": ["Saturday"],
+        "opens": "08:00",
+        "closes": "12:00"
+      }
+    ],
+    "notes_seasonal": "Closed Sundays. Hours may vary."
+  },
+  {
+    "id": "food-014",
+    "slug": "origami-coffee",
+    "business_name": "Origami Coffee",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Cafe", "Coffee"],
+    "schema_type": "CafeOrCoffeeShop",
+    "description_short": "Excellent coffee, treats, and lake views.",
+    "description_long": "Artisan coffee shop located in the MA space complex, offering expertly brewed coffee, specialty drinks, baked goods, and light snacks with views towards the lake. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh05-origami-coffee1.webp",
+        "alt_text": "Origami Coffee shop counter.",
+        "is_hero": true
+      }
+    ],
+    "phone": null,
+    "email": null,
+    "links": [
+      {
+        "url": "https://www.instagram.com/origamicoffeemallacoota/",
+        "text": "Instagram"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/origamicoffeemallacoota/"
+      }
+    ],
+    "address": {
+      "street": "66 Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55836,
+      "longitude": 149.75628
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "07:30",
+        "closes": "14:00"
+      }
+    ],
+    "notes_seasonal": "Check Instagram for current hours."
+  },
+  {
+    "id": "food-015",
+    "slug": "scallywags-seafood-winebar",
+    "business_name": "Scallywags Seafood & Winebar",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Seafood", "Winebar", "Restaurant"],
+    "schema_type": "Restaurant",
+    "description_short": "Seafood, healthy meals, friendly faces, and local wine.",
+    "description_long": "Focusing on fresh, local seafood dishes alongside other healthy meal options. Features a curated selection of local wines and offers a relaxed dining experience. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh09-scallywags-seafood-winebar1.webp",
+        "alt_text": "Scallywags Seafood & Winebar dining area.",
+        "is_hero": true
+      }
+    ],
+    "phone": "03 4110 2059",
+    "email": null,
+    "links": [
+      {
+        "url": "https://scallywagsmallacoota.com.au",
+        "text": "Website"
+      }
+    ],
+    "social_links": [],
+    "address": {
+      "street": "14 Allan Drive",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55648,
+      "longitude": 149.75482
+    },
+    "opening_hours": [],
+    "notes_seasonal": "Hours vary seasonally. Bookings recommended. Check website for current times."
+  },
+  {
+    "id": "food-016",
+    "slug": "sundayss",
+    "business_name": "Sundayss",
+    "category_primary": "Food & Drink",
+    "category_tags": ["Food & Drink", "Cafe", "Coffee", "Brunch"],
+    "schema_type": "CafeOrCoffeeShop",
+    "description_short": "Seasonal cafe located next to the bakery, serving coffee, brunch, and smoothies.",
+    "description_long": "Bright and breezy seasonal cafe offering delicious brunch options, smoothies, juices, and quality coffee. Located conveniently next to the Mallacoota Bakery. (Add more details here).",
+    "images": [
+      {
+        "url": "/images/bus/eat/mh02-sundayss1.webp",
+        "alt_text": "Sundayss cafe exterior seating.",
+        "is_hero": true
+      }
+    ],
+    "phone": "0458 687 332",
+    "email": null,
+    "links": [
+      {
+        "url": "https://www.instagram.com/s.u.n.dayss/",
+        "text": "Instagram"
+      }
+    ],
+    "social_links": [
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/s.u.n.dayss/"
+      }
+    ],
+    "address": {
+      "street": "Maurice Ave (next to Bakery)",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.55815,
+      "longitude": 149.7563
+    },
+    "opening_hours": [],
+    "notes_seasonal": "Typically operates during warmer months/peak season. Check Instagram for current opening days and hours."
+  }
+]

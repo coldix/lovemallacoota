@@ -28,3 +28,5 @@ Redirect 301 /category/what/ /index.html
 Redirect 301 /category/where/ /index.html
 Redirect 301 /category/who/ /index.html
 Redirect 301 /category/why/ /index.html
+
+ErrorDocument 404 /calendar.html

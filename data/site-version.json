@@ -1,0 +1,219 @@
+{
+  "project": "lovemallacoota.com.au",
+  "version": "v0.01",
+  "generatedAt": "2026-06-14 18:46:40 AEST (Melbourne)",
+  "timezone": "Australia/Melbourne",
+  "generator": "tools/update-version.mjs",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 225,
+      "sha256": "08674051906351d80832b563160215ff3454d65ceb552581e3e5a8ac07a7b296"
+    },
+    {
+      "path": ".htaccess",
+      "bytes": 893,
+      "sha256": "767fc3e1726ccafad0d4808f818344ec60ee909fc824b3351d94c424d0180ccd"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1491,
+      "sha256": "d53e097cd4f5cae72ba2068a54faf90feee84f3f1416aeedc8abfd51684a307f"
+    },
+    {
+      "path": "accom.html",
+      "bytes": 7044,
+      "sha256": "0824f15a241806b1be9fba07a58ea3ad3d76e46d9e27bae14bff229c20aa58d7"
+    },
+    {
+      "path": "activity.html",
+      "bytes": 8123,
+      "sha256": "be14067183cb4996279dd5f8725b11eb6664d0d2da787208a559070e4a2eae4c"
+    },
+    {
+      "path": "assets/css/style.css",
+      "bytes": 8799,
+      "sha256": "987b25e538f38245a493f0ced57d0aa91512422c00f226c42bedb4561e88c973"
+    },
+    {
+      "path": "assets/icons/android-chrome-192x192.png",
+      "bytes": 49488,
+      "sha256": "83c9ce0f4b2c5474180eaabd19a9e70c502fbcb9535343094db931e3b2e40bc3"
+    },
+    {
+      "path": "assets/icons/android-chrome-512x512.png",
+      "bytes": 255218,
+      "sha256": "a1e519d308ed442ad2829edc71e4b9d4f82ab00c4389779cdfc343575e3cf256"
+    },
+    {
+      "path": "assets/icons/apple-touch-icon.png",
+      "bytes": 43935,
+      "sha256": "0f3fff0622568cb0cae94d70500a56b8cce6630278d0445994760393898c53fb"
+    },
+    {
+      "path": "assets/icons/favicon-16x16.png",
+      "bytes": 959,
+      "sha256": "8fbec7e2b7b92d5901ab52695e47249b09f9059a18855c4d8b7174a9b2444846"
+    },
+    {
+      "path": "assets/icons/favicon-32x32.png",
+      "bytes": 2793,
+      "sha256": "b527bba0477f7db6adcd6975e44ce9100884cf12d75ec4cdbb41a5bf65acbb47"
+    },
+    {
+      "path": "assets/icons/safari-pinned-tab.svg",
+      "bytes": 306,
+      "sha256": "e905e256659c22af895d5022d040f99902e121f8416d36142b5000aaded60ac4"
+    },
+    {
+      "path": "assets/js/script.js",
+      "bytes": 15722,
+      "sha256": "51e029f7a7f07fa2aa66a43ebfe97f9d6941e548294be164734097baba5a4a00"
+    },
+    {
+      "path": "calendar.html",
+      "bytes": 11247,
+      "sha256": "f0cd073f5742fd80d5f565a241b41621b7928a02fa4cd922c29cb8cb0260de5d"
+    },
+    {
+      "path": "contact.html",
+      "bytes": 14580,
+      "sha256": "dd350fb09cc9c579e951721df339c921ed98de0db37e7a923516fab66801a632"
+    },
+    {
+      "path": "data/coota-arch.json",
+      "bytes": 60953,
+      "sha256": "7810cfb1facb21710ceef3d03cfb5bbdf188989398973cedd3ad7d445ba2c9e7"
+    },
+    {
+      "path": "data/coota-new.json",
+      "bytes": 60121,
+      "sha256": "7ff0883ded36f5eb2dde8739c699c561bb3f8a0fddab679491ee749c3e658ac5"
+    },
+    {
+      "path": "data/coota-old.json",
+      "bytes": 21796,
+      "sha256": "39eb4995605ef807a94e52b84f084bf24b1740252f641ffbf103d7cacbf718d5"
+    },
+    {
+      "path": "data/listings-masterV2.json",
+      "bytes": 66852,
+      "sha256": "25dfb8e57bdbf026ca8ff49f1a73060d262b0b011d2f69751f63e7697b2bd5e9"
+    },
+    {
+      "path": "data/listings_accom.json",
+      "bytes": 28770,
+      "sha256": "e11eda93f906446c1baa1f6a02965853d9532a6dbc0e3fb36d79d47fc85709a5"
+    },
+    {
+      "path": "data/listings_do.json",
+      "bytes": 10605,
+      "sha256": "67b76397b7ef931363d151ca75a38ea5aab9910a7be3145c68c014bd4f775551"
+    },
+    {
+      "path": "data/listings_food.json",
+      "bytes": 23235,
+      "sha256": "5c98c78b9cae0d1217876c02dae9284f564e4b8438642347b040ef676c9f7490"
+    },
+    {
+      "path": "data/listings_other.json",
+      "bytes": 1411,
+      "sha256": "27095aeac29fdd109f56e560fd20f220c3624c084d40484517cfecf9ba12b287"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 15406,
+      "sha256": "38b73356360e6f3b39d7bc0e082349ebb8eca271e2ba49cc71ce95540a95dd86"
+    },
+    {
+      "path": "food.html",
+      "bytes": 7052,
+      "sha256": "212d7e76b4e373c9c78a8d213f856f503e88d82e4a7dc037fd2f9a36776af39b"
+    },
+    {
+      "path": "images/background-01.webp",
+      "bytes": 396888,
+      "sha256": "fd614dfe0c81dae9d0c4a64d5ab68980c3468587bdaf1276209debf9a322e7af"
+    },
+    {
+      "path": "images/background-02.webp",
+      "bytes": 431700,
+      "sha256": "df900ab2ec1e74647ce6f72a7a47b9689d5313a99cda4900f5b88fa81a7e83ed"
+    },
+    {
+      "path": "images/background-03.webp",
+      "bytes": 482080,
+      "sha256": "15ce9a2ca931c05d23a784061e9fba396416472d24a6ef62394e7c213c6aea89"
+    },
+    {
+      "path": "images/background-04.webp",
+      "bytes": 705778,
+      "sha256": "a1faeac5155fd55b877812fdde0ef3286c28ba24101f5d9949df82814d016474"
+    },
+    {
+      "path": "images/background-05.webp",
+      "bytes": 248892,
+      "sha256": "7abc08caaa196091a2351b8daaf944bb52c01614bd405064bd1dd21cc55b9d19"
+    },
+    {
+      "path": "images/background-06.webp",
+      "bytes": 447018,
+      "sha256": "8e68085c69286689bfd43d65c5fd969c72745c222585ebba9200b1b6187c539d"
+    },
+    {
+      "path": "images/logo.png",
+      "bytes": 326674,
+      "sha256": "cd27f655ce96422cc96dc95d66ba71164148c9e5b78526f4e4899c35528ca2c6"
+    },
+    {
+      "path": "images/logo.webp",
+      "bytes": 62176,
+      "sha256": "6355134cc059e81e806f50ff444c3709fa94d822caab3e7ab56c5270559c5aa6"
+    },
+    {
+      "path": "images/logo145x100.webp",
+      "bytes": 7372,
+      "sha256": "bb51eaa115f9131d7f3ecb714352eca1599fb3b246f267c2fe5ae3eddcad3db0"
+    },
+    {
+      "path": "images/oze-logo.webp",
+      "bytes": 26406,
+      "sha256": "aa047c9df3a97e986c2ae47cb6bd7d5c1ccc249a7335d870527710631181d6d8"
+    },
+    {
+      "path": "images/oze-logo216x100.webp",
+      "bytes": 8330,
+      "sha256": "197a8af6f819d9becdb043dfd70b758d72a58e155ae2c16b204b2f7a70628887"
+    },
+    {
+      "path": "images/sunriselake.webp",
+      "bytes": 182324,
+      "sha256": "86e7c14dbcc04c0bfe73707aa684175abab6456039c79744deb2832b7418400f"
+    },
+    {
+      "path": "index.html",
+      "bytes": 10588,
+      "sha256": "e44092ad5759ed2aab6050c217289a680d504182f8688c1d5e7f7ce7e0bb16b4"
+    },
+    {
+      "path": "robots.txt",
+      "bytes": 394,
+      "sha256": "62410f67c4bcdad5bb92a07746c232268a9cb0edb4195674dbec47375ae125e4"
+    },
+    {
+      "path": "site.webmanifest",
+      "bytes": 542,
+      "sha256": "ae4f1181e6bd7d063509fb4a5ab92d58bf5d8ae433fc15940729c4bd82f0c600"
+    },
+    {
+      "path": "sitemap.xml",
+      "bytes": 1291,
+      "sha256": "29726e185b5776af7ce5df04f2fd21352241a2d26c7ef58dfddc880b0d0153af"
+    },
+    {
+      "path": "tools/update-version.mjs",
+      "bytes": 4164,
+      "sha256": "e88d9359677840246d87c04272a77972876ca7c3b3aa89b3b4f2e8ba3fb0984f"
+    }
+  ]
+}

@@ -12,8 +12,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- Version Info ---
-  const FILE_VERSION = "25.10.017";
-  const FILE_DATE = "23 Oct 2025";
+  const FILE_VERSION = "v0.01";
+  const FILE_DATE = "2026-06-14 18:46:40 AEST (Melbourne)";
 
   // --- Theme Toggler ---
   const themeToggleButton = document.getElementById("theme-toggle");
@@ -291,12 +291,30 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = `mailto:crdixon@gmail.com?subject=${subject}&body=${body}`;
   });
 
-  (function setFooterInfo() {
+  async function setFooterInfo() {
     const yearEl = document.getElementById("copyright-year");
     const versionEl = document.getElementById("footer-version-info");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
-    if (versionEl) versionEl.textContent = `V: ${FILE_VERSION} • ${FILE_DATE}`;
-  })();
+    if (!versionEl) return;
+
+    versionEl.textContent = `V: ${FILE_VERSION} • ${FILE_DATE}`;
+
+    try {
+      const response = await fetch("/data/site-version.json", {
+        cache: "no-store",
+      });
+      if (!response.ok) return;
+
+      const siteVersion = await response.json();
+      if (siteVersion.version && siteVersion.generatedAt) {
+        versionEl.textContent = `V: ${siteVersion.version} • ${siteVersion.generatedAt}`;
+      }
+    } catch (err) {
+      console.warn("Site version metadata unavailable:", err);
+    }
+  }
+
+  setFooterInfo();
 
   // --- 🚀 NEW: Schema.org JSON-LD Injection Functions ---
 

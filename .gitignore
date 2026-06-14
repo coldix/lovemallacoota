@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+
+# Local editor and OS state
+.idea/
+.vscode/
+*.swp
+*.tmp
+
+# Native app workspace/user state is not part of the static website
+*.xcuserstate
+xcuserdata/
+
+# Local logs and generated scratch files
+*.log
+tmp/

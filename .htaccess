@@ -1,3 +1,10 @@
+# --- Canonical host: 301 any alias (lovemallacoota.com, www, etc.) to lovemallacoota.com.au ---
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^lovemallacoota\.com\.au$ [NC]
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1
+RewriteRule ^ https://lovemallacoota.com.au%{REQUEST_URI} [R=301,L]
+
 # --- Permanent Redirects from old WordPress links ---
 
 # This permanently moves an old URL to a new one (301)

@@ -2,14 +2,15 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Assistant:    ChatGPT-5
-# Timestamp:   22/10/2025 09:42 PM AEDT (Mallacoota)
-# Version:     [25.10.014]
+# Assistant:   Claude Fable 5
+# Timestamp:   14/07/2026 10:30 PM AEST (Mallacoota)
+# Version:     [26.07.001]
 # File Name:   index.html
-# Description: Main landing page and portal for the lovemallacoota.com.au directory, now including Mallacoota map section.
+# Description: Home — Aurora coastal rebuild. Hero, live directory stats,
+#              ice portal cards, video, map.
 -->
 <!DOCTYPE html>
-<html lang="en-AU" data-theme="light">
+<html lang="en-AU" data-theme="dark">
   <head>
     <!-- Google tag (gtag.js) -->
     <script
@@ -28,7 +29,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Love Mallacoota - Home</title>
+    <title>Love Mallacoota — Your Local Guide to Mallacoota</title>
     <meta
       name="description"
       content="Your local guide to Mallacoota — places to eat, stay, and explore. Curated listings, up-to-date contacts, and videos from around the inlet, beaches and town."
@@ -65,239 +66,230 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
+    <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#24c8e8" />
+    <meta name="msapplication-TileColor" content="#04101c" />
+    <meta name="theme-color" content="#04101c" />
 
+    <!-- Set theme before first paint to avoid flash -->
+    <script>
+      (function () {
+        var t =
+          localStorage.getItem("theme") ||
+          (matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark");
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/assets/css/style.css" />
     <script src="/assets/js/script.js" defer></script>
-
-    <style>
-      /* Floating pills */
-      .floating-pill {
-        position: fixed;
-        top: 1rem;
-        z-index: 1000;
-        background: var(--glass-fill);
-        color: var(--text-color);
-        border: 1px solid var(--glass-border);
-        border-radius: 999px;
-        padding: 0.5rem 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        text-decoration: none;
-        font-weight: 600;
-      }
-      .floating-pill:hover {
-        text-decoration: none;
-      }
-      .pill-left {
-        left: 1rem;
-      }
-      .pill-right {
-        right: 1rem;
-      }
-      #theme-icon svg {
-        width: 16px;
-        height: 16px;
-        display: block;
-      }
-
-      /* Header tidy */
-      .main-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .header-title-row {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      .header-title-row img {
-        height: 100px;
-        width: auto;
-      }
-      .social-links a svg {
-        fill: var(--text-color);
-        width: 24px;
-        height: 24px;
-        transition: opacity 0.2s;
-      }
-      .social-links a:hover svg {
-        opacity: 0.7;
-      }
-
-      /* Map block */
-      .map-embed {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16/9;
-        border-radius: calc(var(--border-radius) - 6px);
-        overflow: hidden;
-      }
-      .map-embed iframe {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
-    </style>
   </head>
   <body>
-    <!-- Left floating pill: Calendar -->
-    <a href="calendar.html" class="floating-pill pill-left">Calendar</a>
+    <!-- Aurora backdrop -->
+    <div class="bg-field" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="caustics" aria-hidden="true"></div>
+    <canvas id="motes" class="motes" aria-hidden="true"></canvas>
 
-    <!-- Right floating pill: Theme toggle -->
-    <button
-      id="theme-toggle"
-      class="floating-pill pill-right"
-      aria-pressed="false"
-    >
-      <span id="theme-icon" aria-hidden="true"></span>
-      <span id="theme-label">Light</span>
-    </button>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/" class="nav-brand">
+        <img src="/images/logo145x100.webp" alt="" />
+        <span>Love Mallacoota</span>
+      </a>
+      <span class="nav-spacer"></span>
+      <a href="/food.html" class="nav-link">Eat &amp; Drink</a>
+      <a href="/accom.html" class="nav-link">Stay</a>
+      <a href="/activity.html" class="nav-link">Do &amp; See</a>
+      <a href="/calendar.html" class="nav-link">Calendar</a>
+      <a href="/contact.html" class="nav-link">Contact</a>
+      <button id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle theme"></button>
+    </nav>
 
-    <header class="main-header glass-card">
-      <!-- Nav removed as requested -->
-    </header>
-
-    <main>
-      <section class="hero-card glass-card">
-        <div class="header-title-row">
-          <img src="images/logo145x100.webp" alt="Love Mallacoota logo" />
-          <h1 style="margin: 0">Love Mallacoota</h1>
-        </div>
-        <p style="margin-top: 0.75rem">
-          Your guide to the stunning natural beauty and vibrant community of
-          Mallacoota. Explore beaches, lakes, and rivers, and discover
-          everything this unique coastal town has to offer.
+    <div class="page-wrapper">
+      <header class="glass-card sheen hero-section">
+        <img
+          src="/images/logo145x100.webp"
+          alt="Love Mallacoota logo"
+          class="hero-logo"
+          width="145"
+          height="100"
+        />
+        <h1>Fall in love with <span class="grad">Mallacoota</span></h1>
+        <p class="lede">
+          Where the wilderness meets the sea. Your local guide to the inlet,
+          beaches, forests and the vibrant community of Victoria's far east —
+          every place to eat, stay and explore, curated and current.
         </p>
-        <div class="portal-nav-grid">
-          <a href="food.html" class="nav-card">
-            <h3>Eat &amp; Drink</h3>
-            <p>Savour local flavours, fresh seafood, and artisan coffee.</p>
-          </a>
-          <a href="accom.html" class="nav-card">
-            <h3>Stay</h3>
-            <p>
-              Find your perfect retreat from lakeside lodges to cosy caravan
-              parks.
-            </p>
-          </a>
-          <a href="activity.html" class="nav-card">
-            <h3>Do &amp; See</h3>
-            <p>Explore tours, activities, and local attractions.</p>
-          </a>
+        <div class="hero-cta">
+          <a href="/food.html" class="btn btn-primary">Eat &amp; Drink</a>
+          <a href="/accom.html" class="btn btn-coral">Find a Stay</a>
+          <a href="/activity.html" class="btn btn-ghost">Do &amp; See</a>
         </div>
-      </section>
+        <div class="stats-row" id="stats-row">
+          <div class="stat">
+            <b id="stat-food">—</b><span>Places to eat</span>
+          </div>
+          <div class="stat">
+            <b id="stat-stay">—</b><span>Places to stay</span>
+          </div>
+          <div class="stat">
+            <b id="stat-do">—</b><span>Things to do</span>
+          </div>
+        </div>
+      </header>
 
-      <section class="video-card glass-card">
-        <h2>Experience Mallacoota</h2>
-        <div class="video-container">
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/AFHOXAZVtcA?si=XCXF_Y4A6snCy2LI"
-            title="YouTube video player"
-            frameborder="0"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </section>
+      <main>
+        <section class="glass-card sheen content-block reveal">
+          <h2 class="section-title">Explore the Directory</h2>
+          <p class="section-sub">
+            Local businesses, checked and updated by locals.
+          </p>
+          <div class="links-grid">
+            <a href="/food.html" class="link-card">
+              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="emoji" aria-hidden="true">🦪</span>
+              <h3>Eat &amp; Drink</h3>
+              <p>
+                Fresh-off-the-boat seafood, artisan coffee, bakery icons and
+                classic pub fare.
+              </p>
+            </a>
+            <a href="/accom.html" class="link-card">
+              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="emoji" aria-hidden="true">🛏️</span>
+              <h3>Stay</h3>
+              <p>
+                Lakeside lodges, holiday houses, cosy caravan parks and
+                everything between.
+              </p>
+            </a>
+            <a href="/activity.html" class="link-card">
+              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="emoji" aria-hidden="true">🛶</span>
+              <h3>Do &amp; See</h3>
+              <p>
+                Boat hire, gallery walks, wilderness tours and the best spots
+                around the inlet.
+              </p>
+            </a>
+            <a href="/calendar.html" class="link-card">
+              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="emoji" aria-hidden="true">📅</span>
+              <h3>What's On</h3>
+              <p>
+                Markets, meetups and community events — the live Mallacoota
+                calendar.
+              </p>
+            </a>
+          </div>
+        </section>
 
-      <!-- 🗺️ Mallacoota Map -->
-      <section class="glass-card">
-        <h2 style="margin-bottom: 0.75rem">Mallacoota Map</h2>
-        <div class="map-embed">
-          <iframe
-            title="Map of Mallacoota"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Mallacoota%20VIC%203892&z=13&output=embed"
-          >
-          </iframe>
-        </div>
-      </section>
-    </main>
+        <section class="glass-card sheen content-block reveal">
+          <h2 class="section-title">Experience Mallacoota</h2>
+          <p class="section-sub">Mornings on the inlet, from Mallacoota2020.</p>
+          <div class="media-frame">
+            <iframe
+              src="https://www.youtube.com/embed/AFHOXAZVtcA?si=XCXF_Y4A6snCy2LI"
+              title="Experience Mallacoota — video"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </section>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section social-links">
+        <section class="glass-card sheen content-block reveal">
+          <h2 class="section-title">Find Your Way</h2>
+          <p class="section-sub">
+            Roughly 520 km east of Melbourne, 550 km south of Sydney — and
+            worth every kilometre.
+          </p>
+          <div class="media-frame">
+            <iframe
+              title="Map of Mallacoota"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Mallacoota%20VIC%203892&z=13&output=embed"
+            ></iframe>
+          </div>
+        </section>
+      </main>
+
+      <footer class="glass-card site-footer reveal">
+        <div class="footer-inner">
+          <nav class="footer-nav" aria-label="Footer">
+            <a href="/food.html">Eat &amp; Drink</a>
+            <a href="/accom.html">Stay</a>
+            <a href="/activity.html">Do &amp; See</a>
+            <a href="/calendar.html">Calendar</a>
+            <a href="/contact.html">Contact</a>
+          </nav>
+          <div class="social-icons">
+            <a
+              href="https://www.facebook.com/lovemallacoota"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.72 9-4.94 9-9.95z"/></svg>
+            </a>
+            <a
+              href="https://www.instagram.com/lovemallacoota"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2H16.2C19.46 2 22 4.54 22 7.8V16.2C22 19.46 19.46 22 16.2 22H7.8C4.54 22 2 19.46 2 16.2V7.8C2 4.54 4.54 2 7.8 2ZM7.8 4C5.69 4 4 5.69 4 7.8V16.2C4 18.31 5.69 20 7.8 20H16.2C18.31 20 20 18.31 20 16.2V7.8C20 5.69 18.31 4 16.2 4H7.8ZM12 7.5C9.79 7.5 8 9.29 8 11.5C8 13.71 9.79 15.5 12 15.5C14.21 15.5 16 13.71 16 11.5C16 9.29 14.21 7.5 12 7.5ZM12 9.5C13.1 9.5 14 10.4 14 11.5C14 12.6 13.1 13.5 12 13.5C10.9 13.5 10 12.6 10 11.5C10 10.4 10.9 9.5 12 9.5ZM17.25 5.75C16.69 5.75 16.25 6.19 16.25 6.75C16.25 7.31 16.69 7.75 17.25 7.75C17.81 7.75 18.25 7.31 18.25 6.75C18.25 6.19 17.81 5.75 17.25 5.75Z"/></svg>
+            </a>
+            <a
+              href="https://x.com/lovemallacoota"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (formerly Twitter)"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21l-6.5 7.43L22.5 22h-7.03l-4.9-6.35L4.6 22H2l6.94-7.93L1.5 2h7.12l4.44 5.76L18.244 2zm-2.463 18h1.7L8.28 4H6.514l9.267 16z"/></svg>
+            </a>
+            <a
+              href="https://www.youtube.com/@mallacoota2020"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+            </a>
+            <a
+              href="https://coota.au"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Coota website"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </a>
+          </div>
           <a
-            href="https://coota.au"
+            href="https://oze.au"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Coota website"
+            class="footer-logo-link"
+            aria-label="Oze — parent business"
           >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
-              />
-            </svg>
+            <img src="/images/oze-logo216x100.webp" alt="Oze logo" class="footer-logo" />
           </a>
-          <a
-            href="https://www.facebook.com/lovemallacoota"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.72 9-4.94 9-9.95z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://www.instagram.com/lovemallacoota"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M7.8 2H16.2C19.46 2 22 4.54 22 7.8V16.2C22 19.46 19.46 22 16.2 22H7.8C4.54 22 2 19.46 2 16.2V7.8C2 4.54 4.54 2 7.8 2ZM7.8 4C5.69 4 4 5.69 4 7.8V16.2C4 18.31 5.69 20 7.8 20H16.2C18.31 20 20 18.31 20 16.2V7.8C20 5.69 18.31 4 16.2 4H7.8ZM12 7.5C9.79 7.5 8 9.29 8 11.5C8 13.71 9.79 15.5 12 15.5C14.21 15.5 16 13.71 16 11.5C16 9.29 14.21 7.5 12 7.5ZM12 9.5C13.1 9.5 14 10.4 14 11.5C14 12.6 13.1 13.5 12 13.5C10.9 13.5 10 12.6 10 11.5C10 10.4 10.9 9.5 12 9.5ZM17.25 5.75C16.69 5.75 16.25 6.19 16.25 6.75C16.25 7.31 16.69 7.75 17.25 7.75C17.81 7.75 18.25 7.31 18.25 6.75C18.25 6.19 17.81 5.75 17.25 5.75Z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://x.com/lovemallacoota"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X (formerly Twitter)"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M18.244 2H21l-6.5 7.43L22.5 22h-7.03l-4.9-6.35L4.6 22H2l6.94-7.93L1.5 2h7.12l4.44 5.76L18.244 2zm-2.463 18h1.7L8.28 4H6.514l9.267 16z"
-              />
-            </svg>
-          </a>
+          <p class="copyright">
+            © <span class="copyright-year"></span> Colin Dixon. All Rights
+            Reserved.
+          </p>
+          <p class="build-stamp" id="build-stamp"></p>
         </div>
-        <div class="footer-section copyright-section">
-          © <span id="copyright-year"></span> Colin Dixon. All Rights Reserved.
-          <span id="footer-version-info"></span>
-        </div>
-        <div
-          class="footer-section oze-logo-container"
-          style="display: flex; justify-content: center"
-        >
-          <a href="https://oze.au" target="_blank" rel="noopener noreferrer">
-            <img
-              src="images/oze-logo216x100.webp"
-              alt="Oze Parent Business Logo"
-              style="height: 100px; width: auto"
-            />
-          </a>
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   </body>
 </html>

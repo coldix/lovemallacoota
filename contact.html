@@ -2,14 +2,17 @@
 # Project:     lovemallacoota.com.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
-# Timestamp:   22/10/2025 9:26 PM AEDT (Mallacoota)
-# Version:     [25.10.006]
+# Assistant:   Claude Fable 5
+# Timestamp:   14/07/2026 10:30 PM AEST (Mallacoota)
+# Version:     [26.07.001]
 # File Name:   contact.html
-# Description: Placeholder contact/report page (to be wired to EmailJS).
+# Description: Contact / suggest-an-update form — Aurora coastal
+#              rebuild, wired to EmailJS.
 -->
 <!DOCTYPE html>
-<html lang="en-AU" data-theme="light">
+<html lang="en-AU" data-theme="dark">
   <head>
+    <!-- Google tag (gtag.js) -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-CPTXSP8D3J"
@@ -20,64 +23,30 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-CPTXSP8D3J");
     </script>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Love Mallacoota",
-        "url": "https://lovemallacoota.com.au",
-        "logo": "https://lovemallacoota.com.au/logo.png",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "col@dixon.net.au",
-          "contactType": "General Inquiries"
-        }
-      }
-    </script>
-
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-    ></script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Contact & Updates — Love Mallacoota</title>
+    <title>Contact — Love Mallacoota</title>
     <meta
       name="description"
-      content="Suggest a new link, update business details, or report an error in the Love Mallacoota directory. We value your feedback."
+      content="Suggest a link or update for the Love Mallacoota directory — help keep local listings accurate."
     />
     <link rel="canonical" href="https://lovemallacoota.com.au/contact.html" />
     <meta name="robots" content="index,follow" />
 
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Contact & Updates — Love Mallacoota" />
+    <meta property="og:title" content="Contact Love Mallacoota" />
     <meta
       property="og:description"
-      content="Help keep the Love Mallacoota directory up-to-date. Suggest a link or report an error."
+      content="Suggest a link or update — help keep the Mallacoota directory accurate."
     />
-    <meta
-      property="og:url"
-      content="https://lovemallacoota.com.au/contact.html"
-    />
+    <meta property="og:url" content="https://lovemallacoota.com.au/contact.html" />
     <meta
       property="og:image"
-      content="https://lovemallacoota.com.au/images/og-hero.jpg"
-    />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Contact & Updates — Love Mallacoota" />
-    <meta
-      name="twitter:description"
-      content="Help keep the Love Mallacoota directory up-to-date. Suggest a link or report an error."
-    />
-    <meta
-      name="twitter:image"
       content="https://lovemallacoota.com.au/images/og-hero.jpg"
     />
 
@@ -85,347 +54,201 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
+    <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#24c8e8" />
+    <meta name="theme-color" content="#04101c" />
 
+    <!-- Set theme before first paint to avoid flash -->
+    <script>
+      (function () {
+        var t =
+          localStorage.getItem("theme") ||
+          (matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark");
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
     <link rel="stylesheet" href="/assets/css/style.css" />
     <script src="/assets/js/script.js" defer></script>
-
-    <style>
-      /* Floating pills */
-      .floating-pill {
-        position: fixed;
-        top: 1rem;
-        z-index: 1000;
-        background: var(--glass-fill);
-        color: var(--text-color);
-        border: 1px solid var(--glass-border);
-        border-radius: 999px;
-        padding: 0.5rem 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        text-decoration: none;
-        font-weight: 600;
-      }
-      .floating-pill:hover {
-        text-decoration: none;
-      }
-      .pill-left {
-        left: 1rem;
-      }
-      .pill-right {
-        right: 1rem;
-      }
-      #theme-icon svg {
-        width: 16px;
-        height: 16px;
-        display: block;
-      }
-
-      /* Logo */
-      .contact-logo-wrap {
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-      .contact-logo-wrap img {
-        height: 100px;
-        width: auto;
-      }
-
-      /* Contact Form Specifics */
-      .contact-wrap {
-        max-width: 720px; /* Constrain form for readability */
-      }
-      .field {
-        margin-bottom: 1rem;
-      }
-      .field label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 0.25rem;
-      }
-      .field input,
-      .field textarea,
-      .field select {
-        width: 100%;
-        padding: 0.6rem 0.8rem;
-        border-radius: 10px;
-        border: 1px solid var(--glass-border);
-        background: rgba(0, 0, 0, 0.05);
-        color: var(--text-color);
-        font-family: var(--font-family-sans);
-        font-size: 1rem;
-      }
-      .pill-btn {
-        display: inline-block;
-        padding: 0.55rem 1rem;
-        border-radius: 999px;
-        border: 1px solid var(--glass-border);
-        background: rgba(0, 0, 0, 0.1);
-        text-decoration: none;
-        font-weight: 600;
-        font-family: var(--font-family-sans);
-        font-size: 1rem;
-        color: var(--text-color);
-        cursor: pointer;
-      }
-      .pill-btn:hover {
-        text-decoration: none;
-        background: var(--link-color);
-        color: var(--bg-color);
-      }
-      .pill-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-      hr.form-divider {
-        border: 0;
-        border-top: 1px solid var(--glass-border);
-        margin: 1.5rem 0;
-      }
-      .form-status {
-        font-weight: 600;
-        margin-top: 1rem;
-        padding: 0.75rem;
-        border-radius: 10px;
-        display: none; /* Hidden by default */
-      }
-      .form-status.success {
-        background: rgba(40, 167, 69, 0.2);
-        color: #155724;
-      }
-      .form-status.error {
-        background: rgba(220, 53, 69, 0.2);
-        color: #721c24;
-      }
-      [data-theme="dark"] .form-status.success {
-        color: #c3e6cb;
-      }
-      [data-theme="dark"] .form-status.error {
-        color: #f5c6cb;
-      }
-    </style>
   </head>
   <body>
-    <a href="calendar.html" class="floating-pill pill-left">Calendar</a>
+    <!-- Aurora backdrop -->
+    <div class="bg-field" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="caustics" aria-hidden="true"></div>
+    <canvas id="motes" class="motes" aria-hidden="true"></canvas>
 
-    <button
-      id="theme-toggle"
-      class="floating-pill pill-right"
-      aria-pressed="false"
-    >
-      <span id="theme-icon" aria-hidden="true"></span>
-      <span id="theme-label">Light</span>
-    </button>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/" class="nav-brand">
+        <img src="/images/logo145x100.webp" alt="" />
+        <span>Love Mallacoota</span>
+      </a>
+      <span class="nav-spacer"></span>
+      <a href="/food.html" class="nav-link">Eat &amp; Drink</a>
+      <a href="/accom.html" class="nav-link">Stay</a>
+      <a href="/activity.html" class="nav-link">Do &amp; See</a>
+      <a href="/calendar.html" class="nav-link">Calendar</a>
+      <a href="/contact.html" class="nav-link active" aria-current="page">Contact</a>
+      <button id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle theme"></button>
+    </nav>
 
-    <main>
-      <section class="glass-card contact-wrap">
-        <div class="contact-logo-wrap">
-          <img src="images/logo145x100.webp" alt="Love Mallacoota logo" />
-        </div>
-
-        <h1>Suggest a Link or Update</h1>
-        <p>
-          See something wrong? Want to add a link? Let us know. This helps keep
-          the directory up-to-date for everyone.
+    <div class="page-wrapper">
+      <header class="glass-card sheen hero-section">
+        <h1>Suggest an <span class="grad">Update</span></h1>
+        <p class="lede">
+          See something wrong? Want to add a link? Let us know — it keeps the
+          directory accurate for everyone.
         </p>
+      </header>
 
-        <form id="contact-form">
-          <div class="field">
-            <label for="business">Business Name</label>
-            <input id="business" name="business" type="text" required />
-          </div>
-          <div class="field">
-            <label for="reason">Reason for Contact</label>
-            <select id="reason" name="reason">
-              <option>Add or update a link</option>
-              <option>Incorrect business info</option>
-              <option>Business has closed</option>
-              <option>Suggest a new business</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="url">URL (if any)</label>
-            <input id="url" name="url" type="url" placeholder="https://..." />
-          </div>
-          <div class="field">
-            <label for="notes">Notes</label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows="4"
-              placeholder="e.g., 'The phone number is wrong', 'This place is now called...'"
-            ></textarea>
-          </div>
+      <main>
+        <section class="glass-card sheen content-block reveal">
+          <form id="contact-form" class="form-grid">
+            <div class="field full">
+              <label for="business">Business Name</label>
+              <input id="business" name="business" type="text" required />
+            </div>
+            <div class="field">
+              <label for="reason">Reason for Contact</label>
+              <select id="reason" name="reason">
+                <option>Add or update a link</option>
+                <option>Incorrect business info</option>
+                <option>Business has closed</option>
+                <option>Suggest a new business</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="url">URL (if any)</label>
+              <input id="url" name="url" type="url" placeholder="https://..." />
+            </div>
+            <div class="field full">
+              <label for="notes">Notes</label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="4"
+                placeholder="e.g., 'The phone number is wrong', 'This place is now called...'"
+              ></textarea>
+            </div>
+            <div class="field">
+              <label for="user_name">Your Name</label>
+              <input id="user_name" name="user_name" type="text" required />
+            </div>
+            <div class="field">
+              <label for="user_email">Your Email</label>
+              <input id="user_email" name="user_email" type="email" required />
+            </div>
+            <div class="field full">
+              <label for="user_phone">Your Phone (Optional)</label>
+              <input id="user_phone" name="user_phone" type="tel" />
+            </div>
+            <div class="form-actions full">
+              <button class="btn btn-primary" type="submit" id="submit-btn">
+                Send Update
+              </button>
+              <a href="/" class="btn btn-ghost">Back to Home</a>
+            </div>
+          </form>
+          <p
+            id="contact-hint"
+            style="margin-top: 1rem; opacity: 0.75; text-align: center; font-size: 0.85rem"
+          ></p>
+          <div id="form-status" class="form-status" role="status"></div>
+        </section>
+      </main>
 
-          <hr class="form-divider" />
-
-          <div class="field">
-            <label for="user_name">Your Name</label>
-            <input id="user_name" name="user_name" type="text" required />
+      <footer class="glass-card site-footer reveal">
+        <div class="footer-inner">
+          <nav class="footer-nav" aria-label="Footer">
+            <a href="/food.html">Eat &amp; Drink</a>
+            <a href="/accom.html">Stay</a>
+            <a href="/activity.html">Do &amp; See</a>
+            <a href="/calendar.html">Calendar</a>
+            <a href="/contact.html">Contact</a>
+          </nav>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/lovemallacoota" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.72 9-4.94 9-9.95z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/lovemallacoota" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2H16.2C19.46 2 22 4.54 22 7.8V16.2C22 19.46 19.46 22 16.2 22H7.8C4.54 22 2 19.46 2 16.2V7.8C2 4.54 4.54 2 7.8 2ZM7.8 4C5.69 4 4 5.69 4 7.8V16.2C4 18.31 5.69 20 7.8 20H16.2C18.31 20 20 18.31 20 16.2V7.8C20 5.69 18.31 4 16.2 4H7.8ZM12 7.5C9.79 7.5 8 9.29 8 11.5C8 13.71 9.79 15.5 12 15.5C14.21 15.5 16 13.71 16 11.5C16 9.29 14.21 7.5 12 7.5ZM12 9.5C13.1 9.5 14 10.4 14 11.5C14 12.6 13.1 13.5 12 13.5C10.9 13.5 10 12.6 10 11.5C10 10.4 10.9 9.5 12 9.5ZM17.25 5.75C16.69 5.75 16.25 6.19 16.25 6.75C16.25 7.31 16.69 7.75 17.25 7.75C17.81 7.75 18.25 7.31 18.25 6.75C18.25 6.19 17.81 5.75 17.25 5.75Z"/></svg>
+            </a>
+            <a href="https://x.com/lovemallacoota" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21l-6.5 7.43L22.5 22h-7.03l-4.9-6.35L4.6 22H2l6.94-7.93L1.5 2h7.12l4.44 5.76L18.244 2zm-2.463 18h1.7L8.28 4H6.514l9.267 16z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@mallacoota2020" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+            </a>
+            <a href="https://coota.au" target="_blank" rel="noopener noreferrer" aria-label="Coota website">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </a>
           </div>
-          <div class="field">
-            <label for="user_email">Your Email</label>
-            <input id="user_email" name="user_email" type="email" required />
-          </div>
-          <div class="field">
-            <label for="user_phone">Your Phone (Optional)</label>
-            <input id="user_phone" name="user_phone" type="tel" />
-          </div>
-
-          <button class="pill-btn" type="submit" id="submit-btn">
-            Send Update
-          </button>
-          <a href="index.html" class="pill-btn" style="margin-left: 0.5rem"
-            >Back to Home</a
-          >
-        </form>
-
-        <p id="contact-hint" style="margin-top: 1rem; opacity: 0.8"></p>
-
-        <div id="form-status" class="form-status"></div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section social-links">
-          <a
-            href="https://coota.au"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Coota website"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
-              />
-            </svg>
+          <a href="https://oze.au" target="_blank" rel="noopener noreferrer" class="footer-logo-link" aria-label="Oze — parent business">
+            <img src="/images/oze-logo216x100.webp" alt="Oze logo" class="footer-logo" />
           </a>
-          <a
-            href="https://www.facebook.com/lovemallacoota"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.72 9-4.94 9-9.95z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://www.instagram.com/lovemallacoota"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M7.8 2H16.2C19.46 2 22 4.54 22 7.8V16.2C22 19.46 19.46 22 16.2 22H7.8C4.54 22 2 19.46 2 16.2V7.8C2 4.54 4.54 2 7.8 2ZM7.8 4C5.69 4 4 5.69 4 7.8V16.2C4 18.31 5.69 20 7.8 20H16.2C18.31 20 20 18.31 20 16.2V7.8C20 5.69 18.31 4 16.2 4H7.8ZM12 7.5C9.79 7.5 8 9.29 8 11.5C8 13.71 9.79 15.5 12 15.5C14.21 15.5 16 13.71 16 11.5C16 9.29 14.21 7.5 12 7.5ZM12 9.5C13.1 9.5 14 10.4 14 11.5C14 12.6 13.1 13.5 12 13.5C10.9 13.5 10 12.6 10 11.5C10 10.4 10.9 9.5 12 9.5ZM17.25 5.75C16.69 5.75 16.25 6.19 16.25 6.75C16.25 7.31 16.69 7.75 17.25 7.75C17.81 7.75 18.25 7.31 18.25 6.75C18.25 6.19 17.81 5.75 17.25 5.75Z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://x.com/lovemallacoota"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X (formerly Twitter)"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M18.244 2H21l-6.5 7.43L22.5 22h-7.03l-4.9-6.35L4.6 22H2l6.94-7.93L1.5 2h7.12l4.44 5.76L18.244 2zm-2.463 18h1.7L8.28 4H6.514l9.267 16z"
-              />
-            </svg>
-          </a>
+          <p class="copyright">
+            © <span class="copyright-year"></span> Colin Dixon. All Rights
+            Reserved.
+          </p>
+          <p class="build-stamp" id="build-stamp"></p>
         </div>
-
-        <div class="footer-section copyright-section">
-          © <span id="copyright-year">2025</span> Colin Dixon. All Rights
-          Reserved. <span id="footer-version-info"></span>
-        </div>
-
-        <div
-          class="footer-section oze-logo-container"
-          style="display: flex; justify-content: center"
-        >
-          <a href="https://oze.au" target="_blank" rel="noopener noreferrer">
-            <img
-              src="images/oze-logo216x100.webp"
-              alt="Oze Parent Business Logo"
-              style="height: 100px; width: auto"
-            />
-          </a>
-        </div>
-      </div>
-    </footer>
-
+      </footer>
+    </div>
     <script>
-      // --- START: EmailJS Configuration ---
+      // --- EmailJS wiring ---
       (function () {
-        // 1. Initialize EmailJS with your Public Key
-        emailjs.init({
-          publicKey: "GdEBEMDQA8_uN35yS", // <-- YOUR PUBLIC KEY IS SET
-        });
+        emailjs.init({ publicKey: "GdEBEMDQA8_uN35yS" });
       })();
 
-      // 2. Add the submit handler
       const contactForm = document.getElementById("contact-form");
       const submitBtn = document.getElementById("submit-btn");
       const statusMsg = document.getElementById("form-status");
 
       contactForm.addEventListener("submit", function (e) {
         e.preventDefault();
-
-        // Disable button to prevent double-send
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending...";
-        statusMsg.style.display = "none";
+        statusMsg.className = "form-status";
 
-        // 3. Send the form
-        emailjs
-          .sendForm(
-            "service_40hkcin", // <-- YOUR SERVICE ID IS SET
-            "template_accwkts", // <-- PASTE YOUR NEW TEMPLATE ID HERE
-            this
-          )
-          .then(
-            () => {
-              // Success
-              statusMsg.textContent = "Thanks! Your update has been sent.";
-              statusMsg.className = "form-status success";
-              statusMsg.style.display = "block";
-              contactForm.reset();
-              submitBtn.disabled = false;
-              submitBtn.textContent = "Send Update";
-            },
-            (err) => {
-              // Error
-              statusMsg.textContent =
-                "Oops! Something went wrong. Please try again.";
-              statusMsg.className = "form-status error";
-              statusMsg.style.display = "block";
-              submitBtn.disabled = false;
-              submitBtn.textContent = "Send Update";
-              console.error("EmailJS Error:", JSON.stringify(err));
-            }
-          );
+        emailjs.sendForm("service_40hkcin", "template_accwkts", this).then(
+          () => {
+            statusMsg.textContent = "Thanks! Your update has been sent.";
+            statusMsg.className = "form-status success";
+            contactForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send Update";
+          },
+          (err) => {
+            statusMsg.textContent =
+              "Oops! Something went wrong. Please try again.";
+            statusMsg.className = "form-status error";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send Update";
+            console.error("EmailJS Error:", JSON.stringify(err));
+          }
+        );
       });
-      // --- END: EmailJS Configuration ---
 
-      // Prefill from querystring
+      // Prefill from querystring (suggest-link buttons land here)
       const params = new URLSearchParams(location.search);
-      const b = params.get("business") || "";
+      document.getElementById("business").value = params.get("business") || "";
       const from = params.get("from") || "";
-      document.getElementById("business").value = b;
-      const hint = document.getElementById("contact-hint");
-      if (from) hint.textContent = `Submitted from: ${from}`;
+      if (from)
+        document.getElementById(
+          "contact-hint"
+        ).textContent = `Submitted from: ${from}`;
     </script>
   </body>
 </html>

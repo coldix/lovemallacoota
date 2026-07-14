@@ -1,10 +1,15 @@
 {
   "project": "lovemallacoota.com.au",
-  "version": "v0.02",
-  "generatedAt": "2026-07-14 22:29:22 AEST (Melbourne)",
+  "version": "v0.03",
+  "generatedAt": "2026-07-14 22:41:46 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
+    {
+      "path": ".github/workflows/deploy.yml",
+      "bytes": 1012,
+      "sha256": "fa5c2222c2ba9cccf45805c5c173abc41604fbf1a590506d4037b057e7b531a8"
+    },
     {
       "path": ".gitignore",
       "bytes": 225,
@@ -22,13 +27,13 @@
     },
     {
       "path": "accom.html",
-      "bytes": 10016,
-      "sha256": "f22d1b1e2324a59f60643d131f196855d116388487ac9484527321b72abccd83"
+      "bytes": 10040,
+      "sha256": "2924f341e4a359231160aee62ef87e05906955036a09e58deec582245001bba7"
     },
     {
       "path": "activity.html",
-      "bytes": 10055,
-      "sha256": "bad44f88dbe85d749197fad070b2e0494c76db99189bd322bad0257730670ad8"
+      "bytes": 10079,
+      "sha256": "93a6d2ea70fcabe1562db1626b1a2c9d57a24fdb4bb9b48bbd59b9c4094046dc"
     },
     {
       "path": "assets/css/style.css",
@@ -72,13 +77,13 @@
     },
     {
       "path": "calendar.html",
-      "bytes": 9340,
-      "sha256": "908b6e963a014a79078686681ddb9d0816fd4e9459abbc34a1717f5c81eb0e0b"
+      "bytes": 9364,
+      "sha256": "595cf429bbaebfe0ba30c023e12e651b14fa39f19533eda761e27d48352961df"
     },
     {
       "path": "contact.html",
-      "bytes": 11988,
-      "sha256": "530b86bd618b712ac2624bd4231144a6a606665f769507ed2bbbc7839e17baa6"
+      "bytes": 12012,
+      "sha256": "9a0460f3c46fae16daba5b0c7147fc5f2ff55693d31198387bd851a4174de9b1"
     },
     {
       "path": "data/coota-arch.json",
@@ -127,8 +132,8 @@
     },
     {
       "path": "food.html",
-      "bytes": 10052,
-      "sha256": "3ae6c8db386fab625831944f83feb85ab472b6725ada79040eb73d242ae15d77"
+      "bytes": 10076,
+      "sha256": "9185f79fe881617c3491d3d9c5111d6defa9a9d0ae46e46ff4a9ce0060f1bba8"
     },
     {
       "path": "images/background-01.webp",
@@ -192,8 +197,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 12898,
-      "sha256": "28ee03d665a635c1ee3f512f12798d0f522de4d439746c23b185c1a212cb5112"
+      "bytes": 12922,
+      "sha256": "89870be62d7e0538309cc7312c5fe035ebfca31fcf7470a3fa4990242ed9165d"
     },
     {
       "path": "robots.txt",

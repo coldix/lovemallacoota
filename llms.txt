@@ -1,0 +1,35 @@
+# Love Mallacoota
+
+> Local directory and visitor guide for Mallacoota, Victoria, Australia (East
+> Gippsland, postcode 3892). Curated, locally maintained listings of places to
+> eat and drink, places to stay, and things to do, plus a community events
+> calendar. Run by Colin Dixon (oze.au). Content is factual business data:
+> names, descriptions, categories, addresses, phone numbers, links, and
+> geo-coordinates.
+
+Mallacoota is a coastal town at the Mallacoota Inlet, roughly 520 km east of
+Melbourne and 550 km south of Sydney, bordered by Croajingolong National Park.
+
+## Pages
+
+- [Home](https://lovemallacoota.com.au/): overview, video, and map
+- [Eat & Drink](https://lovemallacoota.com.au/food.html): cafes, restaurants, pubs, takeaway, and seafood
+- [Stay](https://lovemallacoota.com.au/accom.html): lodges, motels, holiday houses, and caravan parks
+- [Do & See](https://lovemallacoota.com.au/activity.html): boat hire, tours, galleries, shops, and attractions
+- [Community Calendar](https://lovemallacoota.com.au/calendar.html): markets, meetups, and local events
+- [Contact](https://lovemallacoota.com.au/contact.html): suggest a listing correction or addition
+
+## Data
+
+Structured listing data (JSON, schema.org-aligned fields: business_name,
+category_tags, description, address, geo, phone, links, opening_hours):
+
+- [Eat & Drink listings](https://lovemallacoota.com.au/data/listings_food.json)
+- [Accommodation listings](https://lovemallacoota.com.au/data/listings_accom.json)
+- [Activity listings](https://lovemallacoota.com.au/data/listings_do.json)
+- [Other listings](https://lovemallacoota.com.au/data/listings_other.json)
+
+## Related sites
+
+- [oze.au](https://oze.au): parent business hub
+- [coota.au](https://coota.au): sibling Mallacoota site

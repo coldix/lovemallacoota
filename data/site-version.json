@@ -1,14 +1,14 @@
 {
   "project": "lovemallacoota.com.au",
-  "version": "v0.03",
-  "generatedAt": "2026-07-14 22:41:46 AEST (Melbourne)",
+  "version": "v0.04",
+  "generatedAt": "2026-07-14 22:51:48 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
     {
       "path": ".github/workflows/deploy.yml",
       "bytes": 1012,
-      "sha256": "fa5c2222c2ba9cccf45805c5c173abc41604fbf1a590506d4037b057e7b531a8"
+      "sha256": "137dd714992ef303c116e1a2320ff4b9c80c7edfaf78af3a38e91785f33ddeea"
     },
     {
       "path": ".gitignore",
@@ -27,13 +27,13 @@
     },
     {
       "path": "accom.html",
-      "bytes": 10040,
-      "sha256": "2924f341e4a359231160aee62ef87e05906955036a09e58deec582245001bba7"
+      "bytes": 10220,
+      "sha256": "8126a43c854ce67a27e7d5775034642cfedd178a76c3ae414cefc52e40d798e1"
     },
     {
       "path": "activity.html",
-      "bytes": 10079,
-      "sha256": "93a6d2ea70fcabe1562db1626b1a2c9d57a24fdb4bb9b48bbd59b9c4094046dc"
+      "bytes": 10259,
+      "sha256": "129b39b74b603a5530ab8524b9be4ab2de8d7da27f149233ddf7247e49fd14c7"
     },
     {
       "path": "assets/css/style.css",
@@ -77,13 +77,13 @@
     },
     {
       "path": "calendar.html",
-      "bytes": 9364,
-      "sha256": "595cf429bbaebfe0ba30c023e12e651b14fa39f19533eda761e27d48352961df"
+      "bytes": 9544,
+      "sha256": "458d4659d384c07d5f54c2c0bc92b8411a088ae9caaad8962d21b1b80a200cc1"
     },
     {
       "path": "contact.html",
-      "bytes": 12012,
-      "sha256": "9a0460f3c46fae16daba5b0c7147fc5f2ff55693d31198387bd851a4174de9b1"
+      "bytes": 12192,
+      "sha256": "4cf4c1d9b20b16d369b6c3cdb3690c42a3809e050c1ea93b740b00ecee6f9403"
     },
     {
       "path": "data/coota-arch.json",
@@ -132,8 +132,8 @@
     },
     {
       "path": "food.html",
-      "bytes": 10076,
-      "sha256": "9185f79fe881617c3491d3d9c5111d6defa9a9d0ae46e46ff4a9ce0060f1bba8"
+      "bytes": 10256,
+      "sha256": "7192cad0f39ea0cf8b66fd13fd4ba1bd68ce126fb784df0ae5be5c8e604ca06e"
     },
     {
       "path": "images/background-01.webp",
@@ -181,6 +181,11 @@
       "sha256": "bb51eaa115f9131d7f3ecb714352eca1599fb3b246f267c2fe5ae3eddcad3db0"
     },
     {
+      "path": "images/og-hero.jpg",
+      "bytes": 200327,
+      "sha256": "22094a55a25872ee768cd9ba96aa7937043ffee3b10f990b45fa11db5efb71cb"
+    },
+    {
       "path": "images/oze-logo.webp",
       "bytes": 26406,
       "sha256": "aa047c9df3a97e986c2ae47cb6bd7d5c1ccc249a7335d870527710631181d6d8"
@@ -201,19 +206,24 @@
       "sha256": "89870be62d7e0538309cc7312c5fe035ebfca31fcf7470a3fa4990242ed9165d"
     },
     {
+      "path": "llms.txt",
+      "bytes": 1765,
+      "sha256": "a8c078edbde88361b30a17ecfe29a3f7dd73630e04b1340a253fc8bb58c5abdf"
+    },
+    {
       "path": "robots.txt",
-      "bytes": 394,
-      "sha256": "62410f67c4bcdad5bb92a07746c232268a9cb0edb4195674dbec47375ae125e4"
+      "bytes": 508,
+      "sha256": "fe2a2cf71a41144f7bad623d36635403de5a1342a1e30569748f061943260bc8"
     },
     {
       "path": "site.webmanifest",
-      "bytes": 542,
-      "sha256": "ae4f1181e6bd7d063509fb4a5ab92d58bf5d8ae433fc15940729c4bd82f0c600"
+      "bytes": 532,
+      "sha256": "48bade267e99eff104253d845b5fac352d4752bfa5964f60095c43ae1b66f785"
     },
     {
       "path": "sitemap.xml",
-      "bytes": 1291,
-      "sha256": "29726e185b5776af7ce5df04f2fd21352241a2d26c7ef58dfddc880b0d0153af"
+      "bytes": 1149,
+      "sha256": "bfab52b091390f9c4eb31657743f9b19d9b2af47bba35d3316f4f7a824751453"
     },
     {
       "path": "tools/update-version.mjs",

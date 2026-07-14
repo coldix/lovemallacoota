@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 
+# AI crawlers welcome — structured site guide at /llms.txt,
+# machine-readable listing data under /data/*.json
+
 # Block development/system files that shouldn't be indexed
 Disallow: /.htaccess
 

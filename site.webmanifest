@@ -2,11 +2,11 @@
   "name": "Love Mallacoota",
   "short_name": "LoveCoota",
   "description": "Your local guide to Mallacoota: places to eat, stay, and explore.",
-  "start_url": "/index.html",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#121212",
-  "theme_color": "#007bff",
+  "background_color": "#04101c",
+  "theme_color": "#24c8e8",
   "icons": [
     {
       "src": "/assets/icons/android-chrome-192x192.png",

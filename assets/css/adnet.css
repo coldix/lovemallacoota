@@ -1,0 +1,154 @@
+/*
+ * File: assets/css/adnet.css
+ * Website: lovemallacoota.com.au
+ * Description: adnet ad-slot styling, tuned to the Aurora coastal theme
+ * Version: 1.0.0
+ * Date: 24 Aug 2026 | 11:34 PM AEST
+ * Author: Colin Dixon + Claude Opus 5
+ *
+ * Source of truth is https://github.com/coldix/adnet -> embed/adnet.css. Keep the two in
+ * step; only the theme overrides at the bottom of this file are site-specific.
+ */
+
+
+/* The host page reserves the box, and the box is FIXED, not a floor: a min-height alone
+   lets a tall unit grow the slot after the ad lands, which is the layout shift this
+   design exists to avoid. The unit is fitted to the box below instead. */
+.ad-slot { display: block; overflow: hidden; margin: 1.5rem 0; }
+.ad-300x250 { width: 300px; height: 250px; max-width: 100%; }
+.ad-728x90  { width: 728px; height: 90px;  max-width: 100%; }
+.ad-320x100 { width: 320px; height: 100px; max-width: 100%; }
+
+/* An empty slot collapses instead of leaving a hole: the tag sets data-adnet-state. */
+.ad-slot[data-adnet-state="empty"] { height: 0; margin: 0; }
+
+/* --- The ad row ---------------------------------------------------------------------
+   A row of units across rather than a stack down the page. It sizes itself off its own
+   container, not the viewport, so the same markup gives one column in a narrow sidebar,
+   two in an article body and three in a full-width block — with no site-specific
+   breakpoints to keep in step.
+
+   The units keep their exact size at every width: the creative is cut to the slot, so a
+   stretched unit is a cropped one. Three 300px units need a 916px container; an 880px
+   article column gets two, which is the honest answer rather than three squeezed ones.
+
+   `display: none` on the extra columns is load-bearing, not cosmetic — the tag skips any
+   slot with no client rects, so a column nobody can see is never requested and never
+   counts as a delivered impression. */
+
+.ad-row-wrap { container-type: inline-size; }
+
+.ad-row {
+  display: grid;
+  grid-template-columns: 300px;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem auto;
+}
+
+.ad-row .ad-slot { margin: 0; }
+.ad-row > .ad-col-2,
+.ad-row > .ad-col-3 { display: none; }
+
+/* 620px missed real tablets: a WordPress article column commonly holds at ~598-600px from
+   768px through 926px+ viewport width (theme padding/sidebar, not fluid), only growing
+   again past 1024px. 580px covers that whole band while staying above a phone's ~440px
+   container, so "tablet" reliably means two columns, not one. */
+@container (min-width: 580px) {
+  .ad-row { grid-template-columns: repeat(2, 300px); }
+  .ad-row > .ad-col-2 { display: block; }
+}
+
+@container (min-width: 916px) {
+  .ad-row { grid-template-columns: repeat(3, 300px); gap: clamp(8px, 1.2cqw, 16px); }
+  .ad-row > .ad-col-3 { display: block; }
+}
+
+.adnet-unit {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  padding: .9rem;
+  border: 1px solid rgba(128, 128, 128, .25);
+  border-radius: 8px;
+}
+
+.adnet-link {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  height: 100%;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+}
+
+.adnet-headline { font-weight: 650; font-size: 1.05rem; line-height: 1.25; }
+.adnet-body { font-size: .9rem; opacity: .8; }
+.adnet-cta { margin-top: auto; font-size: .85rem; font-weight: 600; color: #0a84ff; }
+.adnet-link:hover .adnet-cta { text-decoration: underline; }
+
+/* Copy longer than the box gets clipped at a line boundary rather than pushing the
+   slot open. Two lines of body in the 300x250, none in the short formats. */
+.adnet-headline,
+.adnet-body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.adnet-headline { -webkit-line-clamp: 2; }
+.adnet-body { -webkit-line-clamp: 3; }
+
+/* The short formats are too shallow to stack: run them as a row and drop the body copy. */
+.ad-728x90 .adnet-unit,
+.ad-320x100 .adnet-unit { padding: .5rem .75rem; }
+
+.ad-728x90 .adnet-link,
+.ad-320x100 .adnet-link {
+  flex-direction: row;
+  align-items: center;
+  gap: .6rem;
+}
+
+.ad-728x90 .adnet-cta,
+.ad-320x100 .adnet-cta { margin-top: 0; margin-left: auto; white-space: nowrap; }
+
+.ad-320x100 .adnet-body { display: none; }
+.ad-320x100 .adnet-headline { font-size: .95rem; -webkit-line-clamp: 3; }
+.ad-728x90 .adnet-body { -webkit-line-clamp: 2; }
+
+/* Required on every unit, house ads included (docs/04-ad-tag.md). */
+.adnet-label {
+  position: absolute;
+  top: .4rem;
+  right: .5rem;
+  font-size: .6rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  opacity: .5;
+}
+
+/* An image creative is cut to the slot's exact size, so the unit gives it the whole box:
+   no padding, no border, nothing to shrink it below its natural dimensions. */
+.adnet-unit.adnet-image { padding: 0; border: 0; overflow: hidden; }
+.ad-728x90 .adnet-unit.adnet-image,
+.ad-320x100 .adnet-unit.adnet-image { padding: 0; }
+.adnet-image .adnet-link { display: block; }
+.adnet-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* The disclosure label sits over artwork on an image unit, so give it its own backdrop —
+   it has to stay readable whatever the creative looks like. */
+.adnet-image .adnet-label {
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  opacity: .85;
+}
+.adnet-html iframe { display: block; border: 0; max-width: 100%; }
+
+/* --- Love Mallacoota (Aurora coastal) theme ----------------------------------------- */
+
+.ad-slot { margin-left: auto; margin-right: auto; }
+.adnet-unit { border-color: var(--glass-border); background: var(--glass-bg); border-radius: var(--radius); }
+.adnet-cta { color: var(--accent); }

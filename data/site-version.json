@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.com.au",
-  "version": "v0.04",
-  "generatedAt": "2026-07-14 22:51:48 AEST (Melbourne)",
+  "version": "v0.05",
+  "generatedAt": "2026-08-24 23:41:06 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -17,8 +17,8 @@
     },
     {
       "path": ".htaccess",
-      "bytes": 893,
-      "sha256": "767fc3e1726ccafad0d4808f818344ec60ee909fc824b3351d94c424d0180ccd"
+      "bytes": 1215,
+      "sha256": "c1e737303a447d6186fe3bc09ade8d25e6386637fd979be6a6976904cea1d070"
     },
     {
       "path": "README.md",
@@ -34,6 +34,11 @@
       "path": "activity.html",
       "bytes": 10259,
       "sha256": "129b39b74b603a5530ab8524b9be4ab2de8d7da27f149233ddf7247e49fd14c7"
+    },
+    {
+      "path": "assets/css/adnet.css",
+      "bytes": 5655,
+      "sha256": "6a5838112c4aa9ca28291d54c3ea4d57f953ed5037c29a769384fe3c0dab6d37"
     },
     {
       "path": "assets/css/style.css",
@@ -202,8 +207,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 12922,
-      "sha256": "89870be62d7e0538309cc7312c5fe035ebfca31fcf7470a3fa4990242ed9165d"
+      "bytes": 13595,
+      "sha256": "1755d9d98d8e44bb91d2d54f522fa055acdc526f73d578ffb58b27e83a1a86aa"
     },
     {
       "path": "llms.txt",

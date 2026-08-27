@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+---
+
+<BaseLayout
+  title="Love Mallacoota — Your Local Guide to Mallacoota"
+  description="Your local guide to Mallacoota — places to eat, stay, explore and connect with the community."
+  canonicalPath="/"
+  showAds={true}
+>
+  <PageHero
+    prefix="Fall in love with"
+    accent="Mallacoota"
+    lede="Where the wilderness meets the sea. Your local guide to the inlet, beaches, forests and the vibrant community of Victoria's far east — every place to eat, stay and explore, curated and current."
+    logo={true}
+  >
+    <div class="hero-cta">
+      <a href="/food.html" class="btn btn-primary">Eat &amp; Drink</a>
+      <a href="/accom.html" class="btn btn-coral">Find a Stay</a>
+      <a href="/activity.html" class="btn btn-ghost">Do &amp; See</a>
+    </div>
+    <div class="stats-row" id="stats-row">
+      <div class="stat"><b id="stat-food">—</b><span>Places to eat</span></div>
+      <div class="stat"><b id="stat-stay">—</b><span>Places to stay</span></div>
+      <div class="stat"><b id="stat-do">—</b><span>Things to do</span></div>
+    </div>
+  </PageHero>
+
+  <main>
+    <section class="glass-card sheen content-block survey-callout reveal" aria-labelledby="community-survey-title">
+      <div class="survey-copy">
+        <p class="eyebrow">Have your say · 5 minute survey</p>
+        <h2 id="community-survey-title">Help shape local news and information</h2>
+        <p>MADRA, with support from Australian Business Volunteers, is asking Mallacoota and district what kind of trusted local information service would be most useful after the closure of <em>The Mallacoota Mouth</em>.</p>
+        <p>The survey covers local news, notices, events, community groups, school and youth activities, local history, business information, and important community or emergency information.</p>
+        <div class="survey-actions">
+          <a class="btn btn-coral" href="https://www.surveymonkey.com/r/5KWFLG8" target="_blank" rel="noopener noreferrer">Take the community survey</a>
+          <span>Responses close Wednesday 9 September 2026.</span>
+        </div>
+      </div>
+      <aside class="survey-note" aria-label="Paper survey information">
+        <strong>Prefer paper?</strong>
+        <p>Copies are available from Council's Information Centre. Completed surveys can be placed in the MADRA suggestion box there.</p>
+        <p class="survey-byline">MADRA · madrecovery.com</p>
+      </aside>
+    </section>
+
+    <section class="glass-card sheen content-block platform-callout reveal" aria-labelledby="platform-title">
+      <div>
+        <p class="eyebrow">Community platform in development</p>
+        <h2 id="platform-title">One useful place for Mallacoota information</h2>
+        <p>Love Mallacoota is growing from a visitor directory into a free community platform for events, notices, groups, local history and a regular email digest. The directory stays open throughout the rebuild.</p>
+      </div>
+      <div class="platform-actions">
+        <a class="btn btn-primary" href="/contact.html?subject=newsletter">Register newsletter interest</a>
+        <a class="btn btn-ghost" href="/editorial-policy.html">How publishing will work</a>
+      </div>
+    </section>
+
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Explore the Directory</h2>
+      <p class="section-sub">Local businesses, checked and updated by locals.</p>
+      <div class="links-grid">
+        <a href="/food.html" class="link-card"><span class="arrow" aria-hidden="true">↗</span><span class="emoji" aria-hidden="true">🦪</span><h3>Eat &amp; Drink</h3><p>Fresh-off-the-boat seafood, artisan coffee, bakery icons and classic pub fare.</p></a>
+        <a href="/accom.html" class="link-card"><span class="arrow" aria-hidden="true">↗</span><span class="emoji" aria-hidden="true">🛏️</span><h3>Stay</h3><p>Lakeside lodges, holiday houses, cosy caravan parks and everything between.</p></a>
+        <a href="/activity.html" class="link-card"><span class="arrow" aria-hidden="true">↗</span><span class="emoji" aria-hidden="true">🛶</span><h3>Do &amp; See</h3><p>Boat hire, gallery walks, wilderness tours and the best spots around the inlet.</p></a>
+        <a href="/calendar.html" class="link-card"><span class="arrow" aria-hidden="true">↗</span><span class="emoji" aria-hidden="true">📅</span><h3>What's On</h3><p>Markets, meetups and community events — the live Mallacoota calendar.</p></a>
+      </div>
+    </section>
+
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Experience Mallacoota</h2>
+      <p class="section-sub">Mornings on the inlet, from Mallacoota2020.</p>
+      <div class="media-frame">
+        <iframe src="https://www.youtube.com/embed/AFHOXAZVtcA?si=XCXF_Y4A6snCy2LI" title="Experience Mallacoota — video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section class="glass-card sheen content-block reveal" aria-label="Sponsored">
+      <div class="ad-row-wrap"><div class="ad-row"><div class="ad-slot ad-300x250" data-ad-zone="in-content"></div><div class="ad-slot ad-300x250 ad-col-2" data-ad-zone="in-content-2"></div><div class="ad-slot ad-300x250 ad-col-3" data-ad-zone="in-content-3"></div></div></div>
+    </section>
+
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Find Your Way</h2>
+      <p class="section-sub">Roughly 520 km east of Melbourne, 550 km south of Sydney — and worth every kilometre.</p>
+      <div class="media-frame"><iframe title="Map of Mallacoota" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Mallacoota%20VIC%203892&z=13&output=embed"></iframe></div>
+    </section>
+  </main>
+</BaseLayout>

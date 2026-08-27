@@ -1,5 +1,5 @@
 /*
-# Project:     lovemallacoota.com.au
+# Project:     lovemallacoota.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
 # Assistant:   Claude Fable 5
@@ -47,7 +47,7 @@ html[data-theme="light"] {
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
     font-family: 'Roboto', system-ui, -apple-system, sans-serif;
@@ -243,6 +243,23 @@ html[data-theme="light"] .glass-card::before { background: linear-gradient(135de
 }
 .theme-toggle:hover { transform: scale(1.08); border-color: var(--accent); box-shadow: 0 6px 18px -4px var(--accent-glow); }
 .theme-toggle svg { width: 20px; height: 20px; display: block; }
+.social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+.social-links a { color: inherit; font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+.social-links a:hover { color: var(--accent); }
+.contact-hint { margin-top: 1rem; opacity: 0.75; text-align: center; font-size: 0.85rem; }
+.policy-nav { font-size: 0.82rem; opacity: 0.88; }
+.policy-content { max-width: 880px; margin-left: auto; margin-right: auto; }
+.policy-content h2 { margin-top: 1.8rem; margin-bottom: 0.55rem; }
+.policy-content h2:first-child { margin-top: 0; }
+.policy-content p + p, .policy-content li + li { margin-top: 0.65rem; }
+.policy-content ul { padding-left: 1.4rem; }
+.policy-content a { color: var(--accent); }
+.emergency-banner { display: grid; gap: 0.35rem; padding: 1rem 1.2rem; border: 2px solid var(--coral); border-radius: 14px; background: rgba(255, 157, 92, 0.14); }
+.emergency-banner strong { font-size: 1.15rem; }
+.platform-callout { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; }
+.platform-callout h2 { margin: 0.2rem 0 0.7rem; }
+.platform-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: flex-end; }
+@media (max-width: 760px) { .platform-callout { grid-template-columns: 1fr; } .platform-actions { justify-content: flex-start; } }
 @media (max-width: 700px) {
     .site-nav { margin-left: 10px; margin-right: 10px; gap: 0.15rem; padding: 0.4rem 0.5rem; }
     .nav-brand span { display: none; }
@@ -329,6 +346,48 @@ main { margin-top: 2rem; }
 .content-block { padding: clamp(1.6rem, 4vw, 2.8rem); margin-bottom: 2.4rem; }
 .section-title { font-size: 1.9rem; text-align: center; margin-bottom: 0.4rem; letter-spacing: -0.3px; }
 .section-sub { text-align: center; color: var(--muted); margin-bottom: 2rem; font-size: 0.98rem; }
+
+/* --- Community survey campaign --- */
+.survey-callout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(230px, 0.7fr);
+    gap: clamp(1.4rem, 4vw, 3rem);
+    border-color: rgba(255, 157, 92, 0.48);
+}
+.survey-copy { max-width: 760px; }
+.eyebrow {
+    margin-bottom: 0.55rem;
+    color: var(--coral);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.survey-copy h2 {
+    margin-bottom: 0.85rem;
+    font-size: clamp(1.65rem, 4vw, 2.35rem);
+    line-height: 1.2;
+}
+.survey-copy > p:not(.eyebrow) { color: var(--muted); margin-top: 0.65rem; }
+.survey-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.9rem 1.2rem;
+    margin-top: 1.4rem;
+}
+.survey-actions span { color: var(--muted); font-size: 0.9rem; font-weight: 600; }
+.survey-note {
+    align-self: stretch;
+    padding: 1.35rem;
+    border: 1px solid rgba(255, 157, 92, 0.28);
+    border-radius: 15px;
+    background: rgba(255, 157, 92, 0.08);
+}
+.survey-note strong { display: block; color: var(--coral); font-family: 'Poppins', sans-serif; }
+.survey-note p { margin-top: 0.65rem; color: var(--muted); font-size: 0.9rem; }
+.survey-note .survey-byline { margin-top: 1rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; }
+@media (max-width: 760px) { .survey-callout { grid-template-columns: 1fr; } }
 
 /* --- Ice link-cards (portal nav) --- */
 .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; perspective: 1300px; }
@@ -417,6 +476,53 @@ html[data-theme="light"] .tag-btn.active {
     box-shadow: 0 5px 14px -4px var(--accent-glow);
 }
 .result-count { text-align: center; font-size: 0.85rem; color: var(--muted); }
+
+/* --- Community publication archive --- */
+.archive-intro { border-color: rgba(36, 200, 232, 0.38); }
+.archive-principles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1rem;
+    margin: 0 auto 1.7rem;
+}
+.archive-principles article {
+    padding: 1.15rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    background: rgba(36, 200, 232, 0.07);
+}
+.archive-principles strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--accent);
+    font-family: 'Poppins', sans-serif;
+}
+.archive-principles span { color: var(--muted); font-size: 0.9rem; }
+.archive-contribute { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem 1.4rem; text-align: center; }
+.archive-contribute p { font-weight: 600; }
+.archive-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.archive-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 16px;
+    background: linear-gradient(158deg, rgba(255,255,255,0.13), rgba(36,200,232,0.06) 55%, rgba(8,30,48,0.32));
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.42), 0 14px 24px -14px rgba(0,0,0,0.55);
+}
+html[data-theme="light"] .archive-card { background: rgba(255,255,255,0.52); border-color: rgba(10,25,41,0.12); }
+.archive-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-bottom: 0.75rem; }
+.archive-publication { color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.archive-issue-number { padding: 0.25rem 0.65rem; border-radius: 999px; background: rgba(36,200,232,0.13); color: var(--accent); font-size: 0.72rem; font-weight: 700; white-space: nowrap; }
+.archive-card h3 { color: var(--accent); font-size: 1.3rem; }
+.archive-description { margin: 0.45rem 0 1rem; color: var(--muted); font-size: 0.92rem; }
+.archive-metadata { display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.75rem; margin-bottom: 1rem; font-size: 0.82rem; }
+.archive-metadata dt { color: var(--muted); font-weight: 700; }
+.archive-metadata dd { min-width: 0; }
+.archive-topics { margin-bottom: 1.1rem; }
+.archive-availability { margin-top: auto; }
+.archive-status { display: inline-flex; padding: 0.48rem 0.8rem; border: 1px solid rgba(255,157,92,0.35); border-radius: 999px; color: var(--coral); font-size: 0.76rem; font-weight: 700; }
+@media (max-width: 520px) { .archive-grid { grid-template-columns: 1fr; } }
 
 /* --- Directory listings grid --- */
 .listings-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); perspective: 1300px; }

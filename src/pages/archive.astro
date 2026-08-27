@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+---
+<BaseLayout title="Mallacoota Mouth Archive — Love Mallacoota" description="A searchable community archive of The Mallacoota Mouth and Mallacoota's local history." canonicalPath="/archive.html" active="archive" extraScript="/assets/js/archive.js?v=26.08.003">
+  <PageHero eyebrow="Community history" prefix="Mallacoota Mouth" accent="Archive" lede="A growing, searchable record of the local newsletter that documented Mallacoota's people, organisations, events and everyday life." />
+  <main>
+    <section class="glass-card sheen content-block reveal archive-intro">
+      <h2 class="section-title">Help recover the collection</h2>
+      <p class="section-sub">We are starting with a handful of digital copies and hope to locate a near-complete run. Original files and clean scans are especially useful.</p>
+      <div class="archive-principles">
+        <article><strong>Preserve</strong><span>Keep a verified master file and checksum for every issue.</span></article>
+        <article><strong>Index</strong><span>Search by date, issue number, organisation, person and topic.</span></article>
+        <article><strong>Respect</strong><span>Record provenance and reuse status before publishing each copy.</span></article>
+      </div>
+      <div class="archive-contribute"><p>Have old editions or know who holds a larger collection?</p><a class="btn btn-coral" href="/contact.html?subject=archive">Contact the archive project</a></div>
+    </section>
+    <section class="glass-card sheen content-block reveal" aria-labelledby="archive-catalogue-title">
+      <h2 id="archive-catalogue-title" class="section-title">Issue catalogue</h2>
+      <p class="section-sub">Search the records collected so far. Searchable article text and page-level results will be added during digitisation.</p>
+      <div class="filter-bar">
+        <div class="search-wrap"><span aria-hidden="true">⌕</span><input type="search" id="archive-search" class="search-input" placeholder="Search issue, date or topic…" aria-label="Search archived issues" autocomplete="off" /></div>
+        <p class="result-count" id="archive-count" aria-live="polite">Loading archive…</p>
+      </div>
+      <div id="archive-grid" class="archive-grid" aria-live="polite"></div>
+      <noscript><p class="no-results">JavaScript is required to search this catalogue.</p></noscript>
+    </section>
+  </main>
+</BaseLayout>

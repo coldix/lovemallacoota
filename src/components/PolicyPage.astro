@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "./PageHero.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  prefix: string;
+  accent: string;
+  lede: string;
+}
+const props = Astro.props;
+---
+<BaseLayout title={props.title} description={props.description} canonicalPath={props.canonicalPath}>
+  <PageHero prefix={props.prefix} accent={props.accent} lede={props.lede} />
+  <main><article class="glass-card sheen content-block policy-content reveal"><slot /></article></main>
+</BaseLayout>

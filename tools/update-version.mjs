@@ -4,12 +4,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const outputDir = path.join(rootDir, "dist");
 const manifestPath = path.join(rootDir, "data", "site-version.json");
+const builtManifestPath = path.join(outputDir, "data", "site-version.json");
 const timeZone = "Australia/Melbourne";
 const args = new Set(process.argv.slice(2));
-
-const ignoredDirs = new Set([".git", "node_modules"]);
-const ignoredFiles = new Set([".DS_Store", "Thumbs.db", "data/site-version.json"]);
 
 function melbourneParts(date) {
   const formatter = new Intl.DateTimeFormat("en-AU", {
@@ -69,22 +68,20 @@ function nextVersion(currentVersion) {
   return `v${major}.${String(minor + 1).padStart(2, "0")}`;
 }
 
-async function collectFiles(dir) {
+async function collectDirectoryFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
 
   for (const entry of entries) {
     const absolutePath = path.join(dir, entry.name);
-    const relativePath = path.relative(rootDir, absolutePath).replaceAll(path.sep, "/");
+    const relativePath = path.relative(outputDir, absolutePath).replaceAll(path.sep, "/");
 
     if (entry.isDirectory()) {
-      if (!ignoredDirs.has(entry.name)) {
-        files.push(...(await collectFiles(absolutePath)));
-      }
+      files.push(...(await collectDirectoryFiles(absolutePath)));
       continue;
     }
 
-    if (entry.isFile() && !ignoredFiles.has(relativePath) && !ignoredFiles.has(entry.name)) {
+    if (entry.isFile()) {
       files.push(relativePath);
     }
   }
@@ -93,7 +90,7 @@ async function collectFiles(dir) {
 }
 
 async function fileRecord(relativePath) {
-  const absolutePath = path.join(rootDir, relativePath);
+  const absolutePath = path.join(outputDir, relativePath);
   const buffer = await readFile(absolutePath);
   const fileStat = await stat(absolutePath);
 
@@ -123,11 +120,13 @@ const generatedAt = timestampFromParts(parts);
 
 await updateRuntimeFallback(version, generatedAt);
 
-const files = await collectFiles(rootDir);
+const files = (await collectDirectoryFiles(outputDir))
+  .filter((file) => file !== "data/site-version.json")
+  .sort();
 const records = await Promise.all(files.map(fileRecord));
 
 const manifest = {
-  project: "lovemallacoota.com.au",
+  project: "lovemallacoota.au",
   version,
   generatedAt,
   timezone: timeZone,
@@ -136,4 +135,5 @@ const manifest = {
 };
 
 await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+await writeFile(builtManifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Wrote ${path.relative(rootDir, manifestPath)} version ${manifest.version}`);

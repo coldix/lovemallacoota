@@ -1,0 +1,9 @@
+---
+import DirectoryPage from "../components/DirectoryPage.astro";
+const explore = [
+  { href: "/accom.html", emoji: "🛏️", title: "Stay", text: "Lakeside lodges, holiday houses and cosy caravan parks." },
+  { href: "/activity.html", emoji: "🛶", title: "Do & See", text: "Boat hire, tours, galleries and the best inlet spots." },
+  { href: "/calendar.html", emoji: "📅", title: "What's On", text: "Markets, meetups and community events this week." },
+];
+---
+<DirectoryPage active="food" title="Eat and Drink in Mallacoota — Love Mallacoota" description="Find cafes, seafood, bakeries, restaurants and pub meals in Mallacoota." canonicalPath="/food.html" prefix="Eat &" accent="Drink" lede="From freshly brewed coffee and iconic bakery treats to straight-off-the-boat seafood and classic pub fare — the diverse flavours of Mallacoota." placeholder="Search cafes, seafood, pizza…" searchLabel="Search Eat and Drink listings" {explore} />

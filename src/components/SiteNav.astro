@@ -1,0 +1,33 @@
+---
+interface Props {
+  active?: string;
+}
+
+const { active = "" } = Astro.props;
+const links = [
+  ["food", "/food.html", "Eat & Drink"],
+  ["accom", "/accom.html", "Stay"],
+  ["activity", "/activity.html", "Do & See"],
+  ["calendar", "/calendar.html", "Calendar"],
+  ["archive", "/archive.html", "Archive"],
+  ["contact", "/contact.html", "Contact"],
+];
+---
+
+<nav class="site-nav" aria-label="Main">
+  <a href="/" class="nav-brand">
+    <img src="/images/logo145x100.webp" alt="" width="145" height="100" />
+    <span>Love Mallacoota</span>
+  </a>
+  <span class="nav-spacer"></span>
+  {links.map(([key, href, label]) => (
+    <a
+      href={href}
+      class:list={["nav-link", { active: active === key }]}
+      aria-current={active === key ? "page" : undefined}
+    >
+      {label}
+    </a>
+  ))}
+  <button id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle theme"></button>
+</nav>

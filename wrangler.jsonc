@@ -1,0 +1,55 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "lovemallacoota",
+  "account_id": "ab29454df8dbb469d259956fcf482075",
+  "main": "./src/worker.ts",
+  "compatibility_date": "2026-08-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "lovemallacoota.au/*",
+      "zone_name": "lovemallacoota.au"
+    },
+    {
+      "pattern": "www.lovemallacoota.au/*",
+      "zone_name": "lovemallacoota.au"
+    },
+    {
+      "pattern": "lovemallacoota.com.au/*",
+      "zone_name": "lovemallacoota.com.au"
+    },
+    {
+      "pattern": "www.lovemallacoota.com.au/*",
+      "zone_name": "lovemallacoota.com.au"
+    },
+    {
+      "pattern": "lovemallacoota.com/*",
+      "zone_name": "lovemallacoota.com"
+    },
+    {
+      "pattern": "www.lovemallacoota.com/*",
+      "zone_name": "lovemallacoota.com"
+    }
+  ],
+  "env": {
+    "preview": {
+      "name": "lovemallacoota-preview",
+      "workers_dev": true,
+      "routes": []
+    }
+  },
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "head_sampling_rate": 1
+    }
+  }
+}

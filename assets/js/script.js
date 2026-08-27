@@ -1,5 +1,5 @@
 /*
-# Project:     lovemallacoota.com.au
+# Project:     lovemallacoota.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     crdixon@gmail.com
 # Assistant:   Claude Fable 5
@@ -143,17 +143,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "food.html": {
       files: ["data/listings_food.json"],
       pageTitle: "Eat & Drink in Mallacoota",
-      pageUrl: "https://lovemallacoota.com.au/food.html",
+      pageUrl: "https://lovemallacoota.au/food.html",
     },
     "accom.html": {
       files: ["data/listings_accom.json"],
       pageTitle: "Stay in Mallacoota",
-      pageUrl: "https://lovemallacoota.com.au/accom.html",
+      pageUrl: "https://lovemallacoota.au/accom.html",
     },
     "activity.html": {
       files: ["data/listings_do.json", "data/listings_other.json"],
       pageTitle: "Do & See in Mallacoota",
-      pageUrl: "https://lovemallacoota.com.au/activity.html",
+      pageUrl: "https://lovemallacoota.au/activity.html",
     },
   };
 
@@ -393,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
     appendSchema({
       "@context": "https://schema.org",
       "@type": "WebSite",
-      url: "https://lovemallacoota.com.au/",
+      url: "https://lovemallacoota.au/",
       name: "Love Mallacoota",
       description:
         "Your local guide to Mallacoota — places to eat, stay, and explore. Curated listings, up-to-date contacts, and videos.",
@@ -408,7 +408,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "@type": item.schema_type || "LocalBusiness",
         name: item.business_name,
         description: item.description_long || item.description_short,
-        image: heroImage ? `https://lovemallacoota.com.au${heroImage.url}` : undefined,
+        image: heroImage ? `https://lovemallacoota.au${heroImage.url}` : undefined,
         url: getPrimaryLink(item) || undefined,
         telephone: item.phone ? String(item.phone).replace(/\s+/g, "") : undefined,
         email: item.email || undefined,

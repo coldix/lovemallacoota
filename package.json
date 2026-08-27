@@ -1,0 +1,28 @@
+{
+  "name": "lovemallacoota",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.22.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "astro build && node tools/build-static.mjs",
+    "astro": "astro",
+    "version:site": "pnpm run build && node tools/update-version.mjs",
+    "dev": "pnpm run build && wrangler dev",
+    "types": "wrangler types",
+    "test": "pnpm run build && tsc --noEmit && node --experimental-strip-types --test tests/*.test.mjs",
+    "check": "pnpm run types && pnpm run test && wrangler deploy --env=\"\" --dry-run",
+    "deploy:preview": "pnpm run build && wrangler deploy --env preview",
+    "deploy": "pnpm run build && wrangler deploy --env=\"\""
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260826.1",
+    "@types/node": "^26.3.0",
+    "astro": "7.2.9",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.126.0"
+  }
+}

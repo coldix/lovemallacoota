@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+---
+<BaseLayout title="What's On in Mallacoota — Love Mallacoota" description="Mallacoota community events, markets, meetups, workshops and activities." canonicalPath="/calendar.html" active="calendar">
+  <PageHero prefix="What's" accent="On" lede="Markets, meetups, workshops and fitness sessions — Mallacoota's community calendar, publicly sourced and updated regularly." />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      <div class="calendar-frame"><iframe title="Mallacoota Community Calendar" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;ctz=Australia%2FMelbourne&amp;title=Mallacoota%20Community%20Calendar&amp;mode=AGENDA&amp;src=Y3JkaXhvbkBnbWFpbC5jb20&amp;color=%237986cb" loading="lazy"></iframe></div>
+    </section>
+    <section class="glass-card sheen content-block reveal">
+      <div class="links-grid">
+        <div class="link-card"><span class="emoji" aria-hidden="true">📅</span><h3>Take It With You</h3><p>Use the “+ Google Calendar” button to add these events to your own phone or computer.</p></div>
+        <div class="link-card"><span class="emoji" aria-hidden="true">📣</span><h3>Help Keep It Current</h3><p>If an event is missing, incorrect or out of date, <a href="/contact.html">let us know</a>.</p></div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

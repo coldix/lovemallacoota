@@ -1,26 +1,69 @@
 # Love Mallacoota
 
-Simple static website for [lovemallacoota.com.au](https://lovemallacoota.com.au/), a local guide to Mallacoota food, accommodation, activities, events, maps, and community links.
+Community information platform and local guide for
+[lovemallacoota.au](https://lovemallacoota.au/). The current release combines
+Mallacoota food, accommodation, activities, events, maps, and community links
+while the broader communications platform is built out.
+
+The project mission is documented in [`docs/MISSION.md`](docs/MISSION.md).
+
+## Current release
+
+Release `v0.07` is the first Astro and Cloudflare Workers release. It preserves
+the established public URLs, adds the Mallacoota Mouth catalogue and community
+information policies, and separates preview deployments from deliberate
+production releases.
 
 ## Structure
 
-- `index.html` and the other root `.html` files are public routes and stay in the root so existing links keep working.
+- `src/pages/` contains the Astro routes. `build.format: "file"` keeps the existing `.html` public URLs working.
+- `src/components/` and `src/layouts/` contain shared navigation, footer, metadata, hero, and directory UI.
 - `assets/css/` contains shared styles.
 - `assets/js/` contains shared browser scripts.
 - `assets/icons/` contains web app and favicon assets, except `favicon.ico`, which remains at the root for browser compatibility.
 - `images/` contains site imagery and logos.
 - `data/` contains listing JSON and generated site version metadata.
-- `tools/` contains maintenance scripts.
+- `src/worker.ts` handles canonical-host, legacy-domain, and old-path redirects.
+- `tools/` copies allow-listed legacy assets into the Astro build and maintains release metadata.
+- `docs/` contains the mission, Codex rebuild plan, deployment runbook, and private working references;
+  it is not included in the public build.
+
+## Local development
+
+```sh
+pnpm install
+pnpm run check
+pnpm run dev
+```
+
+The site is served locally at `http://localhost:8787`. Build output is written to
+`dist/` from the explicit public-file allow-list in `tools/public-files.mjs`.
+
+## Deployment
+
+Production is deployed as Cloudflare Worker Static Assets. The canonical domain is
+`lovemallacoota.au`; the `.com.au`, `.com`, and all `www` variants redirect to it.
+
+Pushes to `main` deploy the isolated preview Worker. Production deployment must
+be selected manually in GitHub Actions or run explicitly by an authenticated
+maintainer.
+
+```sh
+pnpm run deploy
+```
+
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for DNS, email-record preservation,
+cutover, and rollback instructions.
 
 ## Versioning
 
 Run this before publishing content changes:
 
 ```sh
-node tools/update-version.mjs
+pnpm run version:site
 ```
 
-The script writes `data/site-version.json` with:
+The script writes `data/site-version.json` using only public site files, with:
 
 - a simple release version, starting at `v0.01`
 - a generated date and time in Australia/Melbourne time

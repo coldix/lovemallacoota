@@ -1,49 +1,44 @@
 {
-  "project": "lovemallacoota.com.au",
-  "version": "v0.05",
-  "generatedAt": "2026-08-24 23:41:06 AEST (Melbourne)",
+  "project": "lovemallacoota.au",
+  "version": "v0.07",
+  "generatedAt": "2026-08-28 06:19:37 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
     {
-      "path": ".github/workflows/deploy.yml",
-      "bytes": 1012,
-      "sha256": "137dd714992ef303c116e1a2320ff4b9c80c7edfaf78af3a38e91785f33ddeea"
+      "path": "404.html",
+      "bytes": 4993,
+      "sha256": "50760a5bc6d2d2a8e00b63475c3ea8c4c6e0fbf6a1b984ed6f453d57a6f734ff"
     },
     {
-      "path": ".gitignore",
-      "bytes": 225,
-      "sha256": "08674051906351d80832b563160215ff3454d65ceb552581e3e5a8ac07a7b296"
-    },
-    {
-      "path": ".htaccess",
-      "bytes": 1215,
-      "sha256": "c1e737303a447d6186fe3bc09ade8d25e6386637fd979be6a6976904cea1d070"
-    },
-    {
-      "path": "README.md",
-      "bytes": 1491,
-      "sha256": "d53e097cd4f5cae72ba2068a54faf90feee84f3f1416aeedc8abfd51684a307f"
+      "path": "accessibility.html",
+      "bytes": 5764,
+      "sha256": "e67e17f2f570e599ebd76b973d53d1e1fdb948438536ab1bced5f8e00dfdc987"
     },
     {
       "path": "accom.html",
-      "bytes": 10220,
-      "sha256": "8126a43c854ce67a27e7d5775034642cfedd178a76c3ae414cefc52e40d798e1"
+      "bytes": 6511,
+      "sha256": "f686e44dfbc0b42a245746df7f25bb28cf254e36bb1871f682903ef8d7bcf558"
     },
     {
       "path": "activity.html",
-      "bytes": 10259,
-      "sha256": "129b39b74b603a5530ab8524b9be4ab2de8d7da27f149233ddf7247e49fd14c7"
+      "bytes": 6461,
+      "sha256": "1066e6405bb76111458335d941cf784499d1368845942bdad74028ab6c91b05b"
+    },
+    {
+      "path": "archive.html",
+      "bytes": 6957,
+      "sha256": "5d0f9b19626f9540963488ebf3c877c9d6410b1832cd7dcd165b611fa5ab4150"
     },
     {
       "path": "assets/css/adnet.css",
-      "bytes": 5655,
-      "sha256": "6a5838112c4aa9ca28291d54c3ea4d57f953ed5037c29a769384fe3c0dab6d37"
+      "bytes": 5651,
+      "sha256": "d8c33f2bb0a064854b90fc81545e66cab52b420542166795fc67a8b4aa23b084"
     },
     {
       "path": "assets/css/style.css",
-      "bytes": 25580,
-      "sha256": "4cbc3a85ffd62605c1b32f4462222097b248ab7c84addb69e67b75484aa7fb45"
+      "bytes": 30906,
+      "sha256": "60e23efc7ae62b7acde05cd99e0cb24cdb642b32f6f55ad4a16b0aae8ec181e7"
     },
     {
       "path": "assets/icons/android-chrome-192x192.png",
@@ -76,39 +71,34 @@
       "sha256": "e905e256659c22af895d5022d040f99902e121f8416d36142b5000aaded60ac4"
     },
     {
+      "path": "assets/js/archive.js",
+      "bytes": 3574,
+      "sha256": "08b000be2d4338b78b765fb2d0cf19181bae5c98979525d9f98bb4a8aa74127a"
+    },
+    {
       "path": "assets/js/script.js",
-      "bytes": 17100,
-      "sha256": "82fcbfd5149cbfbecf184afd02ba1701d4da710cc726619998e053b23797deab"
+      "bytes": 17076,
+      "sha256": "723ac6b143e4fda8b2d7d6739220d1c169cfb78d61d14191ea97dbdd7c24897f"
     },
     {
       "path": "calendar.html",
-      "bytes": 9544,
-      "sha256": "458d4659d384c07d5f54c2c0bc92b8411a088ae9caaad8962d21b1b80a200cc1"
+      "bytes": 5962,
+      "sha256": "218f9f89adc6cc72d0aa8dd293a686a2ddb8deeef3983b073050399ff9fc0670"
     },
     {
       "path": "contact.html",
-      "bytes": 12192,
-      "sha256": "4cf4c1d9b20b16d369b6c3cdb3690c42a3809e050c1ea93b740b00ecee6f9403"
+      "bytes": 8515,
+      "sha256": "962907f33c3cc9777a010806924b143a5960b64948dc2b963c8b294dce4ec684"
     },
     {
-      "path": "data/coota-arch.json",
-      "bytes": 60953,
-      "sha256": "7810cfb1facb21710ceef3d03cfb5bbdf188989398973cedd3ad7d445ba2c9e7"
+      "path": "corrections.html",
+      "bytes": 5959,
+      "sha256": "66cc8df0b237630920168bba773bc813ee05beb242f1b9fe9ad422b99f02097c"
     },
     {
-      "path": "data/coota-new.json",
-      "bytes": 60121,
-      "sha256": "7ff0883ded36f5eb2dde8739c699c561bb3f8a0fddab679491ee749c3e658ac5"
-    },
-    {
-      "path": "data/coota-old.json",
-      "bytes": 21796,
-      "sha256": "39eb4995605ef807a94e52b84f084bf24b1740252f641ffbf103d7cacbf718d5"
-    },
-    {
-      "path": "data/listings-masterV2.json",
-      "bytes": 66852,
-      "sha256": "25dfb8e57bdbf026ca8ff49f1a73060d262b0b011d2f69751f63e7697b2bd5e9"
+      "path": "data/archive-index.json",
+      "bytes": 1240,
+      "sha256": "4aa5837b50cf6b95028b864c5395ad042777be773b19f9b89211f2fc19479157"
     },
     {
       "path": "data/listings_accom.json",
@@ -131,14 +121,24 @@
       "sha256": "27095aeac29fdd109f56e560fd20f220c3624c084d40484517cfecf9ba12b287"
     },
     {
+      "path": "editorial-policy.html",
+      "bytes": 6143,
+      "sha256": "1d65dad42b037cacc84d91a436b3280925f48ea34e282fd7aead82feec6b5628"
+    },
+    {
+      "path": "emergency.html",
+      "bytes": 6242,
+      "sha256": "04d05dba074264095217858c943e22389b5191709e078905efeaada202e43681"
+    },
+    {
       "path": "favicon.ico",
       "bytes": 15406,
       "sha256": "38b73356360e6f3b39d7bc0e082349ebb8eca271e2ba49cc71ce95540a95dd86"
     },
     {
       "path": "food.html",
-      "bytes": 10256,
-      "sha256": "7192cad0f39ea0cf8b66fd13fd4ba1bd68ce126fb784df0ae5be5c8e604ca06e"
+      "bytes": 6420,
+      "sha256": "4e927615a28fd0ad9452ad688c5b032475603ba3a4d516fdf8ae420bca8ac650"
     },
     {
       "path": "images/background-01.webp",
@@ -171,16 +171,6 @@
       "sha256": "8e68085c69286689bfd43d65c5fd969c72745c222585ebba9200b1b6187c539d"
     },
     {
-      "path": "images/logo.png",
-      "bytes": 326674,
-      "sha256": "cd27f655ce96422cc96dc95d66ba71164148c9e5b78526f4e4899c35528ca2c6"
-    },
-    {
-      "path": "images/logo.webp",
-      "bytes": 62176,
-      "sha256": "6355134cc059e81e806f50ff444c3709fa94d822caab3e7ab56c5270559c5aa6"
-    },
-    {
       "path": "images/logo145x100.webp",
       "bytes": 7372,
       "sha256": "bb51eaa115f9131d7f3ecb714352eca1599fb3b246f267c2fe5ae3eddcad3db0"
@@ -191,34 +181,29 @@
       "sha256": "22094a55a25872ee768cd9ba96aa7937043ffee3b10f990b45fa11db5efb71cb"
     },
     {
-      "path": "images/oze-logo.webp",
-      "bytes": 26406,
-      "sha256": "aa047c9df3a97e986c2ae47cb6bd7d5c1ccc249a7335d870527710631181d6d8"
-    },
-    {
       "path": "images/oze-logo216x100.webp",
       "bytes": 8330,
       "sha256": "197a8af6f819d9becdb043dfd70b758d72a58e155ae2c16b204b2f7a70628887"
     },
     {
-      "path": "images/sunriselake.webp",
-      "bytes": 182324,
-      "sha256": "86e7c14dbcc04c0bfe73707aa684175abab6456039c79744deb2832b7418400f"
-    },
-    {
       "path": "index.html",
-      "bytes": 13595,
-      "sha256": "1755d9d98d8e44bb91d2d54f522fa055acdc526f73d578ffb58b27e83a1a86aa"
+      "bytes": 10318,
+      "sha256": "7ff4ed01f522fd5a646cfa6235c9ea630355d7490d1ba6ef5e2c9080f30c4e9d"
     },
     {
       "path": "llms.txt",
-      "bytes": 1765,
-      "sha256": "a8c078edbde88361b30a17ecfe29a3f7dd73630e04b1340a253fc8bb58c5abdf"
+      "bytes": 2492,
+      "sha256": "78a7debb19e6d1b311a4cfbf94e2683dc9eb7770d27312a7faf39b16b403e43d"
+    },
+    {
+      "path": "privacy.html",
+      "bytes": 6075,
+      "sha256": "59a23c01013a42afbbf77b46c86781ac7f28fe1d743891664b317de53cb1a6de"
     },
     {
       "path": "robots.txt",
-      "bytes": 508,
-      "sha256": "fe2a2cf71a41144f7bad623d36635403de5a1342a1e30569748f061943260bc8"
+      "bytes": 504,
+      "sha256": "e7fd563726f441586abb574219f501e0d5afc64b0b8f9999d90b240876b6b932"
     },
     {
       "path": "site.webmanifest",
@@ -227,13 +212,13 @@
     },
     {
       "path": "sitemap.xml",
-      "bytes": 1149,
-      "sha256": "bfab52b091390f9c4eb31657743f9b19d9b2af47bba35d3316f4f7a824751453"
+      "bytes": 2200,
+      "sha256": "7817722de78ff4fbb285928a6fb75a3bc1d3473c3d0a004e0d3dfc66ef10d2fe"
     },
     {
-      "path": "tools/update-version.mjs",
-      "bytes": 4164,
-      "sha256": "e88d9359677840246d87c04272a77972876ca7c3b3aa89b3b4f2e8ba3fb0984f"
+      "path": "terms.html",
+      "bytes": 6058,
+      "sha256": "a98d56286c642e20844b01948881a93d167482df52f0427b6fd72dd389c3ff1e"
     }
   ]
 }

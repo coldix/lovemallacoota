@@ -1,0 +1,9 @@
+---
+import DirectoryPage from "../components/DirectoryPage.astro";
+const explore = [
+  { href: "/food.html", emoji: "🦪", title: "Eat & Drink", text: "Fresh seafood, artisan coffee and bakery icons." },
+  { href: "/activity.html", emoji: "🛶", title: "Do & See", text: "Boat hire, tours, galleries and the best inlet spots." },
+  { href: "/calendar.html", emoji: "📅", title: "What's On", text: "Markets, meetups and community events this week." },
+];
+---
+<DirectoryPage active="accom" title="Stay in Mallacoota — Love Mallacoota" description="Find your perfect place to stay in Mallacoota — lakeside lodges, motels, holiday houses, and caravan parks." canonicalPath="/accom.html" prefix="Find Your" accent="Stay" lede="Wake up to birdsong and water views. Lakeside lodges, holiday houses, motels and cosy caravan parks — find your perfect Mallacoota retreat." placeholder="Search lodges, cabins, caravan parks…" searchLabel="Search accommodation listings" {explore} />

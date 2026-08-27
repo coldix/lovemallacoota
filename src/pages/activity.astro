@@ -1,0 +1,9 @@
+---
+import DirectoryPage from "../components/DirectoryPage.astro";
+const explore = [
+  { href: "/accom.html", emoji: "🛏️", title: "Stay", text: "Lakeside lodges, holiday houses and cosy caravan parks." },
+  { href: "/food.html", emoji: "🦪", title: "Eat & Drink", text: "Fresh seafood, artisan coffee and bakery icons." },
+  { href: "/calendar.html", emoji: "📅", title: "What's On", text: "Markets, meetups and community events this week." },
+];
+---
+<DirectoryPage active="activity" title="Things to Do in Mallacoota — Love Mallacoota" description="Discover boat hire, tours, galleries, shops, beaches and attractions around Mallacoota." canonicalPath="/activity.html" prefix="Do &" accent="See" lede="Paddle the inlet at dawn, walk wild beaches, browse local galleries. Tours, boat hire, shops and attractions across Victoria's far east." placeholder="Search boat hire, tours, galleries…" searchLabel="Search Do and See listings" {explore} />

@@ -1,37 +1,46 @@
-name: Deploy to Hostinger (SSH rsync)
+name: Deploy to Cloudflare
 
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      target:
+        description: Deployment target
+        required: true
+        type: choice
+        default: preview
+        options:
+          - preview
+          - production
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
-      - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync
+      - uses: pnpm/action-setup@v6
 
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.HOSTINGER_SSH_KEY_B64 }}" | base64 -d > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -p 65002 46.202.196.151 >> ~/.ssh/known_hosts
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
 
-      - name: Deploy via rsync over SSH
-        run: |
-          rsync -av \
-            -e "ssh -p 65002" \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='.DS_Store' \
-            --exclude='README.md' \
-            --exclude='tools' \
-            ./ u566466219@46.202.196.151:/home/u566466219/domains/lovemallacoota.com.au/public_html/
+      - run: pnpm install --frozen-lockfile
+
+      - name: Validate
+        run: pnpm run check
+
+      - name: Deploy preview
+        if: github.event_name == 'push' || inputs.target == 'preview'
+        run: pnpm run deploy:preview
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Deploy lovemallacoota.au
+        if: github.event_name == 'workflow_dispatch' && inputs.target == 'production'
+        run: pnpm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -1,0 +1,88 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteNav from "../components/SiteNav.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  active?: string;
+  robots?: string;
+  extraScript?: string;
+  showAds?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  active = "",
+  robots = "index,follow",
+  extraScript,
+  showAds = false,
+} = Astro.props;
+const canonical = new URL(canonicalPath, Astro.site);
+const socialImage = new URL("/images/og-hero.jpg", Astro.site);
+---
+
+<!doctype html>
+<html lang="en-AU" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={robots} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#24c8e8" />
+    <meta name="theme-color" content="#04101c" />
+    <script is:inline>
+      (() => {
+        const theme = localStorage.getItem("theme") ||
+          (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=26.08.003" />
+    {showAds && <link rel="stylesheet" href="/assets/css/adnet.css?v=1.0.0" />}
+    <script src="/assets/js/script.js?v=26.08.003" defer></script>
+    {extraScript && <script src={extraScript} defer></script>}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CPTXSP8D3J"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)}
+      gtag("js", new Date());
+      gtag("config", "G-CPTXSP8D3J");
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="bg-field" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="caustics" aria-hidden="true"></div>
+    <canvas id="motes" class="motes" aria-hidden="true"></canvas>
+    <SiteNav active={active} />
+    <div class="page-wrapper">
+      <slot />
+      <SiteFooter />
+    </div>
+    {showAds && <script async src="https://ads.oze.net.au/t.js"></script>}
+    <slot name="scripts" />
+  </body>
+</html>

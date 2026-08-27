@@ -12,7 +12,7 @@ The project mission is documented in [`docs/MISSION.md`](docs/MISSION.md).
 Release `v0.07` is the first Astro and Cloudflare Workers release. It preserves
 the established public URLs, adds the Mallacoota Mouth catalogue and community
 information policies, and separates preview deployments from deliberate
-production releases.
+production releases. It was deployed to `lovemallacoota.au` on 28 August 2026.
 
 ## Structure
 

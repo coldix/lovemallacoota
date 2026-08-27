@@ -108,6 +108,12 @@ was changed from a Worker route to a Worker Custom Domain. The `.com.au` and `.c
 zones are not yet in this Cloudflare account, so their redirect routes remain
 pending rather than blocking deployment of the canonical `.au` site.
 
+**08:04, 28 August:** production deployment succeeded. Cloudflare created Custom
+Domains for the `.au` apex and `www`; the apex returned the Astro home page with
+the expected security headers, and `www` returned one permanent redirect preserving
+the requested path and query. Release `v0.07` is live. Legacy-domain cutover remains
+pending until the `.com.au` and `.com` zones are added to this Cloudflare account.
+
 ---
 
 ## Recommended approach

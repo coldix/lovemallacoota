@@ -2,7 +2,12 @@
 
 The canonical production site is `https://lovemallacoota.au`.
 
-**Release:** `v0.07`, authorised for production deployment on 28 August 2026.
+**Release:** `v0.07`, deployed to production on 28 August 2026.
+
+The production Worker is attached as a Cloudflare Custom Domain to both
+`lovemallacoota.au` and `www.lovemallacoota.au`. Authoritative DNS and the live
+Worker were verified after deployment; recursive resolver caches may take a short
+time to observe newly created records.
 
 The Worker serves an explicit static build from `dist/`, redirects the `www` host,
 and preserves the old WordPress redirects previously defined in `.htaccess`.

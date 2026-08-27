@@ -5,8 +5,9 @@ The canonical production site is `https://lovemallacoota.au`.
 **Release:** `v0.07`, authorised for production deployment on 28 August 2026.
 
 The Worker serves an explicit static build from `dist/`, redirects the `www` host,
-redirects the `.com.au` and `.com` domains to the matching `.au` URL, and preserves
-the old WordPress redirects previously defined in `.htaccess`.
+and preserves the old WordPress redirects previously defined in `.htaccess`.
+Legacy `.com.au` and `.com` redirect logic is ready in the Worker but those hostnames
+cannot be attached until their zones are present in the same Cloudflare account.
 
 Pushes to `main` deploy only the isolated preview Worker. Production deployment is
 manual through the GitHub Actions **Run workflow** control with `production` selected,
@@ -14,8 +15,9 @@ or through the explicit local production command below.
 
 ## Prerequisites
 
-- All three domains must be active zones in the same Cloudflare account before the
-  six production routes in `wrangler.jsonc` can be deployed.
+- `lovemallacoota.au` must be an active zone in the configured Cloudflare account.
+- The production Worker uses Custom Domains for the apex and `www` host, allowing
+  Cloudflare to create their DNS records and certificates.
 - `lovemallacoota.au` must use both assigned nameservers:
   `dilbert.ns.cloudflare.com` and `jewel.ns.cloudflare.com`.
 - Copy the existing Hostinger MX, SPF, verification, and any DKIM/DMARC records into
@@ -54,9 +56,10 @@ Wrangler must be authenticated to the Cloudflare account that owns the zones.
 
 1. Deploy and test the generated `workers.dev` preview URL.
 2. Confirm all canonical pages, assets, JSON files, redirects, and the 404 response.
-3. Activate the `lovemallacoota.au` Worker routes.
+3. Activate the `lovemallacoota.au` Worker Custom Domains.
 4. Move `.com.au` and `.com` to Cloudflare only after their email DNS records exist.
-5. Verify the legacy domains return a single 301 to the matching `.au` URL.
+5. After the legacy zones are added, attach their routes and verify they return a
+   single 301 to the matching `.au` URL.
 6. Keep the Hostinger files unchanged for seven days as a rollback source.
 7. Add all domain variants to Search Console and submit the `.au` sitemap.
 

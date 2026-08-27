@@ -15,28 +15,12 @@
   },
   "routes": [
     {
-      "pattern": "lovemallacoota.au/*",
-      "zone_name": "lovemallacoota.au"
+      "pattern": "lovemallacoota.au",
+      "custom_domain": true
     },
     {
-      "pattern": "www.lovemallacoota.au/*",
-      "zone_name": "lovemallacoota.au"
-    },
-    {
-      "pattern": "lovemallacoota.com.au/*",
-      "zone_name": "lovemallacoota.com.au"
-    },
-    {
-      "pattern": "www.lovemallacoota.com.au/*",
-      "zone_name": "lovemallacoota.com.au"
-    },
-    {
-      "pattern": "lovemallacoota.com/*",
-      "zone_name": "lovemallacoota.com"
-    },
-    {
-      "pattern": "www.lovemallacoota.com/*",
-      "zone_name": "lovemallacoota.com"
+      "pattern": "www.lovemallacoota.au",
+      "custom_domain": true
     }
   ],
   "env": {

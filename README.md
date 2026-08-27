@@ -42,7 +42,9 @@ The site is served locally at `http://localhost:8787`. Build output is written t
 ## Deployment
 
 Production is deployed as Cloudflare Worker Static Assets. The canonical domain is
-`lovemallacoota.au`; the `.com.au`, `.com`, and all `www` variants redirect to it.
+`lovemallacoota.au`; its `www` hostname redirects to the apex. Redirect handling
+for the `.com.au` and `.com` names is implemented and can be activated after those
+zones are added to the same Cloudflare account.
 
 Pushes to `main` deploy the isolated preview Worker. Production deployment must
 be selected manually in GitHub Actions or run explicitly by an authenticated

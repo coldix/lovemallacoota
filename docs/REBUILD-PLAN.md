@@ -102,6 +102,12 @@ Seed record: Issue 1771, 18 June 2020, 28 pages, checksum recorded. Public index
 Production custom-domain cutover was authorised by Colin on 28 August 2026. The
 release must be committed and validated before the production command is run.
 
+**Production cutover note:** the first production upload completed but route setup
+exposed two configuration prerequisites. The `.au` apex had no DNS record, so it
+was changed from a Worker route to a Worker Custom Domain. The `.com.au` and `.com`
+zones are not yet in this Cloudflare account, so their redirect routes remain
+pending rather than blocking deployment of the canonical `.au` site.
+
 ---
 
 ## Recommended approach

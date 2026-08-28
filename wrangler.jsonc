@@ -31,6 +31,7 @@
       "vars": {
         "RELAY_URL": "https://ads.oze.net.au/relay"
       },
+      "browser": { "binding": "BROWSER" },
       "ratelimits": [
         {
           "name": "CONTACT_RATE",
@@ -43,6 +44,7 @@
   "vars": {
     "RELAY_URL": "https://ads.oze.net.au/relay"
   },
+  "browser": { "binding": "BROWSER" },
   "ratelimits": [
     {
       "name": "CONTACT_RATE",

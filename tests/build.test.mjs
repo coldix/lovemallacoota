@@ -6,6 +6,7 @@ import { ALL_LISTING_FILES, loadListings, verificationLine } from "../src/lib/li
 import {
   SECTIONS,
   currentEdition,
+  editionSections,
   loadEditions,
   tableOfContents,
 } from "../src/lib/editions.mjs";
@@ -137,16 +138,18 @@ test("the weekly edition is rendered into the HTML, not fetched", async () => {
   }
 });
 
-test("sections with no contributions are left out of the edition", async () => {
+test("sections with nothing in them are left out of the edition", async () => {
   const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
-  const used = new Set((currentEdition().articles || []).map((article) => article.section));
+  // A section earns its place with a contribution or with automatic content.
+  const present = new Set(editionSections(currentEdition()).map((section) => section.id));
   for (const section of SECTIONS) {
-    if (used.has(section.id)) continue;
+    if (present.has(section.id)) continue;
     assert.ok(
       !html.includes(`id="section-${section.id}"`),
       `empty section ${section.title} should not be rendered`
     );
   }
+  assert.ok(present.size < SECTIONS.length, "expected at least one empty section to drop");
 });
 
 test("every edition keeps its own permanent page", async () => {
@@ -197,4 +200,47 @@ test("an unverified listing says so rather than staying silent", async () => {
 
   const html = await readFile(new URL("../dist/food.html", import.meta.url), "utf8");
   assert.ok(html.includes("Not yet verified"), "the card does not show verification state");
+});
+
+test("the rotation features a different trail and business every week", async () => {
+  const trails = JSON.parse(
+    await readFile(new URL("../data/trails-nearby.json", import.meta.url), "utf8")
+  );
+  assert.ok(trails.length > 10, "expected a meaningful pool of nearby trails");
+
+  // Every trail must come up once before any repeats.
+  const seen = new Set();
+  for (let week = 0; week < trails.length; week += 1) {
+    seen.add(trails[week % trails.length].slug);
+  }
+  assert.equal(seen.size, trails.length, "the rotation repeats before featuring them all");
+
+  // Nothing beyond a two-hour drive is ever featured.
+  for (const trail of trails) {
+    assert.ok(trail.directLineKm <= 70, `${trail.name} is ${trail.directLineKm} km away`);
+    assert.match(trail.url, /^https:\/\/trailbound\.au\/trails\//);
+  }
+});
+
+test("automatic sections say where their content came from", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  assert.ok(html.includes("Open-Meteo"), "the forecast does not credit its source");
+  assert.ok(
+    html.includes("Not an official warning service"),
+    "the forecast does not disclaim being a warning service"
+  );
+  assert.ok(
+    html.includes("Not paid placement"),
+    "the featured business does not say it is unpaid"
+  );
+});
+
+test("tide times are linked, never invented", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  assert.ok(html.includes("bom.gov.au"), "tides do not link to the official source");
+  // No table of tide figures should ever be rendered from data we do not hold.
+  assert.ok(
+    !/high\s*tide|low\s*tide/i.test(html),
+    "the edition appears to publish tide figures"
+  );
 });

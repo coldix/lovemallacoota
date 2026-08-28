@@ -1,0 +1,42 @@
+name: Refresh the weekly edition
+
+on:
+  schedule:
+    # 05:10 UTC daily = 15:10 AEST. The forecast is refreshed every day; the
+    # trail and business only change when the ISO week does.
+    - cron: "10 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Refresh this week's automatic sections
+        run: node tools/refresh-weekly.mjs
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- data/weekly; then
+            echo "No change to this week's automatic content."
+            exit 0
+          fi
+          git config user.name "Love Mallacoota bot"
+          git config user.email "coota@lovemallacoota.au"
+          git add data/weekly
+          git commit -m "Refresh the weekly forecast and features"
+          git push

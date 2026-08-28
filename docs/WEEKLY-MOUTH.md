@@ -53,9 +53,31 @@ Rendering turns the published edition page into the PDF, so print and web cannot
 drift apart and the table of contents is built from the same headings. Requires
 Workers Paid on this account.
 
-**W5. Automatic sections are generated, not typed.** Weather, tides and the
-week's events are built from data at build time, because that is what the old
-Mouth carried every week and what nobody will reliably retype.
+**W5. Automatic sections are generated, not typed.** The forecast, the week's
+events, a trail and a business are generated into `data/weekly/<week>.json` by
+`tools/refresh-weekly.mjs`, committed, and read at build time. Generating into a
+committed file rather than fetching during the build means the build never
+depends on a third party being up, and a past edition keeps the forecast it was
+actually published with instead of silently acquiring today's.
+
+**W6. Tide times are linked, not republished.** The Mouth printed tides taken at
+Gabo Island. There is no free, authoritative Australian tide source we may
+republish, and a wrong tide time at the Bastion Point bar is the kind of error
+that puts someone in the water. The section links to the Bureau of Meteorology
+instead. If licensed tide data is ever obtained, this decision changes first.
+
+**W7. The weekly trail and business rotate, and say so.** One trail from
+TrailBound within about two hours of Mallacoota, and one business from the
+directory, chosen by turn so every one is featured before any repeats. Both
+carry a line saying which number of how many they are, and the business says it
+is not paid placement — because the moment a reader suspects it is, every other
+listing looks bought too.
+
+Two hours is measured as 70 km in a straight line, which on these roads — out
+to the highway at Genoa and back in — is about two hours' driving. That gives
+23 trails, roughly six months of weeks. Cape Conran, at 93 km direct and nearer
+two and a half hours, falls outside on purpose. The radius lives in
+`tools/sync-trails.mjs` and can be widened when the rotation runs dry.
 
 
 ## Sections

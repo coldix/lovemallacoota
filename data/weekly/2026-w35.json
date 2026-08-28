@@ -1,0 +1,99 @@
+{
+  "week": "2026-w35",
+  "generatedAt": "2026-08-28T09:41:21.766Z",
+  "weather": {
+    "source": "Open-Meteo",
+    "sourceUrl": "https://open-meteo.com/",
+    "licence": "CC BY 4.0",
+    "fetchedAt": "2026-08-28T09:41:21.766Z",
+    "days": [
+      {
+        "date": "2026-08-24",
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 16.6,
+        "minC": 6,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-08-25",
+        "code": 81,
+        "summary": "Showers",
+        "maxC": 20.9,
+        "minC": 9.8,
+        "rainMm": 13.3
+      },
+      {
+        "date": "2026-08-26",
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 15.3,
+        "minC": 11.6,
+        "rainMm": 0.3
+      },
+      {
+        "date": "2026-08-27",
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 16.1,
+        "minC": 6.7,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-08-28",
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 17.9,
+        "minC": 5.8,
+        "rainMm": 0.1
+      },
+      {
+        "date": "2026-08-29",
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 16.3,
+        "minC": 9.2,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-08-30",
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 16.5,
+        "minC": 9.7,
+        "rainMm": 0
+      }
+    ]
+  },
+  "events": [],
+  "trail": {
+    "slug": "lakeside-drive-boardwalk",
+    "name": "Lakeside Drive Boardwalk",
+    "region": "Mallacoota",
+    "state": "VIC",
+    "distance": "5.4 km",
+    "duration": "1.5 hours",
+    "difficulty": "Easy",
+    "terrain": "lakeside boardwalk",
+    "start": "Buckland Drive or the town foreshore",
+    "summary": "The Mallacoota Shared Pathway skims Bottom Lake with raised boardwalks, fishing platforms and views to Howe Range, Rabbit Island and Goat Island. It links town and Karbeethong, then meets The Narrows.",
+    "url": "https://trailbound.au/trails/lakeside-drive-boardwalk",
+    "directLineKm": 0,
+    "rotation": {
+      "position": 1,
+      "of": 23
+    }
+  },
+  "business": {
+    "slug": "adobe-abodes",
+    "name": "Adobe Abodes",
+    "description": "Comfortable, architecturally designed holiday flats near the lake.",
+    "category": "Accommodation",
+    "locality": "Mallacoota",
+    "url": "https://www.adobeabodes.com.au/mallacoota-accommodation",
+    "rotation": {
+      "position": 1,
+      "of": 42
+    }
+  }
+}

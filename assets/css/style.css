@@ -787,3 +787,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   color: var(--accent);
 }
 .listing-verified.unverified { color: var(--muted); font-weight: 400; }
+
+/* Automatic edition sections: forecast, diary, trail and business features. */
+.edition-auto { max-width: 68ch; margin: 0 auto; text-align: left; }
+.forecast { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.forecast th, .forecast td { padding: 0.45rem 0.5rem; text-align: left; border-bottom: 1px solid var(--line, rgba(255,255,255,0.12)); }
+.forecast thead th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.forecast tbody th { font-weight: 600; white-space: nowrap; }
+.edition-source { margin-top: 0.9rem; font-size: 0.82rem; color: var(--muted); }
+.edition-diary { list-style: none; margin: 0 auto; max-width: 60ch; padding: 0; text-align: left; }
+.edition-diary li { padding: 0.5rem 0; border-bottom: 1px solid var(--line, rgba(255,255,255,0.12)); display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.edition-diary-when { color: var(--muted); font-size: 0.85rem; min-width: 9rem; }
+.edition-diary-where { color: var(--muted); font-size: 0.85rem; width: 100%; }
+.edition-feature h3 { margin-bottom: 0.25rem; }
+.edition-feature-meta { color: var(--muted); font-size: 0.88rem; margin-bottom: 0.8rem; }

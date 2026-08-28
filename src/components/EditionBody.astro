@@ -16,6 +16,9 @@ interface Props {
 const { edition, archived = false } = Astro.props;
 
 const sections = sectionsWithContent(edition);
+
+const DAY = new Intl.DateTimeFormat("en-AU", { weekday: "short", day: "numeric", month: "short", timeZone: "Australia/Melbourne" });
+const dayName = (iso) => DAY.format(new Date(`${iso}T00:00:00+10:00`));
 const toc = tableOfContents(edition);
 const total = countArticles(edition);
 const statusLabel =
@@ -75,9 +78,83 @@ const statusLabel =
 {sections.map((section) => (
   <section class="glass-card sheen content-block reveal" id={`section-${section.id}`} aria-labelledby={`heading-${section.id}`}>
     <h2 class="section-title" id={`heading-${section.id}`}>{section.title}</h2>
-    {section.automatic && (
-      <p class="section-sub edition-automatic">Compiled automatically each week.</p>
+    {section.auto?.type === "weather" && (
+      <div class="edition-auto">
+        <table class="forecast">
+          <thead>
+            <tr><th scope="col">Day</th><th scope="col">Forecast</th><th scope="col">Min</th><th scope="col">Max</th><th scope="col">Rain</th></tr>
+          </thead>
+          <tbody>
+            {section.auto.data.days.map((day) => (
+              <tr>
+                <th scope="row">{dayName(day.date)}</th>
+                <td>{day.summary}</td>
+                <td>{Math.round(day.minC)}°</td>
+                <td>{Math.round(day.maxC)}°</td>
+                <td>{day.rainMm > 0 ? `${day.rainMm} mm` : "—"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="edition-source">
+          Forecast from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a>, {section.auto.data.licence}. Not an official warning service — see <a href="/emergency.html">emergency information</a>.
+        </p>
+      </div>
     )}
+
+    {section.auto?.type === "tides" && (
+      <div class="edition-auto">
+        <p>{section.auto.data.note}</p>
+        <p><a class="btn btn-ghost" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">{section.auto.data.label}</a></p>
+      </div>
+    )}
+
+    {section.auto?.type === "diary" && (
+      <ul class="edition-diary">
+        {section.auto.data.map((event) => (
+          <li>
+            <span class="edition-diary-when">{event.date}{event.time ? ` · ${event.time}` : ""}</span>
+            <strong>{event.title}</strong>
+            {event.location && <span class="edition-diary-where">{event.location}</span>}
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {section.auto?.type === "trail" && (
+      <div class="edition-auto edition-feature">
+        <h3>{section.auto.data.name}</h3>
+        <p class="edition-feature-meta">
+          {[section.auto.data.distance, section.auto.data.duration, section.auto.data.difficulty].filter(Boolean).join(" · ")}
+        </p>
+        <p>{section.auto.data.region}{section.auto.data.start ? ` — starts at ${section.auto.data.start}` : ""}.</p>
+        {section.auto.data.summary && <p>{section.auto.data.summary}</p>}
+        <p>
+          <a class="btn btn-primary" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">Full notes on TrailBound</a>
+        </p>
+        <p class="edition-source">
+          Walk {section.auto.data.rotation.position} of {section.auto.data.rotation.of} within about two hours of Mallacoota. A different one each week.
+        </p>
+      </div>
+    )}
+
+    {section.auto?.type === "business" && (
+      <div class="edition-auto edition-feature">
+        <h3>{section.auto.data.name}</h3>
+        {section.auto.data.category && <p class="edition-feature-meta">{section.auto.data.category}{section.auto.data.locality ? ` · ${section.auto.data.locality}` : ""}</p>}
+        <p>{section.auto.data.description}</p>
+        <p>
+          {section.auto.data.url && (
+            <a class="btn btn-primary" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">Visit</a>
+          )}
+          <a class="btn btn-ghost" href="/food.html">More in the directory</a>
+        </p>
+        <p class="edition-source">
+          Chosen in turn from the {section.auto.data.rotation.of} listings in the directory — number {section.auto.data.rotation.position}. Not paid placement.
+        </p>
+      </div>
+    )}
+
     {section.articles.map((article) => (
       <article class="edition-article" id={articleAnchor(article)}>
         <h3>{article.title}</h3>

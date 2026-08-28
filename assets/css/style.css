@@ -1028,3 +1028,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* The coach timetable is dense; let it wrap sensibly on a phone. */
 .timetable th, .timetable td { font-size: 0.86rem; vertical-align: top; }
 .timetable tbody th { font-weight: 600; }
+
+/* Long pieces read badly as one 68ch column on a wide screen, and the printed
+   edition is already two columns. Match it once there is room. */
+@media (min-width: 1000px) {
+  .edition-article,
+  .locals-page .edition-article {
+    max-width: none;
+    columns: 2;
+    column-gap: 2.6rem;
+  }
+  .edition-article > h3,
+  .edition-article > h2,
+  .edition-article > .edition-byline,
+  .edition-article > .eyebrow,
+  .edition-article > .edition-figure,
+  .edition-article > .edition-source { column-span: all; }
+  .edition-article p { margin-bottom: 0.9rem; }
+  /* A short notice in two columns looks broken, not designed. */
+  .edition-article:has(p:only-of-type) { columns: 1; max-width: 68ch; }
+}

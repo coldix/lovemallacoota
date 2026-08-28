@@ -13,7 +13,7 @@ const locals = localsOfTheWeek();
   showAds={true}
 >
   <PageHero eyebrow="The people here" prefix="Local of the" accent="Week" lede="Mallacoota is its people. Every week we publish one of their stories — what they did, where they came from, and what they know that the rest of us do not." />
-  <main>
+  <main class="locals-page">
     {locals.length === 0 ? (
       <section class="glass-card sheen content-block reveal">
         <p class="no-results">The first Local of the Week is on its way.</p>

@@ -28,6 +28,10 @@ mouth/
 *.xcuserstate
 xcuserdata/
 
+# Staged originals are committed by the Worker and removed by CI once
+# converted; they are never part of the build.
+!uploads/
+
 # Local logs and generated scratch files
 *.log
 tmp/

@@ -59,6 +59,27 @@ const writable = SECTIONS.filter((section) => !section.automatic);
             <textarea id="body" name="body" rows="16" required placeholder="Leave a blank line between paragraphs."></textarea>
             <p class="contact-hint">Blank line between paragraphs. No formatting needed.</p>
           </div>
+          <div class="field full">
+            <label for="photo">Photograph (optional)</label>
+            <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic" />
+            <p class="contact-hint">Sent full size — we resize to 1920px and convert to WebP. Up to 12MB.</p>
+          </div>
+          <div class="field">
+            <label for="caption">Photo caption</label>
+            <input id="caption" name="caption" type="text" maxlength="300" placeholder="What is happening in the picture" />
+          </div>
+          <div class="field">
+            <label for="credit">Photo credit</label>
+            <input id="credit" name="credit" type="text" maxlength="300" placeholder="Who took it — required for a photo" />
+          </div>
+          <div class="field full">
+            <label for="as_cover">
+              <input id="as_cover" name="as_cover" type="checkbox" value="yes" />
+              Offer this as the cover photograph for the week
+            </label>
+            <p class="contact-hint">Cover photographs are portrait if possible, and print best at 2480 × 3508 or larger.</p>
+          </div>
+
           <div class="form-actions full">
             <button class="btn btn-primary" type="submit" id="article-submit">Publish to {edition.displayDate}</button>
             <a href="/edition.html" class="btn btn-ghost">See this week</a>
@@ -80,6 +101,7 @@ const writable = SECTIONS.filter((section) => !section.automatic);
         <li><strong>It publishes itself.</strong> A piece that clears the <a href="/editorial-policy.html">editorial policy</a> goes live in about two minutes, without waiting for anyone.</li>
         <li><strong>Held is not rejected.</strong> Anything the check queries is kept and read by a person, who will tell you why.</li>
         <li><strong>Writing about someone?</strong> Ask them first. Profiles of named people run with their agreement.</li>
+        <li><strong>A photograph needs a credit.</strong> Who took it, always. Without one the words publish and the picture does not.</li>
         <li><strong>Corrections are visible.</strong> Every change is recorded, so a correction reads as a correction rather than a quiet edit.</li>
       </ul>
     </section>

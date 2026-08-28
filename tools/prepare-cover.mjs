@@ -22,7 +22,7 @@ const coversDir = path.join(rootDir, "images", "covers");
 /** A4 portrait at 300 dpi. 210 × 297 mm. */
 const PRINT = { width: 2480, height: 3508 };
 /** Screen only — the page should not carry a print-sized file. */
-const WEB_WIDTH = 1600;
+const WEB_WIDTH = 1920;
 /** Below this the printed cover starts to look soft at A4. */
 const MIN_SHORT_EDGE = 1754;
 

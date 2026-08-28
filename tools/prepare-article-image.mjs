@@ -23,7 +23,7 @@ import sharp from "sharp";
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = path.join(rootDir, "images", "articles");
 
-const LONGEST_EDGE = 1280;
+const LONGEST_EDGE = 1920;
 const RIGHTS = ["permission_granted", "own_work", "open_licence", "public_domain_verified", "review_required"];
 
 const [source, ...rest] = process.argv.slice(2);

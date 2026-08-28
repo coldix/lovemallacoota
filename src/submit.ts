@@ -10,7 +10,15 @@
 
 import contributors from "../data/contributors.json" with { type: "json" };
 
-const MAX = { title: 160, byline: 90, body: 12_000, email: 200, phone: 40 };
+const MAX = { title: 160, byline: 90, body: 12_000, email: 200, phone: 40, caption: 300 };
+/** Bigger than any phone photograph, small enough to commit through the API. */
+const MAX_IMAGE_BYTES = 12 * 1024 * 1024;
+const IMAGE_TYPES: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/heic": "heic",
+};
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const OWNER = "coldix";
 const REPO = "lovemallacoota";
@@ -124,6 +132,56 @@ async function commitArticle(env: Env, week: string, article: Record<string, unk
   if (!written.ok) throw new Error(`Cannot write ${path}: ${written.status}`);
 }
 
+async function putFile(env: Env, filePath: string, bytes: Uint8Array, message: string) {
+  const api = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${filePath}`;
+  const headers = {
+    Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+    Accept: "application/vnd.github+json",
+    "User-Agent": "lovemallacoota-worker",
+    "Content-Type": "application/json",
+  };
+
+  // Chunked so a multi-megabyte photograph does not blow the call stack.
+  let binary = "";
+  for (let i = 0; i < bytes.length; i += 8192) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+  }
+
+  const response = await fetch(api, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ message, content: btoa(binary) }),
+  });
+  if (!response.ok) throw new Error(`Cannot write ${filePath}: ${response.status}`);
+}
+
+/**
+ * Staged into the repository rather than served from it: uploads/ is outside
+ * the deploy allow-list, so an unconverted original never reaches the site.
+ */
+export async function stageImage(
+  env: Env,
+  file: File,
+  meta: Record<string, unknown>
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const extension = IMAGE_TYPES[file.type];
+  if (!extension) return { ok: false, error: "Photographs must be JPEG, PNG, WebP or HEIC." };
+  if (file.size > MAX_IMAGE_BYTES) return { ok: false, error: "That photograph is over 12MB." };
+
+  const stem = String(meta.articleId || `cover-${meta.week}`);
+  const name = `${stem}.${extension}`;
+  const bytes = new Uint8Array(await file.arrayBuffer());
+
+  await putFile(env, `uploads/${name}`, bytes, `Stage ${name} for conversion`);
+  await putFile(
+    env,
+    `uploads/${stem}.json`,
+    new TextEncoder().encode(`${JSON.stringify({ ...meta, file: name }, null, 2)}\n`),
+    `Describe ${name}`
+  );
+  return { ok: true };
+}
+
 export async function handleArticleSubmit(request: Request, env: Env): Promise<Response> {
   if (request.method !== "POST") return json({ ok: false, error: "Use POST." }, 405);
 
@@ -195,6 +253,11 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
     body: toParagraphs(raw),
   };
 
+  const photo = form.get("photo");
+  const caption = String(form.get("caption") || "").trim().slice(0, MAX.caption);
+  const credit = String(form.get("credit") || "").trim().slice(0, MAX.caption);
+  const isCover = String(form.get("as_cover") || "") === "yes";
+
   try {
     await commitArticle(env, week, article);
   } catch (error) {
@@ -202,5 +265,29 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
     return json({ ok: false, error: (error as Error).message }, 502);
   }
 
-  return json({ ok: true, id: article.id, note: "Published — live in about two minutes." }, 200);
+  let photoNote = "";
+  if (photo instanceof File && photo.size > 0) {
+    if (!credit) {
+      photoNote = " The photograph was not attached: it needs a credit.";
+    } else {
+      const staged = await stageImage(env, photo, {
+        kind: isCover ? "cover" : "article",
+        week,
+        articleId: isCover ? null : article.id,
+        caption,
+        credit,
+        alt: caption || article.title,
+        submittedBy: email,
+        rights: "review_required",
+      });
+      photoNote = staged.ok
+        ? " The photograph follows once it has been resized."
+        : ` The photograph was not attached: ${staged.error}`;
+    }
+  }
+
+  return json(
+    { ok: true, id: article.id, note: `Published — live in about two minutes.${photoNote}` },
+    200
+  );
 }

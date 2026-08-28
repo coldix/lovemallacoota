@@ -1,0 +1,63 @@
+name: Convert submitted photographs
+
+on:
+  push:
+    paths: ["uploads/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # A Worker cannot resize an image, so it commits the original and this
+      # converts it to a 1920px WebP and records it on the article or cover.
+      - name: Convert
+        run: node tools/process-uploads.mjs
+
+      - name: Stop here if nothing was converted
+        id: changed
+        run: |
+          if git diff --quiet -- data/editions images uploads; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No photographs waiting."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check before publishing
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+        run: pnpm run check
+
+      - name: Commit the converted photographs
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          git config user.name "Love Mallacoota bot"
+          git config user.email "coota@lovemallacoota.au"
+          git add data/editions images uploads
+          git commit -m "Convert submitted photographs"
+          git push
+
+      - name: Deploy lovemallacoota.au
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+        run: pnpm run deploy

@@ -11,6 +11,7 @@
     "build": "astro build && node tools/build-static.mjs",
     "check:images": "node tools/check-images.mjs",
     "weekly": "node tools/refresh-weekly.mjs",
+    "roll": "node tools/roll-edition.mjs",
     "trails:sync": "node tools/sync-trails.mjs",
     "astro": "astro",
     "version:site": "pnpm run build && node tools/update-version.mjs",

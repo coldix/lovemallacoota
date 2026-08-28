@@ -1,0 +1,96 @@
+name: Close the week
+
+on:
+  schedule:
+    # 13:00 UTC Sunday = Sunday 23:00 AEST. The week closes, the next opens.
+    - cron: "0 13 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  roll:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Idempotent: freezes any open edition whose last day has arrived and
+      # opens the following week, so a missed Sunday recovers on Monday.
+      - name: Close the week and open the next
+        run: node tools/roll-edition.mjs
+
+      - name: Build the new week's automatic sections
+        run: node tools/refresh-weekly.mjs
+
+      - name: Stop here if nothing changed
+        id: changed
+        run: |
+          if git diff --quiet -- data/editions data/weekly; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Nothing to close today."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Closing the week is a release: the edition is final and gets a version.
+      - name: Stamp the release
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+        run: pnpm run version:site
+
+      - name: Check before publishing
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+        run: pnpm run check
+
+      - name: Commit the closed week
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          git config user.name "Love Mallacoota bot"
+          git config user.email "coota@lovemallacoota.au"
+          git add data/editions data/weekly data/site-version.json assets/js/script.js
+          git commit -m "Close the week and open the next"
+          git push
+
+      - name: Deploy lovemallacoota.au
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+        run: pnpm run deploy
+
+      # Render the PDF once now, so the first reader to ask for the closed
+      # edition gets it from cache instead of waiting on a browser.
+      - name: Warm the closed edition's PDF
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          WEEK=$(node -p "
+            const fs = require('node:fs');
+            const editions = fs.readdirSync('data/editions')
+              .map((f) => JSON.parse(fs.readFileSync('data/editions/' + f, 'utf8')))
+              .filter((e) => e.status === 'frozen')
+              .sort((a, b) => b.week.localeCompare(a.week));
+            editions[0] ? editions[0].week : '';
+          ")
+          if [ -n "$WEEK" ]; then
+            echo "Warming https://lovemallacoota.au/edition/$WEEK.pdf"
+            curl -sS -o /dev/null -w "%{http_code} %{size_download} bytes\n" \
+              --max-time 120 "https://lovemallacoota.au/edition/$WEEK.pdf"
+          fi

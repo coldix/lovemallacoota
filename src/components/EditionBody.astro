@@ -32,7 +32,9 @@ const statusLabel =
 <section class="glass-card sheen content-block reveal edition-masthead">
   <p class="eyebrow">{editionTitle(edition)}</p>
   <h2 class="section-title">
-    {total} {total === 1 ? "item" : "items"} this week
+    {total > 0
+      ? `${total} ${total === 1 ? "item" : "items"} this week`
+      : "This week so far"}
   </h2>
   <p class="section-sub">{statusLabel}</p>
   <div class="edition-actions">
@@ -67,10 +69,11 @@ const statusLabel =
   </nav>
 )}
 
-{sections.length === 0 && (
-  <section class="glass-card sheen content-block reveal">
+{total === 0 && (
+  <section class="glass-card sheen content-block reveal edition-web-only">
     <p class="no-results">
-      Nothing has been contributed to this edition yet.
+      Nothing has been contributed to this week yet — the forecast and features
+      below are compiled automatically.
     </p>
   </section>
 )}

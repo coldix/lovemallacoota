@@ -139,10 +139,11 @@ Contributor  →  /submit  (Cloudflare Access)
                   ↓ ~2 minutes
               live in this week's edition
 
-Sunday 23:00 AEST  →  cron
-              freeze the edition, render the page to PDF,
-              store it, open next week's edition, link the PDF
-              from the edition page and the archive
+Sunday 23:00 AEST  →  cron (.github/workflows/roll.yml)
+              freeze the open edition whose last day has arrived,
+              open the following week empty, generate its forecast
+              and features, stamp a release, deploy, and warm the
+              closed edition's PDF so the first reader does not wait
 ```
 
 
@@ -160,8 +161,13 @@ Sunday 23:00 AEST  →  cron
    then submissions land as held.
 4. **The AI check.** Policy prompt, verdict recording, hold-and-notify by the
    adnet relay, and an appeal route that is a human reading it.
-5. **Freeze and PDF.** Cron, Browser Rendering, storage, the download, print and
-   email-this-edition actions.
+5. ~~**Freeze and PDF.**~~ **Done.** `/edition/<week>.pdf` renders on demand
+   through Browser Rendering, so no storage was needed and the PDF cannot drift
+   from the page. `tools/roll-edition.mjs` closes the week and opens the next,
+   run by the Sunday 23:00 AEST cron in `.github/workflows/roll.yml`. It is
+   idempotent — a missed Sunday recovers on Monday, and running it twice does
+   nothing the first run did not. Emailing an edition is not built and waits on
+   the relay.
 6. **Email digest.** Only once several editions exist and there is something
    worth sending. An empty digest on a schedule does more damage than none.
 

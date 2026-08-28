@@ -172,13 +172,22 @@ function pickEvents(week) {
 
 const week = weekArg || isoWeek(new Date());
 
+const previous = existsSync(path.join(weeklyDir, `${week}.json`))
+  ? JSON.parse(readFileSync(path.join(weeklyDir, `${week}.json`), "utf8"))
+  : null;
+
 let weather = null;
 try {
   weather = await fetchForecast(week);
 } catch (error) {
-  // A forecast we could not fetch is simply absent. It is never invented, and
-  // the edition renders without the section.
+  // A forecast is never invented. But a transient outage must not delete the
+  // one we already have: yesterday's forecast, clearly dated, beats no forecast
+  // at all, and beats a section that silently vanishes from the edition.
   console.warn(`forecast unavailable: ${error.message}`);
+  if (previous?.weather) {
+    weather = previous.weather;
+    console.warn(`keeping the forecast fetched at ${previous.weather.fetchedAt}`);
+  }
 }
 
 const payload = {

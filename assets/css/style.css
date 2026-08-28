@@ -993,3 +993,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   color: var(--muted);
   text-align: left;
 }
+
+/* An article photograph always carries its credit. */
+.edition-figure { margin: 0 0 1.2rem; }
+.edition-figure img { width: 100%; height: auto; border-radius: 12px; display: block; }
+.edition-figure figcaption {
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}

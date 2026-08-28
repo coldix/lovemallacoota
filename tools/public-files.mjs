@@ -24,4 +24,4 @@ export const publicFiles = [
 
 // Cover photographs are per-week, so the directory ships whole rather than
 // being listed file by file.
-export const publicDirectories = ["assets", "images/covers"];
+export const publicDirectories = ["assets", "images/covers", "images/articles"];

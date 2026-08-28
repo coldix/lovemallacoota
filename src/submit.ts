@@ -10,7 +10,8 @@
 
 import contributors from "../data/contributors.json" with { type: "json" };
 
-const MAX = { title: 160, byline: 90, body: 12_000 };
+const MAX = { title: 160, byline: 90, body: 12_000, email: 200, phone: 40 };
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const OWNER = "coldix";
 const REPO = "lovemallacoota";
 
@@ -142,6 +143,14 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
   const title = String(form.get("title") || "").trim().slice(0, MAX.title);
   const byline = String(form.get("byline") || contributor.name).trim().slice(0, MAX.byline);
   const raw = String(form.get("body") || "").trim().slice(0, MAX.body);
+  const contactEmail = String(form.get("contact_email") || "").trim().slice(0, MAX.email);
+  const contactPhone = String(form.get("contact_phone") || "").trim().slice(0, MAX.phone);
+  // Contact details are for us unless the contributor asks for them to run.
+  const contactPublic = String(form.get("contact_public") || "") === "yes";
+
+  if (contactEmail && !EMAIL_RE.test(contactEmail)) {
+    return json({ ok: false, error: "That contact email does not look right." }, 400);
+  }
 
   if (!week || !section || !title || !raw) {
     return json({ ok: false, error: "Week, section, title and body are all required." }, 400);
@@ -178,6 +187,11 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
     submittedAt: new Date().toISOString(),
     publishedAt: new Date().toISOString(),
     check: { verdict: "pass", by: "policy check" },
+    contact: {
+      email: contactEmail || email,
+      phone: contactPhone || null,
+      public: contactPublic,
+    },
     body: toParagraphs(raw),
   };
 

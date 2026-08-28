@@ -30,6 +30,21 @@ const writable = SECTIONS.filter((section) => !section.automatic);
             <label for="byline">Byline</label>
             <input id="byline" name="byline" type="text" placeholder="Your name, or your group" />
           </div>
+          <div class="field">
+            <label for="contact_email">Contact email</label>
+            <input id="contact_email" name="contact_email" type="email" placeholder="If different from the address you signed in with" />
+          </div>
+          <div class="field">
+            <label for="contact_phone">Contact phone</label>
+            <input id="contact_phone" name="contact_phone" type="tel" placeholder="Optional" />
+          </div>
+          <div class="field full">
+            <label for="contact_public">
+              <input id="contact_public" name="contact_public" type="checkbox" value="yes" />
+              Publish these contact details with the piece
+            </label>
+            <p class="contact-hint">Leave unticked and they are kept for us to reach you, not shown to readers.</p>
+          </div>
           <div class="field full">
             <label for="title">Headline</label>
             <input id="title" name="title" type="text" required maxlength="160" />

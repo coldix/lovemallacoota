@@ -247,7 +247,22 @@ const statusLabel =
       <article class="edition-article" id={articleAnchor(article)}>
         <h3>{article.title}</h3>
         {article.byline && <p class="edition-byline">{article.byline}</p>}
+        {article.image && (
+          <figure class="edition-figure">
+            <img src={article.image.url} alt={article.image.alt} loading="lazy" decoding="async" />
+            <figcaption>
+              {article.image.credit}
+              {article.image.note && <span> · {article.image.note}</span>}
+            </figcaption>
+          </figure>
+        )}
         {(article.body || []).map((paragraph) => <p>{paragraph}</p>)}
+        {article.contact?.public && (
+          <p class="edition-source">
+            Contact: <a href={`mailto:${article.contact.email}`}>{article.contact.email}</a>
+            {article.contact.phone && <span> · {article.contact.phone}</span>}
+          </p>
+        )}
       </article>
     ))}
   </section>

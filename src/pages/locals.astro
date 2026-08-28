@@ -24,6 +24,15 @@ const locals = localsOfTheWeek();
           <p class="eyebrow">Week of {local.displayDate}</p>
           <h2>{local.title}</h2>
           {local.byline && <p class="edition-byline">{local.byline}</p>}
+          {local.image && (
+            <figure class="edition-figure">
+              <img src={local.image.url} alt={local.image.alt} loading="lazy" decoding="async" />
+              <figcaption>
+                {local.image.credit}
+                {local.image.note && <span> · {local.image.note}</span>}
+              </figcaption>
+            </figure>
+          )}
           {(local.body || []).map((paragraph) => <p>{paragraph}</p>)}
           {local.sources?.length > 0 && (
             <p class="edition-source">

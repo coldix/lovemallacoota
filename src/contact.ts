@@ -118,15 +118,29 @@ export async function handleContactSubmit(request: Request, env: Env): Promise<R
     .map(([label, value]) => `<dt><strong>${escapeHTML(label)}</strong></dt><dd>${escapeHTML(value)}</dd>`)
     .join("")}</dl>`;
 
+  if (!env.RELAY_KEY) {
+    return json({ ok: false, error: "The form is not configured yet." }, 503);
+  }
+
   try {
-    await env.EMAIL.send({
-      to: env.CONTACT_TO,
-      from: { email: env.CONTACT_FROM, name: "Love Mallacoota" },
-      replyTo,
-      subject: `Directory update: ${values.get("business")}`,
-      text,
-      html,
+    const relayed = await fetch(env.RELAY_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${env.RELAY_KEY}`,
+      },
+      body: JSON.stringify({
+        site: "lovemallacoota",
+        subject: `Directory update: ${values.get("business")}`,
+        replyTo,
+        text,
+        html,
+      }),
     });
+    if (!relayed.ok) {
+      console.error("relay rejected the submission", relayed.status, await relayed.text());
+      return json({ ok: false, error: "Could not send your update. Please try again." }, 502);
+    }
   } catch (error) {
     console.error("contact submit failed", error);
     return json({ ok: false, error: "Could not send your update. Please try again." }, 502);

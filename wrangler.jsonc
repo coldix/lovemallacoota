@@ -29,10 +29,8 @@
       "workers_dev": true,
       "routes": [],
       "vars": {
-        "CONTACT_TO": "crdixon@gmail.com",
-        "CONTACT_FROM": "forms@lovemallacoota.au"
+        "RELAY_URL": "https://ads.oze.net.au/relay"
       },
-      "send_email": [{ "name": "EMAIL" }],
       "ratelimits": [
         {
           "name": "CONTACT_RATE",
@@ -43,10 +41,8 @@
     }
   },
   "vars": {
-    "CONTACT_TO": "crdixon@gmail.com",
-    "CONTACT_FROM": "forms@lovemallacoota.au"
+    "RELAY_URL": "https://ads.oze.net.au/relay"
   },
-  "send_email": [{ "name": "EMAIL" }],
   "ratelimits": [
     {
       "name": "CONTACT_RATE",

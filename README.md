@@ -90,23 +90,34 @@ The footer reads this manifest and displays the current version automatically.
 
 The suggest-an-update form posts to `/api/submit` in the Worker
 ([`src/contact.ts`](src/contact.ts)). Every submission must clear a Turnstile
-challenge that is verified server side, is rate limited to five per minute per
-IP, and is then emailed through the Cloudflare Email Sending binding. No sending
-credential and no third-party script is exposed to the browser.
+challenge that is verified server side, passes a honeypot check, and is rate
+limited to five per minute per IP. No sending credential and no third-party
+script is exposed to the browser.
 
-Setup, once per environment:
+Delivery goes through the adnet relay rather than this account's own Email
+Sending binding. The Cloudflare login for this account cannot enable Email
+Sending on `lovemallacoota.au` — every attempt returns `Unauthorized [2036]` —
+while the account behind `ads.oze.net.au` already sends. So the Worker posts the
+message to `https://ads.oze.net.au/relay` with a shared key, and that Worker
+emails `coota@lovemallacoota.au`. The relay knows the recipient itself; this
+Worker cannot choose it.
+
+Setup, once:
 
 ```sh
-npx wrangler email sending enable lovemallacoota.au
-npx wrangler secret put TURNSTILE_SECRET_KEY
-npx wrangler secret put TURNSTILE_SECRET_KEY --env preview
+openssl rand -base64 32                      # generate the shared key
+npx wrangler secret put RELAY_KEY --env=""   # here, and the same value in adnet
+npx wrangler secret put TURNSTILE_SECRET_KEY --env=""
 ```
 
-Put the matching Turnstile **site** key in `.env` as
-`PUBLIC_TURNSTILE_SITE_KEY` (see [`.env.example`](.env.example)). Without it the
-build falls back to Cloudflare's always-passes test key, which is correct for
-local development and wrong in production. The recipient and sender addresses
-are the `CONTACT_TO` and `CONTACT_FROM` vars in `wrangler.jsonc`.
+Put the Turnstile **site** key in `.env` as `PUBLIC_TURNSTILE_SITE_KEY` (see
+[`.env.example`](.env.example)), and in the `PUBLIC_TURNSTILE_SITE_KEY` GitHub
+Actions secret so CI builds with it. Without it the build falls back to
+Cloudflare's always-passes test key, which is correct locally and wrong in
+production.
+
+Everything fails closed: a missing key, a failed challenge or a relay error
+returns an error to the visitor rather than silently dropping the message.
 
 ## Licence
 

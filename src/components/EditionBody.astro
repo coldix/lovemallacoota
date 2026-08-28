@@ -36,6 +36,37 @@ const statusLabel =
       : "Published";
 ---
 
+{edition.cover && (
+  <>
+    {/* Page one of the printed edition: the photograph, full bleed, with the
+        masthead over it. Hidden on screen, where the hero already does this. */}
+    <section class="edition-cover" aria-hidden="true">
+      <img src={edition.cover.print || edition.cover.web} alt="" />
+      <div class="edition-cover-mast">
+        <p class="edition-cover-eyebrow">This Week in</p>
+        <h1>Mallacoota</h1>
+        <p class="edition-cover-date">{editionTitle(edition)}</p>
+      </div>
+      {(edition.cover.caption || edition.cover.credit) && (
+        <p class="edition-cover-caption">
+          {edition.cover.caption}
+          {edition.cover.credit && <span> — {edition.cover.credit}</span>}
+        </p>
+      )}
+    </section>
+
+    <figure class="glass-card sheen content-block reveal edition-cover-web">
+      <img src={edition.cover.web} alt={edition.cover.caption || "This week's cover photograph"} loading="eager" decoding="async" />
+      {(edition.cover.caption || edition.cover.credit) && (
+        <figcaption>
+          {edition.cover.caption}
+          {edition.cover.credit && <span> — {edition.cover.credit}</span>}
+        </figcaption>
+      )}
+    </figure>
+  </>
+)}
+
 <section class="glass-card sheen content-block reveal edition-masthead">
   <p class="eyebrow">{editionTitle(edition)}</p>
   <h2 class="section-title">

@@ -73,9 +73,10 @@ export async function handleEditionPdf(
       const tab = await browser.newPage();
       await tab.goto(pageUrl, { waitUntil: "networkidle0" });
       pdf = await tab.pdf({
-        format: "a4",
-        printBackground: false,
-        margin: { top: "18mm", bottom: "18mm", left: "16mm", right: "16mm" },
+        // The stylesheet owns the page size and margins so the cover can bleed
+        // to the edge while the content pages keep their margins.
+        preferCSSPageSize: true,
+        printBackground: true,
         displayHeaderFooter: true,
         headerTemplate: "<div></div>",
         footerTemplate:

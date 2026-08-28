@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.14",
-  "generatedAt": "2026-08-28 21:20:56 AEST (Melbourne)",
+  "version": "v0.15",
+  "generatedAt": "2026-08-28 21:41:44 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -37,8 +37,8 @@
     },
     {
       "path": "assets/css/style.css",
-      "bytes": 39623,
-      "sha256": "8a3c02f666202f42632b0b5d05e2495af5804f09f2b26b704bba3eafc29cdb1e"
+      "bytes": 41517,
+      "sha256": "b368c3cb8041fe2a08efcb2616a49fe0a87f050f0bf202ec26f6c008a7d9fc03"
     },
     {
       "path": "assets/icons/android-chrome-192x192.png",
@@ -117,13 +117,13 @@
     },
     {
       "path": "edition.html",
-      "bytes": 14368,
-      "sha256": "f26d392b32888991eea8e733c9b9847b85fab3232dc13ba1f2a41d08cbf451cb"
+      "bytes": 15080,
+      "sha256": "5bf0f69b5ab1c7fc5a290080ef6b5a4125124cc5bc0efaded60106822b744f35"
     },
     {
       "path": "edition/2026-w35.html",
-      "bytes": 14338,
-      "sha256": "b53b66a35d92060fc8ede648555ca355c17f35957477b1fd42df04704ef8d105"
+      "bytes": 15050,
+      "sha256": "1648adc64832c6349111cf49d12cdde627c9d82c4f047b00b316e21d2e169dff"
     },
     {
       "path": "editorial-policy.html",
@@ -174,6 +174,16 @@
       "path": "images/background-06.webp",
       "bytes": 447018,
       "sha256": "8e68085c69286689bfd43d65c5fd969c72745c222585ebba9200b1b6187c539d"
+    },
+    {
+      "path": "images/covers/2026-w35-print.jpg",
+      "bytes": 1131035,
+      "sha256": "b31cea8e34f4b55201b1df75b5b596c0688c8aebf696d1c44aade7f303fb0dc3"
+    },
+    {
+      "path": "images/covers/2026-w35.webp",
+      "bytes": 262618,
+      "sha256": "f5106b083ac143e8867233503e797835d6cae0c8a708f1e9ba12772f96abedf1"
     },
     {
       "path": "images/logo145x100.webp",

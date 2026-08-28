@@ -744,6 +744,69 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* The printed edition is the page without the site furniture. */
 @media print {
+  /* A4 with typographic margins, except the cover, which bleeds to the edge. */
+  @page { size: A4 portrait; margin: 18mm 16mm; }
+  @page cover { margin: 0; }
+
+  .edition-cover {
+    display: block;
+    page: cover;
+    break-after: page;
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    overflow: hidden;
+    color: #fff;
+  }
+  .edition-cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* The masthead sits on a dark band so it stays legible over any photograph,
+     bright sky or dark water. */
+  .edition-cover-mast {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 26mm;
+    padding: 10mm 16mm 8mm;
+    background: linear-gradient(to top, rgba(6, 18, 30, 0.88), rgba(6, 18, 30, 0.72) 62%, rgba(6, 18, 30, 0));
+    text-align: left;
+  }
+  .edition-cover-eyebrow {
+    margin: 0;
+    font-size: 11pt;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #f4c98a;
+  }
+  .edition-cover-mast h1 {
+    margin: 1mm 0 2mm;
+    font-size: 44pt;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+  .edition-cover-date {
+    margin: 0;
+    font-size: 12pt;
+    color: rgba(255, 255, 255, 0.88);
+  }
+  .edition-cover-caption {
+    position: absolute;
+    left: 16mm;
+    right: 16mm;
+    bottom: 12mm;
+    margin: 0;
+    font-size: 8.5pt;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .edition-cover-web { display: none !important; }
+
   .site-nav, .site-footer, .bg-field, .bg-grid, .caustics, .motes,
   .edition-actions, .ad-row-wrap, .edition-web-only { display: none !important; }
 
@@ -890,3 +953,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-link-card p { margin: 0; font-size: 0.9rem; color: var(--muted); }
 .edition-link-card .meta { display: block; margin-top: 0.4rem; font-size: 0.82rem; color: var(--muted); }
 .edition-photo { width: 100%; height: auto; border-radius: 14px; margin-bottom: 1rem; }
+
+/* --- Weekly edition cover --- */
+
+/* On screen the cover is a framed photograph; the print cover is hidden. */
+.edition-cover { display: none; }
+.edition-cover-web { padding: 0; overflow: hidden; margin-bottom: 1.6rem; }
+.edition-cover-web img { display: block; width: 100%; height: auto; }
+.edition-cover-web figcaption {
+  padding: 0.7rem 1.1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: left;
+}

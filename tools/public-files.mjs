@@ -22,4 +22,6 @@ export const publicFiles = [
   "sitemap.xml",
 ];
 
-export const publicDirectories = ["assets"];
+// Cover photographs are per-week, so the directory ships whole rather than
+// being listed file by file.
+export const publicDirectories = ["assets", "images/covers"];

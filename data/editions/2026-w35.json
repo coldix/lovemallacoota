@@ -14,7 +14,10 @@
       "authorEmail": "coota@lovemallacoota.au",
       "submittedAt": "2026-08-28T11:00:00+10:00",
       "publishedAt": "2026-08-28T11:00:00+10:00",
-      "check": { "verdict": "author", "note": "Written by the publisher." },
+      "check": {
+        "verdict": "author",
+        "note": "Written by the publisher."
+      },
       "body": [
         "The Mallacoota Mouth stopped, and nothing took its place. This is a first attempt at something weekly again — smaller, and put together differently.",
         "Approved contributors will be able to submit directly, under the headings the Mouth used. What arrives by the end of the week becomes that week's edition, and a printable copy with a table of contents.",
@@ -29,11 +32,20 @@
       "authorEmail": "coota@lovemallacoota.au",
       "submittedAt": "2026-08-28T11:05:00+10:00",
       "publishedAt": "2026-08-28T11:05:00+10:00",
-      "check": { "verdict": "author", "note": "Written by the publisher." },
+      "check": {
+        "verdict": "author",
+        "note": "Written by the publisher."
+      },
       "body": [
         "Thirty-seven issues are catalogued so far, covering 2020 to 2023. Issues 1772 to 1791, 1812 to 1820, and 1835 are missing, along with everything before 1771 and after 1837.",
         "If you have old editions, or know who holds a larger collection, please get in touch through the archive page."
       ]
     }
-  ]
+  ],
+  "cover": {
+    "web": "/images/covers/2026-w35.webp",
+    "print": "/images/covers/2026-w35-print.jpg",
+    "caption": "Placeholder — swap for this week's photograph",
+    "credit": "Love Mallacoota"
+  }
 }

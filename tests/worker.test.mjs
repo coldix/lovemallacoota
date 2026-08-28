@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import worker from "../src/worker.ts";
+import { pdfFilename, weekFromPath } from "../src/edition-pdf.ts";
 
 const env = {
   ASSETS: {
@@ -96,4 +97,35 @@ test("redirects /index.html to the site root so only one URL serves the home pag
   );
   assert.equal(response.status, 301);
   assert.equal(response.headers.get("Location"), "https://lovemallacoota.au/?ref=old");
+});
+
+test("only edition PDF paths are treated as PDF requests", async () => {
+  assert.equal(weekFromPath("/edition/2026-w35.pdf"), "2026-w35");
+  assert.equal(weekFromPath("/edition/2026-w35.html"), null);
+  assert.equal(weekFromPath("/edition/../secrets.pdf"), null);
+  assert.equal(weekFromPath("/edition/not-a-week.pdf"), null);
+  assert.equal(pdfFilename("2026-w35"), "mallacoota-2026-w35.pdf");
+});
+
+test("a PDF for an edition that does not exist is a 404, not a render", async () => {
+  const missingAssets = {
+    async fetch() {
+      return new Response("nope", { status: 404 });
+    },
+  };
+  const response = await worker.fetch(
+    new Request("https://lovemallacoota.au/edition/1999-w01.pdf"),
+    { ...env, ASSETS: missingAssets, BROWSER: {} },
+    { waitUntil() {} }
+  );
+  assert.equal(response.status, 404);
+});
+
+test("the PDF route fails clearly when Browser Rendering is unavailable", async () => {
+  const response = await worker.fetch(
+    new Request("https://lovemallacoota.au/edition/2026-w35.pdf"),
+    { ...env, BROWSER: undefined },
+    { waitUntil() {} }
+  );
+  assert.equal(response.status, 503);
 });

@@ -99,6 +99,11 @@ export function editionPath(edition) {
   return `/edition/${edition.week}.html`;
 }
 
+/** Rendered on demand by the Worker, so every edition has one. */
+export function editionPdfPath(edition) {
+  return `/edition/${edition.week}.pdf`;
+}
+
 export function countArticles(edition) {
   return (edition?.articles || []).length;
 }

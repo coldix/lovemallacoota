@@ -2,6 +2,7 @@
 import {
   articleAnchor,
   countArticles,
+  editionPdfPath,
   editionTitle,
   sectionsWithContent,
   tableOfContents,
@@ -31,14 +32,13 @@ const statusLabel =
     {total} {total === 1 ? "item" : "items"} this week
   </h2>
   <p class="section-sub">{statusLabel}</p>
-  {edition.pdfUrl ? (
-    <div class="edition-actions">
-      <a class="btn btn-primary" href={edition.pdfUrl}>Download the PDF</a>
-      <button class="btn btn-ghost" type="button" data-print-edition>Print this edition</button>
-    </div>
-  ) : (
+  <div class="edition-actions">
+    <a class="btn btn-primary" href={editionPdfPath(edition)}>Download the PDF</a>
+    <button class="btn btn-ghost" type="button" data-print-edition>Print this edition</button>
+  </div>
+  {edition.status === "open" && (
     <p class="edition-pdf-pending">
-      A printable copy with a table of contents is produced when the week closes.
+      The PDF is the week so far — it is complete once the week closes.
     </p>
   )}
 </section>

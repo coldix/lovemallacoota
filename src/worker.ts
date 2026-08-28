@@ -1,4 +1,5 @@
 import { handleContactSubmit } from "./contact.ts";
+import { handleEditionPdf, weekFromPath } from "./edition-pdf.ts";
 
 const CANONICAL_HOST = "lovemallacoota.au";
 
@@ -64,7 +65,7 @@ function applySecurityHeaders(response: Response): Response {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     const movedPath = resolveMovedPath(url.pathname);
 
@@ -78,6 +79,10 @@ export default {
 
     if (url.pathname === "/api/submit") {
       return applySecurityHeaders(await handleContactSubmit(request, env));
+    }
+
+    if (weekFromPath(url.pathname)) {
+      return applySecurityHeaders(await handleEditionPdf(request, env, ctx));
     }
 
     const assetRequest = url.pathname === "/"

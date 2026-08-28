@@ -13,7 +13,12 @@ import {
 
 /** Astro escapes these when it renders text, so the test has to match. */
 const escapeEntities = (value) =>
-  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
 const generatedPages = [
   "index.html",

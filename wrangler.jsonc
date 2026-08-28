@@ -32,6 +32,8 @@
         "RELAY_URL": "https://ads.oze.net.au/relay"
       },
       "browser": { "binding": "BROWSER" },
+      "ai": { "binding": "AI" },
+  "ai": { "binding": "AI" },
       "ratelimits": [
         {
           "name": "CONTACT_RATE",

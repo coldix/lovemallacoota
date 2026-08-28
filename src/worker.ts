@@ -1,5 +1,6 @@
 import { handleContactSubmit } from "./contact.ts";
 import { handleEditionPdf, weekFromPath } from "./edition-pdf.ts";
+import { handleArticleSubmit } from "./submit.ts";
 
 const CANONICAL_HOST = "lovemallacoota.au";
 
@@ -79,6 +80,10 @@ export default {
 
     if (url.pathname === "/api/submit") {
       return applySecurityHeaders(await handleContactSubmit(request, env));
+    }
+
+    if (url.pathname === "/api/article") {
+      return applySecurityHeaders(await handleArticleSubmit(request, env));
     }
 
     if (weekFromPath(url.pathname)) {

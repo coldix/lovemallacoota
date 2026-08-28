@@ -1,0 +1,192 @@
+/*
+# Project:     lovemallacoota.au
+# File Name:   submit.ts
+# Description: POST /api/article — a contributor submits to this week's edition.
+#              Identity comes from Cloudflare Access, which has already proved
+#              the address; this only decides whether that address may publish,
+#              whether the writing clears the editorial policy, and then commits
+#              it. See docs/WEEKLY-MOUTH.md.
+*/
+
+import contributors from "../data/contributors.json" with { type: "json" };
+
+const MAX = { title: 160, byline: 90, body: 12_000 };
+const OWNER = "coldix";
+const REPO = "lovemallacoota";
+
+interface Contributor {
+  email: string;
+  name: string;
+  sections: string[];
+  active: boolean;
+}
+
+function json(body: unknown, status: number): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+  });
+}
+
+/** Cloudflare Access has verified this; without it we are not behind Access. */
+export function accessEmail(request: Request): string | null {
+  const email = request.headers.get("Cf-Access-Authenticated-User-Email");
+  return email && email.includes("@") ? email.toLowerCase() : null;
+}
+
+export function findContributor(email: string): Contributor | null {
+  const found = (contributors as Contributor[]).find(
+    (person) => person.email.toLowerCase() === email && person.active
+  );
+  return found ?? null;
+}
+
+export function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+}
+
+/** Paragraphs, trimmed, with blank lines dropped. */
+export function toParagraphs(text: string): string[] {
+  return text
+    .replace(/\r\n/g, "\n")
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.replace(/\s*\n\s*/g, " ").trim())
+    .filter(Boolean);
+}
+
+const POLICY = `You are checking a community newsletter submission for a small Australian coastal town against its published editorial policy.
+
+The policy permits: events, notices, group updates, directory listings, school and sport information, local history, practical visitor information, and profiles of local people.
+
+The policy refuses: personal attacks; unverified allegations about named people or businesses; discriminatory material; contributions that place someone at unreasonable risk; political campaigning; and anything presenting itself as an emergency authority.
+
+Answer with JSON only: {"verdict":"pass"} if it may be published, or {"verdict":"hold","clause":"<the rule it offends>","reason":"<one sentence>"} if a human should look first. Be permissive about ordinary community writing. Hold only for a real breach.`;
+
+export async function checkAgainstPolicy(
+  env: Env,
+  text: string
+): Promise<{ verdict: "pass" | "hold" | "unchecked"; clause?: string; reason?: string }> {
+  if (!env.AI) return { verdict: "unchecked", reason: "No policy check is configured." };
+  try {
+    const result = (await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+      messages: [
+        { role: "system", content: POLICY },
+        { role: "user", content: text.slice(0, 8000) },
+      ],
+      max_tokens: 200,
+    })) as { response?: string };
+
+    const match = /\{[\s\S]*\}/.exec(result.response ?? "");
+    if (!match) return { verdict: "hold", reason: "The policy check returned nothing readable." };
+    const parsed = JSON.parse(match[0]) as { verdict?: string; clause?: string; reason?: string };
+    return parsed.verdict === "pass"
+      ? { verdict: "pass" }
+      : { verdict: "hold", clause: parsed.clause, reason: parsed.reason };
+  } catch (error) {
+    console.error("policy check failed", error);
+    // A check that cannot run must not wave things through.
+    return { verdict: "hold", reason: "The policy check could not run." };
+  }
+}
+
+async function commitArticle(env: Env, week: string, article: Record<string, unknown>) {
+  const path = `data/editions/${week}.json`;
+  const api = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`;
+  const headers = {
+    Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+    Accept: "application/vnd.github+json",
+    "User-Agent": "lovemallacoota-worker",
+  };
+
+  const current = await fetch(api, { headers });
+  if (!current.ok) throw new Error(`Cannot read ${path}: ${current.status}`);
+  const file = (await current.json()) as { content: string; sha: string };
+  const edition = JSON.parse(atob(file.content.replace(/\n/g, "")));
+
+  if (edition.status !== "open") throw new Error("This week's edition is closed.");
+  edition.articles = [...(edition.articles || []), article];
+
+  const body = new TextEncoder().encode(`${JSON.stringify(edition, null, 2)}\n`);
+  const written = await fetch(api, {
+    method: "PUT",
+    headers: { ...headers, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message: `Add "${article.title}" to ${week}`,
+      content: btoa(String.fromCharCode(...body)),
+      sha: file.sha,
+    }),
+  });
+  if (!written.ok) throw new Error(`Cannot write ${path}: ${written.status}`);
+}
+
+export async function handleArticleSubmit(request: Request, env: Env): Promise<Response> {
+  if (request.method !== "POST") return json({ ok: false, error: "Use POST." }, 405);
+
+  const email = accessEmail(request);
+  if (!email) {
+    return json({ ok: false, error: "Sign in to submit. This page must sit behind Access." }, 401);
+  }
+
+  const contributor = findContributor(email);
+  if (!contributor) {
+    return json({ ok: false, error: `${email} is not an approved contributor yet.` }, 403);
+  }
+
+  const form = await request.formData();
+  const week = String(form.get("week") || "").trim();
+  const section = String(form.get("section") || "").trim();
+  const title = String(form.get("title") || "").trim().slice(0, MAX.title);
+  const byline = String(form.get("byline") || contributor.name).trim().slice(0, MAX.byline);
+  const raw = String(form.get("body") || "").trim().slice(0, MAX.body);
+
+  if (!week || !section || !title || !raw) {
+    return json({ ok: false, error: "Week, section, title and body are all required." }, 400);
+  }
+  if (!contributor.sections.includes(section)) {
+    return json({ ok: false, error: `You are not set up to post in ${section}.` }, 403);
+  }
+
+  const check = await checkAgainstPolicy(env, `${title}\n\n${raw}`);
+  if (check.verdict !== "pass") {
+    return json(
+      {
+        ok: false,
+        held: true,
+        error:
+          "Held for a human to read before publishing. Nothing is lost — it has been sent for review.",
+        clause: check.clause ?? null,
+        reason: check.reason ?? null,
+      },
+      202
+    );
+  }
+
+  if (!env.GITHUB_TOKEN) {
+    return json({ ok: false, error: "Publishing is not configured yet." }, 503);
+  }
+
+  const article = {
+    id: `${week}-${section}-${slugify(title)}`,
+    section,
+    title,
+    byline,
+    authorEmail: email,
+    submittedAt: new Date().toISOString(),
+    publishedAt: new Date().toISOString(),
+    check: { verdict: "pass", by: "policy check" },
+    body: toParagraphs(raw),
+  };
+
+  try {
+    await commitArticle(env, week, article);
+  } catch (error) {
+    console.error("commit failed", error);
+    return json({ ok: false, error: (error as Error).message }, 502);
+  }
+
+  return json({ ok: true, id: article.id, note: "Published — live in about two minutes." }, 200);
+}

@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { editionPath, localsOfTheWeek } from "../lib/editions.mjs";
+
+const locals = localsOfTheWeek();
+---
+<BaseLayout
+  title="Local of the Week — Love Mallacoota"
+  description="The people of Mallacoota and their stories — a new local featured every week."
+  canonicalPath="/locals.html"
+  active="locals"
+  showAds={true}
+>
+  <PageHero eyebrow="The people here" prefix="Local of the" accent="Week" lede="Mallacoota is its people. Every week we publish one of their stories — what they did, where they came from, and what they know that the rest of us do not." />
+  <main>
+    {locals.length === 0 ? (
+      <section class="glass-card sheen content-block reveal">
+        <p class="no-results">The first Local of the Week is on its way.</p>
+      </section>
+    ) : (
+      locals.map((local) => (
+        <article class="glass-card sheen content-block reveal edition-article">
+          <p class="eyebrow">Week of {local.displayDate}</p>
+          <h2>{local.title}</h2>
+          {local.byline && <p class="edition-byline">{local.byline}</p>}
+          {(local.body || []).map((paragraph) => <p>{paragraph}</p>)}
+          {local.sources?.length > 0 && (
+            <p class="edition-source">
+              Source: {local.sources.map((source) => `${source.title}, ${source.publication}, ${source.date}`).join("; ")}.
+            </p>
+          )}
+          <p><a class="btn btn-ghost" href={editionPath({ week: local.week })}>That week's edition</a></p>
+        </article>
+      ))
+    )}
+
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Know someone worth writing about?</h2>
+      <p class="section-sub">Most people here have done something the rest of us have never heard about. Tell us who, and we will ask them.</p>
+      <div class="edition-actions">
+        <a class="btn btn-coral" href="/contact.html?subject=local">Suggest a local</a>
+        <a class="btn btn-ghost" href="/edition.html">This week's edition</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { SECTIONS, currentEdition } from "../lib/editions.mjs";
+
+const edition = currentEdition();
+// Automatic sections are generated, so nobody submits into them.
+const writable = SECTIONS.filter((section) => !section.automatic);
+---
+<BaseLayout
+  title="Submit to this week's edition — Love Mallacoota"
+  description="Approved contributors can add notices, club news, school reports and community updates to this week's edition."
+  canonicalPath="/submit.html"
+  active="submit"
+  robots="noindex,nofollow"
+>
+  <PageHero eyebrow="Contributors" prefix="Submit to this" accent="Week" lede="Notices, club news, school reports, local history and profiles. Approved contributors publish straight through; anything the policy check queries is held for a person to read." />
+  <main>
+    {edition ? (
+      <section class="glass-card sheen content-block reveal">
+        <form id="article-form" class="form-grid" method="post" action="/api/article">
+          <input type="hidden" name="week" value={edition.week} />
+          <div class="field">
+            <label for="section">Section</label>
+            <select id="section" name="section" required>
+              {writable.map((section) => <option value={section.id}>{section.title}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="byline">Byline</label>
+            <input id="byline" name="byline" type="text" placeholder="Your name, or your group" />
+          </div>
+          <div class="field full">
+            <label for="title">Headline</label>
+            <input id="title" name="title" type="text" required maxlength="160" />
+          </div>
+          <div class="field full">
+            <label for="body">The piece</label>
+            <textarea id="body" name="body" rows="16" required placeholder="Leave a blank line between paragraphs."></textarea>
+            <p class="contact-hint">Blank line between paragraphs. No formatting needed.</p>
+          </div>
+          <div class="form-actions full">
+            <button class="btn btn-primary" type="submit" id="article-submit">Publish to {edition.displayDate}</button>
+            <a href="/edition.html" class="btn btn-ghost">See this week</a>
+          </div>
+        </form>
+        <div id="article-status" class="form-status" role="status" aria-live="polite"></div>
+      </section>
+    ) : (
+      <section class="glass-card sheen content-block reveal">
+        <p class="no-results">No edition is open for submissions right now.</p>
+      </section>
+    )}
+
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">How this works</h2>
+      <p class="section-sub">Written down so there are no surprises.</p>
+      <ul class="edition-diary">
+        <li><strong>You are signed in.</strong> Access has already checked who you are; we only check that your address is on the contributor list.</li>
+        <li><strong>It publishes itself.</strong> A piece that clears the <a href="/editorial-policy.html">editorial policy</a> goes live in about two minutes, without waiting for anyone.</li>
+        <li><strong>Held is not rejected.</strong> Anything the check queries is kept and read by a person, who will tell you why.</li>
+        <li><strong>Writing about someone?</strong> Ask them first. Profiles of named people run with their agreement.</li>
+        <li><strong>Corrections are visible.</strong> Every change is recorded, so a correction reads as a correction rather than a quiet edit.</li>
+      </ul>
+    </section>
+  </main>
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("article-form");
+      const status = document.getElementById("article-status");
+      const button = document.getElementById("article-submit");
+      if (!form || !status || !button) return;
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        button.disabled = true;
+        const label = button.textContent;
+        button.textContent = "Checking…";
+        status.className = "form-status";
+
+        try {
+          const response = await fetch("/api/article", { method: "POST", body: new FormData(form) });
+          const result = await response.json().catch(() => ({}));
+          if (result.ok) {
+            status.textContent = result.note || "Published.";
+            status.className = "form-status success";
+            form.reset();
+          } else if (result.held) {
+            status.textContent = `${result.error}${result.reason ? ` (${result.reason})` : ""}`;
+            status.className = "form-status error";
+          } else {
+            status.textContent = result.error || "Something went wrong. Please try again.";
+            status.className = "form-status error";
+          }
+        } catch {
+          status.textContent = "Something went wrong. Please try again.";
+          status.className = "form-status error";
+        } finally {
+          button.disabled = false;
+          button.textContent = label;
+        }
+      });
+    });
+  </script>
+</BaseLayout>

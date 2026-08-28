@@ -24,6 +24,7 @@ const editionsDir = rootDir ? path.join(rootDir, "data", "editions") : null;
  */
 export const SECTIONS = [
   { id: "editorial", title: "Editorial" },
+  { id: "local", title: "Local of the Week" },
   { id: "weather", title: "Weekly Weather Forecast", automatic: true },
   { id: "tides", title: "Tide Times", automatic: true },
   { id: "diary", title: "This Week's Diary", automatic: true },
@@ -190,4 +191,15 @@ export function editionSections(edition) {
     }
     return { ...section, articles: own, auto };
   }).filter((section) => section.articles.length > 0 || section.auto);
+}
+
+/** Every Local of the Week ever published, newest first. */
+export function localsOfTheWeek(editions = loadEditions()) {
+  return editions
+    .flatMap((edition) =>
+      (edition.articles || [])
+        .filter((article) => article.section === "local")
+        .map((article) => ({ ...article, week: edition.week, displayDate: edition.displayDate }))
+    )
+    .sort((a, b) => b.week.localeCompare(a.week));
 }

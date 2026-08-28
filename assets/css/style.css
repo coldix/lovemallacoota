@@ -746,16 +746,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media print {
   /* A4 with typographic margins, except the cover, which bleeds to the edge. */
   @page { size: A4 portrait; margin: 18mm 16mm; }
-  @page cover { margin: 0; }
 
   .edition-cover {
     display: block !important;
-    page: cover;
     break-after: page;
     position: relative;
     width: 210mm;
     height: 297mm;
-    margin: 0;
+    /* Break out of the page margins so the photograph bleeds to the edge. */
+    margin: -18mm -16mm 0;
     overflow: hidden;
     color: #fff;
   }
@@ -809,6 +808,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
   .site-nav, .site-footer, .bg-field, .bg-grid, .caustics, .motes,
   .edition-actions, .ad-row-wrap, .edition-web-only { display: none !important; }
+  body[data-page="edition"] .hero-section { display: none !important; }
 
   html, body, .page-wrapper, main, section, .content-block {
     background: none !important;

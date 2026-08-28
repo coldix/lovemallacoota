@@ -59,9 +59,9 @@ const socialImage = new URL("/images/og-hero.jpg", Astro.site);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=26.08.012" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=26.08.013" />
     {showAds && <link rel="stylesheet" href="/assets/css/adnet.css?v=1.0.0" />}
-    <script src="/assets/js/script.js?v=26.08.012" defer></script>
+    <script src="/assets/js/script.js?v=26.08.013" defer></script>
     {extraScript && <script src={extraScript} defer></script>}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CPTXSP8D3J"></script>
     <script is:inline>
@@ -72,7 +72,7 @@ const socialImage = new URL("/images/og-hero.jpg", Astro.site);
     </script>
     <slot name="head" />
   </head>
-  <body>
+  <body data-page={active}>
     <div class="bg-field" aria-hidden="true"></div>
     <div class="bg-grid" aria-hidden="true"></div>
     <div class="caustics" aria-hidden="true"></div>

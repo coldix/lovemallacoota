@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import EditionBody from "../components/EditionBody.astro";
-import { currentEdition, editionPath, editionTitle, loadEditions, pastEditions } from "../lib/editions.mjs";
+import { currentEdition, editionLabel, editionPath, editionTitle, loadEditions, pastEditions } from "../lib/editions.mjs";
 
 const editions = loadEditions();
 const edition = currentEdition(editions);
@@ -32,7 +32,7 @@ const past = pastEditions(editions);
           {past.map((item) => (
             <li>
               <a href={editionPath(item)}>{editionTitle(item)}</a>
-              <span>{(item.articles || []).length} items</span>
+              <span>{editionLabel(item)} · {(item.articles || []).length} items</span>
             </li>
           ))}
         </ul>

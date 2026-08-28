@@ -1,14 +1,87 @@
-[
-  {
-    "title": "V/Line coach — Mallacoota to Genoa and Melbourne",
-    "description": "Connects at Genoa with the Bairnsdale to Canberra coach. Book ahead; services do not run every day.",
-    "meta": "Check current timings before travelling",
-    "url": "https://www.vline.com.au/Timetables"
-  },
-  {
-    "title": "Mallacoota to Genoa connection",
-    "description": "The local link out to the highway. Times change seasonally and with school terms.",
-    "meta": "Public Transport Victoria",
-    "url": "https://www.ptv.vic.gov.au/"
-  }
-]
+{
+  "source": "Public Transport Victoria GTFS",
+  "sourceUrl": "https://data.vic.gov.au/data/dataset/ptv-timetable-and-geographic-information-gtfs",
+  "licence": "CC BY 4.0, Department of Transport and Planning",
+  "route": "V/Line coach, Batemans Bay \u2013 Melbourne via Bairnsdale, and the Genoa connection",
+  "validFrom": "2026-08-28",
+  "validTo": "2026-11-29",
+  "refreshedAt": "2026-08-28",
+  "services": [
+    {
+      "from": "Bendigo Bank/Maurice Ave",
+      "to": "Genoa Hotel/Alexanders Rd",
+      "days": "Mon, Thu, Fri",
+      "departures": [
+        "08:10",
+        "15:00"
+      ]
+    },
+    {
+      "from": "Genoa Hotel/Alexanders Rd",
+      "to": "Bairnsdale Railway Station/MacLeod St",
+      "days": "Tue, Fri",
+      "departures": [
+        "08:50"
+      ]
+    },
+    {
+      "from": "Genoa Hotel/Alexanders Rd",
+      "to": "Bairnsdale Railway Station/MacLeod St",
+      "days": "Sun",
+      "departures": [
+        "12:50"
+      ]
+    },
+    {
+      "from": "Genoa Hotel/Alexanders Rd",
+      "to": "Bendigo Bank/Maurice Ave",
+      "days": "Mon, Thu, Fri",
+      "departures": [
+        "09:00",
+        "15:50"
+      ]
+    },
+    {
+      "from": "Genoa Hotel/Alexanders Rd",
+      "to": "Narooma Visitor Information Centre/Princes Hwy",
+      "days": "Tue, Wed, Fri, Sun",
+      "departures": [
+        "15:40"
+      ]
+    },
+    {
+      "from": "Genoa Hotel/Alexanders Rd",
+      "to": "Orient St",
+      "days": "Mon, Thu, Fri, Sat",
+      "departures": [
+        "15:40"
+      ]
+    },
+    {
+      "from": "Genoa Hotel/Alexanders Rd",
+      "to": "Post Office/Princes Hwy",
+      "days": "Mon, Wed, Thu, Fri, Sat",
+      "departures": [
+        "08:50"
+      ]
+    },
+    {
+      "from": "Township/Gipsy Point Rd",
+      "to": "Bendigo Bank/Maurice Ave",
+      "days": "Mon, Thu, Fri",
+      "departures": [
+        "09:10",
+        "16:00"
+      ]
+    },
+    {
+      "from": "Township/Gipsy Point Rd",
+      "to": "Genoa Hotel/Alexanders Rd",
+      "days": "Mon, Thu, Fri",
+      "departures": [
+        "08:30",
+        "15:20"
+      ]
+    }
+  ]
+}

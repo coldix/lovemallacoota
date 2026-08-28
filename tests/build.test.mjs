@@ -263,3 +263,31 @@ test("published text keeps its punctuation intact", async () => {
     }
   }
 });
+
+test("the coach timetable publishes times, not a link telling people to look", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const timetable = JSON.parse(
+    await readFile(new URL("../data/bus-timetable.json", import.meta.url), "utf8")
+  );
+
+  assert.ok(timetable.services.length > 0, "no services in the timetable");
+  for (const service of timetable.services) {
+    assert.ok(service.departures.length > 0, `${service.from} has no departure times`);
+    for (const time of service.departures) {
+      assert.match(time, /^\d{2}:\d{2}$/, `"${time}" is not a time`);
+    }
+    assert.notEqual(service.from, service.to, "a service cannot depart to where it already is");
+  }
+
+  // Times go stale. The edition must say which period they cover.
+  assert.ok(html.includes(timetable.validTo), "the timetable does not state its validity");
+  assert.ok(html.includes(timetable.source), "the timetable does not credit its source");
+});
+
+test("the edition is numbered by week and by year", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const edition = currentEdition();
+  const [year, week] = edition.week.split("-w");
+  assert.ok(html.includes(`Week ${week}`), "no week number on the page");
+  assert.ok(html.includes(`Edition ${year.slice(2)}:${week}`), "no YY:WK edition number");
+});

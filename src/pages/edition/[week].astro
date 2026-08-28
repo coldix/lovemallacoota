@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 import EditionBody from "../../components/EditionBody.astro";
-import { editionTitle, loadEditions } from "../../lib/editions.mjs";
+import { editionLabel, editionTitle, loadEditions } from "../../lib/editions.mjs";
 
 // One static page per edition, so every week keeps a permanent URL.
 export function getStaticPaths() {
@@ -21,7 +21,7 @@ const { edition } = Astro.props;
   active="edition"
   showAds={true}
 >
-  <PageHero eyebrow="Weekly edition" prefix="Week of" accent={edition.displayDate} lede="Community notices, club and school news, events, weather and tides for the week." />
+  <PageHero eyebrow="Weekly edition" prefix="Week of" accent={edition.displayDate} lede={`${editionLabel(edition)} — community notices, club and school news, events, weather and tides.`} />
   <main>
     <EditionBody edition={edition} archived={edition.status !== "open"} />
     <section class="glass-card sheen content-block reveal edition-web-only">

@@ -14,7 +14,12 @@ const writable = SECTIONS.filter((section) => !section.automatic);
   active="submit"
   robots="noindex,nofollow"
 >
-  <PageHero eyebrow="Contributors" prefix="Submit to this" accent="Week" lede="Notices, club news, school reports, local history and profiles. Approved contributors publish straight through; anything the policy check queries is held for a person to read." />
+  <PageHero eyebrow="Contributors" prefix="Submit to this" accent="Week" lede="Notices, club news, school reports, local history and profiles. Approved contributors publish straight through; anything the policy check queries is held for a person to read.">
+    <div class="hero-cta">
+      <a class="btn btn-ghost" href="/edition.html">← Back to this week's edition</a>
+      <a class="btn btn-ghost" href="/editorial-policy.html">Editorial policy</a>
+    </div>
+  </PageHero>
   <main>
     {edition ? (
       <section class="glass-card sheen content-block reveal">
@@ -77,6 +82,13 @@ const writable = SECTIONS.filter((section) => !section.automatic);
         <li><strong>Writing about someone?</strong> Ask them first. Profiles of named people run with their agreement.</li>
         <li><strong>Corrections are visible.</strong> Every change is recorded, so a correction reads as a correction rather than a quiet edit.</li>
       </ul>
+    </section>
+    <section class="glass-card sheen content-block reveal">
+      <div class="edition-actions">
+        <a class="btn btn-primary" href="/edition.html">Return to this week's edition</a>
+        <a class="btn btn-ghost" href="/locals.html">Local of the Week</a>
+        <a class="btn btn-ghost" href="/">Home</a>
+      </div>
     </section>
   </main>
   <script slot="scripts" is:inline>

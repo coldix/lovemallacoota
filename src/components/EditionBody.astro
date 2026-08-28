@@ -2,6 +2,7 @@
 import {
   articleAnchor,
   countArticles,
+  editionLabel,
   editionPdfPath,
   editionTitle,
   sectionsWithContent,
@@ -46,6 +47,7 @@ const statusLabel =
         <p class="edition-cover-eyebrow">This Week in</p>
         <h1>Mallacoota</h1>
         <p class="edition-cover-date">{editionTitle(edition)}</p>
+        <p class="edition-cover-number">{editionLabel(edition)}</p>
       </div>
       {(edition.cover.caption || edition.cover.credit) && (
         <p class="edition-cover-caption">
@@ -68,7 +70,7 @@ const statusLabel =
 )}
 
 <section class="glass-card sheen content-block reveal edition-masthead">
-  <p class="eyebrow">{editionTitle(edition)}</p>
+  <p class="eyebrow">{editionTitle(edition)} · {editionLabel(edition)}</p>
   <h2 class="section-title">
     {total > 0
       ? `${total} ${total === 1 ? "item" : "items"} this week`
@@ -210,6 +212,29 @@ const statusLabel =
       </div>
     )}
 
+    {section.auto?.type === "timetable" && (
+      <div class="edition-auto">
+        <table class="forecast timetable">
+          <thead>
+            <tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Days</th><th scope="col">Departs</th></tr>
+          </thead>
+          <tbody>
+            {section.auto.data.services.map((service) => (
+              <tr>
+                <th scope="row">{service.from}</th>
+                <td>{service.to}</td>
+                <td>{service.days}</td>
+                <td>{service.departures.join(", ")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="edition-source">
+          {section.auto.data.route}. Times from the <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a>, {section.auto.data.licence}, valid {section.auto.data.validFrom} to {section.auto.data.validTo}. Coaches must be booked ahead; check before travelling.
+        </p>
+      </div>
+    )}
+
     {section.auto?.type === "links" && (
       <div class="edition-link-grid">
         {section.auto.data.map((item) => (
@@ -276,6 +301,7 @@ const statusLabel =
       people and groups they belong to.
     </p>
     <div class="edition-actions">
+      <a class="btn btn-primary" href="/submit.html">Submit to this edition</a>
       <a class="btn btn-coral" href="/contact.html?subject=edition">Ask about contributing</a>
       <a class="btn btn-ghost" href="/editorial-policy.html">What we publish</a>
     </div>

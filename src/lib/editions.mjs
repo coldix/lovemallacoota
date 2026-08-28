@@ -92,6 +92,7 @@ function autoEntry(section) {
   if (auto.type === "trail") return auto.data.name;
   if (auto.type === "business") return auto.data.name;
   if (auto.type === "links") return `${auto.data.length} ${auto.data.length === 1 ? "link" : "links"}`;
+  if (auto.type === "timetable") return `${auto.data.services.length} coach services`;
   return null;
 }
 
@@ -112,6 +113,21 @@ export function tableOfContents(edition) {
 
 export function articleAnchor(article) {
   return `article-${article.id}`;
+}
+
+/** 1 to 52, from the ISO week the edition covers. */
+export function weekNumber(edition) {
+  return Number(edition.week.split("-w")[1]);
+}
+
+/** Edition numbering is YY:WK — the 35th week of 2026 is Edition 26:35. */
+export function editionNumber(edition) {
+  const [year, week] = edition.week.split("-w");
+  return `${year.slice(2)}:${week}`;
+}
+
+export function editionLabel(edition) {
+  return `Week ${String(weekNumber(edition)).padStart(2, "0")} · Edition ${editionNumber(edition)}`;
 }
 
 export function editionTitle(edition) {
@@ -184,8 +200,8 @@ export function editionSections(edition) {
     if (section.id === "trail" && weekly?.trail) auto = { type: "trail", data: weekly.trail };
     if (section.id === "business" && weekly?.business) auto = { type: "business", data: weekly.business };
     if (section.id === "transport") {
-      const services = loadDataFile("bus-timetable.json", []);
-      if (services.length) auto = { type: "links", data: services };
+      const timetable = loadDataFile("bus-timetable.json", null);
+      if (timetable?.services?.length) auto = { type: "timetable", data: timetable };
     }
     if (section.id === "talking") {
       const items = loadDataFile("talking-points.json", []);

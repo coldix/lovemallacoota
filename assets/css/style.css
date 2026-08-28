@@ -737,8 +737,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* The printed edition is the page without the site furniture. */
 @media print {
   .site-nav, .site-footer, .bg-field, .bg-grid, .caustics, .motes,
-  .edition-actions, .ad-row-wrap { display: none !important; }
-  .glass-card { border: 0; background: none; box-shadow: none; }
+  .edition-actions, .ad-row-wrap, .edition-web-only { display: none !important; }
+
+  /* Cards are a screen device. On paper they are boxes around every paragraph. */
+  .glass-card,
+  .glass-card.sheen {
+    border: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .glass-card::before, .glass-card.sheen::after { display: none !important; }
+  .edition-article p { margin-bottom: 0.7rem; }
   .edition-article { break-inside: avoid; }
 
   /* Scroll reveals never fire in a headless render, so everything below the

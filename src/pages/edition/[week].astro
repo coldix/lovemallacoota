@@ -23,7 +23,7 @@ const { edition } = Astro.props;
   <PageHero eyebrow="Weekly edition" prefix="Week of" accent={edition.displayDate} lede="Community notices, club and school news, events, weather and tides for the week." />
   <main>
     <EditionBody edition={edition} archived={edition.status !== "open"} />
-    <section class="glass-card sheen content-block reveal">
+    <section class="glass-card sheen content-block reveal edition-web-only">
       <a class="btn btn-ghost" href="/edition.html">Back to this week</a>
     </section>
   </main>

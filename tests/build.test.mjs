@@ -249,3 +249,17 @@ test("tide times are linked, never invented", async () => {
     "the edition appears to publish tide figures"
   );
 });
+
+test("published text keeps its punctuation intact", async () => {
+  // An earlier edit mangled every em dash and curly quote through a bad
+  // encoding round trip, and it only showed up in the rendered page.
+  const html = await readFile(new URL("../dist/locals.html", import.meta.url), "utf8");
+  assert.ok(!/â€|Â|�/.test(html), "the page contains mojibake");
+
+  for (const edition of loadEditions()) {
+    for (const article of edition.articles || []) {
+      const text = [article.title, ...(article.body || [])].join(" ");
+      assert.ok(!/â€|�/.test(text), `${article.id} has corrupted punctuation`);
+    }
+  }
+});

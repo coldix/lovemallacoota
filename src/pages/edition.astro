@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import EditionBody from "../components/EditionBody.astro";
+import { currentEdition, editionPath, editionTitle, loadEditions, pastEditions } from "../lib/editions.mjs";
+
+const editions = loadEditions();
+const edition = currentEdition(editions);
+const past = pastEditions(editions);
+---
+<BaseLayout
+  title="This Week in Mallacoota — Love Mallacoota"
+  description="The weekly Mallacoota edition — community notices, club and school news, events, weather and tides for the week."
+  canonicalPath="/edition.html"
+  active="edition"
+>
+  <PageHero eyebrow="Weekly edition" prefix="This Week in" accent="Mallacoota" lede="Community notices, club and school news, the week's events, weather and tides — contributed by the people and groups they belong to." />
+  <main>
+    {edition ? (
+      <EditionBody edition={edition} />
+    ) : (
+      <section class="glass-card sheen content-block reveal">
+        <p class="no-results">The first edition is still being put together.</p>
+      </section>
+    )}
+
+    {past.length > 0 && (
+      <section class="glass-card sheen content-block reveal">
+        <h2 class="section-title">Past editions</h2>
+        <ul class="edition-index">
+          {past.map((item) => (
+            <li>
+              <a href={editionPath(item)}>{editionTitle(item)}</a>
+              <span>{(item.articles || []).length} items</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </main>
+</BaseLayout>

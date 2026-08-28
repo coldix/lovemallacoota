@@ -199,6 +199,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })();
 
+  // --- Print this edition ---
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-print-edition]")) window.print();
+  });
+
   // --- Suggest-link handler (delegated) ---
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".suggest-link");

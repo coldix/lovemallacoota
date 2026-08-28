@@ -3,6 +3,12 @@ import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { loadListings } from "../src/lib/listings.mjs";
+import {
+  SECTIONS,
+  currentEdition,
+  loadEditions,
+  tableOfContents,
+} from "../src/lib/editions.mjs";
 
 /** Astro escapes these when it renders text, so the test has to match. */
 const escapeEntities = (value) =>
@@ -107,4 +113,48 @@ test("the contact form uses the configured Turnstile site key", async () => {
     html.includes(`data-sitekey="${configured}"`),
     "the build did not pick up PUBLIC_TURNSTILE_SITE_KEY — the form would ship with the test key"
   );
+});
+
+test("the weekly edition is rendered into the HTML, not fetched", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const editions = loadEditions();
+  const current = currentEdition(editions);
+  assert.ok(current, "no edition to render");
+
+  for (const article of current.articles) {
+    assert.ok(
+      html.includes(escapeEntities(article.title)),
+      `edition.html is missing "${article.title}"`
+    );
+  }
+
+  // The table of contents links every article it lists.
+  for (const section of tableOfContents(current)) {
+    assert.ok(html.includes(`#section-${section.id}`), `no ToC link for ${section.title}`);
+    for (const entry of section.entries) {
+      assert.ok(html.includes(`#${entry.id}`), `no ToC link for ${entry.title}`);
+    }
+  }
+});
+
+test("sections with no contributions are left out of the edition", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const used = new Set((currentEdition().articles || []).map((article) => article.section));
+  for (const section of SECTIONS) {
+    if (used.has(section.id)) continue;
+    assert.ok(
+      !html.includes(`id="section-${section.id}"`),
+      `empty section ${section.title} should not be rendered`
+    );
+  }
+});
+
+test("every edition keeps its own permanent page", async () => {
+  for (const edition of loadEditions()) {
+    const html = await readFile(
+      new URL(`../dist/edition/${edition.week}.html`, import.meta.url),
+      "utf8"
+    );
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://lovemallacoota\\.au/edition/${edition.week}\\.html"`));
+  }
 });

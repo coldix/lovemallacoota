@@ -1,0 +1,103 @@
+---
+import {
+  articleAnchor,
+  countArticles,
+  editionTitle,
+  sectionsWithContent,
+  tableOfContents,
+} from "../lib/editions.mjs";
+
+interface Props {
+  edition: Record<string, any>;
+  /** Past editions are read-only and say so. */
+  archived?: boolean;
+}
+const { edition, archived = false } = Astro.props;
+
+const sections = sectionsWithContent(edition);
+const toc = tableOfContents(edition);
+const total = countArticles(edition);
+const statusLabel =
+  edition.status === "open"
+    ? "Open — contributions for this week are still being accepted"
+    : edition.status === "frozen"
+      ? "Closed — this week's edition is complete"
+      : "Published";
+---
+
+<section class="glass-card sheen content-block reveal edition-masthead">
+  <p class="eyebrow">{editionTitle(edition)}</p>
+  <h2 class="section-title">
+    {total} {total === 1 ? "item" : "items"} this week
+  </h2>
+  <p class="section-sub">{statusLabel}</p>
+  {edition.pdfUrl ? (
+    <div class="edition-actions">
+      <a class="btn btn-primary" href={edition.pdfUrl}>Download the PDF</a>
+      <button class="btn btn-ghost" type="button" data-print-edition>Print this edition</button>
+    </div>
+  ) : (
+    <p class="edition-pdf-pending">
+      A printable copy with a table of contents is produced when the week closes.
+    </p>
+  )}
+</section>
+
+{toc.length > 0 && (
+  <nav class="glass-card sheen content-block reveal edition-toc" aria-labelledby="edition-toc-title">
+    <h2 id="edition-toc-title" class="section-title">In this edition</h2>
+    <ol class="edition-toc-list">
+      {toc.map((section) => (
+        <li>
+          <a href={`#section-${section.id}`}>{section.title}</a>
+          <ul>
+            {section.entries.map((entry) => (
+              <li>
+                <a href={`#${entry.id}`}>{entry.title}</a>
+                {entry.byline && <span class="edition-toc-byline">{entry.byline}</span>}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+{sections.length === 0 && (
+  <section class="glass-card sheen content-block reveal">
+    <p class="no-results">
+      Nothing has been contributed to this edition yet.
+    </p>
+  </section>
+)}
+
+{sections.map((section) => (
+  <section class="glass-card sheen content-block reveal" id={`section-${section.id}`} aria-labelledby={`heading-${section.id}`}>
+    <h2 class="section-title" id={`heading-${section.id}`}>{section.title}</h2>
+    {section.automatic && (
+      <p class="section-sub edition-automatic">Compiled automatically each week.</p>
+    )}
+    {section.articles.map((article) => (
+      <article class="edition-article" id={articleAnchor(article)}>
+        <h3>{article.title}</h3>
+        {article.byline && <p class="edition-byline">{article.byline}</p>}
+        {(article.body || []).map((paragraph) => <p>{paragraph}</p>)}
+      </article>
+    ))}
+  </section>
+))}
+
+{!archived && (
+  <section class="glass-card sheen content-block reveal">
+    <h2 class="section-title">Contribute</h2>
+    <p class="section-sub">
+      Notices, club news, school reports and community updates are welcome from the
+      people and groups they belong to.
+    </p>
+    <div class="edition-actions">
+      <a class="btn btn-coral" href="/contact.html?subject=edition">Ask about contributing</a>
+      <a class="btn btn-ghost" href="/editorial-policy.html">What we publish</a>
+    </div>
+  </section>
+)}

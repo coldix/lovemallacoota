@@ -1,34 +1,34 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.09",
-  "generatedAt": "2026-08-28 14:51:09 AEST (Melbourne)",
+  "version": "v0.10",
+  "generatedAt": "2026-08-28 15:09:51 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
     {
       "path": "404.html",
-      "bytes": 5235,
-      "sha256": "19f4029630b4bacba6a7e879802db8bdb9a0df528de5e6f248d7527b053fe31d"
+      "bytes": 5326,
+      "sha256": "4c03c89533a38851cbf5dc5a53d93e7ac3ffa53ce40b069d224dd22c9092ef39"
     },
     {
       "path": "accessibility.html",
-      "bytes": 6006,
-      "sha256": "7bcf27b325cc3a8be0253c9438401ee92131d6567aed69c96e5df1d61f0e2912"
+      "bytes": 6097,
+      "sha256": "bd9a2e2035299457230eb833b87656d640c01b75a00f031a568e3d643873728a"
     },
     {
       "path": "accom.html",
-      "bytes": 44538,
-      "sha256": "85718683777b080d878d068287e55f020d2cdc705f12d866e7c96e50c203d2c7"
+      "bytes": 44629,
+      "sha256": "ee0581adf99317c6803b08068ee8383614b4ee182ebde66f50fb6c362ab90788"
     },
     {
       "path": "activity.html",
-      "bytes": 23211,
-      "sha256": "bf800f6749110ad2d7d074e9afe77a2cab5797aa0cd10f2bfa709e1c20e6fb63"
+      "bytes": 23302,
+      "sha256": "f90386846b5c5e4f66bf749593fc9fd51c8b0df6e9b45524d1741e47d10b1c67"
     },
     {
       "path": "archive.html",
-      "bytes": 7736,
-      "sha256": "4bb7a523b2a02ebb41b1fadec2004612e4b2088793b0ed16a1ebae3d66dab267"
+      "bytes": 7827,
+      "sha256": "7d5a5f55817c1e92d28612796ae1350ba27451f6f02b90e94b0995bcf6b61487"
     },
     {
       "path": "assets/css/adnet.css",
@@ -37,8 +37,8 @@
     },
     {
       "path": "assets/css/style.css",
-      "bytes": 32378,
-      "sha256": "43d286f8245b1180554653917e17cc0715c9f08d17603a5340280c2c6850ecaf"
+      "bytes": 34013,
+      "sha256": "eb0dbf450ad74e8924c28f63d30b1bfc0c2ee949973dac8cabbd4fefea3db5fb"
     },
     {
       "path": "assets/icons/android-chrome-192x192.png",
@@ -77,23 +77,23 @@
     },
     {
       "path": "assets/js/script.js",
-      "bytes": 8571,
-      "sha256": "8cc7e322fbbfdca8b3bd71f7ffd508a9ba8f5dfd879d19d1bf827a82538910cd"
+      "bytes": 8722,
+      "sha256": "221387d80c0dd1ea4de2b176640ad7857b8f5ef249708816d116927d3b0aba16"
     },
     {
       "path": "calendar.html",
-      "bytes": 6204,
-      "sha256": "188306658cecfea68e575d801e262a9965fc65d54d550d7044ece4cb24b8a2dc"
+      "bytes": 6295,
+      "sha256": "54a542759ea3986d92ffd0e2a1560ce573ca74224e4113c3465ebb119573b8ac"
     },
     {
       "path": "contact.html",
-      "bytes": 9619,
-      "sha256": "f7122d88311e42bce10bbc7b70bc7671af6bfbf07137bfc24bce0e0e3759db77"
+      "bytes": 9710,
+      "sha256": "de80feeed6b56894e0041f0877de4876e08026622e0c65c95721aa34f30e098e"
     },
     {
       "path": "corrections.html",
-      "bytes": 6201,
-      "sha256": "82de2fee92fb87533ddbf3ac7e75f1f0974f450493452261c2cac361a17acf43"
+      "bytes": 6292,
+      "sha256": "f01260a30a28792d2dab93df75128a952b5fe856f83d07621f0459c22ec6bf33"
     },
     {
       "path": "data/archive-index.json",
@@ -116,14 +116,24 @@
       "sha256": "5c98c78b9cae0d1217876c02dae9284f564e4b8438642347b040ef676c9f7490"
     },
     {
+      "path": "edition.html",
+      "bytes": 8448,
+      "sha256": "65c6a4b80cbf4c4f25ffc16a938da869f219eec00019e9d31353bef74d2655db"
+    },
+    {
+      "path": "edition/2026-w35.html",
+      "bytes": 8401,
+      "sha256": "cf80db4b2a07bee04d3381c65aa328990d662b46c9b1cdc3457c277206621abc"
+    },
+    {
       "path": "editorial-policy.html",
-      "bytes": 6385,
-      "sha256": "9513eeb1403325957a1137bc60abc86519ae028eda9a5df115f12564096aa9fb"
+      "bytes": 6476,
+      "sha256": "87153154d75248a79f11473dc7732a9c24c70538763477429ce1b5931cc8680f"
     },
     {
       "path": "emergency.html",
-      "bytes": 6484,
-      "sha256": "4f24eade4d1210ee2bce818203c48ab6bd0cc67658b060b238d7dc1bee6ab475"
+      "bytes": 6575,
+      "sha256": "ecbd5da6fdbe1537c59847d714a1180da20d2049ae574068a4e657497d7ffc15"
     },
     {
       "path": "favicon.ico",
@@ -132,8 +142,8 @@
     },
     {
       "path": "food.html",
-      "bytes": 36879,
-      "sha256": "d1534e3b1d0c6547e2e040d5e5a8cf267002d5232c17c3fe372fb00c75e4c1ec"
+      "bytes": 36970,
+      "sha256": "364b63c01577f06ddaf5cd870f3db1ab3eabd029bf800656e3692b5fde143331"
     },
     {
       "path": "images/background-01.webp",
@@ -182,8 +192,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 10894,
-      "sha256": "c94bea445d2e489fc00877155134d54c6991fbe675130d014c39318ae7cfcb4b"
+      "bytes": 10985,
+      "sha256": "3322bf3db4fe0103e04c428309d79d86095a833df5b5c8987ec8a3d75ff862ba"
     },
     {
       "path": "llms.txt",
@@ -192,8 +202,8 @@
     },
     {
       "path": "privacy.html",
-      "bytes": 6317,
-      "sha256": "6a639461f30dad027d77c71b472021f89b5b7c87efd997d092965affcc716431"
+      "bytes": 6408,
+      "sha256": "837d764da4e788dcaecf95491c75d4b4fa0775c444522299a374f8272a6614ae"
     },
     {
       "path": "robots.txt",
@@ -207,13 +217,13 @@
     },
     {
       "path": "sitemap.xml",
-      "bytes": 2200,
-      "sha256": "7817722de78ff4fbb285928a6fb75a3bc1d3473c3d0a004e0d3dfc66ef10d2fe"
+      "bytes": 2336,
+      "sha256": "86035417ad32357b24a2177d009785f746a3e417688aefd3de906e3951134a80"
     },
     {
       "path": "terms.html",
-      "bytes": 6446,
-      "sha256": "e1681b928da1a0d0ee5a5c00c54a1d679a2d543e92d58066ef7055b63de5d9ce"
+      "bytes": 6537,
+      "sha256": "a5d6d19cd3edd6d65b49a2f016a8a07698cba7dded5c3954683ae68c69c818e6"
     }
   ]
 }

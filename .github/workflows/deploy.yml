@@ -32,15 +32,19 @@ jobs:
 
       - name: Validate
         run: pnpm run check
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
 
       - name: Deploy preview
         if: github.event_name == 'push' || inputs.target == 'preview'
         run: pnpm run deploy:preview
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
 
       - name: Deploy lovemallacoota.au
         if: github.event_name == 'workflow_dispatch' && inputs.target == 'production'
         run: pnpm run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}

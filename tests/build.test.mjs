@@ -95,3 +95,16 @@ test("every image the built pages reference is actually deployed", async () => {
   }
   assert.deepEqual(missing, [], `referenced images are not in the build:\n${missing.join("\n")}`);
 });
+
+test("the contact form uses the configured Turnstile site key", async () => {
+  const html = await readFile(new URL("../dist/contact.html", import.meta.url), "utf8");
+  assert.match(html, /class="cf-turnstile" data-sitekey="[^"]+"/);
+
+  const configured = process.env.PUBLIC_TURNSTILE_SITE_KEY;
+  if (!configured) return; // Local builds fall back to the always-passes test key.
+
+  assert.ok(
+    html.includes(`data-sitekey="${configured}"`),
+    "the build did not pick up PUBLIC_TURNSTILE_SITE_KEY — the form would ship with the test key"
+  );
+});

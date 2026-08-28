@@ -516,7 +516,14 @@ html[data-theme="light"] .archive-card { background: rgba(255,255,255,0.52); bor
 .archive-issue-number { padding: 0.25rem 0.65rem; border-radius: 999px; background: rgba(36,200,232,0.13); color: var(--accent); font-size: 0.72rem; font-weight: 700; white-space: nowrap; }
 .archive-card h3 { color: var(--accent); font-size: 1.3rem; }
 .archive-description { margin: 0.45rem 0 1rem; color: var(--muted); font-size: 0.92rem; }
+.archive-cover { margin: 0 0 1rem; color: var(--text); font-size: 0.88rem; line-height: 1.45; }
+.archive-cover strong { color: var(--muted); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .archive-metadata { display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.75rem; margin-bottom: 1rem; font-size: 0.82rem; }
+.archive-toc { margin: 0 0 1rem; font-size: 0.84rem; }
+.archive-toc summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+.archive-toc ol { margin: 0.55rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.28rem; }
+.archive-toc li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.4rem; color: var(--muted); }
+.archive-toc-page { color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 700; }
 .archive-metadata dt { color: var(--muted); font-weight: 700; }
 .archive-metadata dd { min-width: 0; }
 .archive-topics { margin-bottom: 1.1rem; }

@@ -25,6 +25,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     appendText(card, "h3", issue.displayDate);
     appendText(card, "p", issue.description, "archive-description");
 
+    const cover = issue.cover && issue.cover.caption ? issue.cover : null;
+    if (cover) {
+      const coverBlock = document.createElement("p");
+      coverBlock.className = "archive-cover";
+      const label = document.createElement("strong");
+      label.textContent = cover.credit ? `Cover (${cover.credit}): ` : "Cover: ";
+      coverBlock.append(label);
+      coverBlock.append(document.createTextNode(cover.caption));
+      card.append(coverBlock);
+    }
+
     const metadata = document.createElement("dl");
     metadata.className = "archive-metadata";
     for (const [label, value] of [
@@ -36,6 +47,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       appendText(metadata, "dd", String(value));
     }
     card.append(metadata);
+
+    const contents = Array.isArray(issue.contents) ? issue.contents : [];
+    if (contents.length) {
+      const toc = document.createElement("details");
+      toc.className = "archive-toc";
+      const summary = document.createElement("summary");
+      summary.textContent = `In this issue (${contents.length})`;
+      toc.append(summary);
+      const list = document.createElement("ol");
+      for (const entry of contents) {
+        const item = document.createElement("li");
+        const page = document.createElement("span");
+        page.className = "archive-toc-page";
+        page.textContent = `p${entry.page}`;
+        item.append(page);
+        item.append(document.createTextNode(entry.title));
+        list.append(item);
+      }
+      toc.append(list);
+      card.append(toc);
+    }
 
     const topics = document.createElement("div");
     topics.className = "chips archive-topics";
@@ -75,8 +107,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           issue.editor,
           issue.description,
           issue.provenance,
+          issue.cover?.caption,
+          issue.cover?.credit,
           ...(issue.topics || []),
           ...(issue.keywords || []),
+          ...(issue.contents || []).map((entry) => `${entry.page} ${entry.title}`),
         ].join(" ").toLocaleLowerCase("en-AU");
         return searchable.includes(query);
       });

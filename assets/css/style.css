@@ -746,6 +746,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media print {
   /* A4 with typographic margins, except the cover, which bleeds to the edge. */
   @page { size: A4 portrait; margin: 18mm 16mm; }
+  /* The cover is the first sheet and takes the whole of it. Named pages were
+     ignored here; the :first pseudo-class is honoured. */
+  @page :first { margin: 0; }
 
   .edition-cover {
     display: block !important;
@@ -753,8 +756,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     position: relative;
     width: 210mm;
     height: 297mm;
-    /* Break out of the page margins so the photograph bleeds to the edge. */
-    margin: -18mm -16mm 0;
+    margin: 0;
     overflow: hidden;
     color: #fff;
   }

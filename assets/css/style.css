@@ -740,4 +740,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .edition-actions, .ad-row-wrap { display: none !important; }
   .glass-card { border: 0; background: none; box-shadow: none; }
   .edition-article { break-inside: avoid; }
+
+  /* Scroll reveals never fire in a headless render, so everything below the
+     fold would print as blank pages. Show it all. */
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+  /* The accent word is gradient text with a transparent fill. With backgrounds
+     off, that prints as nothing at all. */
+  .grad {
+    background: none !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    animation: none !important;
+  }
+
+  body { color: #000; }
+  .section-sub, .edition-byline, .edition-toc-byline { color: #333 !important; }
+  .edition-toc { break-after: page; }
+  h2, h3 { break-after: avoid; }
 }

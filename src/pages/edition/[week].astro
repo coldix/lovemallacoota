@@ -19,6 +19,7 @@ const { edition } = Astro.props;
   description={`The Mallacoota weekly edition for the week of ${edition.displayDate}.`}
   canonicalPath={`/edition/${edition.week}.html`}
   active="edition"
+  showAds={true}
 >
   <PageHero eyebrow="Weekly edition" prefix="Week of" accent={edition.displayDate} lede="Community notices, club and school news, events, weather and tides for the week." />
   <main>

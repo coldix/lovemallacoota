@@ -40,7 +40,7 @@ const tags = tagFilters(businesses);
 const schema = collectionSchema(businesses, props.schemaName, props.canonicalPath);
 ---
 
-<BaseLayout title={props.title} description={props.description} canonicalPath={props.canonicalPath} active={props.active}>
+<BaseLayout title={props.title} description={props.description} canonicalPath={props.canonicalPath} active={props.active} showAds={true}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
   <PageHero prefix={props.prefix} accent={props.accent} lede={props.lede} />
   <main>
@@ -113,6 +113,9 @@ const schema = collectionSchema(businesses, props.schemaName, props.canonicalPat
         })}
       </div>
       <p class="no-results" id="no-results" hidden>No matches — try a different search or tag.</p>
+    </section>
+    <section class="glass-card sheen content-block reveal" aria-label="Sponsored">
+      <div class="ad-row-wrap"><div class="ad-row"><div class="ad-slot ad-300x250" data-ad-zone="in-content"></div><div class="ad-slot ad-300x250 ad-col-2" data-ad-zone="in-content-2"></div><div class="ad-slot ad-300x250 ad-col-3" data-ad-zone="in-content-3"></div></div></div>
     </section>
     <section class="glass-card sheen content-block reveal">
       <h2 class="section-title">Keep Exploring</h2>

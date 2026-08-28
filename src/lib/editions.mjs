@@ -26,9 +26,12 @@ export const SECTIONS = [
   { id: "editorial", title: "Editorial" },
   { id: "weather", title: "Weekly Weather Forecast", automatic: true },
   { id: "tides", title: "Tide Times", automatic: true },
-  { id: "diary", title: "Mouth Diary", automatic: true },
+  { id: "diary", title: "This Week's Diary", automatic: true },
   { id: "trail", title: "Trail of the Week", automatic: true },
   { id: "business", title: "Business of the Week", automatic: true },
+  { id: "transport", title: "Buses and Transport", automatic: true },
+  { id: "talking", title: "Talking Points", automatic: true },
+  { id: "social", title: "Around the Socials", automatic: true },
   { id: "madra", title: "MADRA News" },
   { id: "school", title: "Out and About at MP-12" },
   { id: "community", title: "Community" },
@@ -72,16 +75,32 @@ export function sectionsWithContent(edition) {
 }
 
 /** Table of contents, shared by the web page and the end-of-week PDF. */
+function autoEntry(section) {
+  const auto = section.auto;
+  if (!auto) return null;
+  if (auto.type === "weather") return `Seven-day forecast to ${auto.data.days.at(-1).date}`;
+  if (auto.type === "tides") return "Official predictions, Gabo Island";
+  if (auto.type === "tide-table") return `Highs and lows, ${auto.data.station}`;
+  if (auto.type === "diary") return `${auto.data.length} ${auto.data.length === 1 ? "event" : "events"} this week`;
+  if (auto.type === "trail") return auto.data.name;
+  if (auto.type === "business") return auto.data.name;
+  if (auto.type === "links") return `${auto.data.length} ${auto.data.length === 1 ? "link" : "links"}`;
+  return null;
+}
+
 export function tableOfContents(edition) {
-  return sectionsWithContent(edition).map((section) => ({
-    id: section.id,
-    title: section.title,
-    entries: section.articles.map((article) => ({
+  return sectionsWithContent(edition).map((section) => {
+    const entries = section.articles.map((article) => ({
       id: articleAnchor(article),
       title: article.title,
       byline: article.byline || null,
-    })),
-  }));
+    }));
+    const summary = autoEntry(section);
+    // An automatic section still says what is in it, rather than sitting in the
+    // contents as an empty bullet.
+    if (summary) entries.push({ id: `section-${section.id}`, title: summary, byline: null });
+    return { id: section.id, title: section.title, entries };
+  });
 }
 
 export function articleAnchor(article) {
@@ -111,6 +130,14 @@ export function countArticles(edition) {
  * never depends on the network and a past edition keeps what it was published
  * with.
  */
+/** A small hand-edited data file, absent until there is something to put in it. */
+export function loadDataFile(name, fallback) {
+  if (!rootDir) return fallback;
+  const file = path.join(rootDir, "data", name);
+  if (!existsSync(file)) return fallback;
+  return JSON.parse(readFileSync(file, "utf8"));
+}
+
 export function loadWeekly(week) {
   if (!rootDir) return null;
   const file = path.join(rootDir, "data", "weekly", `${week}.json`);
@@ -140,10 +167,27 @@ export function editionSections(edition) {
     const own = articles.filter((article) => article.section === section.id);
     let auto = null;
     if (section.id === "weather" && weekly?.weather?.days?.length) auto = { type: "weather", data: weekly.weather };
-    if (section.id === "tides") auto = { type: "tides", data: TIDE_SOURCE };
+    // Real predictions when we have licensed them, the official link otherwise.
+    if (section.id === "tides") {
+      auto = weekly?.tides
+        ? { type: "tide-table", data: weekly.tides }
+        : { type: "tides", data: TIDE_SOURCE };
+    }
     if (section.id === "diary" && weekly?.events?.length) auto = { type: "diary", data: weekly.events };
     if (section.id === "trail" && weekly?.trail) auto = { type: "trail", data: weekly.trail };
     if (section.id === "business" && weekly?.business) auto = { type: "business", data: weekly.business };
+    if (section.id === "transport") {
+      const services = loadDataFile("bus-timetable.json", []);
+      if (services.length) auto = { type: "links", data: services };
+    }
+    if (section.id === "talking") {
+      const items = loadDataFile("talking-points.json", []);
+      if (items.length) auto = { type: "links", data: items };
+    }
+    if (section.id === "social") {
+      const accounts = loadDataFile("social-links.json", []);
+      if (accounts.length) auto = { type: "links", data: accounts };
+    }
     return { ...section, articles: own, auto };
   }).filter((section) => section.articles.length > 0 || section.auto);
 }

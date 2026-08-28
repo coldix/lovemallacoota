@@ -320,7 +320,15 @@ html[data-theme="light"] .glass-card::before { background: linear-gradient(135de
 .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px -6px var(--accent-glow); }
 .btn-coral { background: linear-gradient(120deg, var(--coral-deep), var(--coral)); box-shadow: 0 8px 28px -6px var(--coral-glow); }
 .btn-coral:hover { transform: translateY(-3px); box-shadow: 0 14px 36px -6px var(--coral-glow); }
-.btn-ghost { border-color: var(--glass-border); color: inherit; }
+.btn-ghost {
+    border-color: var(--glass-border);
+    color: inherit;
+    /* Buttons do not inherit a background: without this, a ghost button gets the
+       browser's light default and disappears against light text in dark mode. */
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+}
 .btn-ghost:hover { transform: translateY(-3px); border-color: var(--accent); }
 
 /* --- Stats strip --- */
@@ -820,3 +828,65 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-diary-where { color: var(--muted); font-size: 0.85rem; width: 100%; }
 .edition-feature h3 { margin-bottom: 0.25rem; }
 .edition-feature-meta { color: var(--muted); font-size: 0.88rem; margin-bottom: 0.8rem; }
+
+/* --- Weekly edition: contents, links and wide-screen columns --- */
+
+/* Unstyled links inside the edition fell back to browser blue on a dark page. */
+.edition-toc a,
+.edition-auto a,
+.edition-article a,
+.edition-index a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.edition-toc a:hover,
+.edition-auto a:hover,
+.edition-article a:hover,
+.edition-index a:hover { border-bottom-color: var(--accent); }
+
+/* Contents as pills rather than a bulleted list of blue links. */
+.edition-toc-list { list-style: none; padding: 0; max-width: none; }
+.edition-toc-list > li { margin: 0 0 1.1rem; break-inside: avoid; }
+.edition-toc-section {
+  display: inline-block;
+  padding: 0.32rem 0.9rem;
+  border-radius: 50px;
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-bottom-width: 1px;
+}
+.edition-toc-list ul { margin: 0.45rem 0 0; padding: 0; list-style: none; }
+.edition-toc-list ul li { margin: 0.25rem 0; font-size: 0.92rem; line-height: 1.45; }
+
+/* Three columns once there is room, one on a phone. */
+@media (min-width: 900px) {
+  .edition-toc-list { column-count: 2; column-gap: 2.2rem; }
+}
+@media (min-width: 1200px) {
+  .edition-toc-list { column-count: 3; }
+}
+
+/* Link lists — transport, social, the week's talking points. */
+.edition-link-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: 1fr;
+  max-width: none;
+  text-align: left;
+}
+@media (min-width: 760px) { .edition-link-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1150px) { .edition-link-grid { grid-template-columns: repeat(3, 1fr); } }
+.edition-link-card {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+.edition-link-card h4 { margin: 0 0 0.3rem; font-size: 1rem; }
+.edition-link-card p { margin: 0; font-size: 0.9rem; color: var(--muted); }
+.edition-link-card .meta { display: block; margin-top: 0.4rem; font-size: 0.82rem; color: var(--muted); }
+.edition-photo { width: 100%; height: auto; border-radius: 14px; margin-bottom: 1rem; }

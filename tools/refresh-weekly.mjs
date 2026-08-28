@@ -113,6 +113,42 @@ async function fetchForecast(week) {
   };
 }
 
+/**
+ * Tide predictions for the inlet entrance. There is no free authoritative
+ * Australian source we may republish, so this runs only when a WorldTides key
+ * is configured; without one the edition keeps linking to the Bureau rather
+ * than printing numbers nobody checked.
+ */
+async function fetchTides(week) {
+  const key = process.env.WORLDTIDES_API_KEY;
+  if (!key) return null;
+
+  const monday = mondayOf(week);
+  const start = monday.toISOString().slice(0, 10);
+  const url =
+    "https://www.worldtides.info/api/v3?extremes" +
+    `&lat=${MALLACOOTA.latitude}&lon=${MALLACOOTA.longitude}` +
+    `&start=${start}&days=7&datum=LAT&key=${key}`;
+
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`WorldTides returned ${response.status}`);
+  const payload = await response.json();
+  if (!payload.extremes?.length) throw new Error("WorldTides returned no extremes");
+
+  return {
+    source: "WorldTides",
+    sourceUrl: "https://www.worldtides.info/",
+    station: payload.station || "nearest station to the inlet entrance",
+    datum: payload.responseDatum || "LAT",
+    fetchedAt: new Date().toISOString(),
+    extremes: payload.extremes.map((extreme) => ({
+      time: extreme.date,
+      type: extreme.type,
+      heightM: Math.round(extreme.height * 100) / 100,
+    })),
+  };
+}
+
 /** WMO weather codes, in the words a forecast would use. */
 const WEATHER_CODES = {
   0: "Clear", 1: "Mostly clear", 2: "Partly cloudy", 3: "Overcast",
@@ -190,10 +226,19 @@ try {
   }
 }
 
+let tides = null;
+try {
+  tides = await fetchTides(week);
+} catch (error) {
+  console.warn(`tides unavailable: ${error.message}`);
+  if (previous?.tides) tides = previous.tides;
+}
+
 const payload = {
   week,
   generatedAt: new Date().toISOString(),
   weather,
+  tides,
   events: pickEvents(week),
   trail: pickTrail(week),
   business: pickBusiness(week),
@@ -201,6 +246,7 @@ const payload = {
 
 console.log(`week ${week} (rotation ${rotationIndex(week)})`);
 console.log(`  forecast: ${weather ? `${weather.days.length} days` : "unavailable"}`);
+console.log(`  tides:    ${tides ? `${tides.extremes.length} highs and lows` : "no key configured — linking to the Bureau"}`);
 console.log(`  events:   ${payload.events.length}`);
 console.log(`  trail:    ${payload.trail ? payload.trail.name : "none"}`);
 console.log(`  business: ${payload.business ? payload.business.name : "none"}`);

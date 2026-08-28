@@ -19,6 +19,13 @@ const sections = sectionsWithContent(edition);
 
 const DAY = new Intl.DateTimeFormat("en-AU", { weekday: "short", day: "numeric", month: "short", timeZone: "Australia/Melbourne" });
 const dayName = (iso) => DAY.format(new Date(`${iso}T00:00:00+10:00`));
+
+const TIDE_WHEN = new Intl.DateTimeFormat("en-AU", {
+  weekday: "short", day: "numeric", month: "short",
+  hour: "numeric", minute: "2-digit", hour12: true,
+  timeZone: "Australia/Melbourne",
+});
+const tideWhen = (value) => TIDE_WHEN.format(new Date(value));
 const toc = tableOfContents(edition);
 const total = countArticles(edition);
 const statusLabel =
@@ -54,7 +61,7 @@ const statusLabel =
     <ol class="edition-toc-list">
       {toc.map((section) => (
         <li>
-          <a href={`#section-${section.id}`}>{section.title}</a>
+          <a class="edition-toc-section" href={`#section-${section.id}`}>{section.title}</a>
           <ul>
             {section.entries.map((entry) => (
               <li>
@@ -75,6 +82,12 @@ const statusLabel =
       Nothing has been contributed to this week yet — the forecast and features
       below are compiled automatically.
     </p>
+  </section>
+)}
+
+{sections.length > 0 && (
+  <section class="glass-card sheen content-block reveal edition-web-only" aria-label="Sponsored">
+    <div class="ad-row-wrap"><div class="ad-row"><div class="ad-slot ad-300x250" data-ad-zone="in-content"></div><div class="ad-slot ad-300x250 ad-col-2" data-ad-zone="in-content-2"></div><div class="ad-slot ad-300x250 ad-col-3" data-ad-zone="in-content-3"></div></div></div>
   </section>
 )}
 
@@ -112,6 +125,28 @@ const statusLabel =
       </div>
     )}
 
+    {section.auto?.type === "tide-table" && (
+      <div class="edition-auto">
+        <table class="forecast">
+          <thead>
+            <tr><th scope="col">When</th><th scope="col">Tide</th><th scope="col">Height</th></tr>
+          </thead>
+          <tbody>
+            {section.auto.data.extremes.map((extreme) => (
+              <tr>
+                <th scope="row">{tideWhen(extreme.time)}</th>
+                <td>{extreme.type === "High" ? "High" : "Low"}</td>
+                <td>{extreme.heightM.toFixed(2)} m</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="edition-source">
+          Predictions from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a> for {section.auto.data.station}, datum {section.auto.data.datum}. Predictions only — they do not account for wind or barometric pressure, and the bar can differ from the tide. Check conditions before crossing.
+        </p>
+      </div>
+    )}
+
     {section.auto?.type === "diary" && (
       <ul class="edition-diary">
         {section.auto.data.map((event) => (
@@ -126,6 +161,9 @@ const statusLabel =
 
     {section.auto?.type === "trail" && (
       <div class="edition-auto edition-feature">
+        {section.auto.data.photo && (
+          <img class="edition-photo" src={section.auto.data.photo} alt={section.auto.data.name} loading="lazy" decoding="async" />
+        )}
         <h3>{section.auto.data.name}</h3>
         <p class="edition-feature-meta">
           {[section.auto.data.distance, section.auto.data.duration, section.auto.data.difficulty].filter(Boolean).join(" · ")}
@@ -138,6 +176,22 @@ const statusLabel =
         <p class="edition-source">
           Walk {section.auto.data.rotation.position} of {section.auto.data.rotation.of} within about two hours of Mallacoota. A different one each week.
         </p>
+      </div>
+    )}
+
+    {section.auto?.type === "links" && (
+      <div class="edition-link-grid">
+        {section.auto.data.map((item) => (
+          <div class="edition-link-card">
+            <h4>
+              {item.url
+                ? <a href={item.url} rel="noopener noreferrer" target={item.url.startsWith("http") ? "_blank" : undefined}>{item.title}</a>
+                : item.title}
+            </h4>
+            {item.description && <p>{item.description}</p>}
+            {item.meta && <span class="meta">{item.meta}</span>}
+          </div>
+        ))}
       </div>
     )}
 

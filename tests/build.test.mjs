@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { loadListings } from "../src/lib/listings.mjs";
+import { ALL_LISTING_FILES, loadListings, verificationLine } from "../src/lib/listings.mjs";
 import {
   SECTIONS,
   currentEdition,
@@ -157,4 +157,44 @@ test("every edition keeps its own permanent page", async () => {
     );
     assert.match(html, new RegExp(`<link rel="canonical" href="https://lovemallacoota\\.au/edition/${edition.week}\\.html"`));
   }
+});
+
+test("a verification date is never invented, and never in the future", async () => {
+  const today = new Date().toISOString().slice(0, 10);
+  for (const file of ALL_LISTING_FILES) {
+    for (const business of loadListings([file])) {
+      const verification = business.verification;
+      if (!verification) continue;
+
+      const verifiedAt = verification.email?.verifiedAt;
+      if (verifiedAt) {
+        assert.match(verifiedAt, /^\d{4}-\d{2}-\d{2}$/, `${business.business_name}: bad date`);
+        assert.ok(
+          verifiedAt <= today,
+          `${business.business_name} claims to have been verified on ${verifiedAt}, in the future`
+        );
+      }
+
+      // There is no SMS verification path, so nothing may claim one.
+      assert.notEqual(
+        verification.mobile?.verified,
+        true,
+        `${business.business_name} claims a verified mobile, but no SMS verification exists`
+      );
+    }
+  }
+});
+
+test("an unverified listing says so rather than staying silent", async () => {
+  const unverified = loadListings(["listings_food.json"]).find(
+    (business) => !business.verification?.email?.verifiedAt
+  );
+  assert.ok(unverified, "expected at least one unverified listing to check");
+  assert.deepEqual(verificationLine(unverified), {
+    verified: false,
+    text: "Not yet verified",
+  });
+
+  const html = await readFile(new URL("../dist/food.html", import.meta.url), "utf8");
+  assert.ok(html.includes("Not yet verified"), "the card does not show verification state");
 });

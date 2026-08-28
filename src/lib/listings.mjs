@@ -220,3 +220,53 @@ export function collectionSchema(businesses, pageTitle, pagePath) {
     },
   };
 }
+
+/**
+ * How this listing's contact details were checked. A listing with no
+ * verification block is "Not yet verified" — never verified by default, and a
+ * date is only ever written by an actual verification. See
+ * docs/DIRECTORY-SUBMISSIONS.md.
+ */
+export function verificationState(business) {
+  const verification = business.verification || {};
+  const email = verification.email || {};
+  const mobile = verification.mobile || {};
+  return {
+    emailVerifiedAt: email.verifiedAt || null,
+    mobileSupplied: Boolean(mobile.value),
+    // No SMS provider exists yet, so a mobile is supplied, never verified.
+    mobileVerified: false,
+    lastReviewedAt: verification.lastReviewedAt || null,
+  };
+}
+
+const AU_DATE = new Intl.DateTimeFormat("en-AU", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "Australia/Melbourne",
+});
+
+export function formatVerificationDate(isoDate) {
+  if (!isoDate) return null;
+  const parsed = new Date(`${isoDate}T00:00:00+10:00`);
+  return Number.isNaN(parsed.valueOf()) ? null : AU_DATE.format(parsed);
+}
+
+/** The line shown on the card. Says what is true, including when nothing is. */
+export function verificationLine(business) {
+  const state = verificationState(business);
+  const when = formatVerificationDate(state.emailVerifiedAt);
+  if (when) return { verified: true, text: `Email verified ${when}` };
+  return { verified: false, text: "Not yet verified" };
+}
+
+/**
+ * The listing's photo, if the file is actually in the build. One per listing,
+ * 1280px on the longest side, WebP.
+ */
+export function listingPhoto(business) {
+  const hero = heroImage(business);
+  if (!hero) return null;
+  return { url: hero.url, alt: hero.alt_text || business.business_name || "" };
+}

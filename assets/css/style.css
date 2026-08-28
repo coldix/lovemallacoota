@@ -770,3 +770,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .edition-toc { break-after: page; }
   h2, h3 { break-after: avoid; }
 }
+
+/* Listing photo and the verification line beneath it. */
+.listing-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.9rem;
+}
+.listing-verified {
+  margin: 0.6rem 0 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.listing-verified.unverified { color: var(--muted); font-weight: 400; }

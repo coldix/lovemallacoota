@@ -7,11 +7,13 @@ import {
   formatAddress,
   getPrimaryLink,
   getPrimaryLinkLabel,
+  listingPhoto,
   loadListings,
   mapLinks,
   searchText,
   tagFilters,
   telHref,
+  verificationLine,
 } from "../lib/listings.mjs";
 
 interface ExploreLink { href: string; emoji: string; title: string; text: string }
@@ -64,12 +66,25 @@ const schema = collectionSchema(businesses, props.schemaName, props.canonicalPat
           const primaryLabel = getPrimaryLinkLabel(business);
           const address = formatAddress(business.address);
           const chips = displayTags(business);
+          const photo = listingPhoto(business);
+          const verification = verificationLine(business);
           return (
             <article
               class="listing-card"
               data-tags={(business.category_tags || []).join("|")}
               data-search={searchText(business)}
             >
+              {photo && (
+                <img
+                  class="listing-photo"
+                  src={photo.url}
+                  alt={photo.alt}
+                  width="1280"
+                  height="720"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
               <h3>{business.business_name || "Unnamed Business"}</h3>
               {chips.length > 0 && (
                 <div class="chips">
@@ -80,6 +95,9 @@ const schema = collectionSchema(businesses, props.schemaName, props.canonicalPat
                 {business.description_short || business.description_long || "No description available."}
               </p>
               {address && <p class="addr">📍 {address}</p>}
+              <p class:list={["listing-verified", { unverified: !verification.verified }]}>
+                {verification.verified ? "✓ " : ""}{verification.text}
+              </p>
               <div class="links">
                 {primary
                   ? <a href={primary} target="_blank" rel="noopener noreferrer">{primaryLabel}</a>

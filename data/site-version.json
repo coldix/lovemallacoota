@@ -1,34 +1,34 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.10",
-  "generatedAt": "2026-08-28 15:09:51 AEST (Melbourne)",
+  "version": "v0.11",
+  "generatedAt": "2026-08-28 19:20:30 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
     {
       "path": "404.html",
       "bytes": 5326,
-      "sha256": "4c03c89533a38851cbf5dc5a53d93e7ac3ffa53ce40b069d224dd22c9092ef39"
+      "sha256": "cd3338d16d527a38c3e40ee12c48b9832f91114c15aeb2404cfb80c314cd0b17"
     },
     {
       "path": "accessibility.html",
       "bytes": 6097,
-      "sha256": "bd9a2e2035299457230eb833b87656d640c01b75a00f031a568e3d643873728a"
+      "sha256": "96fd30fa1c7a7c4100b53842fb6afddc1d9e62caf5ff85f7a0f4a291dd000694"
     },
     {
       "path": "accom.html",
-      "bytes": 44629,
-      "sha256": "ee0581adf99317c6803b08068ee8383614b4ee182ebde66f50fb6c362ab90788"
+      "bytes": 45691,
+      "sha256": "c2e34c275c5b145768ae4e51f701b8e248b47e4d5b843a2bd29f1a4029bec4d9"
     },
     {
       "path": "activity.html",
-      "bytes": 23302,
-      "sha256": "f90386846b5c5e4f66bf749593fc9fd51c8b0df6e9b45524d1741e47d10b1c67"
+      "bytes": 23774,
+      "sha256": "ef2555c9d97d7daf57df719576eabe569af5e8ea1630c8f5e0293fe58314f9b7"
     },
     {
       "path": "archive.html",
       "bytes": 7827,
-      "sha256": "7d5a5f55817c1e92d28612796ae1350ba27451f6f02b90e94b0995bcf6b61487"
+      "sha256": "c3e01f083764da5bafa1d03fccb8712f8acd3dc45fd2a3a204b123f12ecf5972"
     },
     {
       "path": "assets/css/adnet.css",
@@ -37,8 +37,8 @@
     },
     {
       "path": "assets/css/style.css",
-      "bytes": 34013,
-      "sha256": "eb0dbf450ad74e8924c28f63d30b1bfc0c2ee949973dac8cabbd4fefea3db5fb"
+      "bytes": 35423,
+      "sha256": "9f8970ba5d4190224bd925c8749c0f5e2a308edc4c8125ea98c2dfc51a92de58"
     },
     {
       "path": "assets/icons/android-chrome-192x192.png",
@@ -83,17 +83,17 @@
     {
       "path": "calendar.html",
       "bytes": 6295,
-      "sha256": "54a542759ea3986d92ffd0e2a1560ce573ca74224e4113c3465ebb119573b8ac"
+      "sha256": "20c2df5af3cf524cd7cfd0e7d7d164ed2f905cbe6334326948d6079b016bcb9f"
     },
     {
       "path": "contact.html",
       "bytes": 9710,
-      "sha256": "de80feeed6b56894e0041f0877de4876e08026622e0c65c95721aa34f30e098e"
+      "sha256": "534bf3e9a888057a4e2187da7a4652160e2ea26f4b6709cb449794e5feed8922"
     },
     {
       "path": "corrections.html",
       "bytes": 6292,
-      "sha256": "f01260a30a28792d2dab93df75128a952b5fe856f83d07621f0459c22ec6bf33"
+      "sha256": "1f1f78349281eb98cbfd1a57ca95b929b1a2e13c20a74095db128062209ae4dc"
     },
     {
       "path": "data/archive-index.json",
@@ -117,23 +117,23 @@
     },
     {
       "path": "edition.html",
-      "bytes": 8448,
-      "sha256": "65c6a4b80cbf4c4f25ffc16a938da869f219eec00019e9d31353bef74d2655db"
+      "bytes": 8658,
+      "sha256": "7e486087b17e0277f2c941cf4d4a8fdd6229de7ed041d4c53d762b1281f73a7a"
     },
     {
       "path": "edition/2026-w35.html",
-      "bytes": 8401,
-      "sha256": "cf80db4b2a07bee04d3381c65aa328990d662b46c9b1cdc3457c277206621abc"
+      "bytes": 8628,
+      "sha256": "745baa8cfb33e9bd88986d3630c4b2b6cc4e74703662bb9cadbf73c71e72b2c9"
     },
     {
       "path": "editorial-policy.html",
       "bytes": 6476,
-      "sha256": "87153154d75248a79f11473dc7732a9c24c70538763477429ce1b5931cc8680f"
+      "sha256": "1571aa0a6b053c5679bcc692dda6118856425153de29a0b43f704a845fb3b497"
     },
     {
       "path": "emergency.html",
       "bytes": 6575,
-      "sha256": "ecbd5da6fdbe1537c59847d714a1180da20d2049ae574068a4e657497d7ffc15"
+      "sha256": "4613ca40b29f907e83c512535dff7a0315795e16d3c16b49545c0c6624d86ec1"
     },
     {
       "path": "favicon.ico",
@@ -142,8 +142,8 @@
     },
     {
       "path": "food.html",
-      "bytes": 36970,
-      "sha256": "364b63c01577f06ddaf5cd870f3db1ab3eabd029bf800656e3692b5fde143331"
+      "bytes": 37914,
+      "sha256": "e41ec188ffb2b6f1f8614aa416ad96f1c1e6fe2b41aebfbafe706d5f0c3f9aef"
     },
     {
       "path": "images/background-01.webp",
@@ -193,7 +193,7 @@
     {
       "path": "index.html",
       "bytes": 10985,
-      "sha256": "3322bf3db4fe0103e04c428309d79d86095a833df5b5c8987ec8a3d75ff862ba"
+      "sha256": "0916e9ac68fdcec8c23e64844bd4fb3abfa01732db041017cae0dcc1d6cb464a"
     },
     {
       "path": "llms.txt",
@@ -203,7 +203,7 @@
     {
       "path": "privacy.html",
       "bytes": 6408,
-      "sha256": "837d764da4e788dcaecf95491c75d4b4fa0775c444522299a374f8272a6614ae"
+      "sha256": "e006b19b8ed0e3a49b9d06b3c11772d66df294046d0517361bb4181188d70407"
     },
     {
       "path": "robots.txt",
@@ -223,7 +223,7 @@
     {
       "path": "terms.html",
       "bytes": 6537,
-      "sha256": "a5d6d19cd3edd6d65b49a2f016a8a07698cba7dded5c3954683ae68c69c818e6"
+      "sha256": "67020d0ef4d5efc9608ae5c899d0626e3235c2138eff336c0f7e74b035a17c5b"
     }
   ]
 }

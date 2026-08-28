@@ -755,7 +755,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     break-after: page;
     position: relative;
     width: 210mm;
-    height: 297mm;
+    height: 296.8mm;
     margin: 0;
     overflow: hidden;
     color: #fff;
@@ -816,6 +816,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     background: none !important;
     background-color: transparent !important;
   }
+
+  /* The wrapper's 24px padding and main's top margin were pushing the cover
+     down the first sheet, so its last 30mm broke onto the second. */
+  .page-wrapper { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+  main { margin-top: 0 !important; }
+  body[data-page="edition"] main > :not(.edition-cover) { margin-top: 0; }
   .edition-cover, .edition-cover-mast { background-color: initial !important; }
   .edition-cover-mast {
     background: linear-gradient(to top, rgba(6, 18, 30, 0.88), rgba(6, 18, 30, 0.72) 62%, rgba(6, 18, 30, 0)) !important;

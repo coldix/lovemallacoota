@@ -750,6 +750,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   }
   .glass-card::before, .glass-card.sheen::after { display: none !important; }
   .edition-article p { margin-bottom: 0.7rem; }
+
+  /* A button on paper is a pale outline nobody can act on. Print the link as
+     text, and print where it goes. */
+  .edition-auto .btn {
+    border: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: #000 !important;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  .edition-auto a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-weight: 400;
+    font-size: 0.82em;
+    color: #444;
+    word-break: break-all;
+  }
   .edition-article { break-inside: avoid; }
 
   /* Scroll reveals never fire in a headless render, so everything below the

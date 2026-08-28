@@ -53,14 +53,17 @@ jobs:
           PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
         run: |
           VERSION=$(node -p "require('./data/site-version.json').version")
+          pnpm run types
           pnpm run build
           node tools/update-version.mjs --set="$VERSION"
 
+      # `check` generates worker-configuration.d.ts before typechecking; `test`
+      # alone cannot, because that file is generated and not committed.
       - name: Check before publishing
         if: steps.changed.outputs.changed == 'true'
         env:
           PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
-        run: pnpm run test
+        run: pnpm run check
 
       - name: Commit the refreshed edition
         if: steps.changed.outputs.changed == 'true'

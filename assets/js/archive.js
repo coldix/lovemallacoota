@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.getElementById("archive-grid");
   const search = document.getElementById("archive-search");
   const count = document.getElementById("archive-count");
+  const years = document.getElementById("archive-years");
   if (!grid || !search || !count) return;
 
   const appendText = (parent, tag, value, className) => {
@@ -96,9 +97,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     const archive = await response.json();
     const issues = Array.isArray(archive.issues) ? archive.issues : [];
 
+    const yearOf = (issue) => String(issue.publicationDate || "").slice(0, 4);
+    let activeYear = "All";
+
+    // Years come from the catalogue, newest first, so the row grows by itself
+    // as earlier issues are recovered.
+    if (years) {
+      const counts = new Map();
+      for (const issue of issues) {
+        const year = yearOf(issue);
+        if (year) counts.set(year, (counts.get(year) || 0) + 1);
+      }
+      const ordered = [...counts.keys()].sort((a, b) => b.localeCompare(a));
+      for (const year of ["All", ...ordered]) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = year === "All" ? "tag-btn active" : "tag-btn";
+        button.dataset.year = year;
+        button.textContent = year === "All" ? "All years" : `${year} (${counts.get(year)})`;
+        years.append(button);
+      }
+      years.addEventListener("click", (event) => {
+        const button = event.target.closest(".tag-btn");
+        if (!button) return;
+        activeYear = button.dataset.year;
+        for (const other of years.querySelectorAll(".tag-btn")) {
+          other.classList.toggle("active", other === button);
+        }
+        render();
+      });
+    }
+
     const render = () => {
       const query = search.value.trim().toLocaleLowerCase("en-AU");
       const filtered = issues.filter((issue) => {
+        if (activeYear !== "All" && yearOf(issue) !== activeYear) return false;
         const searchable = [
           issue.publication,
           issue.issueNumber,
@@ -117,8 +150,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       grid.replaceChildren(...filtered.map(createIssueCard));
-      count.textContent = `${filtered.length} ${filtered.length === 1 ? "issue" : "issues"} found`;
-      if (!filtered.length) appendText(grid, "p", "No archived issues match that search.", "no-results");
+      const noun = filtered.length === 1 ? "issue" : "issues";
+      count.textContent =
+        activeYear === "All"
+          ? `${filtered.length} ${noun} found`
+          : `${filtered.length} ${noun} from ${activeYear}`;
+      if (!filtered.length) {
+        appendText(grid, "p", "No archived issues match that search.", "no-results");
+      }
     };
 
     search.addEventListener("input", render);

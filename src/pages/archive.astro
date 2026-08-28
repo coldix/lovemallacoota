@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 ---
-<BaseLayout title="Mallacoota Mouth Archive — Love Mallacoota" description="A searchable community archive of The Mallacoota Mouth and Mallacoota's local history." canonicalPath="/archive.html" active="archive" extraScript="/assets/js/archive.js?v=26.08.005">
+<BaseLayout title="Mallacoota Mouth Archive — Love Mallacoota" description="A searchable community archive of The Mallacoota Mouth and Mallacoota's local history." canonicalPath="/archive.html" active="archive" extraScript="/assets/js/archive.js?v=26.08.006">
   <PageHero eyebrow="Community history" prefix="Mallacoota Mouth" accent="Archive" lede="A growing, searchable record of the local newsletter that documented Mallacoota's people, organisations, events and everyday life." />
   <main>
     <section class="glass-card sheen content-block reveal archive-intro">
@@ -17,9 +17,11 @@ import PageHero from "../components/PageHero.astro";
     </section>
     <section class="glass-card sheen content-block reveal" aria-labelledby="archive-catalogue-title">
       <h2 id="archive-catalogue-title" class="section-title">Issue catalogue</h2>
-      <p class="section-sub">Search by issue, date, cover, or the headings pulled from each edition. Full article text and PDF downloads will follow once reuse permission is recorded.</p>
+      <p class="section-sub">Search by issue, date, cover, or the headings pulled from each edition, and narrow the list to a single year.</p>
+      <p class="archive-rights-note">Before any issue is made downloadable we are establishing whether <em>The Mallacoota Mouth</em> is in the public domain or whether permission is required, and from whom. Until that is settled and recorded, the catalogue lists what we hold but no PDF is published. <strong>If you know who holds the rights, or you were involved in producing the Mouth, please <a href="/contact.html?subject=archive">get in touch</a>.</strong></p>
       <div class="filter-bar">
         <div class="search-wrap"><span aria-hidden="true">⌕</span><input type="search" id="archive-search" class="search-input" placeholder="Search issue, date or topic…" aria-label="Search archived issues" autocomplete="off" /></div>
+        <div class="tag-row" id="archive-years" role="group" aria-label="Filter by year"></div>
         <p class="result-count" id="archive-count" aria-live="polite">Loading archive…</p>
       </div>
       <div id="archive-grid" class="archive-grid" aria-live="polite"></div>

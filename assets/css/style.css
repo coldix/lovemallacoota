@@ -701,3 +701,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .form-grid .cf-turnstile {
   min-height: 65px;
 }
+
+/* Archive rights notice — the reason there is no download button yet. */
+.archive-rights-note {
+  margin: 0 auto 1.4rem;
+  max-width: 70ch;
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(36, 200, 232, 0.35);
+  background: rgba(36, 200, 232, 0.08);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  text-align: left;
+}
+.archive-rights-note a { text-decoration: underline; }

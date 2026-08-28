@@ -1,34 +1,34 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.15",
-  "generatedAt": "2026-08-28 21:41:44 AEST (Melbourne)",
+  "version": "v0.16",
+  "generatedAt": "2026-08-28 21:50:36 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
     {
       "path": "404.html",
-      "bytes": 5326,
-      "sha256": "b8d8fa0f830ad6049744abb50af607a3306e3c15a53658e4aab093c89c82bfae"
+      "bytes": 5336,
+      "sha256": "326f8b50d853f05041f03e556555ec80c23e4968cf93572a201e77db5973e88f"
     },
     {
       "path": "accessibility.html",
-      "bytes": 6097,
-      "sha256": "01ea9b7994bdca28ec62029d2362b77b6c0f81886078a18938eeb3c4964705ca"
+      "bytes": 6107,
+      "sha256": "ee6fe22be1a149e845f34ffa999b7af4c2c00aa6f309055177fb613180d9eed7"
     },
     {
       "path": "accom.html",
-      "bytes": 46167,
-      "sha256": "aa989eaace42799bc3f9d35915c1132d3f7d05f7871b07372fcff7ed04752802"
+      "bytes": 46185,
+      "sha256": "a98223a15053fc57391ae8208d1f55ed20a610bcef961479b4ff2feb8ad7737f"
     },
     {
       "path": "activity.html",
-      "bytes": 24250,
-      "sha256": "1b080156c0ac65535c54f0c4f2e620754be6bfcbf4a81e6a55131ff9d8eae14e"
+      "bytes": 24271,
+      "sha256": "f33de86ab465c39174d6478d0f3a2f1ff21ec6607bc81f37fd2432090bfe15d1"
     },
     {
       "path": "archive.html",
-      "bytes": 7827,
-      "sha256": "087720e0d7191edded3731cc5ff6329dd7a15e82ead18d12cc81ccdfb05f901f"
+      "bytes": 7847,
+      "sha256": "c1050345d8d5aee21e4425109f46dac45a8f65833690dc73643c854503d4f145"
     },
     {
       "path": "assets/css/adnet.css",
@@ -37,8 +37,8 @@
     },
     {
       "path": "assets/css/style.css",
-      "bytes": 41517,
-      "sha256": "b368c3cb8041fe2a08efcb2616a49fe0a87f050f0bf202ec26f6c008a7d9fc03"
+      "bytes": 42856,
+      "sha256": "0a365021d8874de18191380c532dd5a9349007821f276ee865f5027e1d5960e1"
     },
     {
       "path": "assets/icons/android-chrome-192x192.png",
@@ -82,18 +82,18 @@
     },
     {
       "path": "calendar.html",
-      "bytes": 6295,
-      "sha256": "00c8b8c29919f153040348da4ed61c68c25483aed8b20f366a1d8043f0c7e19f"
+      "bytes": 6316,
+      "sha256": "0db8f4cb75f1a00c15c0e15c000d0824294e78a5801cc9a02f62ff010c3d8765"
     },
     {
       "path": "contact.html",
-      "bytes": 9710,
-      "sha256": "a41d5b8958baf3991008479bf8e6eaed71ff8bdc9eb5e3d8ac55c3c9ff4e9b6c"
+      "bytes": 9730,
+      "sha256": "d4486c346ece0b511336a770db9b79c79315fb289edd89a5c8a9a43228ccb352"
     },
     {
       "path": "corrections.html",
-      "bytes": 6292,
-      "sha256": "feec97cd0464ba9f6f1067d52d2395ceea1713b7ec56c117e4a91dc4cfa0f38b"
+      "bytes": 6302,
+      "sha256": "b4fc3d81aa76ebcc7ec9002cd626e13acb27cd561b4ad17804288b42f7eea7e7"
     },
     {
       "path": "data/archive-index.json",
@@ -117,23 +117,23 @@
     },
     {
       "path": "edition.html",
-      "bytes": 15080,
-      "sha256": "5bf0f69b5ab1c7fc5a290080ef6b5a4125124cc5bc0efaded60106822b744f35"
+      "bytes": 15100,
+      "sha256": "bca39dd05a57125a3f236efd0777fc275c84b7a4ff0a3d1f58a74ce9cafdc358"
     },
     {
       "path": "edition/2026-w35.html",
-      "bytes": 15050,
-      "sha256": "1648adc64832c6349111cf49d12cdde627c9d82c4f047b00b316e21d2e169dff"
+      "bytes": 15070,
+      "sha256": "fca2e24bc4519966124f939f11ea09a030c1b6b6c7fad40b40d21650706dc571"
     },
     {
       "path": "editorial-policy.html",
-      "bytes": 6476,
-      "sha256": "778ddc53878be9d8636721dd57cdbeb1f61fa4164f6cc10c6efcc8378fbaf071"
+      "bytes": 6486,
+      "sha256": "237613a133e80f65fe696e25bd28c36c5530b45824afac67b9421a11c751e9bd"
     },
     {
       "path": "emergency.html",
-      "bytes": 6575,
-      "sha256": "674040ad737a9eec631cc69ac1f66c06a17c7c6d757108a905624763b08e1cdb"
+      "bytes": 6585,
+      "sha256": "ba9775e8e039cdc301bdaf8e3748926a5c71f8d81bbb5ec7d43ab51e3dc3f8f8"
     },
     {
       "path": "favicon.ico",
@@ -142,8 +142,8 @@
     },
     {
       "path": "food.html",
-      "bytes": 38390,
-      "sha256": "e6db28668992741017268ba8a2764f70ede9e566bc241dcae11fdc4b75334aab"
+      "bytes": 38407,
+      "sha256": "7d903aa8384f89cf49457172f8eb3c0d764837eec84aa6685e9a18ea2abdceb5"
     },
     {
       "path": "images/background-01.webp",
@@ -202,8 +202,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 10985,
-      "sha256": "f9797437b7967523c3143dd476b9fa1ed693a6864fc7f117711a044b55f6939c"
+      "bytes": 10995,
+      "sha256": "7c0e2e0ef3f2c6a9621b2eb30bd5afd8f6f38a572220de334e99ec130e4bac62"
     },
     {
       "path": "llms.txt",
@@ -212,8 +212,8 @@
     },
     {
       "path": "privacy.html",
-      "bytes": 6408,
-      "sha256": "1d8c697ce75df4d33bb020a00b648e07a0df7da9219b4fe9e9fd301e5f398c3d"
+      "bytes": 6418,
+      "sha256": "515e27f82a5157f4f270d45be1bd6a7438a94df104235645d2ad926d254089ef"
     },
     {
       "path": "robots.txt",
@@ -232,8 +232,8 @@
     },
     {
       "path": "terms.html",
-      "bytes": 6537,
-      "sha256": "d9aa4e0ff06545b533ef49a0c204f73c0669b3c6ff5565d5d5801398fa2a02e9"
+      "bytes": 6547,
+      "sha256": "a1c873535393d7ae28424a26d710c714fe45f5f7aaac031cb2a78e4cd4288fa4"
     }
   ]
 }

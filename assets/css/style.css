@@ -773,7 +773,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 26mm;
+    bottom: 32mm;
     padding: 10mm 16mm 8mm;
     background: linear-gradient(to top, rgba(6, 18, 30, 0.88), rgba(6, 18, 30, 0.72) 62%, rgba(6, 18, 30, 0));
     text-align: left;
@@ -801,7 +801,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     position: absolute;
     left: 16mm;
     right: 16mm;
-    bottom: 12mm;
+    /* Clear of the running footer, which prints on the cover too. */
+    bottom: 20mm;
     margin: 0;
     font-size: 8.5pt;
     color: rgba(255, 255, 255, 0.85);

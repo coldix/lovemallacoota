@@ -749,7 +749,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   @page cover { margin: 0; }
 
   .edition-cover {
-    display: block;
+    display: block !important;
     page: cover;
     break-after: page;
     position: relative;
@@ -809,6 +809,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
   .site-nav, .site-footer, .bg-field, .bg-grid, .caustics, .motes,
   .edition-actions, .ad-row-wrap, .edition-web-only { display: none !important; }
+
+  html, body, .page-wrapper, main, section, .content-block {
+    background: none !important;
+    background-color: transparent !important;
+  }
+  .edition-cover, .edition-cover-mast { background-color: initial !important; }
+  .edition-cover-mast {
+    background: linear-gradient(to top, rgba(6, 18, 30, 0.88), rgba(6, 18, 30, 0.72) 62%, rgba(6, 18, 30, 0)) !important;
+  }
+  /* Contents pills are a screen device; on paper they are boxes around words. */
+  .edition-toc-section {
+    background: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+    font-size: 11pt;
+    text-decoration: underline;
+  }
+  .edition-link-card { background: none !important; border-color: #ccc !important; }
 
   /* Cards are a screen device. On paper they are boxes around every paragraph. */
   .glass-card,

@@ -34,18 +34,23 @@ jobs:
       - name: Close the week and open the next
         run: node tools/roll-edition.mjs
 
-      - name: Build the new week's automatic sections
-        run: node tools/refresh-weekly.mjs
-
-      - name: Stop here if nothing changed
+      # Only data/editions is evidence that a week actually closed. data/weekly
+      # carries a generation timestamp and so always differs, which would make
+      # every run look like a roll.
+      - name: Stop here unless a week actually closed
         id: changed
         run: |
-          if git diff --quiet -- data/editions data/weekly; then
+          if git diff --quiet -- data/editions; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "Nothing to close today."
+            echo "No week closed today."
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --name-only -- data/editions
           fi
+
+      - name: Build the new week's automatic sections
+        if: steps.changed.outputs.changed == 'true'
+        run: node tools/refresh-weekly.mjs
 
       # Closing the week is a release: the edition is final and gets a version.
       - name: Stamp the release

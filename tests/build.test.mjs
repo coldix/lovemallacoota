@@ -2,6 +2,12 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { loadListings } from "../src/lib/listings.mjs";
+
+/** Astro escapes these when it renders text, so the test has to match. */
+const escapeEntities = (value) =>
+  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
 const generatedPages = [
   "index.html",
   "food.html",
@@ -29,4 +35,63 @@ test("Astro produces every public route with canonical metadata", async () => {
 
 test("private archive source material is excluded from the public build", async () => {
   await assert.rejects(access(new URL("../dist/docs/Edition 1771 18th June 2020 Electronic Version.pdf", import.meta.url)));
+});
+
+const directoryPages = [
+  { page: "food.html", files: ["listings_food.json"] },
+  { page: "accom.html", files: ["listings_accom.json"] },
+  { page: "activity.html", files: ["listings_do.json"] },
+];
+
+test("directory pages carry every listing in the static HTML", async () => {
+  for (const { page, files } of directoryPages) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    const businesses = loadListings(files);
+    assert.ok(businesses.length > 0, `${page} has no listing data`);
+    for (const business of businesses) {
+      assert.ok(
+        html.includes(escapeEntities(business.business_name)),
+        `${page} is missing ${business.business_name} — it must not depend on client-side rendering`
+      );
+    }
+    assert.match(html, /Showing \d+ of \d+ places/);
+  }
+});
+
+test("LocalBusiness structured data is rendered at build time", async () => {
+  for (const { page, files } of directoryPages) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+    const collection = blocks
+      .map((match) => JSON.parse(match[1]))
+      .find((schema) => schema["@type"] === "CollectionPage");
+    assert.ok(collection, `${page} has no CollectionPage JSON-LD in the HTML`);
+    assert.equal(
+      collection.mainEntity.itemListElement.length,
+      loadListings(files).length
+    );
+  }
+});
+
+test("every image the built pages reference is actually deployed", async () => {
+  const pages = [...generatedPages];
+  const missing = [];
+  for (const page of pages) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    const referenced = new Set();
+    for (const match of html.matchAll(/(?:src|href)="(\/[^"]+\.(?:webp|jpg|jpeg|png|svg|ico))"/g)) {
+      referenced.add(match[1]);
+    }
+    for (const match of html.matchAll(/"image":\s*"https:\/\/lovemallacoota\.au([^"]+)"/g)) {
+      referenced.add(match[1]);
+    }
+    for (const url of referenced) {
+      try {
+        await access(new URL(`../dist${url}`, import.meta.url));
+      } catch {
+        missing.push(`${page} → ${url}`);
+      }
+    }
+  }
+  assert.deepEqual(missing, [], `referenced images are not in the build:\n${missing.join("\n")}`);
 });

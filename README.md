@@ -86,6 +86,33 @@ node tools/update-version.mjs --set=v0.01
 
 The footer reads this manifest and displays the current version automatically.
 
+## Contact form
+
+The suggest-an-update form posts to `/api/submit` in the Worker
+([`src/contact.ts`](src/contact.ts)). Every submission must clear a Turnstile
+challenge that is verified server side, is rate limited to five per minute per
+IP, and is then emailed through the Cloudflare Email Sending binding. No sending
+credential and no third-party script is exposed to the browser.
+
+Setup, once per environment:
+
+```sh
+npx wrangler email sending enable lovemallacoota.au
+npx wrangler secret put TURNSTILE_SECRET_KEY
+npx wrangler secret put TURNSTILE_SECRET_KEY --env preview
+```
+
+Put the matching Turnstile **site** key in `.env` as
+`PUBLIC_TURNSTILE_SITE_KEY` (see [`.env.example`](.env.example)). Without it the
+build falls back to Cloudflare's always-passes test key, which is correct for
+local development and wrong in production. The recipient and sender addresses
+are the `CONTACT_TO` and `CONTACT_FROM` vars in `wrangler.jsonc`.
+
+## Licence
+
+Code is MIT ([`LICENSE`](LICENSE)). Original content is CC BY 4.0; submitted and
+archived material is not. See [`CONTENT-LICENCE.md`](CONTENT-LICENCE.md).
+
 ## GitHub
 
 The expected remote is:

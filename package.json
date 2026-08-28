@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "astro build && node tools/build-static.mjs",
+    "check:images": "node tools/check-images.mjs",
     "astro": "astro",
     "version:site": "pnpm run build && node tools/update-version.mjs",
     "dev": "pnpm run build && wrangler dev",

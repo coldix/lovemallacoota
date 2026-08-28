@@ -88,3 +88,12 @@ test("serves the Astro home page asset at the site root", async () => {
   assert.equal(response.status, 200);
   assert.equal(await response.text(), "asset:/index.html");
 });
+
+test("redirects /index.html to the site root so only one URL serves the home page", async () => {
+  const response = await worker.fetch(
+    new Request("https://lovemallacoota.au/index.html?ref=old"),
+    env
+  );
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get("Location"), "https://lovemallacoota.au/?ref=old");
+});

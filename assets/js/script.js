@@ -7,9 +7,10 @@
 # Version:     [26.07.001]
 # File Name:   script.js
 # Description: Aurora coastal behaviours — theme toggle, random photo backdrop,
-#              scroll reveals, floating motes, card cursor-glow, directory
-#              rendering with live search + tag filters, home-page stats,
-#              LocalBusiness schema injection, footer version stamp.
+#              scroll reveals, floating motes, card cursor-glow, live search and
+#              tag filtering over the build-time listing cards, home-page stat
+#              count-up, footer version stamp. Listing markup and JSON-LD are
+#              rendered by Astro, not here.
 */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -136,228 +137,57 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =====================================================================
-  // Directory data + rendering
+  // Directory filtering
+  //
+  // Cards and their JSON-LD are rendered by Astro at build time. This only
+  // filters what is already in the page, so the listings are visible to
+  // crawlers and to anyone whose JavaScript never runs.
   // =====================================================================
 
-  const PAGE_DATA = {
-    "food.html": {
-      files: ["data/listings_food.json"],
-      pageTitle: "Eat & Drink in Mallacoota",
-      pageUrl: "https://lovemallacoota.au/food.html",
-    },
-    "accom.html": {
-      files: ["data/listings_accom.json"],
-      pageTitle: "Stay in Mallacoota",
-      pageUrl: "https://lovemallacoota.au/accom.html",
-    },
-    "activity.html": {
-      files: ["data/listings_do.json", "data/listings_other.json"],
-      pageTitle: "Do & See in Mallacoota",
-      pageUrl: "https://lovemallacoota.au/activity.html",
-    },
-  };
-
-  const getPrimaryLink = (b) => {
-    if (Array.isArray(b.links) && b.links.length) {
-      const site = b.links.find((l) => (l.text || "").toLowerCase() === "website") || b.links[0];
-      return site?.url;
-    }
-    if (Array.isArray(b.social_links) && b.social_links.length) return b.social_links[0].url;
-    return null;
-  };
-
-  const formatAddress = (addr) => {
-    if (!addr) return "";
-    return [addr.street, addr.locality].filter(Boolean).join(", ");
-  };
-
-  const escapeHTML = (s) =>
-    String(s).replace(/[&<>"']/g, (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
-    );
-
-  function buildLinksHTML(b) {
-    const links = [];
-    const primary = getPrimaryLink(b);
-    if (primary) {
-      const label =
-        (Array.isArray(b.links) && b.links.find((l) => l.url === primary)?.text) || "Website";
-      links.push(
-        `<a href="${escapeHTML(primary)}" target="_blank" rel="noopener noreferrer">${escapeHTML(label)}</a>`
-      );
-    } else {
-      links.push(
-        `<button type="button" class="suggest-link" data-bname="${escapeHTML(
-          b.business_name || "Business"
-        )}">Suggest Link</button>`
-      );
-    }
-    if (b.geo?.latitude && b.geo?.longitude) {
-      const { latitude: lat, longitude: lng } = b.geo;
-      links.push(
-        `<a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" rel="noopener noreferrer">Map</a>`
-      );
-      links.push(
-        `<a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" target="_blank" rel="noopener noreferrer">Directions</a>`
-      );
-    } else if (b.address) {
-      const q = encodeURIComponent(
-        [b.address.street, b.address.locality, b.address.state, b.address.postcode]
-          .filter(Boolean)
-          .join(", ")
-      );
-      links.push(
-        `<a href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener noreferrer">Map</a>`
-      );
-    }
-    if (b.phone) {
-      links.push(`<a href="tel:${String(b.phone).replace(/\s+/g, "")}">Call</a>`);
-    }
-    if (b.email) {
-      links.push(`<a href="mailto:${escapeHTML(b.email)}">Email</a>`);
-    }
-    return `<div class="links">${links.join("")}</div>`;
-  }
-
-  const createListingCard = (b) => {
-    const card = document.createElement("article");
-    card.className = "listing-card";
-    const addressText = formatAddress(b.address);
-    const tags =
-      Array.isArray(b.category_tags) && b.category_tags.length
-        ? `<div class="chips">${b.category_tags
-            .filter((t) => !/^(food & drink|accommodation|activities)$/i.test(t))
-            .map((t) => `<span class="chip">${escapeHTML(t)}</span>`)
-            .join("")}</div>`
-        : "";
-    const desc = b.description_short || b.description_long || "No description available.";
-    card.innerHTML = `
-      <h3>${escapeHTML(b.business_name || "Unnamed Business")}</h3>
-      ${tags}
-      <p class="desc">${escapeHTML(desc)}</p>
-      ${addressText ? `<p class="addr">📍 ${escapeHTML(addressText)}</p>` : ""}
-      ${buildLinksHTML(b)}
-    `;
-    return card;
-  };
-
-  // --- Listing pages: fetch, filter, render ---
-  async function initListings() {
+  (function initListingFilters() {
     const grid = document.getElementById("listings-grid");
     if (!grid) return;
-    const page = PAGE_DATA[window.location.pathname.split("/").pop()];
-    if (!page) return;
+    const cards = [...grid.querySelectorAll(".listing-card")];
+    if (!cards.length) return;
 
-    let businesses = [];
-    try {
-      const responses = await Promise.all(page.files.map((url) => fetch(url)));
-      const payloads = await Promise.all(
-        responses.map((res) => (res.ok ? res.json() : Promise.resolve([])))
-      );
-      businesses = payloads
-        .flat()
-        .filter(Boolean)
-        .sort((a, b) => (a.business_name || "").localeCompare(b.business_name || ""));
-    } catch (err) {
-      console.error("Error loading listings:", err);
-      grid.innerHTML = '<p class="no-results">Sorry, there was an error loading the listings.</p>';
-      return;
-    }
-
-    if (businesses.length) injectCategorySchema(businesses, page.pageTitle, page.pageUrl);
-
-    // Build tag filter row from data
     const tagRow = document.getElementById("tag-row");
     const searchInput = document.getElementById("listing-search");
     const countEl = document.getElementById("result-count");
+    const emptyEl = document.getElementById("no-results");
     let activeTag = "All";
 
-    const GENERIC = /^(food & drink|accommodation|activities|other)$/i;
-    if (tagRow) {
-      const tagCounts = new Map();
-      businesses.forEach((b) =>
-        (b.category_tags || []).forEach((t) => {
-          if (!GENERIC.test(t)) tagCounts.set(t, (tagCounts.get(t) || 0) + 1);
-        })
-      );
-      const tags = [...tagCounts.entries()]
-        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-        .slice(0, 12)
-        .map(([t]) => t);
-      tagRow.innerHTML = ["All", ...tags]
-        .map(
-          (t) =>
-            `<button type="button" class="tag-btn${t === "All" ? " active" : ""}" data-tag="${escapeHTML(t)}">${escapeHTML(t)}</button>`
-        )
-        .join("");
-      tagRow.addEventListener("click", (e) => {
-        const btn = e.target.closest(".tag-btn");
-        if (!btn) return;
-        activeTag = btn.dataset.tag;
-        tagRow.querySelectorAll(".tag-btn").forEach((b) => b.classList.toggle("active", b === btn));
-        render();
-      });
-    }
-
-    searchInput?.addEventListener("input", render);
-
-    function render() {
+    const render = () => {
       const q = (searchInput?.value || "").trim().toLowerCase();
-      const filtered = businesses.filter((b) => {
-        const tagOK =
-          activeTag === "All" || (b.category_tags || []).some((t) => t === activeTag);
-        if (!tagOK) return false;
-        if (!q) return true;
-        const hay = [
-          b.business_name,
-          b.description_short,
-          b.description_long,
-          ...(b.category_tags || []),
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-        return hay.includes(q);
-      });
-
-      grid.innerHTML = "";
-      if (!filtered.length) {
-        grid.innerHTML = '<p class="no-results">No matches — try a different search or tag.</p>';
-      } else {
-        filtered.forEach((b) => grid.appendChild(createListingCard(b)));
+      let shown = 0;
+      for (const card of cards) {
+        const tags = (card.dataset.tags || "").split("|");
+        const tagOK = activeTag === "All" || tags.includes(activeTag);
+        const searchOK = !q || (card.dataset.search || "").includes(q);
+        const visible = tagOK && searchOK;
+        card.hidden = !visible;
+        if (visible) shown += 1;
       }
-      if (countEl) {
-        countEl.textContent = `Showing ${filtered.length} of ${businesses.length} places`;
-      }
-    }
+      if (emptyEl) emptyEl.hidden = shown > 0;
+      if (countEl) countEl.textContent = `Showing ${shown} of ${cards.length} places`;
+    };
 
+    tagRow?.addEventListener("click", (e) => {
+      const btn = e.target.closest(".tag-btn");
+      if (!btn) return;
+      activeTag = btn.dataset.tag;
+      tagRow.querySelectorAll(".tag-btn").forEach((b) => b.classList.toggle("active", b === btn));
+      render();
+    });
+    searchInput?.addEventListener("input", render);
     render();
-  }
-  initListings();
+  })();
 
-  // --- Home page: live stats from the directory data ---
-  (async function initStats() {
-    const statsRow = document.getElementById("stats-row");
-    if (!statsRow) return;
-    const files = [
-      ["stat-food", ["data/listings_food.json"]],
-      ["stat-stay", ["data/listings_accom.json"]],
-      ["stat-do", ["data/listings_do.json", "data/listings_other.json"]],
-    ];
-    for (const [id, urls] of files) {
-      try {
-        const payloads = await Promise.all(
-          urls.map((u) => fetch(u).then((r) => (r.ok ? r.json() : [])))
-        );
-        const count = payloads.flat().filter(Boolean).length;
-        const el = document.getElementById(id);
-        if (el && count) animateCount(el, count);
-      } catch {
-        /* stat stays as fallback text */
-      }
-    }
-    function animateCount(el, target) {
-      if (reduceMotion) { el.textContent = target; return; }
+  // --- Home page: count up to the build-time totals ---
+  (function initStats() {
+    if (reduceMotion) return;
+    document.querySelectorAll("#stats-row [data-count]").forEach((el) => {
+      const target = Number(el.dataset.count);
+      if (!Number.isFinite(target) || target <= 0) return;
       const t0 = performance.now();
       const dur = 1100;
       const step = (t) => {
@@ -366,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (p < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
-    }
+    });
   })();
 
   // --- Suggest-link handler (delegated) ---
@@ -376,76 +206,4 @@ document.addEventListener("DOMContentLoaded", () => {
     const bname = btn.getAttribute("data-bname") || "Business";
     window.location.href = `contact.html?business=${encodeURIComponent(bname)}&from=${encodeURIComponent(location.href)}`;
   });
-
-  // =====================================================================
-  // Schema.org JSON-LD injection
-  // =====================================================================
-
-  function appendSchema(schema) {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.textContent = JSON.stringify(schema);
-    document.head.appendChild(script);
-  }
-
-  const path = window.location.pathname.split("/").pop();
-  if (path === "" || path === "index.html") {
-    appendSchema({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      url: "https://lovemallacoota.au/",
-      name: "Love Mallacoota",
-      description:
-        "Your local guide to Mallacoota — places to eat, stay, and explore. Curated listings, up-to-date contacts, and videos.",
-    });
-  }
-
-  function injectCategorySchema(items, pageTitle, pageUrl) {
-    const itemListElements = items.map((item, index) => {
-      const heroImage =
-        (item.images || []).find((img) => img.is_hero) || (item.images || [])[0];
-      const businessSchema = {
-        "@type": item.schema_type || "LocalBusiness",
-        name: item.business_name,
-        description: item.description_long || item.description_short,
-        image: heroImage ? `https://lovemallacoota.au${heroImage.url}` : undefined,
-        url: getPrimaryLink(item) || undefined,
-        telephone: item.phone ? String(item.phone).replace(/\s+/g, "") : undefined,
-        email: item.email || undefined,
-        address: item.address
-          ? {
-              "@type": "PostalAddress",
-              streetAddress: item.address.street,
-              addressLocality: item.address.locality,
-              addressRegion: item.address.state,
-              postalCode: item.address.postcode,
-              addressCountry: "AU",
-            }
-          : undefined,
-        geo: item.geo
-          ? {
-              "@type": "GeoCoordinates",
-              latitude: item.geo.latitude,
-              longitude: item.geo.longitude,
-            }
-          : undefined,
-        openingHoursSpecification:
-          item.opening_hours_specification || item.opening_hours || undefined,
-      };
-      Object.keys(businessSchema).forEach(
-        (key) =>
-          (businessSchema[key] === undefined || businessSchema[key] === null) &&
-          delete businessSchema[key]
-      );
-      return { "@type": "ListItem", position: index + 1, item: businessSchema };
-    });
-
-    appendSchema({
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      name: pageTitle,
-      url: pageUrl,
-      mainEntity: { "@type": "ItemList", itemListElement: itemListElements },
-    });
-  }
 });

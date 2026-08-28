@@ -1,6 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "./PageHero.astro";
+import {
+  collectionSchema,
+  displayTags,
+  formatAddress,
+  getPrimaryLink,
+  getPrimaryLinkLabel,
+  loadListings,
+  mapLinks,
+  searchText,
+  tagFilters,
+  telHref,
+} from "../lib/listings.mjs";
 
 interface ExploreLink { href: string; emoji: string; title: string; text: string }
 interface Props {
@@ -13,12 +25,21 @@ interface Props {
   lede: string;
   placeholder: string;
   searchLabel: string;
+  schemaName: string;
+  dataFiles: string[];
   explore: ExploreLink[];
 }
 const props = Astro.props;
+
+// Cards and structured data are built here, at build time, so the directory is
+// visible to crawlers that never run the page script.
+const businesses = loadListings(props.dataFiles);
+const tags = tagFilters(businesses);
+const schema = collectionSchema(businesses, props.schemaName, props.canonicalPath);
 ---
 
 <BaseLayout title={props.title} description={props.description} canonicalPath={props.canonicalPath} active={props.active}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
   <PageHero prefix={props.prefix} accent={props.accent} lede={props.lede} />
   <main>
     <section class="glass-card sheen content-block reveal">
@@ -27,10 +48,53 @@ const props = Astro.props;
           <span aria-hidden="true">⌕</span>
           <input type="search" id="listing-search" class="search-input" placeholder={props.placeholder} aria-label={props.searchLabel} />
         </div>
-        <div class="tag-row" id="tag-row" role="group" aria-label="Filter by category"></div>
-        <p class="result-count" id="result-count" aria-live="polite"></p>
+        <div class="tag-row" id="tag-row" role="group" aria-label="Filter by category">
+          <button type="button" class="tag-btn active" data-tag="All">All</button>
+          {tags.map((tag) => (
+            <button type="button" class="tag-btn" data-tag={tag}>{tag}</button>
+          ))}
+        </div>
+        <p class="result-count" id="result-count" aria-live="polite">
+          Showing {businesses.length} of {businesses.length} places
+        </p>
       </div>
-      <div id="listings-grid" class="listings-grid"></div>
+      <div id="listings-grid" class="listings-grid" data-total={businesses.length}>
+        {businesses.map((business) => {
+          const primary = getPrimaryLink(business);
+          const primaryLabel = getPrimaryLinkLabel(business);
+          const address = formatAddress(business.address);
+          const chips = displayTags(business);
+          return (
+            <article
+              class="listing-card"
+              data-tags={(business.category_tags || []).join("|")}
+              data-search={searchText(business)}
+            >
+              <h3>{business.business_name || "Unnamed Business"}</h3>
+              {chips.length > 0 && (
+                <div class="chips">
+                  {chips.map((tag) => <span class="chip">{tag}</span>)}
+                </div>
+              )}
+              <p class="desc">
+                {business.description_short || business.description_long || "No description available."}
+              </p>
+              {address && <p class="addr">📍 {address}</p>}
+              <div class="links">
+                {primary
+                  ? <a href={primary} target="_blank" rel="noopener noreferrer">{primaryLabel}</a>
+                  : <button type="button" class="suggest-link" data-bname={business.business_name || "Business"}>Suggest Link</button>}
+                {mapLinks(business).map((link) => (
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">{link.text}</a>
+                ))}
+                {business.phone && <a href={telHref(business.phone)}>Call</a>}
+                {business.email && <a href={`mailto:${business.email}`}>Email</a>}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      <p class="no-results" id="no-results" hidden>No matches — try a different search or tag.</p>
     </section>
     <section class="glass-card sheen content-block reveal">
       <h2 class="section-title">Keep Exploring</h2>

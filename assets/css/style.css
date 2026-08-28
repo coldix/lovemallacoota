@@ -675,3 +675,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
     .reveal { opacity: 1; transform: none; }
 }
+
+/* Honeypot field on the contact form — off-screen for people, present for bots. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Turnstile widget sits in the form grid like any other field. */
+.form-grid .cf-turnstile {
+  min-height: 65px;
+}

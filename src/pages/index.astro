@@ -1,6 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import { SITE_ORIGIN, loadListings } from "../lib/listings.mjs";
+
+// Counted at build time so the numbers are in the HTML, not fetched afterwards.
+const foodCount = loadListings(["listings_food.json"]).length;
+const stayCount = loadListings(["listings_accom.json"]).length;
+const doCount = loadListings(["listings_do.json"]).length;
+
+const siteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  url: `${SITE_ORIGIN}/`,
+  name: "Love Mallacoota",
+  description:
+    "Your local guide to Mallacoota — places to eat, stay, and explore. Curated listings, up-to-date contacts, and videos.",
+};
 ---
 
 <BaseLayout
@@ -9,6 +24,7 @@ import PageHero from "../components/PageHero.astro";
   canonicalPath="/"
   showAds={true}
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(siteSchema)} is:inline />
   <PageHero
     prefix="Fall in love with"
     accent="Mallacoota"
@@ -21,9 +37,9 @@ import PageHero from "../components/PageHero.astro";
       <a href="/activity.html" class="btn btn-ghost">Do &amp; See</a>
     </div>
     <div class="stats-row" id="stats-row">
-      <div class="stat"><b id="stat-food">—</b><span>Places to eat</span></div>
-      <div class="stat"><b id="stat-stay">—</b><span>Places to stay</span></div>
-      <div class="stat"><b id="stat-do">—</b><span>Things to do</span></div>
+      <div class="stat"><b id="stat-food" data-count={foodCount}>{foodCount}</b><span>Places to eat</span></div>
+      <div class="stat"><b id="stat-stay" data-count={stayCount}>{stayCount}</b><span>Places to stay</span></div>
+      <div class="stat"><b id="stat-do" data-count={doCount}>{doCount}</b><span>Things to do</span></div>
     </div>
   </PageHero>
 

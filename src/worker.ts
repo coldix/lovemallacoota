@@ -1,3 +1,5 @@
+import { handleContactSubmit } from "./contact.ts";
+
 const CANONICAL_HOST = "lovemallacoota.au";
 
 const REDIRECT_HOSTS = new Set([
@@ -9,6 +11,8 @@ const REDIRECT_HOSTS = new Set([
 ]);
 
 const MOVED_PATHS = new Map([
+  // /index.html and / served the same page, which is duplicate content.
+  ["/index.html", "/"],
   ["/eat-drink", "/food.html"],
   ["/stay", "/accom.html"],
   ["/do-see", "/activity.html"],
@@ -70,6 +74,10 @@ export default {
 
     if (REDIRECT_HOSTS.has(url.hostname) || movedPath) {
       return redirectToCanonical(url);
+    }
+
+    if (url.pathname === "/api/submit") {
+      return applySecurityHeaders(await handleContactSubmit(request, env));
     }
 
     const assetRequest = url.pathname === "/"

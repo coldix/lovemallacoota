@@ -306,3 +306,28 @@ Before launch:
 | October | Automatic draft digests and authorised archive pilot |
 
 The first newsletter should be manually approved. Once several editions have produced reliable results, switch to automatic draft creation — but retain a human “send” decision until the editorial process is proven.
+
+---
+
+## v0.08 — Fix what is broken (28 August 2026)
+
+Worked from the review in [`NEXTSTEPS.md`](NEXTSTEPS.md).
+
+- Listings and their `LocalBusiness` JSON-LD are rendered by Astro at build time
+  (`src/lib/listings.mjs`, `src/components/DirectoryPage.astro`). The page script
+  now only filters cards that are already in the HTML, so the directory is
+  visible to crawlers and to anyone whose JavaScript does not run.
+- Home page counts and the `WebSite` JSON-LD are also build-time.
+- The contact form posts to a Worker route, `/api/submit`, behind Turnstile and a
+  rate limit, and sends through the Cloudflare Email Sending binding.
+- `listings_other.json` folded into `listings_do.json`; the bare-object file is
+  gone.
+- `/index.html` now redirects to `/`.
+- `LICENSE` (MIT) and `CONTENT-LICENCE.md` added; the footer no longer claims
+  "all rights reserved" against a mission that promises the opposite.
+- Build test fails if a page references an image the build does not contain.
+
+Outstanding from v0.08: the 42 listing photographs referenced by the data do not
+exist in the repository, on either live site, or in the Internet Archive. They
+are omitted from the structured data until the files turn up. `pnpm run
+check:images` lists them.

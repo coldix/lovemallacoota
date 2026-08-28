@@ -331,3 +331,17 @@ Outstanding from v0.08: the 42 listing photographs referenced by the data do not
 exist in the repository, on either live site, or in the Internet Archive. They
 are omitted from the structured data until the files turn up. `pnpm run
 check:images` lists them.
+
+
+## Mouth archive catalogue (28 August 2026)
+
+Landed alongside v0.08, from work SuperGrok did on the newsletter PDFs: 37 issues
+catalogued with cover captions and page-level contents, an extraction tool, and the
+archive page rendering both. Every issue is `review_required` with no PDF published.
+See [`ARCHIVE.md`](ARCHIVE.md) for the state, how to rebuild the metadata, and what is
+still outstanding.
+
+The change was committed inside `a9c6982`, whose message describes only the Turnstile
+CI fix. It was swept in by a `git add -A` that should have been a narrower stage. The
+code is sound and deployed; the commit history is simply misleading about where it
+came from.

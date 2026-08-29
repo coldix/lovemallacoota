@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.28",
-  "generatedAt": "2026-08-29 19:59:37 AEST (Melbourne)",
+  "version": "v0.29",
+  "generatedAt": "2026-08-29 20:46:27 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -117,13 +117,13 @@
     },
     {
       "path": "edition.html",
-      "bytes": 26384,
-      "sha256": "7798ce32f35f9115f65f93ad9d72dac77182ec8da7b40b9ab1840efe4b317efb"
+      "bytes": 29421,
+      "sha256": "93a23c5aa35edcfcbd00c75b568a788f87224137ab300cbabd37105535cc2ce8"
     },
     {
       "path": "edition/2026-w35.html",
-      "bytes": 26495,
-      "sha256": "71dad5854d254b621fa29e2d98679025af74275bd1624d10db51c0c598197209"
+      "bytes": 29532,
+      "sha256": "bbe2bb378dce668fbf3803c379ee3f6bf8d97a55b173dc03bab7b2f727d253ad"
     },
     {
       "path": "editorial-policy.html",
@@ -144,6 +144,21 @@
       "path": "food.html",
       "bytes": 38490,
       "sha256": "b96093f2db43b0485cb8f8ae969e4193f1e8cbd3d11f7ec9e2b4647614c0bbfb"
+    },
+    {
+      "path": "images/articles/w35-community-shirley-90-2.webp",
+      "bytes": 519206,
+      "sha256": "4aed0650f69d1ffe6da47473c60c84c72ec273028aee8c20a34673c14be24330"
+    },
+    {
+      "path": "images/articles/w35-community-shirley-90-3.webp",
+      "bytes": 459392,
+      "sha256": "7cc5ce3e57814b492f92c724947655b74c0cf8046cc6161db09a00432be0e5e4"
+    },
+    {
+      "path": "images/articles/w35-community-shirley-90.webp",
+      "bytes": 586686,
+      "sha256": "f13f1e75e8acf5cf0814ffee2df5bcd1d200c256b611420b3610a4209f6be676"
     },
     {
       "path": "images/articles/w35-local-frank-stokes-2.webp",
@@ -184,6 +199,46 @@
       "path": "images/background-06.webp",
       "bytes": 447018,
       "sha256": "8e68085c69286689bfd43d65c5fd969c72745c222585ebba9200b1b6187c539d"
+    },
+    {
+      "path": "images/bank/bastion-path.webp",
+      "bytes": 652084,
+      "sha256": "3a8efdc595712260136e7a8f2b6a9bc4b1535ccf27285cbda8a10d1c3e03fa0e"
+    },
+    {
+      "path": "images/bank/bastion-point.webp",
+      "bytes": 659212,
+      "sha256": "3bff64d71b7fb7f16168d3bc74f4b468839dd9a87bf44e73d60388a602f7fbec"
+    },
+    {
+      "path": "images/bank/betka-beach.webp",
+      "bytes": 390328,
+      "sha256": "86976bee5eb5dc41e5153e484093a2684073b6489aaa15fed21177cdf41589bd"
+    },
+    {
+      "path": "images/bank/karbeethong-lodge.webp",
+      "bytes": 846336,
+      "sha256": "a6f641457e7040b057ce46493c052a5e9b8d105e165290feda6a1bf263c6d143"
+    },
+    {
+      "path": "images/bank/karbeethong-view.webp",
+      "bytes": 634482,
+      "sha256": "01a72c6f9144bc75754de3933bd9534a51285ff3a16e2f8be3731cdef2a8d7e8"
+    },
+    {
+      "path": "images/bank/mallacoota-airport.webp",
+      "bytes": 347290,
+      "sha256": "f2965ada812477c74acc23b5e27bb55860eb1028dcc66d693c16ae14663918aa"
+    },
+    {
+      "path": "images/bank/mallacoota-town.webp",
+      "bytes": 554430,
+      "sha256": "b6a55ee1ba8f44dbb9d1a8f50548ecbaaead7ec7b3a1f77972b42c61342c3709"
+    },
+    {
+      "path": "images/bank/the-mouth.webp",
+      "bytes": 347670,
+      "sha256": "983ce14b86b494789e22eff2f8b11b8d81e3ad7d8300badb0574a7906281a278"
     },
     {
       "path": "images/covers/2026-w35-print.jpg",

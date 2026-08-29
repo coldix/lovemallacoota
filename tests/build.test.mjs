@@ -323,3 +323,15 @@ test("the classifieds and family notices are offered to contributors", async () 
   assert.ok(html.includes("Classifieds"), "classifieds is not on the submit form");
   assert.ok(html.includes("Births, Deaths and Marriages"), "family notices are not on the form");
 });
+
+test("every photograph in the bank has a caption, a credit and a file", async () => {
+  const bank = JSON.parse(
+    await readFile(new URL("../data/photo-bank.json", import.meta.url), "utf8")
+  );
+  for (const photo of bank) {
+    assert.ok(photo.caption, `${photo.slug}: no caption`);
+    assert.ok(photo.credit, `${photo.slug}: no credit`);
+    assert.ok(photo.alt, `${photo.slug}: nothing for a screen reader to say`);
+    await access(new URL(`../dist${photo.url}`, import.meta.url));
+  }
+});

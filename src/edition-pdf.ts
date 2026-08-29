@@ -111,7 +111,7 @@ export async function handleEditionPdf(
       await tab.evaluate(async () => {
         const page = globalThis as unknown as {
           document: {
-            querySelectorAll: (selector: string) => ArrayLike<Record<string, any>>;
+            querySelectorAll: (selector: string) => Iterable<Record<string, any>>;
             fonts?: { ready: Promise<unknown> };
           };
         };

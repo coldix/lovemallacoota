@@ -70,6 +70,9 @@ function redirectToCanonical(url: URL): Response {
  *   ads.oze.net.au      the house ad tag, its decisions and its artwork
  *   challenges.…        Turnstile on the contact form
  *   YouTube, Maps       the two embeds on the home page
+ *   kuula.co            the weekly three-sixty view
+ *   cloudflareinsights  the analytics beacon Cloudflare injects at the edge,
+ *                       which the policy blocked until it was named here
  *   calendar.google.com the What's On embed
  * 'unsafe-inline' for scripts is regrettable and load-bearing: the theme
  * flash-guard, the analytics config and the page-level handlers are all inline
@@ -78,11 +81,11 @@ function redirectToCanonical(url: URL): Response {
  */
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://ads.oze.net.au https://challenges.cloudflare.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://ads.oze.net.au https://challenges.cloudflare.com https://static.cloudflareinsights.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https://ads.oze.net.au https://www.google-analytics.com",
-  "connect-src 'self' https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com",
+  "connect-src 'self' https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://static.cloudflareinsights.com",
   "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://calendar.google.com https://challenges.cloudflare.com https://kuula.co",
   "form-action 'self'",
   "base-uri 'self'",

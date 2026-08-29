@@ -115,38 +115,61 @@ async function fetchForecast(week) {
 }
 
 /**
- * Tide predictions for the inlet entrance. There is no free authoritative
- * Australian source we may republish, so this runs only when a WorldTides key
- * is configured; without one the edition keeps linking to the Bureau rather
- * than printing numbers nobody checked.
+ * Sea level through the week, from Open-Meteo's marine model. This is free,
+ * openly licensed and needs no key — which is why the edition can carry a tide
+ * curve at all.
+ *
+ * What it is not: a navigational tide table. The heights are modelled against
+ * mean sea level rather than chart datum, at a model cell offshore rather than
+ * at the inlet entrance, so the shape of the week is right and the absolute
+ * numbers are indicative. The edition says so, and still links to the official
+ * predictions.
  */
 async function fetchTides(week) {
-  const key = process.env.WORLDTIDES_API_KEY;
-  if (!key) return null;
-
   const monday = mondayOf(week);
   const start = monday.toISOString().slice(0, 10);
+  const end = new Date(monday.getTime() + 6 * 86400000).toISOString().slice(0, 10);
   const url =
-    "https://www.worldtides.info/api/v3?extremes" +
-    `&lat=${MALLACOOTA.latitude}&lon=${MALLACOOTA.longitude}` +
-    `&start=${start}&days=7&datum=LAT&key=${key}`;
+    "https://marine-api.open-meteo.com/v1/marine?" +
+    `latitude=${MALLACOOTA.latitude}&longitude=${MALLACOOTA.longitude}` +
+    "&hourly=sea_level_height_msl&timezone=Australia%2FMelbourne" +
+    `&start_date=${start}&end_date=${end}`;
 
   const response = await fetch(url);
-  if (!response.ok) throw new Error(`WorldTides returned ${response.status}`);
+  if (!response.ok) throw new Error(`Open-Meteo marine returned ${response.status}`);
   const payload = await response.json();
-  if (!payload.extremes?.length) throw new Error("WorldTides returned no extremes");
+  const times = payload.hourly?.time || [];
+  const heights = payload.hourly?.sea_level_height_msl || [];
+
+  const series = times
+    .map((time, index) => ({ time, height: heights[index] }))
+    .filter((point) => typeof point.height === "number");
+  if (series.length < 24) throw new Error("Open-Meteo marine returned too little data");
+
+  // A high or a low is an hour higher, or lower, than both its neighbours.
+  const extremes = [];
+  for (let i = 1; i < series.length - 1; i += 1) {
+    const [before, at, after] = [series[i - 1], series[i], series[i + 1]];
+    const isHigh = at.height > before.height && at.height >= after.height;
+    const isLow = at.height < before.height && at.height <= after.height;
+    if (!isHigh && !isLow) continue;
+    extremes.push({
+      time: at.time,
+      type: isHigh ? "High" : "Low",
+      heightM: Math.round(at.height * 100) / 100,
+    });
+  }
 
   return {
-    source: "WorldTides",
-    sourceUrl: "https://www.worldtides.info/",
-    station: payload.station || "nearest station to the inlet entrance",
-    datum: payload.responseDatum || "LAT",
+    source: "Open-Meteo marine forecast",
+    sourceUrl: "https://open-meteo.com/",
+    licence: "CC BY 4.0",
+    station: `model point near ${payload.latitude.toFixed(2)}, ${payload.longitude.toFixed(2)}`,
+    datum: "mean sea level",
+    modelled: true,
     fetchedAt: new Date().toISOString(),
-    extremes: payload.extremes.map((extreme) => ({
-      time: extreme.date,
-      type: extreme.type,
-      heightM: Math.round(extreme.height * 100) / 100,
-    })),
+    extremes,
+    series: series.map((point) => ({ time: point.time, heightM: Math.round(point.height * 100) / 100 })),
   };
 }
 

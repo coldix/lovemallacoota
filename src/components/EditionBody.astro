@@ -245,8 +245,27 @@ const statusLabel =
             ))}
           </tbody>
         </table>
+        {section.auto.moon && (
+          <table class="forecast moon-table">
+            <thead>
+              <tr><th scope="col">Day</th><th scope="col">Moon</th><th scope="col">Lit</th><th scope="col">Range</th></tr>
+            </thead>
+            <tbody>
+              {section.auto.moon.map((day) => (
+                <tr>
+                  <th scope="row">{dayName(day.date)}</th>
+                  <td><span class="moon-symbol" aria-hidden="true">{day.symbol}</span> {day.name}</td>
+                  <td>{day.illumination}%</td>
+                  <td>{day.range === "spring" ? "Spring — bigger" : day.range === "neap" ? "Neap — smaller" : "—"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
         <p class="edition-source">
-          Predictions from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a> for {section.auto.data.station}, datum {section.auto.data.datum}. Predictions only — they do not account for wind or barometric pressure, and the bar can differ from the tide. Check conditions before crossing.
+          Sea level from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a>, {section.auto.data.licence}, for a {section.auto.data.station}.
+          <strong> Modelled against {section.auto.data.datum}, not chart datum, and not at the inlet entrance</strong> — the shape of the week is right, the absolute heights are indicative. It takes no account of wind or barometric pressure, and the bar can behave differently again.
+          For navigation use the official predictions: <a href={section.auto.source.url} rel="noopener noreferrer" target="_blank">WillyWeather</a> or the <a href={section.auto.source.official} rel="noopener noreferrer" target="_blank">Bureau of Meteorology</a>. Check conditions before crossing.
         </p>
       </div>
     )}

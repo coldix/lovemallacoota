@@ -91,7 +91,7 @@ function autoEntry(section) {
   if (!auto) return null;
   if (auto.type === "weather") return `Seven-day forecast to ${auto.data.days.at(-1).date}`;
   if (auto.type === "tides") return "The week's moon, and where to find the times";
-  if (auto.type === "tide-table") return `Highs and lows, ${auto.data.station}`;
+  if (auto.type === "tide-table") return `${auto.data.extremes.length} highs and lows, and the moon`;
   if (auto.type === "diary") return `${auto.data.length} ${auto.data.length === 1 ? "event" : "events"} this week`;
   if (auto.type === "video") return auto.data.title || "This week's video";
   if (auto.type === "trail") return auto.data.name;
@@ -198,9 +198,9 @@ export function editionSections(edition) {
     if (section.id === "weather" && weekly?.weather?.days?.length) auto = { type: "weather", data: weekly.weather };
     // Real predictions when we have licensed them, the official link otherwise.
     if (section.id === "tides") {
-      auto = weekly?.tides
-        ? { type: "tide-table", data: weekly.tides, moon: weekly.moon }
-        : { type: "tides", data: TIDE_SOURCE, moon: weekly.moon };
+      auto = weekly?.tides?.extremes?.length
+        ? { type: "tide-table", data: weekly.tides, moon: weekly?.moon, source: TIDE_SOURCE }
+        : { type: "tides", data: TIDE_SOURCE, moon: weekly?.moon };
     }
     if (section.id === "diary" && weekly?.events?.length) auto = { type: "diary", data: weekly.events };
     if (section.id === "video" && edition.video) auto = { type: "video", data: edition.video };

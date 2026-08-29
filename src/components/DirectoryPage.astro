@@ -2,19 +2,24 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "./PageHero.astro";
 import {
+  canClaim,
   collectionSchema,
   displayTags,
   formatAddress,
   getPrimaryLink,
   getPrimaryLinkLabel,
+  isOfficialEntity,
+  listingPagePath,
   listingPhoto,
-  loadListings,
   mapLinks,
+  photoAbsoluteUrl,
   searchText,
+  sectionEntities,
   tagFilters,
   telHref,
   verificationLine,
-} from "../lib/listings.mjs";
+} from "../lib/directory.mjs";
+import { ENTITY_TYPES } from "../lib/directory-model.mjs";
 
 interface ExploreLink { href: string; emoji: string; title: string; text: string }
 interface Props {
@@ -28,16 +33,18 @@ interface Props {
   placeholder: string;
   searchLabel: string;
   schemaName: string;
-  dataFiles: string[];
+  section: string;
+  noun?: string;
   explore: ExploreLink[];
 }
 const props = Astro.props;
+const noun = props.noun || "listings";
 
-// Cards and structured data are built here, at build time, so the directory is
-// visible to crawlers that never run the page script.
-const businesses = loadListings(props.dataFiles);
-const tags = tagFilters(businesses);
-const schema = collectionSchema(businesses, props.schemaName, props.canonicalPath);
+const entities = sectionEntities(props.section);
+const tags = tagFilters(entities);
+const schema = collectionSchema(entities, props.schemaName, props.canonicalPath, (entity) =>
+  photoAbsoluteUrl(entity)
+);
 ---
 
 <BaseLayout title={props.title} description={props.description} canonicalPath={props.canonicalPath} active={props.active} showAds={true}>
@@ -45,6 +52,10 @@ const schema = collectionSchema(businesses, props.schemaName, props.canonicalPat
   <PageHero prefix={props.prefix} accent={props.accent} lede={props.lede} />
   <main>
     <section class="glass-card sheen content-block reveal">
+      <p class="directory-add-banner">
+        <a class="btn btn-primary" href="/add-listing.html">Add your listing — free</a>
+        <span>Clubs, trades, shops and services maintain their own information. Love Mallacoota checks it first.</span>
+      </p>
       <div class="filter-bar">
         <div class="search-wrap">
           <span aria-hidden="true">⌕</span>
@@ -57,56 +68,74 @@ const schema = collectionSchema(businesses, props.schemaName, props.canonicalPat
           ))}
         </div>
         <p class="result-count" id="result-count" aria-live="polite">
-          Showing {businesses.length} of {businesses.length} places
+          Showing {entities.length} of {entities.length} {noun}
         </p>
       </div>
-      <div id="listings-grid" class="listings-grid" data-total={businesses.length}>
-        {businesses.map((business) => {
-          const primary = getPrimaryLink(business);
-          const primaryLabel = getPrimaryLinkLabel(business);
-          const address = formatAddress(business.address);
-          const chips = displayTags(business);
-          const photo = listingPhoto(business);
-          const verification = verificationLine(business);
+      <div id="listings-grid" class="listings-grid" data-total={entities.length} data-noun={noun}>
+        {entities.map((entity) => {
+          const primary = getPrimaryLink(entity);
+          const primaryLabel = getPrimaryLinkLabel(entity);
+          const address = formatAddress(entity.address);
+          const chips = displayTags(entity);
+          const photo = listingPhoto(entity);
+          const verification = verificationLine(entity);
+          const typeLabel = ENTITY_TYPES[entity.entityType]?.label;
+          const official = isOfficialEntity(entity);
+          const href = listingPagePath(entity);
           return (
             <article
-              class="listing-card"
-              data-tags={(business.category_tags || []).join("|")}
-              data-search={searchText(business)}
+              class:list={["listing-card", { official }]}
+              data-tags={(entity.categories || []).join("|")}
+              data-search={searchText(entity)}
+              data-type={entity.entityType}
+              data-letter={(entity.name.match(/[A-Za-z]/) || ["#"])[0].toUpperCase()}
             >
               {photo && (
-                <img
-                  class="listing-photo"
-                  src={photo.url}
-                  alt={photo.alt}
-                  width="1280"
-                  height="720"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <a href={href}>
+                  <img
+                    class="listing-photo"
+                    src={photo.url}
+                    alt={photo.alt}
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
               )}
-              <h3>{business.business_name || "Unnamed Business"}</h3>
+              <p class="listing-kicker">
+                {official && <span class="listing-badge official">Official</span>}
+                {typeLabel && <span class="listing-badge">{typeLabel}</span>}
+              </p>
+              <h3><a href={href}>{entity.name}</a></h3>
+              {entity.commonName && entity.commonName !== entity.name && (
+                <p class="listing-aka">Also known as {entity.commonName}</p>
+              )}
               {chips.length > 0 && (
                 <div class="chips">
                   {chips.map((tag) => <span class="chip">{tag}</span>)}
                 </div>
               )}
               <p class="desc">
-                {business.description_short || business.description_long || "No description available."}
+                {entity.descriptionShort || entity.description || "No description available."}
               </p>
-              {address && <p class="addr">📍 {address}</p>}
+              {entity.meetingTimes && <p class="addr">Meeting: {entity.meetingTimes}</p>}
+              {address && <p class="addr">{address}</p>}
+              {entity.serviceArea && !address && <p class="addr">Serves {entity.serviceArea}</p>}
               <p class:list={["listing-verified", { unverified: !verification.verified }]}>
                 {verification.verified ? "✓ " : ""}{verification.text}
               </p>
               <div class="links">
+                <a href={href}>Details</a>
                 {primary
                   ? <a href={primary} target="_blank" rel="noopener noreferrer">{primaryLabel}</a>
-                  : <button type="button" class="suggest-link" data-bname={business.business_name || "Business"}>Suggest Link</button>}
-                {mapLinks(business).map((link) => (
+                  : <button type="button" class="suggest-link" data-bname={entity.name}>Suggest link</button>}
+                {mapLinks(entity).map((link) => (
                   <a href={link.url} target="_blank" rel="noopener noreferrer">{link.text}</a>
                 ))}
-                {business.phone && <a href={telHref(business.phone)}>Call</a>}
-                {business.email && <a href={`mailto:${business.email}`}>Email</a>}
+                {entity.phone && <a href={telHref(entity.phone)}>Call</a>}
+                {entity.email && <a href={`mailto:${entity.email}`}>Email</a>}
+                {canClaim(entity) && <a href={`/claim.html?slug=${entity.slug}`}>Claim</a>}
               </div>
             </article>
           );

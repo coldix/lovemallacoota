@@ -1,18 +1,52 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import { loadDirectory, listingPagePath } from "../lib/directory.mjs";
+
+const meetings = loadDirectory()
+  .filter((entity) => entity.meetingTimes)
+  .sort((a, b) => a.name.localeCompare(b.name));
 ---
-<BaseLayout title="What's On in Mallacoota — Love Mallacoota" description="Mallacoota community events, markets, meetups, workshops and activities." canonicalPath="/calendar.html" active="calendar">
-  <PageHero prefix="What's" accent="On" lede="Markets, meetups, workshops and fitness sessions — Mallacoota's community calendar, publicly sourced and updated regularly." />
+<BaseLayout title="What's On in Mallacoota — Love Mallacoota" description="Mallacoota community events, markets, meetups, workshops and regular club activities." canonicalPath="/calendar.html" active="calendar">
+  <PageHero prefix="What's" accent="On" lede="Markets, meetups, workshops and club nights — the community calendar, plus regular meetings from the directory." />
   <main>
     <section class="glass-card sheen content-block reveal">
       <div class="calendar-frame"><iframe title="Mallacoota Community Calendar" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;ctz=Australia%2FMelbourne&amp;title=Mallacoota%20Community%20Calendar&amp;mode=AGENDA&amp;src=Y3JkaXhvbkBnbWFpbC5jb20&amp;color=%237986cb" loading="lazy"></iframe></div>
     </section>
     <section class="glass-card sheen content-block reveal">
       <div class="links-grid">
-        <div class="link-card"><span class="emoji" aria-hidden="true">📅</span><h3>Take It With You</h3><p>Use the “+ Google Calendar” button to add these events to your own phone or computer.</p></div>
-        <div class="link-card"><span class="emoji" aria-hidden="true">📣</span><h3>Help Keep It Current</h3><p>If an event is missing, incorrect or out of date, <a href="/contact.html">let us know</a>.</p></div>
+        <a href="/edition.html" class="link-card">
+          <span class="arrow" aria-hidden="true">↗</span>
+          <span class="emoji" aria-hidden="true">📰</span>
+          <h3>This Week</h3>
+          <p>The weekly edition — notices, locals, weather and classifieds.</p>
+        </a>
+        <a href="/submit-event.html" class="link-card">
+          <span class="arrow" aria-hidden="true">↗</span>
+          <span class="emoji" aria-hidden="true">📣</span>
+          <h3>Submit an event</h3>
+          <p>If you already have a listing, you do not need to re-enter the organisation.</p>
+        </a>
+        <div class="link-card">
+          <span class="emoji" aria-hidden="true">📅</span>
+          <h3>Take it with you</h3>
+          <p>Use the “+ Google Calendar” button on the calendar to add these events to your own phone.</p>
+        </div>
       </div>
     </section>
+    {meetings.length > 0 && (
+      <section class="glass-card sheen content-block reveal">
+        <h2 class="section-title">Regular meetings</h2>
+        <p class="section-sub">From claimed or confirmed directory listings. Clubs add their own times.</p>
+        <ul class="edition-diary">
+          {meetings.map((entity) => (
+            <li>
+              <span class="edition-diary-when">{entity.meetingTimes}</span>
+              <a href={listingPagePath(entity)}>{entity.name}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
   </main>
 </BaseLayout>

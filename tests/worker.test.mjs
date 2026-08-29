@@ -58,6 +58,21 @@ test("redirects the archive clean URL to the static archive page", async () => {
   );
 });
 
+test("community and services clean URLs redirect to the html pages", async () => {
+  const community = await worker.fetch(new Request("https://lovemallacoota.au/community"), env);
+  assert.equal(community.status, 301);
+  assert.equal(community.headers.get("Location"), "https://lovemallacoota.au/community.html");
+});
+
+test("individual listing pages are served, not sent home", async () => {
+  const response = await worker.fetch(
+    new Request("https://lovemallacoota.au/listing/madra.html"),
+    env
+  );
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), "asset:/listing/madra.html");
+});
+
 test("collapses a legacy hostname and old path into one redirect", async () => {
   const response = await worker.fetch(
     new Request("https://lovemallacoota.com/category/news/local-update?ref=old"),

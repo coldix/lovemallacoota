@@ -3,6 +3,7 @@ import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { ALL_LISTING_FILES, loadListings, verificationLine } from "../src/lib/listings.mjs";
+import { loadDirectory, sectionEntities } from "../src/lib/directory.mjs";
 import {
   AD_SIZES,
   SECTIONS,
@@ -27,6 +28,10 @@ const generatedPages = [
   "food.html",
   "accom.html",
   "activity.html",
+  "community.html",
+  "services.html",
+  "directory.html",
+  "add-listing.html",
   "calendar.html",
   "archive.html",
   "contact.html",
@@ -52,28 +57,30 @@ test("private archive source material is excluded from the public build", async 
 });
 
 const directoryPages = [
-  { page: "food.html", files: ["listings_food.json"] },
-  { page: "accom.html", files: ["listings_accom.json"] },
-  { page: "activity.html", files: ["listings_do.json"] },
+  { page: "food.html", section: "eat-drink" },
+  { page: "accom.html", section: "stay" },
+  { page: "activity.html", section: "do-see" },
+  { page: "community.html", section: "community" },
+  { page: "services.html", section: "services" },
 ];
 
 test("directory pages carry every listing in the static HTML", async () => {
-  for (const { page, files } of directoryPages) {
+  for (const { page, section } of directoryPages) {
     const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
-    const businesses = loadListings(files);
-    assert.ok(businesses.length > 0, `${page} has no listing data`);
-    for (const business of businesses) {
+    const entities = sectionEntities(section);
+    assert.ok(entities.length > 0, `${page} has no listing data`);
+    for (const entity of entities) {
       assert.ok(
-        html.includes(escapeEntities(business.business_name)),
-        `${page} is missing ${business.business_name} — it must not depend on client-side rendering`
+        html.includes(escapeEntities(entity.name)),
+        `${page} is missing ${entity.name} — it must not depend on client-side rendering`
       );
     }
-    assert.match(html, /Showing \d+ of \d+ places/);
+    assert.match(html, /Showing \d+ of \d+ /);
   }
 });
 
-test("LocalBusiness structured data is rendered at build time", async () => {
-  for (const { page, files } of directoryPages) {
+test("directory structured data is rendered at build time", async () => {
+  for (const { page, section } of directoryPages) {
     const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
     const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
     const collection = blocks
@@ -82,9 +89,21 @@ test("LocalBusiness structured data is rendered at build time", async () => {
     assert.ok(collection, `${page} has no CollectionPage JSON-LD in the HTML`);
     assert.equal(
       collection.mainEntity.itemListElement.length,
-      loadListings(files).length
+      sectionEntities(section).length
     );
   }
+});
+
+test("individual listing pages exist and government is not a LocalBusiness", async () => {
+  const police = loadDirectory().find((entity) => entity.slug === "mallacoota-police-station");
+  assert.ok(police);
+  const html = await readFile(new URL("../dist/listing/mallacoota-police-station.html", import.meta.url), "utf8");
+  assert.ok(html.includes("Mallacoota Police Station"));
+  assert.ok(html.includes("Official"));
+  assert.ok(!html.includes("Claim this listing"));
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  const schema = JSON.parse(blocks[0][1]);
+  assert.notEqual(schema["@type"], "LocalBusiness");
 });
 
 test("every image the built pages reference is actually deployed", async () => {
@@ -202,6 +221,7 @@ test("an unverified listing says so rather than staying silent", async () => {
   assert.ok(unverified, "expected at least one unverified listing to check");
   assert.deepEqual(verificationLine(unverified), {
     verified: false,
+    kind: "none",
     text: "Not yet verified",
   });
 

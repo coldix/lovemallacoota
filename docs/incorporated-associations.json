@@ -1,0 +1,524 @@
+{
+  "source": "https://registers.consumer.vic.gov.au/IaSearch/PerformSearch?SearchBy=Name&Name=Mallacoota&PendingCancellation=False&IncludeNonCurrentLicensees=False",
+  "source_name": "Consumer Affairs Victoria incorporated associations register",
+  "queried": "Mallacoota",
+  "retrieved": "2026-08-29T22:05:00+10:00",
+  "register_said_matching_records": 39,
+  "counts": {
+    "total": 39,
+    "registered": 33,
+    "deregistered": 6
+  },
+  "rules": [
+    "Legal name, registration number and status are from CAV. Do not invent contact details, websites, meeting times or addresses from the name alone.",
+    "Registered associations are directory candidates. Deregistered ones are not live listings.",
+    "Proposed IA categories are judgement from the name, not from the register.",
+    "This file is a research seed. It is not published on the site.",
+    "Not on this register: churches, CFA brigade itself, school, Parks Victoria, East Gippsland Shire, RSL Bunker Museum, most businesses, Facebook groups."
+  ],
+  "gaps_this_register_cannot_cover": [
+    "Churches",
+    "Mallacoota P-12 College / school",
+    "CFA brigade (distinct from Volunteer Fire Fighters Fund)",
+    "Victoria Police, Ambulance Victoria, Parks Victoria, East Gippsland Shire",
+    "Mallacoota RSL Bunker Museum (already in listings_do.json, not on this register)",
+    "Trades and shops that are companies or sole traders",
+    "Facebook groups already in social-links.json"
+  ],
+  "associations": [
+    {
+      "name": "Friends Of Mallacoota Incorporated",
+      "number": "A0013056P",
+      "status": "Registered",
+      "identifier": "bb6d3f12-4be0-444e-aab9-4c38a9522c14",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=bb6d3f12-4be0-444e-aab9-4c38a9522c14",
+      "existing_directory": null
+    },
+    {
+      "name": "LIONS CLUB OF MALLACOOTA & DISTRICT INC.",
+      "number": "A0010791G",
+      "status": "Registered",
+      "identifier": "744c34e2-ba98-43a4-87ba-bb234872961a",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=744c34e2-ba98-43a4-87ba-bb234872961a",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA & DISTRICT CAR & BIKE CLUB INCORPORATED",
+      "number": "A0108697L",
+      "status": "Registered",
+      "identifier": "3d0a50d8-b022-ea11-a812-000d3a854410",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=3d0a50d8-b022-ea11-a812-000d3a854410",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA & DISTRICT TOOL LIBRARY INC.",
+      "number": "A0113625O",
+      "status": "Registered",
+      "identifier": "5c45fc64-27fe-eb11-94ee-0022481725b2",
+      "ia": [
+        "Services",
+        "Trades & Home Services"
+      ],
+      "note": "Could also sit under Community. Confirm how they describe themselves.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=5c45fc64-27fe-eb11-94ee-0022481725b2",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA AND DISTRICT ANGLING CLUB INC.",
+      "number": "A0034419L",
+      "status": "Registered",
+      "identifier": "3587f352-d537-4b3d-a268-7ce12dcd7e67",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=3587f352-d537-4b3d-a268-7ce12dcd7e67",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA AND DISTRICT BUSINESS AND TOURISM ASSOCIATION INC.",
+      "number": "A0045736X",
+      "status": "Registered",
+      "identifier": "184638da-e52e-4968-8b59-7a0055d6c0ca",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": "Tourism body. Do not duplicate as a visitor attraction.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=184638da-e52e-4968-8b59-7a0055d6c0ca",
+      "existing_directory": null
+    },
+    {
+      "name": "Mallacoota And District Historical Society Incorporated",
+      "number": "A0045005X",
+      "status": "Registered",
+      "identifier": "909a81cc-4df0-4ebe-83be-2eb61578ef73",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": "Also relevant to About Mallacoota / Local History.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=909a81cc-4df0-4ebe-83be-2eb61578ef73",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA AND DISTRICT KIDS INC.",
+      "number": "A0017902U",
+      "status": "Registered",
+      "identifier": "ce088f9a-df56-4151-b2a9-3b68c99c4f81",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=ce088f9a-df56-4151-b2a9-3b68c99c4f81",
+      "existing_directory": null
+    },
+    {
+      "name": "Mallacoota And District Recovery Association Incorporated",
+      "number": "A0110781S",
+      "status": "Registered",
+      "identifier": "16396205-aa03-eb11-a813-000d3a854410",
+      "ia": [
+        "Community",
+        "Churches & Community Organisations"
+      ],
+      "note": "MADRA. Keep legal name on the listing; MADRA as common name.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=16396205-aa03-eb11-a813-000d3a854410",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA AND DISTRICT UNIVERSITY OF THE THIRD AGE (U3A) INC.",
+      "number": "A0047738S",
+      "status": "Registered",
+      "identifier": "776f5590-3cb8-40e6-b2d8-7eb06f3eb9a4",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=776f5590-3cb8-40e6-b2d8-7eb06f3eb9a4",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA ARTS COUNCIL INC.",
+      "number": "A0020481Z",
+      "status": "Registered",
+      "identifier": "2db71df2-e96c-4518-a130-045bd596ae71",
+      "ia": [
+        "Community",
+        "Arts & Social"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=2db71df2-e96c-4518-a130-045bd596ae71",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA BOARDRIDERS CLUB INCORPORATED",
+      "number": "A0062795R",
+      "status": "Registered",
+      "identifier": "e3c607d3-45f4-47b7-8860-31299ff0579b",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=e3c607d3-45f4-47b7-8860-31299ff0579b",
+      "existing_directory": null
+    },
+    {
+      "name": "Mallacoota Community Health, Infrastructure And Resilience Fund Incorporated",
+      "number": "A0095823N",
+      "status": "Registered",
+      "identifier": "d88810c4-791c-e611-8111-3863bb343d78",
+      "ia": [
+        "Services",
+        "Health & Aged Care"
+      ],
+      "note": "Fund, not a clinic. Do not present as a health service.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=d88810c4-791c-e611-8111-3863bb343d78",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA COMMUNITY OPPORTUNITY SHOP INCORPORATED",
+      "number": "A0039214C",
+      "status": "Registered",
+      "identifier": "72280970-cb14-4033-99e8-597c0b7e1266",
+      "ia": [
+        "Services",
+        "Shops & Local Businesses"
+      ],
+      "note": "Community op shop. Also Community.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=72280970-cb14-4033-99e8-597c0b7e1266",
+      "existing_directory": null
+    },
+    {
+      "name": "Mallacoota District Health And Support Service Incorporated",
+      "number": "A0012127E",
+      "status": "Registered",
+      "identifier": "a32c712c-62f8-4c53-9b07-9cde0895cb1f",
+      "ia": [
+        "Services",
+        "Health & Aged Care"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=a32c712c-62f8-4c53-9b07-9cde0895cb1f",
+      "existing_directory": null
+    },
+    {
+      "name": "Mallacoota District Senior Citizens Club Incorporated",
+      "number": "A0017539X",
+      "status": "Registered",
+      "identifier": "d49f4b5b-586b-412b-8a6b-600ccc51d07d",
+      "ia": [
+        "Community",
+        "Arts & Social"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=d49f4b5b-586b-412b-8a6b-600ccc51d07d",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA EVENTS INC.",
+      "number": "A0108043O",
+      "status": "Registered",
+      "identifier": "865cf7e7-28ee-e911-a811-000d3a854410",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": "Also relevant to What's On.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=865cf7e7-28ee-e911-a811-000d3a854410",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA GENOA BROADCASTING ASSOCIATION INC.",
+      "number": "A0031373P",
+      "status": "Registered",
+      "identifier": "774e975e-d0a5-408c-a51d-8203d7614642",
+      "ia": [
+        "Community",
+        "Local Media & Facebook Groups"
+      ],
+      "note": "Likely 3MGB / community radio. Confirm on-air name before publishing alias.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=774e975e-d0a5-408c-a51d-8203d7614642",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA GOLF AND COUNTRY CLUB INC.",
+      "number": "A0004620V",
+      "status": "Registered",
+      "identifier": "ab43ae48-2a69-476f-b4c9-c6d51cdda208",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": "Related existing listing: Mallacoota Golf Club Bistro (Eat & Drink). Club and bistro should be linked, not duplicated as two golf clubs.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=ab43ae48-2a69-476f-b4c9-c6d51cdda208",
+      "existing_directory": {
+        "match": "related",
+        "listing": "Mallacoota Golf Club Bistro",
+        "section": "eat",
+        "action": "Link club listing to existing bistro; do not create a second golf club business."
+      }
+    },
+    {
+      "name": "MALLACOOTA GUN CLUB INC.",
+      "number": "A0012033U",
+      "status": "Registered",
+      "identifier": "9e81aad9-61d6-4289-ad82-61b59c669ff9",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=9e81aad9-61d6-4289-ad82-61b59c669ff9",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA HALLS AND RECREATION RESERVE GROUNDS MANAGEMENT COMMITTEE INC.",
+      "number": "A0044537F",
+      "status": "Registered",
+      "identifier": "ab9b48ef-1bcc-433e-8d5a-6c57b5691d56",
+      "ia": [
+        "Community",
+        "Churches & Community Organisations"
+      ],
+      "note": "Facility manager, not a social club.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=ab9b48ef-1bcc-433e-8d5a-6c57b5691d56",
+      "existing_directory": null
+    },
+    {
+      "name": "Mallacoota Inlet Aged Care Incorporated",
+      "number": "A0026537X",
+      "status": "Registered",
+      "identifier": "47a5f1d1-de9e-4b9f-8c1a-d23d9cb41686",
+      "ia": [
+        "Services",
+        "Health & Aged Care"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=47a5f1d1-de9e-4b9f-8c1a-d23d9cb41686",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA INLET BOWLING CLUB INC.",
+      "number": "A0037634R",
+      "status": "Registered",
+      "identifier": "877fb5bd-77f8-4a19-97a5-ee7aaa46430c",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=877fb5bd-77f8-4a19-97a5-ee7aaa46430c",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA MARINE SEARCH AND RESCUE INC.",
+      "number": "A0124949R",
+      "status": "Registered",
+      "identifier": "02709887-1b85-ef11-ac21-000d3a800ab8",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": "Emergency volunteer group. Also Services / Government & Public Services. Coast Guard Inc is deregistered; this may be the successor. Flag, do not guess.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=02709887-1b85-ef11-ac21-000d3a800ab8",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA PONY CLUB INC.",
+      "number": "A0005516G",
+      "status": "Registered",
+      "identifier": "877112ae-51f2-4124-b42e-74ab1d968b78",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=877112ae-51f2-4124-b42e-74ab1d968b78",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA PROGRESS ASSOCIATION INC.",
+      "number": "A0060432H",
+      "status": "Registered",
+      "identifier": "d6500cce-d881-4927-9729-f031976c45d7",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=d6500cce-d881-4927-9729-f031976c45d7",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA SEA EAGLES DRAGON BOAT CLUB INC.",
+      "number": "A0100520L",
+      "status": "Registered",
+      "identifier": "72bf8f01-93ac-e711-811e-3863bb2ebb78",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=72bf8f01-93ac-e711-811e-3863bb2ebb78",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA SOCCER CLUB INC.",
+      "number": "A0027422K",
+      "status": "Registered",
+      "identifier": "853e419d-4ea9-4256-bf77-7f625972f31f",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=853e419d-4ea9-4256-bf77-7f625972f31f",
+      "existing_directory": null
+    },
+    {
+      "name": "Mallacoota Surf Lifesaving Club Incorporated",
+      "number": "A0042120A",
+      "status": "Registered",
+      "identifier": "955c5344-961f-4958-8561-e9b0ee87417a",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=955c5344-961f-4958-8561-e9b0ee87417a",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA VOLUNTEER FIRE FIGHTERS FUND INCORPORATED",
+      "number": "A0108792I",
+      "status": "Registered",
+      "identifier": "e54ca788-bf31-ea11-a812-000d3a854410",
+      "ia": [
+        "Community",
+        "Churches & Community Organisations"
+      ],
+      "note": "Fundraising body, not CFA itself. Do not present as the fire brigade.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=e54ca788-bf31-ea11-a812-000d3a854410",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA YOUTH AND SPORTS CLUB INC.",
+      "number": "A0009159K",
+      "status": "Registered",
+      "identifier": "b0e4537e-40fd-4816-b694-8ca79f5fd3bb",
+      "ia": [
+        "Community",
+        "Sport & Recreation"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=b0e4537e-40fd-4816-b694-8ca79f5fd3bb",
+      "existing_directory": null
+    },
+    {
+      "name": "THE MALLACOOTA SANCTUARY YOUTH GROUP INCORPORATED",
+      "number": "A0109127E",
+      "status": "Registered",
+      "identifier": "92cec017-0f4e-ea11-a813-000d3a8543e8",
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": null,
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=92cec017-0f4e-ea11-a813-000d3a8543e8",
+      "existing_directory": null
+    },
+    {
+      "name": "THE MALLACOOTA WILDERNESS COLLECTIVE INC.",
+      "number": "A0116122X",
+      "status": "Registered",
+      "identifier": null,
+      "ia": [
+        "Community",
+        "Clubs & Groups"
+      ],
+      "note": null,
+      "details_url": null,
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA COAST GUARD INC.",
+      "number": "A0061544D",
+      "status": "Deregistered",
+      "identifier": "373cdeec-ef97-41b7-b3ea-16ebd234f671",
+      "ia": null,
+      "note": "Do not list as current. Possible predecessor of Marine Search and Rescue.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=373cdeec-ef97-41b7-b3ea-16ebd234f671",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA COMMUNITY ASSOCIATION INC.",
+      "number": "A0031548B",
+      "status": "Deregistered",
+      "identifier": "e223ea67-08df-4f42-a4fc-095b0d2b9c48",
+      "ia": null,
+      "note": "Do not list as current.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=e223ea67-08df-4f42-a4fc-095b0d2b9c48",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA OCEAN ACCESS COMMITTEE (MOAC) INC.",
+      "number": "A0045114D",
+      "status": "Deregistered",
+      "identifier": "c2f4807f-5294-4737-8b7d-b8460546e3af",
+      "ia": null,
+      "note": "Do not list as current.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=c2f4807f-5294-4737-8b7d-b8460546e3af",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA SAILING CLUB INC.",
+      "number": "A0003410Y",
+      "status": "Deregistered",
+      "identifier": "eb232533-ab7a-4eba-ba93-7abd1f2d6a32",
+      "ia": null,
+      "note": "Do not list as current unless Colin confirms it still operates under another entity.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=eb232533-ab7a-4eba-ba93-7abd1f2d6a32",
+      "existing_directory": null
+    },
+    {
+      "name": "MALLACOOTA STRUM INC.",
+      "number": "A0050759J",
+      "status": "Deregistered",
+      "identifier": "e0c5d219-6b35-46ff-8b1f-4cea40676bda",
+      "ia": null,
+      "note": "Do not list as current.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=e0c5d219-6b35-46ff-8b1f-4cea40676bda",
+      "existing_directory": null
+    },
+    {
+      "name": "THE MALLACOOTA VISITOR INFORMATION SHED INC.",
+      "number": "A0056141B",
+      "status": "Deregistered",
+      "identifier": "0a45e627-286a-4ceb-9f68-176232adec59",
+      "ia": null,
+      "note": "Do not list as current. Visitor information is not this entity.",
+      "details_url": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=0a45e627-286a-4ceb-9f68-176232adec59",
+      "existing_directory": null
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+
+const id = Astro.url.searchParams.get("id") || "";
+---
+<BaseLayout
+  title="Enter your code — Love Mallacoota"
+  description="Enter the email code to confirm a Love Mallacoota directory listing."
+  canonicalPath="/verify.html"
+  robots="noindex,nofollow"
+>
+  <PageHero
+    prefix="Check your"
+    accent="Email"
+    lede="We sent a six-digit code. It expires in 15 minutes. Unverified submissions are never published."
+  />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      <form id="verify-form" class="form-grid" method="post" action="/api/listing/verify">
+        <input type="hidden" name="id" value={id} />
+        <div class="field full">
+          <label for="code">Code</label>
+          <input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code" />
+        </div>
+        <div class="form-actions full">
+          <button class="btn btn-primary" type="submit" id="submit-btn">Confirm</button>
+        </div>
+      </form>
+      <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("verify-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const statusMsg = document.getElementById("form-status");
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        submitBtn.disabled = true;
+        try {
+          const response = await fetch("/api/listing/verify", { method: "POST", body: new FormData(form) });
+          const result = await response.json().catch(() => ({}));
+          if (response.ok && result.ok) {
+            statusMsg.textContent = result.message || "Confirmed.";
+            statusMsg.className = "form-status success";
+            if (result.manageUrl) location.href = result.manageUrl;
+          } else {
+            statusMsg.textContent = result.error || "That code did not work.";
+            statusMsg.className = "form-status error";
+          }
+        } catch {
+          statusMsg.textContent = "Something went wrong. Please try again.";
+          statusMsg.className = "form-status error";
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    });
+  </script>
+</BaseLayout>

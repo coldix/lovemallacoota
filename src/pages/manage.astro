@@ -1,0 +1,141 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+---
+<BaseLayout
+  title="Update your listing — Love Mallacoota"
+  description="Private link to update a Mallacoota directory listing."
+  canonicalPath="/manage.html"
+  robots="noindex,nofollow"
+>
+  <PageHero
+    prefix="Update your"
+    accent="Listing"
+    lede="This page only works with the private link we emailed you. The link expires; you can ask for a new one from the listing's claim page."
+  />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      <p id="manage-loading">Loading your listing…</p>
+      <form id="manage-form" class="form-grid" hidden method="post" action="/api/listing/manage">
+        <input type="hidden" name="token" id="token" />
+        <div class="field full">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required maxlength="160" />
+        </div>
+        <div class="field full">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="4" required maxlength="1200"></textarea>
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" maxlength="40" />
+        </div>
+        <div class="field">
+          <label for="email">Public email</label>
+          <input id="email" name="email" type="email" maxlength="120" />
+        </div>
+        <div class="field">
+          <label for="website_url">Website</label>
+          <input id="website_url" name="website_url" type="url" maxlength="300" />
+        </div>
+        <div class="field">
+          <label for="facebook">Social URL</label>
+          <input id="facebook" name="facebook" type="url" maxlength="300" />
+        </div>
+        <div class="field full">
+          <label for="street">Street address</label>
+          <input id="street" name="street" type="text" maxlength="160" />
+        </div>
+        <div class="field full">
+          <label for="serviceArea">Service area</label>
+          <input id="serviceArea" name="serviceArea" type="text" maxlength="160" />
+        </div>
+        <div class="field full">
+          <label for="openingHours">Opening hours</label>
+          <textarea id="openingHours" name="openingHours" rows="2" maxlength="400"></textarea>
+        </div>
+        <div class="field full">
+          <label for="meetingTimes">Meeting times</label>
+          <textarea id="meetingTimes" name="meetingTimes" rows="2" maxlength="400"></textarea>
+        </div>
+        <div class="field full">
+          <label for="accessibility">Accessibility</label>
+          <input id="accessibility" name="accessibility" type="text" maxlength="300" />
+        </div>
+        <div class="field full">
+          <label for="statusNote">Temporary closure or status note</label>
+          <input id="statusNote" name="statusNote" type="text" maxlength="200" placeholder="Closed for July, back in August" />
+        </div>
+        <div class="form-actions full">
+          <button class="btn btn-primary" type="submit" id="submit-btn">Save changes</button>
+          <a id="event-link" class="btn btn-ghost" href="/submit-event.html">Submit an event</a>
+        </div>
+      </form>
+      <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const token = new URLSearchParams(location.search).get("token") || "";
+      const loading = document.getElementById("manage-loading");
+      const form = document.getElementById("manage-form");
+      const statusMsg = document.getElementById("form-status");
+      if (!token) {
+        loading.textContent = "This page needs the private link from your email.";
+        return;
+      }
+      document.getElementById("token").value = token;
+      try {
+        const response = await fetch(`/api/listing/manage?token=${encodeURIComponent(token)}`);
+        const result = await response.json();
+        if (!response.ok || !result.ok) {
+          loading.textContent = result.error || "This link is not valid.";
+          return;
+        }
+        const listing = result.listing;
+        for (const [name, value] of Object.entries({
+          name: listing.name,
+          description: listing.description,
+          phone: listing.phone,
+          email: listing.email,
+          website_url: listing.website,
+          facebook: (listing.social && listing.social[0] && listing.social[0].url) || "",
+          street: listing.address && listing.address.street,
+          serviceArea: listing.serviceArea,
+          openingHours: Array.isArray(listing.openingHours) ? "" : listing.openingHours,
+          meetingTimes: listing.meetingTimes,
+          accessibility: listing.accessibility,
+          statusNote: listing.notes_seasonal,
+        })) {
+          const field = form.elements[name];
+          if (field && value) field.value = value;
+        }
+        document.getElementById("event-link").href = `/submit-event.html?slug=${encodeURIComponent(listing.slug)}&token=${encodeURIComponent(token)}`;
+        loading.hidden = true;
+        form.hidden = false;
+      } catch {
+        loading.textContent = "Could not load this listing.";
+        return;
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const submitBtn = document.getElementById("submit-btn");
+        submitBtn.disabled = true;
+        try {
+          const response = await fetch("/api/listing/manage", { method: "POST", body: new FormData(form) });
+          const result = await response.json().catch(() => ({}));
+          statusMsg.textContent = result.ok
+            ? (result.message || "Saved. It will show on the site after the next publish, usually a couple of minutes.")
+            : (result.error || "Could not save.");
+          statusMsg.className = result.ok ? "form-status success" : "form-status error";
+        } catch {
+          statusMsg.textContent = "Could not save.";
+          statusMsg.className = "form-status error";
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    });
+  </script>
+</BaseLayout>

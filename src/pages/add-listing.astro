@@ -1,0 +1,188 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { FORM_ENTITY_TYPES, ENTITY_TYPES, SECTIONS } from "../lib/directory-model.mjs";
+
+const turnstileSiteKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+---
+<BaseLayout
+  title="Add your listing — Love Mallacoota"
+  description="Add a free Mallacoota directory listing for a business, club, service or community organisation."
+  canonicalPath="/add-listing.html"
+  active="add-listing"
+>
+  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <PageHero
+    prefix="Add your"
+    accent="Listing"
+    lede="Free for businesses, clubs, trades and community organisations. We email a code to the public address you give; nothing goes live until that code is entered."
+  />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      <form id="listing-form" class="form-grid" method="post" action="/api/listing" enctype="multipart/form-data">
+        <input type="hidden" name="kind" value="add" />
+        <div class="field full">
+          <label for="entityType">What are you listing?</label>
+          <select id="entityType" name="entityType" required>
+            <option value="">Choose one</option>
+            {FORM_ENTITY_TYPES.map((id) => (
+              <option value={id}>{ENTITY_TYPES[id].label}</option>
+            ))}
+          </select>
+        </div>
+        <div class="field full">
+          <label for="name">Organisation or business name</label>
+          <input id="name" name="name" type="text" required maxlength="160" autocomplete="organization" />
+        </div>
+        <div class="field">
+          <label for="commonName">Common name, if different</label>
+          <input id="commonName" name="commonName" type="text" maxlength="120" placeholder="MADRA, 3MGB…" />
+        </div>
+        <div class="field">
+          <label for="section">Directory section</label>
+          <select id="section" name="section">
+            {Object.values(SECTIONS).map((section) => (
+              <option value={section.id}>{section.label}</option>
+            ))}
+          </select>
+        </div>
+        <div class="field full">
+          <label for="description">What you do</label>
+          <textarea id="description" name="description" rows="4" required maxlength="1200" placeholder="Plain language. No websites inside the text — there is a field for the link."></textarea>
+        </div>
+        <div class="field" data-for="address">
+          <label for="street">Street address (if public)</label>
+          <input id="street" name="street" type="text" maxlength="160" autocomplete="street-address" />
+        </div>
+        <div class="field" data-for="address">
+          <label for="locality">Town</label>
+          <input id="locality" name="locality" type="text" value="Mallacoota" maxlength="80" />
+        </div>
+        <div class="field full" data-for="serviceArea">
+          <label for="serviceArea">Service area, if you do not have a public address</label>
+          <input id="serviceArea" name="serviceArea" type="text" maxlength="160" placeholder="Mallacoota and district" />
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel" />
+        </div>
+        <div class="field">
+          <label for="email">Public email</label>
+          <input id="email" name="email" type="email" required maxlength="120" autocomplete="email" />
+          <p class="field-hint">We send a code here. That address is what appears on the listing.</p>
+        </div>
+        <div class="field">
+          <label for="website">Website</label>
+          <input id="website_url" name="website_url" type="url" maxlength="300" placeholder="https://" />
+        </div>
+        <div class="field">
+          <label for="facebook">Facebook or other social URL</label>
+          <input id="facebook" name="facebook" type="url" maxlength="300" placeholder="https://" />
+        </div>
+        <div class="field full" data-for="hours">
+          <label for="openingHours">Opening hours</label>
+          <textarea id="openingHours" name="openingHours" rows="2" maxlength="400" placeholder="Mon–Fri 9am–5pm, weekends seasonal"></textarea>
+        </div>
+        <div class="field full" data-for="meetings">
+          <label for="meetingTimes">Meeting times</label>
+          <textarea id="meetingTimes" name="meetingTimes" rows="2" maxlength="400" placeholder="First Tuesday of the month, 7pm, at the hall"></textarea>
+        </div>
+        <div class="field full">
+          <label for="accessibility">Accessibility, if you know it</label>
+          <input id="accessibility" name="accessibility" type="text" maxlength="300" placeholder="Wheelchair access, accessible toilet…" />
+        </div>
+        <div class="field">
+          <label for="contactName">Your name</label>
+          <input id="contactName" name="contactName" type="text" required maxlength="120" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="contactEmail">Your email, if different</label>
+          <input id="contactEmail" name="contactEmail" type="email" maxlength="120" autocomplete="email" />
+        </div>
+        <div class="field full">
+          <label for="photo">One photograph (optional)</label>
+          <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic" />
+          <p class="field-hint">JPEG, PNG, WebP or HEIC. We resize it. One photo per listing.</p>
+        </div>
+        <div class="field full">
+          <label class="check-label">
+            <input id="authorised" name="authorised" type="checkbox" value="yes" required />
+            I am authorised to submit or maintain this listing.
+          </label>
+        </div>
+        <div class="field visually-hidden" aria-hidden="true">
+          <label for="website">Leave this field empty</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <div class="field full"><div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto"></div></div>
+        <div class="form-actions full">
+          <button class="btn btn-primary" type="submit" id="submit-btn">Send the code</button>
+          <a href="/directory.html" class="btn btn-ghost">Cancel</a>
+        </div>
+      </form>
+      <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("listing-form");
+      const type = document.getElementById("entityType");
+      const section = document.getElementById("section");
+      const hints = {
+        business: { section: "eat-drink", hours: true, meetings: false },
+        trade: { section: "services", hours: true, meetings: false },
+        professional: { section: "services", hours: true, meetings: false },
+        "community-organisation": { section: "community", hours: false, meetings: true },
+        "sporting-club": { section: "community", hours: false, meetings: true },
+        "social-group": { section: "community", hours: false, meetings: true },
+        arts: { section: "community", hours: true, meetings: true },
+        government: { section: "services", hours: true, meetings: false },
+        school: { section: "services", hours: true, meetings: false },
+        church: { section: "community", hours: false, meetings: true },
+        media: { section: "community", hours: true, meetings: false },
+        "community-facility": { section: "community", hours: true, meetings: true },
+        other: { section: "community", hours: true, meetings: true },
+      };
+      const toggle = () => {
+        const spec = hints[type.value] || { hours: true, meetings: true };
+        if (spec.section && !section.dataset.touched) section.value = spec.section;
+        form.querySelectorAll("[data-for='hours']").forEach((el) => { el.hidden = !spec.hours; });
+        form.querySelectorAll("[data-for='meetings']").forEach((el) => { el.hidden = !spec.meetings; });
+      };
+      type.addEventListener("change", toggle);
+      section.addEventListener("change", () => { section.dataset.touched = "1"; });
+      toggle();
+
+      const submitBtn = document.getElementById("submit-btn");
+      const statusMsg = document.getElementById("form-status");
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+        statusMsg.className = "form-status";
+        statusMsg.textContent = "";
+        try {
+          const response = await fetch("/api/listing", { method: "POST", body: new FormData(form) });
+          const result = await response.json().catch(() => ({}));
+          if (response.ok && result.ok) {
+            statusMsg.textContent = result.message || "Check your email for a code.";
+            statusMsg.className = "form-status success";
+            if (result.id) location.href = `/verify.html?id=${encodeURIComponent(result.id)}`;
+          } else {
+            statusMsg.textContent = result.error || "Something went wrong. Please try again.";
+            statusMsg.className = "form-status error";
+            window.turnstile?.reset();
+          }
+        } catch {
+          statusMsg.textContent = "Something went wrong. Please try again.";
+          statusMsg.className = "form-status error";
+          window.turnstile?.reset();
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send the code";
+        }
+      });
+    });
+  </script>
+</BaseLayout>

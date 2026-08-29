@@ -4,6 +4,8 @@ export const publicFiles = [
   "data/listings_accom.json",
   "data/listings_do.json",
   "data/listings_food.json",
+  "data/listings_community.json",
+  "data/listings_services.json",
   "data/archive-index.json",
   "data/site-version.json",
   "favicon.ico",
@@ -22,4 +24,4 @@ export const publicFiles = [
 
 // Cover photographs are per-week, so the directory ships whole rather than
 // being listed file by file.
-export const publicDirectories = ["assets", "images/covers", "images/articles", "images/bank"];
+export const publicDirectories = ["assets", "images/covers", "images/articles", "images/bank", "images/listings", "data/directory"];

@@ -33,7 +33,7 @@ jobs:
       - name: Stop here if nothing was converted
         id: changed
         run: |
-          if git diff --quiet -- data/editions images uploads; then
+          if git diff --quiet -- data/editions images uploads data/directory; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No photographs waiting."
           else
@@ -51,7 +51,7 @@ jobs:
         run: |
           git config user.name "Love Mallacoota bot"
           git config user.email "coota@lovemallacoota.au"
-          git add data/editions images uploads
+          git add data/editions images uploads data/directory
           git commit -m "Convert submitted photographs"
           git push
 

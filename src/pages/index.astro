@@ -1,12 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
-import { SITE_ORIGIN, loadListings } from "../lib/listings.mjs";
+import { SECTIONS, SITE_ORIGIN, WHATS_ON, sectionCounts } from "../lib/directory.mjs";
 
-// Counted at build time so the numbers are in the HTML, not fetched afterwards.
-const foodCount = loadListings(["listings_food.json"]).length;
-const stayCount = loadListings(["listings_accom.json"]).length;
-const doCount = loadListings(["listings_do.json"]).length;
+const counts = sectionCounts();
+const eat = counts["eat-drink"];
+const stay = counts.stay;
+const community = counts.community;
+
+const directoryCards = [
+  { ...SECTIONS["eat-drink"], count: counts["eat-drink"], countLabel: "places to eat" },
+  { ...SECTIONS.stay, count: counts.stay, countLabel: "places to stay" },
+  { ...SECTIONS["do-see"], count: counts["do-see"], countLabel: "things to do" },
+  { ...SECTIONS.community, count: counts.community, countLabel: "groups" },
+  { ...SECTIONS.services, count: counts.services, countLabel: "services" },
+  { ...WHATS_ON, count: null, countLabel: "calendar and this week" },
+];
 
 const siteSchema = {
   "@context": "https://schema.org",
@@ -14,13 +23,13 @@ const siteSchema = {
   url: `${SITE_ORIGIN}/`,
   name: "Love Mallacoota",
   description:
-    "Your local guide to Mallacoota — places to eat, stay, and explore. Curated listings, up-to-date contacts, and videos.",
+    "Mallacoota's community directory — places to eat, stay and explore, plus clubs, services and what's on.",
 };
 ---
 
 <BaseLayout
   title="Love Mallacoota — Your Local Guide to Mallacoota"
-  description="Your local guide to Mallacoota — places to eat, stay, explore and connect with the community."
+  description="Mallacoota's community directory and local guide — eat, stay, do, clubs, services and what's on."
   canonicalPath="/"
   showAds={true}
 >
@@ -28,18 +37,18 @@ const siteSchema = {
   <PageHero
     prefix="Fall in love with"
     accent="Mallacoota"
-    lede="Where the wilderness meets the sea. Your local guide to the inlet, beaches, forests and the vibrant community of Victoria's far east — every place to eat, stay and explore, curated and current."
+    lede="Where the wilderness meets the sea. The town directory for residents and visitors — every place to eat, stay and explore, and the clubs, services and official contacts a remote town actually needs."
     logo={true}
   >
     <div class="hero-cta">
       <a href="/food.html" class="btn btn-primary">Eat &amp; Drink</a>
-      <a href="/accom.html" class="btn btn-coral">Find a Stay</a>
-      <a href="/activity.html" class="btn btn-ghost">Do &amp; See</a>
+      <a href="/community.html" class="btn btn-coral">Community</a>
+      <a href="/services.html" class="btn btn-ghost">Services</a>
     </div>
     <div class="stats-row" id="stats-row">
-      <div class="stat"><b id="stat-food" data-count={foodCount}>{foodCount}</b><span>Places to eat</span></div>
-      <div class="stat"><b id="stat-stay" data-count={stayCount}>{stayCount}</b><span>Places to stay</span></div>
-      <div class="stat"><b id="stat-do" data-count={doCount}>{doCount}</b><span>Things to do</span></div>
+      <div class="stat"><b id="stat-food" data-count={eat}>{eat}</b><span>Places to eat</span></div>
+      <div class="stat"><b id="stat-stay" data-count={stay}>{stay}</b><span>Places to stay</span></div>
+      <div class="stat"><b id="stat-community" data-count={community}>{community}</b><span>Community groups</span></div>
     </div>
   </PageHero>
 
@@ -64,24 +73,40 @@ const siteSchema = {
 
     <section class="glass-card sheen content-block platform-callout reveal" aria-labelledby="platform-title">
       <div>
-        <p class="eyebrow">Community platform in development</p>
-        <h2 id="platform-title">One useful place for Mallacoota information</h2>
-        <p>Love Mallacoota is growing from a visitor directory into a free community platform for events, notices, groups, local history and a regular email digest. The directory stays open throughout the rebuild.</p>
+        <p class="eyebrow">Add your listing — free</p>
+        <h2 id="platform-title">Clubs, trades and services, in the same directory as the bakery</h2>
+        <p>Love Mallacoota is the town directory, not only a visitor guide. A club secretary can add or claim a listing, confirm an email, and later update meeting times without anyone editing JSON by hand.</p>
       </div>
       <div class="platform-actions">
-        <a class="btn btn-primary" href="/contact.html?subject=newsletter">Register newsletter interest</a>
-        <a class="btn btn-ghost" href="/editorial-policy.html">How publishing will work</a>
+        <a class="btn btn-primary" href="/add-listing.html">Add your listing</a>
+        <a class="btn btn-ghost" href="/directory.html">Search the directory</a>
       </div>
     </section>
 
     <section class="glass-card sheen content-block reveal">
-      <h2 class="section-title">Explore the Directory</h2>
-      <p class="section-sub">Local businesses, checked and updated by locals.</p>
-      <div class="links-grid">
-        <a href="/food.html" class="link-card"><span class="arrow" aria-hidden="true">↗</span><span class="emoji" aria-hidden="true">🦪</span><h3>Eat &amp; Drink</h3><p>Fresh-off-the-boat seafood, artisan coffee, bakery icons and classic pub fare.</p></a>
-        <a href="/accom.html" class="link-card"><span class="arrow" aria-hidden="true">↗</span><span class="emoji" aria-hidden="true">🛏️</span><h3>Stay</h3><p>Lakeside lodges, holiday houses, cosy caravan parks and everything between.</p></a>
-        <a href="/activity.html" class="link-card"><span class="arrow" aria-hidden="true">↗</span><span class="emoji" aria-hidden="true">🛶</span><h3>Do &amp; See</h3><p>Boat hire, gallery walks, wilderness tours and the best spots around the inlet.</p></a>
-        <a href="/calendar.html" class="link-card"><span class="arrow" aria-hidden="true">↗</span><span class="emoji" aria-hidden="true">📅</span><h3>What's On</h3><p>Markets, meetups and community events — the live Mallacoota calendar.</p></a>
+      <h2 class="section-title">Explore Mallacoota</h2>
+      <p class="section-sub">Visitor information and community information, side by side.</p>
+      <div class="links-grid directory-home-grid">
+        {directoryCards.map((card) => (
+          <a href={card.href} class="link-card">
+            <span class="arrow" aria-hidden="true">↗</span>
+            <span class="emoji" aria-hidden="true">{card.emoji}</span>
+            <h3>{card.label}</h3>
+            <p>{card.blurb}</p>
+            {card.count !== null && (
+              <p class="directory-card-count">{card.count} {card.countLabel}</p>
+            )}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">This Week</h2>
+      <p class="section-sub">The weekly edition — notices, locals, weather and what's on, in one place.</p>
+      <div class="hero-cta" style="justify-content:flex-start">
+        <a href="/edition.html" class="btn btn-primary">Read this week</a>
+        <a href="/calendar.html" class="btn btn-ghost">Community calendar</a>
       </div>
     </section>
 

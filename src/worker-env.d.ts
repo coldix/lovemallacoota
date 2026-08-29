@@ -7,4 +7,7 @@ interface Env {
   TURNSTILE_SECRET_KEY?: string;
   RELAY_KEY?: string;
   GITHUB_TOKEN?: string;
+  DB?: D1Database;
+  LISTING_RATE?: RateLimit;
+  CONTACT_RATE?: RateLimit;
 }

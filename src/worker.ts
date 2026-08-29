@@ -1,5 +1,6 @@
 import { handleContactSubmit } from "./contact.ts";
 import { handleEditionPdf, weekFromPath } from "./edition-pdf.ts";
+import { handleListingManage, handleListingSubmit, handleListingVerify } from "./listing.ts";
 import { handleArticleSubmit } from "./submit.ts";
 
 const CANONICAL_HOST = "lovemallacoota.au";
@@ -24,7 +25,12 @@ const MOVED_PATHS = new Map([
   ["/accommodation", "/accom.html"],
   ["/activities", "/activity.html"],
   ["/archive", "/archive.html"],
-  ["/listing", "/"],
+  ["/community", "/community.html"],
+  ["/services", "/services.html"],
+  ["/directory", "/directory.html"],
+  ["/add-listing", "/add-listing.html"],
+  ["/claim", "/claim.html"],
+  ["/listing", "/directory.html"],
   ["/category", "/"],
   ["/category/news", "/"],
   ["/category/how", "/"],
@@ -43,7 +49,7 @@ function resolveMovedPath(pathname: string): string | undefined {
   const normalized = pathWithoutTrailingSlash(pathname);
   const exact = MOVED_PATHS.get(normalized);
   if (exact) return exact;
-  if (normalized.startsWith("/listing/") || normalized.startsWith("/category/")) {
+  if (normalized.startsWith("/category/")) {
     return "/";
   }
   return undefined;
@@ -116,6 +122,18 @@ export default {
 
     if (url.pathname === "/api/article") {
       return applySecurityHeaders(await handleArticleSubmit(request, env));
+    }
+
+    if (url.pathname === "/api/listing") {
+      return applySecurityHeaders(await handleListingSubmit(request, env));
+    }
+
+    if (url.pathname === "/api/listing/verify") {
+      return applySecurityHeaders(await handleListingVerify(request, env));
+    }
+
+    if (url.pathname === "/api/listing/manage") {
+      return applySecurityHeaders(await handleListingManage(request, env));
     }
 
     if (weekFromPath(url.pathname)) {

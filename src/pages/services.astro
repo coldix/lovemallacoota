@@ -1,0 +1,23 @@
+---
+import DirectoryPage from "../components/DirectoryPage.astro";
+const explore = [
+  { href: "/community.html", emoji: "🤝", title: "Community", text: "Clubs, sport, arts and volunteer organisations." },
+  { href: "/emergency.html", emoji: "🚨", title: "Emergency", text: "Official sources first. In an emergency call 000." },
+  { href: "/add-listing.html", emoji: "✍️", title: "Add a listing", text: "Free for trades, shops and local services." },
+];
+---
+<DirectoryPage
+  active="services"
+  title="Services in Mallacoota — Love Mallacoota"
+  description="Trades, health, shops, professional services, government and emergency organisations in Mallacoota and district."
+  canonicalPath="/services.html"
+  prefix="Local"
+  accent="Services"
+  lede="Health, shops, trades, the school, the Shire and the official services a town this remote actually needs. Government listings are marked official and cannot be taken over."
+  placeholder="Search health, trades, shops, council…"
+  searchLabel="Search Services listings"
+  schemaName="Services in Mallacoota"
+  section="services"
+  noun="services"
+  {explore}
+/>

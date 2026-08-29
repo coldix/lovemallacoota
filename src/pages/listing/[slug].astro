@@ -1,0 +1,238 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import {
+  SECTIONS,
+  canClaim,
+  entityBySlug,
+  entitySchema,
+  formatAddress,
+  getPrimaryLink,
+  getPrimaryLinkLabel,
+  isOfficialEntity,
+  listingPagePath,
+  listingPhoto,
+  loadDirectory,
+  mapLinks,
+  photoAbsoluteUrl,
+  relatedEntities,
+  telHref,
+  verificationLine,
+} from "../../lib/directory.mjs";
+import { ENTITY_TYPES } from "../../lib/directory-model.mjs";
+
+export function getStaticPaths() {
+  return loadDirectory().map((entity) => ({ params: { slug: entity.slug } }));
+}
+
+const { slug } = Astro.params;
+const entity = entityBySlug(slug);
+if (!entity) {
+  return Astro.redirect("/directory.html");
+}
+
+const section = SECTIONS[entity.section];
+const typeLabel = ENTITY_TYPES[entity.entityType]?.label;
+const official = isOfficialEntity(entity);
+const photo = listingPhoto(entity);
+const verification = verificationLine(entity);
+const primary = getPrimaryLink(entity);
+const primaryLabel = getPrimaryLinkLabel(entity);
+const address = formatAddress(entity.address);
+const related = relatedEntities(loadDirectory(), entity);
+const schema = {
+  "@context": "https://schema.org",
+  ...entitySchema(entity, photoAbsoluteUrl(entity)),
+};
+const canonicalPath = listingPagePath(entity);
+---
+
+<BaseLayout
+  title={`${entity.name} — Love Mallacoota`}
+  description={entity.descriptionShort || entity.description || `${entity.name} in Mallacoota.`}
+  canonicalPath={canonicalPath}
+  active={section?.active || ""}
+  socialImage={photo?.url}
+  showAds={!official}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  <PageHero
+    prefix={section?.label || "Directory"}
+    accent={entity.commonName && entity.commonName !== entity.name ? entity.commonName : entity.name}
+    lede={entity.descriptionShort || entity.description}
+  />
+  <main>
+    {official && (
+      <div class="emergency-banner listing-official-banner">
+        <strong>Official service.</strong>
+        <span>Love Mallacoota does not speak for this organisation. Use the source links below. In an emergency call <a href="tel:000">000</a>.</span>
+      </div>
+    )}
+    <section class="glass-card sheen content-block reveal listing-detail">
+      {photo && (
+        <img class="listing-detail-photo" src={photo.url} alt={photo.alt} width="1280" height="720" />
+      )}
+      <p class="listing-kicker">
+        {official && <span class="listing-badge official">Official</span>}
+        {typeLabel && <span class="listing-badge">{typeLabel}</span>}
+        {section && <a class="listing-badge" href={section.href}>{section.label}</a>}
+      </p>
+      <h2>{entity.name}</h2>
+      {entity.legalName && entity.legalName !== entity.name && (
+        <p class="listing-aka">Legal name: {entity.legalName}</p>
+      )}
+      {entity.commonName && entity.commonName !== entity.name && (
+        <p class="listing-aka">Known as {entity.commonName}</p>
+      )}
+      <p class:list={["listing-verified", { unverified: !verification.verified }]}>
+        {verification.verified ? "✓ " : ""}{verification.text}
+      </p>
+      <p class="listing-body">{entity.description}</p>
+      {entity.notes_seasonal && <p class="listing-note">{entity.notes_seasonal}</p>}
+
+      <dl class="listing-facts">
+        {address && (
+          <>
+            <dt>Address</dt>
+            <dd>{[entity.address.street, entity.address.locality, entity.address.state, entity.address.postcode].filter(Boolean).join(", ")}</dd>
+          </>
+        )}
+        {entity.serviceArea && (
+          <>
+            <dt>Serves</dt>
+            <dd>{entity.serviceArea}</dd>
+          </>
+        )}
+        {entity.locationKind === "none" && !address && (
+          <>
+            <dt>Location</dt>
+            <dd>No public street address — many groups meet in different places or serve the whole district.</dd>
+          </>
+        )}
+        {entity.phone && (
+          <>
+            <dt>Phone</dt>
+            <dd><a href={telHref(entity.phone)}>{entity.phone}</a>{entity.verification?.mobile?.note ? ` — ${entity.verification.mobile.note}` : ""}</dd>
+          </>
+        )}
+        {entity.email && (
+          <>
+            <dt>Email</dt>
+            <dd><a href={`mailto:${entity.email}`}>{entity.email}</a></dd>
+          </>
+        )}
+        {entity.meetingTimes && (
+          <>
+            <dt>Meets</dt>
+            <dd>{entity.meetingTimes}</dd>
+          </>
+        )}
+        {entity.accessibility && (
+          <>
+            <dt>Access</dt>
+            <dd>{entity.accessibility}</dd>
+          </>
+        )}
+        {entity.registration?.number && (
+          <>
+            <dt>Incorporated association</dt>
+            <dd>
+              {entity.registration.number}
+              {entity.registration.status ? ` · ${entity.registration.status}` : ""}
+              {entity.registration.url && (
+                <>
+                  {" "}
+                  <a href={entity.registration.url} rel="noopener noreferrer" target="_blank">Register record</a>
+                </>
+              )}
+            </dd>
+          </>
+        )}
+        {entity.source?.name && (
+          <>
+            <dt>Source</dt>
+            <dd>
+              {entity.source.url ? (
+                <a href={entity.source.url} rel="noopener noreferrer" target="_blank">{entity.source.name}</a>
+              ) : entity.source.name}
+              {entity.source.note ? ` — ${entity.source.note}` : ""}
+            </dd>
+          </>
+        )}
+      </dl>
+
+      <div class="links listing-actions">
+        {primary && <a href={primary} target="_blank" rel="noopener noreferrer">{primaryLabel}</a>}
+        {mapLinks(entity).map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer">{link.text}</a>
+        ))}
+        {entity.phone && <a href={telHref(entity.phone)}>Call</a>}
+        {entity.email && <a href={`mailto:${entity.email}`}>Email</a>}
+        {(entity.social || []).map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer">{link.platform || "Social"}</a>
+        ))}
+      </div>
+
+      <div class="listing-claim">
+        {canClaim(entity) ? (
+          <p>
+            Is this your organisation?
+            <a class="btn btn-primary" href={`/claim.html?slug=${entity.slug}`}>Claim this listing</a>
+            <a class="btn btn-ghost" href={`/submit-event.html?slug=${entity.slug}`}>Submit an event</a>
+          </p>
+        ) : official ? (
+          <p>
+            Official listings cannot be claimed. If something is wrong,
+            <a href={`/contact.html?business=${encodeURIComponent(entity.name)}`}>suggest a correction</a>.
+          </p>
+        ) : (
+          <p>
+            This listing is not available to claim.
+            <a href={`/contact.html?business=${encodeURIComponent(entity.name)}`}>Suggest a correction</a>.
+          </p>
+        )}
+      </div>
+    </section>
+
+    {related.length > 0 && (
+      <section class="glass-card sheen content-block reveal">
+        <h2 class="section-title">Related</h2>
+        <div class="links-grid">
+          {related.map((item) => (
+            <a href={listingPagePath(item)} class="link-card">
+              <span class="arrow" aria-hidden="true">↗</span>
+              <h3>{item.name}</h3>
+              <p>{item.descriptionShort || SECTIONS[item.section]?.label}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Keep Exploring</h2>
+      <div class="links-grid">
+        {section && (
+          <a href={section.href} class="link-card">
+            <span class="arrow" aria-hidden="true">↗</span>
+            <span class="emoji" aria-hidden="true">{section.emoji}</span>
+            <h3>{section.label}</h3>
+            <p>{section.blurb}</p>
+          </a>
+        )}
+        <a href="/directory.html" class="link-card">
+          <span class="arrow" aria-hidden="true">↗</span>
+          <span class="emoji" aria-hidden="true">⌕</span>
+          <h3>Whole directory</h3>
+          <p>Search every listing in Mallacoota and district.</p>
+        </a>
+        <a href="/add-listing.html" class="link-card">
+          <span class="arrow" aria-hidden="true">↗</span>
+          <span class="emoji" aria-hidden="true">✍️</span>
+          <h3>Add a listing</h3>
+          <p>Free for businesses, clubs and community organisations.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

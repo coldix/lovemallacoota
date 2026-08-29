@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { entityBySlug } from "../lib/directory.mjs";
+
+const slug = Astro.url.searchParams.get("slug") || "";
+const entity = slug ? entityBySlug(slug) : null;
+const turnstileSiteKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+---
+<BaseLayout
+  title="Submit an event — Love Mallacoota"
+  description="Submit a Mallacoota community event, meeting or fixture linked to a directory listing."
+  canonicalPath="/submit-event.html"
+>
+  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <PageHero
+    prefix="What's"
+    accent="On"
+    lede="One-off events, markets, exhibitions, fixtures and public meetings. If you already have a listing, you should not have to re-enter the organisation."
+  />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      <form id="listing-form" class="form-grid" method="post" action="/api/listing">
+        <input type="hidden" name="kind" value="event" />
+        <input type="hidden" name="token" id="token" />
+        <div class="field full">
+          <label for="slug">Organisation</label>
+          {entity ? (
+            <>
+              <input type="hidden" name="slug" value={entity.slug} />
+              <p><strong>{entity.name}</strong></p>
+            </>
+          ) : (
+            <input id="slug" name="slug" type="text" required placeholder="Your organisation's directory slug, or name" />
+          )}
+        </div>
+        <div class="field full">
+          <label for="title">Event name</label>
+          <input id="title" name="title" type="text" required maxlength="160" />
+        </div>
+        <div class="field">
+          <label for="starts">Starts</label>
+          <input id="starts" name="starts" type="datetime-local" required />
+        </div>
+        <div class="field">
+          <label for="ends">Ends (optional)</label>
+          <input id="ends" name="ends" type="datetime-local" />
+        </div>
+        <div class="field full">
+          <label for="where">Where</label>
+          <input id="where" name="where" type="text" maxlength="200" placeholder="Mallacoota Hall, Betka Beach…" />
+        </div>
+        <div class="field full">
+          <label for="description">Details</label>
+          <textarea id="description" name="description" rows="4" maxlength="1200" required></textarea>
+        </div>
+        <div class="field">
+          <label for="contactName">Your name</label>
+          <input id="contactName" name="contactName" type="text" required maxlength="120" />
+        </div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input id="email" name="email" type="email" required maxlength="120" />
+        </div>
+        <div class="field full">
+          <label class="check-label">
+            <input name="authorised" type="checkbox" value="yes" required />
+            I am authorised to submit this for the organisation.
+          </label>
+        </div>
+        <div class="field visually-hidden" aria-hidden="true">
+          <label for="website">Leave this field empty</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <div class="field full"><div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto"></div></div>
+        <div class="form-actions full">
+          <button class="btn btn-primary" type="submit" id="submit-btn">Send for review</button>
+          <a href="/calendar.html" class="btn btn-ghost">Back to What's On</a>
+        </div>
+      </form>
+      <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const token = new URLSearchParams(location.search).get("token") || "";
+      if (token) document.getElementById("token").value = token;
+      const form = document.getElementById("listing-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const statusMsg = document.getElementById("form-status");
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        submitBtn.disabled = true;
+        try {
+          const response = await fetch("/api/listing", { method: "POST", body: new FormData(form) });
+          const result = await response.json().catch(() => ({}));
+          if (response.ok && result.ok) {
+            statusMsg.textContent = result.message || "Sent.";
+            statusMsg.className = "form-status success";
+            if (result.id) location.href = `/verify.html?id=${encodeURIComponent(result.id)}`;
+          } else {
+            statusMsg.textContent = result.error || "Something went wrong.";
+            statusMsg.className = "form-status error";
+            window.turnstile?.reset();
+          }
+        } catch {
+          statusMsg.textContent = "Something went wrong.";
+          statusMsg.className = "form-status error";
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    });
+  </script>
+</BaseLayout>

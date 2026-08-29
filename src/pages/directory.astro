@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import {
+  ENTITY_TYPES,
+  SECTIONS,
+  canClaim,
+  collectionSchema,
+  displayTags,
+  formatAddress,
+  listingPagePath,
+  listingPhoto,
+  loadDirectory,
+  photoAbsoluteUrl,
+  searchText,
+  telHref,
+  verificationLine,
+} from "../lib/directory.mjs";
+
+const entities = loadDirectory();
+const schema = collectionSchema(entities, "Mallacoota directory", "/directory.html", (entity) =>
+  photoAbsoluteUrl(entity)
+);
+const sectionFilters = Object.values(SECTIONS);
+const typeFilters = [...new Set(entities.map((entity) => entity.entityType))]
+  .map((id) => ({ id, label: ENTITY_TYPES[id]?.label || id }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+---
+
+<BaseLayout
+  title="Mallacoota directory — Love Mallacoota"
+  description="Search Mallacoota businesses, clubs, services, government and community groups in one place."
+  canonicalPath="/directory.html"
+  active="directory"
+  showAds={true}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  <PageHero
+    prefix="The whole"
+    accent="Directory"
+    lede="One search across Eat & Drink, Stay, Do & See, Community and Services. Built for a town of a thousand people — large type, plain language, no account required."
+  />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      <p class="directory-add-banner">
+        <a class="btn btn-primary" href="/add-listing.html">Add your listing — free</a>
+        <a class="btn btn-ghost" href="/community.html">Community</a>
+        <a class="btn btn-ghost" href="/services.html">Services</a>
+      </p>
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input type="search" id="listing-search" class="search-input" placeholder="Search golf, plumber, radio, health…" aria-label="Search the Mallacoota directory" />
+        </div>
+        <div class="tag-row" id="section-row" role="group" aria-label="Filter by section">
+          <button type="button" class="tag-btn active" data-section="All">All</button>
+          {sectionFilters.map((section) => (
+            <button type="button" class="tag-btn" data-section={section.id}>{section.label}</button>
+          ))}
+        </div>
+        <div class="tag-row" id="type-row" role="group" aria-label="Filter by type">
+          <button type="button" class="tag-btn active" data-type="All">Any type</button>
+          {typeFilters.map((type) => (
+            <button type="button" class="tag-btn" data-type={type.id}>{type.label}</button>
+          ))}
+        </div>
+        <p class="result-count" id="result-count" aria-live="polite">
+          Showing {entities.length} of {entities.length} listings
+        </p>
+      </div>
+      <div id="listings-grid" class="listings-grid" data-total={entities.length} data-noun="listings">
+        {entities.map((entity) => {
+          const photo = listingPhoto(entity);
+          const verification = verificationLine(entity);
+          const href = listingPagePath(entity);
+          const chips = displayTags(entity);
+          const address = formatAddress(entity.address);
+          return (
+            <article
+              class:list={["listing-card", { official: entity.official }]}
+              data-tags={(entity.categories || []).join("|")}
+              data-search={searchText(entity)}
+              data-section={entity.section}
+              data-type={entity.entityType}
+            >
+              {photo && (
+                <a href={href}>
+                  <img class="listing-photo" src={photo.url} alt={photo.alt} width="1280" height="720" loading="lazy" decoding="async" />
+                </a>
+              )}
+              <p class="listing-kicker">
+                {entity.official && <span class="listing-badge official">Official</span>}
+                <span class="listing-badge">{SECTIONS[entity.section]?.label}</span>
+              </p>
+              <h3><a href={href}>{entity.name}</a></h3>
+              {chips.length > 0 && (
+                <div class="chips">{chips.slice(0, 3).map((tag) => <span class="chip">{tag}</span>)}</div>
+              )}
+              <p class="desc">{entity.descriptionShort || entity.description}</p>
+              {address && <p class="addr">{address}</p>}
+              <p class:list={["listing-verified", { unverified: !verification.verified }]}>
+                {verification.verified ? "✓ " : ""}{verification.text}
+              </p>
+              <div class="links">
+                <a href={href}>Details</a>
+                {entity.phone && <a href={telHref(entity.phone)}>Call</a>}
+                {canClaim(entity) && <a href={`/claim.html?slug=${entity.slug}`}>Claim</a>}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      <p class="no-results" id="no-results" hidden>No matches — try a different word or filter.</p>
+    </section>
+  </main>
+</BaseLayout>

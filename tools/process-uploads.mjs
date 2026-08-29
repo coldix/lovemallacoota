@@ -48,6 +48,20 @@ for (const sidecarName of sidecars) {
     continue;
   }
 
+  if (meta.kind === "listing") {
+    const listingsDir = path.join(rootDir, "images", "listings");
+    mkdirSync(listingsDir, { recursive: true });
+    await sharp(source)
+      .resize(1280, 1280, { fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 84 })
+      .toFile(path.join(listingsDir, `${meta.slug}.webp`));
+    console.log(`listing photo for ${meta.slug}`);
+    rmSync(source);
+    rmSync(sidecarPath);
+    processed += 1;
+    continue;
+  }
+
   const editionFile = path.join(rootDir, "data", "editions", `${meta.week}.json`);
   if (!existsSync(editionFile)) {
     console.warn(`! no edition ${meta.week}; leaving ${sidecarName} in place`);

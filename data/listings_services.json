@@ -1,0 +1,285 @@
+[
+  {
+    "id": "gov-east-gippsland-shire",
+    "slug": "east-gippsland-shire-council",
+    "name": "East Gippsland Shire Council",
+    "entityType": "government",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "GovernmentOrganization",
+    "description": "Local government for Mallacoota and the rest of East Gippsland. Rates, roads, planning, waste, and the Mallacoota service centre. This is an official listing: Love Mallacoota does not speak for the Shire.",
+    "descriptionShort": "Local government for East Gippsland, including Mallacoota.",
+    "website": "https://www.eastgippsland.vic.gov.au/",
+    "links": [{ "url": "https://www.eastgippsland.vic.gov.au/", "text": "Website" }],
+    "official": true,
+    "claimable": false,
+    "locationKind": "service-area",
+    "serviceArea": "East Gippsland",
+    "source": {
+      "kind": "authoritative",
+      "name": "East Gippsland Shire Council",
+      "url": "https://www.eastgippsland.vic.gov.au/"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "gov-parks-victoria",
+    "slug": "parks-victoria-croajingolong",
+    "name": "Parks Victoria — Croajingolong National Park",
+    "entityType": "government",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "GovernmentOrganization",
+    "description": "Parks Victoria manages Croajingolong National Park, which surrounds Mallacoota. Park conditions, campgrounds, fire restrictions and visitor information come from Parks Victoria, not from this site.",
+    "descriptionShort": "National park authority for Croajingolong, around Mallacoota.",
+    "website": "https://www.parks.vic.gov.au/places-to-see/parks/croajingolong-national-park",
+    "links": [
+      {
+        "url": "https://www.parks.vic.gov.au/places-to-see/parks/croajingolong-national-park",
+        "text": "Croajingolong National Park"
+      }
+    ],
+    "official": true,
+    "claimable": false,
+    "locationKind": "service-area",
+    "serviceArea": "Croajingolong National Park",
+    "source": {
+      "kind": "authoritative",
+      "name": "Parks Victoria",
+      "url": "https://www.parks.vic.gov.au/places-to-see/parks/croajingolong-national-park"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "gov-victoria-police-mallacoota",
+    "slug": "mallacoota-police-station",
+    "name": "Mallacoota Police Station",
+    "entityType": "emergency",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "EmergencyService",
+    "description": "Victoria Police station at 38 Maurice Avenue. Non-24-hour counter — call to confirm opening hours. Life-threatening emergency: 000. Non-urgent assistance: 131 444.",
+    "descriptionShort": "Victoria Police, Mallacoota. In an emergency call 000.",
+    "website": "https://www.police.vic.gov.au/mallacoota-police-station",
+    "phone": "03 5158 0280",
+    "email": "MALLACOOTA.UNI@police.vic.gov.au",
+    "address": {
+      "street": "38 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "official": true,
+    "claimable": false,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Victoria Police",
+      "url": "https://www.police.vic.gov.au/mallacoota-police-station"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "gov-cfa-mallacoota",
+    "slug": "cfa-mallacoota-fire-brigade",
+    "name": "Mallacoota Fire Brigade (CFA)",
+    "entityType": "emergency",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "FireStation",
+    "description": "Country Fire Authority volunteer brigade in Mallacoota. Love Mallacoota does not issue fire warnings. In an emergency call 000. Warnings and incidents: VicEmergency. The Mallacoota Volunteer Fire Fighters Fund is a separate fundraising body, not the brigade.",
+    "descriptionShort": "CFA brigade. In an emergency call 000. Warnings: VicEmergency.",
+    "website": "https://www.cfa.vic.gov.au/",
+    "links": [
+      { "url": "https://www.cfa.vic.gov.au/", "text": "Country Fire Authority" },
+      { "url": "https://emergency.vic.gov.au/respond/", "text": "VicEmergency" }
+    ],
+    "official": true,
+    "claimable": false,
+    "related": ["mallacoota-volunteer-fire-fighters-fund"],
+    "locationKind": "service-area",
+    "serviceArea": "Mallacoota and district",
+    "source": {
+      "kind": "authoritative",
+      "name": "Country Fire Authority",
+      "url": "https://www.cfa.vic.gov.au/"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "gov-ambulance-victoria",
+    "slug": "ambulance-victoria",
+    "name": "Ambulance Victoria",
+    "entityType": "emergency",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "EmergencyService",
+    "description": "State ambulance service. In a medical emergency call 000. Love Mallacoota does not dispatch ambulances or give medical advice.",
+    "descriptionShort": "State ambulance service. In an emergency call 000.",
+    "website": "https://www.ambulance.vic.gov.au/",
+    "links": [{ "url": "https://www.ambulance.vic.gov.au/", "text": "Website" }],
+    "official": true,
+    "claimable": false,
+    "locationKind": "service-area",
+    "serviceArea": "Victoria",
+    "source": {
+      "kind": "authoritative",
+      "name": "Ambulance Victoria",
+      "url": "https://www.ambulance.vic.gov.au/"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "gov-vic-ses",
+    "slug": "victoria-state-emergency-service",
+    "name": "Victoria State Emergency Service",
+    "entityType": "emergency",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "EmergencyService",
+    "description": "Flood, storm and rescue assistance. Life-threatening emergency: 000. SES assistance: 132 500.",
+    "descriptionShort": "Flood, storm and rescue. Emergency 000; SES 132 500.",
+    "website": "https://www.ses.vic.gov.au/",
+    "phone": "132 500",
+    "links": [{ "url": "https://www.ses.vic.gov.au/", "text": "Website" }],
+    "official": true,
+    "claimable": false,
+    "locationKind": "service-area",
+    "serviceArea": "Victoria",
+    "source": {
+      "kind": "authoritative",
+      "name": "Victoria State Emergency Service",
+      "url": "https://www.ses.vic.gov.au/"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "gov-vicemergency",
+    "slug": "vicemergency",
+    "name": "VicEmergency",
+    "entityType": "emergency",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "GovernmentOrganization",
+    "description": "The official source for warnings and incidents in Victoria. Love Mallacoota relays emergency information only when it can keep a timestamped link current; this page is not a warning service.",
+    "descriptionShort": "Official Victorian warnings and incidents.",
+    "website": "https://emergency.vic.gov.au/respond/",
+    "links": [{ "url": "https://emergency.vic.gov.au/respond/", "text": "Warnings and incidents" }],
+    "official": true,
+    "claimable": false,
+    "locationKind": "service-area",
+    "serviceArea": "Victoria",
+    "source": {
+      "kind": "authoritative",
+      "name": "VicEmergency",
+      "url": "https://emergency.vic.gov.au/respond/"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "gov-bom",
+    "slug": "bureau-of-meteorology",
+    "name": "Bureau of Meteorology",
+    "entityType": "government",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "GovernmentOrganization",
+    "description": "Australia’s official weather and warnings authority. Forecasts on Love Mallacoota are not official warnings — use BOM and VicEmergency for that.",
+    "descriptionShort": "Official weather and warnings for Australia.",
+    "website": "https://www.bom.gov.au/vic/warnings/",
+    "links": [
+      { "url": "https://www.bom.gov.au/vic/warnings/", "text": "Victorian warnings" },
+      { "url": "https://www.bom.gov.au/", "text": "Bureau of Meteorology" }
+    ],
+    "official": true,
+    "claimable": false,
+    "locationKind": "service-area",
+    "serviceArea": "Australia",
+    "source": {
+      "kind": "authoritative",
+      "name": "Bureau of Meteorology",
+      "url": "https://www.bom.gov.au/"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "edu-mallacoota-p12",
+    "slug": "mallacoota-p-12-college",
+    "name": "Mallacoota P-12 College",
+    "entityType": "school",
+    "section": "services",
+    "categories": ["Government & Public Services"],
+    "schema_type": "EducationalOrganization",
+    "description": "Government school for prep to year 12 in Mallacoota. School number 3515. Contact details from the Victorian Government school record.",
+    "descriptionShort": "Government P–12 school, 25 Bucknall Street.",
+    "website": "https://www.mallp12.vic.edu.au/",
+    "phone": "03 5158 0254",
+    "email": "mallacoota.p12@education.vic.gov.au",
+    "address": {
+      "street": "25 Bucknall Street",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "official": true,
+    "claimable": false,
+    "locationKind": "physical",
+    "links": [
+      { "url": "https://www.mallp12.vic.edu.au/", "text": "Website" },
+      {
+        "url": "https://www.vic.gov.au/mallacoota-p-12-college-state-school-number-3515",
+        "text": "Victorian Government school record"
+      }
+    ],
+    "source": {
+      "kind": "authoritative",
+      "name": "Victorian Government",
+      "url": "https://www.vic.gov.au/mallacoota-p-12-college-state-school-number-3515"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  {
+    "id": "health-mallacoota-medical-centre",
+    "slug": "mallacoota-medical-centre",
+    "name": "Mallacoota Medical Centre",
+    "entityType": "professional",
+    "section": "services",
+    "categories": ["Health & Aged Care"],
+    "schema_type": "MedicalClinic",
+    "description": "Accredited general practice at 21–23 Maurice Avenue. For emergencies call 000. After-hours medical advice: 1800 MEDICARE (1800 633 422) or the Victorian Virtual Emergency Department.",
+    "descriptionShort": "General practice on Maurice Avenue. Emergency: 000.",
+    "website": "https://www.mallacootamedicalcentre.com.au/",
+    "phone": "03 5158 0777",
+    "address": {
+      "street": "21-23 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "12:00"
+      },
+      {
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "14:00",
+        "closes": "17:00"
+      }
+    ],
+    "accessibility": "Wheelchair access. Disabled and ambulance parking close to the front door, according to the clinic.",
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Mallacoota Medical Centre",
+      "url": "https://www.mallacootamedicalcentre.com.au/"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  }
+]

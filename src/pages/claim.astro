@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { canClaim, entityBySlug, listingPagePath } from "../lib/directory.mjs";
+
+const slug = Astro.url.searchParams.get("slug") || "";
+const entity = slug ? entityBySlug(slug) : null;
+const turnstileSiteKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+---
+<BaseLayout
+  title="Claim a listing — Love Mallacoota"
+  description="Claim an existing Mallacoota directory listing so you can keep it up to date."
+  canonicalPath="/claim.html"
+  active="claim"
+>
+  <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <PageHero
+    prefix="Is this yours?"
+    accent="Claim it"
+    lede="If you can receive email at the address already published on the listing, we send a code there. Official government listings cannot be claimed."
+  />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      {entity && !canClaim(entity) ? (
+        <p>
+          <strong>{entity.name}</strong> cannot be claimed through this form.
+          {entity.official
+            ? " Official services are maintained from authoritative sources."
+            : ""}
+          {" "}
+          <a href={`/contact.html?business=${encodeURIComponent(entity.name)}`}>Suggest a correction</a>
+          {entity && <> or <a href={listingPagePath(entity)}>return to the listing</a>.</>}
+        </p>
+      ) : (
+        <form id="listing-form" class="form-grid" method="post" action="/api/listing">
+          <input type="hidden" name="kind" value="claim" />
+          <div class="field full">
+            <label for="slug">Listing</label>
+            {entity ? (
+              <>
+                <input type="hidden" name="slug" value={entity.slug} />
+                <p><strong>{entity.name}</strong> — {entity.email ? "we will email the published address." : "this listing has no public email yet, so the request goes to Love Mallacoota for a human to check."}</p>
+              </>
+            ) : (
+              <input id="slug" name="slug" type="text" required placeholder="listing-slug" />
+            )}
+          </div>
+          <div class="field">
+            <label for="contactName">Your name</label>
+            <input id="contactName" name="contactName" type="text" required maxlength="120" />
+          </div>
+          <div class="field">
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" required maxlength="120" />
+            <p class="field-hint">
+              {entity?.email
+                ? "Must be able to receive mail at the address already on the listing."
+                : "Used to contact you. A listing with no public email needs a human to approve the claim."}
+            </p>
+          </div>
+          <div class="field full">
+            <label class="check-label">
+              <input name="authorised" type="checkbox" value="yes" required />
+              I am authorised to submit or maintain this listing.
+            </label>
+          </div>
+          <div class="field visually-hidden" aria-hidden="true">
+            <label for="website">Leave this field empty</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="field full"><div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto"></div></div>
+          <div class="form-actions full">
+            <button class="btn btn-primary" type="submit" id="submit-btn">Send the code</button>
+            <a href={entity ? listingPagePath(entity) : "/directory.html"} class="btn btn-ghost">Cancel</a>
+          </div>
+        </form>
+      )}
+      <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("listing-form");
+      if (!form) return;
+      const submitBtn = document.getElementById("submit-btn");
+      const statusMsg = document.getElementById("form-status");
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+        try {
+          const response = await fetch("/api/listing", { method: "POST", body: new FormData(form) });
+          const result = await response.json().catch(() => ({}));
+          if (response.ok && result.ok) {
+            statusMsg.textContent = result.message || "Check your email.";
+            statusMsg.className = "form-status success";
+            if (result.id) location.href = `/verify.html?id=${encodeURIComponent(result.id)}`;
+          } else {
+            statusMsg.textContent = result.error || "Something went wrong. Please try again.";
+            statusMsg.className = "form-status error";
+            window.turnstile?.reset();
+          }
+        } catch {
+          statusMsg.textContent = "Something went wrong. Please try again.";
+          statusMsg.className = "form-status error";
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send the code";
+        }
+      });
+    });
+  </script>
+</BaseLayout>

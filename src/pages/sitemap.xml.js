@@ -8,6 +8,7 @@
 
 import { loadEditions } from "../lib/editions.mjs";
 import { loadArchive } from "../lib/archive.mjs";
+import { listingPagePath, loadDirectory } from "../lib/directory.mjs";
 
 const ORIGIN = "https://lovemallacoota.au";
 
@@ -21,6 +22,10 @@ export function sitemapEntries(today) {
     { path: "/food.html", changefreq: "weekly", priority: "0.9" },
     { path: "/accom.html", changefreq: "weekly", priority: "0.9" },
     { path: "/activity.html", changefreq: "weekly", priority: "0.9" },
+    { path: "/community.html", changefreq: "weekly", priority: "0.9" },
+    { path: "/services.html", changefreq: "weekly", priority: "0.9" },
+    { path: "/directory.html", changefreq: "weekly", priority: "0.8" },
+    { path: "/add-listing.html", changefreq: "yearly", priority: "0.5" },
     { path: "/locals.html", changefreq: "weekly", priority: "0.8" },
     { path: "/archive.html", changefreq: "monthly", priority: "0.8", lastmod: archive.updatedAt },
     { path: "/calendar.html", changefreq: "weekly", priority: "0.7" },
@@ -32,6 +37,14 @@ export function sitemapEntries(today) {
     { path: "/privacy.html", changefreq: "yearly", priority: "0.4" },
     { path: "/terms.html", changefreq: "yearly", priority: "0.4" },
   ];
+
+  for (const entity of loadDirectory()) {
+    entries.push({
+      path: listingPagePath(entity),
+      changefreq: "monthly",
+      priority: entity.official ? "0.8" : "0.6",
+    });
+  }
 
   // Every week keeps a permanent page, and a frozen one never changes again.
   for (const edition of editions) {

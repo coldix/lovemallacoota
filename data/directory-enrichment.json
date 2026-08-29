@@ -1,0 +1,150 @@
+{
+  "A0031373P": {
+    "commonName": "3MGB Wilderness Radio",
+    "name": "3MGB Wilderness Radio",
+    "slug": "3mgb-wilderness-radio",
+    "entityType": "media",
+    "schema_type": "RadioStation",
+    "categories": ["Local Media & Facebook Groups", "Radio"],
+    "description": "Community radio for Mallacoota, Genoa and surrounding Far East Gippsland, run by volunteers. On air as 3MGB — Mallacoota 101.7 FM and Genoa 96.9 FM. The legal entity is Mallacoota Genoa Broadcasting Association Inc.",
+    "descriptionShort": "Volunteer community radio for Mallacoota and Genoa.",
+    "website": "https://www.3mgb.org.au/",
+    "address": {
+      "street": "66 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  "A0110781S": {
+    "commonName": "MADRA",
+    "name": "Mallacoota and District Recovery Association",
+    "slug": "madra",
+    "entityType": "community-organisation",
+    "categories": ["Churches & Community Organisations"],
+    "description": "MADRA was established after the 2019–20 bushfires so the needs of Mallacoota and district are considered as part of recovery. It is an incorporated association and a registered charity. Legal name: Mallacoota And District Recovery Association Incorporated.",
+    "descriptionShort": "Community-led recovery association for Mallacoota and district.",
+    "website": "https://www.madrecovery.com/",
+    "email": "madra.3892@gmail.com",
+    "social": [
+      { "platform": "facebook", "url": "https://www.facebook.com/MADRA2020" }
+    ],
+    "serviceArea": "Mallacoota, Genoa, Gipsy Point, Wangarabell, Weeragua, Maramingo Creek, Wallagaraugh and Wroxham",
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  "A0020481Z": {
+    "commonName": "Mallacoota Arts Council",
+    "name": "Mallacoota Arts Council",
+    "slug": "mallacoota-arts-council",
+    "entityType": "arts",
+    "categories": ["Arts & Social"],
+    "description": "Hosts, presents and produces professional and community arts activities in and around Mallacoota, including Mallacoota Arts Space (MA Space) at the Croajingolong Centre.",
+    "descriptionShort": "Community arts council and MA Space gallery.",
+    "website": "https://mallacootaartscouncil.com.au/",
+    "address": {
+      "street": "66 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  "A0012127E": {
+    "commonName": "MDHSS",
+    "name": "Mallacoota District Health and Support Service",
+    "slug": "mallacoota-district-health-and-support-service",
+    "entityType": "community-organisation",
+    "section": "services",
+    "categories": ["Health & Aged Care"],
+    "schema_type": "MedicalOrganization",
+    "description": "Community health, in-home aged and disability support, allied health clinics and the Mallacoota District Health Neighbourhood House. Not a hospital emergency department — in an emergency call 000.",
+    "descriptionShort": "Community health, aged and disability support, and neighbourhood house.",
+    "website": "https://mallacoota.org.au/",
+    "phone": "03 5158 0243",
+    "email": "feedback@mdhss.org.au",
+    "address": {
+      "street": "Corner Mattsson Street and Genoa Road",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ],
+    "accessibility": "Accessible toilet, accessible parking and wheelchair access, according to Healthdirect.",
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  "A0004620V": {
+    "name": "Mallacoota Golf and Country Club",
+    "slug": "mallacoota-golf-and-country-club",
+    "entityType": "sporting-club",
+    "categories": ["Sport & Recreation"],
+    "description": "The golf club itself — the sporting organisation. Meals and drinks are listed separately as Mallacoota Golf Club Bistro under Eat & Drink.",
+    "descriptionShort": "Golf club. Bistro listed separately under Eat & Drink.",
+    "website": "https://mallacootagolfclub.com.au",
+    "phone": "03 5158 0277",
+    "address": {
+      "street": "Nelson Drive",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "related": ["mallacoota-golf-club-bistro"],
+    "social": [
+      { "platform": "facebook", "url": "https://www.facebook.com/mallacootagolf/" }
+    ],
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  "A0042120A": {
+    "name": "Mallacoota Surf Lifesaving Club",
+    "slug": "mallacoota-surf-lifesaving-club",
+    "entityType": "sporting-club",
+    "categories": ["Sport & Recreation"],
+    "description": "Volunteer surf lifesaving club patrolling Mallacoota’s ocean beaches. Public contact published by the club is the email and Instagram below; patrol times vary with the season.",
+    "descriptionShort": "Volunteer surf lifesaving club for Mallacoota’s ocean beaches.",
+    "email": "mallacootaslsc@gmail.com",
+    "social": [
+      { "platform": "instagram", "url": "https://www.instagram.com/mallacootaslsc/" }
+    ],
+    "verification": { "lastReviewedAt": "2026-08-29" }
+  },
+  "A0045005X": {
+    "related": ["mallacoota-rsl-bunker-museum"]
+  },
+  "A0095823N": {
+    "commonName": "CHIRF",
+    "name": "Mallacoota Community Health, Infrastructure and Resilience Fund",
+    "slug": "chirf",
+    "entityType": "community-organisation",
+    "section": "services",
+    "categories": ["Health & Aged Care"],
+    "description": "A health promotion charity and fundraising body, not a clinic or hospital. Do not contact CHIRF for medical care — see Mallacoota Medical Centre or Mallacoota District Health and Support Service.",
+    "descriptionShort": "Health infrastructure fundraising body. Not a clinic."
+  },
+  "A0108792I": {
+    "name": "Mallacoota Volunteer Fire Fighters Fund",
+    "slug": "mallacoota-volunteer-fire-fighters-fund",
+    "entityType": "community-organisation",
+    "categories": ["Churches & Community Organisations"],
+    "description": "A fundraising body supporting volunteer firefighters. This is not the CFA brigade and must not be used for fire reports or emergency contact. For fire and warnings use VicEmergency; in an emergency call 000.",
+    "descriptionShort": "Fundraising body, not the CFA brigade.",
+    "related": ["cfa-mallacoota-fire-brigade"]
+  },
+  "A0124949R": {
+    "name": "Mallacoota Marine Search and Rescue",
+    "slug": "mallacoota-marine-search-and-rescue",
+    "entityType": "community-organisation",
+    "categories": ["Sport & Recreation"],
+    "description": "Volunteer marine search and rescue association. In a life-threatening emergency call 000. The earlier Mallacoota Coast Guard Inc. is deregistered; do not treat that name as current.",
+    "descriptionShort": "Volunteer marine search and rescue. In an emergency call 000."
+  }
+}

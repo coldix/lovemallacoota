@@ -151,10 +151,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!cards.length) return;
 
     const tagRow = document.getElementById("tag-row");
+    const sectionRow = document.getElementById("section-row");
+    const typeRow = document.getElementById("type-row");
     const searchInput = document.getElementById("listing-search");
     const countEl = document.getElementById("result-count");
     const emptyEl = document.getElementById("no-results");
+    const noun = grid.dataset.noun || "places";
     let activeTag = "All";
+    let activeSection = "All";
+    let activeType = "All";
 
     const render = () => {
       const q = (searchInput?.value || "").trim().toLowerCase();
@@ -162,22 +167,29 @@ document.addEventListener("DOMContentLoaded", () => {
       for (const card of cards) {
         const tags = (card.dataset.tags || "").split("|");
         const tagOK = activeTag === "All" || tags.includes(activeTag);
+        const sectionOK = activeSection === "All" || card.dataset.section === activeSection;
+        const typeOK = activeType === "All" || card.dataset.type === activeType;
         const searchOK = !q || (card.dataset.search || "").includes(q);
-        const visible = tagOK && searchOK;
+        const visible = tagOK && sectionOK && typeOK && searchOK;
         card.hidden = !visible;
         if (visible) shown += 1;
       }
       if (emptyEl) emptyEl.hidden = shown > 0;
-      if (countEl) countEl.textContent = `Showing ${shown} of ${cards.length} places`;
+      if (countEl) countEl.textContent = `Showing ${shown} of ${cards.length} ${noun}`;
     };
 
-    tagRow?.addEventListener("click", (e) => {
-      const btn = e.target.closest(".tag-btn");
-      if (!btn) return;
-      activeTag = btn.dataset.tag;
-      tagRow.querySelectorAll(".tag-btn").forEach((b) => b.classList.toggle("active", b === btn));
-      render();
-    });
+    const bindRow = (row, key, assign) => {
+      row?.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tag-btn");
+        if (!btn || !btn.dataset[key]) return;
+        assign(btn.dataset[key]);
+        row.querySelectorAll(".tag-btn").forEach((b) => b.classList.toggle("active", b === btn));
+        render();
+      });
+    };
+    bindRow(tagRow, "tag", (value) => { activeTag = value; });
+    bindRow(sectionRow, "section", (value) => { activeSection = value; });
+    bindRow(typeRow, "type", (value) => { activeType = value; });
     searchInput?.addEventListener("input", render);
     render();
   })();

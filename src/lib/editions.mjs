@@ -213,8 +213,11 @@ export function editionSections(edition) {
       if (items.length) auto = { type: "links", data: items };
     }
     if (section.id === "social") {
-      const accounts = loadDataFile("social-links.json", []);
-      if (accounts.length) auto = { type: "links", data: accounts };
+      const social = loadDataFile("social-links.json", []);
+      const links = Array.isArray(social) ? social : social.links || [];
+      if (links.length) {
+        auto = { type: "links", data: links, intro: Array.isArray(social) ? null : social.intro };
+      }
     }
     return { ...section, articles: own, auto };
   }).filter((section) => section.articles.length > 0 || section.auto);
@@ -358,4 +361,16 @@ export function adsForSection(edition, sectionId) {
 
 export function fullPageAds(edition) {
   return editionAds(edition).filter((ad) => ad.size === "full");
+}
+
+/**
+ * The group that belongs beside a given section — the buy-swap-sell group with
+ * the classifieds, the weather group with the forecast. A pointer, not a
+ * duplicate: most of this town's conversation happens somewhere else, and
+ * pretending otherwise helps nobody.
+ */
+export function socialForSection(sectionId) {
+  const social = loadDataFile("social-links.json", []);
+  const links = Array.isArray(social) ? social : social.links || [];
+  return links.find((link) => link.section === sectionId) || null;
 }

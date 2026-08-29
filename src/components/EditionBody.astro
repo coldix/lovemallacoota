@@ -9,7 +9,7 @@ import {
   tableOfContents,
 } from "../lib/editions.mjs";
 import { renderBody } from "../lib/markup.mjs";
-import { adsForSection, fillerPhoto, fullPageAds, youTubeId } from "../lib/editions.mjs";
+import { adsForSection, fillerPhoto, fullPageAds, socialForSection, youTubeId } from "../lib/editions.mjs";
 import { tideChart } from "../lib/tide-chart.mjs";
 
 interface Props {
@@ -286,6 +286,10 @@ const statusLabel =
       </div>
     )}
 
+    {section.auto?.type === "links" && section.auto.intro && (
+      <p class="section-sub">{section.auto.intro}</p>
+    )}
+
     {section.auto?.type === "links" && (
       <div class="edition-link-grid">
         {section.auto.data.map((item) => (
@@ -317,6 +321,12 @@ const statusLabel =
           Chosen in turn from the {section.auto.data.rotation.of} listings in the directory — number {section.auto.data.rotation.position}. Not paid placement.
         </p>
       </div>
+    )}
+
+    {socialForSection(section.id) && (
+      <p class="edition-source edition-web-only">
+        Also on Facebook: <a href={socialForSection(section.id).url} rel="noopener noreferrer" target="_blank">{socialForSection(section.id).title}</a>.
+      </p>
     )}
 
     {adsForSection(edition, section.id).map((ad) => (

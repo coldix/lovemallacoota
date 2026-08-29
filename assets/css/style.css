@@ -915,8 +915,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   /* Justified text without hyphenation opens rivers at this measure. */
   .edition-article p { hyphenate-limit-chars: 6 3 3; }
   .edition-article h3,
-  .edition-byline,
-  .edition-figure { column-span: all; }
+  .edition-byline { column-span: all; }
+
+  /* A photograph sits in its column, three units wide. Spanning the measure
+     made a portrait 190mm wide and 253mm tall, which is most of a page for one
+     picture and pushed the article it belongs to onto the next sheet. */
+  .edition-figure {
+    column-span: none;
+    margin: 0 0 4mm;
+  }
+  .edition-figure img {
+    width: 100%;
+    height: auto;
+    max-height: 105mm;
+    object-fit: contain;
+    object-position: top;
+  }
+  /* Marked wide, a picture may still take the full measure. */
+  .edition-figure.wide { column-span: all; }
+  .edition-figure.wide img { max-height: 130mm; }
   .edition-article p { orphans: 3; widows: 3; margin-bottom: 0.55rem; }
 
   /* Nothing that reads as one object may be split across a page. */

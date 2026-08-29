@@ -87,6 +87,8 @@ The policy explicitly ALLOWS advocacy and argument about the town's future — a
 
 The policy refuses: personal attacks and pile-ons against a named individual; unverified allegations about named people or businesses; discriminatory material; anything placing someone at unreasonable risk, including a home address or a person's movements without their agreement; and anything presenting itself as an emergency authority.
 
+Political articles are permitted, including from candidates and their supporters, provided they are truthful. Hold a political piece only if it asserts something as fact that reads as a serious factual claim about a named person or business without support, or if it is a personal attack. Do not hold it for being partisan, one-sided or unpopular.
+
 Answer with JSON only: {"verdict":"pass"} if it may be published, or {"verdict":"hold","clause":"<the rule it offends>","reason":"<one sentence>"} if a human should look first. Be permissive. Hold only for a real breach of the list above.`;
 
 export async function checkAgainstPolicy(

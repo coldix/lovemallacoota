@@ -933,8 +933,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   }
   /* A 400px original at 44mm prints near 230dpi; across the column it would be
      110, which shows. */
-  .edition-figure.small { width: 44mm; display: inline-block; vertical-align: top; }
-  .edition-figure.small + .edition-figure.small { margin-left: 3mm; }
+  .edition-figure.small { width: 44mm; float: left; margin: 0 3mm 3mm 0; }
+  .edition-figure.small + .edition-figure.small { margin-right: 0; }
   .edition-figure.small img { max-height: 44mm; }
 
   /* Marked wide, a picture may still take the full measure. */
@@ -1173,7 +1173,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-ad-by { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.35rem; }
 .edition-ad-by { margin: 0.35rem 0 0; text-transform: none; letter-spacing: 0; }
 
-/* A pair of small pictures — a then and a now — sit side by side. */
-.edition-figure.small { display: inline-block; width: calc(50% - 0.5rem); vertical-align: top; }
-.edition-figure.small + .edition-figure.small { margin-left: 0.9rem; }
+/* A pair of small pictures — a then and a now — sit side by side. Floated
+   rather than inline-block: two 50% inline-blocks plus the whitespace between
+   them overflow the line and wrap, which is what happened first time. */
+.edition-figure.small { float: left; width: 48%; margin: 0 4% 0.9rem 0; }
+.edition-figure.small + .edition-figure.small { margin-right: 0; }
 .edition-figure.small img { aspect-ratio: 1 / 1; object-fit: cover; }
+.edition-article::after { content: ""; display: block; clear: both; }

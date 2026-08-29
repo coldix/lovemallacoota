@@ -229,6 +229,25 @@ test("filtered listing cards actually disappear", async () => {
   );
 });
 
+test("text links are themed, not browser blue on the dark page", async () => {
+  const css = await readFile(new URL("../assets/css/style.css", import.meta.url), "utf8");
+  assert.match(
+    css,
+    /:where\(a\)\s*\{\s*color:\s*var\(--link\)/,
+    "bare <a> would otherwise be browser blue on black"
+  );
+  assert.match(
+    css,
+    /:where\(a:visited\)\s*\{\s*color:\s*var\(--link\)/,
+    "visited links would otherwise be browser purple on black"
+  );
+  assert.match(
+    css,
+    /\.copyright a\s*\{\s*color:\s*var\(--link\)/,
+    "footer CC BY / MIT links must stay readable"
+  );
+});
+
 test("an unverified listing says so rather than staying silent", async () => {
   const unverified = loadListings(["listings_food.json"]).find(
     (business) => !business.verification?.email?.verifiedAt

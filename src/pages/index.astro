@@ -2,6 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import { SECTIONS, SITE_ORIGIN, WHATS_ON, sectionCounts } from "../lib/directory.mjs";
+import { currentEdition, editionLabel, panoramaOfTheWeek } from "../lib/editions.mjs";
+
+// The weekly promotion and the panorama both follow the open edition.
+const edition = currentEdition();
+const panorama = edition ? panoramaOfTheWeek(edition.week) : null;
 
 const counts = sectionCounts();
 const eat = counts["eat-drink"];
@@ -53,25 +58,8 @@ const siteSchema = {
   </PageHero>
 
   <main>
-    <section class="glass-card sheen content-block survey-callout reveal" aria-labelledby="community-survey-title">
-      <div class="survey-copy">
-        <p class="eyebrow">Have your say · 5 minute survey</p>
-        <h2 id="community-survey-title">Help shape local news and information</h2>
-        <p>MADRA, with support from Australian Business Volunteers, is asking Mallacoota and district what kind of trusted local information service would be most useful after the closure of <em>The Mallacoota Mouth</em>.</p>
-        <p>The survey covers local news, notices, events, community groups, school and youth activities, local history, business information, and important community or emergency information.</p>
-        <div class="survey-actions">
-          <a class="btn btn-coral" href="https://www.surveymonkey.com/r/5KWFLG8" target="_blank" rel="noopener noreferrer">Take the community survey</a>
-          <span>Responses close Wednesday 9 September 2026.</span>
-        </div>
-      </div>
-      <aside class="survey-note" aria-label="Paper survey information">
-        <strong>Prefer paper?</strong>
-        <p>Copies are available from Council's Information Centre. Completed surveys can be placed in the MADRA suggestion box there.</p>
-        <p class="survey-byline">MADRA · madrecovery.com</p>
-      </aside>
-    </section>
 
-    <section class="glass-card sheen content-block platform-callout reveal" aria-labelledby="platform-title">
+<section class="glass-card sheen content-block platform-callout reveal" aria-labelledby="platform-title">
       <div>
         <p class="eyebrow">Add your listing — free</p>
         <h2 id="platform-title">Clubs, trades and services, in the same directory as the bakery</h2>
@@ -101,11 +89,16 @@ const siteSchema = {
       </div>
     </section>
 
-    <section class="glass-card sheen content-block reveal">
-      <h2 class="section-title">This Week</h2>
-      <p class="section-sub">The weekly edition — notices, locals, weather and what's on, in one place.</p>
-      <div class="hero-cta" style="justify-content:flex-start">
+    <section class="glass-card sheen content-block reveal edition-promo" aria-labelledby="this-week-title">
+      <p class="eyebrow">Weekly edition{edition ? ` · ${editionLabel(edition)}` : ""}</p>
+      <h2 id="this-week-title">This Week in <span class="grad">Mallacoota</span></h2>
+      <p class="lede">
+        Community notices, club and school news, the week's events, weather and
+        tides — contributed by the people and groups they belong to.
+      </p>
+      <div class="hero-cta">
         <a href="/edition.html" class="btn btn-primary">Read this week</a>
+        <a href="/locals.html" class="btn btn-coral">Local of the Week</a>
         <a href="/calendar.html" class="btn btn-ghost">Community calendar</a>
       </div>
     </section>
@@ -114,8 +107,30 @@ const siteSchema = {
       <h2 class="section-title">Experience Mallacoota</h2>
       <p class="section-sub">Mornings on the inlet, from Mallacoota2020.</p>
       <div class="media-frame">
-        <iframe src="https://www.youtube.com/embed/AFHOXAZVtcA?si=XCXF_Y4A6snCy2LI" title="Experience Mallacoota — video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube-nocookie.com/embed/BBLQz7ozibM" title="Experience Mallacoota — video" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
+
+      {panorama && (
+        <div class="panorama">
+          <h3>Look around</h3>
+          <p class="section-sub">
+            A three-sixty view, changed each week — number {panorama.position} of {panorama.of}.
+            Drag to look, or open it full screen.
+          </p>
+          <div class="media-frame">
+            <iframe
+              class="ku-embed"
+              title="Three-sixty view around Mallacoota"
+              frameborder="0"
+              allow="xr-spatial-tracking; gyroscope; accelerometer"
+              allowfullscreen
+              scrolling="no"
+              loading="lazy"
+              src={`https://kuula.co/share/${panorama.id}?logo=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.33&autopalt=1&thumbs=0`}
+            ></iframe>
+          </div>
+        </div>
+      )}
     </section>
 
     <section class="glass-card sheen content-block reveal" aria-label="Sponsored">

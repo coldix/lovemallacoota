@@ -375,3 +375,16 @@ export function socialForSection(sectionId) {
   const links = Array.isArray(social) ? social : social.links || [];
   return links.find((link) => link.section === sectionId) || null;
 }
+
+/**
+ * A three-sixty view, rotated weekly like the trail and the business, so the
+ * home page is not the same picture every time somebody visits.
+ */
+export function panoramaOfTheWeek(week) {
+  const data = loadDataFile("panoramas.json", null);
+  const views = data?.views || [];
+  if (!views.length) return null;
+  const index = Number(String(week).split("-w")[1] || 1);
+  const view = views[index % views.length];
+  return { ...view, position: (index % views.length) + 1, of: views.length };
+}

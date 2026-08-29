@@ -83,7 +83,7 @@ const CSP = [
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https://ads.oze.net.au https://www.google-analytics.com",
   "connect-src 'self' https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com",
-  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://calendar.google.com https://challenges.cloudflare.com",
+  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://calendar.google.com https://challenges.cloudflare.com https://kuula.co",
   "form-action 'self'",
   "base-uri 'self'",
   "frame-ancestors 'self'",

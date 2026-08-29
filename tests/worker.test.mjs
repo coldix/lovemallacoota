@@ -129,3 +129,28 @@ test("the PDF route fails clearly when Browser Rendering is unavailable", async 
   );
   assert.equal(response.status, 503);
 });
+
+test("responses carry the security headers, including a policy that allows what the site loads", async () => {
+  const response = await worker.fetch(new Request("https://lovemallacoota.au/food.html"), env, {
+    waitUntil() {},
+  });
+  assert.equal(response.headers.get("Strict-Transport-Security"), "max-age=63072000; includeSubDomains");
+
+  const csp = response.headers.get("Content-Security-Policy");
+  assert.ok(csp, "no policy set");
+  // The things the site genuinely needs.
+  for (const needed of [
+    "https://fonts.gstatic.com",
+    "https://www.googletagmanager.com",
+    "https://ads.oze.net.au",
+    "https://challenges.cloudflare.com",
+    "https://www.youtube.com",
+  ]) {
+    assert.ok(csp.includes(needed), `policy blocks ${needed}, which the site loads`);
+  }
+  // And the things it must not allow.
+  assert.match(csp, /object-src 'none'/);
+  assert.match(csp, /base-uri 'self'/);
+  assert.match(csp, /form-action 'self'/);
+  assert.ok(!/script-src[^;]*\*/.test(csp), "the script policy must not be a wildcard");
+});

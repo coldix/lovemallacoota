@@ -2,7 +2,13 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 import EditionBody from "../../components/EditionBody.astro";
-import { editionLabel, editionTitle, loadEditions } from "../../lib/editions.mjs";
+import {
+  breadcrumbSchema,
+  editionLabel,
+  editionSchema,
+  editionTitle,
+  loadEditions,
+} from "../../lib/editions.mjs";
 
 // One static page per edition, so every week keeps a permanent URL.
 export function getStaticPaths() {
@@ -13,6 +19,12 @@ export function getStaticPaths() {
 }
 
 const { edition } = Astro.props;
+const schema = editionSchema(edition);
+const crumbs = breadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "This Week", path: "/edition.html" },
+  { name: editionLabel(edition), path: `/edition/${edition.week}.html` },
+]);
 ---
 <BaseLayout
   title={`${editionTitle(edition)} — This Week in Mallacoota`}
@@ -20,7 +32,10 @@ const { edition } = Astro.props;
   canonicalPath={`/edition/${edition.week}.html`}
   active="edition"
   showAds={true}
+  socialImage={edition.cover?.web}
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(crumbs)} is:inline />
   <PageHero eyebrow="Weekly edition" prefix="Week of" accent={edition.displayDate} lede={`${editionLabel(edition)} — community notices, club and school news, events, weather and tides.`} />
   <main>
     <EditionBody edition={edition} archived={edition.status !== "open"} />

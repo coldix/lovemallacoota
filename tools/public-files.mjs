@@ -16,10 +16,8 @@ export const publicFiles = [
   "images/logo145x100.webp",
   "images/og-hero.jpg",
   "images/oze-logo216x100.webp",
-  "llms.txt",
   "robots.txt",
   "site.webmanifest",
-  "sitemap.xml",
 ];
 
 // Cover photographs are per-week, so the directory ships whole rather than

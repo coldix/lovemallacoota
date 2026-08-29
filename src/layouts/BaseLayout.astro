@@ -10,6 +10,8 @@ interface Props {
   robots?: string;
   extraScript?: string;
   showAds?: boolean;
+  /** Page-specific social image; falls back to the site hero. */
+  socialImage?: string;
 }
 
 const {
@@ -20,9 +22,10 @@ const {
   robots = "index,follow",
   extraScript,
   showAds = false,
+  socialImage: socialImagePath,
 } = Astro.props;
 const canonical = new URL(canonicalPath, Astro.site);
-const socialImage = new URL("/images/og-hero.jpg", Astro.site);
+const socialImage = new URL(socialImagePath || "/images/og-hero.jpg", Astro.site);
 ---
 
 <!doctype html>

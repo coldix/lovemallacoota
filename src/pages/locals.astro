@@ -1,10 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
-import { editionPath, localsOfTheWeek } from "../lib/editions.mjs";
+import { articleAnchor, breadcrumbSchema, editionPath, localSchema, localsOfTheWeek } from "../lib/editions.mjs";
 import { renderBody } from "../lib/markup.mjs";
 
 const locals = localsOfTheWeek();
+const schema = locals.map(localSchema);
+const crumbs = breadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "Local of the Week", path: "/locals.html" },
+]);
 ---
 <BaseLayout
   title="Local of the Week — Love Mallacoota"
@@ -12,7 +17,10 @@ const locals = localsOfTheWeek();
   canonicalPath="/locals.html"
   active="locals"
   showAds={true}
+  socialImage={locals[0]?.image?.url}
 >
+  {schema.map((entry) => <script slot="head" type="application/ld+json" set:html={JSON.stringify(entry)} is:inline />)}
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(crumbs)} is:inline />
   <PageHero eyebrow="The people here" prefix="Local of the" accent="Week" lede="Mallacoota is its people. Every week we publish one of their stories — what they did, where they came from, and what they know that the rest of us do not." />
   <main class="locals-page">
     {locals.length === 0 ? (
@@ -21,7 +29,7 @@ const locals = localsOfTheWeek();
       </section>
     ) : (
       locals.map((local) => (
-        <article class="glass-card sheen content-block reveal edition-article">
+        <article class="glass-card sheen content-block reveal edition-article" id={articleAnchor(local)}>
           <p class="eyebrow">Week of {local.displayDate}</p>
           <h2>{local.title}</h2>
           {local.byline && <p class="edition-byline">{local.byline}</p>}

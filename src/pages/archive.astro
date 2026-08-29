@@ -1,8 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import {
+  archiveIssues,
+  archiveSchema,
+  archiveYears,
+  issueSearchText,
+  loadArchive,
+} from "../lib/archive.mjs";
+
+// Rendered here, at build time: 37 issues of unique local history that were
+// previously fetched by the browser and therefore invisible to crawlers.
+const archive = loadArchive();
+const issues = archiveIssues(archive);
+const years = archiveYears(issues);
+const schema = archiveSchema(issues, archive);
 ---
 <BaseLayout title="Mallacoota Mouth Archive — Love Mallacoota" description="A searchable community archive of The Mallacoota Mouth and Mallacoota's local history." canonicalPath="/archive.html" active="archive" extraScript="/assets/js/archive.js?v=26.08.006">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
   <PageHero eyebrow="Community history" prefix="Mallacoota Mouth" accent="Archive" lede="A growing, searchable record of the local newsletter that documented Mallacoota's people, organisations, events and everyday life." />
   <main>
     <section class="glass-card sheen content-block reveal archive-intro">
@@ -21,11 +36,62 @@ import PageHero from "../components/PageHero.astro";
       <p class="archive-rights-note">Before any issue is made downloadable we are establishing whether <em>The Mallacoota Mouth</em> is in the public domain or whether permission is required, and from whom. Until that is settled and recorded, the catalogue lists what we hold but no PDF is published. <strong>If you know who holds the rights, or you were involved in producing the Mouth, please <a href="/contact.html?subject=archive">get in touch</a>.</strong></p>
       <div class="filter-bar">
         <div class="search-wrap"><span aria-hidden="true">⌕</span><input type="search" id="archive-search" class="search-input" placeholder="Search issue, date or topic…" aria-label="Search archived issues" autocomplete="off" /></div>
-        <div class="tag-row" id="archive-years" role="group" aria-label="Filter by year"></div>
-        <p class="result-count" id="archive-count" aria-live="polite">Loading archive…</p>
+        <div class="tag-row" id="archive-years" role="group" aria-label="Filter by year">
+          <button type="button" class="tag-btn active" data-year="All">All years</button>
+          {years.map((entry) => (
+            <button type="button" class="tag-btn" data-year={entry.year}>{entry.year} ({entry.count})</button>
+          ))}
+        </div>
+        <p class="result-count" id="archive-count" aria-live="polite">
+          {issues.length} {issues.length === 1 ? "issue" : "issues"} found
+        </p>
       </div>
-      <div id="archive-grid" class="archive-grid" aria-live="polite"></div>
-      <noscript><p class="no-results">JavaScript is required to search this catalogue.</p></noscript>
+      <div id="archive-grid" class="archive-grid">
+        {issues.map((issue) => (
+          <article
+            class="archive-card"
+            data-year={String(issue.publicationDate).slice(0, 4)}
+            data-search={issueSearchText(issue)}
+          >
+            <div class="archive-card-heading">
+              <p class="archive-publication">{issue.publication}</p>
+              <span class="archive-issue-number">Issue {issue.issueNumber}</span>
+            </div>
+            <h3>{issue.displayDate}</h3>
+            <p class="archive-description">{issue.description}</p>
+            {issue.cover?.caption && (
+              <p class="archive-cover">
+                <strong>{issue.cover.credit ? `Cover (${issue.cover.credit}): ` : "Cover: "}</strong>
+                {issue.cover.caption}
+              </p>
+            )}
+            <dl class="archive-metadata">
+              <dt>Pages</dt><dd>{issue.pageCount}</dd>
+              <dt>Editor</dt><dd>{issue.editor || "Not recorded"}</dd>
+              <dt>Source</dt><dd>{issue.provenance || "Not recorded"}</dd>
+            </dl>
+            {(issue.contents || []).length > 0 && (
+              <details class="archive-toc">
+                <summary>In this issue ({issue.contents.length})</summary>
+                <ol>
+                  {issue.contents.map((entry) => (
+                    <li><span class="archive-toc-page">p{entry.page}</span>{entry.title}</li>
+                  ))}
+                </ol>
+              </details>
+            )}
+            <div class="chips archive-topics">
+              {(issue.topics || []).map((topic) => <span class="chip">{topic}</span>)}
+            </div>
+            <div class="archive-availability">
+              {issue.pdfUrl
+                ? <a class="btn btn-primary" href={issue.pdfUrl}>Read issue (PDF)</a>
+                : <span class="archive-status">Catalogued · digital copy under archive review</span>}
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="no-results" id="archive-empty" hidden>No archived issues match that search.</p>
     </section>
   </main>
 </BaseLayout>

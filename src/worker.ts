@@ -56,12 +56,44 @@ function redirectToCanonical(url: URL): Response {
   return Response.redirect(url.toString(), 301);
 }
 
+/**
+ * Everything the site actually loads, and nothing else. Each entry is here
+ * because a feature needs it:
+ *   Google Fonts        the typefaces
+ *   Google Analytics    the tag and its beacons
+ *   ads.oze.net.au      the house ad tag, its decisions and its artwork
+ *   challenges.…        Turnstile on the contact form
+ *   YouTube, Maps       the two embeds on the home page
+ * 'unsafe-inline' for scripts is regrettable and load-bearing: the theme
+ * flash-guard, the analytics config and the page-level handlers are all inline
+ * script blocks. Removing it means giving every one of them a nonce, which the
+ * static build cannot do without rendering each page through the Worker.
+ */
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://ads.oze.net.au https://challenges.cloudflare.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: https://ads.oze.net.au https://www.google-analytics.com",
+  "connect-src 'self' https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com",
+  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://challenges.cloudflare.com",
+  "form-action 'self'",
+  "base-uri 'self'",
+  "frame-ancestors 'self'",
+  "object-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 function applySecurityHeaders(response: Response): Response {
   const secured = new Response(response.body, response);
   secured.headers.set("X-Content-Type-Options", "nosniff");
   secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   secured.headers.set("X-Frame-Options", "SAMEORIGIN");
+  // Two years, subdomains included. No preload: that is a one-way door and
+  // belongs to whoever owns the domain, not to a deploy script.
+  secured.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains");
+  secured.headers.set("Content-Security-Policy", CSP);
   return secured;
 }
 

@@ -225,3 +225,71 @@ export function localsOfTheWeek(editions = loadEditions()) {
     )
     .sort((a, b) => b.week.localeCompare(a.week));
 }
+
+const ORIGIN = "https://lovemallacoota.au";
+
+/** Breadcrumbs, so a deep page shows its place rather than a bare URL. */
+export function breadcrumbSchema(trail) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((step, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: step.name,
+      item: `${ORIGIN}${step.path}`,
+    })),
+  };
+}
+
+/**
+ * An edition as a periodical issue, with each contributed piece as an article.
+ * Automatic sections are not articles: nobody wrote the forecast.
+ */
+export function editionSchema(edition) {
+  const pagePath = edition.status === "open" ? "/edition.html" : editionPath(edition);
+  const articles = (edition.articles || []).map((article) => ({
+    "@type": "NewsArticle",
+    headline: article.title,
+    datePublished: article.publishedAt || undefined,
+    articleSection: sectionTitle(article.section),
+    author: article.byline ? { "@type": "Person", name: article.byline } : undefined,
+    image: article.image?.url ? `${ORIGIN}${article.image.url}` : undefined,
+    url: `${ORIGIN}${pagePath}#${articleAnchor(article)}`,
+    isAccessibleForFree: true,
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "PublicationIssue",
+    name: `This Week in Mallacoota — ${editionLabel(edition)}`,
+    issueNumber: editionNumber(edition),
+    datePublished: edition.weekStart,
+    url: `${ORIGIN}${pagePath}`,
+    isPartOf: {
+      "@type": "Periodical",
+      name: "This Week in Mallacoota",
+      publisher: { "@type": "Organization", name: "Love Mallacoota", url: `${ORIGIN}/` },
+    },
+    hasPart: articles.length ? articles : undefined,
+  };
+}
+
+/** A Local of the Week profile is an article about a person. */
+export function localSchema(local) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: local.title,
+    datePublished: local.publishedAt || undefined,
+    articleSection: "Local of the Week",
+    author: local.byline ? { "@type": "Person", name: local.byline } : undefined,
+    about: local.subject?.name ? { "@type": "Person", name: local.subject.name } : undefined,
+    image: local.image?.url ? `${ORIGIN}${local.image.url}` : undefined,
+    url: `${ORIGIN}/locals.html#${articleAnchor(local)}`,
+    isAccessibleForFree: true,
+    citation: (local.sources || []).map(
+      (source) => `${source.title}, ${source.publication}, ${source.date}`
+    ),
+  };
+}

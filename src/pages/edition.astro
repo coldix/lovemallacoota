@@ -2,11 +2,26 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import EditionBody from "../components/EditionBody.astro";
-import { currentEdition, editionLabel, editionPath, editionTitle, loadEditions, pastEditions } from "../lib/editions.mjs";
+import {
+  breadcrumbSchema,
+  currentEdition,
+  editionLabel,
+  editionPath,
+  editionSchema,
+  editionTitle,
+  loadEditions,
+  pastEditions,
+} from "../lib/editions.mjs";
 
 const editions = loadEditions();
 const edition = currentEdition(editions);
 const past = pastEditions(editions);
+
+const schema = edition ? editionSchema(edition) : null;
+const crumbs = breadcrumbSchema([
+  { name: "Home", path: "/" },
+  { name: "This Week", path: "/edition.html" },
+]);
 ---
 <BaseLayout
   title="This Week in Mallacoota — Love Mallacoota"
@@ -14,7 +29,10 @@ const past = pastEditions(editions);
   canonicalPath="/edition.html"
   active="edition"
   showAds={true}
+  socialImage={edition?.cover?.web}
 >
+  {schema && <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />}
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(crumbs)} is:inline />
   <PageHero eyebrow="Weekly edition" prefix="This Week in" accent="Mallacoota" lede="Community notices, club and school news, the week's events, weather and tides — contributed by the people and groups they belong to." />
   <main>
     {edition ? (

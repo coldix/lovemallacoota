@@ -1,14 +1,43 @@
 ---
 import PolicyPage from "../components/PolicyPage.astro";
 ---
-<PolicyPage title="Privacy — Love Mallacoota" description="How Love Mallacoota handles personal information and website data." canonicalPath="/privacy.html" prefix="Your" accent="Privacy" lede="We collect as little personal information as practical and use it only to operate this community service.">
-  <h2>Information you choose to send</h2>
-  <p>When you submit a correction or enquiry, we receive the contact details and message you provide. We use them to respond, verify the submission and maintain an appropriate record of the change.</p>
-  <h2>Website measurement</h2>
-  <p>We use basic website analytics to understand which pages are useful. Analytics may record technical details such as browser type, approximate location, referring page and pages visited. We do not use this information to build personal profiles.</p>
-  <h2>Service providers</h2>
-  <p>Cloudflare delivers and protects the site. EmailJS handles the current contact-form delivery. Embedded Google, YouTube and advertising content may receive technical information when you load or interact with those services.</p>
-  <h2>Your choices</h2>
-  <p>You can contact us to ask what personal information we hold about a submission, request a correction, or request deletion where we do not need to retain it for a legitimate record.</p>
-  <p><a href="/contact.html">Send a privacy request</a>.</p>
+<PolicyPage title="Privacy — Love Mallacoota" description="What Love Mallacoota collects, who it passes through, and what you can ask us to remove." canonicalPath="/privacy.html" prefix="Privacy" accent="Policy" lede="What we collect, where it goes, and what you can ask us to remove. Written to be read, not to be survived.">
+  <h2>Information you send us</h2>
+  <p>When you use the contact form we receive what you type: your name, your email address, a phone number if you give one, and your message. We use it to answer you and to keep a record of any change we make as a result.</p>
+  <p>The form is protected by Cloudflare Turnstile, which checks that a person rather than a machine is submitting it. Turnstile receives technical information about the request.</p>
+
+  <h2>If you contribute to the weekly edition</h2>
+  <p>Contributors sign in through Cloudflare Access, which confirms the email address you sign in with. We record that address, your byline and what you submitted.</p>
+  <p><strong>Two things about that are worth understanding before you submit.</strong></p>
+  <ul>
+    <li><strong>Submissions are checked by an automated system</strong> before publication. The text you send is passed to a language model running on Cloudflare's network, which checks it against our <a href="/editorial-policy.html">editorial policy</a>. It is not used to train anything.</li>
+    <li><strong>Published articles are stored in a public code repository.</strong> The site is built from files in a public repository on GitHub, so a published piece — including the byline and any contact details you asked us to publish — becomes part of a public record that can be copied and is not practical to erase from its history. Contact details you do <em>not</em> ask us to publish are kept for us to reach you and are not written into the article.</li>
+  </ul>
+  <p>Classifieds, family notices and positions vacant require a phone number or email address so a reader can respond. Those are published by their nature — that is what the notice is for.</p>
+
+  <h2>Photographs</h2>
+  <p>A photograph you send is published with the credit you give, and stored with the site. If it shows other people, please have their agreement before sending it.</p>
+
+  <h2>Measurement</h2>
+  <p>We use Google Analytics and Cloudflare Web Analytics to see which pages are useful. These record technical details such as browser, approximate location, referring page and pages visited. We do not build personal profiles and we do not sell anything to anyone.</p>
+
+  <h2>Who else is involved</h2>
+  <ul>
+    <li><strong>Cloudflare</strong> serves, protects and builds the site, and provides Access, Turnstile and the automated policy check.</li>
+    <li><strong>GitHub</strong> stores the site's files and published content, publicly.</li>
+    <li><strong>Email delivery</strong> is handled through our own ad network at ads.oze.net.au, which sends form submissions on to us. The site itself does not use a third-party email service.</li>
+    <li><strong>Embedded content</strong> — YouTube, Google Maps, Google Calendar, Kuula panoramas and our own advertising at ads.oze.net.au — receives technical information when you load or interact with it. Our house advertising sets nothing on your device and does not track you between sites.</li>
+    <li><strong>Open data services</strong> — Open-Meteo for weather and sea level — are called when the site is built, not by your browser.</li>
+  </ul>
+
+  <h2>What you can ask for</h2>
+  <p>You can ask what we hold about you, ask us to correct it, or ask us to remove it. We will do so unless we need to keep it as a record of something we published, and we will tell you plainly if that is the case.</p>
+  <p>Where something has been published to the public repository, we can remove it from the site immediately; removing it from the repository's history is a heavier operation and we will tell you honestly what is and is not practical.</p>
+  <p><a href="/contact.html?subject=privacy">Send a privacy request</a>.</p>
+
+  <h2>Children</h2>
+  <p>This is a community site and is not directed at children. We do not knowingly collect information from a child. School and youth material is submitted by the school or by a parent, not by students directly.</p>
+
+  <h2>Changes</h2>
+  <p>This page is updated when what we do changes. Every change is dated in the public project history.</p>
 </PolicyPage>

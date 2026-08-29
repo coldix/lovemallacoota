@@ -28,6 +28,7 @@ export const SECTIONS = [
   { id: "weather", title: "Weekly Weather Forecast", automatic: true },
   { id: "tides", title: "Tide Times", automatic: true },
   { id: "diary", title: "This Week's Diary", automatic: true },
+  { id: "video", title: "Video of the Week", automatic: true },
   { id: "trail", title: "Trail of the Week", automatic: true },
   { id: "business", title: "Business of the Week", automatic: true },
   { id: "transport", title: "Buses and Transport", automatic: true },
@@ -89,6 +90,7 @@ function autoEntry(section) {
   if (auto.type === "tides") return "Official predictions, Gabo Island";
   if (auto.type === "tide-table") return `Highs and lows, ${auto.data.station}`;
   if (auto.type === "diary") return `${auto.data.length} ${auto.data.length === 1 ? "event" : "events"} this week`;
+  if (auto.type === "video") return auto.data.title || "This week's video";
   if (auto.type === "trail") return auto.data.name;
   if (auto.type === "business") return auto.data.name;
   if (auto.type === "links") return `${auto.data.length} ${auto.data.length === 1 ? "link" : "links"}`;
@@ -197,6 +199,7 @@ export function editionSections(edition) {
         : { type: "tides", data: TIDE_SOURCE };
     }
     if (section.id === "diary" && weekly?.events?.length) auto = { type: "diary", data: weekly.events };
+    if (section.id === "video" && edition.video) auto = { type: "video", data: edition.video };
     if (section.id === "trail" && weekly?.trail) auto = { type: "trail", data: weekly.trail };
     if (section.id === "business" && weekly?.business) auto = { type: "business", data: weekly.business };
     if (section.id === "transport") {
@@ -292,4 +295,36 @@ export function localSchema(local) {
       (source) => `${source.title}, ${source.publication}, ${source.date}`
     ),
   };
+}
+
+/**
+ * The eleven-character YouTube id, from whichever form of the link was pasted.
+ * Anything else returns null and the section does not render, rather than
+ * embedding a frame pointed at nothing.
+ */
+export function youTubeId(url) {
+  if (!url) return null;
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=)([A-Za-z0-9_-]{11})/,
+    /(?:youtu\.be\/)([A-Za-z0-9_-]{11})/,
+    /(?:youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/,
+    /(?:youtube\.com\/shorts\/)([A-Za-z0-9_-]{11})/,
+  ];
+  for (const pattern of patterns) {
+    const match = pattern.exec(String(url));
+    if (match) return match[1];
+  }
+  return null;
+}
+
+/**
+ * A photograph to fill the space a short edition leaves. Chosen by rotation
+ * from data/photo-bank.json so the same picture does not appear two weeks
+ * running, and only used when there is a gap worth filling.
+ */
+export function fillerPhoto(edition) {
+  const bank = loadDataFile("photo-bank.json", []);
+  if (!bank.length) return null;
+  const [, week] = edition.week.split("-w");
+  return bank[Number(week) % bank.length];
 }

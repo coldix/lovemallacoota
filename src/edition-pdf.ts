@@ -7,6 +7,8 @@
 #              See docs/WEEKLY-MOUTH.md.
 */
 
+import { OZE_LOGO_DATA_URI } from "./oze-logo.ts";
+
 const WEEK = /^\/edition\/(\d{4}-w\d{2})\.pdf$/;
 
 /**
@@ -28,6 +30,34 @@ export function editionPageUrl(origin: string, week: string): string {
 
 export function pdfFilename(week: string): string {
   return `mallacoota-${week}.pdf`;
+}
+
+/** Issue number and cover date, read from the page rather than recomputed. */
+function editionDetails(html: string): { issue: string; date: string } {
+  const issue = /Edition (\d{2}:\d{2})/.exec(html)?.[1] ?? "";
+  const date = /Week of ([0-9]{1,2} [A-Za-z]+ [0-9]{4})/.exec(html)?.[1] ?? "";
+  return { issue, date };
+}
+
+/**
+ * The running footer, on every page after the cover: where it came from, who
+ * made it, which issue it is, and the page number.
+ */
+function footer(week: string, html: string): string {
+  const { issue, date } = editionDetails(html);
+  const middle = [date, issue && `Issue ${issue}`].filter(Boolean).join(" · ");
+  return (
+    '<div style="width:100%;font-size:8px;color:#555;padding:0 10mm;' +
+    'display:flex;align-items:center;justify-content:space-between;font-family:Roboto,Helvetica,Arial,sans-serif">' +
+    '<span style="display:flex;align-items:center;gap:4px">' +
+    '<span style="font-weight:600;color:#333">lovemallacoota.au</span>' +
+    `<span>· ${middle}</span></span>` +
+    '<span style="display:flex;align-items:center;gap:4px">' +
+    '<span>A project by oze.au</span>' +
+    `<img src="${OZE_LOGO_DATA_URI}" style="height:9px;width:auto;vertical-align:middle" />` +
+    '<span style="margin-left:6px" class="pageNumber"></span>' +
+    '</span></div>'
+  );
 }
 
 export async function handleEditionPdf(
@@ -79,9 +109,7 @@ export async function handleEditionPdf(
         printBackground: true,
         displayHeaderFooter: true,
         headerTemplate: "<div></div>",
-        footerTemplate:
-          '<div style="width:100%;font-size:9px;color:#555;padding:0 16mm;display:flex;justify-content:space-between">' +
-          '<span>lovemallacoota.au</span><span class="pageNumber"></span></div>',
+        footerTemplate: footer(week, html),
       });
     } finally {
       await browser.close();

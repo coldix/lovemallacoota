@@ -9,6 +9,8 @@ import {
   tableOfContents,
 } from "../lib/editions.mjs";
 import { renderBody } from "../lib/markup.mjs";
+import { fillerPhoto, youTubeId } from "../lib/editions.mjs";
+import { tideChart } from "../lib/tide-chart.mjs";
 
 interface Props {
   edition: Record<string, any>;
@@ -29,6 +31,7 @@ const TIDE_WHEN = new Intl.DateTimeFormat("en-AU", {
 });
 const tideWhen = (value) => TIDE_WHEN.format(new Date(value));
 const toc = tableOfContents(edition);
+const filler = fillerPhoto(edition);
 const total = countArticles(edition);
 const statusLabel =
   edition.status === "open"
@@ -159,8 +162,55 @@ const statusLabel =
       </div>
     )}
 
+    {section.auto?.type === "video" && youTubeId(section.auto.data.url) && (
+      <div class="edition-auto">
+        <div class="media-frame edition-web-only">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${youTubeId(section.auto.data.url)}`}
+            title={section.auto.data.title || "Video of the week"}
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="edition-source">
+          <a href={section.auto.data.url} rel="noopener noreferrer" target="_blank">Watch on YouTube</a>
+          {section.auto.data.credit && <span> · {section.auto.data.credit}</span>}
+          {section.auto.data.note && <span> · {section.auto.data.note}</span>}
+        </p>
+      </div>
+    )}
+
     {section.auto?.type === "tide-table" && (
       <div class="edition-auto">
+        {(() => {
+          const chart = tideChart(section.auto.data);
+          return chart ? (
+            <svg
+              class="edition-tide-chart"
+              viewBox={`0 0 ${chart.width} ${chart.height}`}
+              role="img"
+              aria-label="The week's tides, high and low water"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <path class="tide-area" d={chart.area} />
+              <path class="tide-line" d={chart.path} />
+              {chart.dayMarks.map((day) => (
+                <g>
+                  <line class="tide-day" x1={day.x} x2={day.x} y1="14" y2={chart.baseline} />
+                  <text class="tide-day-label" x={day.x + 4} y="14">{day.label}</text>
+                </g>
+              ))}
+              {chart.marks.map((mark) => (
+                <g>
+                  <circle class={mark.high ? "tide-high" : "tide-low"} cx={mark.x} cy={mark.y} r="3.5" />
+                  <text class="tide-mark-label" x={mark.x} y={mark.high ? mark.y - 9 : mark.y + 16} text-anchor="middle">{mark.label}</text>
+                </g>
+              ))}
+            </svg>
+          ) : null;
+        })()}
         <table class="forecast">
           <thead>
             <tr><th scope="col">When</th><th scope="col">Tide</th><th scope="col">Height</th></tr>
@@ -303,6 +353,15 @@ const statusLabel =
     ))}
   </section>
 ))}
+
+{filler && (
+  <section class="glass-card sheen content-block reveal edition-filler">
+    <figure class="edition-figure">
+      <img src={filler.url} alt={filler.alt} loading="lazy" decoding="async" />
+      <figcaption>{filler.caption}{filler.credit && <span> — {filler.credit}</span>}</figcaption>
+    </figure>
+  </section>
+)}
 
 {!archived && (
   <section class="glass-card sheen content-block reveal edition-web-only">

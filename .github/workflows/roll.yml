@@ -2,8 +2,9 @@ name: Close the week
 
 on:
   schedule:
-    # 13:00 UTC Sunday = Sunday 23:00 AEST. The week closes, the next opens.
-    - cron: "0 13 * * 0"
+    # 06:00 UTC Sunday = Sunday 16:00 AEST. The edition is published at four on
+    # Sunday afternoon: the week closes, the next one opens.
+    - cron: "0 6 * * 0"
   workflow_dispatch:
 
 permissions:

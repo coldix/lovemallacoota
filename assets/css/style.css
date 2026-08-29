@@ -883,6 +883,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .edition-byline,
   .edition-figure { column-span: all; }
   .edition-article p { orphans: 3; widows: 3; margin-bottom: 0.55rem; }
+
+  /* Nothing that reads as one object may be split across a page. */
+  table, .forecast, .timetable, .edition-figure, .edition-tide-chart,
+  .edition-link-card, .edition-diary li, .edition-list li {
+    break-inside: avoid;
+  }
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+  .edition-auto { break-inside: avoid-page; }
   .edition-auto, .edition-toc-list { columns: 1; }
   .forecast { font-size: 9pt; }
   .section-title { font-size: 15pt; margin-bottom: 0.2rem; }
@@ -1065,3 +1074,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-correction h4 { margin: 0 0 0.35rem; font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.06em; }
 .edition-correction ul { margin: 0; padding-left: 1.1rem; }
 .edition-correction time { color: var(--muted); }
+
+/* Tide curve. Only the marked points are predictions; the line between them is
+   an interpolation, which is what a semidiurnal tide does anyway. */
+.edition-tide-chart { width: 100%; height: auto; margin-bottom: 1rem; overflow: visible; }
+.tide-line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.tide-area { fill: color-mix(in srgb, var(--accent) 16%, transparent); stroke: none; }
+.tide-day { stroke: var(--glass-border); stroke-width: 1; stroke-dasharray: 3 4; }
+.tide-day-label { fill: var(--muted); font-size: 12px; font-weight: 600; }
+.tide-mark-label { fill: var(--muted); font-size: 11px; }
+.tide-high { fill: var(--accent); }
+.tide-low { fill: var(--coral, #ff7a59); }
+@media print {
+  .tide-line { stroke: #000; }
+  .tide-area { fill: #e8e8e8; }
+  .tide-day-label, .tide-mark-label { fill: #333; }
+  .tide-high { fill: #000; }
+  .tide-low { fill: #666; }
+}

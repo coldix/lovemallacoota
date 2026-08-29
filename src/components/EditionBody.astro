@@ -273,16 +273,26 @@ const statusLabel =
       <article class="edition-article" id={articleAnchor(article)}>
         <h3>{article.title}</h3>
         {article.byline && <p class="edition-byline">{article.byline}</p>}
-        {article.image && (
+        {[article.image, ...(article.images || [])].filter(Boolean).map((image) => (
           <figure class="edition-figure">
-            <img src={article.image.url} alt={article.image.alt} loading="lazy" decoding="async" />
+            <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
             <figcaption>
-              {article.image.credit}
-              {article.image.note && <span> · {article.image.note}</span>}
+              {image.credit}
+              {image.note && <span> · {image.note}</span>}
             </figcaption>
           </figure>
-        )}
+        ))}
         <Fragment set:html={renderBody(article.body)} />
+        {article.corrections?.length > 0 && (
+          <aside class="edition-correction">
+            <h4>Corrections</h4>
+            <ul>
+              {article.corrections.map((correction) => (
+                <li><time datetime={correction.date}>{correction.date}</time> — {correction.note}</li>
+              ))}
+            </ul>
+          </aside>
+        )}
         {article.contact?.public && (
           <p class="edition-source">
             Contact: <a href={`mailto:${article.contact.email}`}>{article.contact.email}</a>

@@ -1052,3 +1052,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Bullet lists inside contributed text. */
 .edition-list { margin: 0 0 0.9rem 1.1rem; padding: 0; }
 .edition-list li { margin: 0.2rem 0; }
+
+/* A correction is part of the record, not a footnote to hide. */
+.edition-correction {
+  margin: 1.2rem 0 0;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--coral, #ff7a59);
+  background: color-mix(in srgb, var(--coral, #ff7a59) 8%, transparent);
+  font-size: 0.88rem;
+  column-span: all;
+}
+.edition-correction h4 { margin: 0 0 0.35rem; font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.edition-correction ul { margin: 0; padding-left: 1.1rem; }
+.edition-correction time { color: var(--muted); }

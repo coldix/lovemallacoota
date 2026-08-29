@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.23",
-  "generatedAt": "2026-08-29 16:24:15 AEST (Melbourne)",
+  "version": "v0.24",
+  "generatedAt": "2026-08-29 16:42:02 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -37,8 +37,8 @@
     },
     {
       "path": "assets/css/style.css",
-      "bytes": 44973,
-      "sha256": "3124a434c603fa9c8bb989f7e8b1ea4229f81f4796957f70b6d79cdf49be250a"
+      "bytes": 45502,
+      "sha256": "cff67dbd990d0b2161f7a89faa5a5149cf6a2e4365dfa5c4ad9098ab0cb3ee9b"
     },
     {
       "path": "assets/icons/android-chrome-192x192.png",
@@ -117,13 +117,13 @@
     },
     {
       "path": "edition.html",
-      "bytes": 22417,
-      "sha256": "1d0c537cf867051d60dfa292dd78bdc84d97594f9c94f395dd68a4c35475aef5"
+      "bytes": 23373,
+      "sha256": "561d54c60aab93856608eb727a2432f5aaf3379bc32d2b1eea304184889588ed"
     },
     {
       "path": "edition/2026-w35.html",
-      "bytes": 22528,
-      "sha256": "27de86f849f4962c2fd7ccd869826567be5bb80188b2b3d9e7ab935f024be85e"
+      "bytes": 23484,
+      "sha256": "ec3c7fe3651de3f11646dfc277ab5b19589badd20a252698279df8a30655fc8f"
     },
     {
       "path": "editorial-policy.html",
@@ -144,6 +144,16 @@
       "path": "food.html",
       "bytes": 38490,
       "sha256": "b96093f2db43b0485cb8f8ae969e4193f1e8cbd3d11f7ec9e2b4647614c0bbfb"
+    },
+    {
+      "path": "images/articles/w35-local-frank-squires-2.webp",
+      "bytes": 425374,
+      "sha256": "206306681d8ed6cb2ee29d9bd66dfcff7852fcf7b54721570ece85a51ce5c78d"
+    },
+    {
+      "path": "images/articles/w35-local-frank-squires.webp",
+      "bytes": 313456,
+      "sha256": "b7fc9437dea30fc172a098119032047f40a306b3a7754a2ffbf8b1180d665bab"
     },
     {
       "path": "images/background-01.webp",
@@ -177,13 +187,13 @@
     },
     {
       "path": "images/covers/2026-w35-print.jpg",
-      "bytes": 1131035,
-      "sha256": "b31cea8e34f4b55201b1df75b5b596c0688c8aebf696d1c44aade7f303fb0dc3"
+      "bytes": 1179981,
+      "sha256": "96384b11a4bf5b6283040eb60d162b7296336b21bad7d6585b786724d482ce07"
     },
     {
       "path": "images/covers/2026-w35.webp",
-      "bytes": 262618,
-      "sha256": "f5106b083ac143e8867233503e797835d6cae0c8a708f1e9ba12772f96abedf1"
+      "bytes": 547906,
+      "sha256": "d7505f507a4547f95b68fff0affcf2a2215e8d2f3279aa2f09142d992fb8a5a6"
     },
     {
       "path": "images/logo145x100.webp",
@@ -212,8 +222,8 @@
     },
     {
       "path": "locals.html",
-      "bytes": 9796,
-      "sha256": "06e69c799269cd72234296dfb25b0e11bad8999b8e78dec9b3c80e3bf58d285a"
+      "bytes": 10898,
+      "sha256": "d4b1363aa3eb2efcbd12a74412fe755e5939bf380cac2debb5c4b9c8ef317e47"
     },
     {
       "path": "privacy.html",

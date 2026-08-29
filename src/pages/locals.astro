@@ -33,16 +33,26 @@ const crumbs = breadcrumbSchema([
           <p class="eyebrow">Week of {local.displayDate}</p>
           <h2>{local.title}</h2>
           {local.byline && <p class="edition-byline">{local.byline}</p>}
-          {local.image && (
+          {[local.image, ...(local.images || [])].filter(Boolean).map((image) => (
             <figure class="edition-figure">
-              <img src={local.image.url} alt={local.image.alt} loading="lazy" decoding="async" />
+              <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
               <figcaption>
-                {local.image.credit}
-                {local.image.note && <span> · {local.image.note}</span>}
+                {image.credit}
+                {image.note && <span> · {image.note}</span>}
               </figcaption>
             </figure>
-          )}
+          ))}
           <Fragment set:html={renderBody(local.body)} />
+          {local.corrections?.length > 0 && (
+            <aside class="edition-correction">
+              <h4>Corrections</h4>
+              <ul>
+                {local.corrections.map((correction) => (
+                  <li><time datetime={correction.date}>{correction.date}</time> — {correction.note}</li>
+                ))}
+              </ul>
+            </aside>
+          )}
           {local.sources?.length > 0 && (
             <p class="edition-source">
               Source: {local.sources.map((source) => `${source.title}, ${source.publication}, ${source.date}`).join("; ")}.

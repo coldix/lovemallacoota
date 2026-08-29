@@ -58,7 +58,11 @@ const meta = await sharp(source).metadata();
 console.log(`source ${path.basename(source)} — ${meta.width}×${meta.height} ${meta.format}`);
 
 mkdirSync(outDir, { recursive: true });
-const outFile = path.join(outDir, `${articleId}.webp`);
+// --slot=2 puts a second photograph on the same article rather than replacing
+// the first.
+const slot = Number(valueOf("slot") || 1);
+const stem = slot > 1 ? `${articleId}-${slot}` : articleId;
+const outFile = path.join(outDir, `${stem}.webp`);
 await sharp(source)
   .resize(LONGEST_EDGE, LONGEST_EDGE, { fit: "inside", withoutEnlargement: true })
   .webp({ quality: 84 })
@@ -75,13 +79,20 @@ if (!article) {
   process.exit(1);
 }
 
-article.image = {
-  url: `/images/articles/${articleId}.webp`,
+const record = {
+  url: `/images/articles/${stem}.webp`,
   alt,
   credit,
   note: valueOf("note") || null,
   rights,
 };
+
+if (slot > 1) {
+  article.images = (article.images || []).filter((image) => image.url !== record.url);
+  article.images.push(record);
+} else {
+  article.image = record;
+}
 delete article.imagePending;
 
 writeFileSync(editionFile, `${JSON.stringify(edition, null, 2)}\n`, "utf8");

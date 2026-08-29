@@ -334,7 +334,7 @@ const statusLabel =
         <h3>{article.title}</h3>
         {article.byline && <p class="edition-byline">{article.byline}</p>}
         {[article.image, ...(article.images || [])].filter(Boolean).map((image) => (
-          <figure class="edition-figure">
+          <figure class:list={["edition-figure", { small: image.display === "small" }]}>
             <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
             <figcaption>
               {image.credit}

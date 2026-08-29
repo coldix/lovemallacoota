@@ -24,6 +24,7 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = path.join(rootDir, "images", "articles");
 
 const LONGEST_EDGE = 1920;
+const SMALL_EDGE = 800;
 const RIGHTS = ["permission_granted", "own_work", "open_licence", "public_domain_verified", "review_required"];
 
 const [source, ...rest] = process.argv.slice(2);
@@ -63,8 +64,9 @@ mkdirSync(outDir, { recursive: true });
 const slot = Number(valueOf("slot") || 1);
 const stem = slot > 1 ? `${articleId}-${slot}` : articleId;
 const outFile = path.join(outDir, `${stem}.webp`);
+const longest = valueOf("display") === "small" ? SMALL_EDGE : LONGEST_EDGE;
 await sharp(source)
-  .resize(LONGEST_EDGE, LONGEST_EDGE, { fit: "inside", withoutEnlargement: true })
+  .resize(longest, longest, { fit: "inside", withoutEnlargement: true })
   .webp({ quality: 84 })
   .toFile(outFile);
 
@@ -79,12 +81,15 @@ if (!article) {
   process.exit(1);
 }
 
+// --display=small keeps a low-resolution picture honest: shown at 44mm a
+// 400px original prints near 230dpi, where full width would be 110.
 const record = {
   url: `/images/articles/${stem}.webp`,
   alt,
   credit,
   note: valueOf("note") || null,
   rights,
+  display: valueOf("display") || null,
 };
 
 if (slot > 1) {

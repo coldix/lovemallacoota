@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.29",
-  "generatedAt": "2026-08-29 20:46:27 AEST (Melbourne)",
+  "version": "v0.30",
+  "generatedAt": "2026-08-29 20:58:25 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -37,8 +37,8 @@
     },
     {
       "path": "assets/css/style.css",
-      "bytes": 49758,
-      "sha256": "5f30e5cd979013d90a4bddec995fa503f510dfbb5306fb6db5d78b5d71678a60"
+      "bytes": 50383,
+      "sha256": "08c483c7acc1fa194eeb77ba5b81675f0b3023593873fdc7331a156af78860ef"
     },
     {
       "path": "assets/icons/android-chrome-192x192.png",
@@ -117,13 +117,13 @@
     },
     {
       "path": "edition.html",
-      "bytes": 29421,
-      "sha256": "93a23c5aa35edcfcbd00c75b568a788f87224137ab300cbabd37105535cc2ce8"
+      "bytes": 29910,
+      "sha256": "400cdd1caa80d35821c4b750af62c05ddb48722009182bc52559b35422fbdeff"
     },
     {
       "path": "edition/2026-w35.html",
-      "bytes": 29532,
-      "sha256": "bbe2bb378dce668fbf3803c379ee3f6bf8d97a55b173dc03bab7b2f727d253ad"
+      "bytes": 30021,
+      "sha256": "379aad9455c30a72aa025c9ae3d130f02c006eb6b39e34998b147703500d4d23"
     },
     {
       "path": "editorial-policy.html",
@@ -154,6 +154,16 @@
       "path": "images/articles/w35-community-shirley-90-3.webp",
       "bytes": 459392,
       "sha256": "7cc5ce3e57814b492f92c724947655b74c0cf8046cc6161db09a00432be0e5e4"
+    },
+    {
+      "path": "images/articles/w35-community-shirley-90-4.webp",
+      "bytes": 28670,
+      "sha256": "d2968f7714380ed9ce9812902004c4146caf07a78bddd219f9c4870e6bc30f3f"
+    },
+    {
+      "path": "images/articles/w35-community-shirley-90-5.webp",
+      "bytes": 30382,
+      "sha256": "058914cc7d8ab86b581104c3dd8344cea393bd637b607b51b8a4d6f7f51cade8"
     },
     {
       "path": "images/articles/w35-community-shirley-90.webp",

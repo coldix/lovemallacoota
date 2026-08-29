@@ -931,6 +931,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     object-fit: contain;
     object-position: top;
   }
+  /* A 400px original at 44mm prints near 230dpi; across the column it would be
+     110, which shows. */
+  .edition-figure.small { width: 44mm; display: inline-block; vertical-align: top; }
+  .edition-figure.small + .edition-figure.small { margin-left: 3mm; }
+  .edition-figure.small img { max-height: 44mm; }
+
   /* Marked wide, a picture may still take the full measure. */
   .edition-figure.wide { column-span: all; }
   .edition-figure.wide img { max-height: 130mm; }
@@ -1166,3 +1172,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-ad-label,
 .edition-ad-by { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.35rem; }
 .edition-ad-by { margin: 0.35rem 0 0; text-transform: none; letter-spacing: 0; }
+
+/* A pair of small pictures — a then and a now — sit side by side. */
+.edition-figure.small { display: inline-block; width: calc(50% - 0.5rem); vertical-align: top; }
+.edition-figure.small + .edition-figure.small { margin-left: 0.9rem; }
+.edition-figure.small img { aspect-ratio: 1 / 1; object-fit: cover; }

@@ -8,6 +8,7 @@ import {
   sectionsWithContent,
   tableOfContents,
 } from "../lib/editions.mjs";
+import { renderBody } from "../lib/markup.mjs";
 
 interface Props {
   edition: Record<string, any>;
@@ -281,7 +282,7 @@ const statusLabel =
             </figcaption>
           </figure>
         )}
-        {(article.body || []).map((paragraph) => <p>{paragraph}</p>)}
+        <Fragment set:html={renderBody(article.body)} />
         {article.contact?.public && (
           <p class="edition-source">
             Contact: <a href={`mailto:${article.contact.email}`}>{article.contact.email}</a>

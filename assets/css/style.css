@@ -1048,3 +1048,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   /* A short notice in two columns looks broken, not designed. */
   .edition-article:has(p:only-of-type) { columns: 1; max-width: 68ch; }
 }
+
+/* Bullet lists inside contributed text. */
+.edition-list { margin: 0 0 0.9rem 1.1rem; padding: 0; }
+.edition-list li { margin: 0.2rem 0; }

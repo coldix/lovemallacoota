@@ -57,7 +57,13 @@ const writable = SECTIONS.filter((section) => !section.automatic);
           <div class="field full">
             <label for="body">The piece</label>
             <textarea id="body" name="body" rows="16" required placeholder="Leave a blank line between paragraphs."></textarea>
-            <p class="contact-hint">Blank line between paragraphs. No formatting needed.</p>
+            <p class="contact-hint">
+              Blank line between paragraphs. A little formatting is allowed:
+              <code>**bold**</code>, <code>*italic*</code>,
+              <code>[words](https://example.com)</code>, and lines beginning
+              with <code>-</code> become a bullet list. Anything else, including
+              HTML, is shown as you typed it.
+            </p>
           </div>
           <div class="field full">
             <label for="photo">Photograph (optional)</label>

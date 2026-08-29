@@ -80,6 +80,24 @@
         "rights": "review_required",
         "note": "Geelong Advertiser, 23 March 1968. Still in copyright; colourising creates a derivative. Not published until permission is recorded or a decision is taken."
       }
+    },
+    {
+      "id": "w35-notice-formatting",
+      "section": "notices",
+      "title": "Contributors: a little formatting is now allowed",
+      "byline": "Love Mallacoota",
+      "authorEmail": "coota@lovemallacoota.au",
+      "submittedAt": "2026-08-29T09:00:00+10:00",
+      "publishedAt": "2026-08-29T09:00:00+10:00",
+      "check": {
+        "verdict": "author",
+        "note": "Written by the publisher."
+      },
+      "body": [
+        "Text submitted to the edition stays plain by default, but four things now render: **bold**, *italic*, [links](https://lovemallacoota.au/archive.html), and bullet lists.",
+        "- Start a line with a dash for a bullet\n- Leave a blank line between paragraphs\n- Anything else, including HTML, appears exactly as typed",
+        "That last rule is the point. A pasted <script> tag or an onclick attribute is shown as text rather than run, so a contributor cannot change how the page behaves."
+      ]
     }
   ],
   "cover": {

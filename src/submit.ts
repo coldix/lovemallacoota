@@ -63,7 +63,13 @@ export function toParagraphs(text: string): string[] {
   return text
     .replace(/\r\n/g, "\n")
     .split(/\n{2,}/)
-    .map((paragraph) => paragraph.replace(/\s*\n\s*/g, " ").trim())
+    .map((block) =>
+      block
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .join("\n")
+    )
     .filter(Boolean);
 }
 

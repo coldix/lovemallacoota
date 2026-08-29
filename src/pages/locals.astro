@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import { editionPath, localsOfTheWeek } from "../lib/editions.mjs";
+import { renderBody } from "../lib/markup.mjs";
 
 const locals = localsOfTheWeek();
 ---
@@ -33,7 +34,7 @@ const locals = localsOfTheWeek();
               </figcaption>
             </figure>
           )}
-          {(local.body || []).map((paragraph) => <p>{paragraph}</p>)}
+          <Fragment set:html={renderBody(local.body)} />
           {local.sources?.length > 0 && (
             <p class="edition-source">
               Source: {local.sources.map((source) => `${source.title}, ${source.publication}, ${source.date}`).join("; ")}.

@@ -8,6 +8,7 @@ import {
   slugify,
   toParagraphs,
 } from "../src/submit.ts";
+import { renderBlock } from "../src/lib/markup.mjs";
 
 const withEmail = (email) =>
   new Request("https://lovemallacoota.au/api/article", {
@@ -28,7 +29,18 @@ test("only an approved, active contributor may publish", () => {
 
 test("paragraphs survive the trip, blank lines do not", () => {
   const body = toParagraphs("First para.\nStill first.\n\n\nSecond para.\n\n   \n");
-  assert.deepEqual(body, ["First para. Still first.", "Second para."]);
+  // Line breaks inside a block are kept, because a bullet list is one block of
+  // several lines. The renderer folds them away for ordinary prose.
+  assert.deepEqual(body, ["First para.\nStill first.", "Second para."]);
+  assert.equal(renderBlock(body[0]), "<p>First para. Still first.</p>");
+});
+
+test("a bullet list typed into the form survives as a list", () => {
+  const [block] = toParagraphs("- Bread\n- Milk\n- Bait");
+  assert.equal(
+    renderBlock(block),
+    '<ul class="edition-list"><li>Bread</li><li>Milk</li><li>Bait</li></ul>'
+  );
 });
 
 test("headlines become safe ids", () => {

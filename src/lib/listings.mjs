@@ -238,3 +238,23 @@ export function listingPhoto(business) {
   if (!hero) return null;
   return { url: hero.url, alt: hero.alt_text || business.business_name || "" };
 }
+
+/**
+ * A closed business stays in the directory. Removing it makes the page lie by
+ * omission — people still ask where it went, and a listing that says "closed"
+ * answers that better than a gap does.
+ */
+export function listingStatus(business) {
+  const status = business.trading;
+  if (!status || status.state === "open") return null;
+  return {
+    state: status.state,
+    label: status.state === "closed" ? "Closed" : status.state,
+    note: status.note || null,
+    recordedAt: status.recordedAt || null,
+  };
+}
+
+export function isTradingListing(business) {
+  return !listingStatus(business);
+}

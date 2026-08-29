@@ -460,6 +460,10 @@ export function normalizeListing(raw, defaults = {}) {
     locationKind: raw.locationKind || (raw.address?.street ? "physical" : "none"),
     geo: raw.geo || null,
     serviceArea: raw.serviceArea || null,
+    // Whether the business is trading. Deliberately not called status: the
+    // model already uses that for publication state, and a second meaning on
+    // the same key silently overwrote this one.
+    trading: raw.trading || null,
     phone: raw.phone || null,
     email: raw.email || null,
     website: raw.website || getPrimaryLink(raw),

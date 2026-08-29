@@ -200,6 +200,8 @@ function pickBusiness(week) {
   const businesses = files
     .flatMap((file) => readJson(`data/${file}`, []))
     .filter(Boolean)
+    // Featuring a business that has closed sends people to a locked door.
+    .filter((business) => !business.trading || business.trading.state === "open")
     .sort((a, b) => (a.slug || "").localeCompare(b.slug || ""));
   if (!businesses.length) return null;
 

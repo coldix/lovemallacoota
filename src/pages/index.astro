@@ -2,11 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import { SECTIONS, SITE_ORIGIN, WHATS_ON, sectionCounts } from "../lib/directory.mjs";
-import { currentEdition, editionLabel, panoramaOfTheWeek } from "../lib/editions.mjs";
+import { currentEdition, editionLabel, loadDataFile } from "../lib/editions.mjs";
 
 // The weekly promotion and the panorama both follow the open edition.
 const edition = currentEdition();
-const panorama = edition ? panoramaOfTheWeek(edition.week) : null;
+const panoramas = loadDataFile("panoramas.json", null)?.views || [];
 
 const counts = sectionCounts();
 const eat = counts["eat-drink"];
@@ -110,15 +110,25 @@ const siteSchema = {
         <iframe src="https://www.youtube-nocookie.com/embed/BBLQz7ozibM" title="Experience Mallacoota — video" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
 
-      {panorama && (
+      {panoramas.length > 0 && (
         <div class="panorama">
-          <h3>Look around</h3>
-          <p class="section-sub">
-            A three-sixty view, changed each week — number {panorama.position} of {panorama.of}.
-            Drag to look, or open it full screen.
-          </p>
+          <h3>360° around Mallacoota</h3>
+          <p class="section-sub">Pick a view, then drag to look around — or open it full screen.</p>
+          <div class="tag-row" id="panorama-picker" role="group" aria-label="Choose a 360 degree view">
+            {panoramas.map((view, index) => (
+              <button
+                type="button"
+                class:list={["tag-btn", { active: index === 0 }]}
+                data-panorama={view.id}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                360° · {index + 1}
+              </button>
+            ))}
+          </div>
           <div class="media-frame">
             <iframe
+              id="panorama-frame"
               class="ku-embed"
               title="Three-sixty view around Mallacoota"
               frameborder="0"
@@ -126,7 +136,7 @@ const siteSchema = {
               allowfullscreen
               scrolling="no"
               loading="lazy"
-              src={`https://kuula.co/share/${panorama.id}?logo=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.33&autopalt=1&thumbs=0`}
+              src={`https://kuula.co/share/${panoramas[0].id}?logo=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.33&autopalt=1&thumbs=0`}
             ></iframe>
           </div>
         </div>

@@ -108,6 +108,12 @@ const schema = collectionSchema(entities, props.schemaName, props.canonicalPath,
                 {typeLabel && <span class="listing-badge">{typeLabel}</span>}
               </p>
               <h3><a href={href}>{entity.name}</a></h3>
+              {entity.trading && entity.trading.state !== "open" && (
+                <p class="listing-status">
+                  <strong>{entity.trading.state === "closed" ? "Closed" : entity.trading.state}.</strong>
+                  {entity.trading.note && <span> {entity.trading.note.replace(/^Closed\.\s*/, "")}</span>}
+                </p>
+              )}
               {entity.commonName && entity.commonName !== entity.name && (
                 <p class="listing-aka">Also known as {entity.commonName}</p>
               )}

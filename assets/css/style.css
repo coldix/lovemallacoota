@@ -1353,3 +1353,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .moon-symbol { font-size: 1.05em; margin-right: 0.35rem; }
 .moon-table td:last-child { color: var(--muted); font-size: 0.86em; }
 @media print { .moon-symbol { font-size: 1em; } }
+
+/* A closed business keeps its listing, and says so. */
+.listing-status {
+  margin: 0.4rem 0 0.6rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--coral, #ff7a59) 14%, transparent);
+  border-left: 3px solid var(--coral, #ff7a59);
+  font-size: 0.85rem;
+}

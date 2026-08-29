@@ -238,6 +238,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })();
 
+  // --- 360 degree views: swap the frame rather than reload the page ---
+  (function initPanorama() {
+    const picker = document.getElementById("panorama-picker");
+    const frame = document.getElementById("panorama-frame");
+    if (!picker || !frame) return;
+
+    picker.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-panorama]");
+      if (!button) return;
+      const id = button.dataset.panorama;
+      frame.src = `https://kuula.co/share/${id}?logo=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.33&autopalt=1&thumbs=0`;
+      for (const other of picker.querySelectorAll("[data-panorama]")) {
+        const active = other === button;
+        other.classList.toggle("active", active);
+        other.setAttribute("aria-pressed", active ? "true" : "false");
+      }
+    });
+  })();
+
   // --- Print this edition ---
   document.addEventListener("click", (e) => {
     if (e.target.closest("[data-print-edition]")) window.print();

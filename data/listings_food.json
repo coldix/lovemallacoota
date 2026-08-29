@@ -2,9 +2,13 @@
   {
     "id": "food-001",
     "slug": "alfs-pizza",
-    "business_name": "Alf\u2019s Pizza",
+    "business_name": "Alf’s Pizza",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Pizza", "Takeaway"],
+    "category_tags": [
+      "Food & Drink",
+      "Pizza",
+      "Takeaway"
+    ],
     "schema_type": "Restaurant",
     "description_short": "Seasonal brick oven pizzas.",
     "description_long": "Delicious brick oven pizzas available seasonally. Check their Instagram for current operating times and menu. (Add more details here).",
@@ -48,9 +52,13 @@
     "slug": "beanie-coffee-van",
     "business_name": "Beanie Coffee Van",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Coffee", "Mobile Van"],
+    "category_tags": [
+      "Food & Drink",
+      "Coffee",
+      "Mobile Van"
+    ],
     "schema_type": "CafeOrCoffeeShop",
-    "description_short": "A meeting place at St Peter\u2019s Church, often with live music.",
+    "description_short": "A meeting place at St Peter’s Church, often with live music.",
     "description_long": "Mobile coffee van located near St Peter's Church, serving great coffee and providing a community gathering spot, sometimes featuring live music. (Add more details here).",
     "images": [
       {
@@ -92,9 +100,12 @@
     "slug": "cafe-54",
     "business_name": "Cafe 54",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Cafe"],
+    "category_tags": [
+      "Food & Drink",
+      "Cafe"
+    ],
     "schema_type": "CafeOrCoffeeShop",
-    "description_short": "A well-loved local caf\u00e9 with delicious, lovingly crafted food.",
+    "description_short": "A well-loved local café with delicious, lovingly crafted food.",
     "description_long": "Popular local cafe known for its welcoming atmosphere and delicious menu featuring breakfast, lunch, coffee, and homemade treats. (Add more details here).",
     "images": [
       {
@@ -138,9 +149,14 @@
   {
     "id": "food-004",
     "slug": "gipsy-point-lodge-cafe-restaurant",
-    "business_name": "Gipsy Point Lodge Caf\u00e9-Restaurant",
+    "business_name": "Gipsy Point Lodge Café-Restaurant",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Cafe", "Restaurant", "Accommodation"],
+    "category_tags": [
+      "Food & Drink",
+      "Cafe",
+      "Restaurant",
+      "Accommodation"
+    ],
     "schema_type": "Restaurant",
     "description_short": "Regional food and lake views at Gipsy Point. Also offers accommodation.",
     "description_long": "Enjoy breakfast, lunch, or dinner featuring regional produce with stunning views over the Genoa River. Located within Gipsy Point Lodge. Accommodation also available. (Add more details here).",
@@ -241,9 +257,13 @@
   {
     "id": "food-006",
     "slug": "kelpys-seafood",
-    "business_name": "Kelpy\u2019s Seafood",
+    "business_name": "Kelpy’s Seafood",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Seafood", "Takeaway"],
+    "category_tags": [
+      "Food & Drink",
+      "Seafood",
+      "Takeaway"
+    ],
     "schema_type": "FoodEstablishment",
     "description_short": "Seasonal seafood vendor on the wharf, offering fresh local fish and oysters.",
     "description_long": "Located right on the main wharf, Kelpy's offers fresh, locally caught seafood, including fish, oysters, and sometimes prawns or crayfish, depending on the season and catch. Primarily takeaway. (Add more details here).",
@@ -275,9 +295,13 @@
   {
     "id": "food-007",
     "slug": "larrys-coffee-van",
-    "business_name": "Larry\u2019s Coffee Van",
+    "business_name": "Larry’s Coffee Van",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Coffee", "Mobile Van"],
+    "category_tags": [
+      "Food & Drink",
+      "Coffee",
+      "Mobile Van"
+    ],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "Mobile coffee van serving the Mallacoota area. Look for the van!",
     "description_long": "Keep an eye out for Larry's Coffee Van around Mallacoota for your caffeine fix. Serving barista-made coffee and potentially other drinks or snacks. (Add more details here).",
@@ -309,9 +333,14 @@
   {
     "id": "food-008",
     "slug": "lees-pizza-take-away",
-    "business_name": "Lee\u2019s Pizza & Take Away",
+    "business_name": "Lee’s Pizza & Take Away",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Pizza", "Takeaway", "Fish & Chips"],
+    "category_tags": [
+      "Food & Drink",
+      "Pizza",
+      "Takeaway",
+      "Fish & Chips"
+    ],
     "schema_type": "Restaurant",
     "description_short": "Pizza, Fish & Chips, and tasty takeaways.",
     "description_long": "Popular takeaway spot offering a range of pizzas with various toppings, classic fish and chips, burgers, and other fast food options. (Add more details here).",
@@ -339,19 +368,34 @@
     },
     "opening_hours": [
       {
-        "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "dayOfWeek": [
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
         "opens": "17:00",
         "closes": "20:00"
       }
     ],
-    "notes_seasonal": "Typically open evenings, hours vary seasonally. Check locally."
+    "notes_seasonal": "Typically open evenings, hours vary seasonally. Check locally.",
+    "trading": {
+      "state": "closed",
+      "note": "Closed. The business is for sale.",
+      "recordedAt": "2026-08-30"
+    }
   },
   {
     "id": "food-009",
     "slug": "lucys-chinese-restaurant",
-    "business_name": "Lucy\u2019s Chinese Restaurant",
+    "business_name": "Lucy’s Chinese Restaurant",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Restaurant", "Chinese"],
+    "category_tags": [
+      "Food & Drink",
+      "Restaurant",
+      "Chinese"
+    ],
     "schema_type": "Restaurant",
     "description_short": "Vibrant Chinese fare, homemade noodles, and house specials.",
     "description_long": "Authentic Chinese restaurant serving a wide variety of popular dishes, including homemade noodles, regional specialties, and banquet options. Dine-in and takeaway available. (Add more details here).",
@@ -403,7 +447,10 @@
     "slug": "mallacoota-bakery",
     "business_name": "Mallacoota Bakery",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Bakery"],
+    "category_tags": [
+      "Food & Drink",
+      "Bakery"
+    ],
     "schema_type": "Bakery",
     "description_short": "Iconic sausage rolls, breads, and fresh pastries.",
     "description_long": "A traditional Australian bakery serving up a wide range of pies, sausage rolls, pasties, fresh bread, sandwiches, cakes, slices, and barista coffee. (Add more details here).",
@@ -461,7 +508,12 @@
     "slug": "mallacoota-foodworks",
     "business_name": "Mallacoota Foodworks",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Shopping", "Groceries", "Deli"],
+    "category_tags": [
+      "Food & Drink",
+      "Shopping",
+      "Groceries",
+      "Deli"
+    ],
     "schema_type": "GroceryStore",
     "description_short": "Full-service supermarket with a great deli offering sliced meats, cheeses, smoked fish, roasted chickens, and warm pies.",
     "description_long": "Mallacoota's main Foodworks supermarket providing a wide range of groceries, fresh fruit and vegetables, deli items (including sliced meats, cheeses, olives, smoked fish), hot roast chickens, warm pies, frozen foods, and general merchandise. (Add more details here).",
@@ -499,12 +551,21 @@
     },
     "opening_hours": [
       {
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "opens": "08:00",
         "closes": "19:00"
       },
       {
-        "dayOfWeek": ["Saturday", "Sunday"],
+        "dayOfWeek": [
+          "Saturday",
+          "Sunday"
+        ],
         "opens": "08:00",
         "closes": "18:00"
       }
@@ -516,7 +577,11 @@
     "slug": "mallacoota-golf-club-bistro",
     "business_name": "Mallacoota Golf Club Bistro",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Bistro", "Restaurant"],
+    "category_tags": [
+      "Food & Drink",
+      "Bistro",
+      "Restaurant"
+    ],
     "schema_type": "Restaurant",
     "description_short": "Classic pub-style meals and drinks at the golf club.",
     "description_long": "Located within the Mallacoota Golf & Country Club, the bistro offers hearty pub-style meals, snacks, and drinks with views over the golf course. A relaxed dining option after a game or for a casual night out. Golf also available. (Add more details here).",
@@ -560,7 +625,12 @@
     "slug": "mallacoota-meats",
     "business_name": "Mallacoota Meats",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Shopping", "Butcher", "Groceries"],
+    "category_tags": [
+      "Food & Drink",
+      "Shopping",
+      "Butcher",
+      "Groceries"
+    ],
     "schema_type": "Butcher",
     "description_short": "Local butcher providing a great range of fresh meat, poultry, and BBQ supplies.",
     "description_long": "Traditional local butcher shop offering quality fresh cuts of beef, lamb, pork, and chicken, as well as sausages, smallgoods, and barbecue essentials. (Add more details here).",
@@ -588,12 +658,20 @@
     },
     "opening_hours": [
       {
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "opens": "08:00",
         "closes": "17:00"
       },
       {
-        "dayOfWeek": ["Saturday"],
+        "dayOfWeek": [
+          "Saturday"
+        ],
         "opens": "08:00",
         "closes": "12:00"
       }
@@ -605,7 +683,11 @@
     "slug": "origami-coffee",
     "business_name": "Origami Coffee",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Cafe", "Coffee"],
+    "category_tags": [
+      "Food & Drink",
+      "Cafe",
+      "Coffee"
+    ],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "Excellent coffee, treats, and lake views.",
     "description_long": "Artisan coffee shop located in the MA space complex, offering expertly brewed coffee, specialty drinks, baked goods, and light snacks with views towards the lake. (Add more details here).",
@@ -663,7 +745,12 @@
     "slug": "scallywags-seafood-winebar",
     "business_name": "Scallywags Seafood & Winebar",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Seafood", "Winebar", "Restaurant"],
+    "category_tags": [
+      "Food & Drink",
+      "Seafood",
+      "Winebar",
+      "Restaurant"
+    ],
     "schema_type": "Restaurant",
     "description_short": "Seafood, healthy meals, friendly faces, and local wine.",
     "description_long": "Focusing on fresh, local seafood dishes alongside other healthy meal options. Features a curated selection of local wines and offers a relaxed dining experience. (Add more details here).",
@@ -702,7 +789,12 @@
     "slug": "sundayss",
     "business_name": "Sundayss",
     "category_primary": "Food & Drink",
-    "category_tags": ["Food & Drink", "Cafe", "Coffee", "Brunch"],
+    "category_tags": [
+      "Food & Drink",
+      "Cafe",
+      "Coffee",
+      "Brunch"
+    ],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "Seasonal cafe located next to the bakery, serving coffee, brunch, and smoothies.",
     "description_long": "Bright and breezy seasonal cafe offering delicious brunch options, smoothies, juices, and quality coffee. Located conveniently next to the Mallacoota Bakery. (Add more details here).",

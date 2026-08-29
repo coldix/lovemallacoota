@@ -1,11 +1,11 @@
 {
   "week": "2026-w35",
-  "generatedAt": "2026-08-28T11:09:07.962Z",
+  "generatedAt": "2026-08-29T11:36:01.022Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-08-28T11:09:07.962Z",
+    "fetchedAt": "2026-08-29T11:36:01.022Z",
     "days": [
       {
         "date": "2026-08-24",
@@ -41,30 +41,31 @@
       },
       {
         "date": "2026-08-28",
-        "code": 51,
-        "summary": "Light drizzle",
+        "code": 3,
+        "summary": "Overcast",
         "maxC": 17.9,
         "minC": 5.8,
-        "rainMm": 0.1
+        "rainMm": 0
       },
       {
         "date": "2026-08-29",
-        "code": 2,
-        "summary": "Partly cloudy",
-        "maxC": 16.3,
-        "minC": 9.2,
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 16.6,
+        "minC": 9.3,
         "rainMm": 0
       },
       {
         "date": "2026-08-30",
-        "code": 2,
-        "summary": "Partly cloudy",
+        "code": 1,
+        "summary": "Mostly clear",
         "maxC": 16.5,
-        "minC": 9.7,
+        "minC": 9.6,
         "rainMm": 0
       }
     ]
   },
+  "tides": null,
   "events": [],
   "trail": {
     "slug": "lakeside-drive-boardwalk",

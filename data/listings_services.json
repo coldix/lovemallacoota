@@ -5,22 +5,45 @@
     "name": "East Gippsland Shire Council",
     "entityType": "government",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "GovernmentOrganization",
-    "description": "Local government for Mallacoota and the rest of East Gippsland. Rates, roads, planning, waste, and the Mallacoota service centre. This is an official listing: Love Mallacoota does not speak for the Shire.",
+    "description": "Local government for Mallacoota and the rest of East Gippsland. The Mallacoota Service Centre and Library is at 70 Maurice Avenue. Call centre Monday–Friday 8:30am–5:00pm. After-hours council emergency uses the same number. This is an official listing: Love Mallacoota does not speak for the Shire.",
     "descriptionShort": "Local government for East Gippsland, including Mallacoota.",
     "website": "https://www.eastgippsland.vic.gov.au/",
-    "links": [{ "url": "https://www.eastgippsland.vic.gov.au/", "text": "Website" }],
+    "links": [
+      {
+        "url": "https://www.eastgippsland.vic.gov.au/",
+        "text": "Website"
+      }
+    ],
     "official": true,
     "claimable": false,
-    "locationKind": "service-area",
+    "locationKind": "physical",
     "serviceArea": "East Gippsland",
     "source": {
       "kind": "authoritative",
       "name": "East Gippsland Shire Council",
       "url": "https://www.eastgippsland.vic.gov.au/"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    },
+    "phone": "03 5153 9500",
+    "email": "feedback@egipps.vic.gov.au",
+    "address": {
+      "street": "70 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "related": [
+      "mallacoota-service-centre-and-library",
+      "mallacoota-transfer-station",
+      "mallacoota-airport"
+    ]
   },
   {
     "id": "gov-parks-victoria",
@@ -28,10 +51,12 @@
     "name": "Parks Victoria — Croajingolong National Park",
     "entityType": "government",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "GovernmentOrganization",
-    "description": "Parks Victoria manages Croajingolong National Park, which surrounds Mallacoota. Park conditions, campgrounds, fire restrictions and visitor information come from Parks Victoria, not from this site.",
-    "descriptionShort": "National park authority for Croajingolong, around Mallacoota.",
+    "description": "Parks Victoria manages Croajingolong National Park, Cape Howe Marine National Park and Gabo Island Lighthouse Reserve around Mallacoota. There is no public Parks Victoria counter in town. Call 13 1963 (Monday–Saturday 10am–4pm Melbourne time). In an emergency in a park call 000. All fishing is prohibited in Cape Howe Marine National Park.",
+    "descriptionShort": "Parks around Mallacoota. Phone 13 1963. No town office. Emergency: 000.",
     "website": "https://www.parks.vic.gov.au/places-to-see/parks/croajingolong-national-park",
     "links": [
       {
@@ -48,7 +73,11 @@
       "name": "Parks Victoria",
       "url": "https://www.parks.vic.gov.au/places-to-see/parks/croajingolong-national-park"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    },
+    "phone": "13 1963",
+    "email": "info@parks.vic.gov.au"
   },
   {
     "id": "gov-victoria-police-mallacoota",
@@ -56,7 +85,9 @@
     "name": "Mallacoota Police Station",
     "entityType": "emergency",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "EmergencyService",
     "description": "Victoria Police station at 38 Maurice Avenue. Non-24-hour counter — call to confirm opening hours. Life-threatening emergency: 000. Non-urgent assistance: 131 444.",
     "descriptionShort": "Victoria Police, Mallacoota. In an emergency call 000.",
@@ -78,7 +109,9 @@
       "name": "Victoria Police",
       "url": "https://www.police.vic.gov.au/mallacoota-police-station"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
   },
   {
     "id": "gov-cfa-mallacoota",
@@ -86,18 +119,28 @@
     "name": "Mallacoota Fire Brigade (CFA)",
     "entityType": "emergency",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "FireStation",
-    "description": "Country Fire Authority volunteer brigade in Mallacoota. Love Mallacoota does not issue fire warnings. In an emergency call 000. Warnings and incidents: VicEmergency. The Mallacoota Volunteer Fire Fighters Fund is a separate fundraising body, not the brigade.",
+    "description": "Country Fire Authority volunteer brigade in Mallacoota, District 11. Love Mallacoota does not issue fire warnings. In an emergency call 000. Warnings: VicEmergency. Non-emergency district enquiries: CFA District 11 Headquarters, Bairnsdale, (03) 5153 7400. A street address for the Mallacoota station is not published on a static CFA page, so it is not listed here. The Mallacoota Volunteer Fire Fighters Fund is a separate fundraising body, not the brigade.",
     "descriptionShort": "CFA brigade. In an emergency call 000. Warnings: VicEmergency.",
     "website": "https://www.cfa.vic.gov.au/",
     "links": [
-      { "url": "https://www.cfa.vic.gov.au/", "text": "Country Fire Authority" },
-      { "url": "https://emergency.vic.gov.au/respond/", "text": "VicEmergency" }
+      {
+        "url": "https://www.cfa.vic.gov.au/",
+        "text": "Country Fire Authority"
+      },
+      {
+        "url": "https://emergency.vic.gov.au/respond/",
+        "text": "VicEmergency"
+      }
     ],
     "official": true,
     "claimable": false,
-    "related": ["mallacoota-volunteer-fire-fighters-fund"],
+    "related": [
+      "mallacoota-volunteer-fire-fighters-fund"
+    ],
     "locationKind": "service-area",
     "serviceArea": "Mallacoota and district",
     "source": {
@@ -105,54 +148,88 @@
       "name": "Country Fire Authority",
       "url": "https://www.cfa.vic.gov.au/"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
   },
   {
     "id": "gov-ambulance-victoria",
     "slug": "ambulance-victoria",
-    "name": "Ambulance Victoria",
+    "name": "Ambulance Victoria — Mallacoota branch",
     "entityType": "emergency",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "EmergencyService",
-    "description": "State ambulance service. In a medical emergency call 000. Love Mallacoota does not dispatch ambulances or give medical advice.",
-    "descriptionShort": "State ambulance service. In an emergency call 000.",
+    "description": "Remote Ambulance Victoria branch staffed by Ambulance Community Officers on call. In a medical emergency call 000. No public branch phone is published on ambulance.vic.gov.au. The existing station is at 82 Betka Road. Love Mallacoota does not dispatch ambulances.",
+    "descriptionShort": "Mallacoota AV branch. In an emergency call 000. No public branch phone published.",
     "website": "https://www.ambulance.vic.gov.au/",
-    "links": [{ "url": "https://www.ambulance.vic.gov.au/", "text": "Website" }],
+    "links": [
+      {
+        "url": "https://www.ambulance.vic.gov.au/",
+        "text": "Website"
+      }
+    ],
     "official": true,
     "claimable": false,
-    "locationKind": "service-area",
+    "locationKind": "physical",
     "serviceArea": "Victoria",
     "source": {
       "kind": "authoritative",
       "name": "Ambulance Victoria",
       "url": "https://www.ambulance.vic.gov.au/"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    },
+    "address": {
+      "street": "82 Betka Road",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    }
   },
   {
     "id": "gov-vic-ses",
     "slug": "victoria-state-emergency-service",
-    "name": "Victoria State Emergency Service",
+    "name": "VICSES — Mallacoota Unit",
     "entityType": "emergency",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "EmergencyService",
-    "description": "Flood, storm and rescue assistance. Life-threatening emergency: 000. SES assistance: 132 500.",
-    "descriptionShort": "Flood, storm and rescue. Emergency 000; SES 132 500.",
+    "description": "Victoria State Emergency Service Mallacoota Unit. Flood, storm, search and rescue. Life-threatening emergency: 000. SES assistance (not life-threatening): 132 500. Address from SES East Gippsland flood guides: Lees Road, Mallacoota.",
+    "descriptionShort": "Mallacoota SES unit. Emergency 000; SES assistance 132 500.",
     "website": "https://www.ses.vic.gov.au/",
     "phone": "132 500",
-    "links": [{ "url": "https://www.ses.vic.gov.au/", "text": "Website" }],
+    "links": [
+      {
+        "url": "https://www.ses.vic.gov.au/",
+        "text": "Website"
+      }
+    ],
     "official": true,
     "claimable": false,
-    "locationKind": "service-area",
+    "locationKind": "physical",
     "serviceArea": "Victoria",
     "source": {
       "kind": "authoritative",
       "name": "Victoria State Emergency Service",
       "url": "https://www.ses.vic.gov.au/"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    },
+    "address": {
+      "street": "Lees Road",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    }
   },
   {
     "id": "gov-vicemergency",
@@ -160,12 +237,19 @@
     "name": "VicEmergency",
     "entityType": "emergency",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "GovernmentOrganization",
-    "description": "The official source for warnings and incidents in Victoria. Love Mallacoota relays emergency information only when it can keep a timestamped link current; this page is not a warning service.",
+    "description": "The official source for warnings and incidents in Victoria. Website, app, and hotline 1800 226 226. Love Mallacoota relays emergency information only when it can keep a timestamped link current; this page is not a warning service. In an emergency call 000.",
     "descriptionShort": "Official Victorian warnings and incidents.",
     "website": "https://emergency.vic.gov.au/respond/",
-    "links": [{ "url": "https://emergency.vic.gov.au/respond/", "text": "Warnings and incidents" }],
+    "links": [
+      {
+        "url": "https://emergency.vic.gov.au/respond/",
+        "text": "Warnings and incidents"
+      }
+    ],
     "official": true,
     "claimable": false,
     "locationKind": "service-area",
@@ -175,7 +259,10 @@
       "name": "VicEmergency",
       "url": "https://emergency.vic.gov.au/respond/"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    },
+    "phone": "1800 226 226"
   },
   {
     "id": "gov-bom",
@@ -183,14 +270,22 @@
     "name": "Bureau of Meteorology",
     "entityType": "government",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "GovernmentOrganization",
     "description": "Australia’s official weather and warnings authority. Forecasts on Love Mallacoota are not official warnings — use BOM and VicEmergency for that.",
     "descriptionShort": "Official weather and warnings for Australia.",
     "website": "https://www.bom.gov.au/vic/warnings/",
     "links": [
-      { "url": "https://www.bom.gov.au/vic/warnings/", "text": "Victorian warnings" },
-      { "url": "https://www.bom.gov.au/", "text": "Bureau of Meteorology" }
+      {
+        "url": "https://www.bom.gov.au/vic/warnings/",
+        "text": "Victorian warnings"
+      },
+      {
+        "url": "https://www.bom.gov.au/",
+        "text": "Bureau of Meteorology"
+      }
     ],
     "official": true,
     "claimable": false,
@@ -201,7 +296,9 @@
       "name": "Bureau of Meteorology",
       "url": "https://www.bom.gov.au/"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
   },
   {
     "id": "edu-mallacoota-p12",
@@ -209,7 +306,9 @@
     "name": "Mallacoota P-12 College",
     "entityType": "school",
     "section": "services",
-    "categories": ["Government & Public Services"],
+    "categories": [
+      "Government & Public Services"
+    ],
     "schema_type": "EducationalOrganization",
     "description": "Government school for prep to year 12 in Mallacoota. School number 3515. Contact details from the Victorian Government school record.",
     "descriptionShort": "Government P–12 school, 25 Bucknall Street.",
@@ -227,7 +326,10 @@
     "claimable": false,
     "locationKind": "physical",
     "links": [
-      { "url": "https://www.mallp12.vic.edu.au/", "text": "Website" },
+      {
+        "url": "https://www.mallp12.vic.edu.au/",
+        "text": "Website"
+      },
       {
         "url": "https://www.vic.gov.au/mallacoota-p-12-college-state-school-number-3515",
         "text": "Victorian Government school record"
@@ -238,7 +340,10 @@
       "name": "Victorian Government",
       "url": "https://www.vic.gov.au/mallacoota-p-12-college-state-school-number-3515"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    },
+    "notes_seasonal": "Office staffed 8:30am–4:00pm when the school is open for instruction."
   },
   {
     "id": "health-mallacoota-medical-centre",
@@ -246,7 +351,9 @@
     "name": "Mallacoota Medical Centre",
     "entityType": "professional",
     "section": "services",
-    "categories": ["Health & Aged Care"],
+    "categories": [
+      "Health & Aged Care"
+    ],
     "schema_type": "MedicalClinic",
     "description": "Accredited general practice at 21–23 Maurice Avenue. For emergencies call 000. After-hours medical advice: 1800 MEDICARE (1800 633 422) or the Victorian Virtual Emergency Department.",
     "descriptionShort": "General practice on Maurice Avenue. Emergency: 000.",
@@ -261,12 +368,24 @@
     },
     "openingHours": [
       {
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "opens": "09:00",
         "closes": "12:00"
       },
       {
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "opens": "14:00",
         "closes": "17:00"
       }
@@ -280,6 +399,289 @@
       "name": "Mallacoota Medical Centre",
       "url": "https://www.mallacootamedicalcentre.com.au/"
     },
-    "verification": { "lastReviewedAt": "2026-08-29" }
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
+  },
+  {
+    "id": "gov-mallacoota-service-centre",
+    "slug": "mallacoota-service-centre-and-library",
+    "name": "Mallacoota Service Centre and Library",
+    "entityType": "government",
+    "section": "services",
+    "categories": [
+      "Government & Public Services"
+    ],
+    "schema_type": "GovernmentOrganization",
+    "description": "East Gippsland Shire customer service and public library in the same building at 70 Maurice Avenue. Forms, public computers, library loans. Libraries closed on public holidays. After-hours return chutes available.",
+    "descriptionShort": "Council counter and library, 70 Maurice Avenue.",
+    "website": "https://www.eastgippsland.vic.gov.au/contact-us",
+    "phone": "03 5153 9500",
+    "email": "feedback@egipps.vic.gov.au",
+    "address": {
+      "street": "70 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday"
+        ],
+        "opens": "10:00",
+        "closes": "14:00"
+      },
+      {
+        "dayOfWeek": [
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "14:00",
+        "closes": "17:00"
+      }
+    ],
+    "official": true,
+    "claimable": false,
+    "related": [
+      "east-gippsland-shire-council"
+    ],
+    "source": {
+      "kind": "authoritative",
+      "name": "East Gippsland Shire Council",
+      "url": "https://www.eastgippsland.vic.gov.au/contact-us"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
+  },
+  {
+    "id": "gov-mallacoota-vic",
+    "slug": "mallacoota-visitor-information",
+    "name": "Mallacoota Visitor Information Centre",
+    "entityType": "government",
+    "section": "services",
+    "categories": [
+      "Government & Public Services"
+    ],
+    "schema_type": "GovernmentOrganization",
+    "description": "Council-listed visitor information at the Mallacoota Service Centre, 70 Maurice Avenue. No separate phone is published on the shire tourism page — use the service centre number.",
+    "descriptionShort": "Visitor information at the service centre, 70 Maurice Avenue.",
+    "website": "https://www.eastgippsland.vic.gov.au/leisure/tourism",
+    "phone": "03 5153 9500",
+    "address": {
+      "street": "70 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "official": true,
+    "claimable": false,
+    "related": [
+      "mallacoota-service-centre-and-library",
+      "east-gippsland-shire-council"
+    ],
+    "source": {
+      "kind": "authoritative",
+      "name": "East Gippsland Shire Council",
+      "url": "https://www.eastgippsland.vic.gov.au/leisure/tourism"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
+  },
+  {
+    "id": "gov-transfer-station",
+    "slug": "mallacoota-transfer-station",
+    "name": "Mallacoota Transfer Station",
+    "entityType": "government",
+    "section": "services",
+    "categories": [
+      "Government & Public Services"
+    ],
+    "schema_type": "GovernmentOrganization",
+    "description": "East Gippsland Shire waste and transfer station on Betka Road. Closed Christmas Day and Good Friday. Transfer stations close when on-site temperature reaches 38°C.",
+    "descriptionShort": "Council waste station, Betka Road.",
+    "website": "https://www.eastgippsland.vic.gov.au/environment-and-waste/landfills-and-transfer-stations",
+    "phone": "0427 144 002",
+    "address": {
+      "street": "Betka Road",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "12:00"
+      },
+      {
+        "dayOfWeek": [
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "11:00",
+        "closes": "15:00"
+      }
+    ],
+    "official": true,
+    "claimable": false,
+    "related": [
+      "east-gippsland-shire-council"
+    ],
+    "source": {
+      "kind": "authoritative",
+      "name": "East Gippsland Shire Council",
+      "url": "https://www.eastgippsland.vic.gov.au/environment-and-waste/landfills-and-transfer-stations"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
+  },
+  {
+    "id": "gov-mallacoota-airport",
+    "slug": "mallacoota-airport",
+    "name": "Mallacoota Airport",
+    "entityType": "government",
+    "section": "services",
+    "categories": [
+      "Government & Public Services"
+    ],
+    "schema_type": "Airport",
+    "description": "Council-operated certified aerodrome (YMCO) on Betka Road, about 7 km southwest of town. Supports Air Ambulance Victoria, Victoria Police Airwing and aerial firefighting. Airside access is restricted. Not a public passenger counter.",
+    "descriptionShort": "Council aerodrome, Betka Road. Not a public passenger counter.",
+    "website": "https://www.eastgippsland.vic.gov.au/aerodromes/mallacoota-airport",
+    "phone": "03 5153 9500",
+    "address": {
+      "street": "Betka Road",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "official": true,
+    "claimable": false,
+    "related": [
+      "east-gippsland-shire-council"
+    ],
+    "source": {
+      "kind": "authoritative",
+      "name": "East Gippsland Shire Council",
+      "url": "https://www.eastgippsland.vic.gov.au/aerodromes/mallacoota-airport"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
+  },
+  {
+    "id": "gov-avcg-vf15",
+    "slug": "australian-volunteer-coast-guard-vf15",
+    "name": "Australian Volunteer Coast Guard VF15 Mallacoota",
+    "entityType": "emergency",
+    "section": "services",
+    "categories": [
+      "Government & Public Services"
+    ],
+    "schema_type": "EmergencyService",
+    "description": "The official Victorian marine search and rescue unit for Mallacoota — Volunteer Coast Guard flotilla VF15, listed by the Victorian Government. Volunteer association, not a government department. Distinct from Mallacoota Marine Search and Rescue Inc, which is not operational. In a marine emergency call 000 and ask for Water Police.",
+    "descriptionShort": "Official Mallacoota marine rescue. Emergency: 000, ask for Water Police.",
+    "website": "https://www.vic.gov.au/marine-search-and-rescue-unit-locations",
+    "links": [
+      {
+        "url": "https://www.vic.gov.au/marine-search-and-rescue-unit-locations",
+        "text": "Victorian MSAR units"
+      },
+      {
+        "url": "https://coastguard.com.au/flotilla/vf15-mallacoota/",
+        "text": "VF15 Mallacoota"
+      }
+    ],
+    "address": {
+      "street": "7 Dorron Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "official": true,
+    "claimable": false,
+    "related": [
+      "mallacoota-marine-search-and-rescue"
+    ],
+    "source": {
+      "kind": "authoritative",
+      "name": "Victorian Government marine search and rescue",
+      "url": "https://www.vic.gov.au/marine-search-and-rescue-unit-locations"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
+  },
+  {
+    "id": "gov-east-gippsland-water",
+    "slug": "east-gippsland-water",
+    "name": "East Gippsland Water",
+    "entityType": "government",
+    "section": "services",
+    "categories": [
+      "Government & Public Services"
+    ],
+    "schema_type": "GovernmentOrganization",
+    "description": "Urban water and wastewater for Mallacoota. No public office in town. General enquiries 1800 671 841 or (03) 5150 4444, Monday–Friday 8:30am–5:00pm. Faults 1300 134 202, 24 hours. Customer Service Centre is in Bairnsdale.",
+    "descriptionShort": "Town water and sewer. Faults 1300 134 202. No public office in Mallacoota.",
+    "website": "https://www.egwater.vic.gov.au/contact-us/",
+    "phone": "1800 671 841",
+    "email": "egw@egwater.vic.gov.au",
+    "locationKind": "service-area",
+    "serviceArea": "Mallacoota",
+    "official": true,
+    "claimable": false,
+    "source": {
+      "kind": "authoritative",
+      "name": "East Gippsland Water",
+      "url": "https://www.egwater.vic.gov.au/contact-us/"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
+  },
+  {
+    "id": "gov-ausnet-faults",
+    "slug": "ausnet-electricity-faults",
+    "name": "AusNet Services — electricity faults",
+    "entityType": "government",
+    "section": "services",
+    "categories": [
+      "Government & Public Services"
+    ],
+    "schema_type": "Organization",
+    "description": "Owns the poles, wires and the Mallacoota Area Grid Storage battery. Not the company named on your electricity bill. Faults 13 17 99. Life support 1800 818 832. No public shopfront in Mallacoota.",
+    "descriptionShort": "Electricity distributor. Faults 13 17 99. Not your retailer.",
+    "website": "https://www.ausnetservices.com.au/report-a-fault",
+    "phone": "13 17 99",
+    "locationKind": "service-area",
+    "serviceArea": "Mallacoota",
+    "official": true,
+    "claimable": false,
+    "source": {
+      "kind": "authoritative",
+      "name": "AusNet Services",
+      "url": "https://www.ausnetservices.com.au/report-a-fault"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-08-29"
+    }
   }
 ]

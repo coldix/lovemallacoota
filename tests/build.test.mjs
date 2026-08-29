@@ -44,6 +44,12 @@ const generatedPages = [
   "404.html",
 ];
 
+test("the community calendar is the Google Calendar Colin supplied, and the policy lets it load", async () => {
+  const html = await readFile(new URL("../dist/calendar.html", import.meta.url), "utf8");
+  assert.match(html, /calendar\.google\.com\/calendar\/embed\?src=crdixon%40gmail\.com/);
+  assert.match(html, /id="nav-menu-toggle"/);
+});
+
 test("Astro produces every public route with canonical metadata", async () => {
   for (const page of generatedPages) {
     const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
@@ -212,6 +218,15 @@ test("a verification date is never invented, and never in the future", async () 
       );
     }
   }
+});
+
+test("filtered listing cards actually disappear", async () => {
+  const css = await readFile(new URL("../assets/css/style.css", import.meta.url), "utf8");
+  assert.match(
+    css,
+    /\.listing-card\[hidden\]\s*\{\s*display:\s*none\s*!important/,
+    "display:flex on .listing-card would otherwise keep hidden cards on screen"
+  );
 });
 
 test("an unverified listing says so rather than staying silent", async () => {

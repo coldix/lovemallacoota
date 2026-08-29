@@ -596,6 +596,8 @@ export function assembleEntities(sources) {
   const extraRelated = {
     "mallacoota-golf-club-bistro": ["mallacoota-golf-and-country-club"],
     "mallacoota-rsl-bunker-museum": ["mallacoota-and-district-historical-society"],
+    "mallacoota-marine-search-and-rescue": ["australian-volunteer-coast-guard-vf15"],
+    "australian-volunteer-coast-guard-vf15": ["mallacoota-marine-search-and-rescue"],
   };
   for (const entity of entities) {
     const extra = extraRelated[entity.slug];

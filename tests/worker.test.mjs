@@ -160,6 +160,7 @@ test("responses carry the security headers, including a policy that allows what 
     "https://ads.oze.net.au",
     "https://challenges.cloudflare.com",
     "https://www.youtube.com",
+    "https://calendar.google.com",
   ]) {
     assert.ok(csp.includes(needed), `policy blocks ${needed}, which the site loads`);
   }

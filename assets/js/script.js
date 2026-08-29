@@ -44,6 +44,31 @@ document.addEventListener("DOMContentLoaded", () => {
       (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
   );
 
+  (function initNavMenu() {
+    const toggle = document.getElementById("nav-menu-toggle");
+    const menu = document.getElementById("nav-menu");
+    if (!toggle || !menu) return;
+
+    const setOpen = (open) => {
+      menu.hidden = !open;
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close the rest of the menu" : "Open the rest of the menu");
+    };
+
+    toggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setOpen(menu.hidden);
+    });
+    document.addEventListener("click", (event) => {
+      if (menu.hidden) return;
+      if (event.target.closest(".nav-more")) return;
+      setOpen(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setOpen(false);
+    });
+  })();
+
   // --- Random sunrise backdrop (per visit) ---
   (function setRandomBackground() {
     const n = 1 + Math.floor(Math.random() * 6);
@@ -171,6 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const typeOK = activeType === "All" || card.dataset.type === activeType;
         const searchOK = !q || (card.dataset.search || "").includes(q);
         const visible = tagOK && sectionOK && typeOK && searchOK;
+        // The [hidden] attribute is not enough on its own: .listing-card sets
+        // display:flex, which beats the user-agent [hidden] { display:none }.
         card.hidden = !visible;
         if (visible) shown += 1;
       }

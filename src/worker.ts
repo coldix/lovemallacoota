@@ -70,6 +70,7 @@ function redirectToCanonical(url: URL): Response {
  *   ads.oze.net.au      the house ad tag, its decisions and its artwork
  *   challenges.…        Turnstile on the contact form
  *   YouTube, Maps       the two embeds on the home page
+ *   calendar.google.com the What's On embed
  * 'unsafe-inline' for scripts is regrettable and load-bearing: the theme
  * flash-guard, the analytics config and the page-level handlers are all inline
  * script blocks. Removing it means giving every one of them a nonce, which the
@@ -82,7 +83,7 @@ const CSP = [
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https://ads.oze.net.au https://www.google-analytics.com",
   "connect-src 'self' https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com",
-  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://challenges.cloudflare.com",
+  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://calendar.google.com https://challenges.cloudflare.com",
   "form-action 'self'",
   "base-uri 'self'",
   "frame-ancestors 'self'",

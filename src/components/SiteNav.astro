@@ -4,7 +4,7 @@ interface Props {
 }
 
 const { active = "" } = Astro.props;
-const links = [
+const primary = [
   ["food", "/food.html", "Eat & Drink"],
   ["accom", "/accom.html", "Stay"],
   ["activity", "/activity.html", "Do & See"],
@@ -12,6 +12,16 @@ const links = [
   ["services", "/services.html", "Services"],
   ["calendar", "/calendar.html", "What's On"],
 ];
+const more = [
+  ["edition", "/edition.html", "This Week"],
+  ["locals", "/locals.html", "Locals"],
+  ["archive", "/archive.html", "Archive"],
+  ["directory", "/directory.html", "Directory"],
+  ["emergency", "/emergency.html", "Emergency"],
+  ["contact", "/contact.html", "Contact"],
+  ["add-listing", "/add-listing.html", "Add your listing"],
+];
+const moreActive = more.some(([key]) => key === active);
 ---
 
 <nav class="site-nav" aria-label="Main">
@@ -20,14 +30,42 @@ const links = [
     <span>Love Mallacoota</span>
   </a>
   <span class="nav-spacer"></span>
-  {links.map(([key, href, label]) => (
-    <a
-      href={href}
-      class:list={["nav-link", { active: active === key }]}
-      aria-current={active === key ? "page" : undefined}
+  <div class="nav-inline">
+    {primary.map(([key, href, label]) => (
+      <a
+        href={href}
+        class:list={["nav-link", { active: active === key }]}
+        aria-current={active === key ? "page" : undefined}
+      >
+        {label}
+      </a>
+    ))}
+  </div>
+  <div class="nav-more">
+    <button
+      type="button"
+      id="nav-menu-toggle"
+      class:list={["nav-menu-toggle", { active: moreActive }]}
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Open the rest of the menu"
     >
-      {label}
-    </a>
-  ))}
+      <span class="nav-menu-bars" aria-hidden="true"></span>
+    </button>
+    <div id="nav-menu" class="nav-menu" hidden>
+      <div class="nav-menu-primary">
+        {primary.map(([key, href, label]) => (
+          <a href={href} class:list={[{ active: active === key }]} aria-current={active === key ? "page" : undefined}>
+            {label}
+          </a>
+        ))}
+      </div>
+      {more.map(([key, href, label]) => (
+        <a href={href} class:list={[{ active: active === key }]} aria-current={active === key ? "page" : undefined}>
+          {label}
+        </a>
+      ))}
+    </div>
+  </div>
   <button id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle theme"></button>
 </nav>

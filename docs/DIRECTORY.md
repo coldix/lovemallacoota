@@ -8,6 +8,8 @@ Related:
 - [`DIRECTORY-IA.md`](DIRECTORY-IA.md) — public navigation
 - [`DIRECTORY-SUBMISSIONS.md`](DIRECTORY-SUBMISSIONS.md) — verification rules
 - [`INCORPORATED-ASSOCIATIONS.md`](INCORPORATED-ASSOCIATIONS.md) — CAV seed
+- [`ASSOCIATION-RESEARCH.md`](ASSOCIATION-RESEARCH.md) — verified public contacts for those associations
+- [`GOVERNMENT.md`](GOVERNMENT.md) — official local facilities and emergency channels
 
 ## Public IA
 

@@ -106,8 +106,16 @@ export async function handleEditionPdf(
       // Images are lazy on the web, and a headless render never scrolls, so
       // every picture below the fold would print as an empty caption. Make
       // them eager and wait for the browser to actually have them.
+      // This function is serialised and run inside the page, not in the Worker,
+      // so its globals are the browser's rather than workerd's.
       await tab.evaluate(async () => {
-        const images = [...document.querySelectorAll("img")];
+        const page = globalThis as unknown as {
+          document: {
+            querySelectorAll: (selector: string) => ArrayLike<Record<string, any>>;
+            fonts?: { ready: Promise<unknown> };
+          };
+        };
+        const images = [...page.document.querySelectorAll("img")] as Record<string, any>[];
         for (const image of images) {
           image.loading = "eager";
           if (!image.complete) image.src = image.src;
@@ -116,13 +124,13 @@ export async function handleEditionPdf(
           images.map((image) =>
             image.complete
               ? Promise.resolve()
-              : new Promise((resolve) => {
-                  image.addEventListener("load", resolve, { once: true });
-                  image.addEventListener("error", resolve, { once: true });
+              : new Promise<void>((resolve) => {
+                  image.addEventListener("load", () => resolve(), { once: true });
+                  image.addEventListener("error", () => resolve(), { once: true });
                 })
           )
         );
-        await document.fonts?.ready;
+        await page.document.fonts?.ready;
       });
       pdf = await tab.pdf({
         // The stylesheet owns the page size and margins so the cover can bleed

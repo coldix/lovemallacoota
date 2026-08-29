@@ -81,3 +81,13 @@ test("the check reads a verdict out of the model's reply", async () => {
   assert.equal(hold.verdict, "hold");
   assert.equal(hold.clause, "unverified allegations");
 });
+
+test("a classified without a way to reply is refused", async () => {
+  const { needsContact } = await import("../src/submit.ts");
+  // The rule lives in the handler; this asserts the sections it applies to.
+  assert.ok(needsContact("classifieds"));
+  assert.ok(needsContact("bdm"));
+  assert.ok(needsContact("positions"));
+  assert.ok(!needsContact("editorial"));
+  assert.ok(!needsContact("community"));
+});

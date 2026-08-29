@@ -1,34 +1,34 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.34",
-  "generatedAt": "2026-08-29 21:36:06 AEST (Melbourne)",
+  "version": "v0.35",
+  "generatedAt": "2026-08-29 21:53:52 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
     {
       "path": "404.html",
       "bytes": 5419,
-      "sha256": "4bf98bc2a5fe0afd0c2983898a248e6c222ecb0db9f7950f7fea43fe1f4eda9d"
+      "sha256": "a5bb7c6e935ebd481af8e8e183abb25e761dccd9e957ab1053063ceb86092ef8"
     },
     {
       "path": "accessibility.html",
       "bytes": 6190,
-      "sha256": "df0394b4a0fbf5c916d0278a6d2ea7eb6d00127a5aa10486d1a073eff4a7bfab"
+      "sha256": "2fb1465cac414ac04ebea6c33d837022a03d7b52be27c1e503c09af480b24fd0"
     },
     {
       "path": "accom.html",
       "bytes": 46268,
-      "sha256": "080f09b31b5376978717774d6d9d9dcef7f24cc445dd375de963862a72281574"
+      "sha256": "ac148cb74a88e43b69dd8e1a3625b777b9080f689b1f203e4ea76f1dbc2b92de"
     },
     {
       "path": "activity.html",
       "bytes": 24354,
-      "sha256": "a5e33909d7fc2fdefaf46552a704240378288344a03ec7646ca309f0dcc3a0b1"
+      "sha256": "796e77b1ca7d1c316e991da7e54e47536cb146c9757616e0a5bb65a0679810fe"
     },
     {
       "path": "archive.html",
       "bytes": 126907,
-      "sha256": "ddfb24b14bc35bad576d6f5b1b35b6a636c210bb2db4ee6411c87ee7c800dacd"
+      "sha256": "b6bbc4644833362f480fb3c70f55ba53131ad5d08cf97bed4e3558f9a2c852ec"
     },
     {
       "path": "assets/css/adnet.css",
@@ -37,8 +37,8 @@
     },
     {
       "path": "assets/css/style.css",
-      "bytes": 50949,
-      "sha256": "aa913ffd86b801554560c7d54fc18022357d9d992bbb3307969207dae771181d"
+      "bytes": 51563,
+      "sha256": "dfbe44c075638a0ed0f1952bc9f1ec5b2a561726f18decea8236243d5e34939b"
     },
     {
       "path": "assets/icons/android-chrome-192x192.png",
@@ -83,17 +83,17 @@
     {
       "path": "calendar.html",
       "bytes": 6399,
-      "sha256": "c9c9105ca5d52d357dd44072bdbb8fd8d5b894c0cd6de081121fe98524f11595"
+      "sha256": "af57c1635cc48a2c1650977428a2364857f134b49d8ba35270b76d3ad0fe5d82"
     },
     {
       "path": "contact.html",
-      "bytes": 12778,
-      "sha256": "dafc55749339a96f76735fc17666f5f5535138a633183671b78e80e7496ac661"
+      "bytes": 13122,
+      "sha256": "299014d7906bb4d75caf46a2db4927587a6ae2cfca76dc14f3cf970c634a5d40"
     },
     {
       "path": "corrections.html",
       "bytes": 6385,
-      "sha256": "3e61c2b98279023e927792b1045a4ce6bde1b37bb788c326c06ff68ff969ab21"
+      "sha256": "a255b48f355de1bf00a2dc96a492ce76402301c750218b15bf2efbbdafa39e0a"
     },
     {
       "path": "data/archive-index.json",
@@ -117,23 +117,23 @@
     },
     {
       "path": "edition.html",
-      "bytes": 32428,
-      "sha256": "a7a2c7aaffdc773d50ca9011b9766ed77189610f854b0104ac9ff7a43831c6bd"
+      "bytes": 32170,
+      "sha256": "6687ed7735a4b199c7e08203dbe36fac4f90eb6b4c7ec96a4b91f7233d6684fe"
     },
     {
-      "path": "edition/2026-w35.html",
-      "bytes": 32539,
-      "sha256": "04724fe5104489b3a532ed7dec5d8b83c19126ca6b006c4480ffe073f3938f3e"
+      "path": "edition/2026-w36.html",
+      "bytes": 32295,
+      "sha256": "548ebd09cc3905fe6a065108ae904e1aaf17cc3ca14417671a41d096a2323c23"
     },
     {
       "path": "editorial-policy.html",
       "bytes": 6569,
-      "sha256": "f5278d559cc2d5e4d83088188c4ac43b32d1071c45e25190773a68838a6c5dfd"
+      "sha256": "a7fce6412ae3896ade9ad9c3c3c8cbfd448294ed46c571a7935aed225f238d91"
     },
     {
       "path": "emergency.html",
       "bytes": 6668,
-      "sha256": "4a5813269d0c09a5d9b3f252abae5189a608b65735cf7e4cb32a69bf7ae20882"
+      "sha256": "3b99dfc928133ff76a4e07ba053c9c9da97a14d2fe5b1796dea4fa9d2e3cf953"
     },
     {
       "path": "favicon.ico",
@@ -143,7 +143,7 @@
     {
       "path": "food.html",
       "bytes": 38490,
-      "sha256": "a63b049b40dfabf586a6b75216f57058834dfa406cf8ca182ac29b7c07174fe4"
+      "sha256": "bc42834da4f0284d380e0a7c8c18e8807a742a10cfc6378bfdce3483705a7012"
     },
     {
       "path": "images/articles/w35-community-shirley-90-2.webp",
@@ -278,22 +278,22 @@
     {
       "path": "index.html",
       "bytes": 11078,
-      "sha256": "0543124490d132c7a1f364453fadb6823bbfcce5b4ef7a369a4f9d61f31d7b52"
+      "sha256": "d64f80e3a4b2f634f29ea84380a11fc1415db8e8c9cc7b1db3822793d9489792"
     },
     {
       "path": "llms.txt",
       "bytes": 2498,
-      "sha256": "779c14a7b56592b66a28735eb7946b2d36681b131ccd9251e2e1e10de4d5214a"
+      "sha256": "b29ef30fca407fe2e8090ede8a6a7fff422b368a4df6253773f24e59a2898723"
     },
     {
       "path": "locals.html",
-      "bytes": 10521,
-      "sha256": "a512660f98533b9dfdc5464ce6f9e88863b6e2f39e090a758dfc16d199e25dd5"
+      "bytes": 10523,
+      "sha256": "00fee0250ffcaa0613427d6a0e5fa4488c878bace36cd8d99eefc8878d891052"
     },
     {
       "path": "privacy.html",
       "bytes": 6501,
-      "sha256": "cf791b645df735cfc0810de5b0588742fef1a094dc5a4197d5c9a16e73f2bf86"
+      "sha256": "87e33275b6b4e93e8e22e798257309585a17bb02eeffa1c8441b3c27a676c70a"
     },
     {
       "path": "robots.txt",
@@ -308,17 +308,17 @@
     {
       "path": "sitemap.xml",
       "bytes": 2434,
-      "sha256": "e2ce0f560388196fa5ee120c7bf43a63c73ddabd77d9c223404501d9c3cc75fb"
+      "sha256": "86d1416b8a47cdf8cdbf194e2f416bb32dcac18ac239962ae75949f51ccf7cd4"
     },
     {
       "path": "submit.html",
-      "bytes": 12511,
-      "sha256": "61a473841a26418ec77a3e6b575eb12b38ae363861e5ff32fccae4b2039cf960"
+      "bytes": 12755,
+      "sha256": "a13a0c4d771d54aa5c7496bf26f3f5062f6d50889418832fd39cf3f6402c939b"
     },
     {
       "path": "terms.html",
       "bytes": 6630,
-      "sha256": "67073dfb07e8b301a72281fee12ade925417594c6dc060200470692da095cfc6"
+      "sha256": "7a0775134fc4c3e5f23e4967de7b7e58f538ad2dff9a00d41f31dd95e7e4ca62"
     }
   ]
 }

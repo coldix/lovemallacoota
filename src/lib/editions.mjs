@@ -58,11 +58,12 @@ export function sectionTitle(id) {
   return SECTION_TITLES.get(id) || id;
 }
 
-export function loadEditions() {
+export function loadEditions({ includeDrafts = false } = {}) {
   if (!editionsDir || !existsSync(editionsDir)) return [];
   return readdirSync(editionsDir)
     .filter((file) => file.endsWith(".json"))
     .map((file) => JSON.parse(readFileSync(path.join(editionsDir, file), "utf8")))
+    .filter((edition) => includeDrafts || edition.status !== "draft")
     .sort((a, b) => b.week.localeCompare(a.week));
 }
 

@@ -97,11 +97,11 @@ const statusLabel =
     <h2 id="edition-toc-title" class="section-title">In this edition</h2>
     <ol class="edition-toc-list">
       {toc.map((section) => (
-        <li>
+        <li class="edition-toc-group">
           <a class="edition-toc-section" href={`#section-${section.id}`}>{section.title}</a>
           <ul>
             {section.entries.map((entry) => (
-              <li>
+              <li class="edition-toc-entry">
                 <a href={`#${entry.id}`}>{entry.title}</a>
                 {entry.byline && <span class="edition-toc-byline">{entry.byline}</span>}
               </li>

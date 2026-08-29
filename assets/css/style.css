@@ -950,7 +950,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   thead { display: table-header-group; }
   tfoot { display: table-footer-group; }
   .edition-auto { break-inside: avoid-page; }
-  .edition-auto, .edition-toc-list { columns: 1; }
+  .edition-auto { columns: 1; }
+  .edition-toc-list { columns: 2; column-gap: 6mm; column-rule: 0.5pt solid #ccc; font-size: 9.5pt; }
+  .edition-toc-group { border-bottom: 0.5pt solid #ddd; padding-bottom: 2mm; margin-bottom: 2.5mm; }
+  .edition-toc-section { font-size: 9pt; letter-spacing: 0.04em; }
+  .edition-toc-byline { font-size: 8pt; }
   /* Type scale. Nothing below 8pt. */
   body { font-size: 10.5pt; line-height: 1.33; }
   .section-title { font-size: 16pt; margin-bottom: 0.2rem; }
@@ -1041,7 +1045,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* Contents as pills rather than a bulleted list of blue links. */
 .edition-toc-list { list-style: none; padding: 0; max-width: none; }
-.edition-toc-list > li { margin: 0 0 1.1rem; break-inside: avoid; }
+.edition-toc-group { margin: 0 0 1rem; break-inside: avoid; padding-bottom: 0.6rem; border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent); }
+.edition-toc-group:last-child { border-bottom: 0; }
+.edition-toc-entry { display: flex; gap: 0.5rem; align-items: baseline; }
+.edition-toc-entry > a { flex: 1; }
 .edition-toc-section {
   display: inline-block;
   padding: 0.32rem 0.9rem;
@@ -1056,12 +1063,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-toc-list ul { margin: 0.45rem 0 0; padding: 0; list-style: none; }
 .edition-toc-list ul li { margin: 0.25rem 0; font-size: 0.92rem; line-height: 1.45; }
 
-/* Three columns once there is room, one on a phone. */
-@media (min-width: 900px) {
-  .edition-toc-list { column-count: 2; column-gap: 2.2rem; }
-}
-@media (min-width: 1200px) {
-  .edition-toc-list { column-count: 3; }
+/* Two columns once there is room. Three made each entry too narrow to read a
+   headline in, which is the only thing the contents is for. */
+@media (min-width: 820px) {
+  .edition-toc-list { column-count: 2; column-gap: 2.6rem; column-rule: 1px solid var(--glass-border); }
 }
 
 /* Link lists — transport, social, the week's talking points. */

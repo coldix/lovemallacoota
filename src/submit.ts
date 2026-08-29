@@ -20,6 +20,12 @@ const IMAGE_TYPES: Record<string, string> = {
   "image/heic": "heic",
 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/** Sections nobody can act on without a way to make contact. */
+const NEEDS_CONTACT = new Set(["classifieds", "bdm", "positions"]);
+
+export function needsContact(section: string): boolean {
+  return NEEDS_CONTACT.has(section);
+}
 const OWNER = "coldix";
 const REPO = "lovemallacoota";
 
@@ -221,6 +227,26 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
   }
   if (!contributor.sections.includes(section)) {
     return json({ ok: false, error: `You are not set up to post in ${section}.` }, 403);
+  }
+
+  // A classified or a family notice without a way to answer it is not an
+  // advertisement, it is a puzzle. The reader needs a number or an address.
+  if (NEEDS_CONTACT.has(section)) {
+    const hasContact =
+      /\b(?:0\d[\d ]{7,}|\(0\d\)\s?\d{4}\s?\d{4})\b/.test(raw) ||
+      EMAIL_RE.test(contactEmail) ||
+      /[^\s@]+@[^\s@]+\.[^\s@]+/.test(raw) ||
+      String(form.get("contact_phone") || "").trim().length >= 8;
+    if (!hasContact) {
+      return json(
+        {
+          ok: false,
+          error:
+            "A classified or family notice needs a phone number or an email address — either in the text, or in the contact fields with 'publish these details' ticked.",
+        },
+        400
+      );
+    }
   }
 
   const check = await checkAgainstPolicy(env, `${title}\n\n${raw}`);

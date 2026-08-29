@@ -1,0 +1,100 @@
+{
+  "week": "2026-w36",
+  "generatedAt": "2026-08-29T11:53:28.299Z",
+  "weather": {
+    "source": "Open-Meteo",
+    "sourceUrl": "https://open-meteo.com/",
+    "licence": "CC BY 4.0",
+    "fetchedAt": "2026-08-29T11:53:28.299Z",
+    "days": [
+      {
+        "date": "2026-08-31",
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 16.5,
+        "minC": 9.1,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-09-01",
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 20.5,
+        "minC": 9.2,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-09-02",
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 17.1,
+        "minC": 11.7,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-09-03",
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 20.1,
+        "minC": 10.3,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-09-04",
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 18.7,
+        "minC": 8.2,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-09-05",
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 16.4,
+        "minC": 9.8,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-09-06",
+        "code": 1,
+        "summary": "Mostly clear",
+        "maxC": 18.7,
+        "minC": 6.9,
+        "rainMm": 0
+      }
+    ]
+  },
+  "tides": null,
+  "events": [],
+  "trail": {
+    "slug": "tim-peach-walk-to-bastion-point",
+    "name": "Tim Peach Walk to Bastion Point",
+    "region": "Mallacoota",
+    "state": "VIC",
+    "distance": "2.2 km return",
+    "duration": "45-60 minutes",
+    "difficulty": "Easy",
+    "terrain": "littoral rainforest",
+    "start": "Devlin Drive or Bastion Point car park",
+    "summary": "A town-to-coast loop through littoral rainforest to Bastion Point, Mallacoota's main swimming beach, rock pools and clifftop picnic tables looking over the inlet entrance, Gabo Island and the Howe Range.",
+    "url": "https://trailbound.au/trails/tim-peach-walk-to-bastion-point",
+    "directLineKm": 1,
+    "rotation": {
+      "position": 2,
+      "of": 23
+    }
+  },
+  "business": {
+    "slug": "adobe-mudbrick-holiday-flats",
+    "name": "Adobe (Mudbrick) Holiday Flats",
+    "description": "Unique and rustic mudbrick holiday flats providing a memorable stay in Mallacoota.",
+    "category": "Accommodation",
+    "locality": "Mallacoota",
+    "url": "https://adobeholidayflats.com.au",
+    "rotation": {
+      "position": 2,
+      "of": 42
+    }
+  }
+}

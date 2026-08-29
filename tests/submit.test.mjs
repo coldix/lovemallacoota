@@ -45,8 +45,8 @@ test("a bullet list typed into the form survives as a list", () => {
 
 test("headlines become safe ids", () => {
   assert.equal(
-    slugify("From the mud of the Barwon: Frank Squires' deep-water days"),
-    "from-the-mud-of-the-barwon-frank-squires-deep-water-days"
+    slugify("From the mud of the Barwon: Frank Stokes' deep-water days"),
+    "from-the-mud-of-the-barwon-frank-stokes-deep-water-days"
   );
 });
 

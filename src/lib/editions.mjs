@@ -218,7 +218,12 @@ export function editionSections(edition) {
       const social = loadDataFile("social-links.json", []);
       const links = Array.isArray(social) ? social : social.links || [];
       if (links.length) {
-        auto = { type: "links", data: links, intro: Array.isArray(social) ? null : social.intro };
+        auto = {
+          type: "links",
+          data: links,
+          intro: Array.isArray(social) ? null : social.intro,
+          invite: Array.isArray(social) ? null : social.invite,
+        };
       }
     }
     return { ...section, articles: own, auto };

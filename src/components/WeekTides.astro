@@ -1,0 +1,89 @@
+---
+import { TIDE_SOURCE } from "../lib/editions.mjs";
+import { tideChart } from "../lib/tide-chart.mjs";
+
+// Tides and the moon, shared by the weekly edition and the calendar page.
+interface Props { tides?: Record<string, any> | null; moon?: Record<string, any>[] | null }
+const { tides = null, moon = null } = Astro.props;
+
+const chart = tides ? tideChart(tides) : null;
+
+const DAY = new Intl.DateTimeFormat("en-AU", {
+  weekday: "long", day: "numeric", month: "short", timeZone: "Australia/Melbourne",
+});
+const TIME = new Intl.DateTimeFormat("en-AU", {
+  hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Australia/Melbourne",
+});
+const LOCAL_DATE = new Intl.DateTimeFormat("en-CA", {
+  year: "numeric", month: "2-digit", day: "2-digit", timeZone: "Australia/Melbourne",
+});
+
+// Twenty-seven rows in one column is a wall. Grouped by day it becomes seven
+// small tables that sit side by side on a wide screen.
+const byDay = new Map<string, Record<string, any>[]>();
+for (const extreme of tides?.extremes || []) {
+  const key = LOCAL_DATE.format(new Date(extreme.time));
+  if (!byDay.has(key)) byDay.set(key, []);
+  byDay.get(key)!.push(extreme);
+}
+const days = [...byDay.entries()].map(([date, extremes]) => ({
+  date,
+  label: DAY.format(new Date(`${date}T12:00:00+10:00`)),
+  extremes,
+  moon: (moon || []).find((entry) => entry.date === date) || null,
+}));
+---
+{chart && (
+  <svg class="edition-tide-chart" viewBox={`0 0 ${chart.width} ${chart.height}`} role="img" aria-label="The week's tides, high and low water" preserveAspectRatio="xMidYMid meet">
+    <path class="tide-area" d={chart.area} />
+    <path class="tide-line" d={chart.path} />
+    {chart.dayMarks.map((day: Record<string, any>) => (
+      <g>
+        <line class="tide-day" x1={day.x} x2={day.x} y1="14" y2={chart.baseline} />
+        <text class="tide-day-label" x={day.x + 4} y="14">{day.label}</text>
+      </g>
+    ))}
+    {chart.marks.map((mark: Record<string, any>) => (
+      <circle class={mark.high ? "tide-high" : "tide-low"} cx={mark.x} cy={mark.y} r="3.5" />
+    ))}
+  </svg>
+)}
+
+{days.length > 0 && (
+  <div class="tide-days">
+    {days.map((day) => (
+      <section class="tide-day-card">
+        <h4>{day.label}</h4>
+        {day.moon && (
+          <p class="tide-day-moon">
+            <span aria-hidden="true">{day.moon.symbol}</span> {day.moon.name}, {day.moon.illumination}% lit
+            {day.moon.range !== "between" && <span> · {day.moon.range === "spring" ? "spring tides" : "neap tides"}</span>}
+          </p>
+        )}
+        <table class="tide-day-table">
+          <tbody>
+            {day.extremes.map((extreme: Record<string, any>) => (
+              <tr>
+                <th scope="row">{extreme.type === "High" ? "High" : "Low"}</th>
+                <td>{TIME.format(new Date(extreme.time))}</td>
+                <td>{extreme.heightM.toFixed(2)} m</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    ))}
+  </div>
+)}
+
+<p class="edition-source">
+  {tides ? (
+    <>
+      Sea level from <a href={tides.sourceUrl} rel="noopener noreferrer" target="_blank">{tides.source}</a>, {tides.licence}, for a {tides.station}.
+      <strong> Modelled against {tides.datum}, not chart datum, and not at the inlet entrance</strong> — the shape of the week is right, the heights are indicative. No allowance for wind or pressure, and the bar behaves differently again.
+    </>
+  ) : (
+    <>{TIDE_SOURCE.note}</>
+  )}
+  {" "}For navigation use <a href={TIDE_SOURCE.url} rel="noopener noreferrer" target="_blank">WillyWeather</a> or the <a href={TIDE_SOURCE.official} rel="noopener noreferrer" target="_blank">Bureau of Meteorology</a>. Check conditions before crossing.
+</p>

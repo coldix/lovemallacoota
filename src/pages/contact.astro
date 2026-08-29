@@ -6,6 +6,7 @@ import { loadDataFile } from "../lib/editions.mjs";
 // The same list the weekly edition uses, so the two cannot drift apart.
 const social = loadDataFile("social-links.json", []);
 const socialLinks = Array.isArray(social) ? social : social.links || [];
+const invite = Array.isArray(social) ? null : social.invite;
 
 // Cloudflare's always-passes test key, so local builds work before the real
 // widget exists. Set PUBLIC_TURNSTILE_SITE_KEY for preview and production.
@@ -54,7 +55,7 @@ const turnstileSiteKey =
       </div>
 
       <div class="social-suggest">
-        <h3>Know one we have missed?</h3>
+        <h3>{invite?.heading || "Know one we have missed?"}</h3>
         <p>
           Clubs, sporting groups, the school, church notices, markets, arts,
           fishing, fire and emergency pages — if there is a page the town

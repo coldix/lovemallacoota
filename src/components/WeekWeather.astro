@@ -1,0 +1,32 @@
+---
+// The seven-day forecast, shared by the weekly edition and the calendar page.
+interface Props { weather: Record<string, any> }
+const { weather } = Astro.props;
+
+const DAY = new Intl.DateTimeFormat("en-AU", {
+  weekday: "short", day: "numeric", month: "short", timeZone: "Australia/Melbourne",
+});
+const dayName = (iso: string) => DAY.format(new Date(`${iso}T00:00:00+10:00`));
+---
+<div class="edition-auto">
+  <table class="forecast">
+    <thead>
+      <tr><th scope="col">Day</th><th scope="col">Forecast</th><th scope="col">Min</th><th scope="col">Max</th><th scope="col">Rain</th></tr>
+    </thead>
+    <tbody>
+      {weather.days.map((day: Record<string, any>) => (
+        <tr>
+          <th scope="row">{dayName(day.date)}</th>
+          <td>{day.summary}</td>
+          <td>{Math.round(day.minC)}°</td>
+          <td>{Math.round(day.maxC)}°</td>
+          <td>{day.rainMm > 0 ? `${day.rainMm} mm` : "—"}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="edition-source">
+    Forecast from <a href={weather.sourceUrl} rel="noopener noreferrer" target="_blank">{weather.source}</a>, {weather.licence}.
+    Not an official warning service — see <a href="/emergency.html">emergency information</a>.
+  </p>
+</div>

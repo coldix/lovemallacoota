@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import WeekWeather from "../components/WeekWeather.astro";
+import WeekTides from "../components/WeekTides.astro";
+import { currentEdition, loadWeekly } from "../lib/editions.mjs";
+
+const edition = currentEdition();
+const weekly = edition ? loadWeekly(edition.week) : null;
 import { loadDirectory, listingPagePath } from "../lib/directory.mjs";
 
 const meetings = loadDirectory()
@@ -14,11 +20,27 @@ const meetings = loadDirectory()
       <div class="calendar-frame">
         <iframe
           title="Mallacoota Community Calendar"
-          src="https://calendar.google.com/calendar/embed?wkst=2&ctz=Australia%2FMelbourne&title=Love%20Mallacoota&src=Y3JkaXhvbkBnbWFpbC5jb20&color=%237986cb"
+          src="https://calendar.google.com/calendar/embed?mode=AGENDA&wkst=2&ctz=Australia%2FMelbourne&title=Love%20Mallacoota&src=Y3JkaXhvbkBnbWFpbC5jb20&color=%237986cb"
           loading="lazy"
         ></iframe>
       </div>
     </section>
+    {weekly?.weather && (
+      <section class="glass-card sheen content-block reveal" aria-labelledby="calendar-weather">
+        <h2 id="calendar-weather" class="section-title">This week's weather</h2>
+        <WeekWeather weather={weekly.weather} />
+      </section>
+    )}
+
+    {(weekly?.tides || weekly?.moon) && (
+      <section class="glass-card sheen content-block reveal" aria-labelledby="calendar-tides">
+        <h2 id="calendar-tides" class="section-title">Tides and the moon</h2>
+        <div class="edition-auto">
+          <WeekTides tides={weekly.tides} moon={weekly.moon} />
+        </div>
+      </section>
+    )}
+
     <section class="glass-card sheen content-block reveal">
       <div class="links-grid">
         <a href="/edition.html" class="link-card">

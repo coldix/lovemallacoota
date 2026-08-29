@@ -10,7 +10,8 @@ import {
 } from "../lib/editions.mjs";
 import { renderBody } from "../lib/markup.mjs";
 import { adsForSection, fillerPhoto, fullPageAds, socialForSection, youTubeId } from "../lib/editions.mjs";
-import { tideChart } from "../lib/tide-chart.mjs";
+import WeekWeather from "./WeekWeather.astro";
+import WeekTides from "./WeekTides.astro";
 
 interface Props {
   edition: Record<string, any>;
@@ -132,141 +133,12 @@ const statusLabel =
   <section class="glass-card sheen content-block reveal" id={`section-${section.id}`} aria-labelledby={`heading-${section.id}`}>
     <h2 class="section-title" id={`heading-${section.id}`}>{section.title}</h2>
     {section.auto?.type === "weather" && (
-      <div class="edition-auto">
-        <table class="forecast">
-          <thead>
-            <tr><th scope="col">Day</th><th scope="col">Forecast</th><th scope="col">Min</th><th scope="col">Max</th><th scope="col">Rain</th></tr>
-          </thead>
-          <tbody>
-            {section.auto.data.days.map((day) => (
-              <tr>
-                <th scope="row">{dayName(day.date)}</th>
-                <td>{day.summary}</td>
-                <td>{Math.round(day.minC)}°</td>
-                <td>{Math.round(day.maxC)}°</td>
-                <td>{day.rainMm > 0 ? `${day.rainMm} mm` : "—"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p class="edition-source">
-          Forecast from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a>, {section.auto.data.licence}. Not an official warning service — see <a href="/emergency.html">emergency information</a>.
-        </p>
-      </div>
+      <WeekWeather weather={section.auto.data} />
     )}
 
-    {section.auto?.type === "tides" && (
+    {(section.auto?.type === "tides" || section.auto?.type === "tide-table") && (
       <div class="edition-auto">
-        {section.auto.moon && (
-          <table class="forecast moon-table">
-            <thead>
-              <tr><th scope="col">Day</th><th scope="col">Moon</th><th scope="col">Lit</th><th scope="col">Tides</th></tr>
-            </thead>
-            <tbody>
-              {section.auto.moon.map((day) => (
-                <tr>
-                  <th scope="row">{dayName(day.date)}</th>
-                  <td><span class="moon-symbol" aria-hidden="true">{day.symbol}</span> {day.name}</td>
-                  <td>{day.illumination}%</td>
-                  <td>{day.range === "spring" ? "Spring — bigger range" : day.range === "neap" ? "Neap — smaller range" : "—"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-        <p>{section.auto.data.note}</p>
-        <p class="edition-actions">
-          <a class="btn btn-primary" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">{section.auto.data.label}</a>
-          <a class="btn btn-ghost" href={section.auto.data.official} rel="noopener noreferrer" target="_blank">Bureau of Meteorology</a>
-        </p>
-      </div>
-    )}
-
-    {section.auto?.type === "video" && youTubeId(section.auto.data.url) && (
-      <div class="edition-auto">
-        <div class="media-frame edition-web-only">
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${youTubeId(section.auto.data.url)}`}
-            title={section.auto.data.title || "Video of the week"}
-            loading="lazy"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <p class="edition-source">
-          <a href={section.auto.data.url} rel="noopener noreferrer" target="_blank">Watch on YouTube</a>
-          {section.auto.data.credit && <span> · {section.auto.data.credit}</span>}
-          {section.auto.data.note && <span> · {section.auto.data.note}</span>}
-        </p>
-      </div>
-    )}
-
-    {section.auto?.type === "tide-table" && (
-      <div class="edition-auto">
-        {(() => {
-          const chart = tideChart(section.auto.data);
-          return chart ? (
-            <svg
-              class="edition-tide-chart"
-              viewBox={`0 0 ${chart.width} ${chart.height}`}
-              role="img"
-              aria-label="The week's tides, high and low water"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <path class="tide-area" d={chart.area} />
-              <path class="tide-line" d={chart.path} />
-              {chart.dayMarks.map((day) => (
-                <g>
-                  <line class="tide-day" x1={day.x} x2={day.x} y1="14" y2={chart.baseline} />
-                  <text class="tide-day-label" x={day.x + 4} y="14">{day.label}</text>
-                </g>
-              ))}
-              {chart.marks.map((mark) => (
-                <g>
-                  <circle class={mark.high ? "tide-high" : "tide-low"} cx={mark.x} cy={mark.y} r="3.5" />
-                  <text class="tide-mark-label" x={mark.x} y={mark.high ? mark.y - 9 : mark.y + 16} text-anchor="middle">{mark.label}</text>
-                </g>
-              ))}
-            </svg>
-          ) : null;
-        })()}
-        <table class="forecast">
-          <thead>
-            <tr><th scope="col">When</th><th scope="col">Tide</th><th scope="col">Height</th></tr>
-          </thead>
-          <tbody>
-            {section.auto.data.extremes.map((extreme) => (
-              <tr>
-                <th scope="row">{tideWhen(extreme.time)}</th>
-                <td>{extreme.type === "High" ? "High" : "Low"}</td>
-                <td>{extreme.heightM.toFixed(2)} m</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {section.auto.moon && (
-          <table class="forecast moon-table">
-            <thead>
-              <tr><th scope="col">Day</th><th scope="col">Moon</th><th scope="col">Lit</th><th scope="col">Range</th></tr>
-            </thead>
-            <tbody>
-              {section.auto.moon.map((day) => (
-                <tr>
-                  <th scope="row">{dayName(day.date)}</th>
-                  <td><span class="moon-symbol" aria-hidden="true">{day.symbol}</span> {day.name}</td>
-                  <td>{day.illumination}%</td>
-                  <td>{day.range === "spring" ? "Spring — bigger" : day.range === "neap" ? "Neap — smaller" : "—"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-        <p class="edition-source">
-          Sea level from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a>, {section.auto.data.licence}, for a {section.auto.data.station}.
-          <strong> Modelled against {section.auto.data.datum}, not chart datum, and not at the inlet entrance</strong> — the shape of the week is right, the absolute heights are indicative. It takes no account of wind or barometric pressure, and the bar can behave differently again.
-          For navigation use the official predictions: <a href={section.auto.source.url} rel="noopener noreferrer" target="_blank">WillyWeather</a> or the <a href={section.auto.source.official} rel="noopener noreferrer" target="_blank">Bureau of Meteorology</a>. Check conditions before crossing.
-        </p>
+        <WeekTides tides={section.auto.type === "tide-table" ? section.auto.data : null} moon={section.auto.moon} />
       </div>
     )}
 
@@ -340,8 +212,20 @@ const statusLabel =
             </h4>
             {item.description && <p>{item.description}</p>}
             {item.meta && <span class="meta">{item.meta}</span>}
+            {item.verified && (
+              <span class="meta verified-note">✓ {item.verifiedNote || "Verified"}</span>
+            )}
           </div>
         ))}
+      </div>
+    )}
+
+    {section.auto?.type === "links" && section.auto.invite && (
+      <div class="social-suggest edition-web-only">
+        <h3>{section.auto.invite.heading}</h3>
+        <p>{section.auto.invite.body}</p>
+        <p class="social-rule"><strong>{section.auto.invite.rule.split(".")[0]}.</strong>{section.auto.invite.rule.slice(section.auto.invite.rule.indexOf(".") + 1)}</p>
+        <p><a class="btn btn-coral" href={section.auto.invite.url}>{section.auto.invite.label}</a></p>
       </div>
     )}
 

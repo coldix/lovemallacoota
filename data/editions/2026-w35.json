@@ -109,6 +109,40 @@
         "- Start a line with a dash for a bullet\n- Leave a blank line between paragraphs\n- Anything else, including HTML, appears exactly as typed",
         "That last rule is the point. A pasted <script> tag or an onclick attribute is shown as text rather than run, so a contributor cannot change how the page behaves."
       ]
+    },
+    {
+      "id": "w35-classified-example",
+      "section": "classifieds",
+      "title": "For sale, wanted and work offered",
+      "byline": null,
+      "authorEmail": "coota@lovemallacoota.au",
+      "publishedAt": "2026-08-29T10:00:00+10:00",
+      "check": {
+        "verdict": "author",
+        "note": "Written by the publisher."
+      },
+      "body": [
+        "**Tinny, 3.7m** with 15hp Yamaha, registered to June. Runs well, needs a new bung. $2,400 ono. Ring after six.",
+        "**Firewood** — split red gum, delivered Mallacoota and Gipsy Point. By the cubic metre.",
+        "**Wanted:** someone to mow a Karbeethong block fortnightly over summer. Cash or a swap for fish.",
+        "**Lost:** grey cat, answers to Sooty, missing from Betka Road since the weekend."
+      ]
+    },
+    {
+      "id": "w35-bdm-example",
+      "section": "bdm",
+      "title": "Family notices",
+      "byline": null,
+      "authorEmail": "coota@lovemallacoota.au",
+      "publishedAt": "2026-08-29T10:00:00+10:00",
+      "check": {
+        "verdict": "author",
+        "note": "Written by the publisher."
+      },
+      "body": [
+        "Notices are published as the family sends them. There is no charge, and there never will be.",
+        "To place one, use the submission form or speak to us directly — we will not print a name until someone in the family has asked us to."
+      ]
     }
   ],
   "cover": {
@@ -122,5 +156,16 @@
     "title": "This week's video",
     "credit": null,
     "note": "Chosen by the editor each week."
-  }
+  },
+  "ads": [
+    {
+      "size": "sixth",
+      "after": "notices",
+      "advertiser": "Oze — websites and care plans",
+      "alt": "Oze builds and looks after small websites for businesses, clubs and community groups",
+      "image": "/images/oze-logo216x100.webp",
+      "url": "https://oze.au",
+      "bookedFrom": "2026-w35"
+    }
+  ]
 }

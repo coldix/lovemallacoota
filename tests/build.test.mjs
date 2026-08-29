@@ -4,8 +4,10 @@ import test from "node:test";
 
 import { ALL_LISTING_FILES, loadListings, verificationLine } from "../src/lib/listings.mjs";
 import {
+  AD_SIZES,
   SECTIONS,
   currentEdition,
+  editionAds,
   editionSections,
   loadEditions,
   tableOfContents,
@@ -290,4 +292,34 @@ test("the edition is numbered by week and by year", async () => {
   const [year, week] = edition.week.split("-w");
   assert.ok(html.includes(`Week ${week}`), "no week number on the page");
   assert.ok(html.includes(`Edition ${year.slice(2)}:${week}`), "no YY:WK edition number");
+});
+
+test("advertisements are booked per edition, at a known size, one to a page", async () => {
+  for (const edition of loadEditions()) {
+    const ads = editionAds(edition);
+    for (const ad of ads) {
+      assert.ok(AD_SIZES.has(ad.size), `${ad.advertiser}: unknown size "${ad.size}"`);
+      assert.ok(ad.image, `${ad.advertiser}: no artwork`);
+      assert.ok(ad.alt || ad.advertiser, `${ad.advertiser}: nothing for a screen reader to say`);
+    }
+
+    // One per page means at most one attached to any single section, and the
+    // full-page ones take their own sheet.
+    const bySection = new Map();
+    for (const ad of ads.filter((entry) => entry.size !== "full")) {
+      const count = (bySection.get(ad.after) || 0) + 1;
+      assert.ok(count <= 1, `two advertisements are attached to ${ad.after}`);
+      bySection.set(ad.after, count);
+    }
+  }
+});
+
+test("the classifieds and family notices are offered to contributors", async () => {
+  const offered = SECTIONS.filter((section) => !section.automatic).map((section) => section.id);
+  assert.ok(offered.includes("classifieds"), "no classifieds section");
+  assert.ok(offered.includes("bdm"), "no births, deaths and marriages section");
+
+  const html = await readFile(new URL("../dist/submit.html", import.meta.url), "utf8");
+  assert.ok(html.includes("Classifieds"), "classifieds is not on the submit form");
+  assert.ok(html.includes("Births, Deaths and Marriages"), "family notices are not on the form");
 });

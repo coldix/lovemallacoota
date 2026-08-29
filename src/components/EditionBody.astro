@@ -9,7 +9,7 @@ import {
   tableOfContents,
 } from "../lib/editions.mjs";
 import { renderBody } from "../lib/markup.mjs";
-import { fillerPhoto, youTubeId } from "../lib/editions.mjs";
+import { adsForSection, fillerPhoto, fullPageAds, youTubeId } from "../lib/editions.mjs";
 import { tideChart } from "../lib/tide-chart.mjs";
 
 interface Props {
@@ -319,6 +319,16 @@ const statusLabel =
       </div>
     )}
 
+    {adsForSection(edition, section.id).map((ad) => (
+      <aside class={`edition-ad edition-ad-${ad.size}`} aria-label="Advertisement">
+        <p class="edition-ad-label">Advertisement</p>
+        {ad.url
+          ? <a href={ad.url} rel="noopener noreferrer" target="_blank"><img src={ad.image} alt={ad.alt || ad.advertiser} /></a>
+          : <img src={ad.image} alt={ad.alt || ad.advertiser} />}
+        {ad.advertiser && <p class="edition-ad-by">{ad.advertiser}</p>}
+      </aside>
+    ))}
+
     {section.articles.map((article) => (
       <article class="edition-article" id={articleAnchor(article)}>
         <h3>{article.title}</h3>
@@ -352,6 +362,16 @@ const statusLabel =
       </article>
     ))}
   </section>
+))}
+
+{fullPageAds(edition).map((ad) => (
+  <aside class="edition-ad edition-ad-full" aria-label="Advertisement">
+    <p class="edition-ad-label">Advertisement</p>
+    {ad.url
+      ? <a href={ad.url} rel="noopener noreferrer" target="_blank"><img src={ad.image} alt={ad.alt || ad.advertiser} /></a>
+      : <img src={ad.image} alt={ad.alt || ad.advertiser} />}
+    {ad.advertiser && <p class="edition-ad-by">{ad.advertiser}</p>}
+  </aside>
 ))}
 
 {filler && (

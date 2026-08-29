@@ -815,6 +815,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
   .site-nav, .site-footer, .bg-field, .bg-grid, .caustics, .motes,
   .edition-actions, .ad-row-wrap, .edition-web-only { display: none !important; }
+
+  /* Booked advertisements print at their booked size on the six-unit grid.
+     The network slots do not print at all: a frozen edition is cached for a
+     year, so only a deliberate booking belongs in it. */
+  .edition-ad {
+    break-inside: avoid;
+    column-span: all;
+    margin: 6mm auto;
+    max-width: none;
+  }
+  .edition-ad img { border-radius: 0; width: 100%; height: auto; object-fit: contain; }
+  .edition-ad-label, .edition-ad-by { font-size: 7.5pt; }
+  .edition-ad-sixth { width: 124mm; height: 64mm; }
+  .edition-ad-third { width: 124mm; height: 134mm; }
+  .edition-ad-full {
+    break-before: page;
+    break-after: page;
+    width: 190mm;
+    height: 273mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .edition-ad-sixth img { max-height: 56mm; }
+  .edition-ad-third img { max-height: 126mm; }
+  .edition-ad-full img { max-height: 258mm; }
   body[data-page="edition"] .hero-section { display: none !important; }
 
   html, body, .page-wrapper, main, section, .content-block {
@@ -871,14 +897,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     color: #444;
     word-break: break-all;
   }
-  /* Two columns, like the paper it replaces. Headings and the byline run the
-     full measure; tables and figures are not columned. */
+  /* A 6-unit grid across the 190mm live width, 6mm gutters, so one unit is
+     26.7mm. Text spans 3 units (92mm, about 49 characters at 10.5pt) and
+     pictures and advertisements span 2, 3 or 6.
+     Three columns was considered and rejected: at 59mm it forces 8.5–9pt and
+     roughly 37 characters, which is newspaper practice on a much larger sheet
+     and too mean for the readership this one has. */
   .edition-article {
     columns: 2;
-    column-gap: 8mm;
+    column-gap: 6mm;
     break-inside: auto;
     max-width: none;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
+  /* Justified text without hyphenation opens rivers at this measure. */
+  .edition-article p { hyphenate-limit-chars: 6 3 3; }
   .edition-article h3,
   .edition-byline,
   .edition-figure { column-span: all; }
@@ -893,10 +928,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   tfoot { display: table-footer-group; }
   .edition-auto { break-inside: avoid-page; }
   .edition-auto, .edition-toc-list { columns: 1; }
-  .forecast { font-size: 9pt; }
-  .section-title { font-size: 15pt; margin-bottom: 0.2rem; }
-  .edition-article h3 { font-size: 12pt; }
-  body { font-size: 10.5pt; }
+  /* Type scale. Nothing below 8pt. */
+  body { font-size: 10.5pt; line-height: 1.33; }
+  .section-title { font-size: 16pt; margin-bottom: 0.2rem; }
+  .edition-article h3 { font-size: 13pt; }
+  .edition-byline, .edition-source, .edition-figure figcaption { font-size: 8.5pt; }
+  .edition-figure figcaption { font-size: 8pt; }
+  .forecast, .timetable { font-size: 9pt; }
+
+  /* Classifieds and the family notices are scanned, not read, so the narrow
+     measure that fails for prose is right for them. */
+  #section-classifieds .edition-article,
+  #section-bdm .edition-article {
+    columns: 3;
+    column-gap: 6mm;
+    font-size: 9pt;
+    text-align: left;
+  }
+  #section-classifieds .edition-article h3,
+  #section-bdm .edition-article h3 { font-size: 10pt; column-span: none; }
 
   /* Scroll reveals never fire in a headless render, so everything below the
      fold would print as blank pages. Show it all. */
@@ -1092,3 +1142,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .tide-high { fill: #000; }
   .tide-low { fill: #666; }
 }
+
+/* Booked advertisements, as opposed to the network slots. One per page. */
+.edition-ad { margin: 1.4rem auto; text-align: center; max-width: 640px; }
+.edition-ad img { max-width: 100%; height: auto; border-radius: 10px; }
+.edition-ad-label,
+.edition-ad-by { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.35rem; }
+.edition-ad-by { margin: 0.35rem 0 0; text-transform: none; letter-spacing: 0; }

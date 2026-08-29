@@ -44,6 +44,8 @@ export const SECTIONS = [
   { id: "social-clubs", title: "Social Clubs" },
   { id: "arts", title: "Arts" },
   { id: "notices", title: "Public Notices" },
+  { id: "bdm", title: "Births, Deaths and Marriages" },
+  { id: "classifieds", title: "Classifieds" },
   { id: "positions", title: "Positions Vacant" },
   { id: "church", title: "Church Times" },
   { id: "sport", title: "Sport" },
@@ -327,4 +329,33 @@ export function fillerPhoto(edition) {
   if (!bank.length) return null;
   const [, week] = edition.week.split("-w");
   return bank[Number(week) % bank.length];
+}
+
+/**
+ * Advertisements printed in the edition. These are chosen and frozen per
+ * edition rather than served by the ad network: a frozen week is cached for a
+ * year, so whatever is in its PDF is there permanently, and that has to be a
+ * deliberate booking rather than whatever happened to be live at render time.
+ *
+ * Sizes are fractions of the page on the six-unit grid:
+ *   sixth  two cells   124 × 64mm, or 59 × 134mm upright
+ *   third  four cells  124 × 134mm
+ *   full   the sheet   190 × 273mm
+ *
+ * One advertisement per page is the rule, so they are spaced through the
+ * edition rather than stacked.
+ */
+export const AD_SIZES = new Set(["sixth", "third", "full"]);
+
+export function editionAds(edition) {
+  return (edition?.ads || []).filter((ad) => AD_SIZES.has(ad.size));
+}
+
+/** Where each advertisement sits: after a given section, or on its own page. */
+export function adsForSection(edition, sectionId) {
+  return editionAds(edition).filter((ad) => ad.after === sectionId && ad.size !== "full");
+}
+
+export function fullPageAds(edition) {
+  return editionAds(edition).filter((ad) => ad.size === "full");
 }

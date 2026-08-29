@@ -1,6 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import { loadDataFile } from "../lib/editions.mjs";
+
+// The same list the weekly edition uses, so the two cannot drift apart.
+const social = loadDataFile("social-links.json", []);
+const socialLinks = Array.isArray(social) ? social : social.links || [];
 
 // Cloudflare's always-passes test key, so local builds work before the real
 // widget exists. Set PUBLIC_TURNSTILE_SITE_KEY for preview and production.
@@ -31,6 +36,42 @@ const turnstileSiteKey =
       <p id="contact-hint" class="contact-hint"></p>
       <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
     </section>
+
+    <section class="glass-card sheen content-block reveal" aria-labelledby="social-title">
+      <h2 id="social-title" class="section-title">Where the town talks</h2>
+      <p class="section-sub">
+        Mallacoota does much of its talking on Facebook. These are the groups we
+        point people to, and what each is for.
+      </p>
+      <div class="edition-link-grid">
+        {socialLinks.map((link) => (
+          <div class="edition-link-card">
+            <h4><a href={link.url} rel="noopener noreferrer" target="_blank">{link.title}</a></h4>
+            {link.description && <p>{link.description}</p>}
+            {link.meta && <span class="meta">{link.meta}</span>}
+          </div>
+        ))}
+      </div>
+
+      <div class="social-suggest">
+        <h3>Know one we have missed?</h3>
+        <p>
+          Clubs, sporting groups, the school, church notices, markets, arts,
+          fishing, fire and emergency pages — if there is a page the town
+          actually uses and it is not here, tell us and we will add it.
+        </p>
+        <p class="social-rule">
+          <strong>Public pages and groups only.</strong> We do not list private,
+          closed or invitation-only groups. A link is only worth printing if
+          anyone reading it can follow it, and a directory that sends people to
+          doors they cannot open is worse than no directory. If a group is
+          public but asks new members a question or two, that is fine.
+        </p>
+        <p>
+          <a class="btn btn-coral" href="/contact.html?subject=social">Suggest a page or group</a>
+        </p>
+      </div>
+    </section>
   </main>
   <script slot="scripts" is:inline>
     document.addEventListener("DOMContentLoaded", () => {
@@ -49,7 +90,13 @@ const turnstileSiteKey =
           ? "Mallacoota Mouth archive"
           : subject === "newsletter"
             ? "Newsletter interest"
-            : "");
+            : subject === "social"
+              ? "Facebook page or group to add"
+              : subject === "edition"
+                ? "The weekly edition"
+                : subject === "local"
+                  ? "Local of the Week suggestion"
+                  : "");
       const from = params.get("from");
       if (from) {
         hint.textContent = `Submitted from: ${from}`;

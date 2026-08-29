@@ -2,6 +2,7 @@ import { handleContactSubmit } from "./contact.ts";
 import { handleEditionPdf, weekFromPath } from "./edition-pdf.ts";
 import { handleListingManage, handleListingSubmit, handleListingVerify } from "./listing.ts";
 import { handleArticleSubmit } from "./submit.ts";
+import { handleStripeWebhook } from "./stripe-webhook.ts";
 
 const CANONICAL_HOST = "lovemallacoota.au";
 
@@ -141,6 +142,10 @@ export default {
       return applySecurityHeaders(
         new Response("That payment link is not configured yet.", { status: 503 })
       );
+    }
+
+    if (url.pathname === "/api/stripe") {
+      return applySecurityHeaders(await handleStripeWebhook(request, env));
     }
 
     if (url.pathname === "/api/article") {

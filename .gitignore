@@ -12,6 +12,13 @@ worker-configuration.d.ts
 docs/Edition 1771 18th June 2020 Electronic Version.pdf
 mouth/
 
+# Working photographs. The originals live here while a week is put together;
+# what the site needs is the derivative committed under images/covers,
+# images/articles and images/bank. A folder of 2k originals every week is
+# several hundred megabytes of permanent history a year, and git is not a
+# photo backup — keep these in your own library.
+images/thisweek/
+
 # Local Worker secrets
 .dev.vars
 .env

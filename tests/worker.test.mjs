@@ -170,3 +170,34 @@ test("responses carry the security headers, including a policy that allows what 
   assert.match(csp, /form-action 'self'/);
   assert.ok(!/script-src[^;]*\*/.test(csp), "the script policy must not be a wildcard");
 });
+
+test("the short payment paths hand off to Stripe, and say so when unconfigured", async () => {
+  const configured = {
+    ...env,
+    STRIPE_LINK_DONATE: "https://buy.stripe.com/test_donate",
+    STRIPE_LINK_SUBSCRIBE: "https://buy.stripe.com/test_subscribe",
+    STRIPE_LINK_ADVERTISE: "https://buy.stripe.com/test_advertise",
+  };
+
+  for (const [path, expected] of [
+    ["/donate", "https://buy.stripe.com/test_donate"],
+    ["/subscribe", "https://buy.stripe.com/test_subscribe"],
+    ["/advertise", "https://buy.stripe.com/test_advertise"],
+  ]) {
+    const response = await worker.fetch(
+      new Request(`https://lovemallacoota.au${path}`),
+      configured,
+      { waitUntil() {} }
+    );
+    assert.equal(response.status, 302, `${path} should redirect`);
+    assert.equal(response.headers.get("Location"), expected);
+  }
+
+  // A missing link must not send anyone to a broken page.
+  const unset = await worker.fetch(
+    new Request("https://lovemallacoota.au/donate"),
+    { ...env, STRIPE_LINK_DONATE: undefined },
+    { waitUntil() {} }
+  );
+  assert.equal(unset.status, 503);
+});

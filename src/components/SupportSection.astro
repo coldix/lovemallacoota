@@ -1,0 +1,68 @@
+---
+/*
+  The three ways to put money behind the site. Prices are stated in full, and
+  so is what they are not: Love Mallacoota is not registered for GST and is not
+  a deductible gift recipient, so nobody should reach the payment page expecting
+  a tax invoice with GST on it or a deduction at tax time.
+*/
+interface Props {
+  heading?: string;
+  lede?: string;
+}
+const {
+  heading = "Keeping this going",
+  lede = "The site is free to read and free to be listed in, and it costs something to run. Three ways to help, none of them obligatory.",
+} = Astro.props;
+
+const options = [
+  {
+    href: "/donate",
+    kicker: "One-off",
+    title: "Chip in",
+    body: "Whatever you think it is worth. Covers hosting, the domains, the archive scanning and the odd webcam.",
+    cta: "Donate",
+    tone: "btn-coral",
+  },
+  {
+    href: "/subscribe",
+    kicker: "$10 a month",
+    title: "Community supporter",
+    body: "Ongoing support for the weekly edition, local guides, photography and the archive. Cancel whenever you like.",
+    cta: "Become a supporter",
+    tone: "btn-primary",
+  },
+  {
+    href: "/advertise",
+    kicker: "$35 a month",
+    title: "Local business listing",
+    body: "A featured placement in the directory and your advertisement in the weekly edition, in print and on the web.",
+    cta: "Book a spot",
+    tone: "btn-ghost",
+  },
+];
+---
+
+<section class="glass-card sheen content-block reveal" aria-labelledby="support-title">
+  <h2 id="support-title" class="section-title">{heading}</h2>
+  <p class="section-sub">{lede}</p>
+
+  <div class="support-grid">
+    {options.map((option) => (
+      <article class="support-card">
+        <p class="support-kicker">{option.kicker}</p>
+        <h3>{option.title}</h3>
+        <p>{option.body}</p>
+        <a class={`btn ${option.tone}`} href={option.href}>{option.cta}</a>
+      </article>
+    ))}
+  </div>
+
+  <p class="edition-source support-note">
+    Payments are handled by Stripe; no card details reach this site.
+    <strong> Love Mallacoota is not registered for GST</strong>, so no GST is charged and
+    what you pay is the whole amount. It is not a registered charity and
+    contributions are not tax deductible — this is chipping in, not a donation
+    receipt. Advertising is billed monthly and you can stop it whenever you
+    like. Questions: <a href="/contact.html?subject=support">ask us</a>.
+  </p>
+</section>

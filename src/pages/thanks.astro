@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+
+// Stripe returns people here. The page renders all three messages and shows
+// the right one from the query string, because the site is static and the
+// parameter is only known in the browser.
+---
+<BaseLayout
+  title="Thank you — Love Mallacoota"
+  description="Thank you for supporting Love Mallacoota."
+  canonicalPath="/thanks.html"
+  robots="noindex,nofollow"
+>
+  <PageHero eyebrow="Thank you" prefix="That genuinely" accent="helps" lede="Love Mallacoota is run by one person from a town of about a thousand people. Support keeps it free to read and free to be listed in." />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      <div class="thanks-message" data-thanks="donate" hidden>
+        <h2 class="section-title">Thank you for chipping in</h2>
+        <p class="section-sub">It goes straight into the running of the site — hosting, domains, the archive, and the work of keeping the directory true.</p>
+      </div>
+
+      <div class="thanks-message" data-thanks="subscribe" hidden>
+        <h2 class="section-title">Thank you for becoming a supporter</h2>
+        <p class="section-sub">Ten dollars a month is what makes a weekly edition sustainable rather than a burst of enthusiasm. You can change or cancel it any time through the link in your Stripe receipt.</p>
+      </div>
+
+      <div class="thanks-message" data-thanks="ad" hidden>
+        <h2 class="section-title">Thank you — one more step</h2>
+        <p class="section-sub">Send us what should appear, and we will build it and show you before it runs.</p>
+        <ul class="edition-diary">
+          <li>Your business name, phone, email and website</li>
+          <li>A logo or artwork if you have one — otherwise we will set the text</li>
+          <li>A line or two about what you would like it to say</li>
+        </ul>
+        <p><a class="btn btn-primary" href="/contact.html?subject=advertising">Send your details</a></p>
+      </div>
+
+      <div class="thanks-message" data-thanks="default">
+        <h2 class="section-title">Thank you</h2>
+        <p class="section-sub">Your support keeps this going.</p>
+      </div>
+
+      <div class="edition-actions">
+        <a class="btn btn-ghost" href="/">Back to the home page</a>
+        <a class="btn btn-ghost" href="/edition.html">This week's edition</a>
+      </div>
+    </section>
+  </main>
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const type = new URLSearchParams(location.search).get("type");
+      const blocks = [...document.querySelectorAll("[data-thanks]")];
+      const wanted = blocks.find((block) => block.dataset.thanks === type);
+      const fallback = blocks.find((block) => block.dataset.thanks === "default");
+      for (const block of blocks) block.hidden = true;
+      (wanted || fallback).hidden = false;
+    });
+  </script>
+</BaseLayout>

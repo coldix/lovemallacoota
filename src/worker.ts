@@ -5,6 +5,13 @@ import { handleArticleSubmit } from "./submit.ts";
 
 const CANONICAL_HOST = "lovemallacoota.au";
 
+/** Clean paths that hand off to Stripe. */
+const PAYMENT_PATHS: Record<string, "STRIPE_LINK_DONATE" | "STRIPE_LINK_SUBSCRIBE" | "STRIPE_LINK_ADVERTISE"> = {
+  "/donate": "STRIPE_LINK_DONATE",
+  "/subscribe": "STRIPE_LINK_SUBSCRIBE",
+  "/advertise": "STRIPE_LINK_ADVERTISE",
+};
+
 const REDIRECT_HOSTS = new Set([
   "www.lovemallacoota.au",
   "lovemallacoota.com.au",
@@ -122,6 +129,18 @@ export default {
 
     if (url.pathname === "/api/submit") {
       return applySecurityHeaders(await handleContactSubmit(request, env));
+    }
+
+    // Short paths to the Stripe payment links. The URLs are vars rather than
+    // code so they can be replaced without a source change, and the redirect is
+    // temporary because a payment link can be regenerated.
+    const payment = PAYMENT_PATHS[url.pathname];
+    if (payment) {
+      const target = env[payment];
+      if (target) return Response.redirect(target, 302);
+      return applySecurityHeaders(
+        new Response("That payment link is not configured yet.", { status: 503 })
+      );
     }
 
     if (url.pathname === "/api/article") {

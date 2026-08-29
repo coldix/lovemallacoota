@@ -29,7 +29,10 @@
       "workers_dev": true,
       "routes": [],
       "vars": {
-        "RELAY_URL": "https://ads.oze.net.au/relay"
+        "RELAY_URL": "https://ads.oze.net.au/relay",
+        "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
+        "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
+        "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a"
       },
       "browser": { "binding": "BROWSER" },
       "ai": { "binding": "AI" },
@@ -56,7 +59,10 @@
     }
   },
   "vars": {
-    "RELAY_URL": "https://ads.oze.net.au/relay"
+    "RELAY_URL": "https://ads.oze.net.au/relay",
+    "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
+    "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
+    "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a"
   },
   "browser": { "binding": "BROWSER" },
   "d1_databases": [

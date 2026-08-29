@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import { loadDataFile } from "../lib/editions.mjs";
+import SupportSection from "../components/SupportSection.astro";
 
 // The same list the weekly edition uses, so the two cannot drift apart.
 const social = loadDataFile("social-links.json", []);
@@ -37,6 +38,8 @@ const turnstileSiteKey =
       <p id="contact-hint" class="contact-hint"></p>
       <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
     </section>
+
+    <SupportSection heading="Support, or advertise" lede="Two ways to keep the site going, and one way to reach the people reading it." />
 
     <section class="glass-card sheen content-block reveal" aria-labelledby="social-title">
       <h2 id="social-title" class="section-title">Where the town talks</h2>
@@ -91,9 +94,13 @@ const turnstileSiteKey =
           ? "Mallacoota Mouth archive"
           : subject === "newsletter"
             ? "Newsletter interest"
-            : subject === "photo"
-              ? "Please remove or blur a photograph"
-              : subject === "privacy"
+            : subject === "advertising"
+              ? "Advertising"
+              : subject === "support"
+                ? "Supporting the site"
+                : subject === "photo"
+                ? "Please remove or blur a photograph"
+                : subject === "privacy"
                 ? "Privacy request"
                 : subject === "event"
                 ? "Event for the calendar"

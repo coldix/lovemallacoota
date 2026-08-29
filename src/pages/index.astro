@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import { SECTIONS, SITE_ORIGIN, WHATS_ON, sectionCounts } from "../lib/directory.mjs";
 import { currentEdition, editionLabel, loadDataFile } from "../lib/editions.mjs";
+import SupportSection from "../components/SupportSection.astro";
 
 // The weekly promotion and the panorama both follow the open edition.
 const edition = currentEdition();
@@ -102,6 +103,8 @@ const siteSchema = {
         <a href="/calendar.html" class="btn btn-ghost">Community calendar</a>
       </div>
     </section>
+
+    <SupportSection />
 
     <section class="glass-card sheen content-block reveal">
       <h2 class="section-title">Experience Mallacoota</h2>

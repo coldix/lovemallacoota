@@ -1396,3 +1396,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* A group we administer, so the listing can vouch for itself. */
 .verified-note { color: var(--accent); }
+
+/* The three ways to support the site. */
+.support-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; margin: 1.4rem 0 0; }
+@media (min-width: 780px) { .support-grid { grid-template-columns: repeat(3, 1fr); } }
+.support-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.2rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  text-align: left;
+}
+.support-card h3 { margin: 0; font-size: 1.15rem; }
+.support-card p { margin: 0; font-size: 0.92rem; color: var(--muted); flex: 1; }
+.support-card .btn { align-self: flex-start; margin-top: 0.4rem; }
+.support-kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
+.support-note { max-width: 70ch; margin-inline: auto; }
+@media print { .support-grid, .support-note { display: none; } }

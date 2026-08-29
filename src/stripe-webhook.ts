@@ -82,11 +82,35 @@ export async function verifyStripeSignature(
     : { ok: false, reason: "Signature does not match." };
 }
 
+/**
+ * Which of the three things was paid for. All three arrive as the same event
+ * type, so without this a ten dollar donation is filed as a thirty-five dollar
+ * advertising booking — which is how the first real donation would have been
+ * recorded.
+ *
+ * Matched on the payment link where one is configured, and otherwise on the
+ * shape of the payment: only advertising is a recurring thirty-five dollars.
+ */
+export function classifyPayment(object: Record<string, any>, env?: Env): "advertising" | "supporter" | "donation" | "unknown" {
+  const link = typeof object.payment_link === "string" ? object.payment_link : object.payment_link?.id;
+  if (link && env?.STRIPE_AD_PAYMENT_LINK && link === env.STRIPE_AD_PAYMENT_LINK) return "advertising";
+
+  const amount = typeof object.amount_total === "number" ? object.amount_total / 100 : null;
+  const recurring = object.mode === "subscription";
+
+  if (recurring && amount === 35) return "advertising";
+  if (recurring && amount === 10) return "supporter";
+  if (!recurring && amount !== null) return "donation";
+  if (recurring) return "supporter";
+  return "unknown";
+}
+
 /** What we keep about a booking. Deliberately not the card, or anything near it. */
-export function bookingFromEvent(event: Record<string, any>) {
+export function bookingFromEvent(event: Record<string, any>, env?: Env) {
   const object = event?.data?.object || {};
   const details = object.customer_details || {};
   return {
+    kind: classifyPayment(object, env),
     id: object.id || event.id,
     eventId: event.id,
     type: event.type,
@@ -97,7 +121,6 @@ export function bookingFromEvent(event: Record<string, any>) {
     currency: (object.currency || "aud").toUpperCase(),
     recurring: object.mode === "subscription",
     status: "new",
-    note: "Draft booking. Build the advertisement, show the advertiser, then add it to an edition's ads array.",
   };
 }
 
@@ -124,22 +147,32 @@ async function commitBooking(env: Env, booking: Record<string, any>) {
   }
 }
 
+const SUBJECTS: Record<string, string> = {
+  advertising: "Advertisement booked",
+  supporter: "New monthly supporter",
+  donation: "Someone chipped in",
+  unknown: "Stripe payment received",
+};
+
 async function notify(env: Env, booking: Record<string, any>) {
   if (!env.RELAY_KEY || !env.RELAY_URL) return;
   const lines = [
-    `Advertiser: ${booking.name || "not given"}`,
+    `Kind: ${booking.kind}`,
+    `From: ${booking.name || "not given"}`,
     `Email: ${booking.email || "not given"}`,
     `Amount: ${booking.amount ?? "?"} ${booking.currency}${booking.recurring ? " a month" : ""}`,
     `Booked: ${booking.bookedAt}`,
     "",
-    "A draft is in data/ad-bookings. Build the advertisement, show them, then add it to the edition.",
+    booking.kind === "advertising"
+      ? "A draft is in data/ad-bookings. Build the advertisement, show them, then add it to the edition."
+      : "Nothing to do — this is money in, not work to schedule.",
   ];
   await fetch(env.RELAY_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.RELAY_KEY}` },
     body: JSON.stringify({
       site: "lovemallacoota",
-      subject: `Advertisement booked: ${booking.name || booking.email || "new advertiser"}`,
+      subject: `${SUBJECTS[booking.kind] || SUBJECTS.unknown}: ${booking.name || booking.email || "someone"}`,
       replyTo: booking.email || undefined,
       text: lines.join("\n"),
     }),
@@ -177,7 +210,15 @@ export async function handleStripeWebhook(request: Request, env: Env): Promise<R
   // event we simply do not act on.
   if (!BOOKING_EVENTS.has(event.type)) return json({ ok: true, ignored: event.type }, 200);
 
-  const booking = bookingFromEvent(event);
+  const booking = bookingFromEvent(event, env);
+
+  // A supporter or a one-off contribution needs no draft and no work: say
+  // thank you by email and stop. Only advertising has something to build.
+  if (booking.kind !== "advertising") {
+    await notify(env, booking);
+    return json({ ok: true, recorded: booking.id, kind: booking.kind }, 200);
+  }
+
   if (!env.GITHUB_TOKEN) {
     // Fail loudly rather than swallow a paid booking: Stripe will retry, and
     // the booking is recorded once the token exists.

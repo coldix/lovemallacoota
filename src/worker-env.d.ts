@@ -9,6 +9,8 @@ interface Env {
   RELAY_KEY?: string;
   GITHUB_TOKEN?: string;
   STRIPE_WEBHOOK_SECRET?: string;
+  /** Optional: the plink_… id of the advertising link, for exact matching. */
+  STRIPE_AD_PAYMENT_LINK?: string;
   DB?: D1Database;
   LISTING_RATE?: RateLimit;
   CONTACT_RATE?: RateLimit;

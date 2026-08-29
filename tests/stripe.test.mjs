@@ -86,3 +86,41 @@ test("a booking keeps the details we need and nothing near a card", () => {
   assert.equal(booking.status, "new");
   assert.ok(!JSON.stringify(booking).includes("4242"), "card details must not be kept");
 });
+
+test("a payment is classified before anything is filed", async () => {
+  const { classifyPayment } = await import("../src/stripe-webhook.ts");
+
+  // The three real products.
+  assert.equal(classifyPayment({ mode: "subscription", amount_total: 3500 }), "advertising");
+  assert.equal(classifyPayment({ mode: "subscription", amount_total: 1000 }), "supporter");
+  assert.equal(classifyPayment({ mode: "payment", amount_total: 1000 }), "donation");
+
+  // The case that prompted this: a ten dollar donation must never be filed as
+  // an advertising booking.
+  assert.notEqual(classifyPayment({ mode: "payment", amount_total: 1000 }), "advertising");
+
+  // An explicit payment link wins over the amount.
+  assert.equal(
+    classifyPayment({ payment_link: "plink_ad", mode: "payment", amount_total: 1 }, { STRIPE_AD_PAYMENT_LINK: "plink_ad" }),
+    "advertising"
+  );
+});
+
+test("only advertising creates work; the rest are just thanks", async () => {
+  const { bookingFromEvent } = await import("../src/stripe-webhook.ts");
+  const donation = bookingFromEvent({
+    id: "evt_d",
+    type: "checkout.session.completed",
+    created: 1756500000,
+    data: { object: { id: "cs_d", mode: "payment", amount_total: 1000, currency: "aud", customer_details: { email: "someone@example.com" } } },
+  });
+  assert.equal(donation.kind, "donation");
+
+  const ad = bookingFromEvent({
+    id: "evt_a",
+    type: "checkout.session.completed",
+    created: 1756500000,
+    data: { object: { id: "cs_a", mode: "subscription", amount_total: 3500, currency: "aud", customer_details: { name: "A Business" } } },
+  });
+  assert.equal(ad.kind, "advertising");
+});

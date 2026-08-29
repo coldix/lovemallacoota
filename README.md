@@ -159,6 +159,90 @@ production.
 Everything fails closed: a missing key, a failed challenge or a relay error
 returns an error rather than silently dropping the message.
 
+## The weekly edition
+
+`/edition.html` is the current week; every week keeps a permanent page at
+`/edition/<year>-w<week>.html` and a printable A4 PDF rendered on demand at
+`/edition/<year>-w<week>.pdf`. Editions are numbered `YY:WK` — Week 36 of 2026
+is Edition 26:36. Design decisions are in
+[`docs/WEEKLY-MOUTH.md`](docs/WEEKLY-MOUTH.md).
+
+Contributed sections come from `data/editions/<week>.json`; the automatic ones
+are generated into `data/weekly/<week>.json` and committed, so a build never
+depends on a third party being reachable and a past edition keeps what it was
+published with.
+
+| Automatic section | Source | Licence |
+| --- | --- | --- |
+| Weather | Open-Meteo forecast | CC BY 4.0 |
+| Tides | Open-Meteo marine model, sea level height | CC BY 4.0 |
+| Moon | Computed in [`src/lib/moon.mjs`](src/lib/moon.mjs) | — |
+| Buses | PTV GTFS via `tools/refresh-transport.py` | CC BY 4.0 |
+| Trail of the week | TrailBound, via `tools/sync-trails.mjs` | own |
+| Business of the week | The directory, by rotation | own |
+
+Tides are modelled against mean sea level, not chart datum, at a model point
+offshore. They are indicative and not for navigation, and every page that
+carries them says so.
+
+## Scheduled work
+
+| Workflow | When | What |
+| --- | --- | --- |
+| `deploy.yml` | push, or dispatch | preview on push, production on dispatch |
+| `weekly.yml` | daily, 15:10 AEST | refresh forecast, tides, features, then deploy |
+| `roll.yml` | Sunday, 16:00 AEST | close the week, open the next, then deploy |
+| `uploads.yml` | on `uploads/**` | convert submitted photographs to WebP |
+
+`roll.yml` is idempotent: a missed Sunday recovers on Monday, and running it
+twice does nothing the first run did not.
+
+## Payments
+
+`/donate`, `/subscribe` and `/advertise` are Worker redirects to Stripe payment
+links, held as vars in `wrangler.jsonc` so a regenerated link is a config
+change. Stripe posts back to `/api/stripe`
+([`src/stripe-webhook.ts`](src/stripe-webhook.ts)), which verifies the
+signature and timestamp before reading the body, classifies the payment, and
+opens a draft in `data/ad-bookings/` for advertising only — a supporter payment
+or a contribution needs no work, so it is acknowledged and not filed.
+
+Listing in the directory is free. Advertising is $35 a month, supporters $10,
+contributions whatever people choose. Not registered for GST; not a deductible
+gift recipient.
+
+## Secrets
+
+```sh
+npx wrangler secret put TURNSTILE_SECRET_KEY --env=""
+npx wrangler secret put RELAY_KEY --env=""             # same value on adnet
+npx wrangler secret put GITHUB_TOKEN --env=""          # contents:write on this repo
+npx wrangler secret put STRIPE_WEBHOOK_SECRET --env=""
+```
+
+The Turnstile **site** key is public: it goes in `.env` as
+`PUBLIC_TURNSTILE_SITE_KEY` and in the GitHub Actions secret of the same name.
+Without it the build falls back to Cloudflare's always-passes test key, which is
+right locally and wrong in production.
+
+## Tools
+
+```sh
+pnpm run weekly                  # refresh this week's automatic sections
+pnpm run roll                    # close the week, open the next
+pnpm run trails:sync             # re-read TrailBound
+pnpm run check:images            # listing images referenced but missing
+node tools/prepare-cover.mjs <photo> --week=… --caption=… --credit=…
+node tools/prepare-article-image.mjs <photo> --week=… --article=… --credit=… --alt=…
+node tools/prepare-bank.mjs <photo> --slug=… --caption=… --credit=…
+node tools/refresh-transport.py <ptv-gtfs.zip>   # 290MB feed, run by hand
+```
+
+## Outreach
+
+Announcement copy, and the letter to the College about the Mouth archive, are in
+[`docs/outreach/`](docs/outreach/).
+
 ## Licence
 
 Code is MIT ([`LICENSE`](LICENSE)). Original content is CC BY 4.0; submitted and

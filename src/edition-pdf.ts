@@ -102,6 +102,28 @@ export async function handleEditionPdf(
     try {
       const tab = await browser.newPage();
       await tab.goto(pageUrl, { waitUntil: "networkidle0" });
+
+      // Images are lazy on the web, and a headless render never scrolls, so
+      // every picture below the fold would print as an empty caption. Make
+      // them eager and wait for the browser to actually have them.
+      await tab.evaluate(async () => {
+        const images = [...document.querySelectorAll("img")];
+        for (const image of images) {
+          image.loading = "eager";
+          if (!image.complete) image.src = image.src;
+        }
+        await Promise.all(
+          images.map((image) =>
+            image.complete
+              ? Promise.resolve()
+              : new Promise((resolve) => {
+                  image.addEventListener("load", resolve, { once: true });
+                  image.addEventListener("error", resolve, { once: true });
+                })
+          )
+        );
+        await document.fonts?.ready;
+      });
       pdf = await tab.pdf({
         // The stylesheet owns the page size and margins so the cover can bleed
         // to the edge while the content pages keep their margins.

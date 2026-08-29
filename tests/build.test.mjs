@@ -46,7 +46,12 @@ const generatedPages = [
 
 test("the community calendar is the Google Calendar Colin supplied, and the policy lets it load", async () => {
   const html = await readFile(new URL("../dist/calendar.html", import.meta.url), "utf8");
-  assert.match(html, /calendar\.google\.com\/calendar\/embed\?src=crdixon%40gmail\.com/);
+  // The embed Colin supplied encodes the same address in base64 (unpadded) and
+  // starts the week on Monday.
+  assert.match(html, /calendar\.google\.com\/calendar\/embed\?/);
+  assert.match(html, /src=Y3JkaXhvbkBnbWFpbC5jb20/);
+  assert.equal(atob("Y3JkaXhvbkBnbWFpbC5jb20="), "crdixon@gmail.com");
+  assert.match(html, /wkst=2/);
   assert.match(html, /id="nav-menu-toggle"/);
 });
 

@@ -1,71 +1,129 @@
 {
   "week": "2026-w36",
-  "generatedAt": "2026-08-29T11:53:28.299Z",
+  "generatedAt": "2026-08-29T19:30:58.740Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-08-29T11:53:28.299Z",
+    "fetchedAt": "2026-08-29T19:30:58.740Z",
     "days": [
       {
         "date": "2026-08-31",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 16.5,
-        "minC": 9.1,
+        "maxC": 16.8,
+        "minC": 9,
         "rainMm": 0
       },
       {
         "date": "2026-09-01",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 20.5,
-        "minC": 9.2,
+        "maxC": 21,
+        "minC": 9.3,
         "rainMm": 0
       },
       {
         "date": "2026-09-02",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 17.1,
-        "minC": 11.7,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 18.1,
+        "minC": 11.1,
+        "rainMm": 0.1
       },
       {
         "date": "2026-09-03",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 20.1,
-        "minC": 10.3,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 20,
+        "minC": 11.3,
+        "rainMm": 0.5
       },
       {
         "date": "2026-09-04",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 18.7,
-        "minC": 8.2,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 19.5,
+        "minC": 7.5,
+        "rainMm": 0.3
       },
       {
         "date": "2026-09-05",
-        "code": 2,
-        "summary": "Partly cloudy",
-        "maxC": 16.4,
-        "minC": 9.8,
+        "code": 1,
+        "summary": "Mostly clear",
+        "maxC": 20.2,
+        "minC": 12.2,
         "rainMm": 0
       },
       {
         "date": "2026-09-06",
-        "code": 1,
-        "summary": "Mostly clear",
-        "maxC": 18.7,
-        "minC": 6.9,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 15.9,
+        "minC": 9.7,
+        "rainMm": 0.3
       }
     ]
   },
   "tides": null,
+  "moon": [
+    {
+      "date": "2026-08-31",
+      "name": "Waning gibbous",
+      "symbol": "◔",
+      "age": 17.8,
+      "illumination": 90,
+      "range": "between"
+    },
+    {
+      "date": "2026-09-01",
+      "name": "Waning gibbous",
+      "symbol": "◔",
+      "age": 18.8,
+      "illumination": 83,
+      "range": "between"
+    },
+    {
+      "date": "2026-09-02",
+      "name": "Waning gibbous",
+      "symbol": "◔",
+      "age": 19.8,
+      "illumination": 74,
+      "range": "between"
+    },
+    {
+      "date": "2026-09-03",
+      "name": "Waning gibbous",
+      "symbol": "◔",
+      "age": 20.8,
+      "illumination": 65,
+      "range": "between"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "Last quarter",
+      "symbol": "◐",
+      "age": 21.8,
+      "illumination": 54,
+      "range": "neap"
+    },
+    {
+      "date": "2026-09-05",
+      "name": "Last quarter",
+      "symbol": "◐",
+      "age": 22.8,
+      "illumination": 44,
+      "range": "neap"
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Waning crescent",
+      "symbol": "☾",
+      "age": 23.8,
+      "illumination": 33,
+      "range": "neap"
+    }
+  ],
   "events": [],
   "trail": {
     "slug": "tim-peach-walk-to-bastion-point",

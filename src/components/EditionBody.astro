@@ -157,8 +157,28 @@ const statusLabel =
 
     {section.auto?.type === "tides" && (
       <div class="edition-auto">
+        {section.auto.moon && (
+          <table class="forecast moon-table">
+            <thead>
+              <tr><th scope="col">Day</th><th scope="col">Moon</th><th scope="col">Lit</th><th scope="col">Tides</th></tr>
+            </thead>
+            <tbody>
+              {section.auto.moon.map((day) => (
+                <tr>
+                  <th scope="row">{dayName(day.date)}</th>
+                  <td><span class="moon-symbol" aria-hidden="true">{day.symbol}</span> {day.name}</td>
+                  <td>{day.illumination}%</td>
+                  <td>{day.range === "spring" ? "Spring — bigger range" : day.range === "neap" ? "Neap — smaller range" : "—"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
         <p>{section.auto.data.note}</p>
-        <p><a class="btn btn-ghost" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">{section.auto.data.label}</a></p>
+        <p class="edition-actions">
+          <a class="btn btn-primary" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">{section.auto.data.label}</a>
+          <a class="btn btn-ghost" href={section.auto.data.official} rel="noopener noreferrer" target="_blank">Bureau of Meteorology</a>
+        </p>
       </div>
     )}
 

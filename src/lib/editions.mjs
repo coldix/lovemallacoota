@@ -24,7 +24,6 @@ const editionsDir = rootDir ? path.join(rootDir, "data", "editions") : null;
  */
 export const SECTIONS = [
   { id: "editorial", title: "Editorial" },
-  { id: "local", title: "Local of the Week" },
   { id: "weather", title: "Weekly Weather Forecast", automatic: true },
   { id: "tides", title: "Tide Times", automatic: true },
   { id: "diary", title: "This Week's Diary", automatic: true },
@@ -37,6 +36,7 @@ export const SECTIONS = [
   { id: "madra", title: "MADRA News" },
   { id: "school", title: "Out and About at MP-12" },
   { id: "community", title: "Community" },
+  { id: "local", title: "Local of the Week" },
   { id: "region", title: "Gipsy Point, Genoa and District" },
   { id: "history", title: "History" },
   { id: "fishing", title: "Fishing Report" },
@@ -90,7 +90,7 @@ function autoEntry(section) {
   const auto = section.auto;
   if (!auto) return null;
   if (auto.type === "weather") return `Seven-day forecast to ${auto.data.days.at(-1).date}`;
-  if (auto.type === "tides") return "Official predictions, Gabo Island";
+  if (auto.type === "tides") return "The week's moon, and where to find the times";
   if (auto.type === "tide-table") return `Highs and lows, ${auto.data.station}`;
   if (auto.type === "diary") return `${auto.data.length} ${auto.data.length === 1 ? "event" : "events"} this week`;
   if (auto.type === "video") return auto.data.title || "This week's video";
@@ -180,9 +180,10 @@ export function loadWeekly(week) {
  * instead of guessing.
  */
 export const TIDE_SOURCE = {
-  label: "Bureau of Meteorology tide predictions — Gabo Island",
-  url: "http://www.bom.gov.au/australia/tides/",
-  note: "The Mouth printed tides taken at Gabo Island. We link to the official predictions rather than republish figures we cannot verify.",
+  label: "Tide times for Gabo Island",
+  url: "https://tides.willyweather.com.au/vic/east-gippsland/gabo-island.html",
+  official: "http://www.bom.gov.au/australia/tides/",
+  note: "The Mouth printed tides taken at Gabo Island. We publish the moon, which drives them, and link out for the times themselves rather than republish figures we have not licensed.",
 };
 
 /** Every section with something in it, contributed or automatic, in order. */
@@ -198,8 +199,8 @@ export function editionSections(edition) {
     // Real predictions when we have licensed them, the official link otherwise.
     if (section.id === "tides") {
       auto = weekly?.tides
-        ? { type: "tide-table", data: weekly.tides }
-        : { type: "tides", data: TIDE_SOURCE };
+        ? { type: "tide-table", data: weekly.tides, moon: weekly.moon }
+        : { type: "tides", data: TIDE_SOURCE, moon: weekly.moon };
     }
     if (section.id === "diary" && weekly?.events?.length) auto = { type: "diary", data: weekly.events };
     if (section.id === "video" && edition.video) auto = { type: "video", data: edition.video };

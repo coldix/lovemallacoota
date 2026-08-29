@@ -14,6 +14,7 @@
 */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { moonWeek } from "../src/lib/moon.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -239,6 +240,8 @@ const payload = {
   generatedAt: new Date().toISOString(),
   weather,
   tides,
+  // Computed, not fetched: the moon is arithmetic, and the tides follow it.
+  moon: moonWeek(mondayOf(week).toISOString().slice(0, 10)),
   events: pickEvents(week),
   trail: pickTrail(week),
   business: pickBusiness(week),
@@ -247,6 +250,7 @@ const payload = {
 console.log(`week ${week} (rotation ${rotationIndex(week)})`);
 console.log(`  forecast: ${weather ? `${weather.days.length} days` : "unavailable"}`);
 console.log(`  tides:    ${tides ? `${tides.extremes.length} highs and lows` : "no key configured — linking to the Bureau"}`);
+console.log(`  moon:     ${payload.moon[0].name} → ${payload.moon.at(-1).name}`);
 console.log(`  events:   ${payload.events.length}`);
 console.log(`  trail:    ${payload.trail ? payload.trail.name : "none"}`);
 console.log(`  business: ${payload.business ? payload.business.name : "none"}`);

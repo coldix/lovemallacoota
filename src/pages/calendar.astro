@@ -25,6 +25,19 @@ const meetings = loadDirectory()
         ></iframe>
       </div>
     </section>
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Something missing, or wrong?</h2>
+      <p class="section-sub">
+        The calendar is only as good as what people tell us. Send an event and
+        it goes up; tell us something is wrong and we will fix it.
+      </p>
+      <div class="edition-actions">
+        <a class="btn btn-primary" href="/contact.html?subject=event">Add an event</a>
+        <a class="btn btn-coral" href="/contact.html?subject=correction">Report a correction</a>
+        <a class="btn btn-ghost" href="/corrections.html">How corrections work</a>
+      </div>
+    </section>
+
     {weekly?.weather && (
       <section class="glass-card sheen content-block reveal" aria-labelledby="calendar-weather">
         <h2 id="calendar-weather" class="section-title">This week's weather</h2>

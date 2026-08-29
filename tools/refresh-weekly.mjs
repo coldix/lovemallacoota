@@ -82,9 +82,25 @@ function readJson(relativePath, fallback) {
   return JSON.parse(readFileSync(file, "utf8"));
 }
 
+/**
+ * Where the week's data should begin. An edition published on Sunday for the
+ * week ahead would otherwise open with a forecast that starts tomorrow, which
+ * is no use to somebody reading it today.
+ */
+function startDateFor(week) {
+  const monday = mondayOf(week).toISOString().slice(0, 10);
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Australia/Melbourne",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+  return today < monday ? today : monday;
+}
+
 async function fetchForecast(week) {
   const monday = mondayOf(week);
-  const start = monday.toISOString().slice(0, 10);
+  const start = startDateFor(week);
   const end = new Date(monday.getTime() + 6 * 86400000).toISOString().slice(0, 10);
   const url =
     `https://api.open-meteo.com/v1/forecast?latitude=${MALLACOOTA.latitude}` +
@@ -127,7 +143,7 @@ async function fetchForecast(week) {
  */
 async function fetchTides(week) {
   const monday = mondayOf(week);
-  const start = monday.toISOString().slice(0, 10);
+  const start = startDateFor(week);
   const end = new Date(monday.getTime() + 6 * 86400000).toISOString().slice(0, 10);
   const url =
     "https://marine-api.open-meteo.com/v1/marine?" +

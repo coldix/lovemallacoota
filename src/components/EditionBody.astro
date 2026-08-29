@@ -136,6 +136,26 @@ const statusLabel =
       <WeekWeather weather={section.auto.data} />
     )}
 
+    {section.auto?.type === "video" && youTubeId(section.auto.data.url) && (
+      <div class="edition-auto">
+        <div class="media-frame edition-web-only">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${youTubeId(section.auto.data.url)}`}
+            title={section.auto.data.title || "Video of the week"}
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="edition-source">
+          <a href={section.auto.data.url} rel="noopener noreferrer" target="_blank">Watch on YouTube</a>
+          {section.auto.data.credit && <span> · {section.auto.data.credit}</span>}
+          {section.auto.data.note && <span> · {section.auto.data.note}</span>}
+        </p>
+      </div>
+    )}
+
     {(section.auto?.type === "tides" || section.auto?.type === "tide-table") && (
       <div class="edition-auto">
         <WeekTides tides={section.auto.type === "tide-table" ? section.auto.data : null} moon={section.auto.moon} />

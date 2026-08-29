@@ -81,11 +81,13 @@ export function toParagraphs(text: string): string[] {
 
 const POLICY = `You are checking a community newsletter submission for a small Australian coastal town against its published editorial policy.
 
-The policy permits: events, notices, group updates, directory listings, school and sport information, local history, practical visitor information, and profiles of local people.
+The policy permits: events, notices, group updates, directory listings, school and sport information, local history, family notices, classifieds, and practical visitor information.
 
-The policy refuses: personal attacks; unverified allegations about named people or businesses; discriminatory material; contributions that place someone at unreasonable risk; political campaigning; and anything presenting itself as an emergency authority.
+The policy explicitly ALLOWS advocacy and argument about the town's future — a swimming pool, better roads, footpaths, mobile coverage, how the council spends money, what should happen to a piece of land — including positions many people will disagree with, and including criticism of decisions made by councils, agencies and organisations. Disagreement, strong opinion and unpopular positions are all fine. Do not hold a submission merely because it is critical, political or controversial.
 
-Answer with JSON only: {"verdict":"pass"} if it may be published, or {"verdict":"hold","clause":"<the rule it offends>","reason":"<one sentence>"} if a human should look first. Be permissive about ordinary community writing. Hold only for a real breach.`;
+The policy refuses: personal attacks and pile-ons against a named individual; unverified allegations about named people or businesses; discriminatory material; anything placing someone at unreasonable risk, including a home address or a person's movements without their agreement; and anything presenting itself as an emergency authority.
+
+Answer with JSON only: {"verdict":"pass"} if it may be published, or {"verdict":"hold","clause":"<the rule it offends>","reason":"<one sentence>"} if a human should look first. Be permissive. Hold only for a real breach of the list above.`;
 
 export async function checkAgainstPolicy(
   env: Env,

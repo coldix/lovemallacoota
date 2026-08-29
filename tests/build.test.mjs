@@ -394,3 +394,23 @@ test("every photograph in the bank has a caption, a credit and a file", async ()
     await access(new URL(`../dist${photo.url}`, import.meta.url));
   }
 });
+
+test("a section that says it has content actually renders it", async () => {
+  // A refactor once removed the video embed while leaving its heading, and the
+  // page looked right. Check the content, not the title.
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const edition = currentEdition();
+
+  if (edition?.video) {
+    assert.ok(html.includes("Video of the Week"), "no video heading");
+    assert.match(html, /youtube-nocookie\.com\/embed\/[A-Za-z0-9_-]{11}/, "heading with no embed");
+  }
+  for (const section of editionSections(edition)) {
+    if (section.auto?.type === "weather") {
+      assert.ok(html.includes("Forecast from"), "weather heading with no table");
+    }
+    if (section.auto?.type === "tide-table") {
+      assert.ok(html.includes("tide-day-card"), "tide heading with no tides");
+    }
+  }
+});

@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.51",
-  "generatedAt": "2026-08-30 11:16:58 AEST (Melbourne)",
+  "version": "v0.52",
+  "generatedAt": "2026-08-30 13:27:31 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -17,13 +17,13 @@
     },
     {
       "path": "accom.html",
-      "bytes": 62050,
-      "sha256": "4478d329c46e41e27edb402aa9ca8c4e6e150b71fd1a5c33b2994fcd5952eff0"
+      "bytes": 60700,
+      "sha256": "14242d29ca948e816b578c0f69c50f469c8f64a6bea0ef899e34832514c6cc64"
     },
     {
       "path": "activity.html",
-      "bytes": 22344,
-      "sha256": "66bb3d4a4fea4c575a22c4e5f36266e4598a46849b40696b3ca636869af3c5b6"
+      "bytes": 22119,
+      "sha256": "6bf7cea368ff5347d357374075eaf1e64021725c3de3acc4157e2c0de163ee27"
     },
     {
       "path": "add-listing.html",
@@ -122,8 +122,8 @@
     },
     {
       "path": "data/listings_accom.json",
-      "bytes": 28770,
-      "sha256": "e11eda93f906446c1baa1f6a02965853d9532a6dbc0e3fb36d79d47fc85709a5"
+      "bytes": 28320,
+      "sha256": "c2b909f8ef35cd83c423a346cbd91a6f01281a34ebaeea5486b29b34a3b69da2"
     },
     {
       "path": "data/listings_community.json",
@@ -132,13 +132,13 @@
     },
     {
       "path": "data/listings_do.json",
-      "bytes": 12252,
-      "sha256": "888f7604c956619d9f494cc4c0442d3a1013ea18a2f3e40853f8dca06aded6c9"
+      "bytes": 12077,
+      "sha256": "e9d7e773006df2d1da5943679d00de472d01dd5be68df8bf985b04e3efdb7d9f"
     },
     {
       "path": "data/listings_food.json",
-      "bytes": 23956,
-      "sha256": "d61dbf2d297c4a3ac38f4b67305599613f05c13d4d3aeff607eae3014db49fbf"
+      "bytes": 23556,
+      "sha256": "30610ff2a829025afc3c8f6cda4337eda7a54558a77ba860b44e53ef7cd3fbf2"
     },
     {
       "path": "data/listings_services.json",
@@ -147,8 +147,8 @@
     },
     {
       "path": "directory.html",
-      "bytes": 230574,
-      "sha256": "9ddd67abf4d551d87e32acbb8b58b05e68b9bdd94dd37997b632740a542cfd94"
+      "bytes": 227499,
+      "sha256": "40fc4ec76bfcb90d33f80c2d6aa34c6193bf30f3363e755003ec5253629b7cea"
     },
     {
       "path": "edition.html",
@@ -177,8 +177,8 @@
     },
     {
       "path": "food.html",
-      "bytes": 51979,
-      "sha256": "a8575d1a898daa229de63f5503722b5752e1a3b95daa1c6985020799a1c0f67f"
+      "bytes": 50779,
+      "sha256": "c9e47318e810a851043b01030f6ba66b340de3226cd967b2bd134abee90ff99d"
     },
     {
       "path": "images/articles/w35-community-shirley-90-2.webp",
@@ -392,18 +392,18 @@
     },
     {
       "path": "listing/adobe-abodes.html",
-      "bytes": 11573,
-      "sha256": "7e4536e02cbe84a9562bb1d059bce92c94827acbc5015beae130d7ec123f484b"
+      "bytes": 11523,
+      "sha256": "5e5c0ee833ae58e59a85ec8c2ebbc502e66afbd5206a9f07fa6627aeb5263a6c"
     },
     {
       "path": "listing/adobe-mudbrick-holiday-flats.html",
-      "bytes": 11851,
-      "sha256": "bdaf71ddf6e41c1fe44504200157363a7eafa35e7c7875e1f297e1c3e519d2fa"
+      "bytes": 11801,
+      "sha256": "be523f474ae2d71d31ccff6924a47a22341cc47f1874b8c167b2e0e998c3e3db"
     },
     {
       "path": "listing/alfs-pizza.html",
-      "bytes": 11313,
-      "sha256": "b09ad6ffc62b95605ff763931cf0adf42d66e3d458e08cde4acd6e504e01ac91"
+      "bytes": 11263,
+      "sha256": "91d2560036b9e4e3a04d2fab02b08be54c8a51fc6df523d8b405b3797ae56379"
     },
     {
       "path": "listing/ambulance-victoria.html",
@@ -422,33 +422,33 @@
     },
     {
       "path": "listing/awangralea-caravan-park.html",
-      "bytes": 11883,
-      "sha256": "f4fe4183c5a5a5c5a295934fce6d69304ef800e187769ac007eed23f3333d05b"
+      "bytes": 11833,
+      "sha256": "e2f606997de928838b057c2fbc0589fbb24fd14510d246cbabe321829691f707"
     },
     {
       "path": "listing/beachcomber-caravan-park.html",
-      "bytes": 11693,
-      "sha256": "183a98c6f56c6a0fae3811eb9178875e5efce80c02f1c7ee7d48beb1b003712c"
+      "bytes": 11643,
+      "sha256": "8d308b6a18b882048f4142190c2a1af92f0881766ed86fd17fb185be6f16e759"
     },
     {
       "path": "listing/beanie-coffee-van.html",
-      "bytes": 11518,
-      "sha256": "e42e1a8c50a40519927d55056755b2d11e47d86fb7e582d2334b653dfd4444bd"
+      "bytes": 11468,
+      "sha256": "4e349ac61cd406ca0783eb392f42757b989746a36caddaca53bb93c10092bd70"
     },
     {
       "path": "listing/bribes-gift-shop-and-fresh-flowers.html",
-      "bytes": 11892,
-      "sha256": "32b71d701ad4cac31dbf9514c1022b0d88ff562599171829bac67e7e57c31a09"
+      "bytes": 11842,
+      "sha256": "b397b86e9dd01817fdb9f7d5dd2a3c8bbaa475f69bce240d34132c80c4527657"
     },
     {
       "path": "listing/bruces-waterside-units.html",
-      "bytes": 11671,
-      "sha256": "5543cfdd2f8e5ea28faaa606513541fea39977257de3b9a1254cf77d24884063"
+      "bytes": 11621,
+      "sha256": "df2c9cb5116ade1862fe083cc4d725681ddd60aaacbc1688abc9babf03066cbf"
     },
     {
       "path": "listing/buckland-jetty-boat-hire.html",
-      "bytes": 12146,
-      "sha256": "d437a02a8c7527e1c437c28690a593c12d86e8165ebb1fe3ed0555269c390fd8"
+      "bytes": 12096,
+      "sha256": "0c1cbf2578314706bff5da6c57ca616ffa60ad254c8c7219a13bc161cc7586bf"
     },
     {
       "path": "listing/bureau-of-meteorology.html",
@@ -457,8 +457,8 @@
     },
     {
       "path": "listing/cafe-54.html",
-      "bytes": 11200,
-      "sha256": "6ba4bd5e1e6edcc6d87d4342c1aef3ea99f8f0fa87dbcab4c8c4b048cd4eda65"
+      "bytes": 11150,
+      "sha256": "c4e4b19bc27ca86949eac1853794c6a34e26174c802c06ac8b39fe479e59db9b"
     },
     {
       "path": "listing/cfa-mallacoota-fire-brigade.html",
@@ -472,8 +472,8 @@
     },
     {
       "path": "listing/eagle-view-stay.html",
-      "bytes": 11664,
-      "sha256": "53c90dddb15798c85b6b93e9be30dd86d61c7146ae7ec2e8e267248fbaec41f8"
+      "bytes": 11614,
+      "sha256": "6fc2c35af10b28074cf3177b8321bf79216406833e1e080119e6bfc02e7a2fa8"
     },
     {
       "path": "listing/east-gippsland-shire-council.html",
@@ -497,58 +497,58 @@
     },
     {
       "path": "listing/gipsy-point-lodge-cafe-restaurant.html",
-      "bytes": 12181,
-      "sha256": "6d6c181f79bac3992f141b99438a20f45fcfdbb35ed3b6f2f2215a0af31c0eb1"
+      "bytes": 12131,
+      "sha256": "231dea197c5de3497e1b47e288993de7d806e3948e343dc0f8fb10788694cc67"
     },
     {
       "path": "listing/gipsy-point-lodge.html",
-      "bytes": 12242,
-      "sha256": "de16d56050e06e66313c2a0a951b5af964bad19685f2151b55c1d0c2e250a5f3"
+      "bytes": 12192,
+      "sha256": "94372e2e000d5c8b75e3d786873ed8aab16bc1494f35aebabb99c5cb3d7fdff5"
     },
     {
       "path": "listing/gowings-of-mallacoota-holiday-units.html",
-      "bytes": 11824,
-      "sha256": "c115ef48d2fd539e97c011020630fb01b13bb175dfb4c545bb9636416f1fde2d"
+      "bytes": 11774,
+      "sha256": "2a6ca49f076751e6a0305b1ec887e404f38c7ee2dc9c73d5a8271925e3a2a87e"
     },
     {
       "path": "listing/harbour-lights-holiday-flats.html",
-      "bytes": 11869,
-      "sha256": "2774d9f1df0bd49c1f2fea2195a8c733964f85a60d4e8b63e8c78b45f5fbcbfd"
+      "bytes": 11819,
+      "sha256": "5ea08949bace0e9a7ccf5b4e77da09b267818318e4745585e09acfd3d55e886f"
     },
     {
       "path": "listing/iga-local-grocer-mallacoota.html",
-      "bytes": 12025,
-      "sha256": "4a6daffb385867945cd3efecc7b885eb54da36d89835dd852f7c70610680805a"
+      "bytes": 11975,
+      "sha256": "ec3d53326d0555ece88cf0a1ea841d18d65295fd002d39611419bf6e4e5cf75e"
     },
     {
       "path": "listing/karbeethong-lodge.html",
-      "bytes": 12536,
-      "sha256": "2a68cab0be26c63d3f9ed7b267d6af05deb278b78a70ff166bbbde3fa8c712c7"
+      "bytes": 12486,
+      "sha256": "0b21975cf248f8dfe70320139849c4cd4f886d2786e65f3b60fd25b55c231ac4"
     },
     {
       "path": "listing/kelpys-seafood.html",
-      "bytes": 11439,
-      "sha256": "15694ce77d9697eb241c21850be78b9679e77037b521011ec0c22b965cfd4d99"
+      "bytes": 11389,
+      "sha256": "3aeb886fe897a443513864a0d5be3365fcf405638121949c5ebd2411fbc3fdc4"
     },
     {
       "path": "listing/lakeside-at-mallacoota.html",
-      "bytes": 11726,
-      "sha256": "c4555576f0998ac9543820e36e51687364475dc92c839e167ba395e95c26595a"
+      "bytes": 11676,
+      "sha256": "539a50a7e7738d9e4fee7fe358f2981dcdeacdd20f6fb328602741f84641488f"
     },
     {
       "path": "listing/larrys-coffee-van.html",
-      "bytes": 11268,
-      "sha256": "40505acd0ce0f8b7a1b414cdccdbe5d80311f9f713d83321454f4db17f27d250"
+      "bytes": 11218,
+      "sha256": "53ede6f3495c6e95b396f9d85b4b29564f31514b032b2667b062b6ac07ae22a4"
     },
     {
       "path": "listing/lees-pizza-take-away.html",
-      "bytes": 11590,
-      "sha256": "57b468a044afd169903a666bc27f55087ffd360675963f6b8664e346b890e993"
+      "bytes": 11540,
+      "sha256": "b2aa0b0ee097c3195904ed6546b66cd27575da2b73d815cfa92da420189a52d5"
     },
     {
       "path": "listing/lin-cottage.html",
-      "bytes": 11605,
-      "sha256": "6358ac8fb1a4b6b200a693a0af4df03fd6597d07e610485a2a84429ff46b87f3"
+      "bytes": 11555,
+      "sha256": "245937efebf23bff08125c039107ecc4f0e1ce8a7b3f79894e58c56ce9a9dd90"
     },
     {
       "path": "listing/lions-club-of-mallacoota-and-district.html",
@@ -562,8 +562,8 @@
     },
     {
       "path": "listing/lucys-chinese-restaurant.html",
-      "bytes": 11899,
-      "sha256": "f008ee578ae734ad5de797271f0ea1f64659a3412f1bcbc95f860de33fee07be"
+      "bytes": 11849,
+      "sha256": "2b844071305704e6b7f104504822aca0e3490d251f2e0920932d592794983f21"
     },
     {
       "path": "listing/madra.html",
@@ -607,8 +607,8 @@
     },
     {
       "path": "listing/mallacoota-bakery.html",
-      "bytes": 11772,
-      "sha256": "fa12ff39cc0901e10aadaba22d55df1bc8cfe2b7e56837452276794cdff0088c"
+      "bytes": 11722,
+      "sha256": "2c8c60cea8f1fdcbad73f94a046ef9fea7a61a578faf8568d50b6cc04a1e4d96"
     },
     {
       "path": "listing/mallacoota-birds.html",
@@ -652,13 +652,13 @@
     },
     {
       "path": "listing/mallacoota-foodworks.html",
-      "bytes": 12115,
-      "sha256": "43c707879fc9307cb345693512496dfda5b9859c710e19b2736cd189c7e1f8a5"
+      "bytes": 12065,
+      "sha256": "4ef4b1ea2c7b6fe031daf5aa0fd86b1bbf505b9a1cda8dded73bdbcee2b5a9b9"
     },
     {
       "path": "listing/mallacoota-foreshore-holiday-park.html",
-      "bytes": 12300,
-      "sha256": "4ac5728ddeaa08db771826179beade3e0a76bd4515ffea9a1d4b4b91eafe68dc"
+      "bytes": 12250,
+      "sha256": "cd4b3c410be5bac61fe89d042764d891608767cf0a0af0f68925bf40ad428e75"
     },
     {
       "path": "listing/mallacoota-golf-and-country-club.html",
@@ -667,8 +667,8 @@
     },
     {
       "path": "listing/mallacoota-golf-club-bistro.html",
-      "bytes": 12276,
-      "sha256": "e1acddf35bc282e64c01f6904102e2ff84db2a9714546d298245ac14078a72d7"
+      "bytes": 12226,
+      "sha256": "17fb607f129623d7b6184ce8a4cee22954b54d32c25bdf204988ef15c26dc425"
     },
     {
       "path": "listing/mallacoota-gun-club.html",
@@ -682,13 +682,13 @@
     },
     {
       "path": "listing/mallacoota-hireboats.html",
-      "bytes": 11886,
-      "sha256": "aff7ed22d81d7f351111fef25c6c2f7326d3bdb55aacf316a7410fc54682c179"
+      "bytes": 11836,
+      "sha256": "08f42cd3066a31c7b94ab5ab20b1425f93a05c87751ca3c080c2c2fcc7e20bbc"
     },
     {
       "path": "listing/mallacoota-hotel-motel-bistro.html",
-      "bytes": 12399,
-      "sha256": "0cbfca40bb77c2b7707a6eb2c65660f782f5decd32eb8fd8402cd015a383b467"
+      "bytes": 12349,
+      "sha256": "92490ad7fbfdb1341cf25ee543f4b1a358c1ff5b273b9fbcb3ba49be176e856f"
     },
     {
       "path": "listing/mallacoota-inlet-aged-care-miac.html",
@@ -707,8 +707,8 @@
     },
     {
       "path": "listing/mallacoota-meats.html",
-      "bytes": 11480,
-      "sha256": "d0367c71b7fc86b159b143c26dcd0a546277c7453df8157e1407e0f1916949b7"
+      "bytes": 11430,
+      "sha256": "53b9d38023a4115b74ff6f49b6a932f28053e78ee108504de06d1edf7e01bcab"
     },
     {
       "path": "listing/mallacoota-medical-centre.html",
@@ -767,8 +767,8 @@
     },
     {
       "path": "listing/mallacoota-surf-shack.html",
-      "bytes": 11937,
-      "sha256": "302036a1d4b74592e2fe6d959fc9800227b8713d1c64a8d6a0e02cbc90ed8591"
+      "bytes": 11887,
+      "sha256": "4d6652a8dae23854be7e7c137dec3554ce41813dc030fbedd8b7776c241bb706"
     },
     {
       "path": "listing/mallacoota-transfer-station.html",
@@ -797,23 +797,23 @@
     },
     {
       "path": "listing/mallamaurice-holiday-units.html",
-      "bytes": 11807,
-      "sha256": "695a1a8a0cf31491a5980fb0af08eeeae526e9dd02f57c7b56dabb9f9aed9a49"
+      "bytes": 11757,
+      "sha256": "08007658887c40ff02ba7de415c334f57bee41d1689563431af85157b5c62262"
     },
     {
       "path": "listing/mapa-pearls.html",
-      "bytes": 11533,
-      "sha256": "56c5611c4b1928ad841507908d3217f60abd7b19d76ce714cff5d5b24bbadde6"
+      "bytes": 11483,
+      "sha256": "f4faac5d30de1d114bce96bce3005aab1843bc8a5d31b1e99e775fdba8e03d7b"
     },
     {
       "path": "listing/mv-loch-ard-dale-winward.html",
-      "bytes": 11909,
-      "sha256": "65dfe5394977f3fd0528bd1fdd2f2f30770e17e265377ff397f81c5a4d16d39c"
+      "bytes": 11859,
+      "sha256": "acee13153e3981913e32842b15d05e94234156efa7bc9b7561ac6d8c706c10b1"
     },
     {
       "path": "listing/origami-coffee.html",
-      "bytes": 11682,
-      "sha256": "b1cf1cf7f28898d729d0597ee81a7d7cf2b567abf27f3f91f6ee154732d5c158"
+      "bytes": 11632,
+      "sha256": "6f4e3c24a976ca634336ccb11fe5d92dbabf506c8e6dc33eafbac68e6574b6d9"
     },
     {
       "path": "listing/parks-victoria-croajingolong.html",
@@ -822,23 +822,23 @@
     },
     {
       "path": "listing/scallywags-seafood-winebar.html",
-      "bytes": 11696,
-      "sha256": "12df3621564a242b66897cf4b78ddfe757c5be8defc420072513f6f6653ab218"
+      "bytes": 11646,
+      "sha256": "7e0787d5e78073be55770e5b3b7c3de6add3b534ca8de5d750f4ba8f4f8f4253"
     },
     {
       "path": "listing/shady-gully-caravan-park.html",
-      "bytes": 11831,
-      "sha256": "0ce4ca6e780bfdeeec4172e76bebabad44287aceb1fed65934cf578f82e2361c"
+      "bytes": 11781,
+      "sha256": "18823d239449db5c601ddd5c12a6ff4de7f56903d3f7ae557745d52902098c5e"
     },
     {
       "path": "listing/silver-bream-motel-flats.html",
-      "bytes": 11629,
-      "sha256": "c878a468b50a31cc6a771db2bf370c9b400e02ce875eff721bf14fc42b65d36d"
+      "bytes": 11579,
+      "sha256": "837a7e41ceffe15cb4e32a77ea6b78b9ae24b5b9e6873c2444a72c1e4dd18e80"
     },
     {
       "path": "listing/sundayss.html",
-      "bytes": 11586,
-      "sha256": "3f6e369c7958de89ff8d779c56a89a8a2c029c622e87fa602bd7cf24c4dc5264"
+      "bytes": 11536,
+      "sha256": "2c6c88847e47c8f509b6f2ac3c0c87bccfd4f8db12e5bc47c053b6f3161c9b64"
     },
     {
       "path": "listing/the-mallacoota-sanctuary-youth-group.html",
@@ -847,8 +847,8 @@
     },
     {
       "path": "listing/the-wave-oasis-self-contained-b-and-b.html",
-      "bytes": 12018,
-      "sha256": "9b9c650085aae09013b1073812a931924a0aa2baa1feeb8129d955a1c033c421"
+      "bytes": 11968,
+      "sha256": "1e2ff17a3b71e588b691aec03099eb22e196943d267491cd58da81ed2d4d9081"
     },
     {
       "path": "listing/the-wilderness-collective.html",
@@ -872,8 +872,8 @@
     },
     {
       "path": "listing/wilderness-coast-candles.html",
-      "bytes": 11746,
-      "sha256": "40e6bfc65fda8c74fd102f68509a42329a31a37fa030756a1f28c3a99dc0c920"
+      "bytes": 11696,
+      "sha256": "fb5ea99f9a618040e852a7211605ec3b82e2af86bab864515ae174a962df7fc8"
     },
     {
       "path": "llms.txt",
@@ -897,8 +897,8 @@
     },
     {
       "path": "services.html",
-      "bytes": 77926,
-      "sha256": "a51e05e7ef4652682eceb9f23a0c4a7b64a308d6a3c275ed6d1ca348d16dca3f"
+      "bytes": 77626,
+      "sha256": "3f4bd1b266c5226efc6b2e3292437722bd06708301a5fc33f7b993936f9220f3"
     },
     {
       "path": "site.webmanifest",

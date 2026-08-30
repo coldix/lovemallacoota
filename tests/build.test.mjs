@@ -415,3 +415,24 @@ test("a section that says it has content actually renders it", async () => {
     }
   }
 });
+
+test("no editor's note is left where the town can read it", async () => {
+  // Forty-one listings shipped with "(Add more details here)." on the end of
+  // their description — a note to ourselves, rendered on the public page. The
+  // card blurbs were clean, so it only showed on the individual listing pages
+  // and nobody spotted it.
+  const notes = /\(add more details here\)|\blorem ipsum\b|\bplaceholder\b|\bTODO\b|\bFIXME\b|\bXXX\b/i;
+  const offenders = [];
+  for (const entity of loadDirectory()) {
+    for (const [field, value] of Object.entries({
+      description: entity.description,
+      descriptionShort: entity.descriptionShort,
+      notes_seasonal: entity.notes_seasonal,
+    })) {
+      if (typeof value === "string" && notes.test(value)) {
+        offenders.push(`${entity.slug} [${field}]: ${value.slice(0, 80)}`);
+      }
+    }
+  }
+  assert.deepEqual(offenders, [], `unfinished text on public listing pages:\n${offenders.join("\n")}`);
+});

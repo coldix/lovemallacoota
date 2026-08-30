@@ -1,9 +1,14 @@
 # Love Mallacoota
 
 Community information platform and local guide for
-[lovemallacoota.au](https://lovemallacoota.au/). Mallacoota residents and
-visitors use the same directory: places to eat, stay and explore, plus clubs,
-services, government contacts and what's on.
+[lovemallacoota.au](https://lovemallacoota.au/).
+
+The site has two complementary jobs:
+
+1. **This Week** tells people what is happening now: notices, local stories,
+events, weather, tides, transport and weekly features.
+2. **The Directory** tells residents and visitors where to find businesses,
+services, clubs, government contacts, places to stay, food and things to do.
 
 The project mission is [`docs/MISSION.md`](docs/MISSION.md). The directory
 mission, information architecture and operating workflow are:
@@ -17,15 +22,81 @@ mission, information architecture and operating workflow are:
 
 The site is a static Astro build served by a Cloudflare Worker. Visitor URLs
 (`/food.html`, `/accom.html`, `/activity.html`, `/calendar.html`, `/edition.html`)
-are preserved. Community and Services are first-class sections. Every listing
-has its own page at `/listing/<slug>.html`. The whole set is searchable at
-`/directory.html`.
+are preserved. Community and Services are first-class directory sections. Every
+listing has its own page at `/listing/<slug>.html`. The whole directory is
+searchable at `/directory.html`.
 
-Primary nav: Eat & Drink, Stay, Do & See, Community, Services, What's On.
-This Week, Locals, Archive and Contact live in the footer.
+`/edition.html` is the current weekly edition and is intended to become the
+primary current-information destination. The first public edition is Week 36 of
+2026, Edition 26:36.
 
 Pushes to `main` deploy the isolated preview Worker. Production deployment of
 `lovemallacoota.au` is a deliberate maintainer action.
+
+## Information architecture
+
+The target navigation is organised around user tasks rather than around the
+site's internal data files.
+
+```text
+Love Mallacoota
+|
+|-- This Week                      /edition.html
+|   |-- Notices
+|   |-- Community updates
+|   |-- Local stories / Local of the Week
+|   |-- Weather, tides and moon
+|   |-- What's On highlights
+|   |-- Transport
+|   |-- Trail / Business / Video of the Week
+|   `-- Previous editions
+|
+|-- What's On                      /calendar.html
+|   |-- Community calendar
+|   `-- Submit an event
+|
+|-- Directory                      /directory.html
+|   |-- Eat & Drink                /food.html
+|   |-- Stay                       /accom.html
+|   |-- Do & See                   /activity.html
+|   |-- Community                  /community.html
+|   |-- Services                   /services.html
+|   |-- Add your listing
+|   `-- Claim / update a listing
+|
+|-- Archive                        /archive.html
+|
+|-- Emergency                      /emergency.html
+|
+`-- About & contribute
+    |-- Contact / suggest a correction
+    |-- Support
+    |-- Advertise
+    `-- Editorial, privacy, accessibility and terms
+```
+
+Recommended desktop primary navigation:
+
+```text
+This Week | What's On | Directory | Eat & Drink | Stay | Do & See | More
+```
+
+`More` contains Community, Services, Archive, Emergency, Contact and Add your
+listing. The logo remains the Home link. Mobile can expose the same hierarchy
+as an expanded menu.
+
+### `locals.html`
+
+`/locals.html` is no longer part of the target navigation. **Local of the Week
+belongs inside This Week**, where the story was originally published and where
+its surrounding week's context is preserved.
+
+The compatibility route may remain temporarily, but the eventual behaviour
+should be a redirect to the current edition or an appropriate archive view.
+No local stories need to be lost or duplicated.
+
+The current `SiteNav.astro` still reflects the older navigation and should be
+brought into line with this structure as a separate UI change.
 
 ## Directory
 
@@ -39,13 +110,13 @@ Section pages are filtered views of the same records.
 | Do & See | `/activity.html` | Boat hire, tours, attractions |
 | Community | `/community.html` | Clubs, sport, arts, volunteer groups, local media |
 | Services | `/services.html` | Trades, shops, health, government, emergency |
-| What's On | `/calendar.html` | Community calendar, this week's edition, event form |
+| What's On | `/calendar.html` | Community calendar, weekly highlights, event form |
 | Whole directory | `/directory.html` | Search and filters across every listing |
 
 Shops that used to sit under Do & See now appear under Services.
 
 Government and emergency listings are marked **Official**, use the matching
-schema.org type (not LocalBusiness), and cannot be claimed. Incorporated
+schema.org type rather than LocalBusiness, and cannot be claimed. Incorporated
 associations seeded from Consumer Affairs Victoria show legal name and number
 only until a representative confirms contact details. No phone or hours are
 invented from a register name.
@@ -54,7 +125,7 @@ invented from a register name.
 
 Free. No accounts or passwords.
 
-1. [Add your listing](https://lovemallacoota.au/add-listing.html) — the form
+1. [Add your listing](https://lovemallacoota.au/add-listing.html) - the form
    adapts by organisation type.
 2. A six-digit code is emailed to the public address given. Unverified
    submissions are never published.
@@ -72,15 +143,17 @@ runbook.
 
 ## Structure
 
-- `src/pages/` — Astro routes. `build.format: "file"` keeps `.html` URLs.
-- `src/components/` and `src/layouts/` — navigation, footer, directory UI.
-- `src/lib/directory-model.mjs` and `src/lib/directory.mjs` — unified listings.
-- `src/listing.ts` — add / claim / verify / manage / event Worker APIs.
-- `src/worker.ts` — redirects, security headers, `/api/*` routes.
-- `data/` — listing JSON. `data/directory/` holds submitted overlays.
-- `migrations/` — D1 schema for directory submissions.
-- `docs/` — mission, directory IA, CAV seed, government research. Not deployed.
-- `tools/` — public-file allow-list, version stamp, photo conversion.
+- `src/pages/` - Astro routes. `build.format: "file"` keeps `.html` URLs.
+- `src/components/` and `src/layouts/` - navigation, footer, directory and edition UI.
+- `src/lib/directory-model.mjs` and `src/lib/directory.mjs` - unified listings.
+- `src/listing.ts` - add / claim / verify / manage / event Worker APIs.
+- `src/worker.ts` - redirects, security headers, `/api/*` routes.
+- `data/editions/` - contributed weekly-edition content.
+- `data/weekly/` - generated weekly weather, tides and features.
+- `data/` - listing JSON. `data/directory/` holds submitted overlays.
+- `migrations/` - D1 schema for directory submissions.
+- `docs/` - mission, directory IA, deployment, outreach and operating notes. Not deployed.
+- `tools/` - weekly refresh, rollover, public-file allow-list, version stamp and photo conversion.
 
 ## Local development
 
@@ -134,7 +207,7 @@ The footer reads this manifest and displays the current version.
 
 The suggest-an-update form posts to `/api/submit` ([`src/contact.ts`](src/contact.ts)).
 Directory add/claim/event posts to `/api/listing` ([`src/listing.ts`](src/listing.ts)).
-Both require Turnstile (verified server side), a honeypot, and a per-IP rate
+Both require Turnstile verified server side, a honeypot, and a per-IP rate
 limit. No sending credential is exposed to the browser.
 
 Delivery goes through the adnet relay at `https://ads.oze.net.au/relay`. The
@@ -163,7 +236,7 @@ returns an error rather than silently dropping the message.
 
 `/edition.html` is the current week; every week keeps a permanent page at
 `/edition/<year>-w<week>.html` and a printable A4 PDF rendered on demand at
-`/edition/<year>-w<week>.pdf`. Editions are numbered `YY:WK` — Week 36 of 2026
+`/edition/<year>-w<week>.pdf`. Editions are numbered `YY:WK` - Week 36 of 2026
 is Edition 26:36. Design decisions are in
 [`docs/WEEKLY-MOUTH.md`](docs/WEEKLY-MOUTH.md).
 
@@ -176,7 +249,7 @@ published with.
 | --- | --- | --- |
 | Weather | Open-Meteo forecast | CC BY 4.0 |
 | Tides | Open-Meteo marine model, sea level height | CC BY 4.0 |
-| Moon | Computed in [`src/lib/moon.mjs`](src/lib/moon.mjs) | — |
+| Moon | Computed in [`src/lib/moon.mjs`](src/lib/moon.mjs) | - |
 | Buses | PTV GTFS via `tools/refresh-transport.py` | CC BY 4.0 |
 | Trail of the week | TrailBound, via `tools/sync-trails.mjs` | own |
 | Business of the week | The directory, by rotation | own |
@@ -204,12 +277,13 @@ links, held as vars in `wrangler.jsonc` so a regenerated link is a config
 change. Stripe posts back to `/api/stripe`
 ([`src/stripe-webhook.ts`](src/stripe-webhook.ts)), which verifies the
 signature and timestamp before reading the body, classifies the payment, and
-opens a draft in `data/ad-bookings/` for advertising only — a supporter payment
-or a contribution needs no work, so it is acknowledged and not filed.
+opens a draft in `data/ad-bookings/` for advertising only. A supporter payment
+or a contribution needs no work, so it is acknowledged and not filed as an ad
+booking.
 
 Listing in the directory is free. Advertising is $35 a month, supporters $10,
-contributions whatever people choose. Not registered for GST; not a deductible
-gift recipient.
+and contributions are whatever people choose. Love Mallacoota is not registered
+for GST and is not a deductible gift recipient at the time of this revision.
 
 ## Secrets
 
@@ -246,7 +320,8 @@ Announcement copy, and the letter to the College about the Mouth archive, are in
 ## Licence
 
 Code is MIT ([`LICENSE`](LICENSE)). Original content is CC BY 4.0; submitted and
-archived material is not. See [`CONTENT-LICENCE.md`](CONTENT-LICENCE.md).
+archived material is not automatically relicensed. See
+[`CONTENT-LICENCE.md`](CONTENT-LICENCE.md).
 
 ## GitHub
 

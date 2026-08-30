@@ -1,0 +1,36 @@
+---
+/*
+ * The trail, visible and structured, from one component so the two never drift
+ * apart. Home is always the first step and is never passed in — a caller
+ * supplies only the steps below it, with the current page last.
+ *
+ * Deliberately short: two or three steps. A trail that lists every ancestor of
+ * a listing tells a reader nothing they cannot see from the page itself.
+ */
+import { breadcrumbSchema } from "../lib/editions.mjs";
+
+interface Step {
+  name: string;
+  path: string;
+}
+interface Props {
+  trail: Step[];
+}
+
+const { trail } = Astro.props;
+const steps = [{ name: "Home", path: "/" }, ...trail];
+const schema = breadcrumbSchema(steps);
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {steps.map((step, index) => (
+      <li>
+        {index === steps.length - 1
+          ? <span aria-current="page">{step.name}</span>
+          : <a href={step.path}>{step.name}</a>}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />

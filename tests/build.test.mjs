@@ -313,8 +313,9 @@ test("tide times are linked, never invented", async () => {
 
 test("published text keeps its punctuation intact", async () => {
   // An earlier edit mangled every em dash and curly quote through a bad
-  // encoding round trip, and it only showed up in the rendered page.
-  const html = await readFile(new URL("../dist/locals.html", import.meta.url), "utf8");
+  // encoding round trip, and it only showed up in the rendered page. The
+  // profiles now render inside the edition, so that is where to look.
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
   assert.ok(!/â€|Â|�/.test(html), "the page contains mojibake");
 
   for (const edition of loadEditions()) {

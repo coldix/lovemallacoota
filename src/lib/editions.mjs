@@ -8,6 +8,7 @@
 */
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { editionCard } from "./social.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -243,6 +244,24 @@ export function localsOfTheWeek(editions = loadEditions()) {
 
 const ORIGIN = "https://lovemallacoota.au";
 
+/**
+ * Share cards that have actually been rendered into images/og. Read once,
+ * because an edition page asks for its own card and a missing file would
+ * otherwise become a broken Facebook preview.
+ */
+let renderedCards = null;
+function availableCards() {
+  if (renderedCards) return renderedCards;
+  const dir = rootDir ? path.join(rootDir, "images", "og") : null;
+  renderedCards = new Set(dir && existsSync(dir) ? readdirSync(dir) : []);
+  return renderedCards;
+}
+
+/** The 1200 x 630 card for an edition, frozen per week once it exists. */
+export function editionSocialImage(edition) {
+  return editionCard(edition.week, availableCards());
+}
+
 /** Breadcrumbs, so a deep page shows its place rather than a bare URL. */
 export function breadcrumbSchema(trail) {
   return {
@@ -269,6 +288,13 @@ export function editionSchema(edition) {
     datePublished: article.publishedAt || undefined,
     articleSection: sectionTitle(article.section),
     author: article.byline ? { "@type": "Person", name: article.byline } : undefined,
+    // A Local of the Week piece is an article *about* somebody. Naming the
+    // subject is the difference between a headline and a profile, and it is
+    // only claimed where the edition records who the subject is.
+    about: article.subject?.name ? { "@type": "Person", name: article.subject.name } : undefined,
+    citation: article.sources?.length
+      ? article.sources.map((source) => `${source.title}, ${source.publication}, ${source.date}`)
+      : undefined,
     image: article.image?.url ? `${ORIGIN}${article.image.url}` : undefined,
     url: `${ORIGIN}${pagePath}#${articleAnchor(article)}`,
     isAccessibleForFree: true,
@@ -287,25 +313,6 @@ export function editionSchema(edition) {
       publisher: { "@type": "Organization", name: "Love Mallacoota", url: `${ORIGIN}/` },
     },
     hasPart: articles.length ? articles : undefined,
-  };
-}
-
-/** A Local of the Week profile is an article about a person. */
-export function localSchema(local) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    headline: local.title,
-    datePublished: local.publishedAt || undefined,
-    articleSection: "Local of the Week",
-    author: local.byline ? { "@type": "Person", name: local.byline } : undefined,
-    about: local.subject?.name ? { "@type": "Person", name: local.subject.name } : undefined,
-    image: local.image?.url ? `${ORIGIN}${local.image.url}` : undefined,
-    url: `${ORIGIN}/locals.html#${articleAnchor(local)}`,
-    isAccessibleForFree: true,
-    citation: (local.sources || []).map(
-      (source) => `${source.title}, ${source.publication}, ${source.date}`
-    ),
   };
 }
 

@@ -57,7 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toggle.addEventListener("click", (event) => {
       event.stopPropagation();
-      setOpen(menu.hidden);
+      const open = menu.hidden;
+      setOpen(open);
+      // Opening from the keyboard should land on the first item, not leave the
+      // reader on a button whose menu has silently appeared underneath it.
+      if (open) menu.querySelector("a")?.focus();
     });
     document.addEventListener("click", (event) => {
       if (menu.hidden) return;
@@ -65,7 +69,75 @@ document.addEventListener("DOMContentLoaded", () => {
       setOpen(false);
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key !== "Escape" || menu.hidden) return;
+      setOpen(false);
+      toggle.focus();
+    });
+    // Tabbing out of the menu closes it, so focus never continues into the page
+    // with an open menu covering what it lands on.
+    menu.addEventListener("focusout", () => {
+      requestAnimationFrame(() => {
+        if (menu.hidden) return;
+        if (document.activeElement?.closest(".nav-more")) return;
+        setOpen(false);
+      });
+    });
+  })();
+
+  /*
+   * A fragment has to survive the page settling. Web fonts, lazily decoded
+   * photographs and the reveal transform all change the layout after the
+   * browser has already made its jump, which left an anchored link — the
+   * edition's contents, or a profile reached from an old /locals.html link —
+   * parked hundreds of pixels short of what it was pointing at.
+   */
+  (function honourFragment() {
+    if (!location.hash) return;
+
+    /*
+     * The reveal animation is a 3D transform, and an element inside one that
+     * has not been revealed yet reports a box thousands of pixels from where it
+     * will finally sit — so the browser's jump, and any scroll of ours, lands
+     * somewhere else entirely. Nothing reveals a section until it is scrolled
+     * to, and it cannot be scrolled to until it is revealed.
+     *
+     * Arriving with a fragment settles that in the fragment's favour: the
+     * decoration is skipped for this load, and the link lands where it points.
+     */
+    for (const element of document.querySelectorAll(".reveal")) element.classList.add("in");
+
+    // scrollIntoView honours scroll-padding-top, so the target clears the nav.
+    const targetElement = () => {
+      let id;
+      try {
+        id = decodeURIComponent(location.hash.slice(1));
+      } catch {
+        return null; // a malformed fragment is not worth an exception
+      }
+      return document.getElementById(id);
+    };
+    /*
+     * The jump itself has to be immediate. The page sets scroll-behavior:
+     * smooth, and a smooth scroll begun during load is an animation the browser
+     * is free to cancel or to retarget as the layout settles. Turning the
+     * behaviour off around the call is safer than passing behavior:"instant",
+     * which older browsers reject with a TypeError rather than ignore.
+     */
+    const jump = () => {
+      const target = targetElement();
+      if (!target) return;
+      const scroller = document.scrollingElement || document.documentElement;
+      const previous = scroller.style.scrollBehavior;
+      scroller.style.scrollBehavior = "auto";
+      target.scrollIntoView({ block: "start" });
+      scroller.style.scrollBehavior = previous;
+    };
+
+    jump();
+    window.addEventListener("load", () => {
+      jump();
+      // Once more after the last images have taken their space.
+      setTimeout(jump, 300);
     });
   })();
 

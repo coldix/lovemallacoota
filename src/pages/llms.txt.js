@@ -30,6 +30,19 @@ export function GET() {
 Mallacoota is a coastal town at the Mallacoota Inlet, roughly 520 km east of
 Melbourne and 550 km south of Sydney, bordered by Croajingolong National Park.
 
+## How to tell the three kinds of information apart
+
+- **Current**: /edition.html is this week and changes weekly. /calendar.html is
+  what is coming up. Anything on these is dated on the page.
+- **Permanent**: /edition/<year>-w<week>.html is a frozen record of one week and
+  will not change again. Directory listings under /listing/ carry the date each
+  was last checked.
+- **Historical**: /archive.html catalogues the Mallacoota Mouth, indexes every
+  past weekly edition, and indexes every Local of the Week profile.
+
+Emergency and safety information is relayed from official sources only and is
+never written here; /emergency.html links to the authority in every case.
+
 ## The weekly edition
 
 ${edition ? `Current: ${editionLabel(edition)}, published at https://lovemallacoota.au/edition.html
@@ -57,10 +70,19 @@ representative confirms contact details.
 Each listing carries its verification state and the date it was checked. A
 listing marked "Not yet verified" has not been confirmed by us.
 
+## What's on
+
+- [Community calendar](https://lovemallacoota.au/calendar.html): events, markets,
+  meetups and the regular meeting times clubs publish on their own listings
+- [Submit an event](https://lovemallacoota.au/submit-event.html)
+
 ## People and history
 
-- [Local of the Week](https://lovemallacoota.au/locals.html): ${locals.length} profile(s) of Mallacoota people
+- [Local of the Week](https://lovemallacoota.au/archive.html#locals): ${locals.length} profile(s) of Mallacoota people, each linking to the edition that published it
 - [Mallacoota Mouth archive](https://lovemallacoota.au/archive.html): ${issues.length} issues catalogued, ${issues.at(-1)?.publicationDate.slice(0, 4)}–${issues[0]?.publicationDate.slice(0, 4)}
+
+There is no standalone /locals.html; it redirects to the archive index, which
+links each profile to the edition that carried it.
 
 The archive publishes catalogue metadata only. No PDF is republished: the
 issues remain in copyright and permission has not yet been recorded.

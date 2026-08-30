@@ -1,7 +1,22 @@
 ---
 import PolicyPage from "../components/PolicyPage.astro";
+import { CARDS } from "../lib/social.mjs";
+
+// A page somebody reaches in a hurry. Nothing on it is ours: every line points
+// at the authority that issued it, and the share card stays sober rather than
+// carrying a photograph of a disaster.
 ---
-<PolicyPage title="Emergency Information — Love Mallacoota" description="Official emergency and weather sources for Mallacoota and district." canonicalPath="/emergency.html" prefix="Official sources" accent="First" lede="In an emergency call 000. VicEmergency is the official source. This page may be out of date.">
+<PolicyPage
+  title="Mallacoota emergency information — official sources"
+  description="Official Mallacoota warnings and emergency information: VicEmergency, the Bureau of Meteorology, CFA, SES and the Shire. In an emergency call 000."
+  canonicalPath="/emergency.html"
+  active="emergency"
+  crumb="Emergency"
+  socialImage={CARDS.emergency}
+  prefix="Official sources"
+  accent="First"
+  lede="In an emergency call 000. VicEmergency is the official source. This page may be out of date."
+>
   <div class="emergency-banner"><strong>Life-threatening emergency: call <a href="tel:000">000</a>.</strong><span>Do not rely on Love Mallacoota for warnings or instructions.</span></div>
   <h2>Current official information</h2>
   <ul>
@@ -13,4 +28,6 @@ import PolicyPage from "../components/PolicyPage.astro";
   </ul>
   <h2>Our emergency rules</h2>
   <p>Love Mallacoota relays only information issued by an authority. Every relay must show its source and timestamp. We do not create emergency advice, aggregate warnings from social media, or keep a relay online when we cannot keep it current.</p>
+  <h2>Emergency services listed in the directory</h2>
+  <p>Contact details for the local police station, fire brigade, coast guard, SES unit and medical centre are in <a href="/services.html">Services</a>. Those listings are marked official, are not claimable, and carry the date each was last checked.</p>
 </PolicyPage>

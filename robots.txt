@@ -1,24 +1,16 @@
 User-agent: *
 Allow: /
 
-# AI crawlers welcome — structured site guide at /llms.txt,
-# machine-readable listing data under /data/*.json
+# AI crawlers welcome — structured site guide at /llms.txt, machine-readable
+# listing data under /data/*.json, and every page's meaning in JSON-LD.
 
-# Block development/system files that shouldn't be indexed
-Disallow: /.htaccess
+# Nothing here is disallowed by path. Pages that should not be indexed —
+# private management links, verification steps, the thank-you page — say so in
+# their own robots meta tag, which is authoritative and cannot drift from the
+# page the way a list of paths does.
 
-# Block any backup or temporary files
-Disallow: /*.bak$
-Disallow: /*.tmp$
-Disallow: /*.old$
+# Preview deployments serve this same file. They are kept out of the index by
+# an X-Robots-Tag header the Worker adds to every response on a hostname that
+# is not lovemallacoota.au, rather than by anything written here.
 
-# Allow all HTML pages and resources
-Allow: /*.html
-Allow: /*.css
-Allow: /*.js
-Allow: /assets/
-Allow: /images/
-Allow: /data/
-
-# Sitemap location
 Sitemap: https://lovemallacoota.au/sitemap.xml

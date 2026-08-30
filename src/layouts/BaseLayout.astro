@@ -1,6 +1,8 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteNav from "../components/SiteNav.astro";
+import { DEFAULT_CARD, OG_DIR, cardAlt } from "../lib/social.mjs";
+import { versioned } from "../lib/asset-version.mjs";
 
 interface Props {
   title: string;
@@ -10,8 +12,12 @@ interface Props {
   robots?: string;
   extraScript?: string;
   showAds?: boolean;
-  /** Page-specific social image; falls back to the site hero. */
+  /** Page-specific 1200 x 630 share card; falls back to the home card. */
   socialImage?: string;
+  /** Alternative text for the share card, where the default is not specific enough. */
+  socialImageAlt?: string;
+  /** "article" for editorial pages, "website" for everything else. */
+  ogType?: string;
 }
 
 const {
@@ -23,9 +29,17 @@ const {
   extraScript,
   showAds = false,
   socialImage: socialImagePath,
+  socialImageAlt,
+  ogType = "website",
 } = Astro.props;
 const canonical = new URL(canonicalPath, Astro.site);
-const socialImage = new URL(socialImagePath || "/images/og-hero.jpg", Astro.site);
+const socialPath = socialImagePath || DEFAULT_CARD;
+const socialImage = new URL(socialPath, Astro.site);
+// Dimensions are declared only for the generated cards, whose size we know. A
+// listing photograph is whatever the owner supplied, and guessing at it would
+// make Facebook lay out a space the picture does not fill.
+const isCard = socialPath.startsWith(`${OG_DIR}/`);
+const socialAlt = socialImageAlt || cardAlt(title.split(" — ")[0]);
 ---
 
 <!doctype html>
@@ -37,15 +51,23 @@ const socialImage = new URL(socialImagePath || "/images/og-hero.jpg", Astro.site
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="robots" content={robots} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Love Mallacoota" />
+    <meta property="og:locale" content="en_AU" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
+    {isCard && <meta property="og:image:width" content="1200" />}
+    {isCard && <meta property="og:image:height" content="630" />}
+    <meta property="og:image:alt" content={socialAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={socialAlt} />
+    <meta name="geo.region" content="AU-VIC" />
+    <meta name="geo.placename" content="Mallacoota" />
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
@@ -62,9 +84,9 @@ const socialImage = new URL(socialImagePath || "/images/og-hero.jpg", Astro.site
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=26.08.027" />
-    {showAds && <link rel="stylesheet" href="/assets/css/adnet.css?v=1.0.0" />}
-    <script src="/assets/js/script.js?v=26.08.027" defer></script>
+    <link rel="stylesheet" href={versioned("/assets/css/style.css")} />
+    {showAds && <link rel="stylesheet" href={versioned("/assets/css/adnet.css")} />}
+    <script src={versioned("/assets/js/script.js")} defer></script>
     {extraScript && <script src={extraScript} defer></script>}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CPTXSP8D3J"></script>
     <script is:inline>

@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
-import { SECTIONS, SITE_ORIGIN, WHATS_ON, sectionCounts } from "../lib/directory.mjs";
+import { SECTIONS, SITE_ORIGIN, WHATS_ON, loadDirectory, sectionCounts } from "../lib/directory.mjs";
 import { currentEdition, editionLabel, loadDataFile } from "../lib/editions.mjs";
+import { CARDS } from "../lib/social.mjs";
 import SupportSection from "../components/SupportSection.astro";
 
 // The weekly promotion and the panorama both follow the open edition.
@@ -23,23 +24,61 @@ const directoryCards = [
   { ...WHATS_ON, count: null, countLabel: "calendar and this week" },
 ];
 
+const listingCount = loadDirectory().length;
+
 const siteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   url: `${SITE_ORIGIN}/`,
   name: "Love Mallacoota",
+  inLanguage: "en-AU",
   description:
     "Mallacoota's community directory — places to eat, stay and explore, plus clubs, services and what's on.",
+  publisher: { "@id": `${SITE_ORIGIN}/#publisher` },
+};
+
+/**
+ * Who publishes this. Named once, on the home page, so a search or answer
+ * engine can attribute the rest of the site to a real person in a real place
+ * rather than to an anonymous domain.
+ */
+const publisherSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${SITE_ORIGIN}/#publisher`,
+  name: "Love Mallacoota",
+  url: `${SITE_ORIGIN}/`,
+  logo: `${SITE_ORIGIN}/images/logo.png`,
+  founder: { "@type": "Person", name: "Colin Dixon" },
+  areaServed: {
+    "@type": "Place",
+    name: "Mallacoota, Victoria 3892, Australia",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Mallacoota",
+      addressRegion: "VIC",
+      postalCode: "3892",
+      addressCountry: "AU",
+    },
+  },
+  parentOrganization: { "@type": "Organization", name: "Oze", url: "https://oze.au" },
+  sameAs: [
+    "https://www.facebook.com/lovemallacoota",
+    "https://www.instagram.com/lovemallacoota",
+    "https://www.youtube.com/@mallacoota2020",
+  ],
 };
 ---
 
 <BaseLayout
-  title="Love Mallacoota — Your Local Guide to Mallacoota"
-  description="Mallacoota's community directory and local guide — eat, stay, do, clubs, services and what's on."
+  title="Mallacoota — what's on, and where to find things"
+  description={`Mallacoota, Victoria: this week's community edition, what's on, and ${listingCount} listings for places to eat, stay and visit, plus clubs, trades and official services.`}
   canonicalPath="/"
   showAds={true}
+  socialImage={CARDS.home}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(siteSchema)} is:inline />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(publisherSchema)} is:inline />
   <PageHero
     prefix="Fall in love with"
     accent="Mallacoota"
@@ -47,9 +86,10 @@ const siteSchema = {
     logo={true}
   >
     <div class="hero-cta">
-      <a href="/food.html" class="btn btn-primary">Eat &amp; Drink</a>
-      <a href="/community.html" class="btn btn-coral">Community</a>
-      <a href="/services.html" class="btn btn-ghost">Services</a>
+      <a href="/edition.html" class="btn btn-primary">This Week</a>
+      <a href="/calendar.html" class="btn btn-coral">What's On</a>
+      <a href="/food.html" class="btn btn-ghost">Eat &amp; Drink</a>
+      <a href="/accom.html" class="btn btn-ghost">Stay</a>
     </div>
     <div class="stats-row" id="stats-row">
       <div class="stat"><b id="stat-food" data-count={eat}>{eat}</b><span>Places to eat</span></div>
@@ -60,15 +100,17 @@ const siteSchema = {
 
   <main>
 
-<section class="glass-card sheen content-block platform-callout reveal" aria-labelledby="platform-title">
-      <div>
-        <p class="eyebrow">Add your listing — free</p>
-        <h2 id="platform-title">Clubs, trades and services, in the same directory as the bakery</h2>
-        <p>Love Mallacoota is the town directory, not only a visitor guide. A club secretary can add or claim a listing, confirm an email, and later update meeting times without anyone editing JSON by hand.</p>
-      </div>
-      <div class="platform-actions">
-        <a class="btn btn-primary" href="/add-listing.html">Add your listing</a>
-        <a class="btn btn-ghost" href="/directory.html">Search the directory</a>
+    <section class="glass-card sheen content-block reveal edition-promo" aria-labelledby="this-week-title">
+      <p class="eyebrow">Weekly edition{edition ? ` · ${editionLabel(edition)}` : ""}</p>
+      <h2 id="this-week-title">This Week in <span class="grad">Mallacoota</span></h2>
+      <p class="lede">
+        Community notices, club and school news, the week's events, weather and
+        tides — contributed by the people and groups they belong to.
+      </p>
+      <div class="hero-cta">
+        <a href="/edition.html" class="btn btn-primary">Read this week</a>
+        <a href="/calendar.html" class="btn btn-coral">What's On</a>
+        <a href="/archive.html" class="btn btn-ghost">Past editions</a>
       </div>
     </section>
 
@@ -90,17 +132,15 @@ const siteSchema = {
       </div>
     </section>
 
-    <section class="glass-card sheen content-block reveal edition-promo" aria-labelledby="this-week-title">
-      <p class="eyebrow">Weekly edition{edition ? ` · ${editionLabel(edition)}` : ""}</p>
-      <h2 id="this-week-title">This Week in <span class="grad">Mallacoota</span></h2>
-      <p class="lede">
-        Community notices, club and school news, the week's events, weather and
-        tides — contributed by the people and groups they belong to.
-      </p>
-      <div class="hero-cta">
-        <a href="/edition.html" class="btn btn-primary">Read this week</a>
-        <a href="/locals.html" class="btn btn-coral">Local of the Week</a>
-        <a href="/calendar.html" class="btn btn-ghost">Community calendar</a>
+    <section class="glass-card sheen content-block platform-callout reveal" aria-labelledby="platform-title">
+      <div>
+        <p class="eyebrow">Add your listing — free</p>
+        <h2 id="platform-title">Clubs, trades and services, in the same directory as the bakery</h2>
+        <p>Love Mallacoota is the town directory, not only a visitor guide. A club secretary can add or claim a listing, confirm it by email, and update meeting times whenever they change — without asking anyone, and without an account.</p>
+      </div>
+      <div class="platform-actions">
+        <a class="btn btn-primary" href="/add-listing.html">Add your listing</a>
+        <a class="btn btn-ghost" href="/directory.html">Search the directory</a>
       </div>
     </section>
 

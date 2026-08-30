@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import PageHero from "../components/PageHero.astro";
+import { CARDS } from "../lib/social.mjs";
 import WeekWeather from "../components/WeekWeather.astro";
 import WeekTides from "../components/WeekTides.astro";
 import { currentEdition, loadWeekly } from "../lib/editions.mjs";
@@ -13,9 +15,16 @@ const meetings = loadDirectory()
   .filter((entity) => entity.meetingTimes)
   .sort((a, b) => a.name.localeCompare(b.name));
 ---
-<BaseLayout title="What's On in Mallacoota — Love Mallacoota" description="Mallacoota community events, markets, meetups, workshops and regular club activities." canonicalPath="/calendar.html" active="calendar">
+<BaseLayout
+  title="What's on in Mallacoota — events, markets and club nights"
+  description={`The Mallacoota community calendar: markets, meetups, workshops and club nights, with ${meetings.length} regular meeting times from local clubs and groups.`}
+  canonicalPath="/calendar.html"
+  active="calendar"
+  socialImage={CARDS.calendar}
+>
   <PageHero prefix="What's" accent="On" lede="Markets, meetups, workshops and club nights — the community calendar, plus regular meetings from the directory." />
   <main>
+    <Breadcrumbs trail={[{ name: "What's On", path: "/calendar.html" }]} />
     <section class="glass-card sheen content-block reveal">
       <div class="calendar-frame">
         <iframe
@@ -32,7 +41,7 @@ const meetings = loadDirectory()
         it goes up; tell us something is wrong and we will fix it.
       </p>
       <div class="edition-actions">
-        <a class="btn btn-primary" href="/contact.html?subject=event">Add an event</a>
+        <a class="btn btn-primary" href="/submit-event.html">Add an event</a>
         <a class="btn btn-coral" href="/contact.html?subject=correction">Report a correction</a>
         <a class="btn btn-ghost" href="/corrections.html">How corrections work</a>
       </div>
@@ -60,13 +69,13 @@ const meetings = loadDirectory()
           <span class="arrow" aria-hidden="true">↗</span>
           <span class="emoji" aria-hidden="true">📰</span>
           <h3>This Week</h3>
-          <p>The weekly edition — notices, locals, weather and classifieds.</p>
+          <p>The weekly edition — notices, local stories, weather and classifieds.</p>
         </a>
-        <a href="/submit-event.html" class="link-card">
+        <a href="/directory.html" class="link-card">
           <span class="arrow" aria-hidden="true">↗</span>
-          <span class="emoji" aria-hidden="true">📣</span>
-          <h3>Submit an event</h3>
-          <p>If you already have a listing, you do not need to re-enter the organisation.</p>
+          <span class="emoji" aria-hidden="true">📖</span>
+          <h3>Directory</h3>
+          <p>Every business, club and service, with contacts and meeting times.</p>
         </a>
         <div class="link-card">
           <span class="emoji" aria-hidden="true">📅</span>

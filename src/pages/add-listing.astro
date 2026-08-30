@@ -5,12 +5,14 @@ import { FORM_ENTITY_TYPES, ENTITY_TYPES, SECTIONS } from "../lib/directory-mode
 
 const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+import { CARDS } from "../lib/social.mjs";
 ---
 <BaseLayout
   title="Add your listing — Love Mallacoota"
   description="Add a free Mallacoota directory listing for a business, club, service or community organisation."
   canonicalPath="/add-listing.html"
   active="add-listing"
+  socialImage={CARDS["add-listing"]}
 >
   <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <PageHero

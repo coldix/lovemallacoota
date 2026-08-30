@@ -45,12 +45,15 @@ const statusLabel =
 {edition.cover && (
   <>
     {/* Page one of the printed edition: the photograph, full bleed, with the
-        masthead over it. Hidden on screen, where the hero already does this. */}
+        masthead over it. Hidden on screen, where the hero already does this.
+        The masthead is a <p>, not a heading: the page already has its h1 in
+        the hero, and a second one told crawlers the page was about the word
+        "Mallacoota" rather than about the week. */}
     <section class="edition-cover" aria-hidden="true">
       <img src={edition.cover.print || edition.cover.web} alt="" />
       <div class="edition-cover-mast">
         <p class="edition-cover-eyebrow">This Week in</p>
-        <h1>Mallacoota</h1>
+        <p class="edition-cover-title">Mallacoota</p>
         <p class="edition-cover-date">{editionTitle(edition)}</p>
         <p class="edition-cover-number">{editionLabel(edition)}</p>
       </div>
@@ -163,15 +166,21 @@ const statusLabel =
     )}
 
     {section.auto?.type === "diary" && (
-      <ul class="edition-diary">
-        {section.auto.data.map((event) => (
-          <li>
-            <span class="edition-diary-when">{event.date}{event.time ? ` · ${event.time}` : ""}</span>
-            <strong>{event.title}</strong>
-            {event.location && <span class="edition-diary-where">{event.location}</span>}
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul class="edition-diary">
+          {section.auto.data.map((event) => (
+            <li>
+              <span class="edition-diary-when">{event.date}{event.time ? ` · ${event.time}` : ""}</span>
+              <strong>{event.title}</strong>
+              {event.location && <span class="edition-diary-where">{event.location}</span>}
+            </li>
+          ))}
+        </ul>
+        <p class="edition-source">
+          This week only. Everything further out, and the regular club meetings,
+          are on <a href="/calendar.html">What's On</a>.
+        </p>
+      </>
     )}
 
     {section.auto?.type === "trail" && (
@@ -258,7 +267,13 @@ const statusLabel =
           {section.auto.data.url && (
             <a class="btn btn-primary" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">Visit</a>
           )}
-          <a class="btn btn-ghost" href="/food.html">More in the directory</a>
+          {/* Its own page, not the section a week's rotation happened to land in.
+              This said "More in the directory" and went to Eat & Drink even when
+              the business of the week was a caravan park. */}
+          {section.auto.data.slug && (
+            <a class="btn btn-coral edition-web-only" href={`/listing/${section.auto.data.slug}.html`}>Contact and details</a>
+          )}
+          <a class="btn btn-ghost" href="/directory.html">The whole directory</a>
         </p>
         <p class="edition-source">
           Chosen in turn from the {section.auto.data.rotation.of} listings in the directory — number {section.auto.data.rotation.position}. Not paid placement.

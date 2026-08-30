@@ -8,8 +8,9 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "astro build && node tools/build-static.mjs",
+    "build": "node tools/build-og.mjs && astro build && node tools/build-static.mjs",
     "check:images": "node tools/check-images.mjs",
+    "og": "node tools/build-og.mjs",
     "weekly": "node tools/refresh-weekly.mjs",
     "roll": "node tools/roll-edition.mjs",
     "trails:sync": "node tools/sync-trails.mjs",

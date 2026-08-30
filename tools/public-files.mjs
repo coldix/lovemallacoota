@@ -16,12 +16,25 @@ export const publicFiles = [
   "images/background-05.webp",
   "images/background-06.webp",
   "images/logo145x100.webp",
+  // No page points at this any more — every page has a card of its own under
+  // images/og. It keeps shipping because links shared before that change named
+  // it, and a scraper that refetches one should not find a 404 where the
+  // picture was.
   "images/og-hero.jpg",
   "images/oze-logo216x100.webp",
   "robots.txt",
   "site.webmanifest",
 ];
 
-// Cover photographs are per-week, so the directory ships whole rather than
-// being listed file by file.
-export const publicDirectories = ["assets", "images/covers", "images/articles", "images/bank", "images/listings", "data/directory"];
+// Cover photographs and share cards are per-week and per-page, so these
+// directories ship whole rather than being listed file by file. images/og holds
+// the 1200 x 630 Open Graph cards built by tools/build-og.mjs.
+export const publicDirectories = [
+  "assets",
+  "images/covers",
+  "images/articles",
+  "images/bank",
+  "images/listings",
+  "images/og",
+  "data/directory",
+];

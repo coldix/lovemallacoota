@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "./Breadcrumbs.astro";
 import PageHero from "./PageHero.astro";
+import { CARDS } from "../lib/social.mjs";
 import {
   canClaim,
   collectionSchema,
@@ -19,7 +21,7 @@ import {
   telHref,
   verificationLine,
 } from "../lib/directory.mjs";
-import { ENTITY_TYPES } from "../lib/directory-model.mjs";
+import { ENTITY_TYPES, SECTIONS } from "../lib/directory-model.mjs";
 
 interface ExploreLink { href: string; emoji: string; title: string; text: string }
 interface Props {
@@ -45,12 +47,29 @@ const tags = tagFilters(entities);
 const schema = collectionSchema(entities, props.schemaName, props.canonicalPath, (entity) =>
   photoAbsoluteUrl(entity)
 );
+const section = SECTIONS[props.section];
+// A category is part of the directory, not a product beside it: the trail and
+// the share card both say so.
+const card = CARDS[props.active] || CARDS.directory;
 ---
 
-<BaseLayout title={props.title} description={props.description} canonicalPath={props.canonicalPath} active={props.active} showAds={true}>
+<BaseLayout
+  title={props.title}
+  description={props.description}
+  canonicalPath={props.canonicalPath}
+  active={props.active}
+  showAds={true}
+  socialImage={card}
+>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
   <PageHero prefix={props.prefix} accent={props.accent} lede={props.lede} />
   <main>
+    <Breadcrumbs
+      trail={[
+        { name: "Directory", path: "/directory.html" },
+        { name: section?.label || props.accent, path: props.canonicalPath },
+      ]}
+    />
     <section class="glass-card sheen content-block reveal">
       <p class="directory-add-banner">
         <a class="btn btn-primary" href="/add-listing.html">Add your listing — free</a>
@@ -163,6 +182,12 @@ const schema = collectionSchema(entities, props.schemaName, props.canonicalPath,
             <p>{item.text}</p>
           </a>
         ))}
+        <a href="/directory.html" class="link-card">
+          <span class="arrow" aria-hidden="true">↗</span>
+          <span class="emoji" aria-hidden="true">📖</span>
+          <h3>The whole directory</h3>
+          <p>Search every business, club, service and official contact in one list.</p>
+        </a>
       </div>
     </section>
   </main>

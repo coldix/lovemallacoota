@@ -1,14 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import PageHero from "../../components/PageHero.astro";
 import EditionBody from "../../components/EditionBody.astro";
 import {
-  breadcrumbSchema,
   editionLabel,
   editionSchema,
+  editionSocialImage,
   editionTitle,
   loadEditions,
+  sectionsWithContent,
 } from "../../lib/editions.mjs";
+import { clampMeta } from "../../lib/meta.mjs";
 
 // One static page per edition, so every week keeps a permanent URL.
 export function getStaticPaths() {
@@ -20,27 +23,46 @@ export function getStaticPaths() {
 
 const { edition } = Astro.props;
 const schema = editionSchema(edition);
-const crumbs = breadcrumbSchema([
-  { name: "Home", path: "/" },
-  { name: "This Week", path: "/edition.html" },
-  { name: editionLabel(edition), path: `/edition/${edition.week}.html` },
-]);
+
+// A permanent edition is a dated record. Its description names the week and
+// the pieces in it, so a search result for an old week is not indistinguishable
+// from every other week.
+const headlines = (edition.articles || []).map((article) => article.title).slice(0, 3);
+const description = clampMeta(
+  headlines.length
+    ? `Mallacoota for the week of ${edition.displayDate}: ${headlines.join("; ")}.`
+    : `The Mallacoota weekly edition for the week of ${edition.displayDate} — ${sectionsWithContent(edition)
+        .map((section) => section.title)
+        .slice(0, 4)
+        .join(", ")
+        .toLowerCase()}.`
+);
 ---
 <BaseLayout
-  title={`${editionTitle(edition)} — This Week in Mallacoota`}
-  description={`The Mallacoota weekly edition for the week of ${edition.displayDate}.`}
+  title={`Mallacoota, week of ${edition.displayDate} — This Week in Mallacoota`}
+  description={description}
   canonicalPath={`/edition/${edition.week}.html`}
   active="edition"
   showAds={true}
-  socialImage={edition.cover?.web}
+  ogType="article"
+  socialImage={editionSocialImage(edition)}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(crumbs)} is:inline />
   <PageHero eyebrow="Weekly edition" prefix="Week of" accent={edition.displayDate} lede={`${editionLabel(edition)} — community notices, club and school news, events, weather and tides.`} />
   <main>
+    <Breadcrumbs
+      trail={[
+        { name: "This Week", path: "/edition.html" },
+        { name: editionTitle(edition), path: `/edition/${edition.week}.html` },
+      ]}
+    />
     <EditionBody edition={edition} archived={edition.status !== "open"} />
     <section class="glass-card sheen content-block reveal edition-web-only">
-      <a class="btn btn-ghost" href="/edition.html">Back to this week</a>
+      <div class="edition-actions">
+        <a class="btn btn-primary" href="/edition.html">This week's edition</a>
+        <a class="btn btn-ghost" href="/archive.html#editions">Every edition</a>
+        <a class="btn btn-ghost" href="/calendar.html">What's on</a>
+      </div>
     </section>
   </main>
 </BaseLayout>

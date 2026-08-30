@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import {
   archiveIssues,
   archiveSchema,
@@ -8,6 +9,16 @@ import {
   issueSearchText,
   loadArchive,
 } from "../lib/archive.mjs";
+import {
+  articleAnchor,
+  editionLabel,
+  editionPath,
+  editionTitle,
+  loadEditions,
+  localsOfTheWeek,
+} from "../lib/editions.mjs";
+import { CARDS } from "../lib/social.mjs";
+import { versioned } from "../lib/asset-version.mjs";
 
 // Rendered here, at build time: 37 issues of unique local history that were
 // previously fetched by the browser and therefore invisible to crawlers.
@@ -15,11 +26,27 @@ const archive = loadArchive();
 const issues = archiveIssues(archive);
 const years = archiveYears(issues);
 const schema = archiveSchema(issues, archive);
+
+// The weekly editions and the Local of the Week profiles are indexed here
+// rather than on a page of their own. /locals.html used to republish the
+// profiles in full beside the edition that already carried them; this is an
+// index into that edition, and each row keeps the anchor the old page used so
+// links shared before the change still land on the right story.
+const editions = loadEditions();
+const locals = localsOfTheWeek(editions);
 ---
-<BaseLayout title="Mallacoota Mouth Archive — Love Mallacoota" description="A searchable community archive of The Mallacoota Mouth and Mallacoota's local history." canonicalPath="/archive.html" active="archive" extraScript="/assets/js/archive.js?v=26.08.027">
+<BaseLayout
+  title="Mallacoota Mouth archive — every issue catalogued"
+  description={`${issues.length} issues of The Mallacoota Mouth catalogued by date, issue number and contents, with past weekly editions and every Local of the Week profile.`}
+  canonicalPath="/archive.html"
+  active="archive"
+  extraScript={versioned("/assets/js/archive.js")}
+  socialImage={CARDS.archive}
+>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
-  <PageHero eyebrow="Community history" prefix="Mallacoota Mouth" accent="Archive" lede="A growing, searchable record of the local newsletter that documented Mallacoota's people, organisations, events and everyday life." />
+  <PageHero eyebrow="Community history" prefix="Mallacoota Mouth" accent="Archive" lede="A growing, searchable record of the local newsletter that documented Mallacoota's people, organisations, events and everyday life — with the weekly editions and local profiles published since." />
   <main>
+    <Breadcrumbs trail={[{ name: "Archive", path: "/archive.html" }]} />
     <section class="glass-card sheen content-block reveal archive-intro">
       <h2 class="section-title">Help recover the collection</h2>
       <p class="section-sub">We are starting with a handful of digital copies and hope to locate a near-complete run. Original files and clean scans are especially useful.</p>
@@ -30,6 +57,44 @@ const schema = archiveSchema(issues, archive);
       </div>
       <div class="archive-contribute"><p>Have old editions or know who holds a larger collection?</p><a class="btn btn-coral" href="/contact.html?subject=archive">Contact the archive project</a></div>
     </section>
+    {locals.length > 0 && (
+      <section class="glass-card sheen content-block reveal" aria-labelledby="archive-locals-title" id="locals">
+        <h2 id="archive-locals-title" class="section-title">Local of the Week</h2>
+        <p class="section-sub">
+          Every profile we have published, and the edition it appeared in. The
+          stories stay where they were written rather than being copied to a
+          page of their own.
+        </p>
+        <ul class="edition-index">
+          {locals.map((local) => (
+            <li id={articleAnchor(local)}>
+              <a href={`${editionPath({ week: local.week })}#${articleAnchor(local)}`}>{local.title}</a>
+              <span>Week of {local.displayDate}{local.byline ? ` · ${local.byline}` : ""}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="section-sub">
+          <a href="/contact.html?subject=local">Suggest someone worth writing about</a>.
+        </p>
+      </section>
+    )}
+
+    {editions.length > 0 && (
+      <section class="glass-card sheen content-block reveal" aria-labelledby="archive-editions-title" id="editions">
+        <h2 id="archive-editions-title" class="section-title">Weekly editions</h2>
+        <p class="section-sub">Every week keeps a permanent page and a printable PDF.</p>
+        <ul class="edition-index">
+          {editions.map((edition) => (
+            <li>
+              <a href={editionPath(edition)}>{editionTitle(edition)}</a>
+              <span>{editionLabel(edition)} · {(edition.articles || []).length} items</span>
+            </li>
+          ))}
+        </ul>
+        <p class="section-sub"><a href="/edition.html">Read this week's edition</a>.</p>
+      </section>
+    )}
+
     <section class="glass-card sheen content-block reveal" aria-labelledby="archive-catalogue-title">
       <h2 id="archive-catalogue-title" class="section-title">Issue catalogue</h2>
       <p class="section-sub">Search by issue, date, cover, or the headings pulled from each edition, and narrow the list to a single year.</p>

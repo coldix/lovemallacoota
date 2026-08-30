@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "./Breadcrumbs.astro";
 import PageHero from "./PageHero.astro";
 
 interface Props {
@@ -9,10 +10,26 @@ interface Props {
   prefix: string;
   accent: string;
   lede: string;
+  /** Set where the page belongs in the navigation, if it does. */
+  active?: string;
+  /** Share card, where a page has one of its own. */
+  socialImage?: string;
+  /** The trail's last step, so the reader can see where the page sits. */
+  crumb?: string;
 }
 const props = Astro.props;
+const crumb = props.crumb || `${props.prefix} ${props.accent}`;
 ---
-<BaseLayout title={props.title} description={props.description} canonicalPath={props.canonicalPath}>
+<BaseLayout
+  title={props.title}
+  description={props.description}
+  canonicalPath={props.canonicalPath}
+  active={props.active || ""}
+  socialImage={props.socialImage}
+>
   <PageHero prefix={props.prefix} accent={props.accent} lede={props.lede} />
-  <main><article class="glass-card sheen content-block policy-content reveal"><slot /></article></main>
+  <main>
+    <Breadcrumbs trail={[{ name: crumb, path: props.canonicalPath }]} />
+    <article class="glass-card sheen content-block policy-content reveal"><slot /></article>
+  </main>
 </BaseLayout>

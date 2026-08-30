@@ -16,21 +16,25 @@ export function sitemapEntries(today) {
   const editions = loadEditions();
   const archive = loadArchive();
 
+  // Priorities follow the navigation: what is happening now, then the
+  // directory, then the pages that support them. Pages carrying noindex are
+  // absent by design — a sitemap that lists them contradicts the page.
   const entries = [
     { path: "/", changefreq: "weekly", priority: "1.0", lastmod: today },
-    { path: "/edition.html", changefreq: "daily", priority: "0.9", lastmod: today },
+    { path: "/edition.html", changefreq: "daily", priority: "1.0", lastmod: today },
+    { path: "/calendar.html", changefreq: "weekly", priority: "0.9" },
+    { path: "/directory.html", changefreq: "weekly", priority: "0.9" },
     { path: "/food.html", changefreq: "weekly", priority: "0.9" },
     { path: "/accom.html", changefreq: "weekly", priority: "0.9" },
     { path: "/activity.html", changefreq: "weekly", priority: "0.9" },
-    { path: "/community.html", changefreq: "weekly", priority: "0.9" },
-    { path: "/services.html", changefreq: "weekly", priority: "0.9" },
-    { path: "/directory.html", changefreq: "weekly", priority: "0.8" },
-    { path: "/add-listing.html", changefreq: "yearly", priority: "0.5" },
-    { path: "/locals.html", changefreq: "weekly", priority: "0.8" },
-    { path: "/archive.html", changefreq: "monthly", priority: "0.8", lastmod: archive.updatedAt },
-    { path: "/calendar.html", changefreq: "weekly", priority: "0.7" },
-    { path: "/contact.html", changefreq: "yearly", priority: "0.5" },
+    { path: "/community.html", changefreq: "weekly", priority: "0.8" },
+    { path: "/services.html", changefreq: "weekly", priority: "0.8" },
+    { path: "/archive.html", changefreq: "weekly", priority: "0.8", lastmod: archive.updatedAt },
     { path: "/emergency.html", changefreq: "monthly", priority: "0.7" },
+    { path: "/add-listing.html", changefreq: "yearly", priority: "0.6" },
+    { path: "/claim.html", changefreq: "yearly", priority: "0.5" },
+    { path: "/submit-event.html", changefreq: "yearly", priority: "0.5" },
+    { path: "/contact.html", changefreq: "yearly", priority: "0.5" },
     { path: "/editorial-policy.html", changefreq: "yearly", priority: "0.4" },
     { path: "/corrections.html", changefreq: "yearly", priority: "0.4" },
     { path: "/accessibility.html", changefreq: "yearly", priority: "0.4" },

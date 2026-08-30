@@ -7,11 +7,13 @@ const slug = Astro.url.searchParams.get("slug") || "";
 const entity = slug ? entityBySlug(slug) : null;
 const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+import { CARDS } from "../lib/social.mjs";
 ---
 <BaseLayout
   title="Submit an event — Love Mallacoota"
   description="Submit a Mallacoota community event, meeting or fixture linked to a directory listing."
   canonicalPath="/submit-event.html"
+  socialImage={CARDS["calendar"]}
 >
   <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <PageHero

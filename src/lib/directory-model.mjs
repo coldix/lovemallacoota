@@ -365,16 +365,26 @@ export function entitySchema(entity, photoUrl) {
             longitude: entity.geo.longitude,
           }
         : undefined,
-    openingHoursSpecification:
+    // The listing data holds bare {dayOfWeek, opens, closes} objects. Schema.org
+    // needs each one typed, and without the @type Google discards the hours
+    // rather than reading them.
+    openingHoursSpecification: typeOpeningHours(
       entity.openingHoursSpecification ||
-      entity.opening_hours_specification ||
-      (entity.openingHours?.length ? entity.openingHours : undefined) ||
-      (entity.opening_hours?.length ? entity.opening_hours : undefined),
+        entity.opening_hours_specification ||
+        (entity.openingHours?.length ? entity.openingHours : undefined) ||
+        (entity.opening_hours?.length ? entity.opening_hours : undefined)
+    ),
     sameAs: [
       ...(entity.social || entity.social_links || []).map((link) => link.url).filter(Boolean),
       entity.source?.url,
     ].filter(Boolean),
   });
+}
+
+/** Each period as a typed OpeningHoursSpecification, whatever shape it arrived in. */
+function typeOpeningHours(periods) {
+  if (!Array.isArray(periods) || periods.length === 0) return undefined;
+  return periods.map((period) => ({ "@type": "OpeningHoursSpecification", ...period }));
 }
 
 export function collectionSchema(entities, pageTitle, pagePath, photoFor) {
@@ -623,4 +633,116 @@ export function entityBySlug(entities, slug) {
 export function relatedEntities(entities, entity) {
   const slugs = new Set(entity.related || []);
   return entities.filter((candidate) => slugs.has(candidate.slug));
+}
+
+/*
+ * Page metadata for a listing, composed from the record rather than from a
+ * template. Ninety-eight listings previously shared one pattern — the name plus
+ * the site's name, and whatever short description happened to be on file, which
+ * ran from nineteen characters to two hundred and sixty-three. Neither told a
+ * search result what the thing was or where it was.
+ *
+ * Nothing here is invented. Every clause is dropped when the field behind it is
+ * missing, so a sparse listing gets a short description rather than a padded one.
+ */
+
+/** Trim to a length without cutting a word or leaving dangling punctuation. */
+function clamp(text, limit) {
+  const value = String(text).replace(/\s+/g, " ").trim();
+  if (value.length <= limit) return value;
+  const cut = value.slice(0, limit - 1);
+  const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("! "), cut.lastIndexOf("? "));
+  // A sentence boundary in the back half of the allowance beats a word boundary.
+  if (stop > limit * 0.5) return cut.slice(0, stop + 1).trim();
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\-–—]$/, "").trim()}…`;
+}
+
+/**
+ * Umbrella tags. They are useful as filter buttons on a category page, where
+ * the reader is choosing between them, and useless in a page title, where they
+ * describe a shelf rather than the thing on it.
+ */
+const BROAD_TAG = new Set([
+  "Government & Public Services",
+  "Local Media & Facebook Groups",
+  "Clubs & Groups",
+  "Churches & Community Organisations",
+  "Shops & Local Businesses",
+  "Trades & Home Services",
+]);
+
+/** Short enough for a title, where the ENTITY_TYPES labels are not. */
+const KIND_BY_TYPE = {
+  business: "Business",
+  trade: "Trade service",
+  professional: "Professional service",
+  "community-organisation": "Community group",
+  "sporting-club": "Sports club",
+  "social-group": "Social group",
+  arts: "Arts organisation",
+  government: "Public service",
+  school: "School",
+  church: "Church",
+  emergency: "Emergency service",
+  media: "Local media",
+  "community-facility": "Community facility",
+  "facebook-group": "Community Facebook group",
+  other: "Listing",
+};
+
+/** What this listing is, in as few words as the record supports. */
+export function listingKind(entity) {
+  const specific = displayTags(entity).find((tag) => !BROAD_TAG.has(tag));
+  if (specific) return specific;
+  return KIND_BY_TYPE[entity.entityType] || displayTags(entity)[0] || "Listing";
+}
+
+/**
+ * "Mallacoota Bakery — Bakery in Mallacoota". Where the name already carries
+ * the town, the trailing "in Mallacoota" is dropped rather than repeated, and a
+ * name long enough to fill a search result keeps the town and loses the kind.
+ */
+export function listingTitle(entity) {
+  const kind = listingKind(entity);
+  const carriesTown = /mallacoota/i.test(entity.name);
+  // Naming the town twice in one title helps nobody, so a name that already
+  // carries it falls back to itself rather than to "… — Mallacoota".
+  const candidates = carriesTown
+    ? [`${entity.name} — ${kind}`, entity.name]
+    : [`${entity.name} — ${kind} in Mallacoota`, `${entity.name} — Mallacoota`, entity.name];
+  return candidates.find((candidate) => candidate.length <= 62) || clamp(entity.name, 60);
+}
+
+/**
+ * The listing's own words first, then where it is, then what the page adds.
+ * The last clause is the only editorial one, and it describes the page rather
+ * than the business.
+ */
+export function listingDescription(entity, { limit = 155 } = {}) {
+  const own = entity.descriptionShort || entity.description || "";
+  const parts = [];
+  if (own) parts.push(clamp(own, limit - 30));
+
+  const where = formatAddress(entity.address);
+  const kind = listingKind(entity);
+  if (where) {
+    parts.push(`${kind} at ${where}.`);
+  } else if (entity.serviceArea) {
+    parts.push(`${kind} serving ${entity.serviceArea}.`);
+  } else if (!own) {
+    parts.push(`${kind} in Mallacoota.`);
+  }
+
+  if (entity.meetingTimes) parts.push(`Meets ${entity.meetingTimes}.`);
+
+  const joined = parts.join(" ").replace(/\s+/g, " ").trim();
+  const tail = isOfficialEntity(entity)
+    ? "Official contact details on Love Mallacoota."
+    : (entity.openingHours || entity.opening_hours || []).length
+      ? "Contact details, opening hours and links on Love Mallacoota."
+      : "Contact details and links on Love Mallacoota.";
+
+  // The tail earns its place only when there is room for all of it.
+  if (joined.length + tail.length + 1 <= limit) return `${joined} ${tail}`;
+  return clamp(joined || `${entity.name} in Mallacoota.`, limit);
 }

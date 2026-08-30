@@ -106,11 +106,11 @@ Add your listing
 
 The logo always returns to Home. Mobile navigation may show the same hierarchy expanded rather than trying to reproduce the desktop row exactly.
 
-### Retire `locals.html` as a standalone destination
+### Retire `locals.html` as a standalone destination — done
 
-`/locals.html` is no longer needed as a navigation concept. Local of the Week is an article type within the weekly edition, not a separate product.
+`/locals.html` is no longer a navigation concept. Local of the Week is an article type within the weekly edition, not a separate product.
 
-The existing route can be retained temporarily for compatibility, but it should eventually redirect to the current edition or an appropriate archive view. Existing local stories remain part of their original weekly editions.
+The route is permanently redirected to `/archive.html`, which indexes every profile and links each one to the edition that published it. Each index row carries the anchor the old page used, so deep links shared before the change still land on the right story. Existing local stories remain part of their original weekly editions and are not duplicated anywhere.
 
 ## 4. What Love Mallacoota carries
 
@@ -276,4 +276,4 @@ The most important operational measure is maintainer time. If routine publishing
 - Permission and copyright status for publishing historical Mallacoota Mouth editions, as distinct from cataloguing them.
 - Whether advertising and supporter contributions are enough to sustain maintenance over time.
 - Whether a broader contributor or governance model becomes useful once the platform has real participation.
-- Whether old compatibility routes such as `/locals.html` should redirect to This Week or an archive view once external links have had time to age out.
+- Whether the `/locals.html` redirect to the archive index can eventually be dropped, once external links have had time to age out.

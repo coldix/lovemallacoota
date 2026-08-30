@@ -24,6 +24,13 @@ const REDIRECT_HOSTS = new Set([
 const MOVED_PATHS = new Map([
   // /index.html and / served the same page, which is duplicate content.
   ["/index.html", "/"],
+  // Local of the Week is an article inside the weekly edition, not a product of
+  // its own. The archive indexes every profile and keeps the anchors the old
+  // page used, so /locals.html#article-… still lands on the right story: a
+  // fragment is never sent to the server, and the browser carries it across a
+  // redirect whose Location has none of its own.
+  ["/locals.html", "/archive.html"],
+  ["/locals", "/archive.html"],
   ["/eat-drink", "/food.html"],
   ["/stay", "/accom.html"],
   ["/do-see", "/activity.html"],
@@ -102,8 +109,14 @@ const CSP = [
   "upgrade-insecure-requests",
 ].join("; ");
 
-function applySecurityHeaders(response: Response): Response {
+function applySecurityHeaders(response: Response, hostname?: string): Response {
   const secured = new Response(response.body, response);
+  // The preview worker and the workers.dev hostname serve the production HTML.
+  // The canonical tag points home, but a crawler should not have to take that
+  // on trust: anything not on the real domain is told plainly not to index.
+  if (hostname && hostname !== CANONICAL_HOST) {
+    secured.headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
   secured.headers.set("X-Content-Type-Options", "nosniff");
   secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
@@ -165,13 +178,13 @@ export default {
     }
 
     if (weekFromPath(url.pathname)) {
-      return applySecurityHeaders(await handleEditionPdf(request, env, ctx));
+      return applySecurityHeaders(await handleEditionPdf(request, env, ctx), url.hostname);
     }
 
     const assetRequest = url.pathname === "/"
       ? new Request(new URL(`/index.html${url.search}`, url), request)
       : request;
     const response = await env.ASSETS.fetch(assetRequest);
-    return applySecurityHeaders(response);
+    return applySecurityHeaders(response, url.hostname);
   },
 } satisfies ExportedHandler<Env>;

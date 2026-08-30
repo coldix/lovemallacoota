@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import PageHero from "../components/PageHero.astro";
+import { CARDS } from "../lib/social.mjs";
 import {
   ENTITY_TYPES,
   SECTIONS,
@@ -28,11 +30,12 @@ const typeFilters = [...new Set(entities.map((entity) => entity.entityType))]
 ---
 
 <BaseLayout
-  title="Mallacoota directory — Love Mallacoota"
-  description="Search Mallacoota businesses, clubs, services, government and community groups in one place."
+  title="Mallacoota directory — every business, club and service"
+  description={`Search ${entities.length} Mallacoota listings in one place: cafes and pubs, accommodation, things to do, clubs and sport, trades, health and official services.`}
   canonicalPath="/directory.html"
   active="directory"
   showAds={true}
+  socialImage={CARDS.directory}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
   <PageHero
@@ -41,6 +44,7 @@ const typeFilters = [...new Set(entities.map((entity) => entity.entityType))]
     lede="One search across Eat & Drink, Stay, Do & See, Community and Services. Built for a town of a thousand people — large type, plain language, no account required."
   />
   <main>
+    <Breadcrumbs trail={[{ name: "Directory", path: "/directory.html" }]} />
     <section class="glass-card sheen content-block reveal">
       <p class="directory-add-banner">
         <a class="btn btn-primary" href="/add-listing.html">Add your listing — free</a>

@@ -1,31 +1,51 @@
 ---
+/*
+ * The bar carries the two things the site is for — what is happening now
+ * (This Week, What's On) and where to find things (Directory, and the three
+ * shortcuts visitors actually arrive looking for). Everything else lives one
+ * press away, with Emergency at the head of that menu rather than buried in it.
+ *
+ * The logo is Home. Spending a navigation slot on a Home link would cost a
+ * shortcut and buy nothing.
+ */
 interface Props {
   active?: string;
 }
 
 const { active = "" } = Astro.props;
+
+/** Shown in the bar on desktop, and at the top of the menu on narrow screens. */
 const primary = [
+  ["edition", "/edition.html", "This Week"],
+  ["calendar", "/calendar.html", "What's On"],
+  ["directory", "/directory.html", "Directory"],
   ["food", "/food.html", "Eat & Drink"],
   ["accom", "/accom.html", "Stay"],
   ["activity", "/activity.html", "Do & See"],
-  ["community", "/community.html", "Community"],
-  ["services", "/services.html", "Services"],
-  ["calendar", "/calendar.html", "What's On"],
 ];
-const more = [
-  ["edition", "/edition.html", "This Week"],
-  ["locals", "/locals.html", "Locals"],
-  ["archive", "/archive.html", "Archive"],
-  ["directory", "/directory.html", "Directory"],
-  ["emergency", "/emergency.html", "Emergency"],
-  ["contact", "/contact.html", "Contact"],
-  ["add-listing", "/add-listing.html", "Add your listing"],
+
+/**
+ * The rest of the directory, then the reference pages. Grouped so the menu
+ * reads as two short lists rather than one long one.
+ */
+const secondary = [
+  { label: "More of the directory", items: [
+    ["community", "/community.html", "Community"],
+    ["services", "/services.html", "Services"],
+    ["add-listing", "/add-listing.html", "Add your listing"],
+  ] },
+  { label: "Also here", items: [
+    ["archive", "/archive.html", "Archive"],
+    ["contact", "/contact.html", "Contact"],
+  ] },
 ];
-const moreActive = more.some(([key]) => key === active);
+
+const secondaryKeys = secondary.flatMap((group) => group.items.map(([key]) => key));
+const menuActive = secondaryKeys.includes(active) || active === "emergency";
 ---
 
 <nav class="site-nav" aria-label="Main">
-  <a href="/" class="nav-brand">
+  <a href="/" class="nav-brand" aria-label="Love Mallacoota — home">
     <img src="/images/logo145x100.webp" alt="" width="145" height="100" />
     <span>Love Mallacoota</span>
   </a>
@@ -45,7 +65,7 @@ const moreActive = more.some(([key]) => key === active);
     <button
       type="button"
       id="nav-menu-toggle"
-      class:list={["nav-menu-toggle", { active: moreActive }]}
+      class:list={["nav-menu-toggle", { active: menuActive }]}
       aria-expanded="false"
       aria-controls="nav-menu"
       aria-label="Open the rest of the menu"
@@ -60,10 +80,23 @@ const moreActive = more.some(([key]) => key === active);
           </a>
         ))}
       </div>
-      {more.map(([key, href, label]) => (
-        <a href={href} class:list={[{ active: active === key }]} aria-current={active === key ? "page" : undefined}>
-          {label}
-        </a>
+      {/* First in the menu, and marked, because somebody looking for it is not browsing. */}
+      <a
+        href="/emergency.html"
+        class:list={["nav-menu-emergency", { active: active === "emergency" }]}
+        aria-current={active === "emergency" ? "page" : undefined}
+      >
+        Emergency
+      </a>
+      {secondary.map((group) => (
+        <div class="nav-menu-group">
+          <p class="nav-menu-label">{group.label}</p>
+          {group.items.map(([key, href, label]) => (
+            <a href={href} class:list={[{ active: active === key }]} aria-current={active === key ? "page" : undefined}>
+              {label}
+            </a>
+          ))}
+        </div>
       ))}
     </div>
   </div>

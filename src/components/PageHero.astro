@@ -12,7 +12,7 @@ const { prefix, accent, lede, eyebrow, logo = false } = Astro.props;
 <header class="glass-card sheen hero-section">
   {logo && <img src="/images/logo145x100.webp" alt="Love Mallacoota logo" class="hero-logo" width="145" height="100" />}
   {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-  <h1>{prefix} <span class="grad">{accent}</span></h1>
+  <h1>{prefix ? <>{prefix} </> : null}<span class="grad">{accent}</span></h1>
   <p class="lede">{lede}</p>
   <slot />
 </header>

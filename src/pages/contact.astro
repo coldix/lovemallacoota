@@ -13,8 +13,10 @@ const invite = Array.isArray(social) ? null : social.invite;
 // widget exists. Set PUBLIC_TURNSTILE_SITE_KEY for preview and production.
 const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+import { CARDS } from "../lib/social.mjs";
 ---
-<BaseLayout title="Suggest an Update — Love Mallacoota" description="Suggest a new Mallacoota listing or correct information in the Love Mallacoota directory." canonicalPath="/contact.html" active="contact">
+<BaseLayout title="Suggest an Update — Love Mallacoota" description="Suggest a new Mallacoota listing or correct information in the Love Mallacoota directory." canonicalPath="/contact.html"
+  socialImage={CARDS["add-listing"]} active="contact">
   <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <PageHero prefix="Suggest an" accent="Update" lede="See something wrong? Want to add a link? Let us know — it keeps the directory accurate for everyone." />
   <main>

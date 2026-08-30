@@ -201,3 +201,33 @@ test("the short payment paths hand off to Stripe, and say so when unconfigured",
   );
   assert.equal(unset.status, 503);
 });
+
+test("the retired Local of the Week page redirects to the archive that replaced it", async () => {
+  for (const path of ["/locals.html", "/locals", "/locals/"]) {
+    const response = await worker.fetch(
+      new Request(`https://lovemallacoota.au${path}`),
+      env
+    );
+    assert.equal(response.status, 301, `${path} did not redirect`);
+    // No fragment on the Location, so a shared /locals.html#article-… keeps its
+    // own and lands on the matching row in the archive index.
+    assert.equal(
+      response.headers.get("Location"),
+      "https://lovemallacoota.au/archive.html"
+    );
+  }
+});
+
+test("a preview hostname is told not to index the production pages it serves", async () => {
+  const preview = await worker.fetch(
+    new Request("https://lovemallacoota-preview.workers.dev/edition.html"),
+    env
+  );
+  assert.equal(preview.headers.get("X-Robots-Tag"), "noindex, nofollow");
+
+  const production = await worker.fetch(
+    new Request("https://lovemallacoota.au/edition.html"),
+    env
+  );
+  assert.equal(production.headers.get("X-Robots-Tag"), null);
+});

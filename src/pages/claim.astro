@@ -7,11 +7,13 @@ const slug = Astro.url.searchParams.get("slug") || "";
 const entity = slug ? entityBySlug(slug) : null;
 const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+import { CARDS } from "../lib/social.mjs";
 ---
 <BaseLayout
   title="Claim a listing — Love Mallacoota"
   description="Claim an existing Mallacoota directory listing so you can keep it up to date."
   canonicalPath="/claim.html"
+  socialImage={CARDS["add-listing"]}
   active="claim"
 >
   <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

@@ -91,3 +91,28 @@ test("a classified without a way to reply is refused", async () => {
   assert.ok(!needsContact("editorial"));
   assert.ok(!needsContact("community"));
 });
+
+test("every contributor has a real address and only sections that exist", async () => {
+  // A typo in a section id fails silently: the contributor keeps their account,
+  // the form offers the section, and the submission is refused at the last step
+  // with no indication of why.
+  const { SECTIONS } = await import("../src/lib/editions.mjs");
+  const { readFile } = await import("node:fs/promises");
+  const contributors = JSON.parse(
+    await readFile(new URL("../data/contributors.json", import.meta.url), "utf8")
+  );
+  const offered = new Set(SECTIONS.filter((section) => !section.automatic).map((s) => s.id));
+
+  assert.ok(contributors.length > 0, "no contributors at all");
+  for (const person of contributors) {
+    assert.match(person.email, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, `${person.email}: not an address`);
+    assert.equal(person.email, person.email.toLowerCase(), `${person.email}: lookup lowercases, this will never match`);
+    assert.ok(person.name, `${person.email}: no name, so no byline`);
+    assert.ok(person.sections.length > 0, `${person.email}: approved for nothing`);
+    for (const section of person.sections) {
+      assert.ok(offered.has(section), `${person.email}: "${section}" is not a section anyone can submit to`);
+    }
+  }
+  const emails = contributors.map((p) => p.email);
+  assert.equal(new Set(emails).size, emails.length, "the same address is listed twice");
+});

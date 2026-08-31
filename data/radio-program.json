@@ -1,0 +1,79 @@
+{
+  "_comment": "3MGB's published weekly grid, transcribed from their Radio Waves 2026 V6 PDF on 31 August 2026. A standing file like data/bus-timetable.json: it is not regenerated each week, and it changes when 3MGB publish a new guide. Their programme, not ours — transcribe what is printed rather than correcting it. Do not fetch this at build time.",
+  "station": "3MGB Wilderness Radio",
+  "legalName": "Mallacoota & Genoa Broadcasting Association Incorporated",
+  "listingSlug": "3mgb-wilderness-radio",
+  "source": "Radio Waves 2026 V6",
+  "sourceUrl": "https://www.3mgb.org.au/program/",
+  "guideUpdated": "2026-05-26",
+  "checked": "2026-08-31",
+  "frequencies": [
+    { "place": "Mallacoota", "mhz": "101.7" },
+    { "place": "Genoa", "mhz": "96.9" }
+  ],
+  "phone": "03 5158 0929",
+  "sms": "0482 170 909",
+  "email": "cootafm@gmail.com",
+  "listen": ["3mgb.org.au", "Community Radio Plus", "iHeart"],
+  "caution": "Presenters are volunteers and the programme can change at short notice.",
+  "networkFiller": "Community Radio Network Australia satellite",
+  "days": [
+    {
+      "day": "Monday",
+      "shows": [
+        { "start": "08:00", "time": "8.00am", "title": "Monday Breakfast", "presenter": "Maggie Langdon" },
+        { "start": "12:00", "time": "12.00pm", "title": "Eclectic Lady Land", "presenter": "Kathi Blomer" },
+        { "start": "15:00", "time": "3.00pm", "title": "Under the Milky Way", "presenter": "Rosy Morton" }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "shows": [
+        { "start": "08:00", "time": "8.00am", "title": "Tuesday Breakfast", "presenter": "Mark Keating" },
+        { "start": "11:00", "time": "11.00am", "title": "Jukebox Jamboree", "presenter": "Doctor Fred" },
+        { "start": "16:00", "time": "4.00pm", "title": "Blues and Other Stuff", "presenter": "Peter Vickery" },
+        { "start": "19:00", "time": "7.00pm", "title": "Prog Prog", "presenter": "Don and Mickie Dee" }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "shows": [
+        { "start": "07:00", "time": "7.00am", "title": "This & That", "presenter": "Laurie Hamilton" },
+        { "start": "09:00", "time": "9.00am", "title": "Something Different", "presenter": "Wally Who" },
+        { "start": "10:00", "time": "10.00am", "title": "Blast from the Past", "presenter": "Wally Who" }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "shows": [
+        { "start": "08:00", "time": "8.00am", "title": "Thursday Breakfast", "presenter": "Mike Webb" },
+        { "start": "15:00", "time": "3.00pm", "title": "Thanks for the Memory", "presenter": "Mervyn Kimm" }
+      ]
+    },
+    {
+      "day": "Friday",
+      "shows": [
+        { "start": "08:00", "time": "8.00am", "title": "Sea Change Brekky", "presenter": "Maggie Langdon" },
+        { "start": "11:00", "time": "11.00am", "title": "The Open Page", "presenter": "Don and Kate", "postponed": "Show postponed until July 2026" },
+        { "start": "12:30", "time": "12.30pm", "title": "Folk Like Us - mostly Oz folk music", "presenter": "Don Ashby", "postponed": "Show postponed until July 2026" },
+        { "start": "14:00", "time": "2.00pm", "title": "3BGB's", "presenter": "Angus Buchanan", "note": "Printed as 3BGB's in the published guide." },
+        { "start": "16:00", "time": "4.00pm", "title": "Friday Coota Drive", "presenter": "Simon Walshe" }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "shows": [
+        { "start": "07:00", "time": "7.00am", "title": "Good Morning Blues", "presenter": "Greg Hopkins", "postponed": "Show postponed until July 2026" },
+        { "start": "10:00", "time": "10.00am", "title": "Sisters of Soul", "presenter": "Cindy, Maggie or Rosy" },
+        { "start": "12:00", "time": "12.00pm", "title": "Easy Listening", "presenter": "Wally Who" }
+      ]
+    },
+    {
+      "day": "Sunday",
+      "shows": [
+        { "start": "10:00", "time": "10.00am", "title": "Uptown Sunday Morning", "presenter": "Mike Webb", "note": "Last Sunday of the month only" },
+        { "start": "14:00", "time": "2.00pm", "title": "From the Concert Hall", "presenter": "John Roy", "note": "First Sunday of the month only" }
+      ]
+    }
+  ]
+}

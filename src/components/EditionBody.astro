@@ -23,6 +23,9 @@ const { edition, archived = false } = Astro.props;
 const sections = sectionsWithContent(edition);
 
 const DAY = new Intl.DateTimeFormat("en-AU", { weekday: "short", day: "numeric", month: "short", timeZone: "Australia/Melbourne" });
+/** A publication date wants the year and not the weekday. */
+const PUBLISHED = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Melbourne" });
+const publishedOn = (iso) => PUBLISHED.format(new Date(`${iso}T00:00:00+10:00`));
 const dayName = (iso) => DAY.format(new Date(`${iso}T00:00:00+10:00`));
 
 const TIDE_WHEN = new Intl.DateTimeFormat("en-AU", {
@@ -222,6 +225,37 @@ const statusLabel =
         </table>
         <p class="edition-source">
           {section.auto.data.route}. Times from the <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a>, {section.auto.data.licence}, valid {section.auto.data.validFrom} to {section.auto.data.validTo}. Coaches must be booked ahead; check before travelling.
+        </p>
+      </div>
+    )}
+
+    {section.auto?.type === "radio" && (
+      <div class="edition-auto">
+        {/* A day-by-day grid, not the bus from/to table: what matters is when a
+            local show is on, and every hour between them is the same satellite
+            feed. Listing that feed hour by hour would triple the height of the
+            section on paper and say nothing. */}
+        <div class="radio-week">
+          {section.auto.data.days.map((day) => (
+            <div class="radio-day">
+              <h4>{day.day}</h4>
+              <ul>
+                {day.shows.map((show) => (
+                  <li class:list={["radio-show", { postponed: Boolean(show.postponed) }]}>
+                    <span class="radio-time">{show.time}</span>
+                    <span class="radio-title">{show.title}</span>
+                    {show.presenter && <span class="radio-presenter">{show.presenter}</span>}
+                    {show.postponed && <span class="radio-note">{show.postponed}</span>}
+                    {show.note && <span class="radio-note">{show.note}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p class="edition-source">
+          Everything between these is the {section.auto.data.networkFiller}.
+          Programme from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a> on 3mgb.org.au, the guide 3MGB published {publishedOn(section.auto.data.guideUpdated)}. {section.auto.data.caution} {section.auto.data.frequencies.map((f) => `${f.mhz} ${f.place}`).join(", ")}. Listen live at {section.auto.data.listen.join(", ")}, or ring the studio on {section.auto.data.phone}. This is 3MGB's programme, not ours — <a href={`/listing/${section.auto.data.listingSlug}.html`}>their listing</a>.
         </p>
       </div>
     )}

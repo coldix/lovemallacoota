@@ -460,3 +460,48 @@ test("the honeypot is not something a password manager will fill in", async () =
     }
   }
 });
+
+test("the radio programme is 3MGB's, attributed and printed as they published it", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const program = JSON.parse(
+    await readFile(new URL("../data/radio-program.json", import.meta.url), "utf8")
+  );
+
+  // Every local show they print, present on the page.
+  const shows = program.days.flatMap((day) => day.shows);
+  assert.ok(shows.length > 15, "the grid looks truncated");
+  for (const show of shows) {
+    assert.ok(html.includes(escapeEntities(show.title)), `missing "${show.title}"`);
+    if (show.presenter) {
+      assert.ok(html.includes(escapeEntities(show.presenter)), `missing ${show.presenter}`);
+    }
+  }
+
+  // Three shows are still printed as postponed until July 2026 and it is later
+  // than that. They stay as published: guessing they are back would put a
+  // listener in front of a radio at seven on a Saturday for nothing.
+  const postponed = shows.filter((show) => show.postponed);
+  assert.equal(postponed.length, 3, "expected three postponed shows in the published guide");
+  for (const show of postponed) {
+    assert.ok(html.includes(escapeEntities(show.postponed)), `${show.title} does not say it is postponed`);
+  }
+
+  // Attribution: their guide, their version, their frequencies, their station.
+  assert.ok(html.includes(program.source), "the programme version is not credited");
+  assert.ok(html.includes(program.sourceUrl), "3MGB's programme page is not linked");
+  assert.ok(html.includes(program.caution), "the volunteers-and-may-change note is missing");
+  for (const frequency of program.frequencies) {
+    assert.ok(html.includes(frequency.mhz), `${frequency.mhz} is not shown`);
+  }
+  assert.ok(
+    /3MGB's programme, not ours/.test(html),
+    "the page does not say whose programme this is"
+  );
+
+  // It is a standing file, like the timetable — never regenerated per week.
+  const weekly = await readFile(new URL("../tools/refresh-weekly.mjs", import.meta.url), "utf8");
+  assert.ok(
+    !weekly.includes("radio-program"),
+    "the weekly refresh is rewriting 3MGB's programme; it is theirs to change, not ours"
+  );
+});

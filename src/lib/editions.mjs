@@ -32,6 +32,7 @@ export const SECTIONS = [
   { id: "trail", title: "Trail of the Week", automatic: true },
   { id: "business", title: "Business of the Week", automatic: true },
   { id: "transport", title: "Buses and Transport", automatic: true },
+  { id: "radio", title: "3MGB Wilderness Radio", automatic: true },
   { id: "talking", title: "Talking Points", automatic: true },
   { id: "social", title: "Around the Socials", automatic: true },
   { id: "madra", title: "MADRA News" },
@@ -99,6 +100,10 @@ function autoEntry(section) {
   if (auto.type === "business") return auto.data.name;
   if (auto.type === "links") return `${auto.data.length} ${auto.data.length === 1 ? "link" : "links"}`;
   if (auto.type === "timetable") return `${auto.data.services.length} coach services`;
+  if (auto.type === "radio") {
+    const shows = auto.data.days.reduce((total, day) => total + (day.shows?.length || 0), 0);
+    return `${shows} local shows on ${auto.data.frequencies.map((f) => f.mhz).join(" / ")}`;
+  }
   return null;
 }
 
@@ -210,6 +215,12 @@ export function editionSections(edition) {
     if (section.id === "transport") {
       const timetable = loadDataFile("bus-timetable.json", null);
       if (timetable?.services?.length) auto = { type: "timetable", data: timetable };
+    }
+    // 3MGB's own weekly grid, standing like the timetable rather than
+    // regenerated each week. It changes when they publish a new guide.
+    if (section.id === "radio") {
+      const program = loadDataFile("radio-program.json", null);
+      if (program?.days?.some((day) => day.shows?.length)) auto = { type: "radio", data: program };
     }
     if (section.id === "talking") {
       const items = loadDataFile("talking-points.json", []);

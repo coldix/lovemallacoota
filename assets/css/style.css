@@ -1015,6 +1015,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .edition-cover-mast {
     background: linear-gradient(to top, rgba(6, 18, 30, 0.88), rgba(6, 18, 30, 0.72) 62%, rgba(6, 18, 30, 0)) !important;
   }
+  /* The radio week is the one section that is naturally columnar, so on paper
+     it packs tighter than the screen allows and a day is never split across a
+     page break. */
+  .radio-week { grid-template-columns: repeat(3, 1fr); gap: 4mm 6mm; }
+  .radio-day { break-inside: avoid; }
+  .radio-day h4 { font-size: 10pt; }
+  .radio-show { grid-template-columns: 15mm minmax(0, 1fr); }
+  .radio-title { font-size: 9.5pt; }
+  .radio-time, .radio-presenter { font-size: 8.5pt; }
+  .radio-note { font-size: 8pt; }
+
   /* Contents pills are a screen device; on paper they are boxes around words. */
   .edition-toc-section {
     background: none !important;
@@ -1330,6 +1341,35 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 /* The coach timetable is dense; let it wrap sensibly on a phone. */
+/* 3MGB's week. A column per day rather than a table: the useful unit is "what
+   is on Tuesday", and the hours between local shows are all the same satellite
+   feed, so there is nothing to line up across days. Collapses to one column on
+   a phone and packs to three on paper. */
+.radio-week {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 1rem 1.4rem;
+  margin-bottom: 1.2rem;
+}
+.radio-day h4 {
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+.radio-day ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+.radio-show { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: 0.1rem 0.6rem; }
+.radio-time { grid-row: span 2; font-variant-numeric: tabular-nums; font-size: 0.85rem; color: var(--muted); }
+.radio-title { font-weight: 600; font-size: 0.92rem; }
+.radio-presenter { font-size: 0.84rem; color: var(--muted); }
+.radio-note { grid-column: 2; font-size: 0.78rem; color: var(--coral); }
+/* Printed as postponed because their guide still says so — not greyed out of
+   existence, because a reader looking for the show needs to find the answer. */
+.radio-show.postponed .radio-title { text-decoration: line-through; text-decoration-thickness: 1px; }
+.radio-show.postponed .radio-title,
+.radio-show.postponed .radio-presenter { opacity: 0.72; }
+
 .timetable th, .timetable td { font-size: 0.86rem; vertical-align: top; }
 .timetable tbody th { font-weight: 600; }
 

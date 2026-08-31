@@ -231,3 +231,32 @@ test("a preview hostname is told not to index the production pages it serves", a
   );
   assert.equal(production.headers.get("X-Robots-Tag"), null);
 });
+
+test("every third party the site loads is allowed in the directive it needs", async () => {
+  const response = await worker.fetch(new Request("https://lovemallacoota.au/"), env);
+  const csp = response.headers.get("Content-Security-Policy");
+  const directive = (name) =>
+    csp.split(";").map((part) => part.trim()).find((part) => part.startsWith(`${name} `)) || "";
+
+  // Turnstile needs all three. It was in script-src and frame-src but not
+  // connect-src, so the script loaded, built its container, and then died on
+  // the call that starts the challenge — no iframe, no token, no error. Every
+  // form on the site failed from launch until this was found.
+  for (const name of ["script-src", "connect-src", "frame-src"]) {
+    assert.ok(
+      directive(name).includes("https://challenges.cloudflare.com"),
+      `Turnstile is missing from ${name}; the widget will fail silently`
+    );
+  }
+
+  // The embeds, each in the directive that actually governs it.
+  assert.ok(directive("frame-src").includes("https://www.youtube-nocookie.com"), "the video embed is blocked");
+  assert.ok(directive("frame-src").includes("https://calendar.google.com"), "What's On is blocked");
+  assert.ok(directive("frame-src").includes("https://kuula.co"), "the 360 view is blocked");
+  assert.ok(directive("font-src").includes("https://fonts.gstatic.com"), "the typefaces are blocked");
+  assert.ok(directive("style-src").includes("https://fonts.googleapis.com"), "the font stylesheet is blocked");
+
+  // The relay is called from the Worker, not the page, so it needs no entry —
+  // but the ad tag is fetched by the browser and does.
+  assert.ok(directive("connect-src").includes("https://ads.oze.net.au"), "the ad tag cannot report");
+});

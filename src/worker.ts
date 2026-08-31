@@ -100,7 +100,12 @@ const CSP = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https://ads.oze.net.au https://www.google-analytics.com",
-  "connect-src 'self' https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://static.cloudflareinsights.com",
+  // challenges.cloudflare.com belongs here as well as in script-src and
+  // frame-src. Turnstile loads its script, builds its container, and then calls
+  // home to start the challenge — and that last call was blocked, so the widget
+  // died without an iframe, without a token and without an error. Every form on
+  // the site failed from launch until 31 August 2026 for this reason.
+  "connect-src 'self' https://challenges.cloudflare.com https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://static.cloudflareinsights.com",
   "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://calendar.google.com https://challenges.cloudflare.com https://kuula.co",
   "form-action 'self'",
   "base-uri 'self'",

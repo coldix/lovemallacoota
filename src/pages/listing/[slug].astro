@@ -191,7 +191,17 @@ const canonicalPath = listingPagePath(entity);
       </div>
 
       <div class="listing-claim">
-        {canClaim(entity) ? (
+        {/* A claimed listing offers its owner the way back in. There are no
+            accounts here, so "edit" means asking for a fresh private link to
+            be emailed to the address already on the listing — the same claim
+            flow, named for what the owner is actually doing. */}
+        {entity.verification?.email?.verifiedAt ? (
+          <p>
+            This listing is looked after by its owner.
+            <a class="btn btn-primary" href={`/claim.html?slug=${entity.slug}`}>Edit this listing</a>
+            <a class="btn btn-ghost" href={`/submit-event.html?slug=${entity.slug}`}>Submit an event</a>
+          </p>
+        ) : canClaim(entity) ? (
           <p>
             Is this your organisation?
             <a class="btn btn-primary" href={`/claim.html?slug=${entity.slug}`}>Claim this listing</a>

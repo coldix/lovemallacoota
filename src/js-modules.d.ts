@@ -31,5 +31,16 @@ interface DirectoryEntity {
   accessibility?: string | null;
   notes_seasonal?: string | null;
   openingHours?: unknown;
-  verification?: object;
+  /**
+   * Shaped rather than `object`, because whether a listing has been claimed is
+   * read from it in the Worker and `object` made that a type error.
+   */
+  verification?: {
+    email?: { value?: string | null; verifiedAt?: string | null; method?: string } | null;
+    lastReviewedAt?: string | null;
+    sourceKind?: string;
+  } | null;
+  status?: string;
+  claimable?: boolean;
+  section?: string;
 }

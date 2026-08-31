@@ -500,7 +500,16 @@ async function handleClaim(form: FormData, env: Env): Promise<Response> {
   const email = String(form.get("email") || "").trim().toLowerCase();
   const listing = await findEntity(env, slug);
   if (!listing) return json({ ok: false, error: "We could not find that listing." }, 404);
-  if (!canClaim(listing) || isOfficialEntity(listing)) {
+  /*
+   * An already-claimed listing still comes through here, because this is also
+   * how its owner gets a fresh edit link — there are no accounts on this site,
+   * only a link emailed to the address on the listing. canClaim() answers "may
+   * a stranger claim this", which is a different question and would refuse the
+   * owner. The email check below is the real guard either way: a code only ever
+   * goes to the address already published.
+   */
+  const alreadyClaimed = Boolean(listing.verification?.email?.verifiedAt);
+  if (isOfficialEntity(listing) || (!canClaim(listing) && !alreadyClaimed)) {
     return json({ ok: false, error: "Official listings cannot be claimed this way." }, 403);
   }
   if (!looksLikeEmail(email)) return json({ ok: false, error: "That email address does not look right." }, 400);

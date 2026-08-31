@@ -8,8 +8,13 @@ on:
 permissions:
   contents: write
 
+# Its own group. Sharing "deploy-production" with deploy.yml meant a photo
+# conversion queued behind a deploy, and GitHub keeps only one pending run per
+# group — so the second of the Worker's two pushes ("Stage listing photo", then
+# "Describe listing photo") was cancelled every time. Colin's photograph was
+# staged twice and converted neither time.
 concurrency:
-  group: deploy-production
+  group: convert-uploads
   cancel-in-progress: false
 
 jobs:

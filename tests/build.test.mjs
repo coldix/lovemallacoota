@@ -534,3 +534,38 @@ test("pages that need a query parameter read it at runtime, not at build time", 
   const verify = await readFile(new URL("../dist/verify.html", import.meta.url), "utf8");
   assert.match(verify, /name="id"/, "verify.html has no id field to populate");
 });
+
+test("a claimed listing stops offering to be claimed", async () => {
+  const { canClaim } = await import("../src/lib/directory-model.mjs");
+  const base = { entityType: "business", status: "published" };
+  assert.equal(canClaim({ ...base, verification: {} }), true, "an unclaimed listing should be claimable");
+  assert.equal(
+    canClaim({ ...base, verification: { email: { verifiedAt: "2026-08-31" } } }),
+    false,
+    "a listing whose owner has proved their address still offers Claim"
+  );
+});
+
+test("neither form offers a type the server will refuse", async () => {
+  // government and school are in FORM_ENTITY_TYPES but handleListingSubmit
+  // rejects official types, so offering them produced a refusal after somebody
+  // had filled the whole form in.
+  const { ENTITY_TYPES } = await import("../src/lib/directory-model.mjs");
+  const official = Object.entries(ENTITY_TYPES)
+    .filter(([, info]) => info.official)
+    .map(([id]) => id);
+  assert.ok(official.length > 0, "expected some official types");
+
+  for (const page of ["add-listing.html", "manage.html"]) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    const offered = [...html.matchAll(/<option value="([a-z-]+)"/g)].map((m) => m[1]);
+    for (const id of official) {
+      assert.ok(!offered.includes(id), `${page} offers "${id}", which the server refuses`);
+    }
+    assert.ok(offered.includes("business"), `${page} does not offer Business`);
+  }
+
+  // And the owner must be able to change it at all.
+  const manage = await readFile(new URL("../dist/manage.html", import.meta.url), "utf8");
+  assert.match(manage, /name="entityType"/, "the manage form cannot change what a listing is");
+});

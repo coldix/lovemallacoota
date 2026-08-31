@@ -789,6 +789,7 @@ export async function handleListingManage(request: Request, env: Env): Promise<R
         ok: true,
         listing: {
           slug: listing.slug,
+          entityType: listing.entityType,
           name: listing.name,
           description: listing.description,
           phone: listing.phone,
@@ -816,8 +817,21 @@ export async function handleListingManage(request: Request, env: Env): Promise<R
   const verifiedAddress = String(row.email || "").trim().toLowerCase();
   const nextEmail = String(form.get("email") || listing?.email || "").trim().toLowerCase() || null;
 
+  // A listing could not change what it is. Entered once as a professional
+  // service, it stayed one; the section it appears in follows the type, so it
+  // was also stuck in the wrong part of the directory. An official type is not
+  // reachable here — the guard above refuses to edit one at all, and neither
+  // form offers it.
+  const requestedType = String(form.get("entityType") || "");
+  const nextType =
+    (FORM_ENTITY_TYPES as readonly string[]).includes(requestedType) && !typeInfo(requestedType)?.official
+      ? requestedType
+      : listing?.entityType || "other";
+
   const updated = {
     ...(listing || {}),
+    entityType: nextType,
+    section: typeInfo(nextType)?.sectionHint || listing?.section || "community",
     name: plainText(String(form.get("name") || listing?.name || ""), 160),
     description: plainText(String(form.get("description") || listing?.description || ""), 1200),
     descriptionShort: plainText(String(form.get("description") || listing?.descriptionShort || ""), 220),

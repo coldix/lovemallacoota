@@ -260,6 +260,11 @@ export function canClaim(entity) {
   if (isOfficialEntity(entity)) return false;
   if (entity.entityType === "facebook-group") return false;
   if (entity.status && entity.status !== "published") return false;
+  // Already claimed. Somebody proved control of the published address and holds
+  // a link to edit it; offering "Claim this listing" to the next visitor invites
+  // a request that will be refused, and reads to the owner as though claiming
+  // had not worked.
+  if (entity.verification?.email?.verifiedAt) return false;
   return true;
 }
 

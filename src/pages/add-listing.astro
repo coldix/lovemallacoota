@@ -28,7 +28,11 @@ import { CARDS } from "../lib/social.mjs";
           <label for="entityType">What are you listing?</label>
           <select id="entityType" name="entityType" required>
             <option value="">Choose one</option>
-            {FORM_ENTITY_TYPES.map((id) => (
+            {/* Official types are left out. The server refuses them with
+                "Official government and emergency listings cannot be added
+                here", so offering the choice only produces a rejection after
+                somebody has filled the whole form in. */}
+            {FORM_ENTITY_TYPES.filter((id) => !ENTITY_TYPES[id]?.official).map((id) => (
               <option value={id}>{ENTITY_TYPES[id].label}</option>
             ))}
           </select>

@@ -242,22 +242,56 @@ Cloudflare login for this account cannot enable Email Sending on
 `lovemallacoota.au`; the account behind adnet already sends. The relay knows the
 recipient; this Worker cannot choose it.
 
-Setup, once:
-
-```sh
-openssl rand -base64 32
-npx wrangler secret put RELAY_KEY --env=""
-npx wrangler secret put TURNSTILE_SECRET_KEY --env=""
-```
+`RELAY_KEY` is a **shared** bearer token: the same string must be set on this
+Worker *and* on `adnet-serve`, or the relay answers 401. Set both together with
+[`tools/push-secrets.sh`](tools/push-secrets.sh) rather than by hand; setting
+one side is how they drift apart.
 
 Put the Turnstile **site** key in `.env` as `PUBLIC_TURNSTILE_SITE_KEY` (see
 [`.env.example`](.env.example)), and in the `PUBLIC_TURNSTILE_SITE_KEY` GitHub
 Actions secret so CI builds with it. Without it the build falls back to
 Cloudflare's always-passes test key, which is correct locally and wrong in
-production.
+production. **The site key and the secret key must come from the same Turnstile
+widget**, and that widget's hostname list must include `lovemallacoota.au`.
 
 Everything fails closed: a missing key, a failed challenge or a relay error
 returns an error rather than silently dropping the message.
+
+### What broke, and what it cost
+
+Every form on the site failed from launch until 31 August 2026, and the D1
+tables were empty because nothing had ever succeeded. Four separate faults,
+stacked, each hidden by the one above it:
+
+1. **`connect-src` in the CSP had no `challenges.cloudflare.com`**, though
+   `script-src` and `frame-src` did. Turnstile loaded, built its container, and
+   died on the call that starts the challenge — no iframe, no token, no error,
+   and a form that looks perfectly normal until you press the button. This one
+   was underneath all the others.
+2. **`RELAY_KEY` was an empty string on `adnet-serve`.** `wrangler secret list`
+   shows an empty secret exactly as it shows a correct one.
+3. **`TURNSTILE_SECRET_KEY` came from a different widget** than the site key on
+   the page. The widget goes green and the server refuses.
+4. **`GITHUB_TOKEN` was rejected by GitHub with a 401**, which surfaced only
+   because a photograph upload happened to log it.
+
+None of these produced a failing build, a failing test, or an error anyone
+would see. Worker secrets are write-only, so a wrong value, an empty value and
+a correct value are indistinguishable by inspection. Three things came out of
+it and are worth keeping:
+
+- [`tools/push-secrets.sh`](tools/push-secrets.sh) verifies every secret against
+  the service that owns it *before* sending it, and refuses to send one that
+  fails. See [`.env.secrets.template`](.env.secrets.template).
+- The Worker now logs *why* a form was refused — Turnstile's `error-codes`, a
+  missing token as distinct from a rejected one, and the relay's status and
+  body — rather than a bare "Verification failed".
+- A test asserts every third party the pages load appears in the CSP directive
+  that governs it.
+
+If a form fails, `npx wrangler tail --env=""` now names the cause. Tail
+`adnet-serve` as well when the failure is in delivery:
+`cd ~/web/adnet && npx wrangler tail --config serve/wrangler.jsonc`.
 
 ## The weekly edition
 
@@ -314,17 +348,33 @@ for GST and is not a deductible gift recipient at the time of this revision.
 
 ## Secrets
 
+Worker secrets are **write-only**. Nothing can read one back, so a correct
+value, a wrong value and an empty string all look identical in `wrangler secret
+list`. Do not set them by hand — use the script, which checks each one against
+the service that owns it and refuses to send anything that fails:
+
 ```sh
-npx wrangler secret put TURNSTILE_SECRET_KEY --env=""
-npx wrangler secret put RELAY_KEY --env=""             # same value on adnet
-npx wrangler secret put GITHUB_TOKEN --env=""          # contents:write on this repo
-npx wrangler secret put STRIPE_WEBHOOK_SECRET --env=""
+cp .env.secrets.template .env.secrets && chmod 600 .env.secrets
+./tools/push-secrets.sh --check     # verify everything, change nothing
+./tools/push-secrets.sh             # verify, then push what is set
 ```
+
+`.env.secrets` is ignored by git (`.env.*`); the template is tracked and holds
+no values. What each secret is, where it comes from and how it is verified is
+documented in [`.env.secrets.template`](.env.secrets.template).
+
+| Secret | Where it comes from | Verified by |
+| --- | --- | --- |
+| `TURNSTILE_SECRET_KEY` | Cloudflare → Turnstile → widget → Settings. **Same widget as the site key.** | siteverify answers `invalid-input-response`, not `invalid-input-secret` |
+| `RELAY_KEY` | You generate it: `openssl rand -base64 32` | pushed to **both** Workers at once; the relay then answers 401 to a wrong bearer, not 503 |
+| `GITHUB_TOKEN` | GitHub → fine-grained PAT, `coldix/lovemallacoota`, Contents: read and write. Expires. | `GET /repos/coldix/lovemallacoota` returns 200 |
+| `STRIPE_WEBHOOK_SECRET` | Stripe → Developers → Webhooks → the `/api/stripe` endpoint | starts `whsec_`; no read-only check exists, so it is pushed unverified |
 
 The Turnstile **site** key is public: it goes in `.env` as
 `PUBLIC_TURNSTILE_SITE_KEY` and in the GitHub Actions secret of the same name.
 Without it the build falls back to Cloudflare's always-passes test key, which is
-right locally and wrong in production.
+right locally and wrong in production. Changing it needs a **deploy**, because
+the pages bake it in at build time; changing a Worker secret does not.
 
 ## Tools
 

@@ -76,6 +76,48 @@ hostname returns one permanent redirect that keeps the complete path and query
 string. Record the deployed version and rollback version before changing any
 remaining DNS records.
 
+### Verify the forms, because nothing else will
+
+The pages are static and fail loudly. The forms are not, and every one of them
+failed silently from launch until 31 August 2026 without a single failing build
+or test. Check them deliberately after any change to the CSP, the secrets, or
+the Turnstile widget.
+
+Submit the add-listing form and follow it to the end: a code by email, the code
+accepted at `/verify.html`, the listing saved. That single path exercises
+Turnstile, D1, the mail relay and the GitHub token in order — the four things
+that can be independently broken.
+
+Watch it happen rather than guessing:
+
+```sh
+npx wrangler tail --env="" --format json      # this Worker
+cd ~/web/adnet && npx wrangler tail --config serve/wrangler.jsonc   # the mail relay
+```
+
+What the messages mean:
+
+| Log line | Cause |
+| --- | --- |
+| `no turnstile token in the submission` | The widget never ran. Check `connect-src` in the CSP, and the widget's hostname list. |
+| `turnstile rejected ["invalid-input-secret"]` | The secret is not the partner of the site key on the page. |
+| `turnstile rejected ["timeout-or-duplicate"]` | A stale page or a resubmitted token. Reload. |
+| `relay rejected the mail 401` | `RELAY_KEY` differs between this Worker and `adnet-serve`. |
+| `relay rejected the mail 503` | `RELAY_KEY` is unset or empty on `adnet-serve`. |
+| `relay rejected the mail 502 Send failed` | The keys match; Cloudflare Email Sending refused. Check the destination is a verified address. |
+| `Cannot write …: 401` | `GITHUB_TOKEN` is wrong, expired, or lacks Contents: read and write. |
+
+Verify the secrets themselves without deploying anything:
+
+```sh
+./tools/push-secrets.sh --check
+```
+
+A Worker secret takes effect immediately and needs no deploy. The Turnstile
+**site** key does need one, because the pages bake it in at build time. Setting
+any secret creates a new Worker version, which ends an attached `wrangler tail`
+— restart it before testing.
+
 ## Rollback
 
 Use `wrangler versions list` followed by `wrangler rollback` to restore a previous

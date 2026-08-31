@@ -2,20 +2,28 @@
   "id": "colin-dixon",
   "slug": "colin-dixon",
   "name": "Colin Dixon",
+  "business_name": "Colin Dixon",
+  "legalName": null,
   "commonName": null,
   "entityType": "professional",
   "section": "services",
   "categories": [],
+  "category_tags": [],
   "description": "I provide practical IT and digital media services for small businesses, community organisations and individuals, including website design and development, AI-assisted software and online services, technical consulting, automation, SEO, digital publishing, drone photography and video, 360° media, and general technology support. I focus on clear, reliable solutions that are easy to manage, suited to the client’s real needs, and built without unnecessary complexity.",
   "descriptionShort": "I provide practical IT and digital media services for small businesses, community organisations and individuals, including website design and development, AI-assisted software and online services, technical consulting, a",
+  "description_short": "I provide practical IT and digital media services for small businesses, community organisations and individuals, including website design and development, AI-assisted software and online services, technical consulting, a",
+  "description_long": "I provide practical IT and digital media services for small businesses, community organisations and individuals, including website design and development, AI-assisted software and online services, technical consulting, automation, SEO, digital publishing, drone photography and video, 360° media, and general technology support. I focus on clear, reliable solutions that are easy to manage, suited to the client’s real needs, and built without unnecessary complexity.",
   "address": {
-    "street": "2 Fern Court PO Box 327 Mallacoota",
+    "street": "2 Fern Crt",
     "locality": "Mallacoota",
     "state": "VIC",
     "postcode": "3892",
     "country": "Australia"
   },
+  "locationKind": "physical",
+  "geo": null,
   "serviceArea": "The World",
+  "trading": null,
   "phone": "+61419415000",
   "email": "col@dixon.net.au",
   "website": "https://coota.au",
@@ -31,14 +39,23 @@
       "url": "https://www.facebook.com/crdixon"
     }
   ],
+  "social_links": [
+    {
+      "platform": "facebook",
+      "url": "https://www.facebook.com/crdixon"
+    }
+  ],
   "openingHours": [],
+  "opening_hours": [],
   "meetingTimes": "📅 Book a time: https://calendly.com/colindixon",
-  "notes_seasonal": "24/7/365",
-  "accessibility": null,
+  "accessibility": "Ground Level",
   "images": [],
+  "notes_seasonal": "24/7/365",
   "status": "published",
   "claimable": true,
   "official": false,
+  "registration": null,
+  "related": [],
   "source": {
     "kind": "submitted",
     "note": "Submitted through Add your listing."
@@ -51,6 +68,7 @@
     },
     "lastReviewedAt": "2026-08-31"
   },
+  "schema_type": "ProfessionalService",
   "createdAt": "2026-08-31T12:19:44.900Z",
-  "updatedAt": "2026-08-31T12:22:19.227Z"
+  "updatedAt": "2026-08-31T12:36:25.177Z"
 }

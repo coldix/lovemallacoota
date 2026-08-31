@@ -19,11 +19,14 @@ mouth/
 # photo backup — keep these in your own library.
 images/thisweek/
 
-# Local Worker secrets
+# Local Worker secrets. The templates carry no values and are tracked; anything
+# holding a real one is not. Order matters here — the negations must follow the
+# .env.* rule to take effect.
 .dev.vars
 .env
 .env.*
 !.env.example
+!.env.secrets.template
 
 # Local editor and OS state
 .idea/

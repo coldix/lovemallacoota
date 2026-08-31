@@ -359,8 +359,11 @@ const statusLabel =
       people and groups they belong to.
     </p>
     <div class="edition-actions">
-      <a class="btn btn-primary" href="/submit.html">Submit to this edition</a>
-      <a class="btn btn-coral" href="/contact.html?subject=edition">Ask about contributing</a>
+      {/* The contact route leads, because it works for everybody. Submitting
+          directly needs a contributor account, and this button used to be the
+          primary one — which sent people to a form that turned them away. */}
+      <a class="btn btn-primary" href="/contact.html?subject=edition">Send us something for the edition</a>
+      <a class="btn btn-ghost" href="/submit.html">Contributors: publish direct</a>
       <a class="btn btn-ghost" href="/editorial-policy.html">What we publish</a>
     </div>
   </section>

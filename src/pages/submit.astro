@@ -21,6 +21,28 @@ const writable = SECTIONS.filter((section) => !section.automatic);
     </div>
   </PageHero>
   <main>
+    {/* The edition links here with a prominent button, so most people arriving
+        are not contributors and have no way to become one by clicking. Say so
+        first, and give them a route that works, rather than letting them fill
+        the form in and be turned away by the server. */}
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Who this page is for</h2>
+      <p class="section-sub">
+        Contributing straight to the edition is by invitation, and there is no
+        sign-up. If you have not been set up as a contributor, the form below
+        will not accept your piece — but that is the only thing standing in the
+        way, and it is easily fixed.
+      </p>
+      <div class="edition-actions">
+        <a class="btn btn-primary" href="/contact.html?subject=contribute">Ask to become a contributor</a>
+        <a class="btn btn-coral" href="mailto:coota@lovemallacoota.au?subject=For%20this%20week%27s%20edition">Email your piece instead</a>
+      </div>
+      <p class="edition-source">
+        Anything sent to <a href="mailto:coota@lovemallacoota.au">coota@lovemallacoota.au</a>
+        runs the same way and on the same terms as a piece submitted here. Nothing is charged for, either way.
+      </p>
+    </section>
+
     {edition ? (
       <section class="glass-card sheen content-block reveal">
         <form id="article-form" class="form-grid" method="post" action="/api/article">
@@ -103,7 +125,7 @@ const writable = SECTIONS.filter((section) => !section.automatic);
       <h2 class="section-title">How this works</h2>
       <p class="section-sub">Written down so there are no surprises.</p>
       <ul class="edition-diary">
-        <li><strong>You are signed in.</strong> Access has already checked who you are; we only check that your address is on the contributor list.</li>
+        <li><strong>Contributors are recognised by their email address.</strong> There is no password and no account to create. If your browser is not signed in as a contributor, the form says so and tells you who to email.</li>
         <li><strong>It publishes itself.</strong> A piece that clears the <a href="/editorial-policy.html">editorial policy</a> goes live in about two minutes, without waiting for anyone.</li>
         <li><strong>Held is not rejected.</strong> Anything the check queries is kept and read by a person, who will tell you why.</li>
         <li><strong>Writing about someone?</strong> Ask them first. Profiles of named people run with their agreement.</li>

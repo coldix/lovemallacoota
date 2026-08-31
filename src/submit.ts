@@ -203,12 +203,29 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
 
   const email = accessEmail(request);
   if (!email) {
-    return json({ ok: false, error: "Sign in to submit. This page must sit behind Access." }, 401);
+    // No Cf-Access header means the request did not come through Access, so we
+    // cannot tell who this is. That is usually not the reader's mistake — the
+    // page is linked from the edition and anyone can reach it — so the message
+    // says what to do rather than naming the component that is missing.
+    return json(
+      {
+        ok: false,
+        error:
+          "Contributing to the edition is by invitation, and this browser is not signed in as a contributor. Email coota@lovemallacoota.au and we will set you up — or send your piece to that address and we will run it.",
+      },
+      401
+    );
   }
 
   const contributor = findContributor(email);
   if (!contributor) {
-    return json({ ok: false, error: `${email} is not an approved contributor yet.` }, 403);
+    return json(
+      {
+        ok: false,
+        error: `${email} is not on the contributor list yet. Email coota@lovemallacoota.au to be added, or send your piece to that address and we will run it.`,
+      },
+      403
+    );
   }
 
   const form = await request.formData();

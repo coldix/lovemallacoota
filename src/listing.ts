@@ -128,7 +128,10 @@ async function sendMail(
   env: Env,
   payload: { subject: string; replyTo?: string; text: string; html: string }
 ): Promise<boolean> {
-  if (!env.RELAY_KEY) return false;
+  if (!env.RELAY_KEY) {
+    console.error("relay key is not set on this Worker");
+    return false;
+  }
   const relayed = await fetch(env.RELAY_URL, {
     method: "POST",
     headers: {
@@ -137,6 +140,12 @@ async function sendMail(
     },
     body: JSON.stringify({ site: "lovemallacoota", ...payload }),
   });
+  if (!relayed.ok) {
+    // The contact form logged this and the listing form did not, so a failed
+    // code email said only "Could not send the code" with nothing behind it.
+    // 401 here means this Worker's key and the relay's key are different.
+    console.error("relay rejected the mail", relayed.status, (await relayed.text()).slice(0, 200));
+  }
   return relayed.ok;
 }
 

@@ -28,9 +28,12 @@ the directory was one-way. `findEntity()` falls back to `data/directory/<slug>
 
 ## The one thing to do first
 
-**Claim a submitted listing**, which has never worked and was only fixed after
-the first successful submission exposed it. Use `colin-dixon`:
-https://lovemallacoota.au/claim.html?slug=colin-dixon
+**Save the listing once from the manage link.** `data/directory/colin-dixon.json`
+still holds `verifiedAt: null`, because it was written before the code that
+records the verification a claim proves. Until it is re-saved the listing reads
+"Not yet verified" and offers Claim instead of Edit — both correct given the
+data, both wrong given what actually happened. One save rewrites the file and
+fixes both, and it will deploy itself.
 
 1. https://lovemallacoota.au/add-listing.html — fill it in with any address
 2. The code arrives from `Love Mallacoota <coota@oze.com.au>`
@@ -105,6 +108,26 @@ data file; restoring the `postponed` key puts the strike-through back.
   submitter.
 
 ---
+
+## Open question — multiple types on one listing
+
+Colin asked to "add more Types, eg Business to Service" and did not pick between
+the readings. Three possibilities, in ascending order of work:
+
+1. **Change the one type** — already works. The manage page has a "What this is"
+   selector as of v0.75; changing it moves the listing to the matching section.
+   Try this first; it may be all that was meant.
+2. **More types in the list** — the eleven offered may not describe every kind of
+   Mallacoota business. Cheap to extend once somebody names the gaps.
+3. **One listing in several sections** — a listing appearing under both Services
+   and Eat & Drink. This is a data-model change: `section` is a single value and
+   drives the directory pages, the counts, the tag filters, the CollectionPage
+   schema and the breadcrumbs. Do not start it without deciding it is wanted.
+
+Worth knowing before choosing: `categories` is **already** a list, and shows as
+chips on the listing. If the want is "describe my listing several ways" rather
+than "appear in two sections", letting owners edit their categories from the
+manage page is a much smaller change that may cover it.
 
 ## Still open
 

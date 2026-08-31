@@ -48,8 +48,16 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null)
   if (ip) body.append("remoteip", ip);
 
   const response = await fetch(TURNSTILE_VERIFY_URL, { method: "POST", body });
-  if (!response.ok) return false;
-  const outcome = (await response.json()) as { success?: boolean };
+  if (!response.ok) {
+    console.error("turnstile siteverify unreachable", response.status);
+    return false;
+  }
+  const outcome = (await response.json()) as { success?: boolean; "error-codes"?: string[] };
+  if (outcome.success !== true) {
+    // See the note in listing.ts: the codes are the difference between a wrong
+    // secret and a stale token, and they name no secret.
+    console.error("turnstile rejected", JSON.stringify(outcome["error-codes"] ?? []));
+  }
   return outcome.success === true;
 }
 

@@ -87,8 +87,20 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null)
   body.append("response", token);
   if (ip) body.append("remoteip", ip);
   const response = await fetch(TURNSTILE_VERIFY_URL, { method: "POST", body });
-  if (!response.ok) return false;
-  const outcome = (await response.json()) as { success?: boolean };
+  if (!response.ok) {
+    console.error("turnstile siteverify unreachable", response.status);
+    return false;
+  }
+  const outcome = (await response.json()) as { success?: boolean; "error-codes"?: string[] };
+  if (outcome.success !== true) {
+    // Cloudflare says exactly why, and this used to throw it away — leaving
+    // "Verification failed" with no way to tell a wrong secret from a stale
+    // token. The codes name no secret and are safe to log.
+    //   invalid-input-secret   the secret does not match the site key on the page
+    //   invalid-input-response the token is malformed
+    //   timeout-or-duplicate   the token expired or was already used
+    console.error("turnstile rejected", JSON.stringify(outcome["error-codes"] ?? []));
+  }
   return outcome.success === true;
 }
 

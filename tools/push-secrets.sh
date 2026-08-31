@@ -64,6 +64,16 @@ push() { # push <NAME> <dir> [extra wrangler args...]
 }
 
 echo "Reading $ENV_FILE"
+
+# A key the template knows about but the file has never heard of is almost
+# always a stale copy: .env.secrets was made before the secret existed, and a
+# `sed -i "s|^NAME=.*|NAME=value|"` against it silently matches nothing and
+# reports success. That is exactly how the Resend key looked set and was not.
+for KEY in $(grep -oE '^[A-Z_]+=' "$ROOT/.env.secrets.template" | tr -d '='); do
+  if ! grep -q "^$KEY=" "$ENV_FILE"; then
+    warn "$KEY is in the template but missing from .env.secrets — add the line, or a sed against it will do nothing"
+  fi
+done
 echo
 
 # --- Turnstile -------------------------------------------------------------
@@ -141,14 +151,26 @@ if [ -z "$V" ]; then
   warn "  not set in .env.secrets, skipping"
   warn "  without it no verification code can be sent and every submission is refused"
 else
-  CODE="$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $V" https://api.resend.com/domains)"
-  if [ "$CODE" = "200" ]; then
-    green "  valid (Resend accepted it)"
-    push RESEND_API_KEY "$ROOT" --env=""
-  else
-    red "  Resend answered $CODE. Not sent."
-    FAILED=1
-  fi
+  # POST /emails with an empty body, which sends nothing. A bad key is refused
+  # at 401 before the payload is looked at; a good one gets as far as 422,
+  # complaining about the payload. Checking GET /domains instead would fail a
+  # perfectly good Sending-access key, which only has permission to send.
+  CODE="$(curl -s -o /dev/null -w '%{http_code}' -X POST https://api.resend.com/emails \
+    -H "Authorization: Bearer $V" -H 'Content-Type: application/json' -d '{}')"
+  case "$CODE" in
+    422|400)
+      green "  valid (Resend accepted the key)"
+      push RESEND_API_KEY "$ROOT" --env=""
+      ;;
+    401|403)
+      red "  Resend rejected the key ($CODE). Check it was copied whole and is not revoked. Not sent."
+      FAILED=1
+      ;;
+    *)
+      warn "  Resend answered $CODE, which is not a clear yes or no; pushing anyway"
+      push RESEND_API_KEY "$ROOT" --env=""
+      ;;
+  esac
 fi
 echo
 

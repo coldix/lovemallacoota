@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.71",
-  "generatedAt": "2026-08-31 22:21:17 AEST (Melbourne)",
+  "version": "v0.72",
+  "generatedAt": "2026-08-31 22:31:02 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -87,8 +87,8 @@
     },
     {
       "path": "calendar.html",
-      "bytes": 24426,
-      "sha256": "39c7079707aeb6ca51feb4e8018b9cfac579e28e3d29f79aa134d27b6d89ec2c"
+      "bytes": 24817,
+      "sha256": "7f458816cb23549fdcee57d215ef700457365477ed8f0d857049d147471573dd"
     },
     {
       "path": "claim.html",
@@ -121,6 +121,11 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
+      "path": "data/directory/colin-dixon.json",
+      "bytes": 1989,
+      "sha256": "27583e6473347fdb1f7630254a503659b3e39b1c3ed6060796a637243a5865a7"
+    },
+    {
       "path": "data/listings_accom.json",
       "bytes": 28320,
       "sha256": "c2b909f8ef35cd83c423a346cbd91a6f01281a34ebaeea5486b29b34a3b69da2"
@@ -147,8 +152,8 @@
     },
     {
       "path": "directory.html",
-      "bytes": 227499,
-      "sha256": "d75fbab914ead2e6df695bfb7d9f78893e343dd460ef0b1d2b8d732ccd4d5b0e"
+      "bytes": 230707,
+      "sha256": "2e61de5e18733b31338a64c0099c81faa5486775815de489ec825d533a4e9415"
     },
     {
       "path": "edition.html",
@@ -383,7 +388,7 @@
     {
       "path": "index.html",
       "bytes": 17500,
-      "sha256": "74942f939916dbdb9ae05fbf8f1d9862d80bb4853316f0f14448a3944e180f9b"
+      "sha256": "045987eaa1ebf599663ee3bd20b81b112217488abc6f3d06c3b41fe37d3ce547"
     },
     {
       "path": "listing/3mgb-wilderness-radio.html",
@@ -469,6 +474,11 @@
       "path": "listing/chirf.html",
       "bytes": 12436,
       "sha256": "8eeb5aca8c4dbf07a16bcdbbbb01e0328000546dd9eead55c18fbdc76cc243c5"
+    },
+    {
+      "path": "listing/colin-dixon.html",
+      "bytes": 12442,
+      "sha256": "d8fa205c951da651385b710e6f487746a4d59f3083597af4420ec5c86ffe7c64"
     },
     {
       "path": "listing/eagle-view-stay.html",
@@ -878,7 +888,7 @@
     {
       "path": "llms.txt",
       "bytes": 4483,
-      "sha256": "b5f04a6ff783a5292c66506e4c8c2509c5310225767222a9d460b98142f28937"
+      "sha256": "a6005610a14f2ae9dc6d0e61918e7dbe1e42fd9387881be2b83f26e3c96139e7"
     },
     {
       "path": "manage.html",
@@ -897,8 +907,8 @@
     },
     {
       "path": "services.html",
-      "bytes": 77626,
-      "sha256": "b9c27dac222925e76235e7502cfe2a78341c079204d414a08d6342b86cf501c3"
+      "bytes": 81232,
+      "sha256": "329b98335126d9aeab6bc7801aca50da6562a8313c2a5aca291764921ac3b549"
     },
     {
       "path": "site.webmanifest",
@@ -907,8 +917,8 @@
     },
     {
       "path": "sitemap.xml",
-      "bytes": 19130,
-      "sha256": "aefe71bf28b3a4f07839fff8c0e275c7ab06679611a3e295ff287a044b694cac"
+      "bytes": 19279,
+      "sha256": "e4c1b00ba8cb6ccfee28dfe8ad779cfe91d5f12165befbf3ce4034c56013fecb"
     },
     {
       "path": "submit-event.html",

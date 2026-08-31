@@ -69,3 +69,37 @@ test("a verification code goes to the person, never to the site's own inbox", as
     "submissions are accepted even when no code can be sent"
   );
 });
+
+test("the Worker can find a listing that was added through the form", async () => {
+  // The five listing JSON files are bundled into the Worker at deploy time.
+  // Anything submitted since lives under data/directory/, which the Worker
+  // itself wrote — and it was not looking there. Claiming your own new listing
+  // answered "We could not find that listing", no event could be attached to
+  // one, and a duplicate slug did not register as a duplicate.
+  const source = await readFile(new URL("../src/listing.ts", import.meta.url), "utf8");
+
+  assert.match(source, /async function findEntity/, "no lookup that reaches submitted listings");
+  assert.match(
+    source,
+    /data\/directory\/\$\{slug\}\.json/,
+    "findEntity does not read the submitted listing files"
+  );
+  // The slug reaches a URL.
+  assert.match(source, /\^\[a-z0-9-\]\{1,120\}\$/, "the slug is not validated before it reaches a URL");
+
+  // Exactly one search of the bundle is allowed: the fast path inside
+  // findEntity itself. A second one is a caller that will miss submitted
+  // listings, which is the bug this guards.
+  const findEntityBody = source.slice(
+    source.indexOf("async function findEntity"),
+    source.indexOf("function requireDb")
+  );
+  const allBundled = [...source.matchAll(/directoryEntities\(\)\.find\(/g)].length;
+  const insideFindEntity = [...findEntityBody.matchAll(/directoryEntities\(\)\.find\(/g)].length;
+  assert.equal(insideFindEntity, 1, "findEntity no longer checks the bundle first");
+  assert.equal(
+    allBundled,
+    1,
+    "a caller still searches only the bundled listings and will miss submitted ones"
+  );
+});

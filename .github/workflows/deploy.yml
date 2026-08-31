@@ -24,6 +24,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Whole history, so the step below can diff across every commit in the
+          # push rather than only the last one. A push that carries the Worker's
+          # listing commit behind a code commit must still publish.
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v6
 
@@ -46,8 +51,39 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
 
+      # A listing or an article is published by the person who submitted it,
+      # after they have confirmed their address with a code. Waiting for a
+      # maintainer to deploy makes the site tell them "live in about two
+      # minutes" and then do nothing for a day, which reads as a failure and
+      # gets retried. Content the Worker commits therefore goes live on its own;
+      # code changes still need a deliberate workflow_dispatch.
+      - name: Did this push publish content?
+        id: content
+        if: github.event_name == 'push'
+        run: |
+          set -euo pipefail
+          BEFORE="${{ github.event.before }}"
+          if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ] \
+             && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            CHANGED="$(git diff --name-only "$BEFORE" "${{ github.sha }}")"
+          elif git rev-parse --verify --quiet HEAD~1 >/dev/null; then
+            CHANGED="$(git diff --name-only HEAD~1 HEAD)"
+          else
+            CHANGED="$(git show --name-only --format= HEAD)"
+          fi
+          echo "Changed in this push:"; echo "$CHANGED"
+          if echo "$CHANGED" | grep -qE '^(data/directory/|data/editions/)'; then
+            echo "Publishing: this push carries submitted content."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Not publishing: no submitted content in this push."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy lovemallacoota.au
-        if: github.event_name == 'workflow_dispatch' && inputs.target == 'production'
+        if: |
+          (github.event_name == 'workflow_dispatch' && inputs.target == 'production')
+          || steps.content.outputs.publish == 'true'
         run: pnpm run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

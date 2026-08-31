@@ -12,11 +12,25 @@ than a day.
 
 ---
 
+## Two things settled after this was first written
+
+**Submitted listings now publish themselves.** A push carrying
+`data/directory/**` or `data/editions/**` deploys production; anything else
+still needs a deliberate `workflow_dispatch`. The site told people "live in
+about two minutes" while production waited on a maintainer, which reads as a
+failure and gets retried.
+
+**The Worker can now see listings added through the form.** It only had the five
+bundled JSON files, so a listing submitted through the site could not be
+claimed, could not have an event attached, and did not register as a duplicate —
+the directory was one-way. `findEntity()` falls back to `data/directory/<slug>
+.json` in the deployed assets.
+
 ## The one thing to do first
 
-**Finish a submission end to end.** It has never been done. Everything is now
-configured and each link tested individually, but no listing has completed the
-whole path.
+**Claim a submitted listing**, which has never worked and was only fixed after
+the first successful submission exposed it. Use `colin-dixon`:
+https://lovemallacoota.au/claim.html?slug=colin-dixon
 
 1. https://lovemallacoota.au/add-listing.html — fill it in with any address
 2. The code arrives from `Love Mallacoota <coota@oze.com.au>`
@@ -96,7 +110,7 @@ data file; restoring the `postponed` key puts the strike-through back.
 
 | | |
 | --- | --- |
-| **Finish a submission end to end** | Never done. See above. |
+| ~~Finish a submission end to end~~ | **Done, 31 Aug.** `colin-dixon` went add → code → verify → commit → live. First complete submission in the site's history. |
 | **`STRIPE_WEBHOOK_SECRET` not in `.env.secrets`** | It is set in production and working; the local record is incomplete. Add it when convenient. |
 | **Rotate two credentials** | An 84-character and a 390-character string went through the shell and out to Cloudflare's siteverify during debugging, and one spent time in the Worker as `TURNSTILE_SECRET_KEY`. If either was a GitHub or Cloudflare token, reissue it. |
 | **`allowed_destination_addresses` on the relay** | `serve/wrangler.jsonc` in the adnet repo. Would make a wrong destination fail at deploy rather than at send. |

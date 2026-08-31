@@ -121,6 +121,35 @@ function directoryEntities() {
   });
 }
 
+/**
+ * A listing by slug, whether it shipped with the build or was added through the
+ * form since. The five listing JSON files are bundled into the Worker at deploy
+ * time; anything submitted after that lives under data/directory/ in the
+ * deployed assets, which is where this Worker itself put it.
+ *
+ * Looking only at the bundle meant a listing added through the form could not
+ * be claimed, could not have an event attached, and did not register as a
+ * duplicate — the directory was one-way, and claiming your own new listing
+ * answered "We could not find that listing".
+ */
+async function findEntity(env: Env, slug: string): Promise<DirectoryEntity | null> {
+  const bundled = directoryEntities().find((entity: DirectoryEntity) => entity.slug === slug);
+  if (bundled) return bundled;
+  // The slug reaches a URL, so it is checked rather than trusted, even though
+  // every caller slugifies first.
+  if (!/^[a-z0-9-]{1,120}$/.test(slug) || !env.ASSETS) return null;
+  try {
+    const response = await env.ASSETS.fetch(
+      new Request(`https://lovemallacoota.au/data/directory/${slug}.json`)
+    );
+    if (!response.ok) return null;
+    const [entity] = assembleEntities({ submitted: [await response.json()] });
+    return (entity as DirectoryEntity) ?? null;
+  } catch {
+    return null;
+  }
+}
+
 function requireDb(env: Env): D1Database | null {
   return env.DB ?? null;
 }
@@ -418,7 +447,7 @@ export async function handleListingSubmit(request: Request, env: Env): Promise<R
   }
 
   const slug = slugify(String(form.get("commonName") || name));
-  const existing = directoryEntities().find((entity: DirectoryEntity) => entity.slug === slug);
+  const existing = await findEntity(env, slug);
   if (existing) {
     return json(
       {
@@ -469,7 +498,7 @@ export async function handleListingSubmit(request: Request, env: Env): Promise<R
 async function handleClaim(form: FormData, env: Env): Promise<Response> {
   const slug = slugify(String(form.get("slug") || ""));
   const email = String(form.get("email") || "").trim().toLowerCase();
-  const listing = directoryEntities().find((entity: DirectoryEntity) => entity.slug === slug);
+  const listing = await findEntity(env, slug);
   if (!listing) return json({ ok: false, error: "We could not find that listing." }, 404);
   if (!canClaim(listing) || isOfficialEntity(listing)) {
     return json({ ok: false, error: "Official listings cannot be claimed this way." }, 403);
@@ -746,7 +775,7 @@ export async function handleListingManage(request: Request, env: Env): Promise<R
     return json({ ok: false, error: "This link has expired. Claim the listing again to get a new one." }, 401);
   }
 
-  const live = directoryEntities().find((entity: DirectoryEntity) => entity.slug === row.listing_slug);
+  const live = await findEntity(env, row.listing_slug);
   const latest = await db.prepare(
     `SELECT payload FROM submissions WHERE slug = ? AND status IN ('published', 'approved') ORDER BY updated_at DESC LIMIT 1`
   )

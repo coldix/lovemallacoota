@@ -75,7 +75,10 @@ import { CARDS } from "../lib/social.mjs";
           <p class="field-hint">We send a code here. That address is what appears on the listing.</p>
         </div>
         <div class="field">
-          <label for="website">Website</label>
+          {/* for= must name the input's id. It said "website", which was the
+              hidden honeypot, so clicking the label focused the trap and the
+              real field had no label at all for a screen reader. */}
+          <label for="website_url">Website</label>
           <input id="website_url" name="website_url" type="url" maxlength="300" placeholder="https://" />
         </div>
         <div class="field">
@@ -114,8 +117,12 @@ import { CARDS } from "../lib/social.mjs";
           </label>
         </div>
         <div class="field visually-hidden" aria-hidden="true">
-          <label for="website">Leave this field empty</label>
-          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          {/* A trap for bots that fill every field. Named so no password
+              manager or browser autofill recognises it — it used to be
+              "website", beside a real website_url field, and autofill
+              walked straight into it, silently discarding the submission. */}
+          <label for="lm_leave_blank">Leave this field empty</label>
+          <input id="lm_leave_blank" name="lm_leave_blank" type="text" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true" data-form-type="other" />
         </div>
         <div class="field full"><div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto"></div></div>
         <div class="form-actions full">

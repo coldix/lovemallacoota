@@ -225,7 +225,14 @@ async function guardForm(request: Request, env: Env): Promise<FormData | Respons
   } catch {
     return json({ ok: false, error: "Could not read the form." }, 400);
   }
-  if (String(form.get("website") || "").trim() !== "") return json({ ok: true }, 200);
+  // The honeypot answers a bot with a plausible success so it stops trying. A
+  // person who trips it gets the same answer and waits for an email that was
+  // never sent, so it is logged: this fired once for Colin, whose password
+  // manager filled the trap when it was still called "website".
+  if (String(form.get("lm_leave_blank") || "").trim() !== "") {
+    console.error("honeypot tripped — submission discarded, nothing was written or sent");
+    return json({ ok: true }, 200);
+  }
   const token = String(form.get("cf-turnstile-response") || "");
   // No token at all is a different fault from a rejected one: the widget never
   // ran, or never finished, so nothing was submitted to check. It used to

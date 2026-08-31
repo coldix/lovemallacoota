@@ -93,7 +93,10 @@ export async function handleContactSubmit(request: Request, env: Env): Promise<R
   }
 
   // Hidden field. A person never fills it in; naive bots fill in everything.
-  if (String(form.get("website") || "").trim() !== "") {
+  // See the note in listing.ts: a bot gets a plausible success, and a person who
+  // trips it gets one too, so the fact is logged rather than left invisible.
+  if (String(form.get("lm_leave_blank") || "").trim() !== "") {
+    console.error("honeypot tripped — submission discarded, nothing was written or sent");
     return json({ ok: true }, 200);
   }
 

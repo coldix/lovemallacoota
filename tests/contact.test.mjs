@@ -73,10 +73,30 @@ test("rejects a submission that fails the Turnstile check", async () => {
 
 test("swallows a honeypot submission without relaying it", async () => {
   const calls = stubFetch();
-  const response = await handleContactSubmit(submit({ website: "http://spam.example" }), env());
+  const response = await handleContactSubmit(
+    submit({ lm_leave_blank: "http://spam.example" }),
+    env()
+  );
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), { ok: true });
   assert.equal(calls.length, 0);
+});
+
+test("a real website address is not mistaken for the honeypot", async () => {
+  // The trap used to be called "website", beside a real website field, and a
+  // password manager filling it silently discarded a genuine submission while
+  // telling the person to check their email. Filling anything called "website"
+  // must now be ordinary form input, not a bot signal.
+  const calls = stubFetch();
+  const response = await handleContactSubmit(
+    submit({ website: "https://a-real-business.example" }),
+    env()
+  );
+  assert.equal(response.status, 200);
+  assert.ok(
+    calls.find((call) => call.href === RELAY_URL),
+    "a genuine submission was discarded as a bot"
+  );
 });
 
 test("requires the mandatory fields and a plausible email", async () => {

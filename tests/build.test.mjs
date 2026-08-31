@@ -436,3 +436,27 @@ test("no editor's note is left where the town can read it", async () => {
   }
   assert.deepEqual(offenders, [], `unfinished text on public listing pages:\n${offenders.join("\n")}`);
 });
+
+test("the honeypot is not something a password manager will fill in", async () => {
+  // It was called "website", sat beside a real website_url field, and the real
+  // field's label pointed at the honeypot's id. Autofill filled the trap, the
+  // Worker discarded the submission as a bot, and the page said "Check your
+  // email for a code" — a false success with nothing sent and nothing written.
+  const tempting = /^(website|url|homepage|company|address|name|email|phone|first|last)/i;
+  for (const page of ["add-listing.html", "claim.html", "contact.html", "submit-event.html"]) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    const trap = html.match(/<div class="field visually-hidden"[\s\S]*?<input[^>]*name="([^"]+)"[^>]*>/);
+    assert.ok(trap, `${page} has no honeypot`);
+    assert.ok(
+      !tempting.test(trap[1]),
+      `${page}: the honeypot is named "${trap[1]}", which autofill will recognise`
+    );
+
+    // Every label must name a field that exists, or it labels nothing and may
+    // focus something hidden.
+    const ids = new Set([...html.matchAll(/<(?:input|select|textarea)[^>]*\sid="([^"]+)"/g)].map((m) => m[1]));
+    for (const [, target] of html.matchAll(/<label[^>]*\sfor="([^"]+)"/g)) {
+      assert.ok(ids.has(target), `${page}: <label for="${target}"> matches no field`);
+    }
+  }
+});

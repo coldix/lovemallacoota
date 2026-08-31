@@ -72,8 +72,12 @@ import { CARDS } from "../lib/social.mjs";
           </label>
         </div>
         <div class="field visually-hidden" aria-hidden="true">
-          <label for="website">Leave this field empty</label>
-          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          {/* A trap for bots that fill every field. Named so no password
+              manager or browser autofill recognises it — it used to be
+              "website", beside a real website_url field, and autofill
+              walked straight into it, silently discarding the submission. */}
+          <label for="lm_leave_blank">Leave this field empty</label>
+          <input id="lm_leave_blank" name="lm_leave_blank" type="text" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true" data-form-type="other" />
         </div>
         <div class="field full"><div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto"></div></div>
         <div class="form-actions full">

@@ -10,6 +10,10 @@ events, weather, tides, transport and weekly features.
 2. **The Directory** tells residents and visitors where to find businesses,
 services, clubs, government contacts, places to stay, food and things to do.
 
+**Picking this up cold?** [`docs/HANDOVER.md`](docs/HANDOVER.md) is the current
+state and what to do first. [`docs/EMAIL.md`](docs/EMAIL.md) is how mail works
+and every way it has broken — read that before touching a form.
+
 The project mission is [`docs/MISSION.md`](docs/MISSION.md). The directory
 mission, information architecture and operating workflow are:
 
@@ -237,15 +241,33 @@ Directory add/claim/event posts to `/api/listing` ([`src/listing.ts`](src/listin
 Both require Turnstile verified server side, a honeypot, and a per-IP rate
 limit. No sending credential is exposed to the browser.
 
-Delivery goes through the adnet relay at `https://ads.oze.net.au/relay`. The
-Cloudflare login for this account cannot enable Email Sending on
-`lovemallacoota.au`; the account behind adnet already sends. The relay knows the
-recipient; this Worker cannot choose it.
+**There are two mail paths, and they are not interchangeable.**
+[`docs/EMAIL.md`](docs/EMAIL.md) is the full account; the short version:
+
+| | To Colin | To a stranger |
+| --- | --- | --- |
+| contact form, claims needing review, events for the calendar | the adnet relay | |
+| verification codes for add-listing, claim, submit-event | | Resend, direct |
+| code | `sendMail()` | [`src/mailer.ts`](src/mailer.ts) |
+
+The relay at `https://ads.oze.net.au/relay` **cannot choose a recipient**,
+deliberately: the caller names a site, the relay resolves it to one fixed
+address. That is what makes a leaked relay key harmless. It is also why it
+cannot carry verification codes — it sends through Cloudflare Email Routing,
+which only delivers to addresses verified on that account, and a member of the
+public never is. Before `src/mailer.ts` existed every code went to the site's own
+inbox, and no member of the public could have completed a listing.
+
+Do not "fix" that by widening the relay. Both halves are correct.
 
 `RELAY_KEY` is a **shared** bearer token: the same string must be set on this
 Worker *and* on `adnet-serve`, or the relay answers 401. Set both together with
 [`tools/push-secrets.sh`](tools/push-secrets.sh) rather than by hand; setting
 one side is how they drift apart.
+
+`MAIL_FROM` must be on a domain **verified with Resend**. That is `oze.com.au`.
+`lovemallacoota.au` is a Google Workspace alias onto it, not a sending domain,
+and Resend refuses a `From` on it.
 
 Put the Turnstile **site** key in `.env` as `PUBLIC_TURNSTILE_SITE_KEY` (see
 [`.env.example`](.env.example)), and in the `PUBLIC_TURNSTILE_SITE_KEY` GitHub
@@ -292,6 +314,10 @@ it and are worth keeping:
 If a form fails, `npx wrangler tail --env=""` now names the cause. Tail
 `adnet-serve` as well when the failure is in delivery:
 `cd ~/web/adnet && npx wrangler tail --config serve/wrangler.jsonc`.
+
+[`docs/EMAIL.md`](docs/EMAIL.md) maps every log line either Worker emits to its
+cause, and carries the checks that diagnose each secret without sending
+anything.
 
 ## The weekly edition
 

@@ -104,8 +104,15 @@ What the messages mean:
 | `turnstile rejected ["timeout-or-duplicate"]` | A stale page or a resubmitted token. Reload. |
 | `relay rejected the mail 401` | `RELAY_KEY` differs between this Worker and `adnet-serve`. |
 | `relay rejected the mail 503` | `RELAY_KEY` is unset or empty on `adnet-serve`. |
-| `relay rejected the mail 502 Send failed` | The keys match; Cloudflare Email Sending refused. Check the destination is a verified address. |
+| `relay rejected the mail 502 Send failed` | The keys match; Cloudflare Email Sending refused. Verify the destination in Email Routing **on the relay's own account**, `1b494ec3…`, not the site's. |
+| `mailer refused the message 403 … domain is not verified` | The `MAIL_FROM` domain is not verified at resend.com/domains. It must be `oze.com.au`. |
+| `mailer is not configured` | `RESEND_API_KEY` or `MAIL_FROM` is missing; submissions are refused up front. |
+| `honeypot tripped` | Something filled `lm_leave_blank` — usually a password manager. The submission was discarded. |
+| `Enter the six-digit code` when the code is right | The verification link lost its `?id=`. |
 | `Cannot write …: 401` | `GITHUB_TOKEN` is wrong, expired, or lacks Contents: read and write. |
+
+[`docs/EMAIL.md`](EMAIL.md) explains each of these and carries checks that
+diagnose a secret without sending anything.
 
 Verify the secrets themselves without deploying anything:
 

@@ -1,20 +1,22 @@
 # Letter to the College, the Historical Society and MADRA
 
-The joint version: archive permission, printed copies, contributing to *This
-Week in Mallacoota*, and the question of the Mouth's name.
+The joint version: archive permission, printed copies of the new weekly
+newsletter, contributing to *This Week in Mallacoota*, and the question of the
+Mouth's name.
 
-**To:** mallacoota.p12@education.vic.gov.au — the Principal, by name
+**To:** mallacoota.p12@education.vic.gov.au — addressed to the Principal by
+role; the office would not give the name over the phone (31 Aug 2026)
 **Cc:** admin@mallacootabunker.com.au (Mallacoota & District Historical Society)
 **Cc:** madra.3892@gmail.com (MADRA)
 **Cc:** mallacootamouth@gmail.com — only if that address still works
 **Link, do not attach:** https://lovemallacoota.au/archive.html
 
-**Subject:** The Mallacoota Mouth archive: permission, printed copies, and what
-comes next
+**Subject:** The Mallacoota Mouth archive: permission, the weekly newsletter, and
+what comes next
 
 ---
 
-Dear [Principal's name],
+Dear Principal,
 
 I am building a public catalogue of *The Mallacoota Mouth* at lovemallacoota.au,
 as a community history resource after the paper closed. I would rather you saw
@@ -48,18 +50,18 @@ specific credit line, the right to ask for anything to be taken down. Whatever
 you set, I will write into the site's published policy so it binds whoever comes
 after me.
 
-**3. Would the College or the Society like to print and sell copies from the
-archive?** I would be glad if you did. To be exact about what I am offering: I
-make no claim on the material and will charge nothing for access to my scans —
-but the right to reproduce the Mouth is yours to determine, not mine to grant.
-All I would ask is that you tell me how many copies and which issues, so the
-archive can keep a record.
+**3. Would the College or the Society like to print and sell the new weekly
+newsletter?** Since August the site has carried *This Week in Mallacoota* — a
+weekly edition of notices, club and school news, what's on, weather and tides,
+local history and profiles of people in the town. If
+you want to print copies to sell, I would be glad. I do not want any payment.
+All I would ask is that you tell me how many copies, so I know it is being
+used. The Mouth scans are a separate matter; the right to reproduce those is
+yours to determine, not mine to grant.
 
-**4. Would you contribute to the weekly edition?** Since August the site has
-carried *This Week in Mallacoota* — a weekly edition of notices, club and school
-news, what's on, weather and tides, local history and profiles of people in the
-town. It is the part I care most about, because a catalogue records what the
-town was and this records what it is.
+**4. Would you contribute to the weekly edition?** It is the part I care most
+about, because a catalogue records what the town was and this records what it
+is.
 
 There is a section waiting for the things that used to run under "Out and About
 at MP-12", and one for the Historical Society's notes. Anyone you nominate can
@@ -102,8 +104,14 @@ coota@lovemallacoota.au · https://dixon.au
 
 ## Notes before sending
 
-- **Name the Principal.** "Dear Everyone" on a permissions letter to a school
-  reads as a circular and gets treated as one.
+- **The Principal's name.** The office would not give it out over the phone
+  (31 Aug 2026), so the letter opens "Dear Principal" — a named role, which does
+  not read as a circular the way "Dear Everyone" would. Ask for the name in the
+  first reply and use it from then on. The Historical Society will know it, and
+  an introduction beats a cold email.
+- **Send it as plain text.** The markdown here is for reading in the repo. The
+  version actually sent had no asterisks and no hard line wrapping, so it
+  reflows on a phone, with the numbered asks broken out by blank lines.
 - **Ask five things, expect two answers.** Questions 1 and 2 are the ones that
   matter for the archive. Everything else can wait for a second letter.
 - **Question 5 is the one to be careful with.** A name is not a file; it carries
@@ -113,8 +121,10 @@ coota@lovemallacoota.au · https://dixon.au
   from one person.
 - **Do not attach the scans.** Offering the material back to the people who made
   it looks like a fait accompli. Link the catalogue instead.
-- **Do not offer reproduction rights you do not hold.** Point 3 says what is
-  actually true: no charge for the scans, and the rights question is theirs.
+- **Point 3 is the new weekly newsletter, not old Mouth reprints.** *This Week
+  in Mallacoota* is Colin's to offer. The Mouth scans stay in points 1 and 2:
+  no charge for access to the scans, and the right to reproduce the Mouth is
+  still theirs, not his to grant.
 - No reply in three weeks: ring, do not email again. A school is not ignoring
   you; a school is busy.
 - Record whatever comes back in `docs/ARCHIVE.md` with the date and who said it.

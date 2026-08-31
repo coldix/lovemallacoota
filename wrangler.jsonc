@@ -29,6 +29,9 @@
       "workers_dev": true,
       "routes": [],
       "vars": {
+        // The From on a verification code. Its domain must be verified with the
+        // sending provider, or every code is refused.
+        "MAIL_FROM": "Love Mallacoota <noreply@lovemallacoota.au>",
         "RELAY_URL": "https://ads.oze.net.au/relay",
         "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
         "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
@@ -59,6 +62,9 @@
     }
   },
   "vars": {
+    // The From on a verification code. Its domain must be verified with the
+    // sending provider, or every code is refused.
+    "MAIL_FROM": "Love Mallacoota <noreply@lovemallacoota.au>",
     "RELAY_URL": "https://ads.oze.net.au/relay",
     "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
     "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",

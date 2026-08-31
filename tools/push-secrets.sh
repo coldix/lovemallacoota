@@ -134,6 +134,24 @@ else
 fi
 echo
 
+# --- Resend ----------------------------------------------------------------
+echo "RESEND_API_KEY"
+V="$(value_of RESEND_API_KEY)"
+if [ -z "$V" ]; then
+  warn "  not set in .env.secrets, skipping"
+  warn "  without it no verification code can be sent and every submission is refused"
+else
+  CODE="$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $V" https://api.resend.com/domains)"
+  if [ "$CODE" = "200" ]; then
+    green "  valid (Resend accepted it)"
+    push RESEND_API_KEY "$ROOT" --env=""
+  else
+    red "  Resend answered $CODE. Not sent."
+    FAILED=1
+  fi
+fi
+echo
+
 # --- Stripe ----------------------------------------------------------------
 echo "STRIPE_WEBHOOK_SECRET"
 V="$(value_of STRIPE_WEBHOOK_SECRET)"

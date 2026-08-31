@@ -13,6 +13,7 @@ import stay from "../data/listings_accom.json" with { type: "json" };
 import doSee from "../data/listings_do.json" with { type: "json" };
 import services from "../data/listings_services.json" with { type: "json" };
 import associationsSeed from "../docs/incorporated-associations.json" with { type: "json" };
+import { canSendToPeople, sendToPerson } from "./mailer.ts";
 
 import {
   ENTITY_TYPES,
@@ -122,6 +123,20 @@ function directoryEntities() {
 
 function requireDb(env: Env): D1Database | null {
   return env.DB ?? null;
+}
+
+/**
+ * A confirmation code goes to the person who typed the address, so it cannot go
+ * through the relay — the relay sends to the site's own inbox by design, and
+ * Email Routing behind it will not deliver to an unverified stranger anyway.
+ */
+async function sendCode(
+  env: Env,
+  to: string,
+  payload: { subject: string; text: string; html: string }
+): Promise<boolean> {
+  const result = await sendToPerson(env, { to, replyTo: undefined, ...payload });
+  return result.ok;
 }
 
 async function sendMail(
@@ -366,6 +381,12 @@ export async function handleListingSubmit(request: Request, env: Env): Promise<R
   const form = guarded;
   const db = requireDb(env);
   if (!db) return json({ ok: false, error: "The directory is not configured yet." }, 503);
+  // Refuse before anything is written. A submission stored with no way to send
+  // its code is a row that can never be completed and a person left waiting.
+  if (!canSendToPeople(env)) {
+    console.error("submission refused: the mailer is not configured, so no code could be sent");
+    return json({ ok: false, error: "The form is not configured to send confirmation codes yet." }, 503);
+  }
 
   if (String(form.get("authorised") || "") !== "yes") {
     return json({ ok: false, error: "You need to confirm you are authorised to maintain this listing." }, 400);
@@ -434,9 +455,8 @@ export async function handleListingSubmit(request: Request, env: Env): Promise<R
   }
 
   const code = await createCode(env, id, email);
-  const mailed = await sendMail(env, {
+  const mailed = await sendCode(env, email, {
     subject: `Confirm your Love Mallacoota listing: ${name}`,
-    replyTo: email,
     text: `Your confirmation code is ${code}. It expires in 15 minutes.\n\nEnter it at https://lovemallacoota.au/verify.html?id=${id}\n\nIf you did not request this, ignore the message.`,
     html: `<p>Your confirmation code is <strong>${code}</strong>. It expires in 15 minutes.</p><p><a href="https://lovemallacoota.au/verify.html?id=${id}">Enter the code</a></p>`,
   });
@@ -502,9 +522,8 @@ async function handleClaim(form: FormData, env: Env): Promise<Response> {
   }
 
   const code = await createCode(env, id, email);
-  const mailed = await sendMail(env, {
+  const mailed = await sendCode(env, email, {
     subject: `Claim ${listing.name} on Love Mallacoota`,
-    replyTo: email,
     text: `Your confirmation code is ${code}. Enter it at https://lovemallacoota.au/verify.html?id=${id}`,
     html: `<p>Your confirmation code is <strong>${code}</strong>.</p><p><a href="https://lovemallacoota.au/verify.html?id=${id}">Enter the code</a></p>`,
   });
@@ -561,9 +580,8 @@ async function handleEvent(form: FormData, env: Env): Promise<Response> {
   }
 
   const code = await createCode(env, id, email);
-  const mailed = await sendMail(env, {
+  const mailed = await sendCode(env, email, {
     subject: `Confirm your Mallacoota event: ${title}`,
-    replyTo: email,
     text: `Your confirmation code is ${code}. Enter it at https://lovemallacoota.au/verify.html?id=${id}`,
     html: `<p>Your confirmation code is <strong>${code}</strong>.</p><p><a href="https://lovemallacoota.au/verify.html?id=${id}">Enter the code</a></p>`,
   });

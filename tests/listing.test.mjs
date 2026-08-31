@@ -103,3 +103,31 @@ test("the Worker can find a listing that was added through the form", async () =
     "a caller still searches only the bundled listings and will miss submitted ones"
   );
 });
+
+test("an owner who proved their address is recorded as verified", async () => {
+  // A manage token is only issued after a code sent to the address published on
+  // the listing was entered correctly — that is email verification. The update
+  // used to record only lastReviewedAt, so the one listing on the site that had
+  // actually proved control of its address still read "Not yet verified", which
+  // is the whole visible point of claiming it.
+  const source = await readFile(new URL("../src/listing.ts", import.meta.url), "utf8");
+  const manage = source.slice(source.indexOf("export async function handleListingManage"));
+
+  assert.match(manage, /const verifiedAddress = String\(row\.email/, "the token's address is not read");
+  assert.match(
+    manage,
+    /verifiedAddress && nextEmail === verifiedAddress/,
+    "verification does not check the edit kept the address that was proved"
+  );
+  assert.match(
+    manage,
+    /verifiedAt: melbourneDate\(\)/,
+    "a proved address is still never recorded as verified"
+  );
+  // Changing the address in the same edit must not inherit the old proof.
+  assert.match(
+    manage,
+    /: \{ value: nextEmail, verifiedAt: null, method: "emailed-code" \}/,
+    "a changed address would be claimed as verified without being proved"
+  );
+});

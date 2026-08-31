@@ -812,13 +812,17 @@ export async function handleListingManage(request: Request, env: Env): Promise<R
     return json({ ok: false, error: "Official listings cannot be edited this way." }, 403);
   }
 
+  // The address the token was issued against — the one that received the code.
+  const verifiedAddress = String(row.email || "").trim().toLowerCase();
+  const nextEmail = String(form.get("email") || listing?.email || "").trim().toLowerCase() || null;
+
   const updated = {
     ...(listing || {}),
     name: plainText(String(form.get("name") || listing?.name || ""), 160),
     description: plainText(String(form.get("description") || listing?.description || ""), 1200),
     descriptionShort: plainText(String(form.get("description") || listing?.descriptionShort || ""), 220),
     phone: plainText(String(form.get("phone") || ""), 40) || null,
-    email: String(form.get("email") || listing?.email || "").trim().toLowerCase() || null,
+    email: nextEmail,
     website: looksLikeHttpUrl(String(form.get("website_url") || ""))
       ? String(form.get("website_url"))
       : listing?.website || null,
@@ -841,6 +845,19 @@ export async function handleListingManage(request: Request, env: Env): Promise<R
     slug: row.listing_slug,
     verification: {
       ...(listing?.verification || {}),
+      /*
+       * Reaching this line required a manage token, and a manage token is only
+       * issued after a code sent to the address published on the listing was
+       * entered correctly. That is email verification — the strongest this site
+       * has. It used to record only lastReviewedAt, so the one listing that had
+       * actually proved control of its address still read "Not yet verified".
+       *
+       * If the owner changes the address in the same edit, the new one has not
+       * been proved and is not claimed as verified.
+       */
+      email: verifiedAddress && nextEmail === verifiedAddress
+        ? { value: verifiedAddress, verifiedAt: melbourneDate(), method: "emailed-code" }
+        : { value: nextEmail, verifiedAt: null, method: "emailed-code" },
       lastReviewedAt: melbourneDate(),
     },
   };

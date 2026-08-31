@@ -511,3 +511,26 @@ test("the radio programme is 3MGB's, attributed and printed as they published it
     "the weekly refresh is rewriting 3MGB's programme; it is theirs to change, not ours"
   );
 });
+
+test("pages that need a query parameter read it at runtime, not at build time", async () => {
+  // This is a static build, so Astro.url is the URL at build time and has no
+  // query string. Reading it in the frontmatter shipped an empty value on every
+  // copy of the page: /verify.html?id=… posted no id at all, and the server
+  // blamed the code the person had just typed correctly.
+  for (const page of ["verify.astro", "claim.astro", "submit-event.astro"]) {
+    const source = await readFile(new URL(`../src/pages/${page}`, import.meta.url), "utf8");
+    assert.ok(
+      !/Astro\.url\.searchParams/.test(source),
+      `${page} reads a query parameter at build time, where there is never one`
+    );
+    assert.match(
+      source,
+      /new URLSearchParams\(location\.search\)/,
+      `${page} never reads its query parameter at runtime either`
+    );
+  }
+
+  // And the built page must carry the field for the script to fill.
+  const verify = await readFile(new URL("../dist/verify.html", import.meta.url), "utf8");
+  assert.match(verify, /name="id"/, "verify.html has no id field to populate");
+});

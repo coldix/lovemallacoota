@@ -596,7 +596,17 @@ export async function handleListingVerify(request: Request, env: Env): Promise<R
   const form = await request.formData();
   const id = String(form.get("id") || "");
   const code = String(form.get("code") || "").replace(/\D/g, "");
-  if (!id || code.length !== 6) return json({ ok: false, error: "Enter the six-digit code." }, 400);
+  // Two different faults. A missing id is a broken link, not a mistyped code,
+  // and telling somebody to check the six digits they just copied correctly
+  // sends them round the same loop for as long as their patience lasts.
+  if (!id) {
+    console.error("verify called with no submission id — the link lost its ?id=");
+    return json(
+      { ok: false, error: "This link is missing its submission. Open the link in the email we sent you." },
+      400
+    );
+  }
+  if (code.length !== 6) return json({ ok: false, error: "Enter the six-digit code." }, 400);
 
   const submission = await db.prepare(`SELECT * FROM submissions WHERE id = ?`).bind(id).first<{
     id: string;

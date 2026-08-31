@@ -2,7 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 
-const id = Astro.url.searchParams.get("id") || "";
+/*
+ * The id is NOT read here. This is a static build, so Astro.url is the URL at
+ * build time, which has no query string — reading it here shipped
+ * value="" on every copy of the page, the submission id never reached the
+ * server, and the error blamed the code the person had just typed correctly.
+ * It is filled from location.search at runtime, below.
+ */
 ---
 <BaseLayout
   title="Enter your code — Love Mallacoota"
@@ -18,7 +24,7 @@ const id = Astro.url.searchParams.get("id") || "";
   <main>
     <section class="glass-card sheen content-block reveal">
       <form id="verify-form" class="form-grid" method="post" action="/api/listing/verify">
-        <input type="hidden" name="id" value={id} />
+        <input type="hidden" name="id" value="" />
         <div class="field full">
           <label for="code">Code</label>
           <input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code" />
@@ -35,6 +41,16 @@ const id = Astro.url.searchParams.get("id") || "";
       const form = document.getElementById("verify-form");
       const submitBtn = document.getElementById("submit-btn");
       const statusMsg = document.getElementById("form-status");
+
+      // The page is static, so the id can only come from the address bar, and
+      // only once the browser has it.
+      const submissionId = new URLSearchParams(location.search).get("id") || "";
+      form.elements.id.value = submissionId;
+      if (!submissionId) {
+        statusMsg.textContent =
+          "This link is missing its submission. Open the link in the email we sent rather than typing the address.";
+        statusMsg.className = "form-status error";
+      }
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         submitBtn.disabled = true;

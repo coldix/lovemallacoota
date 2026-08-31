@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.69",
-  "generatedAt": "2026-08-31 22:00:01 AEST (Melbourne)",
+  "version": "v0.70",
+  "generatedAt": "2026-08-31 22:13:11 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -92,8 +92,8 @@
     },
     {
       "path": "claim.html",
-      "bytes": 10521,
-      "sha256": "bcf671eaa9941851d57c22df769e556b3ec61ecfac44ee39ca3d97d76c691022"
+      "bytes": 10752,
+      "sha256": "0c7bfe2431c5be476f185455ff6bc4fed53d7cca8966fdc7fa00a7e65592fe95"
     },
     {
       "path": "community.html",
@@ -912,8 +912,8 @@
     },
     {
       "path": "submit-event.html",
-      "bytes": 11200,
-      "sha256": "95ca09be45b990ddfcf5232537889d805ab4b3fdf8f56fc78673b5dbd4396ddf"
+      "bytes": 11431,
+      "sha256": "0dc59a834536868e57c295d0b7880165831357046d523b7f3d1d9c4572e16076"
     },
     {
       "path": "submit.html",
@@ -932,8 +932,8 @@
     },
     {
       "path": "verify.html",
-      "bytes": 9153,
-      "sha256": "e6e328df1bfe3ad8eda3249268d1b9b0703d14f5fe751c3c3c8ecf18d9756f23"
+      "bytes": 9636,
+      "sha256": "7ef4733b4550e92fcd922906e66fb0e29d38e0b0a15d8a7eb75bdbda77c57688"
     }
   ]
 }

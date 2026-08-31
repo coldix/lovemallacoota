@@ -3,8 +3,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import { entityBySlug } from "../lib/directory.mjs";
 
-const slug = Astro.url.searchParams.get("slug") || "";
-const entity = slug ? entityBySlug(slug) : null;
+/*
+ * The slug is NOT read here. This is a static build, so Astro.url is the URL at
+ * build time and carries no query string; ?slug=… never reached the page. It is
+ * filled from location.search at runtime, below.
+ */
+/*
+ * Always null on a static build. It used to be looked up from the build-time
+ * slug, which never had a value, so every `entity ?` branch below has been dead
+ * since the page was written. Kept as a named constant rather than deleted
+ * because the branches it guards are the shape this page wants once the listing
+ * is resolved in the browser — see the runtime prefill in the script.
+ */
+const entity = null;
 const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 import { CARDS } from "../lib/social.mjs";
@@ -93,6 +104,10 @@ import { CARDS } from "../lib/social.mjs";
       const token = new URLSearchParams(location.search).get("token") || "";
       if (token) document.getElementById("token").value = token;
       const form = document.getElementById("listing-form");
+
+      // Static page: the slug can only come from the address bar at runtime.
+      const fromLink = new URLSearchParams(location.search).get("slug");
+      if (fromLink && form.elements.slug) form.elements.slug.value = fromLink;
       const submitBtn = document.getElementById("submit-btn");
       const statusMsg = document.getElementById("form-status");
       form.addEventListener("submit", async (event) => {

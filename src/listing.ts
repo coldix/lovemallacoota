@@ -87,11 +87,15 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null)
   body.append("response", token);
   if (ip) body.append("remoteip", ip);
   const response = await fetch(TURNSTILE_VERIFY_URL, { method: "POST", body });
-  if (!response.ok) {
-    console.error("turnstile siteverify unreachable", response.status);
-    return false;
-  }
-  const outcome = (await response.json()) as { success?: boolean; "error-codes"?: string[] };
+  // Cloudflare answers a bad secret with 400 and puts the reason in the body,
+  // so the body is read whatever the status. Returning early on !response.ok
+  // threw away the one field that says what is wrong.
+  const outcome = (await response
+    .json()
+    .catch(() => ({ success: false, "error-codes": [`http-${response.status}`] }))) as {
+    success?: boolean;
+    "error-codes"?: string[];
+  };
   if (outcome.success !== true) {
     // Cloudflare says exactly why, and this used to throw it away — leaving
     // "Verification failed" with no way to tell a wrong secret from a stale

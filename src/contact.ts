@@ -98,7 +98,13 @@ export async function handleContactSubmit(request: Request, env: Env): Promise<R
   }
 
   const token = String(form.get("cf-turnstile-response") || "");
-  if (!token || !(await verifyTurnstile(token, env.TURNSTILE_SECRET_KEY, ip))) {
+  // See the note in listing.ts: a widget that never produced a token is not the
+  // same fault as a token that was refused, and used to look identical.
+  if (!token) {
+    console.error("no turnstile token in the submission — the widget did not produce one");
+    return json({ ok: false, error: "The verification box did not load. Reload the page and try again." }, 403);
+  }
+  if (!(await verifyTurnstile(token, env.TURNSTILE_SECRET_KEY, ip))) {
     return json({ ok: false, error: "Verification failed. Reload the page and try again." }, 403);
   }
 

@@ -227,7 +227,15 @@ async function guardForm(request: Request, env: Env): Promise<FormData | Respons
   }
   if (String(form.get("website") || "").trim() !== "") return json({ ok: true }, 200);
   const token = String(form.get("cf-turnstile-response") || "");
-  if (!token || !(await verifyTurnstile(token, env.TURNSTILE_SECRET_KEY, ip))) {
+  // No token at all is a different fault from a rejected one: the widget never
+  // ran, or never finished, so nothing was submitted to check. It used to
+  // short-circuit into the same silent 403 as a bad token, which made a broken
+  // widget look identical to a wrong secret.
+  if (!token) {
+    console.error("no turnstile token in the submission — the widget did not produce one");
+    return json({ ok: false, error: "The verification box did not load. Reload the page and try again." }, 403);
+  }
+  if (!(await verifyTurnstile(token, env.TURNSTILE_SECRET_KEY, ip))) {
     return json({ ok: false, error: "Verification failed. Reload the page and try again." }, 403);
   }
   return form;

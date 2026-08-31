@@ -477,13 +477,19 @@ test("the radio programme is 3MGB's, attributed and printed as they published it
     }
   }
 
-  // Three shows are still printed as postponed until July 2026 and it is later
-  // than that. They stay as published: guessing they are back would put a
+  // Whether a show is postponed is Colin's call — the published guide still
+  // says July 2026 and July has been and gone, so the three it names are shown
+  // as running. What must hold is that a postponement in the data reaches the
+  // page: a show quietly listed as on when the data says otherwise would put a
   // listener in front of a radio at seven on a Saturday for nothing.
-  const postponed = shows.filter((show) => show.postponed);
-  assert.equal(postponed.length, 3, "expected three postponed shows in the published guide");
-  for (const show of postponed) {
-    assert.ok(html.includes(escapeEntities(show.postponed)), `${show.title} does not say it is postponed`);
+  for (const show of shows.filter((s) => s.postponed)) {
+    assert.ok(
+      html.includes(escapeEntities(show.postponed)),
+      `${show.title} is marked postponed in the data but the page does not say so`
+    );
+  }
+  for (const show of shows.filter((s) => s.note)) {
+    assert.ok(html.includes(escapeEntities(show.note)), `${show.title} loses its note`);
   }
 
   // Attribution: their guide, their version, their frequencies, their station.

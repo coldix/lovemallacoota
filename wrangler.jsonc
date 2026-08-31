@@ -29,11 +29,10 @@
       "workers_dev": true,
       "routes": [],
       "vars": {
-        // TEMPORARY. resend.dev is Resend's shared sender: no DNS, but it will
-        // only deliver to the address on the Resend account. Put this back to
-        // coota@oze.com.au the moment oze.com.au verifies, or no member of the
-        // public can receive a code.
-        "MAIL_FROM": "Love Mallacoota <onboarding@resend.dev>",
+        // oze.com.au is the domain verified with Resend. lovemallacoota.au is a
+        // Google Workspace alias onto it, not a sending domain, and Resend
+        // refuses a From on it.
+        "MAIL_FROM": "Love Mallacoota <coota@oze.com.au>",
         "RELAY_URL": "https://ads.oze.net.au/relay",
         "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
         "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
@@ -64,11 +63,10 @@
     }
   },
   "vars": {
-    // TEMPORARY. resend.dev is Resend's shared sender: no DNS, but it will
-    // only deliver to the address on the Resend account. Put this back to
-    // coota@oze.com.au the moment oze.com.au verifies, or no member of the
-    // public can receive a code.
-    "MAIL_FROM": "Love Mallacoota <onboarding@resend.dev>",
+    // oze.com.au is the domain verified with Resend. lovemallacoota.au is a
+    // Google Workspace alias onto it, not a sending domain, and Resend
+    // refuses a From on it.
+    "MAIL_FROM": "Love Mallacoota <coota@oze.com.au>",
     "RELAY_URL": "https://ads.oze.net.au/relay",
     "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
     "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",

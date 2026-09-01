@@ -26,26 +26,24 @@ const writable = SECTIONS.filter((section) => !section.automatic);
         first, and give them a route that works, rather than letting them fill
         the form in and be turned away by the server. */}
     <section class="glass-card sheen content-block reveal">
-      <h2 class="section-title">Who this page is for</h2>
+      <h2 class="section-title">Submitting to the edition</h2>
       <p class="section-sub">
-        Contributing straight to the edition is by invitation, and there is no
-        sign-up. If you have not been set up as a contributor, the form below
-        will not accept your piece — but that is the only thing standing in the
-        way, and it is easily fixed.
+        Anyone is welcome to submit an article, notice, club report or photograph to the weekly edition.
       </p>
+      <ul class="edition-diary">
+        <li><strong>Signed-in contributors:</strong> If you are signed in, your submission is verified and published straight away upon passing policy check.</li>
+        <li><strong>Guests / Non signed-in:</strong> You must supply both a <strong>contact email and phone number</strong>. Your piece will be reviewed and approved by an admin before going live.</li>
+        <li><strong>Photographs:</strong> You may attach up to 3 photographs per piece. Each photo requires a credit.</li>
+      </ul>
       <div class="edition-actions">
-        <a class="btn btn-primary" href="/contact.html?subject=contribute">Ask to become a contributor</a>
+        <a class="btn btn-primary" href="/contact.html?subject=contribute">Ask to become an automatic contributor</a>
         <a class="btn btn-coral" href="mailto:coota@lovemallacoota.au?subject=For%20this%20week%27s%20edition">Email your piece instead</a>
       </div>
-      <p class="edition-source">
-        Anything sent to <a href="mailto:coota@lovemallacoota.au">coota@lovemallacoota.au</a>
-        runs the same way and on the same terms as a piece submitted here. Nothing is charged for, either way.
-      </p>
     </section>
 
     {edition ? (
       <section class="glass-card sheen content-block reveal">
-        <form id="article-form" class="form-grid" method="post" action="/api/article">
+        <form id="article-form" class="form-grid" method="post" action="/api/article" enctype="multipart/form-data">
           <input type="hidden" name="week" value={edition.week} />
           <div class="field">
             <label for="section">Section</label>
@@ -59,11 +57,11 @@ const writable = SECTIONS.filter((section) => !section.automatic);
           </div>
           <div class="field">
             <label for="contact_email">Contact email</label>
-            <input id="contact_email" name="contact_email" type="email" placeholder="If different from the address you signed in with" />
+            <input id="contact_email" name="contact_email" type="email" placeholder="Required if not signed in" />
           </div>
           <div class="field">
             <label for="contact_phone">Contact phone</label>
-            <input id="contact_phone" name="contact_phone" type="tel" placeholder="Optional" />
+            <input id="contact_phone" name="contact_phone" type="tel" placeholder="Required if not signed in" />
           </div>
           <div class="field full">
             <label for="contact_public">
@@ -87,29 +85,60 @@ const writable = SECTIONS.filter((section) => !section.automatic);
               HTML, is shown as you typed it.
             </p>
           </div>
+
+          {/* Photograph 1 */}
           <div class="field full">
-            <label for="photo">Photograph (optional)</label>
+            <label for="photo">Photograph 1 (optional)</label>
             <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic" />
             <p class="contact-hint">Sent full size — we resize to 1920px and convert to WebP. Up to 12MB.</p>
           </div>
           <div class="field">
-            <label for="caption">Photo caption</label>
+            <label for="caption">Photo 1 caption</label>
             <input id="caption" name="caption" type="text" maxlength="300" placeholder="What is happening in the picture" />
           </div>
           <div class="field">
-            <label for="credit">Photo credit</label>
-            <input id="credit" name="credit" type="text" maxlength="300" placeholder="Who took it — required for a photo" />
+            <label for="credit">Photo 1 credit</label>
+            <input id="credit" name="credit" type="text" maxlength="300" placeholder="Who took it — required if photo attached" />
           </div>
+
+          {/* Photograph 2 */}
+          <div class="field full">
+            <label for="photo2">Photograph 2 (optional)</label>
+            <input id="photo2" name="photo2" type="file" accept="image/jpeg,image/png,image/webp,image/heic" />
+          </div>
+          <div class="field">
+            <label for="caption2">Photo 2 caption</label>
+            <input id="caption2" name="caption2" type="text" maxlength="300" placeholder="What is happening in the picture" />
+          </div>
+          <div class="field">
+            <label for="credit2">Photo 2 credit</label>
+            <input id="credit2" name="credit2" type="text" maxlength="300" placeholder="Who took it" />
+          </div>
+
+          {/* Photograph 3 */}
+          <div class="field full">
+            <label for="photo3">Photograph 3 (optional)</label>
+            <input id="photo3" name="photo3" type="file" accept="image/jpeg,image/png,image/webp,image/heic" />
+          </div>
+          <div class="field">
+            <label for="caption3">Photo 3 caption</label>
+            <input id="caption3" name="caption3" type="text" maxlength="300" placeholder="What is happening in the picture" />
+          </div>
+          <div class="field">
+            <label for="credit3">Photo 3 credit</label>
+            <input id="credit3" name="credit3" type="text" maxlength="300" placeholder="Who took it" />
+          </div>
+
           <div class="field full">
             <label for="as_cover">
               <input id="as_cover" name="as_cover" type="checkbox" value="yes" />
-              Offer this as the cover photograph for the week
+              Offer Photograph 1 as the cover photograph for the week
             </label>
             <p class="contact-hint">Cover photographs are portrait if possible, and print best at 2480 × 3508 or larger.</p>
           </div>
 
           <div class="form-actions full">
-            <button class="btn btn-primary" type="submit" id="article-submit">Publish to {edition.displayDate}</button>
+            <button class="btn btn-primary" type="submit" id="article-submit">Submit article</button>
             <a href="/edition.html" class="btn btn-ghost">See this week</a>
           </div>
         </form>

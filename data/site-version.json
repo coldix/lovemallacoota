@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
-  "version": "v0.80",
-  "generatedAt": "2026-09-01 19:58:40 AEST (Melbourne)",
+  "version": "v0.81",
+  "generatedAt": "2026-09-01 20:30:59 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -29,6 +29,11 @@
       "path": "add-listing.html",
       "bytes": 16279,
       "sha256": "12851e678c9e49353fb7abd35bf7745dbdd4af4a68eef1186049fb19d8f3b4fd"
+    },
+    {
+      "path": "admin.html",
+      "bytes": 14198,
+      "sha256": "e1034222440f47fa81241a7c088afd96834e4665998486aeebeaa1cb984b2d84"
     },
     {
       "path": "archive.html",
@@ -157,8 +162,13 @@
     },
     {
       "path": "edition.html",
+<<<<<<< HEAD
       "bytes": 59408,
       "sha256": "8e3e774662fc392b0ae9dfc8fcf07cad1e6c1d7e774da3556360ba3a5a9d62c4"
+=======
+      "bytes": 59308,
+      "sha256": "50789301c560bae6dd54b7a092ac1c32551fd22ed76a3041bd560f445a67089c"
+>>>>>>> 6b71e5e (Add submit CTA to edition page, guest submission rules with required contact info, support up to 3 photos, and Admin Approval Dashboard)
     },
     {
       "path": "edition/2026-w36.html",
@@ -1067,8 +1077,8 @@
     },
     {
       "path": "submit.html",
-      "bytes": 15687,
-      "sha256": "3d38ca373db008149ac950391433199f7f8a77864061e91f3c42643bdbeb65cd"
+      "bytes": 16896,
+      "sha256": "109c362e42ebac70a10c03809545acb745be32b9c1b71983a477c0d767892078"
     },
     {
       "path": "terms.html",

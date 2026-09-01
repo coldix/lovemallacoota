@@ -1,0 +1,156 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+---
+<BaseLayout
+  title="Admin Approval Dashboard — Love Mallacoota"
+  description="Admin approval dashboard for community submissions."
+  canonicalPath="/admin.html"
+  robots="noindex,nofollow"
+>
+  <PageHero eyebrow="Administration" prefix="Admin" accent="Dashboard" lede="Review and approve pending community submissions, notices and articles for publication." />
+  <main>
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Pending Submissions</h2>
+      <p class="section-sub">Submissions awaiting review or approval before publishing.</p>
+      <div id="admin-status" class="form-status" role="status" aria-live="polite">Loading pending items…</div>
+      
+      <div id="submissions-list" class="admin-grid" style="display: grid; gap: 1.5rem; margin-top: 1.5rem;"></div>
+    </section>
+  </main>
+
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const statusEl = document.getElementById("admin-status");
+      const listEl = document.getElementById("submissions-list");
+      if (!statusEl || !listEl) return;
+
+      async function loadPending() {
+        statusEl.textContent = "Loading pending items…";
+        statusEl.className = "form-status";
+        try {
+          const res = await fetch("/api/admin/pending");
+          const data = await res.json();
+          if (!res.ok || !data.ok) {
+            statusEl.textContent = data.error || "Could not load pending submissions.";
+            statusEl.className = "form-status error";
+            return;
+          }
+
+          const items = data.submissions || [];
+          if (items.length === 0) {
+            statusEl.textContent = "No pending submissions awaiting review.";
+            statusEl.className = "form-status success";
+            listEl.innerHTML = "";
+            return;
+          }
+
+          statusEl.textContent = `${items.length} item(s) awaiting review.`;
+          statusEl.className = "form-status success";
+
+          listEl.innerHTML = items.map(item => {
+            const article = (item.data && item.data.article) || item.data || {};
+            const title = article.title || item.slug || "Untitled Submission";
+            const byline = article.byline || item.email || "Unknown";
+            const contactEmail = (item.data && item.data.contactEmail) || item.email || "";
+            const contactPhone = (item.data && item.data.contactPhone) || "";
+            const bodyText = Array.isArray(article.body) ? article.body.join("\n\n") : (item.data && item.data.rawBody) || "";
+            const week = (item.data && item.data.week) || "Unknown week";
+            const section = item.entity_type || (item.data && item.data.section) || "";
+
+            return `
+              <div class="glass-card" style="padding: 1.25rem; border: 1px solid var(--glass-border); border-radius: 12px;" id="item-${item.id}">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem;">
+                  <div>
+                    <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--accent);">${item.kind} · ${section} · Week ${week}</span>
+                    <h3 style="margin: 0.25rem 0 0.5rem; font-size: 1.2rem;">${escapeHtml(title)}</h3>
+                  </div>
+                  <span style="font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255, 157, 92, 0.2); color: var(--coral); font-weight: 700;">${item.status}</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem;">
+                  <strong>Byline:</strong> ${escapeHtml(byline)} | 
+                  <strong>Email:</strong> ${escapeHtml(contactEmail)} | 
+                  <strong>Phone:</strong> ${escapeHtml(contactPhone || 'N/A')}
+                </p>
+                <div style="white-space: pre-wrap; font-size: 0.9rem; background: rgba(0,0,0,0.15); padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; max-height: 200px; overflow-y: auto;">${escapeHtml(bodyText)}</div>
+                <div style="display: flex; gap: 0.75rem;">
+                  <button class="btn btn-primary approve-btn" data-id="${item.id}">Approve & Publish</button>
+                  <button class="btn btn-ghost reject-btn" data-id="${item.id}" style="color: var(--coral);">Reject</button>
+                </div>
+              </div>
+            `;
+          }).join("");
+
+          // Attach click handlers
+          document.querySelectorAll(".approve-btn").forEach(btn => {
+            btn.addEventListener("click", async (e) => {
+              const id = e.target.getAttribute("data-id");
+              if (!id) return;
+              e.target.disabled = true;
+              e.target.textContent = "Approving…";
+              try {
+                const res = await fetch("/api/admin/approve", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ id })
+                });
+                const resData = await res.json();
+                if (resData.ok) {
+                  const card = document.getElementById(`item-${id}`);
+                  if (card) card.remove();
+                  loadPending();
+                } else {
+                  alert(resData.error || "Approval failed.");
+                  e.target.disabled = false;
+                  e.target.textContent = "Approve & Publish";
+                }
+              } catch {
+                alert("Approval failed.");
+                e.target.disabled = false;
+                e.target.textContent = "Approve & Publish";
+              }
+            });
+          });
+
+          document.querySelectorAll(".reject-btn").forEach(btn => {
+            btn.addEventListener("click", async (e) => {
+              const id = e.target.getAttribute("data-id");
+              if (!id) return;
+              if (!confirm("Are you sure you want to reject this submission?")) return;
+              e.target.disabled = true;
+              try {
+                const res = await fetch("/api/admin/reject", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ id })
+                });
+                const resData = await res.json();
+                if (resData.ok) {
+                  const card = document.getElementById(`item-${id}`);
+                  if (card) card.remove();
+                  loadPending();
+                } else {
+                  alert(resData.error || "Rejection failed.");
+                  e.target.disabled = false;
+                }
+              } catch {
+                alert("Rejection failed.");
+                e.target.disabled = false;
+              }
+            });
+          });
+
+        } catch (err) {
+          statusEl.textContent = "Error loading submissions.";
+          statusEl.className = "form-status error";
+        }
+      }
+
+      function escapeHtml(text) {
+        return String(text || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      }
+
+      loadPending();
+    });
+  </script>
+</BaseLayout>

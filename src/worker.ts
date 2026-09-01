@@ -1,3 +1,4 @@
+import { handleAdminApprove, handleAdminPending, handleAdminReject } from "./admin.ts";
 import { handleContactSubmit } from "./contact.ts";
 import { handleEditionPdf, weekFromPath } from "./edition-pdf.ts";
 import { handleListingManage, handleListingSubmit, handleListingVerify } from "./listing.ts";
@@ -180,6 +181,18 @@ export default {
 
     if (url.pathname === "/api/listing/manage") {
       return applySecurityHeaders(await handleListingManage(request, env));
+    }
+
+    if (url.pathname === "/api/admin/pending") {
+      return applySecurityHeaders(await handleAdminPending(request, env));
+    }
+
+    if (url.pathname === "/api/admin/approve") {
+      return applySecurityHeaders(await handleAdminApprove(request, env));
+    }
+
+    if (url.pathname === "/api/admin/reject") {
+      return applySecurityHeaders(await handleAdminReject(request, env));
     }
 
     if (weekFromPath(url.pathname)) {

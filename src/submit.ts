@@ -118,7 +118,7 @@ export async function checkAgainstPolicy(
   }
 }
 
-async function commitArticle(env: Env, week: string, article: Record<string, unknown>) {
+export async function commitArticle(env: Env, week: string, article: Record<string, unknown>) {
   const path = `data/editions/${week}.json`;
   const api = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`;
   const headers = {
@@ -202,62 +202,46 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
   if (request.method !== "POST") return json({ ok: false, error: "Use POST." }, 405);
 
   const email = accessEmail(request);
-  if (!email) {
-    // No Cf-Access header means the request did not come through Access, so we
-    // cannot tell who this is. That is usually not the reader's mistake — the
-    // page is linked from the edition and anyone can reach it — so the message
-    // says what to do rather than naming the component that is missing.
-    return json(
-      {
-        ok: false,
-        error:
-          "Contributing to the edition is by invitation, and this browser is not signed in as a contributor. Email coota@lovemallacoota.au and we will set you up — or send your piece to that address and we will run it.",
-      },
-      401
-    );
-  }
-
-  const contributor = findContributor(email);
-  if (!contributor) {
-    return json(
-      {
-        ok: false,
-        error: `${email} is not on the contributor list yet. Email coota@lovemallacoota.au to be added, or send your piece to that address and we will run it.`,
-      },
-      403
-    );
-  }
+  const contributor = email ? findContributor(email) : null;
+  const isAuthedContributor = Boolean(contributor && contributor.active);
 
   const form = await request.formData();
   const week = String(form.get("week") || "").trim();
   const section = String(form.get("section") || "").trim();
   const title = String(form.get("title") || "").trim().slice(0, MAX.title);
-  const byline = String(form.get("byline") || contributor.name).trim().slice(0, MAX.byline);
+  const byline = String(form.get("byline") || (contributor ? contributor.name : "")).trim().slice(0, MAX.byline);
   const raw = String(form.get("body") || "").trim().slice(0, MAX.body);
-  const contactEmail = String(form.get("contact_email") || "").trim().slice(0, MAX.email);
+  const contactEmail = String(form.get("contact_email") || email || "").trim().slice(0, MAX.email);
   const contactPhone = String(form.get("contact_phone") || "").trim().slice(0, MAX.phone);
-  // Contact details are for us unless the contributor asks for them to run.
   const contactPublic = String(form.get("contact_public") || "") === "yes";
 
-  if (contactEmail && !EMAIL_RE.test(contactEmail)) {
+  if (!week || !section || !title || !raw) {
+    return json({ ok: false, error: "Week, section, title and body are required." }, 400);
+  }
+
+  // If not signed in as a registered contributor, contact email and phone number are required
+  if (!isAuthedContributor) {
+    if (!contactEmail || !EMAIL_RE.test(contactEmail)) {
+      return json({ ok: false, error: "Guest submissions require a valid contact email address." }, 400);
+    }
+    if (!contactPhone || contactPhone.length < 8) {
+      return json({ ok: false, error: "Guest submissions require a contact phone number." }, 400);
+    }
+  } else if (contactEmail && !EMAIL_RE.test(contactEmail)) {
     return json({ ok: false, error: "That contact email does not look right." }, 400);
   }
 
-  if (!week || !section || !title || !raw) {
-    return json({ ok: false, error: "Week, section, title and body are all required." }, 400);
-  }
-  if (!contributor.sections.includes(section)) {
+  if (contributor && !contributor.sections.includes(section)) {
     return json({ ok: false, error: `You are not set up to post in ${section}.` }, 403);
   }
 
-  // A classified or a family notice without a way to answer it is not an
-  // advertisement, it is a puzzle. The reader needs a number or an address.
+  // Classifieds & notices require contact details
   if (NEEDS_CONTACT.has(section)) {
     const hasContact =
       /\b(?:0\d[\d ]{7,}|\(0\d\)\s?\d{4}\s?\d{4})\b/.test(raw) ||
       EMAIL_RE.test(contactEmail) ||
       /[^\s@]+@[^\s@]+\.[^\s@]+/.test(raw) ||
-      String(form.get("contact_phone") || "").trim().length >= 8;
+      contactPhone.length >= 8;
     if (!hasContact) {
       return json(
         {
@@ -270,16 +254,100 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
     }
   }
 
+  const article = {
+    id: `${week}-${section}-${slugify(title)}`,
+    section,
+    title,
+    byline: byline || "Community Contributor",
+    authorEmail: contactEmail || email || "guest",
+    submittedAt: new Date().toISOString(),
+    publishedAt: new Date().toISOString(),
+    check: { verdict: "pass", by: "policy check" },
+    contact: {
+      email: contactEmail || email || "",
+      phone: contactPhone || null,
+      public: contactPublic,
+    },
+    body: toParagraphs(raw),
+  };
+
+  // Up to 3 photographs
+  const photoInputs = [
+    { file: form.get("photo"), caption: String(form.get("caption") || "").trim().slice(0, MAX.caption), credit: String(form.get("credit") || "").trim().slice(0, MAX.caption), isCover: String(form.get("as_cover") || "") === "yes", suffix: "" },
+    { file: form.get("photo2"), caption: String(form.get("caption2") || "").trim().slice(0, MAX.caption), credit: String(form.get("credit2") || "").trim().slice(0, MAX.caption), isCover: false, suffix: "-2" },
+    { file: form.get("photo3"), caption: String(form.get("caption3") || "").trim().slice(0, MAX.caption), credit: String(form.get("credit3") || "").trim().slice(0, MAX.caption), isCover: false, suffix: "-3" },
+  ];
+
+  let photoNote = "";
+  let stagedPhotosCount = 0;
+
+  for (let i = 0; i < photoInputs.length; i++) {
+    const item = photoInputs[i];
+    if (item.file instanceof File && item.file.size > 0) {
+      if (!item.credit) {
+        photoNote += ` Photograph ${i + 1} needs a credit.`;
+      } else {
+        const staged = await stageImage(env, item.file, {
+          kind: item.isCover ? "cover" : "article",
+          week,
+          articleId: item.isCover ? null : `${article.id}${item.suffix}`,
+          caption: item.caption,
+          credit: item.credit,
+          alt: item.caption || article.title,
+          submittedBy: contactEmail || email || "guest",
+          rights: "review_required",
+        });
+        if (staged.ok) {
+          stagedPhotosCount++;
+        } else {
+          photoNote += ` Photograph ${i + 1} error: ${staged.error}`;
+        }
+      }
+    }
+  }
+
+  if (stagedPhotosCount > 0) {
+    photoNote += ` ${stagedPhotosCount} photograph(s) attached.`;
+  }
+
   const check = await checkAgainstPolicy(env, `${title}\n\n${raw}`);
-  if (check.verdict !== "pass") {
+
+  // Guest submissions OR policy query -> store in pending_approval
+  if (!isAuthedContributor || check.verdict !== "pass") {
+    if (env.DB) {
+      const subId = `art-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      const now = new Date().toISOString();
+      const payload = JSON.stringify({
+        article,
+        week,
+        section,
+        title,
+        byline: article.byline,
+        contactEmail: contactEmail || email,
+        contactPhone,
+        contactPublic,
+        rawBody: raw,
+        policyCheck: check,
+        isGuest: !isAuthedContributor,
+      });
+
+      try {
+        await env.DB.prepare(
+          `INSERT INTO submissions (id, kind, slug, payload, email, entity_type, official, status, created_at, updated_at)
+           VALUES (?, 'article', ?, ?, ?, ?, 0, 'pending_approval', ?, ?)`
+        )
+          .bind(subId, article.id, payload, contactEmail || email || "guest", section, now, now)
+          .run();
+      } catch (err) {
+        console.error("Failed to store pending article submission in D1", err);
+      }
+    }
+
     return json(
       {
-        ok: false,
+        ok: true,
         held: true,
-        error:
-          "Held for a human to read before publishing. Nothing is lost — it has been sent for review.",
-        clause: check.clause ?? null,
-        reason: check.reason ?? null,
+        note: `Submitted — your piece has been placed in the review queue and will be published once approved by an admin.${photoNote}`,
       },
       202
     );
@@ -289,54 +357,11 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
     return json({ ok: false, error: "Publishing is not configured yet." }, 503);
   }
 
-  const article = {
-    id: `${week}-${section}-${slugify(title)}`,
-    section,
-    title,
-    byline,
-    authorEmail: email,
-    submittedAt: new Date().toISOString(),
-    publishedAt: new Date().toISOString(),
-    check: { verdict: "pass", by: "policy check" },
-    contact: {
-      email: contactEmail || email,
-      phone: contactPhone || null,
-      public: contactPublic,
-    },
-    body: toParagraphs(raw),
-  };
-
-  const photo = form.get("photo");
-  const caption = String(form.get("caption") || "").trim().slice(0, MAX.caption);
-  const credit = String(form.get("credit") || "").trim().slice(0, MAX.caption);
-  const isCover = String(form.get("as_cover") || "") === "yes";
-
   try {
     await commitArticle(env, week, article);
   } catch (error) {
     console.error("commit failed", error);
     return json({ ok: false, error: (error as Error).message }, 502);
-  }
-
-  let photoNote = "";
-  if (photo instanceof File && photo.size > 0) {
-    if (!credit) {
-      photoNote = " The photograph was not attached: it needs a credit.";
-    } else {
-      const staged = await stageImage(env, photo, {
-        kind: isCover ? "cover" : "article",
-        week,
-        articleId: isCover ? null : article.id,
-        caption,
-        credit,
-        alt: caption || article.title,
-        submittedBy: email,
-        rights: "review_required",
-      });
-      photoNote = staged.ok
-        ? " The photograph follows once it has been resized."
-        : ` The photograph was not attached: ${staged.error}`;
-    }
   }
 
   return json(

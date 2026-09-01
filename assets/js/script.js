@@ -334,6 +334,48 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.closest("[data-print-edition]")) window.print();
   });
 
+  // --- Photo Lightbox (Click to Enlarge) ---
+  (function initLightbox() {
+    let overlay = document.getElementById("photo-lightbox");
+    if (!overlay) {
+      overlay = document.createElement("dialog");
+      overlay.id = "photo-lightbox";
+      overlay.className = "photo-lightbox-dialog";
+      overlay.innerHTML = `
+        <div class="photo-lightbox-content">
+          <button type="button" class="photo-lightbox-close" aria-label="Close photo overlay">×</button>
+          <img id="photo-lightbox-img" src="" alt="" />
+          <p id="photo-lightbox-caption"></p>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay || e.target.classList.contains("photo-lightbox-close")) {
+          overlay.close();
+        }
+      });
+    }
+
+    const imgEl = document.getElementById("photo-lightbox-img");
+    const capEl = document.getElementById("photo-lightbox-caption");
+
+    document.addEventListener("click", (e) => {
+      const figureImg = e.target.closest(".edition-figure img, .edition-cover-web img");
+      if (!figureImg) return;
+
+      const figcaption = figureImg.closest("figure")?.querySelector("figcaption");
+      const captionText = figcaption ? figcaption.innerText : figureImg.alt || "";
+
+      if (imgEl && overlay) {
+        imgEl.src = figureImg.src;
+        imgEl.alt = figureImg.alt || "Enlarged photograph";
+        if (capEl) capEl.textContent = captionText;
+        overlay.showModal();
+      }
+    });
+  })();
+
   // --- Suggest-link handler (delegated) ---
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".suggest-link");

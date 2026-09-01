@@ -346,34 +346,54 @@ const statusLabel =
             </audio>
           </div>
         )}
-        {article.format === "poem" && article.image ? (
-          <div class="poem-with-image-grid">
-            <figure class="edition-figure poem-featured-image">
-              <img src={article.image.url} alt={article.image.alt} loading="lazy" decoding="async" />
-              {(article.image.credit || article.image.note) && (
-                <figcaption>
-                  {article.image.credit}
-                  {article.image.note && <span> · {article.image.note}</span>}
-                </figcaption>
-              )}
-            </figure>
-            <div class="edition-article-body poem-2col">
+        {article.format === "poem" ? (
+          <>
+            {article.image && (
+              <figure class="edition-figure" style="max-width: 520px; margin: 1rem 0;">
+                <img src={article.image.url} alt={article.image.alt} loading="lazy" decoding="async" />
+                {(article.image.credit || article.image.note) && (
+                  <figcaption>
+                    {article.image.credit}
+                    {article.image.note && <span> · {article.image.note}</span>}
+                  </figcaption>
+                )}
+              </figure>
+            )}
+            <div class="edition-article-body poem-body">
               <Fragment set:html={renderBody(article.body, true)} />
             </div>
-          </div>
+          </>
         ) : (
           <>
-            {[article.image, ...(article.images || [])].filter(Boolean).map((image) => (
-              <figure class:list={["edition-figure", { small: image.display === "small" }]}>
-                <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
-                <figcaption>
-                  {image.credit}
-                  {image.note && <span> · {image.note}</span>}
-                </figcaption>
-              </figure>
-            ))}
-            <div class:list={["edition-article-body", { "poem-2col": article.format === "poem" }]}>
-              <Fragment set:html={renderBody(article.body, article.format === "poem")} />
+            {(() => {
+              const allImages = [article.image, ...(article.images || [])].filter(Boolean);
+              if (allImages.length > 1) {
+                return (
+                  <div class="edition-figures-grid">
+                    {allImages.map((image) => (
+                      <figure class:list={["edition-figure", { small: image.display === "small" }]}>
+                        <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
+                        <figcaption>
+                          {image.credit}
+                          {image.note && <span> · {image.note}</span>}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                );
+              }
+              return allImages.map((image) => (
+                <figure class:list={["edition-figure", { small: image.display === "small" }]}>
+                  <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
+                  <figcaption>
+                    {image.credit}
+                    {image.note && <span> · {image.note}</span>}
+                  </figcaption>
+                </figure>
+              ));
+            })()}
+            <div class="edition-article-body">
+              <Fragment set:html={renderBody(article.body)} />
             </div>
           </>
         )}

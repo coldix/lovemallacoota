@@ -69,7 +69,7 @@ export function renderBlock(text, isPoem = false) {
 
   if (isPoem) {
     const poemLines = lines.map((line) => inline(escapeHTML(line))).join("<br />");
-    return `<div class="poem-stanza" style="margin-bottom: 1.25rem; font-style: italic; line-height: 1.6; break-inside: avoid-column;">${poemLines}</div>`;
+    return `<div class="poem-stanza" style="margin-bottom: 1.5rem; font-style: italic; font-size: 1.05rem; line-height: 1.75; letter-spacing: 0.01em;">${poemLines}</div>`;
   }
 
   return `<p>${inline(escapeHTML(lines.join(" ")))}</p>`;

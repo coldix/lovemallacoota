@@ -1,3 +1,6 @@
+---
+import siteVersion from "../../data/site-version.json";
+---
 <footer class="glass-card site-footer reveal">
   <div class="footer-inner">
     <nav class="footer-nav" aria-label="This week">
@@ -44,7 +47,7 @@
       <img src="/images/oze-logo216x100.webp" alt="Oze logo" class="footer-logo" width="216" height="100" />
     </a>
     <p class="copyright">
-      © <span class="copyright-year"></span> Colin Dixon · Content <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer license">CC BY 4.0</a> · Code <a href="https://github.com/coldix/lovemallacoota/blob/main/LICENSE" target="_blank" rel="noopener noreferrer license">MIT</a> · <span id="build-stamp"></span>
+      © <span class="copyright-year"></span> Colin Dixon · Content <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer license">CC BY 4.0</a> · Code <a href="https://github.com/coldix/lovemallacoota/blob/main/LICENSE" target="_blank" rel="noopener noreferrer license">MIT</a> · <span id="build-stamp" class="build-stamp">{siteVersion.version} · {siteVersion.generatedAt}</span>
     </p>
   </div>
 </footer>

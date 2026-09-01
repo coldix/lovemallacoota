@@ -914,13 +914,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
   .edition-cover {
     display: block !important;
-    break-after: page;
     position: relative;
     width: 210mm;
-    height: 296.8mm;
+    height: 297mm;
+    max-height: 297mm;
     margin: 0;
     overflow: hidden;
     break-inside: avoid;
+    break-after: page;
+    page-break-after: always;
     color: #fff;
   }
   .edition-cover img {
@@ -998,7 +1000,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
   .breadcrumbs,
   .site-nav, .site-footer, .bg-field, .bg-grid, .caustics, .motes,
-  .edition-actions, .ad-row-wrap, .edition-web-only { display: none !important; }
+  .edition-actions, .ad-row-wrap, .edition-web-only, .edition-cover-web { display: none !important; }
 
   /* Booked advertisements print at their booked size on the six-unit grid.
      The network slots do not print at all: a frozen edition is cached for a
@@ -1185,7 +1187,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
   body { color: #000; }
   .section-sub, .edition-byline, .edition-toc-byline { color: #333 !important; }
-  .edition-toc { break-after: page; }
   h2, h3 { break-after: avoid; }
 }
 

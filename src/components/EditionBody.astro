@@ -355,7 +355,9 @@ const statusLabel =
             </figcaption>
           </figure>
         ))}
-        <Fragment set:html={renderBody(article.body)} />
+        <div class:list={["edition-article-body", { "poem-2col": article.format === "poem" }]}>
+          <Fragment set:html={renderBody(article.body, article.format === "poem")} />
+        </div>
         {article.corrections?.length > 0 && (
           <aside class="edition-correction">
             <h4>Corrections</h4>

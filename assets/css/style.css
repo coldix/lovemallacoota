@@ -1288,6 +1288,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .edition-toc-list { column-count: 2; column-gap: 2.6rem; column-rule: 1px solid var(--glass-border); }
 }
 
+/* Two-column layout for poetry stanzas */
+.poem-2col {
+  column-count: 2;
+  column-gap: 2.5rem;
+  column-rule: 1px solid var(--glass-border);
+  margin-top: 1rem;
+}
+.poem-stanza {
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  line-height: 1.65;
+  break-inside: avoid-column;
+  font-size: 0.96rem;
+}
+@media (max-width: 680px) {
+  .poem-2col {
+    column-count: 1;
+    column-rule: none;
+  }
+}
+
 /* Link lists — transport, social, the week's talking points. */
 .edition-link-grid {
   display: grid;

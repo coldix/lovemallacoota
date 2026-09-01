@@ -55,7 +55,7 @@ function inline(escaped) {
  * One stored paragraph becomes one block of HTML: a bullet list when every
  * line is a bullet, otherwise a paragraph with its line breaks folded away.
  */
-export function renderBlock(text) {
+export function renderBlock(text, isPoem = false) {
   const lines = String(text).split("\n").map((line) => line.trim()).filter(Boolean);
   if (!lines.length) return "";
 
@@ -67,10 +67,15 @@ export function renderBlock(text) {
     return `<ul class="edition-list">${items}</ul>`;
   }
 
+  if (isPoem) {
+    const poemLines = lines.map((line) => inline(escapeHTML(line))).join("<br />");
+    return `<div class="poem-stanza" style="margin-bottom: 1.25rem; font-style: italic; line-height: 1.6; break-inside: avoid-column;">${poemLines}</div>`;
+  }
+
   return `<p>${inline(escapeHTML(lines.join(" ")))}</p>`;
 }
 
 /** The whole body, as a single string of HTML blocks. */
-export function renderBody(paragraphs) {
-  return (paragraphs || []).map(renderBlock).filter(Boolean).join("");
+export function renderBody(paragraphs, isPoem = false) {
+  return (paragraphs || []).map((paragraph) => renderBlock(paragraph, isPoem)).filter(Boolean).join("");
 }

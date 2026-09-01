@@ -1,0 +1,145 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import {
+  archiveIssues,
+  archiveSchema,
+  archiveYears,
+  issueSearchText,
+  loadArchive,
+} from "../lib/archive.mjs";
+import { CARDS } from "../lib/social.mjs";
+import { versioned } from "../lib/asset-version.mjs";
+
+const archive = loadArchive();
+const issues = archiveIssues(archive);
+const years = archiveYears(issues);
+const schema = archiveSchema(issues, archive);
+---
+<BaseLayout
+  title="The Mallacoota Mouth — Historic Issue Catalogue"
+  description={`${issues.length} issues of The Mallacoota Mouth catalogued by date, issue number, cover photographs and contents.`}
+  canonicalPath="/mouth.html"
+  active="archive"
+  extraScript={versioned("/assets/js/archive.js")}
+  socialImage={CARDS.archive}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  <PageHero
+    eyebrow="Historical Publication"
+    prefix="The Mallacoota"
+    accent="Mouth"
+    lede="A searchable catalogue of historic issues of the community newspaper that documented Mallacoota's people, organisations, events and everyday life."
+  />
+  <main>
+    <Breadcrumbs
+      trail={[
+        { name: "Archive", path: "/archive.html" },
+        { name: "Mallacoota Mouth Catalogue", path: "/mouth.html" },
+      ]}
+    />
+
+    {/* Help Recover Collection Card */}
+    <section class="glass-card sheen content-block reveal archive-intro">
+      <h2 class="section-title">Help recover the collection</h2>
+      <p class="section-sub">
+        We are starting with a handful of digital copies and hope to locate a near-complete run. Original files and clean scans are especially useful.
+      </p>
+      <div class="archive-principles">
+        <article><strong>Preserve</strong><span>Keep a verified master file and checksum for every issue.</span></article>
+        <article><strong>Index</strong><span>Search by date, issue number, organisation, person and topic.</span></article>
+        <article><strong>Respect</strong><span>Record provenance and reuse status before publishing each copy.</span></article>
+      </div>
+      <div class="archive-contribute">
+        <p>Have old editions or know who holds a larger collection?</p>
+        <a class="btn btn-coral" href="/contact.html?subject=archive">Contact the archive project</a>
+      </div>
+    </section>
+
+    {/* Issue Catalogue Grid */}
+    <section class="glass-card sheen content-block reveal" aria-labelledby="archive-catalogue-title">
+      <h2 id="archive-catalogue-title" class="section-title">Issue Catalogue</h2>
+      <p class="section-sub">
+        Search by issue, date, cover, or the headings pulled from each edition, and narrow the list to a single year.
+      </p>
+      <p class="archive-rights-note">
+        Before any issue is made downloadable we are establishing whether <em>The Mallacoota Mouth</em> is in the public domain or whether permission is required, and from whom. Until that is settled and recorded, the catalogue lists what we hold but no PDF is published. <strong>If you know who holds the rights, or you were involved in producing the Mouth, please <a href="/contact.html?subject=archive">get in touch</a>.</strong>
+      </p>
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            id="archive-search"
+            class="search-input"
+            placeholder="Search issue, date or topic…"
+            aria-label="Search archived issues"
+            autocomplete="off"
+          />
+        </div>
+        <div class="tag-row" id="archive-years" role="group" aria-label="Filter by year">
+          <button type="button" class="tag-btn active" data-year="All">All years</button>
+          {years.map((entry) => (
+            <button type="button" class="tag-btn" data-year={entry.year}>
+              {entry.year} ({entry.count})
+            </button>
+          ))}
+        </div>
+        <p class="result-count" id="archive-count" aria-live="polite">
+          {issues.length} {issues.length === 1 ? "issue" : "issues"} found
+        </p>
+      </div>
+      <div id="archive-grid" class="archive-grid">
+        {issues.map((issue) => (
+          <article
+            class="archive-card"
+            data-year={String(issue.publicationDate).slice(0, 4)}
+            data-search={issueSearchText(issue)}
+          >
+            <div class="archive-card-heading">
+              <p class="archive-publication">{issue.publication}</p>
+              <span class="archive-issue-number">Issue {issue.issueNumber}</span>
+            </div>
+            <h3>{issue.displayDate}</h3>
+            <p class="archive-description">{issue.description}</p>
+            {issue.cover?.caption && (
+              <p class="archive-cover">
+                <strong>{issue.cover.credit ? `Cover (${issue.cover.credit}): ` : "Cover: "}</strong>
+                {issue.cover.caption}
+              </p>
+            )}
+            <dl class="archive-metadata">
+              <dt>Pages</dt><dd>{issue.pageCount}</dd>
+              <dt>Editor</dt><dd>{issue.editor || "Not recorded"}</dd>
+              <dt>Source</dt><dd>{issue.provenance || "Not recorded"}</dd>
+            </dl>
+            {(issue.contents || []).length > 0 && (
+              <details class="archive-toc">
+                <summary>In this issue ({issue.contents.length})</summary>
+                <ol>
+                  {issue.contents.map((entry) => (
+                    <li>
+                      <span class="archive-toc-page">p{entry.page}</span>{entry.title}
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            )}
+            <div class="chips archive-topics">
+              {(issue.topics || []).map((topic) => <span class="chip">{topic}</span>)}
+            </div>
+            <div class="archive-availability">
+              {issue.pdfUrl ? (
+                <a class="btn btn-primary" href={issue.pdfUrl}>Read issue (PDF)</a>
+              ) : (
+                <span class="archive-status">Catalogued · digital copy under archive review</span>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="no-results" id="archive-empty" hidden>No archived issues match that search.</p>
+    </section>
+  </main>
+</BaseLayout>

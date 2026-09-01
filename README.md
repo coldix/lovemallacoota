@@ -54,10 +54,13 @@ Over 120 verified listings categorized into 5 primary task-based sections:
 * Community event listings and integrated Google Calendar.
 * Public event submission form ([`/submit-event.html`](https://lovemallacoota.au/submit-event.html)).
 
-### 6. Mouth Archive (`/archive.html`)
-* Searchable catalog of historic *Mallacoota Mouth* back-issues (1990s–2020s).
-* Index of past weekly digital editions and *Local of the Week* profiles.
-* Showcase feature for historical collections.
+### 6. Mouth Back-Issue Catalogue (`/mouth.html`)
+* Dedicated searchable catalog of historic *Mallacoota Mouth* back-issues (1990s–2020s).
+* Search by issue number, date, cover photo credits, or article headlines, with single-year filter tags.
+
+### 7. Archive Hub (`/archive.html`)
+* Central historical archive hub for Mallacoota.
+* Features the Edna J. Brady collection (`/brady.html`), *The Mallacoota Mouth* back-issue catalogue (`/mouth.html`), weekly digital editions index, and *Local of the Week* profile archive.
 
 ---
 
@@ -112,7 +115,8 @@ Love Mallacoota (lovemallacoota.au)
 │   ├── Add Listing                     /add-listing.html
 │   └── Claim Listing                   /claim.html
 │
-├── Archive                             /archive.html
+├── Archive Hub                         /archive.html
+│   ├── Mallacoota Mouth Catalogue     /mouth.html
 │   └── Love of Mallacoota (1998)      /brady.html
 │
 ├── Submissions & Admin

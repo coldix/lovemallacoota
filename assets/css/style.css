@@ -1377,31 +1377,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .photo-lightbox-dialog {
     display: none !important;
   }
-  figure,
   .edition-figure,
-  .edition-cover,
-  .edition-cover-web,
-  .edition-figures-grid,
-  img {
+  .edition-figures-grid {
     display: block !important;
     max-width: 100% !important;
     height: auto !important;
     page-break-inside: avoid;
     break-inside: avoid;
-    opacity: 1 !important;
-    visibility: visible !important;
   }
-}
-  .poem-with-image-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-}
-
-@media print {
-  .edition-audio-block,
-  audio {
-    display: none !important;
+  .edition-figure img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain;
   }
 }
 

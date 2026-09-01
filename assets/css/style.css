@@ -1371,15 +1371,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 @media print {
+  .edition-audio-block,
+  audio,
+  .no-print,
+  .photo-lightbox-dialog {
+    display: none !important;
+  }
   figure,
   .edition-figure,
   .edition-cover,
   .edition-cover-web,
   .edition-figures-grid,
-  .edition-audio-block,
-  audio,
   img {
-    display: none !important;
+    display: block !important;
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 }
   .poem-with-image-grid {

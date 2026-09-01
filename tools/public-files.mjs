@@ -22,6 +22,7 @@ export const publicFiles = [
   // picture was.
   "images/og-hero.jpg",
   "images/oze-logo216x100.webp",
+  "images/ColinA.webp",
   "audio/frank-stokes-diver.mp3",
   "audio/lawson-brady-camp.mp3",
   "audio/the-bar-lawson.mp3",

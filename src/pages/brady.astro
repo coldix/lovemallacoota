@@ -1,0 +1,197 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import PageHero from "../components/PageHero.astro";
+
+const indexItems = [
+  { title: "Dedication", author: "Edna J. Brady", page: 1 },
+  { title: "Credits & Historical Acknowledgements", author: "Historical Society", page: 2 },
+  { title: "Mallacoota (Poem)", author: "Ted Harrington", page: 3 },
+  { title: "A Short History & Chronology", author: "Regional History", page: 4 },
+  { title: "Maps of Mallacoota (1900 & 1925)", author: "Historical Selectors Maps", page: 5 },
+  { title: "Map of Areas Mentioned", author: "Regional Map", page: 6 },
+  { title: "Old State School 3516 (c. 1910)", author: "Photo / Historical Society", page: 7 },
+  { title: "The Kurnai of South East Gippsland", author: "Aldo Massola / VAS Survey", page: 8 },
+  { title: "A Man from the Stone Age", author: "E.J. Brady (Dreams & Realities)", page: 9 },
+  { title: "Report on Mallacoota and Environs", author: "E.J. Brady (Australia Unlimited, 1929)", page: 12 },
+  { title: "Hills and the Sea", author: "E.J. Brady (The Overlander, 1926)", page: 13 },
+  { title: "Cinderella", author: "E.J. Brady (Dreams & Realities)", page: 14 },
+  { title: "Flo's Painting of the Camp & Mallacoota House", author: "Florence Jane Brady", page: 18 },
+  { title: "The Lake (Poem)", author: "E.J. Brady", page: 19 },
+  { title: "A Cruise in the Lady Loch: Genoa River", author: "The Age (1890)", page: 22 },
+  { title: "A Cruise in the Lady Loch: Farewell", author: "The Age (1890)", page: 28 },
+  { title: "The Cannery & Karbeethong Guest House", author: "Historical Records", page: 32 },
+  { title: "The Communal Farm: Description & Records", author: "Webb Thesis / Sun (1932) / Balance Sheets", page: 33 },
+  { title: "A Hard Doer", author: "E.J. Brady", page: 40 },
+  { title: "Gippsland Cattle & Wild Cattle (Poems)", author: "Louis Esson", page: 42 },
+  { title: "Swimming Cattle (Poem)", author: "Louis Esson", page: 44 },
+  { title: "Louis Esson & Australian Theatre / Diary", author: "Vance Palmer (1948)", page: 45 },
+  { title: "Australia Felix (Play)", author: "Louis Esson", page: 47 },
+  { title: "Nomad Chant & The White Crane", author: "Louis Esson", page: 52 },
+  { title: "Mallacoota House", author: "Historical Note", page: 54 },
+  { title: "Katharine Susannah Prichard in Mallacoota", author: "Child of the Hurricane", page: 55 },
+  { title: "Between the Lines (Memoir)", author: "Bernice Morris", page: 57 },
+  { title: "The Road Comes in to Mallacoota", author: "Historical Note & Photos", page: 58 },
+  { title: "Llewellyn Martin", author: "Hugh Brady / Nan Bridle", page: 59 },
+  { title: "Lawson in Mallacoota", author: "Edna J. Brady (1978)", page: 60 },
+  { title: "How Henry Lawson Saw Mallacoota", author: "Henry Lawson (Letter, 1910)", page: 61 },
+  { title: "Captain's Point (Poem)", author: "Henry Lawson (1910)", page: 63 },
+  { title: "Mallacoota Bar, Entrance and Channel", author: "Victor Dorron Memoirs (1966)", page: 64 },
+  { title: "The Bar & Mallacoota Bar (Poems)", author: "Henry Lawson (1910)", page: 66 },
+  { title: "Mallacoota Bar (Poem)", author: "E.J. Brady (The Bulletin, 1922)", page: 69 },
+  { title: "Karl Rasmus & Little Peter", author: "Victor Dorron / E.J. Brady", page: 71 },
+  { title: "Crossing In (Poem)", author: "E.J. Brady", page: 75 },
+  { title: "Mallacoota West: A Song of the Telephone", author: "Henry Lawson (1910)", page: 78 },
+  { title: "The Cutter Wongrabelle (Ballad)", author: "E.J. Brady", page: 80 },
+  { title: "South of Gabo & The Gale (Poems)", author: "E.J. Brady", page: 85 },
+  { title: "From the Beach & Nocturne (Poems)", author: "E.J. Brady", page: 88 },
+  { title: "Twilight & Sea Thought (Poems)", author: "E.J. Brady", page: 91 },
+  { title: "Colonial Fleets (Poem)", author: "E.J. Brady (1933)", page: 95 },
+  { title: "Boydtown, Eden & Ben Boyd's Tower", author: "Note & Henry Lawson Poem", page: 97 },
+  { title: "Did You See Us Sailing Past? & Twofold Bay", author: "Henry Lawson / E.J. Brady", page: 98 },
+  { title: "Coasts of Dream (Poem Extract)", author: "E.J. Brady", page: 101 },
+  { title: "Gabo Island Lighthouse & Childhood Memoirs", author: "Geoff Coles / A.W. Hutton (1862–1865)", page: 102 },
+  { title: "Memories of Gabo", author: "Eileen McKee & Mother's Diary", page: 104 },
+  { title: "The Wind That Blows by Gabo (Poem)", author: "E.J. Brady", page: 106 },
+  { title: "Florence Jane Brady & Family Legacy", author: "Edna J. Brady", page: 108 },
+  { title: "Brady (Tribute Poem & Obituary)", author: "Edward Harrington (1952)", page: 109 },
+];
+---
+<BaseLayout
+  title="Love of Mallacoota (1998) — Edna J. Brady Collection"
+  description="Interactive archive index and document reader for Love of Mallacoota, compiled by Edna J. Brady in 1998."
+  canonicalPath="/brady.html"
+  active="archive"
+>
+  <PageHero
+    eyebrow="Historical Collection"
+    prefix="Love of"
+    accent="Mallacoota"
+    lede="Compiled by Edna J. Brady (1998) — An indispensable archive of regional history, bush poetry, memoirs, early maps and local coastal stories."
+  />
+  <main>
+    <Breadcrumbs trail={[{ name: "Archive", path: "/archive.html" }, { name: "Love of Mallacoota (1998)", path: "/brady.html" }]} />
+
+    {/* Acknowledgements and External Link Block */}
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Acknowledgements &amp; Credit</h2>
+      <p class="section-sub">
+        Our sincere thanks and gratitude go to <strong>Edna J. Brady</strong> and the Brady family for preserving and sharing this vital record of Mallacoota's heritage.
+      </p>
+      <p style="margin-bottom: 1.25rem; font-size: 0.95rem; color: var(--text);">
+        This collection brings together historical accounts, poetry by Henry Lawson, E.J. Brady, Louis Esson, and Ted Harrington, along with early maps, photographs, and memoirs. For further historical materials, photos, and family history, please visit the official website:
+      </p>
+      <div class="edition-actions">
+        <a class="btn btn-primary" href="https://loveofmallacoota.com/" target="_blank" rel="noopener noreferrer">
+          Visit Love of Mallacoota Website →
+        </a>
+        <a class="btn btn-ghost" href="/pdf/Love-of-Mallacoota.pdf" target="_blank" rel="noopener noreferrer">
+          Download Original PDF (3.3 MB)
+        </a>
+      </div>
+    </section>
+
+    {/* Interactive Reader Section */}
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Interactive Archive &amp; Document Index</h2>
+      <p class="section-sub">Type to filter by title or author. Click any page number to jump directly to that page in the reader.</p>
+
+      <div class="field full" style="margin-bottom: 1.5rem;">
+        <label for="searchInput" class="sr-only">Search index</label>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search index by title, author, poem or topic (e.g., Henry Lawson, Gabo, Maps)..."
+          style="width: 100%; padding: 0.85rem 1.2rem; font-size: 1rem; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--card-bg); color: var(--text);"
+        />
+      </div>
+
+      <div class="brady-reader-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
+        {/* Table of Contents Column */}
+        <div class="brady-toc-wrap" style="max-height: 720px; overflow-y: auto; padding-right: 0.5rem;">
+          <table class="archive-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--glass-border); text-align: left;">
+                <th style="padding: 0.6rem; color: var(--muted); font-size: 0.85rem;">Title / Section</th>
+                <th style="padding: 0.6rem; color: var(--muted); font-size: 0.85rem;">Author / Source</th>
+                <th style="padding: 0.6rem; text-align: right; color: var(--muted); font-size: 0.85rem;">Page</th>
+              </tr>
+            </thead>
+            <tbody id="indexTableBody">
+              {indexItems.map((item) => (
+                <tr class="brady-row" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                  <td style="padding: 0.6rem; font-size: 0.92rem; font-weight: 600;">{item.title}</td>
+                  <td style="padding: 0.6rem; font-size: 0.85rem; color: var(--muted);">{item.author}</td>
+                  <td style="padding: 0.6rem; text-align: right;">
+                    <a
+                      href={`/pdf/Love-of-Mallacoota.pdf#page=${item.page}`}
+                      class="btn btn-ghost page-pill"
+                      data-page={item.page}
+                      style="padding: 0.2rem 0.65rem; font-size: 0.82rem; font-weight: 700; color: var(--accent); border-radius: 999px; white-space: nowrap;"
+                    >
+                      p. {item.page}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* PDF Viewer Column */}
+        <div class="brady-pdf-container" style="position: sticky; top: 1.5rem; border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden; background: #111;">
+          <iframe
+            id="pdfViewer"
+            src="/pdf/Love-of-Mallacoota.pdf#page=1"
+            title="Love of Mallacoota PDF Document"
+            style="width: 100%; height: 720px; border: none;"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script slot="scripts" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById("searchInput");
+      const tableBody = document.getElementById("indexTableBody");
+      const pdfViewer = document.getElementById("pdfViewer");
+
+      if (searchInput && tableBody) {
+        searchInput.addEventListener("input", () => {
+          const query = searchInput.value.toLowerCase().trim();
+          const rows = tableBody.querySelectorAll("tr");
+          rows.forEach((row) => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(query) ? "" : "none";
+          });
+        });
+      }
+
+      if (pdfViewer && tableBody) {
+        tableBody.addEventListener("click", (e) => {
+          const btn = e.target.closest(".page-pill");
+          if (!btn) return;
+          e.preventDefault();
+          const page = btn.getAttribute("data-page");
+          if (page) {
+            pdfViewer.src = `/pdf/Love-of-Mallacoota.pdf#page=${page}`;
+            if (window.innerWidth < 768) {
+              pdfViewer.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      }
+    });
+  </script>
+  <style>
+    @media (max-width: 860px) {
+      .brady-reader-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .brady-pdf-container {
+        position: static !important;
+      }
+    }
+  </style>
+</BaseLayout>

@@ -22,6 +22,7 @@ export const publicFiles = [
   // picture was.
   "images/og-hero.jpg",
   "images/oze-logo216x100.webp",
+  "pdf/Love-of-Mallacoota.pdf",
   "robots.txt",
   "site.webmanifest",
 ];

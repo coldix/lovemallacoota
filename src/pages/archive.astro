@@ -47,6 +47,27 @@ const locals = localsOfTheWeek(editions);
   <PageHero eyebrow="Community history" prefix="Mallacoota Mouth" accent="Archive" lede="A growing, searchable record of the local newsletter that documented Mallacoota's people, organisations, events and everyday life — with the weekly editions and local profiles published since." />
   <main>
     <Breadcrumbs trail={[{ name: "Archive", path: "/archive.html" }]} />
+
+    {/* Featured Feature: Love of Mallacoota Collection */}
+    <section class="glass-card sheen content-block reveal" style="border: 1px solid var(--accent); background: linear-gradient(135deg, rgba(36,200,232,0.12), rgba(15,23,42,0.6));">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(36,200,232,0.2); color: var(--accent); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem;">
+            Featured Collection
+          </span>
+          <h2 class="section-title" style="margin: 0 0 0.5rem;">Love of Mallacoota (1998)</h2>
+          <p class="section-sub" style="max-width: 680px; margin-bottom: 1.25rem;">
+            Compiled by <strong>Edna J. Brady</strong> — A 100+ page regional history collection featuring coastal bush poetry by Henry Lawson, E.J. Brady, Louis Esson, and Ted Harrington, along with early selector maps, lighthouse memoirs, and historical photos.
+          </p>
+        </div>
+      </div>
+      <div class="edition-actions">
+        <a class="btn btn-coral" href="/brady.html">Open Love of Mallacoota Archive &amp; PDF Reader →</a>
+        <a class="btn btn-primary" href="https://loveofmallacoota.com/" target="_blank" rel="noopener noreferrer">Visit Love of Mallacoota Website</a>
+        <a class="btn btn-ghost" href="/pdf/Love-of-Mallacoota.pdf" target="_blank" rel="noopener noreferrer">Download Original PDF (3.3 MB)</a>
+      </div>
+    </section>
+
     <section class="glass-card sheen content-block reveal archive-intro">
       <h2 class="section-title">Help recover the collection</h2>
       <p class="section-sub">We are starting with a handful of digital copies and hope to locate a near-complete run. Original files and clean scans are especially useful.</p>

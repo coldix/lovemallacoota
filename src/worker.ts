@@ -107,11 +107,11 @@ const CSP = [
   // died without an iframe, without a token and without an error. Every form on
   // the site failed from launch until 31 August 2026 for this reason.
   "connect-src 'self' https://challenges.cloudflare.com https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://static.cloudflareinsights.com",
-  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://calendar.google.com https://challenges.cloudflare.com https://kuula.co",
+  "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://calendar.google.com https://challenges.cloudflare.com https://kuula.co",
   "form-action 'self'",
   "base-uri 'self'",
   "frame-ancestors 'self'",
-  "object-src 'none'",
+  "object-src 'self'",
   "upgrade-insecure-requests",
 ].join("; ");
 

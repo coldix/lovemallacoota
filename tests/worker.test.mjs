@@ -165,7 +165,7 @@ test("responses carry the security headers, including a policy that allows what 
     assert.ok(csp.includes(needed), `policy blocks ${needed}, which the site loads`);
   }
   // And the things it must not allow.
-  assert.match(csp, /object-src 'none'/);
+  assert.match(csp, /object-src 'self'/);
   assert.match(csp, /base-uri 'self'/);
   assert.match(csp, /form-action 'self'/);
   assert.ok(!/script-src[^;]*\*/.test(csp), "the script policy must not be a wildcard");

@@ -69,10 +69,10 @@ const indexItems = [
     accent="Mallacoota"
     lede="Compiled by Edna J. Brady (1998) — An indispensable archive of regional history, bush poetry, memoirs, early maps and local coastal stories."
   />
-  <main>
+  <main style="max-width: 1400px; margin: 0 auto; padding: 0 1rem;">
     <Breadcrumbs trail={[{ name: "Archive", path: "/archive.html" }, { name: "Love of Mallacoota (1998)", path: "/brady.html" }]} />
 
-    {/* Acknowledgements and External Link Block */}
+    {/* Acknowledgements & External Link Block */}
     <section class="glass-card sheen content-block reveal">
       <h2 class="section-title">Acknowledgements &amp; Credit</h2>
       <p class="section-sub">
@@ -92,11 +92,23 @@ const indexItems = [
     </section>
 
     {/* Interactive Reader Section */}
-    <section class="glass-card sheen content-block reveal">
-      <h2 class="section-title">Interactive Archive &amp; Document Index</h2>
-      <p class="section-sub">Type to filter by title or author. Click any page number to jump directly to that page in the reader.</p>
+    <section class="glass-card sheen content-block reveal" id="readerSection">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <h2 class="section-title" style="margin: 0;">Interactive Archive &amp; Document Reader</h2>
+          <p class="section-sub" style="margin: 0.25rem 0 0;">Click any chapter or page pill to jump directly to that page in the large PDF viewer.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button id="toggleExpandBtn" type="button" class="btn btn-ghost" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;">
+            ↔ Toggle Full Width
+          </button>
+          <a id="openTabBtn" href="/pdf/Love-of-Mallacoota.pdf#page=1" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;">
+            ↗ Open in New Tab
+          </a>
+        </div>
+      </div>
 
-      <div class="field full" style="margin-bottom: 1.5rem;">
+      <div class="field full" style="margin-bottom: 1.25rem;">
         <label for="searchInput" class="sr-only">Search index</label>
         <input
           id="searchInput"
@@ -106,9 +118,9 @@ const indexItems = [
         />
       </div>
 
-      <div class="brady-reader-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
-        {/* Table of Contents Column */}
-        <div class="brady-toc-wrap" style="max-height: 720px; overflow-y: auto; padding-right: 0.5rem;">
+      <div id="bradyReaderGrid" class="brady-reader-grid">
+        {/* Table of Contents Column (350px width) */}
+        <div class="brady-toc-wrap">
           <table class="archive-table" style="width: 100%; border-collapse: collapse;">
             <thead>
               <tr style="border-bottom: 2px solid var(--glass-border); text-align: left;">
@@ -118,11 +130,15 @@ const indexItems = [
               </tr>
             </thead>
             <tbody id="indexTableBody">
-              {indexItems.map((item) => (
-                <tr class="brady-row" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-                  <td style="padding: 0.6rem; font-size: 0.92rem; font-weight: 600;">{item.title}</td>
-                  <td style="padding: 0.6rem; font-size: 0.85rem; color: var(--muted);">{item.author}</td>
-                  <td style="padding: 0.6rem; text-align: right;">
+              {indexItems.map((item, idx) => (
+                <tr
+                  class={`brady-row ${idx === 0 ? "active-row" : ""}`}
+                  data-page={item.page}
+                  style="border-bottom: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: background 0.15s ease;"
+                >
+                  <td style="padding: 0.65rem 0.6rem; font-size: 0.92rem; font-weight: 600;">{item.title}</td>
+                  <td style="padding: 0.65rem 0.6rem; font-size: 0.85rem; color: var(--muted);">{item.author}</td>
+                  <td style="padding: 0.65rem 0.6rem; text-align: right;">
                     <a
                       href={`/pdf/Love-of-Mallacoota.pdf#page=${item.page}`}
                       class="btn btn-ghost page-pill"
@@ -138,13 +154,17 @@ const indexItems = [
           </table>
         </div>
 
-        {/* PDF Viewer Column */}
-        <div class="brady-pdf-container" style="position: sticky; top: 1.5rem; border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden; background: #111;">
+        {/* PDF Viewer Column (Large View Window) */}
+        <div class="brady-pdf-container">
+          <div style="padding: 0.5rem 1rem; background: #1a2234; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--muted);">
+            <span id="currentViewingLabel">Currently Viewing: <strong>Dedication (Page 1)</strong></span>
+            <span style="font-size: 0.8rem; color: var(--accent);">PDF Document Viewer</span>
+          </div>
           <iframe
             id="pdfViewer"
-            src="/pdf/Love-of-Mallacoota.pdf#page=1"
+            src="/pdf/Love-of-Mallacoota.pdf?p=1#page=1"
             title="Love of Mallacoota PDF Document"
-            style="width: 100%; height: 720px; border: none;"
+            style="width: 100%; height: 860px; border: none; background: #0f172a;"
           ></iframe>
         </div>
       </div>
@@ -156,7 +176,42 @@ const indexItems = [
       const searchInput = document.getElementById("searchInput");
       const tableBody = document.getElementById("indexTableBody");
       const pdfViewer = document.getElementById("pdfViewer");
+      const currentViewingLabel = document.getElementById("currentViewingLabel");
+      const openTabBtn = document.getElementById("openTabBtn");
+      const toggleExpandBtn = document.getElementById("toggleExpandBtn");
+      const readerGrid = document.getElementById("bradyReaderGrid");
 
+      // Jump to page helper
+      function jumpToPage(page, title) {
+        if (!pdfViewer) return;
+        
+        const targetUrl = `/pdf/Love-of-Mallacoota.pdf?p=${page}#page=${page}`;
+        
+        // Force iframe refresh and hash jump
+        pdfViewer.src = targetUrl;
+        
+        if (openTabBtn) {
+          openTabBtn.href = targetUrl;
+        }
+
+        if (currentViewingLabel && title) {
+          currentViewingLabel.innerHTML = `Currently Viewing: <strong>${title} (Page ${page})</strong>`;
+        }
+
+        // Highlight active row
+        document.querySelectorAll(".brady-row").forEach(r => r.classList.remove("active-row"));
+        const activeRow = document.querySelector(`.brady-row[data-page="${page}"]`);
+        if (activeRow) {
+          activeRow.classList.add("active-row");
+        }
+
+        // Scroll to viewer on mobile / smaller screens
+        if (window.innerWidth < 1024) {
+          pdfViewer.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+
+      // Filter search box
       if (searchInput && tableBody) {
         searchInput.addEventListener("input", () => {
           const query = searchInput.value.toLowerCase().trim();
@@ -168,29 +223,89 @@ const indexItems = [
         });
       }
 
-      if (pdfViewer && tableBody) {
+      // Table row & page pill click listener
+      if (tableBody) {
         tableBody.addEventListener("click", (e) => {
-          const btn = e.target.closest(".page-pill");
-          if (!btn) return;
+          const row = e.target.closest(".brady-row");
+          if (!row) return;
+          
           e.preventDefault();
-          const page = btn.getAttribute("data-page");
+          const page = row.getAttribute("data-page");
+          const titleEl = row.querySelector("td");
+          const title = titleEl ? titleEl.textContent : `Page ${page}`;
+
           if (page) {
-            pdfViewer.src = `/pdf/Love-of-Mallacoota.pdf#page=${page}`;
-            if (window.innerWidth < 768) {
-              pdfViewer.scrollIntoView({ behavior: "smooth" });
-            }
+            jumpToPage(page, title);
+          }
+        });
+      }
+
+      // Toggle Expand Full Width
+      if (toggleExpandBtn && readerGrid) {
+        let isExpanded = false;
+        toggleExpandBtn.addEventListener("click", () => {
+          isExpanded = !isExpanded;
+          if (isExpanded) {
+            readerGrid.classList.add("expanded-grid");
+            toggleExpandBtn.textContent = "↔ Reset Width";
+          } else {
+            readerGrid.classList.remove("expanded-grid");
+            toggleExpandBtn.textContent = "↔ Toggle Full Width";
           }
         });
       }
     });
   </script>
+
   <style>
-    @media (max-width: 860px) {
+    .brady-reader-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .brady-toc-wrap {
+      max-height: 860px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      background: var(--card-bg);
+    }
+
+    .brady-pdf-container {
+      position: sticky;
+      top: 1.5rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .brady-row:hover {
+      background: rgba(36, 200, 232, 0.08) !important;
+    }
+
+    .brady-row.active-row {
+      background: rgba(36, 200, 232, 0.18) !important;
+      border-left: 4px solid var(--accent);
+    }
+
+    .expanded-grid {
+      grid-template-columns: 280px 1fr !important;
+    }
+
+    @media (max-width: 1024px) {
       .brady-reader-grid {
         grid-template-columns: 1fr !important;
       }
       .brady-pdf-container {
         position: static !important;
+      }
+      #pdfViewer {
+        height: 650px !important;
       }
     }
   </style>

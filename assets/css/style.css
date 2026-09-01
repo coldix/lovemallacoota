@@ -654,6 +654,7 @@ html[data-theme="light"] .tag-btn.active {
 .archive-contribute { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem 1.4rem; text-align: center; }
 .archive-contribute p { font-weight: 600; }
 .archive-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.archive-card[hidden] { display: none !important; }
 .archive-card {
     display: flex;
     flex-direction: column;

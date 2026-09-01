@@ -35,6 +35,7 @@ export const publicDirectories = [
   "images/articles",
   "images/bank",
   "images/listings",
+  "images/bus",
   "images/og",
   "data/directory",
 ];

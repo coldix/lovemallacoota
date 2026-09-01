@@ -7,23 +7,20 @@ import {
   loadArchive,
 } from "../lib/archive.mjs";
 import {
-  articleAnchor,
   editionLabel,
   editionPath,
   editionTitle,
   loadEditions,
-  localsOfTheWeek,
 } from "../lib/editions.mjs";
 import { CARDS } from "../lib/social.mjs";
 
 const archive = loadArchive();
 const issues = archiveIssues(archive);
 const editions = loadEditions();
-const locals = localsOfTheWeek(editions);
 ---
 <BaseLayout
   title="Mallacoota Community History & Archive Hub"
-  description="Historical archive hub for Mallacoota, featuring past weekly digital editions, Local of the Week profiles, the Edna J. Brady collection, and catalogued issues of The Mallacoota Mouth."
+  description="Historical archive hub for Mallacoota, featuring past weekly digital editions, the Edna J. Brady collection, and catalogued issues of The Mallacoota Mouth."
   canonicalPath="/archive.html"
   active="archive"
   socialImage={CARDS.archive}
@@ -71,27 +68,6 @@ const locals = localsOfTheWeek(editions);
         <a class="btn btn-ghost" href="/contact.html?subject=archive">Help Recover Missing Issues</a>
       </div>
     </section>
-
-    {/* Local of the Week Profiles */}
-    {locals.length > 0 && (
-      <section class="glass-card sheen content-block reveal" aria-labelledby="archive-locals-title" id="locals">
-        <h2 id="archive-locals-title" class="section-title">Local of the Week</h2>
-        <p class="section-sub">
-          Every profile we have published, and the edition it appeared in. The stories stay where they were written rather than being copied to a page of their own.
-        </p>
-        <ul class="edition-index">
-          {locals.map((local) => (
-            <li id={articleAnchor(local)}>
-              <a href={`${editionPath({ week: local.week })}#${articleAnchor(local)}`}>{local.title}</a>
-              <span>Week of {local.displayDate}{local.byline ? ` · ${local.byline}` : ""}</span>
-            </li>
-          ))}
-        </ul>
-        <p class="section-sub">
-          <a href="/contact.html?subject=local">Suggest someone worth writing about</a>.
-        </p>
-      </section>
-    )}
 
     {/* Weekly Digital Editions */}
     {editions.length > 0 && (

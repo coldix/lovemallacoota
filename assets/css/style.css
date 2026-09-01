@@ -1302,10 +1302,37 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   break-inside: avoid-column;
   font-size: 0.96rem;
 }
-@media (max-width: 680px) {
+.poem-with-image-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin-top: 1.25rem;
+}
+.poem-featured-image {
+  margin: 0 !important;
+}
+.poem-featured-image img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 768px) {
   .poem-2col {
     column-count: 1;
     column-rule: none;
+  }
+  .poem-with-image-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media print {
+  .edition-audio-block,
+  audio {
+    display: none !important;
   }
 }
 

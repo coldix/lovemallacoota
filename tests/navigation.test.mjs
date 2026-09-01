@@ -75,23 +75,9 @@ test("the retired Locals page is gone from the build and from every menu", async
   );
 });
 
-test("every Local of the Week profile is still reachable, at its edition", async () => {
+test("Local of the Week section is removed from archive.html", async () => {
   const html = await read("archive.html");
-  const editions = loadEditions();
-  const profiles = editions.flatMap((edition) =>
-    (edition.articles || [])
-      .filter((article) => article.section === "local")
-      .map((article) => ({ article, edition }))
-  );
-  assert.ok(profiles.length > 0, "no profiles to check");
-  for (const { article, edition } of profiles) {
-    // The anchor the old page used, so shared deep links still land.
-    assert.ok(html.includes(`id="article-${article.id}"`), `${article.id} has no anchor`);
-    assert.ok(
-      html.includes(`/edition/${edition.week}.html#article-${article.id}`),
-      `${article.id} does not link to the edition that published it`
-    );
-  }
+  assert.ok(!html.includes('id="archive-locals-title"'), "Local of the Week title should be removed from archive.html");
 });
 
 test("every page carries its own title, description and canonical", async () => {

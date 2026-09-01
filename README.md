@@ -2,7 +2,7 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v0.86-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v0.94-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-125%20passing-22c55e.svg)](tests/)
 
 ---
@@ -19,7 +19,9 @@ Historical project documentation and earlier README iterations have been preserv
 
 ### 1. This Week (`/edition.html`)
 The primary weekly news destination published every Monday (`YY:WK` format, e.g. Edition 26:36).
-* **Local History**: Heritage articles, historical photo restorations (e.g. Henry Lawson and E.J. Brady at Captain's Point), and regional memoirs.
+* **Local History & Bush Poetry**: Heritage articles, historical photo restorations (e.g. Henry Lawson and E.J. Brady at Captain's Point), and Lawson's 1910 poem *The Bar*.
+* **Embedded Audio Narration**: HTML5 audio players for local history pieces and recitations (`/audio/*.mp3`), hidden cleanly during printing (`@media print`).
+* **Multi-Column Poetry Layout**: 2-column stanza grid formatting (`format: "poem"`) ensuring every verse stays on one line.
 * **Community & Editorial**: Local news, notices, classifieds, and contributor pieces.
 * **Live Conditions**: Open-Meteo weather forecasts, marine sea-level tides, and lunar cycle indicator.
 * **Local Transport**: PTV coach & bus timetables.
@@ -38,7 +40,7 @@ The primary weekly news destination published every Monday (`YY:WK` format, e.g.
 * Dedicated interactive page for Edna J. Brady's 1998 100+ page regional history compilation.
 * **Split-Pane Interactive Reader**:
   * **Live Search**: Instant client-side filtering across 50+ chapters, poems, photos, and lighthouse memoirs by keyword, author, or title.
-  * **Embedded PDF Viewer**: `#page=X` deep-linking allows users to click any page pill (e.g. `p. 60` for Henry Lawson) to update the embedded viewer directly.
+  * **Large View Window & Reliable Jump**: 860px tall viewer with query cache-busting (`/pdf/Love-of-Mallacoota.pdf?p=X#page=X&pagemode=none&navpanes=0&view=FitH`) allowing instant jumps and collapsing PDF thumbnail sidebars on load.
 * **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
 
 ### 4. Community Directory (`/directory.html`)
@@ -60,7 +62,7 @@ Over 120 verified listings categorized into 5 primary task-based sections:
 
 ### 7. Archive Hub (`/archive.html`)
 * Central historical archive hub for Mallacoota.
-* Features the Edna J. Brady collection (`/brady.html`), *The Mallacoota Mouth* back-issue catalogue (`/mouth.html`), weekly digital editions index, and *Local of the Week* profile archive.
+* Features the Edna J. Brady collection (`/brady.html`), *The Mallacoota Mouth* back-issue catalogue (`/mouth.html`), and weekly digital editions index.
 
 ---
 

@@ -62,7 +62,7 @@ function nextVersion(currentVersion) {
   const major = Number(match[1]);
   const minor = Number(match[2]);
   if (minor >= 99) {
-    throw new Error("Current version is at .99. Use --major for the next major release.");
+    return `v${major + 1}.00`;
   }
 
   return `v${major}.${String(minor + 1).padStart(2, "0")}`;

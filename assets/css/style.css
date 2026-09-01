@@ -901,6 +901,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-index li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--line, rgba(255,255,255,0.12)); }
 .edition-index span { color: var(--muted); font-size: 0.88rem; }
 
+.edition-print-only { display: none; }
+
 /* The printed edition is the page without the site furniture. */
 @media print {
   /* A4 with typographic margins, except the cover, which bleeds to the edge. */
@@ -969,7 +971,30 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     font-size: 8.5pt;
     color: rgba(255, 255, 255, 0.85);
   }
-  .edition-cover-web { display: none !important; }
+  .edition-print-only { display: block !important; }
+  .edition-print-footer {
+    margin-top: 12mm;
+    padding-top: 3mm;
+    border-top: 0.5pt solid #ccc;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #555;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .edition-print-footer a { color: #555 !important; text-decoration: none !important; }
+
+  h1, h2, h3, h4, h5, h6,
+  .section-title,
+  .eyebrow,
+  .edition-article h2,
+  .edition-article h3,
+  .edition-article-body h3,
+  .edition-byline {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    break-inside: avoid !important;
+  }
 
   .breadcrumbs,
   .site-nav, .site-footer, .bg-field, .bg-grid, .caustics, .motes,

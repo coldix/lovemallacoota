@@ -35,7 +35,11 @@ const TIDE_WHEN = new Intl.DateTimeFormat("en-AU", {
 });
 const tideWhen = (value) => TIDE_WHEN.format(new Date(value));
 const toc = tableOfContents(edition);
-const filler = fillerPhoto(edition);
+const rawFiller = fillerPhoto(edition);
+const isFillerUsed = edition.articles?.some(a => 
+  a.image?.url === rawFiller?.url || a.images?.some(img => img.url === rawFiller?.url)
+);
+const filler = isFillerUsed ? null : rawFiller;
 const total = countArticles(edition);
 const statusLabel =
   edition.status === "open"
@@ -454,3 +458,7 @@ const statusLabel =
     </div>
   </section>
 )}
+
+<footer class="edition-print-footer edition-print-only">
+  <p>Love Mallacoota · lovemallacoota.au · Published {publishedOn(edition.weekStart)} · Documenting East Gippsland’s coast, community & history with care.</p>
+</footer>

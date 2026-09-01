@@ -1,433 +1,206 @@
 # Love Mallacoota
 
-Community information platform and local guide for
-[lovemallacoota.au](https://lovemallacoota.au/).
+Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-The site has two complementary jobs:
+[![Site Version](https://img.shields.io/badge/version-v0.86-0284c7.svg)](data/site-version.json)
+[![Build & Test](https://img.shields.io/badge/tests-125%20passing-22c55e.svg)](tests/)
 
-1. **This Week** tells people what is happening now: notices, local stories,
-events, weather, tides, transport and weekly features.
-2. **The Directory** tells residents and visitors where to find businesses,
-services, clubs, government contacts, places to stay, food and things to do.
+---
 
-**Picking this up cold?** [`docs/HANDOVER.md`](docs/HANDOVER.md) is the current
-state and what to do first. [`docs/EMAIL.md`](docs/EMAIL.md) is how mail works
-and every way it has broken — read that before touching a form.
+## Overview
 
-The project mission is [`docs/MISSION.md`](docs/MISSION.md). The directory
-mission, information architecture and operating workflow are:
+**Love Mallacoota** is a modern, community-driven digital publication and directory serving residents, visitors, and history enthusiasts of Mallacoota and district (Gipsy Point, Genoa, and East Gippsland).
 
-- [`docs/MISSION-COMMUNITY-DIRECTORY.md`](docs/MISSION-COMMUNITY-DIRECTORY.md)
-- [`docs/DIRECTORY-IA.md`](docs/DIRECTORY-IA.md)
-- [`docs/DIRECTORY.md`](docs/DIRECTORY.md)
-- [`docs/DIRECTORY-SUBMISSIONS.md`](docs/DIRECTORY-SUBMISSIONS.md)
+Historical project documentation and earlier README iterations have been preserved in [`docs/history.md`](docs/history.md).
 
-## Current release
+---
 
-The site is a static Astro build served by a Cloudflare Worker. Visitor URLs
-(`/food.html`, `/accom.html`, `/activity.html`, `/calendar.html`, `/edition.html`)
-are preserved. Community and Services are first-class directory sections. Every
-listing has its own page at `/listing/<slug>.html`. The whole directory is
-searchable at `/directory.html`.
+## Platform Features
 
-`/edition.html` is the current weekly edition and is intended to become the
-primary current-information destination. The first public edition is Week 36 of
-2026, Edition 26:36.
+### 1. This Week (`/edition.html`)
+The primary weekly news destination published every Monday (`YY:WK` format, e.g. Edition 26:36).
+* **Local History**: Heritage articles, historical photo restorations (e.g. Henry Lawson and E.J. Brady at Captain's Point), and regional memoirs.
+* **Community & Editorial**: Local news, notices, classifieds, and contributor pieces.
+* **Live Conditions**: Open-Meteo weather forecasts, marine sea-level tides, and lunar cycle indicator.
+* **Local Transport**: PTV coach & bus timetables.
+* **Weekly Rotations**: Trail of the Week, Business of the Week, and featured videos.
+* **Printable PDF**: Automatic server-side rendering of each weekly edition as a formatted A4 document.
 
-Pushes to `main` deploy the isolated preview Worker. Production deployment of
-`lovemallacoota.au` is a deliberate maintainer action.
+### 2. Article Submissions & Admin Dashboard (`/submit.html` & `/admin.html`)
+* **Community Submissions**: Anyone can submit articles or historical notices via `/submit.html`.
+* **Multi-Photo Attachments**: Supports up to 3 high-resolution photographs per submission with captions and credits.
+* **Guest & Contributor Safeguards**:
+  * Authenticated contributors are published instantly upon passing automated policy checks.
+  * Guest (unauthenticated) submissions require a valid email and phone number, automatically staging photos and placing articles in the `pending_approval` queue in the D1 database.
+* **Admin Dashboard (`/admin.html`)**: Maintains an administrative dashboard for single-click review, approval, publishing, or rejection of pending submissions.
 
-## Information architecture
+### 3. Edna J. Brady *Love of Mallacoota* Collection (`/brady.html`)
+* Dedicated interactive page for Edna J. Brady's 1998 100+ page regional history compilation.
+* **Split-Pane Interactive Reader**:
+  * **Live Search**: Instant client-side filtering across 50+ chapters, poems, photos, and lighthouse memoirs by keyword, author, or title.
+  * **Embedded PDF Viewer**: `#page=X` deep-linking allows users to click any page pill (e.g. `p. 60` for Henry Lawson) to update the embedded viewer directly.
+* **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
 
-The target navigation is organised around user tasks rather than around the
-site's internal data files.
+### 4. Community Directory (`/directory.html`)
+Over 120 verified listings categorized into 5 primary task-based sections:
+* **Eat & Drink** ([`/food.html`](https://lovemallacoota.au/food.html)): Cafes, pubs, takeaway, seafood, groceries.
+* **Stay** ([`/accom.html`](https://lovemallacoota.au/accom.html)): Lodges, motels, holiday units, caravan parks.
+* **Do & See** ([`/activity.html`](https://lovemallacoota.au/activity.html)): Boat hire, tours, attractions, parks.
+* **Community** ([`/community.html`](https://lovemallacoota.au/community.html)): Clubs, sports, arts, volunteer groups, 3MGB radio.
+* **Services** ([`/services.html`](https://lovemallacoota.au/services.html)): Trades, health, government, police, CFA, SES.
+* **Self-Service Verification**: Free listing registration ([`/add-listing.html`](https://lovemallacoota.au/add-listing.html)) and listing claiming ([`/claim.html`](https://lovemallacoota.au/claim.html)) using D1-backed email verification tokens.
 
-```text
-Love Mallacoota
-|
-|-- This Week                      /edition.html
-|   |-- Notices
-|   |-- Community updates
-|   |-- Local stories / Local of the Week
-|   |-- Weather, tides and moon
-|   |-- What's On highlights
-|   |-- Transport
-|   |-- Trail / Business / Video of the Week
-|   `-- Previous editions
-|
-|-- What's On                      /calendar.html
-|   |-- Community calendar
-|   `-- Submit an event
-|
-|-- Directory                      /directory.html
-|   |-- Eat & Drink                /food.html
-|   |-- Stay                       /accom.html
-|   |-- Do & See                   /activity.html
-|   |-- Community                  /community.html
-|   |-- Services                   /services.html
-|   |-- Add your listing
-|   `-- Claim / update a listing
-|
-|-- Archive                        /archive.html
-|
-|-- Emergency                      /emergency.html
-|
-`-- About & contribute
-    |-- Contact / suggest a correction
-    |-- Support
-    |-- Advertise
-    `-- Editorial, privacy, accessibility and terms
-```
+### 5. What's On Calendar (`/calendar.html`)
+* Community event listings and integrated Google Calendar.
+* Public event submission form ([`/submit-event.html`](https://lovemallacoota.au/submit-event.html)).
 
-Desktop primary navigation, as built:
+### 6. Mouth Archive (`/archive.html`)
+* Searchable catalog of historic *Mallacoota Mouth* back-issues (1990s–2020s).
+* Index of past weekly digital editions and *Local of the Week* profiles.
+* Showcase feature for historical collections.
+
+---
+
+## Site Architecture & Tech Stack
 
 ```text
-This Week | What's On | Directory | Eat & Drink | Stay | Do & See | ☰
+                                 ┌───────────────────────────┐
+                                 │    Cloudflare Workers     │
+                                 │     (Edge Worker Engine)  │
+                                 └─────────────┬─────────────┘
+                                               │
+               ┌───────────────────────────────┼───────────────────────────────┐
+               ▼                               ▼                               ▼
+┌──────────────────────────────┐┌──────────────────────────────┐┌──────────────────────────────┐
+│     Static Assets (Astro)    ││    D1 SQLite Database (DB)   ││   Browser Rendering API      │
+│  - Pre-rendered HTML pages   ││  - Directory Submissions     ││  - On-demand A4 PDF renders  │
+│  - Optimized WebP images     ││  - Article Approval Queue    ││    of weekly editions        │
+│  - CSS Glassmorphism theme   ││  - Verification Tokens       ││                              │
+└──────────────────────────────┘└──────────────────────────────┘└──────────────────────────────┘
 ```
 
-The menu behind `☰` opens with **Emergency**, then *More of the directory*
-(Community, Services, Add your listing) and *Also here* (Archive, Contact).
-Emergency leads it because somebody looking for it is not browsing. The logo is
-the Home link; no navigation slot is spent on one. Below 1080px the primary row
-moves into the same menu, so the hierarchy is identical on every width.
+* **Core Framework**: Astro (Static Site Generation with file-based routing).
+* **Server / Edge Runtime**: Cloudflare Workers with TypeScript API routes (`src/worker.ts`, `src/submit.ts`, `src/admin.ts`, `src/listing.ts`).
+* **Database**: Cloudflare D1 (`lovemallacoota-directory`) for pending submissions, verification tokens, and audit logs.
+* **Design System**: Custom Vanilla CSS featuring an Antigravity Glassmorphism theme with dark/light mode support, vibrant accents, and smooth micro-animations.
+* **Image Optimization**: Automated conversion of uploaded photos to WebP format via Sharp (`tools/convert-uploaded-lawson-photos.mjs`, `uploads.yml`).
+* **Build Manifest & Versioning**: Version hash and timestamp dynamically generated in `data/site-version.json` and displayed in the site footer stamp.
 
-Navigation lives in [`src/components/SiteNav.astro`](src/components/SiteNav.astro)
-and the footer mirrors it in two columns — this week, and the directory.
+---
 
-### `locals.html`
+## Information Architecture
 
-`/locals.html` has been retired. **Local of the Week is an article inside This
-Week**, where the story was published and where the rest of that week sits
-around it.
+```text
+Love Mallacoota (lovemallacoota.au)
+├── This Week                           /edition.html
+│   ├── Local History & Stories
+│   ├── Notices & Classifieds
+│   ├── Weather, Tides & Moon
+│   ├── Transport (PTV Coach/Buses)
+│   └── Weekly Features (Trail / Business / Video)
+│
+├── What's On                           /calendar.html
+│   ├── Community Calendar
+│   └── Submit an Event                 /submit-event.html
+│
+├── Directory                           /directory.html
+│   ├── Eat & Drink                     /food.html
+│   ├── Stay                            /accom.html
+│   ├── Do & See                        /activity.html
+│   ├── Community                       /community.html
+│   ├── Services                        /services.html
+│   ├── Add Listing                     /add-listing.html
+│   └── Claim Listing                   /claim.html
+│
+├── Archive                             /archive.html
+│   └── Love of Mallacoota (1998)      /brady.html
+│
+├── Submissions & Admin
+│   ├── Submit Article / Notice         /submit.html
+│   └── Admin Approval Dashboard        /admin.html
+│
+├── Emergency                           /emergency.html
+│
+└── About & Contribute
+    ├── Contact & Corrections           /contact.html
+    └── Editorial & Terms               /editorial-policy.html
+```
 
-The Worker permanently redirects `/locals.html` (and `/locals`) to
-`/archive.html`, which carries an index of every profile. Each row keeps the
-anchor the old page used, so a link shared as `/locals.html#article-<id>` still
-lands on the right story: a fragment never reaches the server, and the browser
-carries it across a redirect whose `Location` has none of its own.
+---
 
-## Search, sharing and metadata
+## Local Development
 
-- Titles and descriptions are built from the page's own data. Listing metadata
-  comes from the record (`listingTitle` / `listingDescription` in
-  `src/lib/directory-model.mjs`); an edition names its week and its headlines.
-- Breadcrumbs are one component,
-  [`src/components/Breadcrumbs.astro`](src/components/Breadcrumbs.astro), which
-  renders the visible trail and the `BreadcrumbList` together so the two cannot
-  drift apart.
-- Open Graph cards are 1200 × 630 JPEGs in `images/og/`, generated by
-  [`tools/build-og.mjs`](tools/build-og.mjs) from Colin's own photographs and
-  committed. `pnpm run og` renders anything missing; `pnpm run og -- --force`
-  rebuilds them all. The build runs the generator first, so a new edition gets a
-  card automatically and then keeps it: a share posted months ago must not
-  change. A listing without a photograph of its own falls back to the card for
-  its part of the directory, never to a bare logo.
-- `?v=` on the stylesheet and scripts is a content hash
-  ([`src/lib/asset-version.mjs`](src/lib/asset-version.mjs)), not a number
-  somebody has to remember to change.
-- Preview and `workers.dev` hostnames serve the production HTML, so the Worker
-  adds `X-Robots-Tag: noindex, nofollow` to every response that is not on
-  `lovemallacoota.au`.
+### Requirements
+* Node.js v18+
+* `pnpm` package manager
 
-## Directory
-
-About ninety listings share one entity model (`src/lib/directory-model.mjs`).
-Section pages are filtered views of the same records.
-
-| Section | URL | What it holds |
-| --- | --- | --- |
-| Eat & Drink | `/food.html` | Cafes, pubs, takeaway, seafood, groceries |
-| Stay | `/accom.html` | Lodges, motels, holiday houses, caravan parks |
-| Do & See | `/activity.html` | Boat hire, tours, attractions |
-| Community | `/community.html` | Clubs, sport, arts, volunteer groups, local media |
-| Services | `/services.html` | Trades, shops, health, government, emergency |
-| What's On | `/calendar.html` | Community calendar, weekly highlights, event form |
-| Whole directory | `/directory.html` | Search and filters across every listing |
-
-Shops that used to sit under Do & See now appear under Services.
-
-Government and emergency listings are marked **Official**, use the matching
-schema.org type rather than LocalBusiness, and cannot be claimed. Incorporated
-associations seeded from Consumer Affairs Victoria show legal name and number
-only until a representative confirms contact details. No phone or hours are
-invented from a register name.
-
-### Add, claim, update
-
-Free. No accounts or passwords.
-
-1. [Add your listing](https://lovemallacoota.au/add-listing.html) - the form
-   adapts by organisation type.
-2. A six-digit code is emailed to the public address given. Unverified
-   submissions are never published.
-3. After the code, the listing is committed to git and a private manage link
-   is emailed. The link expires; claim the listing again to get a new one.
-4. Existing listings carry **Claim this listing**. Official services cannot
-   be taken over.
-
-Pending submissions, codes, manage tokens and an audit trail live in the
-`lovemallacoota-directory` D1 database. Published records stay in git. Photos
-are staged to `uploads/` and converted in CI to 1280px WebP.
-
-See [`docs/DIRECTORY.md`](docs/DIRECTORY.md) for the data model and maintainer
-runbook.
-
-## Structure
-
-- `src/pages/` - Astro routes. `build.format: "file"` keeps `.html` URLs.
-- `src/components/` and `src/layouts/` - navigation, footer, directory and edition UI.
-- `src/lib/directory-model.mjs` and `src/lib/directory.mjs` - unified listings.
-- `src/listing.ts` - add / claim / verify / manage / event Worker APIs.
-- `src/worker.ts` - redirects, security headers, `/api/*` routes.
-- `data/editions/` - contributed weekly-edition content.
-- `data/weekly/` - generated weekly weather, tides and features.
-- `data/` - listing JSON. `data/directory/` holds submitted overlays.
-- `migrations/` - D1 schema for directory submissions.
-- `docs/` - mission, directory IA, deployment, outreach and operating notes. Not deployed.
-- `tools/` - weekly refresh, rollover, public-file allow-list, version stamp and photo conversion.
-
-## Local development
+### Getting Started
 
 ```sh
+# 1. Install dependencies
 pnpm install
+
+# 2. Run type check & verification
 pnpm run check
+
+# 3. Run unit test suite (125 tests)
+pnpm run test
+
+# 4. Start local development server
 pnpm run dev
 ```
 
-The site is served locally at `http://localhost:8787`. Apply D1 migrations once:
+The site will be served locally at `http://localhost:8787`.
+
+### Local Database Setup (D1)
+
+Apply D1 database migrations locally:
 
 ```sh
 pnpm wrangler d1 migrations apply lovemallacoota-directory --local
 ```
 
-Build output is written to `dist/` from the allow-list in
-`tools/public-files.mjs`.
+---
 
-## Deployment
+## Deployment & Rebuilding
 
-Production is a Cloudflare Worker with static assets. Canonical domain:
-`lovemallacoota.au`. `www` redirects to the apex.
+Production runs on **Cloudflare Workers** with static asset binding serving `lovemallacoota.au`.
 
-```sh
-pnpm run deploy:preview   # isolated workers.dev preview
-pnpm run deploy           # lovemallacoota.au
-```
+### Build & Versioning
 
-See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for DNS, email-record
-preservation, cutover and rollback.
-
-## Versioning
-
-Run this before publishing content changes:
+To update the version manifest (`data/site-version.json`) and rebuild the site:
 
 ```sh
 pnpm run version:site
 ```
 
-The script writes `data/site-version.json` from public site files: a `v0.01`-style
-version, a Melbourne timestamp, and a SHA-256 for each deployed file. Normal
-updates increment by `.01`. For a major release:
+### Deployment Commands
 
 ```sh
-node tools/update-version.mjs --major
+# Deploy to preview environment (workers.dev)
+pnpm run deploy:preview
+
+# Deploy to live production (lovemallacoota.au)
+pnpm run deploy
 ```
 
-The footer reads this manifest and displays the current version.
+For detailed deployment runbooks, secret configuration, and DNS setup, see [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
-## Forms and mail
+---
 
-The suggest-an-update form posts to `/api/submit` ([`src/contact.ts`](src/contact.ts)).
-Directory add/claim/event posts to `/api/listing` ([`src/listing.ts`](src/listing.ts)).
-Both require Turnstile verified server side, a honeypot, and a per-IP rate
-limit. No sending credential is exposed to the browser.
+## Documentation Index
 
-**There are two mail paths, and they are not interchangeable.**
-[`docs/EMAIL.md`](docs/EMAIL.md) is the full account; the short version:
+- [`docs/history.md`](docs/history.md) - Legacy project history and original README archives.
+- [`docs/HANDOVER.md`](docs/HANDOVER.md) - Maintainer handover notes.
+- [`docs/EMAIL.md`](docs/EMAIL.md) - Email routing, Turnstile, and relay secret setup.
+- [`docs/DIRECTORY.md`](docs/DIRECTORY.md) - Directory schema and management workflows.
+- [`docs/WEEKLY-MOUTH.md`](docs/WEEKLY-MOUTH.md) - Weekly edition design decisions.
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) - Cloudflare Workers deployment details.
 
-| | To Colin | To a stranger |
-| --- | --- | --- |
-| contact form, claims needing review, events for the calendar | the adnet relay | |
-| verification codes for add-listing, claim, submit-event | | Resend, direct |
-| code | `sendMail()` | [`src/mailer.ts`](src/mailer.ts) |
+---
 
-The relay at `https://ads.oze.net.au/relay` **cannot choose a recipient**,
-deliberately: the caller names a site, the relay resolves it to one fixed
-address. That is what makes a leaked relay key harmless. It is also why it
-cannot carry verification codes — it sends through Cloudflare Email Routing,
-which only delivers to addresses verified on that account, and a member of the
-public never is. Before `src/mailer.ts` existed every code went to the site's own
-inbox, and no member of the public could have completed a listing.
+## License
 
-Do not "fix" that by widening the relay. Both halves are correct.
-
-`RELAY_KEY` is a **shared** bearer token: the same string must be set on this
-Worker *and* on `adnet-serve`, or the relay answers 401. Set both together with
-[`tools/push-secrets.sh`](tools/push-secrets.sh) rather than by hand; setting
-one side is how they drift apart.
-
-`MAIL_FROM` must be on a domain **verified with Resend**. That is `oze.com.au`.
-`lovemallacoota.au` is a Google Workspace alias onto it, not a sending domain,
-and Resend refuses a `From` on it.
-
-Put the Turnstile **site** key in `.env` as `PUBLIC_TURNSTILE_SITE_KEY` (see
-[`.env.example`](.env.example)), and in the `PUBLIC_TURNSTILE_SITE_KEY` GitHub
-Actions secret so CI builds with it. Without it the build falls back to
-Cloudflare's always-passes test key, which is correct locally and wrong in
-production. **The site key and the secret key must come from the same Turnstile
-widget**, and that widget's hostname list must include `lovemallacoota.au`.
-
-Everything fails closed: a missing key, a failed challenge or a relay error
-returns an error rather than silently dropping the message.
-
-### What broke, and what it cost
-
-Every form on the site failed from launch until 31 August 2026, and the D1
-tables were empty because nothing had ever succeeded. Four separate faults,
-stacked, each hidden by the one above it:
-
-1. **`connect-src` in the CSP had no `challenges.cloudflare.com`**, though
-   `script-src` and `frame-src` did. Turnstile loaded, built its container, and
-   died on the call that starts the challenge — no iframe, no token, no error,
-   and a form that looks perfectly normal until you press the button. This one
-   was underneath all the others.
-2. **`RELAY_KEY` was an empty string on `adnet-serve`.** `wrangler secret list`
-   shows an empty secret exactly as it shows a correct one.
-3. **`TURNSTILE_SECRET_KEY` came from a different widget** than the site key on
-   the page. The widget goes green and the server refuses.
-4. **`GITHUB_TOKEN` was rejected by GitHub with a 401**, which surfaced only
-   because a photograph upload happened to log it.
-
-None of these produced a failing build, a failing test, or an error anyone
-would see. Worker secrets are write-only, so a wrong value, an empty value and
-a correct value are indistinguishable by inspection. Three things came out of
-it and are worth keeping:
-
-- [`tools/push-secrets.sh`](tools/push-secrets.sh) verifies every secret against
-  the service that owns it *before* sending it, and refuses to send one that
-  fails. See [`.env.secrets.template`](.env.secrets.template).
-- The Worker now logs *why* a form was refused — Turnstile's `error-codes`, a
-  missing token as distinct from a rejected one, and the relay's status and
-  body — rather than a bare "Verification failed".
-- A test asserts every third party the pages load appears in the CSP directive
-  that governs it.
-
-If a form fails, `npx wrangler tail --env=""` now names the cause. Tail
-`adnet-serve` as well when the failure is in delivery:
-`cd ~/web/adnet && npx wrangler tail --config serve/wrangler.jsonc`.
-
-[`docs/EMAIL.md`](docs/EMAIL.md) maps every log line either Worker emits to its
-cause, and carries the checks that diagnose each secret without sending
-anything.
-
-## The weekly edition
-
-`/edition.html` is the current week; every week keeps a permanent page at
-`/edition/<year>-w<week>.html` and a printable A4 PDF rendered on demand at
-`/edition/<year>-w<week>.pdf`. Editions are numbered `YY:WK` - Week 36 of 2026
-is Edition 26:36. Design decisions are in
-[`docs/WEEKLY-MOUTH.md`](docs/WEEKLY-MOUTH.md).
-
-Contributed sections come from `data/editions/<week>.json`; the automatic ones
-are generated into `data/weekly/<week>.json` and committed, so a build never
-depends on a third party being reachable and a past edition keeps what it was
-published with.
-
-| Automatic section | Source | Licence |
-| --- | --- | --- |
-| Weather | Open-Meteo forecast | CC BY 4.0 |
-| Tides | Open-Meteo marine model, sea level height | CC BY 4.0 |
-| Moon | Computed in [`src/lib/moon.mjs`](src/lib/moon.mjs) | - |
-| Buses | PTV GTFS via `tools/refresh-transport.py` | CC BY 4.0 |
-| Trail of the week | TrailBound, via `tools/sync-trails.mjs` | own |
-| Business of the week | The directory, by rotation | own |
-
-Tides are modelled against mean sea level, not chart datum, at a model point
-offshore. They are indicative and not for navigation, and every page that
-carries them says so.
-
-## Scheduled work
-
-| Workflow | When | What |
-| --- | --- | --- |
-| `deploy.yml` | push, or dispatch | preview on push, production on dispatch |
-| `weekly.yml` | daily, 15:10 AEST | refresh forecast, tides, features, then deploy |
-| `roll.yml` | Sunday, 16:00 AEST | close the week, open the next, then deploy |
-| `uploads.yml` | on `uploads/**` | convert submitted photographs to WebP |
-
-`roll.yml` is idempotent: a missed Sunday recovers on Monday, and running it
-twice does nothing the first run did not.
-
-## Payments
-
-`/donate`, `/subscribe` and `/advertise` are Worker redirects to Stripe payment
-links, held as vars in `wrangler.jsonc` so a regenerated link is a config
-change. Stripe posts back to `/api/stripe`
-([`src/stripe-webhook.ts`](src/stripe-webhook.ts)), which verifies the
-signature and timestamp before reading the body, classifies the payment, and
-opens a draft in `data/ad-bookings/` for advertising only. A supporter payment
-or a contribution needs no work, so it is acknowledged and not filed as an ad
-booking.
-
-Listing in the directory is free. Advertising is $35 a month, supporters $10,
-and contributions are whatever people choose. Love Mallacoota is not registered
-for GST and is not a deductible gift recipient at the time of this revision.
-
-## Secrets
-
-Worker secrets are **write-only**. Nothing can read one back, so a correct
-value, a wrong value and an empty string all look identical in `wrangler secret
-list`. Do not set them by hand — use the script, which checks each one against
-the service that owns it and refuses to send anything that fails:
-
-```sh
-cp .env.secrets.template .env.secrets && chmod 600 .env.secrets
-./tools/push-secrets.sh --check     # verify everything, change nothing
-./tools/push-secrets.sh             # verify, then push what is set
-```
-
-`.env.secrets` is ignored by git (`.env.*`); the template is tracked and holds
-no values. What each secret is, where it comes from and how it is verified is
-documented in [`.env.secrets.template`](.env.secrets.template).
-
-| Secret | Where it comes from | Verified by |
-| --- | --- | --- |
-| `TURNSTILE_SECRET_KEY` | Cloudflare → Turnstile → widget → Settings. **Same widget as the site key.** | siteverify answers `invalid-input-response`, not `invalid-input-secret` |
-| `RELAY_KEY` | You generate it: `openssl rand -base64 32` | pushed to **both** Workers at once; the relay then answers 401 to a wrong bearer, not 503 |
-| `GITHUB_TOKEN` | GitHub → fine-grained PAT, `coldix/lovemallacoota`, Contents: read and write. Expires. | `GET /repos/coldix/lovemallacoota` returns 200 |
-| `STRIPE_WEBHOOK_SECRET` | Stripe → Developers → Webhooks → the `/api/stripe` endpoint | starts `whsec_`; no read-only check exists, so it is pushed unverified |
-
-The Turnstile **site** key is public: it goes in `.env` as
-`PUBLIC_TURNSTILE_SITE_KEY` and in the GitHub Actions secret of the same name.
-Without it the build falls back to Cloudflare's always-passes test key, which is
-right locally and wrong in production. Changing it needs a **deploy**, because
-the pages bake it in at build time; changing a Worker secret does not.
-
-## Tools
-
-```sh
-pnpm run weekly                  # refresh this week's automatic sections
-pnpm run roll                    # close the week, open the next
-pnpm run trails:sync             # re-read TrailBound
-pnpm run check:images            # listing images referenced but missing
-node tools/prepare-cover.mjs <photo> --week=… --caption=… --credit=…
-node tools/prepare-article-image.mjs <photo> --week=… --article=… --credit=… --alt=…
-node tools/prepare-bank.mjs <photo> --slug=… --caption=… --credit=…
-node tools/refresh-transport.py <ptv-gtfs.zip>   # 290MB feed, run by hand
-```
-
-## Outreach
-
-Announcement copy, and the letter to the College about the Mouth archive, are in
-[`docs/outreach/`](docs/outreach/).
-
-## Licence
-
-Code is MIT ([`LICENSE`](LICENSE)). Original content is CC BY 4.0; submitted and
-archived material is not automatically relicensed. See
-[`CONTENT-LICENCE.md`](CONTENT-LICENCE.md).
-
-## GitHub
-
-```sh
-origin https://github.com/coldix/lovemallacoota.git
-```
+* **Code**: MIT License ([`LICENSE`](LICENSE)).
+* **Original Content**: Creative Commons Attribution 4.0 International ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)).
+* **Archived Materials**: Retained under original rights / historical fair dealing.

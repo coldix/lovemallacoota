@@ -102,7 +102,7 @@ const indexItems = [
           <button id="toggleExpandBtn" type="button" class="btn btn-ghost" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;">
             ↔ Toggle Full Width
           </button>
-          <a id="openTabBtn" href="/pdf/Love-of-Mallacoota.pdf#page=1" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;">
+          <a id="openTabBtn" href="/pdf/Love-of-Mallacoota.pdf#page=1&pagemode=none&navpanes=0" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;">
             ↗ Open in New Tab
           </a>
         </div>
@@ -119,14 +119,14 @@ const indexItems = [
       </div>
 
       <div id="bradyReaderGrid" class="brady-reader-grid">
-        {/* Table of Contents Column (350px width) */}
+        {/* Table of Contents Column (Swapped: Title | Page | Author) */}
         <div class="brady-toc-wrap">
           <table class="archive-table" style="width: 100%; border-collapse: collapse;">
             <thead>
               <tr style="border-bottom: 2px solid var(--glass-border); text-align: left;">
                 <th style="padding: 0.6rem; color: var(--muted); font-size: 0.85rem;">Title / Section</th>
+                <th style="padding: 0.6rem; text-align: center; color: var(--muted); font-size: 0.85rem;">Page</th>
                 <th style="padding: 0.6rem; color: var(--muted); font-size: 0.85rem;">Author / Source</th>
-                <th style="padding: 0.6rem; text-align: right; color: var(--muted); font-size: 0.85rem;">Page</th>
               </tr>
             </thead>
             <tbody id="indexTableBody">
@@ -137,10 +137,9 @@ const indexItems = [
                   style="border-bottom: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: background 0.15s ease;"
                 >
                   <td style="padding: 0.65rem 0.6rem; font-size: 0.92rem; font-weight: 600;">{item.title}</td>
-                  <td style="padding: 0.65rem 0.6rem; font-size: 0.85rem; color: var(--muted);">{item.author}</td>
-                  <td style="padding: 0.65rem 0.6rem; text-align: right;">
+                  <td style="padding: 0.65rem 0.6rem; text-align: center;">
                     <a
-                      href={`/pdf/Love-of-Mallacoota.pdf#page=${item.page}`}
+                      href={`/pdf/Love-of-Mallacoota.pdf#page=${item.page}&pagemode=none&navpanes=0`}
                       class="btn btn-ghost page-pill"
                       data-page={item.page}
                       style="padding: 0.2rem 0.65rem; font-size: 0.82rem; font-weight: 700; color: var(--accent); border-radius: 999px; white-space: nowrap;"
@@ -148,13 +147,14 @@ const indexItems = [
                       p. {item.page}
                     </a>
                   </td>
+                  <td style="padding: 0.65rem 0.6rem; font-size: 0.85rem; color: var(--muted);">{item.author}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        {/* PDF Viewer Column (Large View Window) */}
+        {/* PDF Viewer Column (Large View Window, Sidebar Collapsed by default) */}
         <div class="brady-pdf-container">
           <div style="padding: 0.5rem 1rem; background: #1a2234; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--muted);">
             <span id="currentViewingLabel">Currently Viewing: <strong>Dedication (Page 1)</strong></span>
@@ -162,7 +162,7 @@ const indexItems = [
           </div>
           <iframe
             id="pdfViewer"
-            src="/pdf/Love-of-Mallacoota.pdf?p=1#page=1"
+            src="/pdf/Love-of-Mallacoota.pdf?p=1#page=1&pagemode=none&navpanes=0&view=FitH"
             title="Love of Mallacoota PDF Document"
             style="width: 100%; height: 860px; border: none; background: #0f172a;"
           ></iframe>
@@ -185,7 +185,8 @@ const indexItems = [
       function jumpToPage(page, title) {
         if (!pdfViewer) return;
         
-        const targetUrl = `/pdf/Love-of-Mallacoota.pdf?p=${page}#page=${page}`;
+        // Include pagemode=none and navpanes=0 to hide PDF thumbnail sidebar on load
+        const targetUrl = `/pdf/Love-of-Mallacoota.pdf?p=${page}#page=${page}&pagemode=none&navpanes=0&view=FitH`;
         
         // Force iframe refresh and hash jump
         pdfViewer.src = targetUrl;
@@ -260,7 +261,7 @@ const indexItems = [
   <style>
     .brady-reader-grid {
       display: grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 380px 1fr;
       gap: 1.5rem;
       align-items: start;
     }

@@ -40,7 +40,7 @@ export const SECTIONS = [
   { id: "community", title: "Community" },
   { id: "local", title: "Local of the Week" },
   { id: "region", title: "Gipsy Point, Genoa and District" },
-  { id: "history", title: "History" },
+  { id: "history", title: "Local History" },
   { id: "fishing", title: "Fishing Report" },
   { id: "sports-clubs", title: "Sports Clubs" },
   { id: "social-clubs", title: "Social Clubs" },

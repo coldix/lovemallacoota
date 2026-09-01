@@ -316,12 +316,12 @@ test("published text keeps its punctuation intact", async () => {
   // encoding round trip, and it only showed up in the rendered page. The
   // profiles now render inside the edition, so that is where to look.
   const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
-  assert.ok(!/â€|Â|�/.test(html), "the page contains mojibake");
+  assert.ok(!/â€|Â|\uFFFD/.test(html), "the page contains mojibake");
 
   for (const edition of loadEditions()) {
     for (const article of edition.articles || []) {
       const text = [article.title, ...(article.body || [])].join(" ");
-      assert.ok(!/â€|�/.test(text), `${article.id} has corrupted punctuation`);
+      assert.ok(!/â€|\uFFFD/.test(text), `${article.id} has corrupted punctuation`);
     }
   }
 });

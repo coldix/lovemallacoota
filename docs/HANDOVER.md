@@ -1,7 +1,7 @@
 # Handover — 2 September 2026
 
 Live release **v1.10** at [lovemallacoota.au](https://lovemallacoota.au).
-132 tests passing. Written for whoever picks this up next (Colin said Opus 5).
+133 tests passing. Written for whoever picks this up next (Colin said Opus 5).
 
 ---
 
@@ -57,6 +57,30 @@ was found:
   and table print as one block on the next page, and the bus page is half blank
   because the radio programme does. Both are one-page automatic sections and
   were designed that way.
+
+### Two things the deploy taught, after the push
+
+**A push without edition data does not reach production.** The v1.10 push ran
+the deploy workflow, it reported success, and the site kept serving v1.09: the
+workflow only publishes production on its own for a push carrying
+`data/directory/**` or `data/editions/**`. Anything else needs
+`gh workflow run deploy.yml -f target=production`. It is in "Where things are"
+below and was easy to forget while watching the run go green.
+
+**The scheduled refresh failed on its first run after the punctuation guard.**
+The calendar feed sends curly apostrophes ("Senior Women's Exercise Class"),
+`tools/refresh-weekly.mjs` wrote them into `data/weekly/2026-w36.json`, and the
+build test refused the page, so nothing was published that afternoon.
+`loadWeekly()` now normalises the automatic half the way `loadEditions()` does
+the pieces, and both tools normalise before writing. A test covers it.
+
+**Cropped pictures cost megabytes.** The first v1.10 PDF was 10.2MB, larger
+than before the 1400px cap. `pdfimages -list` showed why: the three pictures
+printed with `object-fit: cover` were stored as uncompressed bitmaps (2.6MB for
+one), because Chromium rasterises a cover-cropped image rather than embedding
+the JPEG. On paper the grid now crops by clipping a fixed-height box, and the
+JPEG passes through whole. Check any future picture rule against
+`pdfimages -list` on the live PDF: `jpeg` in the `enc` column is what you want.
 
 ### How to look at the print layout without deploying
 

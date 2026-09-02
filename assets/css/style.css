@@ -1570,12 +1570,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     margin: 0 0 3mm;
   }
   .edition-figures-grid .edition-figure { float: none !important; width: auto !important; margin: 0 !important; }
-  .edition-figures-grid img { width: 100% !important; max-height: 50mm !important; aspect-ratio: 4 / 3; object-fit: cover; }
-  .edition-figures-grid .edition-figure.small img { aspect-ratio: 1 / 1; max-height: 40mm !important; }
+  /* Pictures are cropped to the cell by clipping a fixed-height box, never by
+     object-fit: cover. A cover-cropped picture makes Chromium rasterise a new
+     bitmap and store it in the PDF uncompressed (2.6MB for one photograph);
+     a clipped one passes the JPEG through whole. Anchored at the top, so a
+     portrait keeps its head. */
+  .edition-figures-grid .edition-zoom { display: block; height: 50mm; overflow: hidden; }
+  .edition-figures-grid img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: fill !important;
+  }
+  .edition-figures-grid .edition-figure.small .edition-zoom { height: 40mm; }
   .edition-figures-grid .edition-figure.lead { grid-column: auto; }
-  .edition-figures-grid .edition-figure.lead img { width: 100% !important; aspect-ratio: 4 / 3; object-fit: cover; }
   .edition-figures-grid:has(> :nth-child(4)) { grid-template-columns: repeat(3, 1fr); }
-  .edition-figures-grid:has(> :nth-child(4)) img { max-height: 36mm !important; }
+  .edition-figures-grid:has(> :nth-child(4)) .edition-zoom { height: 36mm; }
   .edition-figures-grid figcaption { font-size: 7.5pt; }
   /* A lone picture in its column is capped lower than before, so a headline,
      its picture and the first lines of the story fit in the last third of a

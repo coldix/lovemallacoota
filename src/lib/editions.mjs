@@ -190,11 +190,17 @@ export function loadDataFile(name, fallback) {
   return JSON.parse(readFileSync(file, "utf8"));
 }
 
+/**
+ * The automatic half is normalised too. The calendar feed sends curly
+ * apostrophes ("Senior Women’s Exercise Class"), and the first scheduled
+ * refresh after the plain-punctuation guard went in failed its own build test
+ * on exactly that.
+ */
 export function loadWeekly(week) {
   if (!rootDir) return null;
   const file = path.join(rootDir, "data", "weekly", `${week}.json`);
   if (!existsSync(file)) return null;
-  return JSON.parse(readFileSync(file, "utf8"));
+  return plainEdition(JSON.parse(readFileSync(file, "utf8")));
 }
 
 /**

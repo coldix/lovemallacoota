@@ -611,3 +611,18 @@ test("neither form offers a type the server will refuse", async () => {
   const manage = await readFile(new URL("../dist/manage.html", import.meta.url), "utf8");
   assert.match(manage, /name="entityType"/, "the manage form cannot change what a listing is");
 });
+
+test("the automatic sections are normalised like the pieces are", async () => {
+  // The calendar feed sends curly apostrophes; the first scheduled refresh
+  // after the plain-punctuation guard failed on "Senior Women\u2019s Exercise
+  // Class". Whatever the weekly file holds, the page prints it plain.
+  const { plainEdition } = await import("../src/lib/editions.mjs");
+  const weekly = plainEdition({
+    events: [{ title: "Senior Women\u2019s Exercise Class", location: "MIVA \u2014 hall" }],
+    trail: { name: "Betka \u2013 Quarry", url: "https://example.com/a\u2019b" },
+  });
+  assert.equal(weekly.events[0].title, "Senior Women's Exercise Class");
+  assert.equal(weekly.events[0].location, "MIVA - hall");
+  assert.equal(weekly.trail.name, "Betka - Quarry");
+  assert.equal(weekly.trail.url, "https://example.com/a\u2019b", "a url is not prose");
+});

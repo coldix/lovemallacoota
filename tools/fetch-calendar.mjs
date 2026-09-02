@@ -7,6 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { plainEdition } from "../src/lib/editions.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -187,7 +188,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       const weeklyFile = path.join(rootDir, "data", "weekly", `${week}.json`);
       if (fs.existsSync(weeklyFile)) {
         const data = JSON.parse(fs.readFileSync(weeklyFile, "utf8"));
-        data.events = events;
+        data.events = plainEdition(events);
         fs.writeFileSync(weeklyFile, JSON.stringify(data, null, 2), "utf8");
         console.log(`Updated ${weeklyFile}`);
       }

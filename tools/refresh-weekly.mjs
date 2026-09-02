@@ -15,6 +15,7 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { moonWeek } from "../src/lib/moon.mjs";
+import { plainEdition } from "../src/lib/editions.mjs";
 import { fetchCalendarEvents } from "./fetch-calendar.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -315,7 +316,8 @@ if (dryRun) {
 } else {
   mkdirSync(weeklyDir, { recursive: true });
   const file = path.join(weeklyDir, `${week}.json`);
-  writeFileSync(file, `${JSON.stringify(payload, null, 2)}\n`);
+  // Plain punctuation in the committed file as well as on the page.
+  writeFileSync(file, `${JSON.stringify(plainEdition(payload), null, 2)}\n`);
   console.log(`\nwrote ${path.relative(rootDir, file)}`);
 }
 

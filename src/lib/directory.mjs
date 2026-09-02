@@ -135,7 +135,12 @@ export function sectionCounts() {
 export function listingPhoto(entity) {
   const dedicated = `/images/listings/${entity.slug}.webp`;
   if (existsSync(path.join(rootDir, dedicated.replace(/^\//, "")))) {
-    return { url: dedicated, alt: entity.name };
+    // A photograph saved under the slug needs no data entry at all, which is
+    // the point of it. Alt text is the one thing the filename cannot carry, so
+    // data/listing-photos.json holds it where somebody has written one; the
+    // name of the listing is a poor description but better than nothing.
+    const described = readJson("data/listing-photos.json", {})[entity.slug];
+    return { url: dedicated, alt: described?.alt || entity.name };
   }
   const images = entity.images || [];
   const hero = images.find((image) => image.is_hero) || images[0];

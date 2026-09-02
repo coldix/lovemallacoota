@@ -20,15 +20,30 @@ Eight releases, v1.11 to v1.18. Each one is a commit with its reasoning.
 
 Also done, in the adnet repo: the relay's `send_email` binding now names `coota@oze.com.au` instead of accepting any verified destination, with a test holding the binding and `TARGETS` in step. Deployed.
 
-### The photographs are on the NAS
+### What is actually on the NAS
 
 `tools/import-nas-images.mjs` maps business photographs from
 `/Volumes/Media/Docs/OZonLine/A-Businesses` into `images/bus/`. It covered 26 of
-the 44 folders on that volume. Folders like Abalone Coop, Bank, Hardware, Inlet
-Bowling Club, Caltex, Bunker, 3MGB and Gabo Island have never been imported, and
-several of them are listings showing no picture today. This is the cheapest
-remaining lever on the directory and it needs no owner's permission - the
-photographs are already Colin's.
+the 44 folders there, and the first reading of that gap was too hopeful: the
+other 18 are mostly businesses with **no listing at all**. Bendigo Bank, the
+hardware shop, Caltex, Blue Wren Motel, Wallagaraugh River Retreat, Gabo Island,
+Abalone Coop, cootacraft, Arcuthi - none of them are in the directory, so there
+was no photograph gap to fill, only a directory gap. Whether they still trade
+after 2020 is the question, and it is Colin's to answer, not something to guess
+from a folder of old photographs.
+
+Only four folders matched a listing with no picture, and three did not survive
+a look:
+
+| Folder | Listing | Outcome |
+| --- | --- | --- |
+| PonyClub | Mallacoota Pony Club | **Imported.** `PonyClub04.jpg`, a trail ride away from the camera - no faces, which matters when most of the riders are children. |
+| Inlet Bowling Club | Mallacoota Inlet Bowling Club | Nothing usable. The folder holds logos and two stock photographs from Pexels; neither is a photograph of the club. |
+| CHIRF | Community Health, Infrastructure and Resilience Fund | Left. `chirf3.jpg` shows the Community Doctor Search stand at a conference, which is a different campaign, and five identifiable people whose consent for this use is unknown. `chirf2.jpg` is 537px wide. |
+| 3MGB | 3MGB Wilderness Radio | Left. A 527px logo, not a photograph. |
+
+So the directory sits at 29 of 99 with a photograph. The remaining lever is
+still Colin with a camera, or owners claiming their listings.
 
 ---
 

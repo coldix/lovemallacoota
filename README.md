@@ -215,6 +215,11 @@ build time except `build-og.mjs`, `build-static.mjs` and `public-files.mjs`.
 | `refresh-weekly.mjs` | Builds the automatic half of an edition: forecast, tides, moon, events. `pnpm run weekly` |
 | `roll-edition.mjs` | Closes the week and opens the next. `pnpm run roll` |
 | `check-images.mjs` | Listing images the data names but the repository lacks; `--gaps` lists listings with no photograph at all. `pnpm run check:images` |
+
+To give a listing a photograph, save it as `images/listings/<slug>.webp` - no
+data edit, and it wins over anything the listing data names. Alt text for one of
+those goes in `data/listing-photos.json`, keyed by slug; without an entry the
+alt text is the listing's name.
 | `process-uploads.mjs` | Converts photographs submitted through the form. Run by `uploads.yml`. |
 | `prepare-cover.mjs` | One photograph into the two derivatives an edition cover needs. |
 | `prepare-article-image.mjs` | One image per article, WebP at 1280px on the longest side. |

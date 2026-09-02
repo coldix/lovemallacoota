@@ -157,7 +157,19 @@ export async function fetchCalendarEvents(startDateStr, endDateStr) {
   const result = Array.from(uniqueMap.values());
   result.sort((a, b) => a.timestamp - b.timestamp);
 
-  return result.map(({ timestamp, ...rest }) => rest);
+  // Curate to a compact 1-page selection: max 2 key items per day, max 14 items total
+  const curated = [];
+  const dayCounts = {};
+  for (const ev of result) {
+    const dayKey = ev.date;
+    const count = dayCounts[dayKey] || 0;
+    if (count < 2 && curated.length < 14) {
+      dayCounts[dayKey] = count + 1;
+      curated.push(ev);
+    }
+  }
+
+  return curated.map(({ timestamp, ...rest }) => rest);
 }
 
 // Run as CLI if called directly

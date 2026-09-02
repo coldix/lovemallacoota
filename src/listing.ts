@@ -599,6 +599,11 @@ async function handleEvent(form: FormData, env: Env): Promise<Response> {
     ends: String(form.get("ends") || ""),
     where: plainText(String(form.get("where") || ""), 200),
     contactName: plainText(String(form.get("contactName") || ""), 120),
+    frequency: plainText(String(form.get("frequency") || "one-off"), 40),
+    schoolTerm: form.get("schoolTerm") === "yes",
+    noPublicHolidays: form.get("noPublicHolidays") === "yes",
+    schoolHolidaysOnly: form.get("schoolHolidaysOnly") === "yes",
+    recurrenceNotes: plainText(String(form.get("recurrenceNotes") || ""), 200),
   };
   await requireReadyDb(env).prepare(
     `INSERT INTO submissions (id, kind, slug, payload, email, entity_type, official, status, created_at, updated_at)

@@ -61,6 +61,37 @@ import { CARDS } from "../lib/social.mjs";
           <input id="ends" name="ends" type="datetime-local" />
         </div>
         <div class="field full">
+          <label for="frequency">How often does this event run?</label>
+          <select id="frequency" name="frequency">
+            <option value="one-off">One-off event</option>
+            <option value="weekly">Weekly</option>
+            <option value="fortnightly">Fortnightly</option>
+            <option value="monthly">Monthly</option>
+            <option value="other">Other / Seasonal</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Schedule conditions & exceptions (optional)</label>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem;">
+            <label class="check-label">
+              <input name="schoolTerm" type="checkbox" value="yes" />
+              Only during school term
+            </label>
+            <label class="check-label">
+              <input name="noPublicHolidays" type="checkbox" value="yes" />
+              Does not run on public holidays
+            </label>
+            <label class="check-label">
+              <input name="schoolHolidaysOnly" type="checkbox" value="yes" />
+              School holidays only
+            </label>
+          </div>
+        </div>
+        <div class="field full">
+          <label for="recurrenceNotes">Schedule details or dates (optional)</label>
+          <input id="recurrenceNotes" name="recurrenceNotes" type="text" maxlength="200" placeholder="e.g. 1st Saturday of the month; breaks over Dec/Jan" />
+        </div>
+        <div class="field full">
           <label for="where">Where</label>
           <input id="where" name="where" type="text" maxlength="200" placeholder="Mallacoota Hall, Betka Beach…" />
         </div>

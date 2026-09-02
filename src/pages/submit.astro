@@ -8,7 +8,7 @@ const edition = currentEdition();
 const writable = SECTIONS.filter((section) => !section.automatic);
 ---
 <BaseLayout
-  title="Submit to this week's edition — Love Mallacoota"
+  title="Submit to this week's edition - Love Mallacoota"
   description="Approved contributors can add notices, club news, school reports and community updates to this week's edition."
   canonicalPath="/submit.html"
   active="submit"
@@ -78,11 +78,13 @@ const writable = SECTIONS.filter((section) => !section.automatic);
             <label for="body">The piece</label>
             <textarea id="body" name="body" rows="16" required placeholder="Leave a blank line between paragraphs."></textarea>
             <p class="contact-hint">
-              Blank line between paragraphs. A little formatting is allowed:
-              <code>**bold**</code>, <code>*italic*</code>,
-              <code>[words](https://example.com)</code>, and lines beginning
-              with <code>-</code> become a bullet list. Anything else, including
-              HTML, is shown as you typed it.
+              Blank line between paragraphs. A single line break is kept, so a
+              verse or an address stays as you set it out. A little formatting
+              is allowed: <code>**bold**</code>, <code>*italic*</code>,
+              <code>[words](https://example.com)</code>, lines beginning with
+              <code>-</code> become a bullet list, and a line beginning
+              <code>##</code> is a subheading. Curly quotes and dashes are
+              printed plain. Anything else, including HTML, is shown as you typed it.
             </p>
           </div>
 
@@ -90,7 +92,7 @@ const writable = SECTIONS.filter((section) => !section.automatic);
           <div class="field full">
             <label for="photo">Photograph 1 (optional)</label>
             <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic" />
-            <p class="contact-hint">Sent full size — we resize to 1920px and convert to WebP. Up to 12MB.</p>
+            <p class="contact-hint">Sent full size - we resize to 1920px and convert to WebP. Up to 12MB.</p>
           </div>
           <div class="field">
             <label for="caption">Photo 1 caption</label>
@@ -98,7 +100,7 @@ const writable = SECTIONS.filter((section) => !section.automatic);
           </div>
           <div class="field">
             <label for="credit">Photo 1 credit</label>
-            <input id="credit" name="credit" type="text" maxlength="300" placeholder="Who took it — required if photo attached" />
+            <input id="credit" name="credit" type="text" maxlength="300" placeholder="Who took it - required if photo attached" />
           </div>
 
           {/* Photograph 2 */}
@@ -182,7 +184,7 @@ const writable = SECTIONS.filter((section) => !section.automatic);
         event.preventDefault();
         button.disabled = true;
         const label = button.textContent;
-        button.textContent = "Checking…";
+        button.textContent = "Checking...";
         status.className = "form-status";
 
         try {

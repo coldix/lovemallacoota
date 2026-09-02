@@ -66,7 +66,7 @@ const rootDir = [
 ].find((candidate) => existsSync(path.join(candidate, "data", "listings_food.json")));
 
 if (!rootDir) {
-  throw new Error("Cannot locate the data directory — run builds and tests from the project root");
+  throw new Error("Cannot locate the data directory - run builds and tests from the project root");
 }
 
 function readJson(relative, fallback) {

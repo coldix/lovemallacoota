@@ -57,7 +57,7 @@ const canonicalPath = listingPagePath(entity);
   canonicalPath={canonicalPath}
   active={section?.active || ""}
   socialImage={listingCard(entity, photo?.url)}
-  socialImageAlt={photo ? photo.alt : `${entity.name} — Love Mallacoota`}
+  socialImageAlt={photo ? photo.alt : `${entity.name} - Love Mallacoota`}
   showAds={!official}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
@@ -123,13 +123,13 @@ const canonicalPath = listingPagePath(entity);
         {entity.locationKind === "none" && !address && (
           <>
             <dt>Location</dt>
-            <dd>No public street address — many groups meet in different places or serve the whole district.</dd>
+            <dd>No public street address - many groups meet in different places or serve the whole district.</dd>
           </>
         )}
         {entity.phone && (
           <>
             <dt>Phone</dt>
-            <dd><a href={telHref(entity.phone)}>{entity.phone}</a>{entity.verification?.mobile?.note ? ` — ${entity.verification.mobile.note}` : ""}</dd>
+            <dd><a href={telHref(entity.phone)}>{entity.phone}</a>{entity.verification?.mobile?.note ? ` - ${entity.verification.mobile.note}` : ""}</dd>
           </>
         )}
         {entity.email && (
@@ -172,7 +172,7 @@ const canonicalPath = listingPagePath(entity);
               {entity.source.url ? (
                 <a href={entity.source.url} rel="noopener noreferrer" target="_blank">{entity.source.name}</a>
               ) : entity.source.name}
-              {entity.source.note ? ` — ${entity.source.note}` : ""}
+              {entity.source.note ? ` - ${entity.source.note}` : ""}
             </dd>
           </>
         )}
@@ -193,7 +193,7 @@ const canonicalPath = listingPagePath(entity);
       <div class="listing-claim">
         {/* A claimed listing offers its owner the way back in. There are no
             accounts here, so "edit" means asking for a fresh private link to
-            be emailed to the address already on the listing — the same claim
+            be emailed to the address already on the listing - the same claim
             flow, named for what the owner is actually doing. */}
         {entity.verification?.email?.verifiedAt ? (
           <p>

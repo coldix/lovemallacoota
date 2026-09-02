@@ -34,10 +34,10 @@ const sectionNames = edition
   : "";
 const description = edition
   ? clampMeta(`Mallacoota for the week of ${edition.displayDate}: ${sectionNames}. A new edition every week.`)
-  : "The weekly Mallacoota edition — community notices, club and school news, events, weather and tides for the week.";
+  : "The weekly Mallacoota edition - community notices, club and school news, events, weather and tides for the week.";
 ---
 <BaseLayout
-  title={edition ? `This Week in Mallacoota — ${editionLabel(edition)}` : "This Week in Mallacoota"}
+  title={edition ? `This Week in Mallacoota - ${editionLabel(edition)}` : "This Week in Mallacoota"}
   description={description}
   canonicalPath="/edition.html"
   active="edition"
@@ -46,7 +46,7 @@ const description = edition
   socialImage={edition ? editionSocialImage(edition) : CARDS.edition}
 >
   {schema && <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />}
-  <PageHero eyebrow="Weekly edition" prefix="This Week in" accent="Mallacoota" lede="Community notices, club and school news, the week's events, weather and tides — contributed by the people and groups they belong to.">
+  <PageHero eyebrow="Weekly edition" prefix="This Week in" accent="Mallacoota" lede="Community notices, club and school news, the week's events, weather and tides - contributed by the people and groups they belong to.">
     <div class="hero-cta">
       <a class="btn btn-coral" href="/submit.html">Submit an article or notice</a>
       <a class="btn btn-ghost" href="/archive.html#editions">Past editions archive</a>

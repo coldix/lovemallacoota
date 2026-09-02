@@ -77,7 +77,7 @@ async function deliver(env: Env, mail: Mail): Promise<MailResult> {
  */
 export async function sendToPerson(env: Env, mail: Mail): Promise<MailResult> {
   if (!canSendToPeople(env)) {
-    console.error("mailer is not configured — RESEND_API_KEY or MAIL_FROM is missing");
+    console.error("mailer is not configured - RESEND_API_KEY or MAIL_FROM is missing");
     return { ok: false, error: "not configured" };
   }
 

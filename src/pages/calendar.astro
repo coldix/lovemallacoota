@@ -16,13 +16,13 @@ const meetings = loadDirectory()
   .sort((a, b) => a.name.localeCompare(b.name));
 ---
 <BaseLayout
-  title="What's on in Mallacoota — events, markets and club nights"
+  title="What's on in Mallacoota - events, markets and club nights"
   description={`The Mallacoota community calendar: markets, meetups, workshops and club nights, with ${meetings.length} regular meeting times from local clubs and groups.`}
   canonicalPath="/calendar.html"
   active="calendar"
   socialImage={CARDS.calendar}
 >
-  <PageHero prefix="What's" accent="On" lede="Markets, meetups, workshops and club nights — the community calendar, plus regular meetings from the directory." />
+  <PageHero prefix="What's" accent="On" lede="Markets, meetups, workshops and club nights - the community calendar, plus regular meetings from the directory." />
   <main>
     <Breadcrumbs trail={[{ name: "What's On", path: "/calendar.html" }]} />
     <section class="glass-card sheen content-block reveal">
@@ -69,7 +69,7 @@ const meetings = loadDirectory()
           <span class="arrow" aria-hidden="true">↗</span>
           <span class="emoji" aria-hidden="true">📰</span>
           <h3>This Week</h3>
-          <p>The weekly edition — notices, local stories, weather and classifieds.</p>
+          <p>The weekly edition - notices, local stories, weather and classifieds.</p>
         </a>
         <a href="/directory.html" class="link-card">
           <span class="arrow" aria-hidden="true">↗</span>
@@ -80,7 +80,7 @@ const meetings = loadDirectory()
         <div class="link-card">
           <span class="emoji" aria-hidden="true">📅</span>
           <h3>Take it with you</h3>
-          <p>Use the “+ Google Calendar” button on the calendar to add these events to your own phone.</p>
+          <p>Use the "+ Google Calendar" button on the calendar to add these events to your own phone.</p>
         </div>
       </div>
     </section>

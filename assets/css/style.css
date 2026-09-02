@@ -907,10 +907,40 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media print {
   /* A4 with typographic margins, except the cover, which bleeds to the edge. */
   /* 10mm all round, with a little more at the foot for the page number. */
-  @page { size: A4 portrait; margin: 10mm 10mm 14mm; }
+  @page {
+    size: A4 portrait;
+    margin: 10mm 10mm 14mm;
+    /* A running footer with the page number when the edition is printed from
+       the browser. Chrome 131 and later draw these; the PDF route draws its
+       own footer and switches these off so they do not double up. */
+    @bottom-left {
+      content: "lovemallacoota.au";
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      font-weight: 600;
+      color: #555;
+    }
+    @bottom-center {
+      content: "This Week in Mallacoota";
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      color: #555;
+    }
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      color: #555;
+    }
+  }
   /* The cover is the first sheet and takes the whole of it. Named pages were
      ignored here; the :first pseudo-class is honoured. */
-  @page :first { margin: 0; }
+  @page :first {
+    margin: 0;
+    @bottom-left { content: none; }
+    @bottom-center { content: none; }
+    @bottom-right { content: none; }
+  }
 
   .edition-cover {
     display: block !important;
@@ -1129,18 +1159,39 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      roughly 37 characters, which is newspaper practice on a much larger sheet
      and too mean for the readership this one has. */
   .edition-article {
-    columns: 2;
-    column-gap: 6mm;
     break-inside: auto;
     max-width: none;
     text-align: justify;
     hyphens: auto;
     -webkit-hyphens: auto;
   }
+  .edition-article-columns {
+    columns: 2;
+    column-gap: 6mm;
+    break-inside: auto;
+    break-before: avoid;
+    /* Fill the first column before the second. Balanced columns across a page
+       break left the picture alone in column one and the story overleaf. */
+    column-fill: auto;
+  }
+  /* The headline and byline sit outside the columns and are never separated
+     from the first lines of the story. A headline used to be left alone at
+     the foot of a page with its story overleaf. */
+  .edition-article-head {
+    break-inside: avoid;
+    break-after: avoid;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  .edition-article-columns > :first-child { break-before: avoid; }
+  .edition-subhead {
+    font-size: 10.5pt;
+    margin: 3mm 0 1mm;
+    column-span: all;
+    break-after: avoid;
+  }
   /* Justified text without hyphenation opens rivers at this measure. */
   .edition-article p { hyphenate-limit-chars: 6 3 3; }
-  .edition-article h3,
-  .edition-byline { column-span: all; }
 
   /* A photograph sits in its column, three units wide. Spanning the measure
      made a portrait 190mm wide and 253mm tall, which is most of a page for one
@@ -1197,8 +1248,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     font-size: 9pt;
     text-align: left;
   }
+  #section-classifieds .edition-article-columns,
+  #section-bdm .edition-article-columns { columns: auto; }
   #section-classifieds .edition-article h3,
-  #section-bdm .edition-article h3 { font-size: 10pt; column-span: none; }
+  #section-bdm .edition-article h3 { font-size: 10pt; }
 
   /* Scroll reveals never fire in a headless render, so everything below the
      fold would print as blank pages. Show it all. */
@@ -1345,12 +1398,33 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Multi-photo side by side grid */
 .edition-figures-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.25rem;
-  margin: 1.25rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.25rem;
 }
-.edition-figures-grid figure {
-  margin: 0 !important;
+.edition-figures-grid figure { margin: 0 !important; float: none !important; width: auto !important; }
+.edition-figures-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: none;
+  object-fit: cover;
+}
+.edition-figures-grid .edition-figure.small img { aspect-ratio: 1 / 1; }
+/* The first picture leads the piece: centred, and never cropped. The rest sit
+   in the grid beneath it. */
+.edition-figure.lead { text-align: center; }
+.edition-figure.lead img { margin: 0 auto; max-height: 520px; }
+.edition-figure.lead figcaption { text-align: left; }
+/* Every picture opens larger. The link works without script; with it, the
+   lightbox takes over and pages through the article's pictures. */
+.edition-zoom { display: block; cursor: zoom-in; border-radius: 12px; }
+.edition-zoom:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* A subheading inside a contributed piece, from a line beginning "##". */
+.edition-subhead {
+  margin: 1.3rem 0 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 /* Click-to-enlarge photo cursor & Lightbox dialog */
@@ -1416,6 +1490,33 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .photo-lightbox-close:hover {
   background: var(--coral, #ff7a59);
 }
+.photo-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo-lightbox-nav:hover { background: var(--coral, #ff7a59); }
+.photo-lightbox-nav.prev { left: 0.75rem; }
+.photo-lightbox-nav.next { right: 0.75rem; }
+.photo-lightbox-nav[hidden] { display: none; }
+#photo-lightbox-count {
+  margin: 0.3rem 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+}
 #photo-lightbox-caption {
   margin-top: 0.85rem;
   font-size: 0.9rem;
@@ -1431,14 +1532,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .photo-lightbox-dialog {
     display: none !important;
   }
-  .edition-figure,
-  .edition-figures-grid {
+  .edition-figure {
     display: block !important;
     max-width: 100% !important;
     height: auto !important;
     page-break-inside: avoid;
     break-inside: avoid;
   }
+  /* A set of pictures prints two to a row across the measure, rather than one
+     under another down a single column. */
+  .edition-figures-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2mm 4mm;
+    column-span: all;
+    break-inside: avoid;
+    margin: 0 0 3mm;
+  }
+  .edition-figures-grid .edition-figure { float: none !important; width: auto !important; margin: 0 !important; }
+  .edition-figures-grid img { width: 100% !important; max-height: 60mm !important; aspect-ratio: 4 / 3; object-fit: cover; }
+  .edition-figures-grid .edition-figure.small img { aspect-ratio: 1 / 1; max-height: 44mm !important; }
   .edition-figure img {
     max-width: 100% !important;
     height: auto !important;
@@ -1535,20 +1648,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Long pieces read badly as one 68ch column on a wide screen, and the printed
    edition is already two columns. Match it once there is room. */
 @media (min-width: 1000px) {
-  .edition-article {
-    max-width: none;
+  .edition-article { max-width: none; }
+  .edition-article-columns {
     columns: 2;
     column-gap: 2.6rem;
   }
-  .edition-article > h3,
-  .edition-article > h2,
-  .edition-article > .edition-byline,
-  .edition-article > .eyebrow,
-  .edition-article > .edition-figure,
-  .edition-article > .edition-source { column-span: all; }
+  .edition-article-columns > .edition-figure,
+  .edition-article-columns > .edition-figures-grid,
+  .edition-article-columns > .edition-source,
+  .edition-article-columns .edition-subhead { column-span: all; }
   .edition-article p { margin-bottom: 0.9rem; }
   /* A short notice in two columns looks broken, not designed. */
-  .edition-article:has(p:only-of-type) { columns: 1; max-width: 68ch; }
+  .edition-article-columns:has(p:only-of-type) { columns: 1; max-width: 68ch; }
 }
 
 /* Bullet lists inside contributed text. */

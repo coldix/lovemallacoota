@@ -311,19 +311,61 @@ test("tide times are linked, never invented", async () => {
   );
 });
 
-test("published text keeps its punctuation intact", async () => {
+test("published text is plain punctuation, and never mojibake", async () => {
   // An earlier edit mangled every em dash and curly quote through a bad
-  // encoding round trip, and it only showed up in the rendered page. The
-  // profiles now render inside the edition, so that is where to look.
-  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
-  assert.ok(!/â€|Â|\uFFFD/.test(html), "the page contains mojibake");
+  // encoding round trip, a repair of that left C1 control characters behind,
+  // and both only showed up in the rendered page. The edition now publishes
+  // straight quotes and hyphens, so none of these characters belong anywhere
+  // a reader sees.
+  const forbidden = /[\u2013\u2014\u2018\u2019\u201C\u201D\u2026\u0080-\u009F\uFFFD]|â€|Â/;
+  const pages = ["edition.html", "index.html", "directory.html", "calendar.html", "archive.html"];
+  for (const page of pages) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    const hit = forbidden.exec(html);
+    assert.ok(!hit, `${page} carries typographic or corrupted punctuation near: ${html.slice(Math.max(0, hit?.index - 40), hit?.index + 40)}`);
+  }
 
   for (const edition of loadEditions()) {
     for (const article of edition.articles || []) {
-      const text = [article.title, ...(article.body || [])].join(" ");
-      assert.ok(!/â€|\uFFFD/.test(text), `${article.id} has corrupted punctuation`);
+      const text = [article.title, article.byline, ...(article.body || [])].join(" ");
+      assert.ok(!forbidden.test(text), `${article.id} has typographic or corrupted punctuation`);
     }
   }
+});
+
+test("no piece appears twice in an edition", () => {
+  // A submission approved from the queue after a hand-edited copy had been
+  // committed put "Farewell to Barbara" in the edition twice.
+  for (const edition of loadEditions()) {
+    const articles = edition.articles || [];
+    const ids = articles.map((article) => article.id);
+    assert.equal(new Set(ids).size, ids.length, `${edition.week}: an article id is repeated`);
+    const titles = articles.map((article) => String(article.title).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim());
+    assert.equal(new Set(titles).size, titles.length, `${edition.week}: a headline is repeated`);
+  }
+});
+
+test("a headline is never left at the foot of a page without its story", async () => {
+  // The headline and byline sit in their own block, outside the text columns,
+  // and print refuses to break after it. "Local of the Week" once sat alone at
+  // the bottom of page six with the story overleaf.
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  assert.ok(html.includes('class="edition-article-head"'), "articles have no head block");
+  assert.ok(html.includes('class="edition-article-columns"'), "articles have no column block");
+  const css = await readFile(new URL("../assets/css/style.css", import.meta.url), "utf8");
+  const print = css.slice(css.indexOf("@media print"));
+  assert.match(print, /\.edition-article-head\s*\{[^}]*break-after:\s*avoid/, "print does not keep the head with the story");
+  assert.match(print, /@bottom-right\s*\{[^}]*counter\(page\)/, "print has no page number");
+});
+
+test("every picture in the edition opens larger, with its own words", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const figures = html.match(/<figure class="edition-figure[^"]*">/g) || [];
+  const zooms = html.match(/<a class="edition-zoom" href="\/images\/[^"]+"/g) || [];
+  assert.ok(figures.length > 0, "no figures in the edition");
+  assert.equal(zooms.length, figures.length, "a figure is not a link to its picture");
+  // The photograph with a caption field, not a note, shows it.
+  assert.ok(html.includes("farewell Barb in 2009"), "a caption in the caption field is dropped");
 });
 
 test("the coach timetable publishes times, not a link telling people to look", async () => {

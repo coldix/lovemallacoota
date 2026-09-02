@@ -1,11 +1,24 @@
 # Handover — 2 September 2026
 
-Live release **v1.08** at [lovemallacoota.au](https://lovemallacoota.au).
-Working tree clean, `main` pushed, 125 tests passing.
+Live release **v1.09** at [lovemallacoota.au](https://lovemallacoota.au).
+132 tests passing.
 
 ---
 
-## Recent Highlights (1–2 September 2026)
+## Evening of 2 September: the edition page, reviewed
+
+Colin read the live edition and listed what was wrong. Every item is fixed and guarded by a test.
+
+- **Mojibake, again.** The previous repair replaced the first byte of each corrupted quote with an em dash and left the two control bytes behind, so the page showed a dash and an invisible pair after every apostrophe. Fixed at the source, and the edition now publishes plain punctuation everywhere: straight quotes, a spaced hyphen for a dash, three dots for an ellipsis. `plainPunctuation()` in `src/lib/markup.mjs` repairs both known mojibake shapes and flattens the rest. It runs on submission, on every edition when it loads, and the build test fails on any of those characters in the rendered pages. The site's own templates and data files were purged of them too.
+- **"Farewell to Barbara" twice.** The queue approval committed the raw submission, then a hand-edited copy with the photograph and recital was committed beside it. The duplicate is gone, and `appendArticle()` in `src/submit.ts` now refuses a second copy of the same id or headline.
+- **The poem ran together.** The renderer folded single newlines into spaces. A line break typed by the contributor is now kept, a line beginning `##` is a subheading, and the stanzas were regrouped by their rhyming couplets (the submission had them cut at every fourth line).
+- **Pictures.** The first photograph leads a piece; the rest sit in a grid. Every picture is a link to itself, and the lightbox pages through an article's photographs.
+- **Print.** Headline and byline now live in their own block outside the text columns, and print refuses to break after it. "Local of the Week" no longer sits alone at the foot of a page. A running footer with `Page n of m` prints from the browser (Chrome 131+ page margin boxes); the PDF route keeps its own footer and switches those off. Print columns fill in order rather than balancing, which is what moved the story onto the same page as its headline.
+- **The PDF was 43MB.** Chromium stores a WebP as raw pixels. The PDF route now re-encodes each picture as JPEG in the page before printing, so the bytes pass straight through. Not yet measured on the live Worker; the logic was run in a browser against the built page, where 68MB of pixels became 4.2MB of JPEG.
+
+Two things found and left: `data/coota-new.json` is not valid JSON (nothing reads it), and the console messages in `tools/*.mjs` still use em dashes (they are never published).
+
+## Recent Highlights (1-2 September 2026)
 
 - **Automated Google Calendar iCal Fetcher & RRULE Recurrence Expansion**: Built `tools/fetch-calendar.mjs` to fetch `crdixon@gmail.com` public iCal feed and expand weekly/monthly recurring events for the current edition week. Integrated into `tools/refresh-weekly.mjs`.
 - **Compact 1-Page What's On Layout**: Curated What's On section capped at 14 items (2 per day), styled in 2-column print CSS (`columns: 2`, `break-inside: avoid`), guaranteeing the entire section fits on 1 page in print & PDF.

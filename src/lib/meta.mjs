@@ -15,5 +15,5 @@ export function clampMeta(text, limit = 158) {
   const cut = value.slice(0, limit - 1);
   const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("; "));
   if (stop > limit * 0.6) return cut.slice(0, stop + 1).trim();
-  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\-–—]$/, "").trim()}…`;
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\-–—]$/, "").trim()}...`;
 }

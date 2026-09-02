@@ -335,6 +335,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --- Photo Lightbox (Click to Enlarge) ---
+  // Every edition picture is a link to itself, so it opens larger without
+  // script. With script, the dialog takes over and pages through the pictures
+  // of the same article: arrows, keyboard, or a swipe on a phone.
   (function initLightbox() {
     let overlay = document.getElementById("photo-lightbox");
     if (!overlay) {
@@ -344,35 +347,74 @@ document.addEventListener("DOMContentLoaded", () => {
       overlay.innerHTML = `
         <div class="photo-lightbox-content">
           <button type="button" class="photo-lightbox-close" aria-label="Close photo overlay">×</button>
+          <button type="button" class="photo-lightbox-nav prev" aria-label="Previous photograph">&lsaquo;</button>
           <img id="photo-lightbox-img" src="" alt="" />
+          <button type="button" class="photo-lightbox-nav next" aria-label="Next photograph">&rsaquo;</button>
           <p id="photo-lightbox-caption"></p>
+          <p id="photo-lightbox-count"></p>
         </div>
       `;
       document.body.appendChild(overlay);
-
-      overlay.addEventListener("click", (e) => {
-        if (e.target === overlay || e.target.classList.contains("photo-lightbox-close")) {
-          overlay.close();
-        }
-      });
     }
 
     const imgEl = document.getElementById("photo-lightbox-img");
     const capEl = document.getElementById("photo-lightbox-caption");
+    const countEl = document.getElementById("photo-lightbox-count");
+    const prevBtn = overlay.querySelector(".photo-lightbox-nav.prev");
+    const nextBtn = overlay.querySelector(".photo-lightbox-nav.next");
+    if (!imgEl) return;
+
+    let set = [];
+    let index = 0;
+
+    const captionFor = (img) => {
+      const figcaption = img.closest("figure")?.querySelector("figcaption");
+      return figcaption ? figcaption.innerText : img.alt || "";
+    };
+    const show = (i) => {
+      if (!set.length) return;
+      index = (i + set.length) % set.length;
+      const img = set[index];
+      const link = img.closest("a.edition-zoom");
+      imgEl.src = link ? link.href : img.currentSrc || img.src;
+      imgEl.alt = img.alt || "Enlarged photograph";
+      if (capEl) capEl.textContent = captionFor(img);
+      const many = set.length > 1;
+      if (countEl) countEl.textContent = many ? `${index + 1} of ${set.length}` : "";
+      if (prevBtn) prevBtn.hidden = !many;
+      if (nextBtn) nextBtn.hidden = !many;
+    };
 
     document.addEventListener("click", (e) => {
-      const figureImg = e.target.closest(".edition-figure img, .edition-cover-web img");
-      if (!figureImg) return;
+      const target = e.target.closest("a.edition-zoom, .edition-figure img, .edition-cover-web img");
+      if (!target) return;
+      const img = target.tagName === "IMG" ? target : target.querySelector("img");
+      if (!img) return;
+      e.preventDefault();
+      const scope = img.closest(".edition-article") || img.closest("figure") || document;
+      set = [...scope.querySelectorAll(".edition-figure img, .edition-cover-web img")];
+      if (!set.includes(img)) set = [img];
+      show(set.indexOf(img));
+      if (!overlay.open) overlay.showModal();
+    });
 
-      const figcaption = figureImg.closest("figure")?.querySelector("figcaption");
-      const captionText = figcaption ? figcaption.innerText : figureImg.alt || "";
-
-      if (imgEl && overlay) {
-        imgEl.src = figureImg.src;
-        imgEl.alt = figureImg.alt || "Enlarged photograph";
-        if (capEl) capEl.textContent = captionText;
-        overlay.showModal();
-      }
+    overlay.addEventListener("click", (e) => {
+      if (e.target.closest(".photo-lightbox-nav.prev")) return show(index - 1);
+      if (e.target.closest(".photo-lightbox-nav.next")) return show(index + 1);
+      if (e.target === overlay || e.target.classList.contains("photo-lightbox-close")) overlay.close();
+    });
+    overlay.addEventListener("keydown", (e) => {
+      if (set.length < 2) return;
+      if (e.key === "ArrowLeft") { e.preventDefault(); show(index - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); show(index + 1); }
+    });
+    let touchX = null;
+    overlay.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    overlay.addEventListener("touchend", (e) => {
+      if (touchX === null || set.length < 2) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) > 40) show(dx < 0 ? index + 1 : index - 1);
     });
   })();
 

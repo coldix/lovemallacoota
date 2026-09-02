@@ -82,7 +82,7 @@ export function archiveSchema(issues, archive) {
           "@type": "PublicationIssue",
           issueNumber: issue.issueNumber,
           datePublished: issue.publicationDate,
-          name: `${issue.publication} — issue ${issue.issueNumber}`,
+          name: `${issue.publication} - issue ${issue.issueNumber}`,
           description: issue.description || undefined,
           editor: issue.editor ? { "@type": "Person", name: issue.editor } : undefined,
           isPartOf: {

@@ -96,7 +96,7 @@ export async function handleContactSubmit(request: Request, env: Env): Promise<R
   // See the note in listing.ts: a bot gets a plausible success, and a person who
   // trips it gets one too, so the fact is logged rather than left invisible.
   if (String(form.get("lm_leave_blank") || "").trim() !== "") {
-    console.error("honeypot tripped — submission discarded, nothing was written or sent");
+    console.error("honeypot tripped - submission discarded, nothing was written or sent");
     return json({ ok: true }, 200);
   }
 
@@ -104,7 +104,7 @@ export async function handleContactSubmit(request: Request, env: Env): Promise<R
   // See the note in listing.ts: a widget that never produced a token is not the
   // same fault as a token that was refused, and used to look identical.
   if (!token) {
-    console.error("no turnstile token in the submission — the widget did not produce one");
+    console.error("no turnstile token in the submission - the widget did not produce one");
     return json({ ok: false, error: "The verification box did not load. Reload the page and try again." }, 403);
   }
   if (!(await verifyTurnstile(token, env.TURNSTILE_SECRET_KEY, ip))) {

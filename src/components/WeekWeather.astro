@@ -20,13 +20,13 @@ const dayName = (iso: string) => DAY.format(new Date(`${iso}T00:00:00+10:00`));
           <td>{day.summary}</td>
           <td>{Math.round(day.minC)}°</td>
           <td>{Math.round(day.maxC)}°</td>
-          <td>{day.rainMm > 0 ? `${day.rainMm} mm` : "—"}</td>
+          <td>{day.rainMm > 0 ? `${day.rainMm} mm` : "-"}</td>
         </tr>
       ))}
     </tbody>
   </table>
   <p class="edition-source">
     Forecast from <a href={weather.sourceUrl} rel="noopener noreferrer" target="_blank">{weather.source}</a>, {weather.licence}.
-    Not an official warning service — see <a href="/emergency.html">emergency information</a>.
+    Not an official warning service - see <a href="/emergency.html">emergency information</a>.
   </p>
 </div>

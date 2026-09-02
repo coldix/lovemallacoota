@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { escapeHTML, renderBlock, renderBody, safeHref } from "../src/lib/markup.mjs";
+import { escapeHTML, plainPunctuation, renderBlock, renderBody, safeHref } from "../src/lib/markup.mjs";
 
 test("everything is escaped before anything is interpreted", () => {
   assert.equal(
@@ -72,4 +72,29 @@ test("a body is a run of blocks", () => {
 
 test("escapeHTML covers the characters that matter", () => {
   assert.equal(escapeHTML(`&<>"'`), "&amp;&lt;&gt;&quot;&#39;");
+});
+
+test("a line break the contributor typed is kept", () => {
+  // A poem was folded into prose because single newlines were joined with a space.
+  assert.equal(renderBlock("Line one\nLine two"), "<p>Line one<br />Line two</p>");
+  assert.equal(renderBlock("Line one\nLine two", true), '<div class="poem-stanza" style="margin-bottom: 1.5rem; font-style: italic; font-size: 1.05rem; line-height: 1.75; letter-spacing: 0.01em;">Line one<br />Line two</div>');
+});
+
+test("a line of its own beginning ## is a subheading", () => {
+  assert.equal(renderBlock("## Farewell to Barbara"), '<h4 class="edition-subhead">Farewell to Barbara</h4>');
+  assert.match(renderBlock("## not a heading\nsecond line"), /^<p>/);
+  assert.match(renderBlock("#hashtag"), /^<p>/);
+});
+
+test("typographic punctuation is published plain", () => {
+  assert.equal(
+    plainPunctuation("Frank\u2019s \u201cbig\u201d day \u2014 then 29 \u2013 and more\u2026"),
+    'Frank\'s "big" day - then 29 - and more...'
+  );
+  assert.equal(plainPunctuation("Tuppy\u2014remembered"), "Tuppy - remembered");
+  // Mojibake from a bad round trip is repaired rather than flattened.
+  assert.equal(plainPunctuation("Frank\u00e2\u20ac\u2122s day \u00e2\u20ac\u201d 360\u00c2\u00b0"), "Frank's day - 360\u00b0");
+  // And the shape left by the earlier repair that only got half way.
+  assert.equal(plainPunctuation("Frank\u2014\u0080\u0099s \u2014\u0080\u009cBuffalo\u2014\u0080\u009d"), 'Frank\'s "Buffalo"');
+  assert.equal(plainPunctuation("plain text stays"), "plain text stays");
 });

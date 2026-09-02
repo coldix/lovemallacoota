@@ -165,7 +165,7 @@ async function notify(env: Env, booking: Record<string, any>) {
     "",
     booking.kind === "advertising"
       ? "A draft is in data/ad-bookings. Build the advertisement, show them, then add it to the edition."
-      : "Nothing to do — this is money in, not work to schedule.",
+      : "Nothing to do - this is money in, not work to schedule.",
   ];
   await fetch(env.RELAY_URL, {
     method: "POST",

@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 ---
 <BaseLayout
-  title="Admin Approval Dashboard — Love Mallacoota"
+  title="Admin Approval Dashboard - Love Mallacoota"
   description="Admin approval dashboard for community submissions."
   canonicalPath="/admin.html"
   robots="noindex,nofollow"
@@ -13,7 +13,7 @@ import PageHero from "../components/PageHero.astro";
     <section class="glass-card sheen content-block reveal">
       <h2 class="section-title">Pending Submissions</h2>
       <p class="section-sub">Submissions awaiting review or approval before publishing.</p>
-      <div id="admin-status" class="form-status" role="status" aria-live="polite">Loading pending items…</div>
+      <div id="admin-status" class="form-status" role="status" aria-live="polite">Loading pending items...</div>
       
       <div id="submissions-list" class="admin-grid" style="display: grid; gap: 1.5rem; margin-top: 1.5rem;"></div>
     </section>
@@ -26,7 +26,7 @@ import PageHero from "../components/PageHero.astro";
       if (!statusEl || !listEl) return;
 
       async function loadPending() {
-        statusEl.textContent = "Loading pending items…";
+        statusEl.textContent = "Loading pending items...";
         statusEl.className = "form-status";
         try {
           const res = await fetch("/api/admin/pending");
@@ -87,7 +87,7 @@ import PageHero from "../components/PageHero.astro";
               const id = e.target.getAttribute("data-id");
               if (!id) return;
               e.target.disabled = true;
-              e.target.textContent = "Approving…";
+              e.target.textContent = "Approving...";
               try {
                 const res = await fetch("/api/admin/approve", {
                   method: "POST",

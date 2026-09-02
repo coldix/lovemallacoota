@@ -43,9 +43,9 @@ const filler = isFillerUsed ? null : rawFiller;
 const total = countArticles(edition);
 const statusLabel =
   edition.status === "open"
-    ? "Open — contributions for this week are still being accepted"
+    ? "Open - contributions for this week are still being accepted"
     : edition.status === "frozen"
-      ? "Closed — this week's edition is complete"
+      ? "Closed - this week's edition is complete"
       : "Published";
 ---
 
@@ -67,7 +67,7 @@ const statusLabel =
       {(edition.cover.caption || edition.cover.credit) && (
         <p class="edition-cover-caption">
           {edition.cover.caption}
-          {edition.cover.credit && <span> — {edition.cover.credit}</span>}
+          {edition.cover.credit && <span> - {edition.cover.credit}</span>}
         </p>
       )}
     </section>
@@ -77,7 +77,7 @@ const statusLabel =
       {(edition.cover.caption || edition.cover.credit) && (
         <figcaption>
           {edition.cover.caption}
-          {edition.cover.credit && <span> — {edition.cover.credit}</span>}
+          {edition.cover.credit && <span> - {edition.cover.credit}</span>}
         </figcaption>
       )}
     </figure>
@@ -98,7 +98,7 @@ const statusLabel =
   </div>
   {edition.status === "open" && (
     <p class="edition-pdf-pending">
-      The PDF is the week so far — it is complete once the week closes.
+      The PDF is the week so far - it is complete once the week closes.
     </p>
   )}
 </section>
@@ -127,7 +127,7 @@ const statusLabel =
 {total === 0 && (
   <section class="glass-card sheen content-block reveal edition-web-only">
     <p class="no-results">
-      Nothing has been contributed to this week yet — the forecast and features
+      Nothing has been contributed to this week yet - the forecast and features
       below are compiled automatically.
     </p>
   </section>
@@ -199,7 +199,7 @@ const statusLabel =
         <p class="edition-feature-meta">
           {[section.auto.data.distance, section.auto.data.duration, section.auto.data.difficulty].filter(Boolean).join(" · ")}
         </p>
-        <p>{section.auto.data.region}{section.auto.data.start ? ` — starts at ${section.auto.data.start}` : ""}.</p>
+        <p>{section.auto.data.region}{section.auto.data.start ? ` - starts at ${section.auto.data.start}` : ""}.</p>
         {section.auto.data.summary && <p>{section.auto.data.summary}</p>}
         <p>
           <a class="btn btn-primary" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">Full notes on TrailBound</a>
@@ -259,7 +259,7 @@ const statusLabel =
         </div>
         <p class="edition-source">
           Everything between these is the {section.auto.data.networkFiller}.
-          Programme from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a> on 3mgb.org.au, the guide 3MGB published {publishedOn(section.auto.data.guideUpdated)}. {section.auto.data.caution} {section.auto.data.frequencies.map((f) => `${f.mhz} ${f.place}`).join(", ")}. Listen live at {section.auto.data.listen.join(", ")}, or ring the studio on {section.auto.data.phone}. This is 3MGB's programme, not ours — <a href={`/listing/${section.auto.data.listingSlug}.html`}>their listing</a>.
+          Programme from <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a> on 3mgb.org.au, the guide 3MGB published {publishedOn(section.auto.data.guideUpdated)}. {section.auto.data.caution} {section.auto.data.frequencies.map((f) => `${f.mhz} ${f.place}`).join(", ")}. Listen live at {section.auto.data.listen.join(", ")}, or ring the studio on {section.auto.data.phone}. This is 3MGB's programme, not ours - <a href={`/listing/${section.auto.data.listingSlug}.html`}>their listing</a>.
         </p>
       </div>
     )}
@@ -314,7 +314,7 @@ const statusLabel =
           <a class="btn btn-ghost" href="/directory.html">The whole directory</a>
         </p>
         <p class="edition-source">
-          Chosen in turn from the {section.auto.data.rotation.of} listings in the directory — number {section.auto.data.rotation.position}. Not paid placement.
+          Chosen in turn from the {section.auto.data.rotation.of} listings in the directory - number {section.auto.data.rotation.position}. Not paid placement.
         </p>
       </div>
     )}
@@ -335,90 +335,87 @@ const statusLabel =
       </aside>
     ))}
 
-    {section.articles.map((article) => (
-      <article class="edition-article" id={articleAnchor(article)}>
-        <h3>{article.title}</h3>
-        {article.byline && <p class="edition-byline">{article.byline}</p>}
-        {article.audio && (
-          <div class="edition-audio-block" style="margin: 0.85rem 0 1.25rem; padding: 0.75rem 1rem; border-radius: 12px; background: rgba(36,200,232,0.08); border: 1px solid var(--glass-border);">
-            <p style="margin: 0 0 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 0.4rem;">
-              <span aria-hidden="true">🎧</span> {article.audio.title || "Listen to audio narration"}
-            </p>
-            <audio controls preload="none" style="width: 100%; height: 38px; border-radius: 999px;">
-              <source src={article.audio.url} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-        )}
-        {article.format === "poem" ? (
-          <>
-            {article.image && (
-              <figure class="edition-figure" style="max-width: 520px; margin: 1rem 0;">
-                <img src={article.image.url} alt={article.image.alt} loading="lazy" decoding="async" />
-                {(article.image.credit || article.image.note) && (
+    {section.articles.map((article) => {
+      const isPoem = article.format === "poem";
+      /* The first picture leads the piece; any others sit in a grid beneath
+         it. Every picture is a link to itself, so it opens larger with or
+         without script; the lightbox in script.js takes over when it can. */
+      const pictures = [article.image, ...(article.images || [])].filter(Boolean);
+      const [lead, ...gallery] = pictures;
+      const captionOf = (image) => [image.credit, image.caption || image.note].filter(Boolean);
+      return (
+        <article class:list={["edition-article", { "edition-poem": isPoem }]} id={articleAnchor(article)}>
+          {/* Headline and byline are kept outside the columns so print can hold
+              them together with the first lines of the story. */}
+          <header class="edition-article-head">
+            <h3>{article.title}</h3>
+            {article.byline && <p class="edition-byline">{article.byline}</p>}
+            {article.audio && (
+              <div class="edition-audio-block" style="margin: 0.85rem 0 1.25rem; padding: 0.75rem 1rem; border-radius: 12px; background: rgba(36,200,232,0.08); border: 1px solid var(--glass-border);">
+                <p style="margin: 0 0 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 0.4rem;">
+                  <span aria-hidden="true">🎧</span> {article.audio.title || "Listen to audio narration"}
+                </p>
+                <audio controls preload="none" style="width: 100%; height: 38px; border-radius: 999px;">
+                  <source src={article.audio.url} type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            )}
+          </header>
+          <div class="edition-article-columns">
+            {lead && (
+              <figure class:list={["edition-figure", "lead", { small: lead.display === "small" }]}>
+                <a class="edition-zoom" href={lead.url} aria-label={`Enlarge: ${lead.alt || article.title}`}>
+                  <img src={lead.url} alt={lead.alt} loading="lazy" decoding="async" />
+                </a>
+                {captionOf(lead).length > 0 && (
                   <figcaption>
-                    {article.image.credit}
-                    {article.image.note && <span> · {article.image.note}</span>}
+                    {captionOf(lead)[0]}
+                    {captionOf(lead)[1] && <span> · {captionOf(lead)[1]}</span>}
                   </figcaption>
                 )}
               </figure>
             )}
-            <div class="edition-article-body poem-body">
-              <Fragment set:html={renderBody(article.body, true)} />
+            {gallery.length > 0 && (
+              <div class="edition-figures-grid">
+                {gallery.map((image) => (
+                  <figure class:list={["edition-figure", { small: image.display === "small" }]}>
+                    <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
+                      <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
+                    </a>
+                    {captionOf(image).length > 0 && (
+                      <figcaption>
+                        {captionOf(image)[0]}
+                        {captionOf(image)[1] && <span> · {captionOf(image)[1]}</span>}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            )}
+            <div class:list={["edition-article-body", { "poem-body": isPoem }]}>
+              <Fragment set:html={renderBody(article.body, isPoem)} />
             </div>
-          </>
-        ) : (
-          <>
-            {(() => {
-              const allImages = [article.image, ...(article.images || [])].filter(Boolean);
-              if (allImages.length > 1) {
-                return (
-                  <div class="edition-figures-grid">
-                    {allImages.map((image) => (
-                      <figure class:list={["edition-figure", { small: image.display === "small" }]}>
-                        <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
-                        <figcaption>
-                          {image.credit}
-                          {image.note && <span> · {image.note}</span>}
-                        </figcaption>
-                      </figure>
-                    ))}
-                  </div>
-                );
-              }
-              return allImages.map((image) => (
-                <figure class:list={["edition-figure", { small: image.display === "small" }]}>
-                  <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
-                  <figcaption>
-                    {image.credit}
-                    {image.note && <span> · {image.note}</span>}
-                  </figcaption>
-                </figure>
-              ));
-            })()}
-            <div class="edition-article-body">
-              <Fragment set:html={renderBody(article.body)} />
-            </div>
-          </>
-        )}
-        {article.corrections?.length > 0 && (
-          <aside class="edition-correction">
-            <h4>Corrections</h4>
-            <ul>
-              {article.corrections.map((correction) => (
-                <li><time datetime={correction.date}>{correction.date}</time> — {correction.note}</li>
-              ))}
-            </ul>
-          </aside>
-        )}
-        {article.contact?.public && (
-          <p class="edition-source">
-            Contact: <a href={`mailto:${article.contact.email}`}>{article.contact.email}</a>
-            {article.contact.phone && <span> · {article.contact.phone}</span>}
-          </p>
-        )}
-      </article>
-    ))}
+          </div>
+          {article.corrections?.length > 0 && (
+            <aside class="edition-correction">
+              <h4>Corrections</h4>
+              <ul>
+                {article.corrections.map((correction) => (
+                  <li><time datetime={correction.date}>{correction.date}</time> - {correction.note}</li>
+                ))}
+              </ul>
+            </aside>
+          )}
+          {article.contact?.public && (
+            <p class="edition-source">
+              Contact: <a href={`mailto:${article.contact.email}`}>{article.contact.email}</a>
+              {article.contact.phone && <span> · {article.contact.phone}</span>}
+            </p>
+          )}
+        </article>
+      );
+    })}
   </section>
 ))}
 
@@ -436,7 +433,7 @@ const statusLabel =
   <section class="glass-card sheen content-block reveal edition-filler">
     <figure class="edition-figure">
       <img src={filler.url} alt={filler.alt} loading="lazy" decoding="async" />
-      <figcaption>{filler.caption}{filler.credit && <span> — {filler.credit}</span>}</figcaption>
+      <figcaption>{filler.caption}{filler.credit && <span> - {filler.credit}</span>}</figcaption>
     </figure>
   </section>
 )}
@@ -451,7 +448,7 @@ const statusLabel =
     <div class="edition-actions">
       {/* The contact route leads, because it works for everybody. Submitting
           directly needs a contributor account, and this button used to be the
-          primary one — which sent people to a form that turned them away. */}
+          primary one - which sent people to a form that turned them away. */}
       <a class="btn btn-primary" href="/contact.html?subject=edition">Send us something for the edition</a>
       <a class="btn btn-ghost" href="/submit.html">Contributors: publish direct</a>
       <a class="btn btn-ghost" href="/editorial-policy.html">What we publish</a>
@@ -460,5 +457,5 @@ const statusLabel =
 )}
 
 <footer class="edition-print-footer edition-print-only">
-  <p>Love Mallacoota · lovemallacoota.au · Published {publishedOn(edition.weekStart)} · Documenting East Gippsland’s coast, community & history with care.</p>
+  <p>Love Mallacoota · lovemallacoota.au · Published {publishedOn(edition.weekStart)} · Documenting East Gippsland's coast, community & history with care.</p>
 </footer>

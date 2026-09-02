@@ -274,7 +274,7 @@ async function guardForm(request: Request, env: Env): Promise<FormData | Respons
   // never sent, so it is logged: this fired once for Colin, whose password
   // manager filled the trap when it was still called "website".
   if (String(form.get("lm_leave_blank") || "").trim() !== "") {
-    console.error("honeypot tripped — submission discarded, nothing was written or sent");
+    console.error("honeypot tripped - submission discarded, nothing was written or sent");
     return json({ ok: true }, 200);
   }
   const token = String(form.get("cf-turnstile-response") || "");
@@ -283,7 +283,7 @@ async function guardForm(request: Request, env: Env): Promise<FormData | Respons
   // short-circuit into the same silent 403 as a bad token, which made a broken
   // widget look identical to a wrong secret.
   if (!token) {
-    console.error("no turnstile token in the submission — the widget did not produce one");
+    console.error("no turnstile token in the submission - the widget did not produce one");
     return json({ ok: false, error: "The verification box did not load. Reload the page and try again." }, 403);
   }
   if (!(await verifyTurnstile(token, env.TURNSTILE_SECRET_KEY, ip))) {
@@ -643,7 +643,7 @@ export async function handleListingVerify(request: Request, env: Env): Promise<R
   // and telling somebody to check the six digits they just copied correctly
   // sends them round the same loop for as long as their patience lasts.
   if (!id) {
-    console.error("verify called with no submission id — the link lost its ?id=");
+    console.error("verify called with no submission id - the link lost its ?id=");
     return json(
       { ok: false, error: "This link is missing its submission. Open the link in the email we sent you." },
       400
@@ -746,7 +746,7 @@ export async function handleListingVerify(request: Request, env: Env): Promise<R
     return json(
       {
         ok: true,
-        message: "Email confirmed. Publishing is queued for a person — it will go live shortly.",
+        message: "Email confirmed. Publishing is queued for a person - it will go live shortly.",
       },
       200
     );

@@ -9,6 +9,7 @@
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { editionCard } from "./social.mjs";
+import { plainPunctuation } from "./markup.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -60,11 +61,28 @@ export function sectionTitle(id) {
   return SECTION_TITLES.get(id) || id;
 }
 
+/** Keys whose value is an address or an identifier, not prose. */
+const LITERAL_KEYS = new Set(["url", "web", "print", "image", "id", "authorEmail", "email", "week", "phone", "sourceUrl", "slug"]);
+
+/**
+ * Everything an edition prints goes through plainPunctuation, whatever the
+ * file holds: a piece committed straight from the form, or one pasted in by
+ * hand, reads the same on the page. See markup.mjs for why.
+ */
+export function plainEdition(value, key = null) {
+  if (typeof value === "string") return key && LITERAL_KEYS.has(key) ? value : plainPunctuation(value);
+  if (Array.isArray(value)) return value.map((item) => plainEdition(item));
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, plainEdition(v, k)]));
+  }
+  return value;
+}
+
 export function loadEditions({ includeDrafts = false } = {}) {
   if (!editionsDir || !existsSync(editionsDir)) return [];
   return readdirSync(editionsDir)
     .filter((file) => file.endsWith(".json"))
-    .map((file) => JSON.parse(readFileSync(path.join(editionsDir, file), "utf8")))
+    .map((file) => plainEdition(JSON.parse(readFileSync(path.join(editionsDir, file), "utf8"))))
     .filter((edition) => includeDrafts || edition.status !== "draft")
     .sort((a, b) => b.week.localeCompare(a.week));
 }
@@ -314,7 +332,7 @@ export function editionSchema(edition) {
   return {
     "@context": "https://schema.org",
     "@type": "PublicationIssue",
-    name: `This Week in Mallacoota — ${editionLabel(edition)}`,
+    name: `This Week in Mallacoota - ${editionLabel(edition)}`,
     issueNumber: editionNumber(edition),
     datePublished: edition.weekStart,
     url: `${ORIGIN}${pagePath}`,

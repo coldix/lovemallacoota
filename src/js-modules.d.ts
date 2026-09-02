@@ -14,6 +14,11 @@ declare module "./lib/directory-model.mjs" {
   export function slugify(value: string): string;
 }
 
+declare module "./lib/markup.mjs" {
+  export function plainPunctuation(value: unknown): string;
+  export function renderBody(paragraphs: string[], isPoem?: boolean): string;
+}
+
 interface DirectoryEntity {
   slug: string;
   name: string;

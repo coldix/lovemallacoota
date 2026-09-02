@@ -9,6 +9,7 @@
 */
 
 import contributors from "../data/contributors.json" with { type: "json" };
+import { plainPunctuation } from "./lib/markup.mjs";
 
 const MAX = { title: 160, byline: 90, body: 12_000, email: 200, phone: 40, caption: 300 };
 /** Bigger than any phone photograph, small enough to commit through the API. */
@@ -83,7 +84,7 @@ const POLICY = `You are checking a community newsletter submission for a small A
 
 The policy permits: events, notices, group updates, directory listings, school and sport information, local history, family notices, classifieds, and practical visitor information.
 
-The policy explicitly ALLOWS advocacy and argument about the town's future — a swimming pool, better roads, footpaths, mobile coverage, how the council spends money, what should happen to a piece of land — including positions many people will disagree with, and including criticism of decisions made by councils, agencies and organisations. Disagreement, strong opinion and unpopular positions are all fine. Do not hold a submission merely because it is critical, political or controversial.
+The policy explicitly ALLOWS advocacy and argument about the town's future - a swimming pool, better roads, footpaths, mobile coverage, how the council spends money, what should happen to a piece of land - including positions many people will disagree with, and including criticism of decisions made by councils, agencies and organisations. Disagreement, strong opinion and unpopular positions are all fine. Do not hold a submission merely because it is critical, political or controversial.
 
 The policy refuses: personal attacks and pile-ons against a named individual; unverified allegations about named people or businesses; discriminatory material; anything placing someone at unreasonable risk, including a home address or a person's movements without their agreement; and anything presenting itself as an emergency authority.
 
@@ -118,6 +119,23 @@ export async function checkAgainstPolicy(
   }
 }
 
+/**
+ * The same piece must not appear twice. It did once: a submission was approved
+ * from the queue after a hand-edited copy had already been committed, and the
+ * edition carried both until somebody noticed.
+ */
+export function appendArticle(
+  edition: { articles?: Record<string, unknown>[] },
+  article: Record<string, unknown>
+) {
+  const key = (value: unknown) => String(value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const existing = edition.articles || [];
+  const twin = existing.find((item) => item.id === article.id || key(item.title) === key(article.title));
+  if (twin) throw new Error(`"${article.title}" is already in this edition as ${twin.id}.`);
+  edition.articles = [...existing, article];
+  return edition;
+}
+
 export async function commitArticle(env: Env, week: string, article: Record<string, unknown>) {
   const path = `data/editions/${week}.json`;
   const api = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`;
@@ -133,7 +151,7 @@ export async function commitArticle(env: Env, week: string, article: Record<stri
   const edition = JSON.parse(atob(file.content.replace(/\n/g, "")));
 
   if (edition.status !== "open") throw new Error("This week's edition is closed.");
-  edition.articles = [...(edition.articles || []), article];
+  appendArticle(edition, article);
 
   const body = new TextEncoder().encode(`${JSON.stringify(edition, null, 2)}\n`);
   const written = await fetch(api, {
@@ -208,9 +226,10 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
   const form = await request.formData();
   const week = String(form.get("week") || "").trim();
   const section = String(form.get("section") || "").trim();
-  const title = String(form.get("title") || "").trim().slice(0, MAX.title);
-  const byline = String(form.get("byline") || (contributor ? contributor.name : "")).trim().slice(0, MAX.byline);
-  const raw = String(form.get("body") || "").trim().slice(0, MAX.body);
+  // Plain punctuation from the start, so what is committed is what prints.
+  const title = plainPunctuation(String(form.get("title") || "")).trim().slice(0, MAX.title);
+  const byline = plainPunctuation(String(form.get("byline") || (contributor ? contributor.name : ""))).trim().slice(0, MAX.byline);
+  const raw = plainPunctuation(String(form.get("body") || "")).trim().slice(0, MAX.body);
   const contactEmail = String(form.get("contact_email") || email || "").trim().slice(0, MAX.email);
   const contactPhone = String(form.get("contact_phone") || "").trim().slice(0, MAX.phone);
   const contactPublic = String(form.get("contact_public") || "") === "yes";
@@ -247,7 +266,7 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
         {
           ok: false,
           error:
-            "A classified or family notice needs a phone number or an email address — either in the text, or in the contact fields with 'publish these details' ticked.",
+            "A classified or family notice needs a phone number or an email address - either in the text, or in the contact fields with 'publish these details' ticked.",
         },
         400
       );
@@ -347,7 +366,7 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
       {
         ok: true,
         held: true,
-        note: `Submitted — your piece has been placed in the review queue and will be published once approved by an admin.${photoNote}`,
+        note: `Submitted - your piece has been placed in the review queue and will be published once approved by an admin.${photoNote}`,
       },
       202
     );
@@ -365,7 +384,7 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
   }
 
   return json(
-    { ok: true, id: article.id, note: `Published — live in about two minutes.${photoNote}` },
+    { ok: true, id: article.id, note: `Published - live in about two minutes.${photoNote}` },
     200
   );
 }

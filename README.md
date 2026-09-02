@@ -2,8 +2,8 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.08-0284c7.svg)](data/site-version.json)
-[![Build & Test](https://img.shields.io/badge/tests-125%20passing-22c55e.svg)](tests/)
+[![Site Version](https://img.shields.io/badge/version-v1.09-0284c7.svg)](data/site-version.json)
+[![Build & Test](https://img.shields.io/badge/tests-132%20passing-22c55e.svg)](tests/)
 
 ---
 
@@ -23,12 +23,15 @@ The primary weekly news destination published every Monday (`YY:WK` format, e.g.
 * **Reordered Back Sections**: Structured flow featuring Classifieds, What's On This Week, Weekly Weather Forecast, Tide Times, Buses and Transport, ending with 3MGB Wilderness Radio strictly last.
 * **Local History & Bush Poetry**: Heritage articles, historical photo restorations (e.g. Henry Lawson and E.J. Brady at Captain's Point), and Lawson's 1910 poem *The Bar*.
 * **Embedded Audio Narration & Recitals**: HTML5 audio players for local history pieces and poetry recitations (`/audio/*.mp3`), such as Shirley Dixon's recitation of *Farewell to Barbara*, hidden cleanly during printing (`@media print`).
+* **Plain Punctuation, Guaranteed**: Every edition is published with straight quotes and hyphens. Text is normalised on submission (`src/submit.ts`), again when editions load (`src/lib/editions.mjs`), and a build test fails on any em dash, curly quote or mojibake in the rendered pages.
+* **Contributor Markup**: Bold, italic, links, bullet lists, a `##` subheading, and line breaks kept as typed so a poem or an address is set out the way it was written.
+* **Photo Layout and Lightbox**: The first photograph leads each piece, the rest sit in a grid; every picture opens larger in a lightbox that pages through the article's photographs with arrows, keyboard or swipe.
 * **Multi-Column Poetry Layout**: Full-width stanza formatting ensuring every verse stays on one line.
 * **Community & Editorial**: Local news, notices, classifieds (e.g., gardener wanted notice under Trilogy Care), and contributor submissions.
 * **Live Conditions**: Open-Meteo weather forecasts, marine sea-level tides, and lunar cycle indicator.
 * **Local Transport**: PTV coach & bus timetables.
 * **Weekly Rotations**: Trail of the Week, Business of the Week, and featured videos.
-* **Printable PDF & 1-Page Layout**: Automatic server-side rendering of each weekly edition as a formatted A4 document, with page-break avoidance preventing orphan headlines.
+* **Printable PDF & 1-Page Layout**: Automatic server-side rendering of each weekly edition as a formatted A4 document. Headlines are kept with their story, a running footer with page numbers prints from the browser as well as in the PDF, and pictures are re-encoded as JPEG so the PDF is a fraction of its former 43MB.
 
 ### 2. Article & Event Submissions (`/submit.html` & `/submit-event.html`)
 * **Community Submissions**: Anyone can submit articles, notices, or photos via `/submit.html`.

@@ -8,7 +8,7 @@ const turnstileSiteKey =
 import { CARDS } from "../lib/social.mjs";
 ---
 <BaseLayout
-  title="Add your listing — Love Mallacoota"
+  title="Add your listing - Love Mallacoota"
   description="Add a free Mallacoota directory listing for a business, club, service or community organisation."
   canonicalPath="/add-listing.html"
   active="add-listing"
@@ -43,7 +43,7 @@ import { CARDS } from "../lib/social.mjs";
         </div>
         <div class="field">
           <label for="commonName">Common name, if different</label>
-          <input id="commonName" name="commonName" type="text" maxlength="120" placeholder="MADRA, 3MGB…" />
+          <input id="commonName" name="commonName" type="text" maxlength="120" placeholder="MADRA, 3MGB..." />
         </div>
         <div class="field">
           <label for="section">Directory section</label>
@@ -55,7 +55,7 @@ import { CARDS } from "../lib/social.mjs";
         </div>
         <div class="field full">
           <label for="description">What you do</label>
-          <textarea id="description" name="description" rows="4" required maxlength="1200" placeholder="Plain language. No websites inside the text — there is a field for the link."></textarea>
+          <textarea id="description" name="description" rows="4" required maxlength="1200" placeholder="Plain language. No websites inside the text - there is a field for the link."></textarea>
         </div>
         <div class="field" data-for="address">
           <label for="street">Street address (if public)</label>
@@ -91,7 +91,7 @@ import { CARDS } from "../lib/social.mjs";
         </div>
         <div class="field full" data-for="hours">
           <label for="openingHours">Opening hours</label>
-          <textarea id="openingHours" name="openingHours" rows="2" maxlength="400" placeholder="Mon–Fri 9am–5pm, weekends seasonal"></textarea>
+          <textarea id="openingHours" name="openingHours" rows="2" maxlength="400" placeholder="Mon-Fri 9am-5pm, weekends seasonal"></textarea>
         </div>
         <div class="field full" data-for="meetings">
           <label for="meetingTimes">Meeting times</label>
@@ -99,7 +99,7 @@ import { CARDS } from "../lib/social.mjs";
         </div>
         <div class="field full">
           <label for="accessibility">Accessibility, if you know it</label>
-          <input id="accessibility" name="accessibility" type="text" maxlength="300" placeholder="Wheelchair access, accessible toilet…" />
+          <input id="accessibility" name="accessibility" type="text" maxlength="300" placeholder="Wheelchair access, accessible toilet..." />
         </div>
         <div class="field">
           <label for="contactName">Your name</label>
@@ -122,7 +122,7 @@ import { CARDS } from "../lib/social.mjs";
         </div>
         <div class="field visually-hidden" aria-hidden="true">
           {/* A trap for bots that fill every field. Named so no password
-              manager or browser autofill recognises it — it used to be
+              manager or browser autofill recognises it - it used to be
               "website", beside a real website_url field, and autofill
               walked straight into it, silently discarding the submission. */}
           <label for="lm_leave_blank">Leave this field empty</label>
@@ -172,7 +172,7 @@ import { CARDS } from "../lib/social.mjs";
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         submitBtn.disabled = true;
-        submitBtn.textContent = "Sending…";
+        submitBtn.textContent = "Sending...";
         statusMsg.className = "form-status";
         statusMsg.textContent = "";
         try {

@@ -112,6 +112,7 @@ export async function handleEditionPdf(
         const page = globalThis as unknown as {
           document: {
             querySelectorAll: (selector: string) => Iterable<Record<string, any>>;
+            createElement: (tag: string) => Record<string, any>;
             fonts?: { ready: Promise<unknown> };
           };
         };
@@ -131,6 +132,34 @@ export async function handleEditionPdf(
           )
         );
         await page.document.fonts?.ready;
+
+        // A WebP or PNG is decoded and stored in the PDF as raw pixels, which
+        // made a twelve-picture edition a 43MB download. Re-encoded as JPEG,
+        // the bytes pass straight through. Anything already a JPEG is left.
+        for (const image of images) {
+          if (!image.naturalWidth || /\.jpe?g(\?|$)/i.test(image.currentSrc || image.src)) continue;
+          const scale = Math.min(1, 1800 / Math.max(image.naturalWidth, image.naturalHeight));
+          const canvas = page.document.createElement("canvas");
+          canvas.width = Math.round(image.naturalWidth * scale);
+          canvas.height = Math.round(image.naturalHeight * scale);
+          const context = canvas.getContext("2d");
+          if (!context) continue;
+          try {
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            image.src = canvas.toDataURL("image/jpeg", 0.85);
+          } catch {
+            // A picture from another origin taints the canvas; it prints as it was.
+          }
+        }
+        await Promise.all(images.map((image) => image.decode?.().catch(() => undefined)));
+      });
+
+      // The footer below is drawn by the renderer. The stylesheet also defines
+      // page margin boxes for a print from the browser, which would double
+      // the footer once this Chromium learns to draw them.
+      await tab.addStyleTag({
+        content:
+          "@page { @bottom-left { content: none; } @bottom-center { content: none; } @bottom-right { content: none; } }",
       });
       pdf = await tab.pdf({
         // The stylesheet owns the page size and margins so the cover can bleed

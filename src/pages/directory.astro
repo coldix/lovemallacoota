@@ -30,7 +30,7 @@ const typeFilters = [...new Set(entities.map((entity) => entity.entityType))]
 ---
 
 <BaseLayout
-  title="Mallacoota directory — every business, club and service"
+  title="Mallacoota directory - every business, club and service"
   description={`Search ${entities.length} Mallacoota listings in one place: cafes and pubs, accommodation, things to do, clubs and sport, trades, health and official services.`}
   canonicalPath="/directory.html"
   active="directory"
@@ -41,20 +41,20 @@ const typeFilters = [...new Set(entities.map((entity) => entity.entityType))]
   <PageHero
     prefix="The whole"
     accent="Directory"
-    lede="One search across Eat & Drink, Stay, Do & See, Community and Services. Built for a town of a thousand people — large type, plain language, no account required."
+    lede="One search across Eat & Drink, Stay, Do & See, Community and Services. Built for a town of a thousand people - large type, plain language, no account required."
   />
   <main>
     <Breadcrumbs trail={[{ name: "Directory", path: "/directory.html" }]} />
     <section class="glass-card sheen content-block reveal">
       <p class="directory-add-banner">
-        <a class="btn btn-primary" href="/add-listing.html">Add your listing — free</a>
+        <a class="btn btn-primary" href="/add-listing.html">Add your listing - free</a>
         <a class="btn btn-ghost" href="/community.html">Community</a>
         <a class="btn btn-ghost" href="/services.html">Services</a>
       </p>
       <div class="filter-bar">
         <div class="search-wrap">
           <span aria-hidden="true">⌕</span>
-          <input type="search" id="listing-search" class="search-input" placeholder="Search golf, plumber, radio, health…" aria-label="Search the Mallacoota directory" />
+          <input type="search" id="listing-search" class="search-input" placeholder="Search golf, plumber, radio, health..." aria-label="Search the Mallacoota directory" />
         </div>
         <div class="tag-row" id="section-row" role="group" aria-label="Filter by section">
           <button type="button" class="tag-btn active" data-section="All">All</button>
@@ -114,7 +114,7 @@ const typeFilters = [...new Set(entities.map((entity) => entity.entityType))]
           );
         })}
       </div>
-      <p class="no-results" id="no-results" hidden>No matches — try a different word or filter.</p>
+      <p class="no-results" id="no-results" hidden>No matches - try a different word or filter.</p>
     </section>
   </main>
 </BaseLayout>

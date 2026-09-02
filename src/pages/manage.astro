@@ -9,7 +9,7 @@ import { ENTITY_TYPES, FORM_ENTITY_TYPES } from "../lib/directory-model.mjs";
 const claimableTypes = FORM_ENTITY_TYPES.filter((id) => !ENTITY_TYPES[id]?.official);
 ---
 <BaseLayout
-  title="Update your listing — Love Mallacoota"
+  title="Update your listing - Love Mallacoota"
   description="Private link to update a Mallacoota directory listing."
   canonicalPath="/manage.html"
   robots="noindex,nofollow"
@@ -21,7 +21,7 @@ const claimableTypes = FORM_ENTITY_TYPES.filter((id) => !ENTITY_TYPES[id]?.offic
   />
   <main>
     <section class="glass-card sheen content-block reveal">
-      <p id="manage-loading">Loading your listing…</p>
+      <p id="manage-loading">Loading your listing...</p>
       <form id="manage-form" class="form-grid" hidden method="post" action="/api/listing/manage">
         <input type="hidden" name="token" id="token" />
         <div class="field full">

@@ -29,10 +29,10 @@ test("only an approved, active contributor may publish", () => {
 
 test("paragraphs survive the trip, blank lines do not", () => {
   const body = toParagraphs("First para.\nStill first.\n\n\nSecond para.\n\n   \n");
-  // Line breaks inside a block are kept, because a bullet list is one block of
-  // several lines. The renderer folds them away for ordinary prose.
+  // Line breaks inside a block are kept: a bullet list is one block of several
+  // lines, and a verse or an address is set out the way it was typed.
   assert.deepEqual(body, ["First para.\nStill first.", "Second para."]);
-  assert.equal(renderBlock(body[0]), "<p>First para. Still first.</p>");
+  assert.equal(renderBlock(body[0]), "<p>First para.<br />Still first.</p>");
 });
 
 test("a bullet list typed into the form survives as a list", () => {
@@ -115,4 +115,13 @@ test("every contributor has a real address and only sections that exist", async 
   }
   const emails = contributors.map((p) => p.email);
   assert.equal(new Set(emails).size, emails.length, "the same address is listed twice");
+});
+
+test("the same piece cannot be committed to an edition twice", async () => {
+  const { appendArticle } = await import("../src/submit.ts");
+  const edition = { articles: [{ id: "w1-a", title: "Farewell to Barbara (2009)" }] };
+  assert.throws(() => appendArticle(edition, { id: "w1-a", title: "Other" }), /already/);
+  assert.throws(() => appendArticle(edition, { id: "w1-b", title: "farewell to barbara 2009" }), /already/);
+  appendArticle(edition, { id: "w1-c", title: "Something else" });
+  assert.equal(edition.articles.length, 2);
 });

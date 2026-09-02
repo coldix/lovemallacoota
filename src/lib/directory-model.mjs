@@ -659,7 +659,7 @@ function clamp(text, limit) {
   const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("! "), cut.lastIndexOf("? "));
   // A sentence boundary in the back half of the allowance beats a word boundary.
   if (stop > limit * 0.5) return cut.slice(0, stop + 1).trim();
-  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\-–—]$/, "").trim()}…`;
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\-–—]$/, "").trim()}...`;
 }
 
 /**
@@ -713,8 +713,8 @@ export function listingTitle(entity) {
   // Naming the town twice in one title helps nobody, so a name that already
   // carries it falls back to itself rather than to "… — Mallacoota".
   const candidates = carriesTown
-    ? [`${entity.name} — ${kind}`, entity.name]
-    : [`${entity.name} — ${kind} in Mallacoota`, `${entity.name} — Mallacoota`, entity.name];
+    ? [`${entity.name} - ${kind}`, entity.name]
+    : [`${entity.name} - ${kind} in Mallacoota`, `${entity.name} - Mallacoota`, entity.name];
   return candidates.find((candidate) => candidate.length <= 62) || clamp(entity.name, 60);
 }
 

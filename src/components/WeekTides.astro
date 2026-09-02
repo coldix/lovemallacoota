@@ -80,7 +80,7 @@ const days = [...byDay.entries()].map(([date, extremes]) => ({
   {tides ? (
     <>
       Sea level from <a href={tides.sourceUrl} rel="noopener noreferrer" target="_blank">{tides.source}</a>, {tides.licence}, for a {tides.station}.
-      <strong> Modelled against {tides.datum}, not chart datum, and not at the inlet entrance</strong> — the shape of the week is right, the heights are indicative. No allowance for wind or pressure, and the bar behaves differently again.
+      <strong> Modelled against {tides.datum}, not chart datum, and not at the inlet entrance</strong> - the shape of the week is right, the heights are indicative. No allowance for wind or pressure, and the bar behaves differently again.
     </>
   ) : (
     <>{TIDE_SOURCE.note}</>

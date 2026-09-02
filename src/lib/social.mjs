@@ -63,5 +63,5 @@ export function editionCard(week, available) {
 
 /** Alt text, so the card is described rather than announced as an image. */
 export function cardAlt(title) {
-  return `${title} — Love Mallacoota`;
+  return `${title} - Love Mallacoota`;
 }

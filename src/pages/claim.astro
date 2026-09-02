@@ -21,7 +21,7 @@ const turnstileSiteKey =
 import { CARDS } from "../lib/social.mjs";
 ---
 <BaseLayout
-  title="Claim a listing — Love Mallacoota"
+  title="Claim a listing - Love Mallacoota"
   description="Claim an existing Mallacoota directory listing so you can keep it up to date."
   canonicalPath="/claim.html"
   socialImage={CARDS["add-listing"]}
@@ -53,7 +53,7 @@ import { CARDS } from "../lib/social.mjs";
             {entity ? (
               <>
                 <input type="hidden" name="slug" value={entity.slug} />
-                <p><strong>{entity.name}</strong> — {entity.email ? "we will email the published address." : "this listing has no public email yet, so the request goes to Love Mallacoota for a human to check."}</p>
+                <p><strong>{entity.name}</strong> - {entity.email ? "we will email the published address." : "this listing has no public email yet, so the request goes to Love Mallacoota for a human to check."}</p>
               </>
             ) : (
               <input id="slug" name="slug" type="text" required placeholder="listing-slug" />
@@ -80,7 +80,7 @@ import { CARDS } from "../lib/social.mjs";
           </div>
           <div class="field visually-hidden" aria-hidden="true">
             {/* A trap for bots that fill every field. Named so no password
-                manager or browser autofill recognises it — it used to be
+                manager or browser autofill recognises it - it used to be
                 "website", beside a real website_url field, and autofill
                 walked straight into it, silently discarding the submission. */}
             <label for="lm_leave_blank">Leave this field empty</label>
@@ -109,7 +109,7 @@ import { CARDS } from "../lib/social.mjs";
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         submitBtn.disabled = true;
-        submitBtn.textContent = "Sending…";
+        submitBtn.textContent = "Sending...";
         try {
           const response = await fetch("/api/listing", { method: "POST", body: new FormData(form) });
           const result = await response.json().catch(() => ({}));

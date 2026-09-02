@@ -39,7 +39,7 @@ const socialImage = new URL(socialPath, Astro.site);
 // listing photograph is whatever the owner supplied, and guessing at it would
 // make Facebook lay out a space the picture does not fill.
 const isCard = socialPath.startsWith(`${OG_DIR}/`);
-const socialAlt = socialImageAlt || cardAlt(title.split(" — ")[0]);
+const socialAlt = socialImageAlt || cardAlt(title.split(" - ")[0]);
 ---
 
 <!doctype html>

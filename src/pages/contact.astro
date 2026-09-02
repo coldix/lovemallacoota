@@ -15,10 +15,10 @@ const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 import { CARDS } from "../lib/social.mjs";
 ---
-<BaseLayout title="Suggest an Update — Love Mallacoota" description="Suggest a new Mallacoota listing or correct information in the Love Mallacoota directory." canonicalPath="/contact.html"
+<BaseLayout title="Suggest an Update - Love Mallacoota" description="Suggest a new Mallacoota listing or correct information in the Love Mallacoota directory." canonicalPath="/contact.html"
   socialImage={CARDS["add-listing"]} active="contact">
   <script slot="head" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-  <PageHero prefix="Suggest an" accent="Update" lede="See something wrong? Want to add a link? Let us know — it keeps the directory accurate for everyone." />
+  <PageHero prefix="Suggest an" accent="Update" lede="See something wrong? Want to add a link? Let us know - it keeps the directory accurate for everyone." />
   <main>
     <section class="glass-card sheen content-block reveal">
       <form id="contact-form" class="form-grid" method="post" action="/api/submit">
@@ -32,7 +32,7 @@ import { CARDS } from "../lib/social.mjs";
         <input type="hidden" id="from_page" name="from_page" value="" />
         <div class="field visually-hidden" aria-hidden="true">
           {/* A trap for bots that fill every field. Named so no password
-              manager or browser autofill recognises it — it used to be
+              manager or browser autofill recognises it - it used to be
               "website", beside a real website_url field, and autofill
               walked straight into it, silently discarding the submission. */}
           <label for="lm_leave_blank">Leave this field empty</label>
@@ -67,7 +67,7 @@ import { CARDS } from "../lib/social.mjs";
         <h3>{invite?.heading || "Know one we have missed?"}</h3>
         <p>
           Clubs, sporting groups, the school, church notices, markets, arts,
-          fishing, fire and emergency pages — if there is a page the town
+          fishing, fire and emergency pages - if there is a page the town
           actually uses and it is not here, tell us and we will add it.
         </p>
         <p class="social-rule">
@@ -128,7 +128,7 @@ import { CARDS } from "../lib/social.mjs";
       contactForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         submitBtn.disabled = true;
-        submitBtn.textContent = "Sending…";
+        submitBtn.textContent = "Sending...";
         statusMsg.className = "form-status";
         statusMsg.textContent = "";
 

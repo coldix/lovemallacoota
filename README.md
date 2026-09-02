@@ -2,7 +2,7 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.09-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.10-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-132%20passing-22c55e.svg)](tests/)
 
 ---
@@ -31,7 +31,8 @@ The primary weekly news destination published every Monday (`YY:WK` format, e.g.
 * **Live Conditions**: Open-Meteo weather forecasts, marine sea-level tides, and lunar cycle indicator.
 * **Local Transport**: PTV coach & bus timetables.
 * **Weekly Rotations**: Trail of the Week, Business of the Week, and featured videos.
-* **Printable PDF & 1-Page Layout**: Automatic server-side rendering of each weekly edition as a formatted A4 document. Headlines are kept with their story, a running footer with page numbers prints from the browser as well as in the PDF, and pictures are re-encoded as JPEG so the PDF is a fraction of its former 43MB.
+* **Printable PDF & 1-Page Layout**: Automatic server-side rendering of each weekly edition as a formatted A4 document. Headlines are kept with their story, a piece's pictures print as one compact grid between headline and text, section padding is dropped on paper so pieces fill the page, a running footer with page numbers prints from the browser as well as in the PDF, and pictures are re-encoded as JPEG at 1400px so the PDF is a few MB rather than 43MB.
+* **Checking the print layout locally**: `pnpm run build`, serve `dist/` on a port, then `Google Chrome --headless=new --no-pdf-header-footer --host-resolver-rules='MAP * ~NOTFOUND, EXCLUDE localhost' --print-to-pdf=out.pdf http://localhost:PORT/edition.html` (blocking outside hosts stops the embeds hanging the render). `pdftoppm -r 28 -png out.pdf pg` gives a thumbnail per page to read as a contact sheet. See [`docs/HANDOVER.md`](docs/HANDOVER.md).
 
 ### 2. Article & Event Submissions (`/submit.html` & `/submit-event.html`)
 * **Community Submissions**: Anyone can submit articles, notices, or photos via `/submit.html`.

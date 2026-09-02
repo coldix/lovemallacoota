@@ -1,7 +1,7 @@
 # Handover — 2 September 2026
 
-Live release **v1.09** at [lovemallacoota.au](https://lovemallacoota.au).
-132 tests passing.
+Live release **v1.10** at [lovemallacoota.au](https://lovemallacoota.au).
+132 tests passing. Written for whoever picks this up next (Colin said Opus 5).
 
 ---
 
@@ -17,6 +17,67 @@ Colin read the live edition and listed what was wrong. Every item is fixed and g
 - **The PDF was 43MB.** Chromium stores a WebP as raw pixels. The PDF route now re-encodes each picture as JPEG in the page before printing, so the bytes pass straight through. Not yet measured on the live Worker; the logic was run in a browser against the built page, where 68MB of pixels became 4.2MB of JPEG.
 
 Two things found and left: `data/coota-new.json` is not valid JSON (nothing reads it), and the console messages in `tools/*.mjs` still use em dashes (they are never published).
+
+## Later that evening: the printed edition, page by page
+
+The live PDF after the first push was 7.5MB and 20 pages. Rendering every page
+as a thumbnail and reading them as a contact sheet showed where the paper was
+going: a lone picture in column one with column two empty beside it, whole
+pieces pushed to a fresh page with a third of the previous one blank, the
+contents spilling three lines onto the editorial page, section headings
+("Births, Deaths and Marriages", "Around the Socials") stranded at a page foot,
+and the radio programme leaving Sunday alone on a last page. It is now 16 pages
+and every heading sits with its content. What changed, and why, in the order it
+was found:
+
+- **Pictures at 1400px** in `src/edition-pdf.ts` (was 1800). More than enough
+  for a 92mm column at 300dpi.
+- **Several pictures print as one grid between headline and text**, two across,
+  three across when there are four or more, capped at 50mm and 36mm. On screen
+  the first picture still leads full-width above the grid (`.edition-figure.lead`
+  spans the grid). A lone picture stays in its column, capped at 80mm on paper.
+- **The grid sits outside the column container.** As the first child of the
+  multicol it was a spanner, and Chromium would not start such a piece mid-page.
+- **Section padding is zero on paper.** `.content-block` carried 12mm above and
+  below every heading and 10mm beneath each section. That, not the break rules,
+  was why a headline, its pictures and three lines of text kept missing the
+  space left on a page. This was the single biggest improvement.
+- **`column-fill: auto`** on the text columns, so a piece that crosses a page
+  fills column one before column two instead of leaving it empty.
+- **Classifieds and family notices** use the same head-then-columns structure
+  as every other piece, three columns of 9pt.
+- **Contents**: three columns, bylines hidden on paper (they are in the pieces).
+- **Around the Socials**: the link cards were a CSS grid, which Chromium prints
+  as one unbreakable block. On paper they are plain blocks that break between
+  cards, so the heading keeps its first cards.
+- **Radio**: three flowing CSS columns rather than a row grid, so the seven days
+  balance and the whole programme, its source line and the closing footer share
+  one page. Four across was tried and was worse: narrow columns wrap every title.
+- **Still deliberate**: the weather page is half blank because the tide chart
+  and table print as one block on the next page, and the bus page is half blank
+  because the radio programme does. Both are one-page automatic sections and
+  were designed that way.
+
+### How to look at the print layout without deploying
+
+```sh
+pnpm run build
+python3 -m http.server 4174 --directory dist &
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+  --no-pdf-header-footer --timeout=20000 \
+  --host-resolver-rules='MAP * ~NOTFOUND, EXCLUDE localhost' \
+  --print-to-pdf=out.pdf http://localhost:4174/edition.html
+pdftoppm -r 28 -png out.pdf pg      # one thumbnail per page
+```
+
+The host-resolver rule is what makes it finish: with YouTube, the ad network
+and Google Fonts reachable, headless Chrome sat on the page for minutes. Local
+Chrome 152 draws the `@page` margin-box footer itself; the Worker's Chrome 128
+does not, and draws its own through Puppeteer instead. Read the thumbnails as a
+sheet (PIL will paste them into one image) and look for blank space and
+stranded headings before trusting any break rule: several that looked right in
+the CSS did nothing, and the padding that mattered was not in the print block
+at all.
 
 ## Recent Highlights (1-2 September 2026)
 

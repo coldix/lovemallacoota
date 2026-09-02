@@ -1005,7 +1005,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   }
   .edition-print-only { display: block !important; }
   .edition-print-footer {
-    margin-top: 12mm;
+    margin-top: 5mm;
     padding-top: 3mm;
     border-top: 0.5pt solid #ccc;
     text-align: center;
@@ -1104,13 +1104,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   /* The radio week is the one section that is naturally columnar, so on paper
      it packs tighter than the screen allows and a day is never split across a
      page break. */
-  .radio-week { grid-template-columns: repeat(3, 1fr); gap: 4mm 6mm; }
-  .radio-day { break-inside: avoid; }
-  .radio-day h4 { font-size: 10pt; }
-  .radio-show { grid-template-columns: 15mm minmax(0, 1fr); }
-  .radio-title { font-size: 9.5pt; }
-  .radio-time, .radio-presenter { font-size: 8.5pt; }
-  .radio-note { font-size: 8pt; }
+  /* Three flowing columns rather than a grid of rows: seven days balance
+     across them, where a row grid left Sunday alone on a page of its own. */
+  .radio-week { display: block !important; columns: 3; column-gap: 5mm; }
+  .radio-day { break-inside: avoid; margin: 0 0 2.5mm; }
+  .radio-day h4 { font-size: 9pt; margin: 0 0 0.5mm; }
+  .radio-day ul { gap: 0.8mm; }
+  .radio-show { grid-template-columns: 13mm minmax(0, 1fr); gap: 0 1.5mm; }
+  .radio-title { font-size: 8.5pt; }
+  .radio-time, .radio-presenter { font-size: 7.5pt; }
+  .radio-note { font-size: 7.5pt; }
+  #section-radio .edition-source { font-size: 7.5pt; margin-top: 1.5mm; }
 
   /* Contents pills are a screen device; on paper they are boxes around words. */
   .edition-toc-section {
@@ -1132,6 +1136,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     padding-right: 0;
   }
   .glass-card::before, .glass-card.sheen::after { display: none !important; }
+  /* On screen a section is a padded card with a wide gap beneath it. On paper
+     that was 12mm above and below every heading and 10mm between sections,
+     which is what kept a headline, its pictures and its first lines from
+     fitting in the last third of a page. */
+  .content-block { padding: 0 !important; margin-bottom: 5mm !important; }
+  .section-title { margin-top: 2mm; }
+  .section-sub { margin-bottom: 2mm; }
+  .edition-article { margin-bottom: 3mm; }
   .edition-article p { margin-bottom: 0.7rem; }
 
   /* A button on paper is a pale outline nobody can act on. Print the link as
@@ -1169,7 +1181,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     columns: 2;
     column-gap: 6mm;
     break-inside: auto;
-    break-before: avoid;
     /* Fill the first column before the second. Balanced columns across a page
        break left the picture alone in column one and the story overleaf. */
     column-fill: auto;
@@ -1183,7 +1194,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     page-break-after: avoid;
     page-break-inside: avoid;
   }
-  .edition-article-columns > :first-child { break-before: avoid; }
+  .section-sub { break-after: avoid; }
+  /* A CSS grid of link cards printed as one unbreakable block, so a heading and
+     its intro were left at the foot of one page and the list began the next.
+     As plain blocks the cards break between themselves. */
+  .edition-link-grid { display: block !important; }
+  .edition-link-grid .edition-link-card { break-inside: avoid; margin: 0 0 2.5mm; }
+  .edition-link-grid .edition-link-card:first-child { break-before: avoid; }
   .edition-subhead {
     font-size: 10.5pt;
     margin: 3mm 0 1mm;
@@ -1227,10 +1244,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   tfoot { display: table-footer-group; }
   .edition-auto { break-inside: avoid-page; }
   .edition-auto { columns: 1; }
-  .edition-toc-list { columns: 2; column-gap: 6mm; column-rule: 0.5pt solid #ccc; font-size: 9.5pt; }
-  .edition-toc-group { border-bottom: 0.5pt solid #ddd; padding-bottom: 2mm; margin-bottom: 2.5mm; }
-  .edition-toc-section { font-size: 9pt; letter-spacing: 0.04em; }
-  .edition-toc-byline { font-size: 8pt; }
+  .edition-toc-list { columns: 3; column-gap: 5mm; column-rule: 0.5pt solid #ccc; font-size: 8.5pt; line-height: 1.25; }
+  .edition-toc-group { border-bottom: 0.5pt solid #ddd; padding-bottom: 1.5mm; margin-bottom: 2mm; }
+  .edition-toc-entry { margin: 0.4mm 0; }
+  .edition-toc-section { font-size: 8.5pt; letter-spacing: 0.04em; }
+  /* Bylines are in the pieces themselves; on the contents page they doubled
+     its length and pushed the last entries onto the editorial page. */
+  .edition-toc-byline { display: none; }
   /* Type scale. Nothing below 8pt. */
   body { font-size: 10.5pt; line-height: 1.33; }
   .section-title { font-size: 16pt; margin-bottom: 0.2rem; }
@@ -1243,13 +1263,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      measure that fails for prose is right for them. */
   #section-classifieds .edition-article,
   #section-bdm .edition-article {
-    columns: 3;
-    column-gap: 6mm;
     font-size: 9pt;
     text-align: left;
   }
   #section-classifieds .edition-article-columns,
-  #section-bdm .edition-article-columns { columns: auto; }
+  #section-bdm .edition-article-columns { columns: 3; column-gap: 6mm; }
   #section-classifieds .edition-article h3,
   #section-bdm .edition-article h3 { font-size: 10pt; }
 
@@ -1410,6 +1428,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   object-fit: cover;
 }
 .edition-figures-grid .edition-figure.small img { aspect-ratio: 1 / 1; }
+.edition-figures-grid .edition-figure.lead { grid-column: 1 / -1; }
+.edition-figures-grid .edition-figure.lead img { width: auto; max-width: 100%; aspect-ratio: auto; object-fit: contain; }
 /* The first picture leads the piece: centred, and never cropped. The rest sit
    in the grid beneath it. */
 .edition-figure.lead { text-align: center; }
@@ -1545,13 +1565,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     display: grid !important;
     grid-template-columns: repeat(2, 1fr);
     gap: 2mm 4mm;
-    column-span: all;
     break-inside: avoid;
+    break-after: avoid;
     margin: 0 0 3mm;
   }
   .edition-figures-grid .edition-figure { float: none !important; width: auto !important; margin: 0 !important; }
-  .edition-figures-grid img { width: 100% !important; max-height: 60mm !important; aspect-ratio: 4 / 3; object-fit: cover; }
-  .edition-figures-grid .edition-figure.small img { aspect-ratio: 1 / 1; max-height: 44mm !important; }
+  .edition-figures-grid img { width: 100% !important; max-height: 50mm !important; aspect-ratio: 4 / 3; object-fit: cover; }
+  .edition-figures-grid .edition-figure.small img { aspect-ratio: 1 / 1; max-height: 40mm !important; }
+  .edition-figures-grid .edition-figure.lead { grid-column: auto; }
+  .edition-figures-grid .edition-figure.lead img { width: 100% !important; aspect-ratio: 4 / 3; object-fit: cover; }
+  .edition-figures-grid:has(> :nth-child(4)) { grid-template-columns: repeat(3, 1fr); }
+  .edition-figures-grid:has(> :nth-child(4)) img { max-height: 36mm !important; }
+  .edition-figures-grid figcaption { font-size: 7.5pt; }
+  /* A lone picture in its column is capped lower than before, so a headline,
+     its picture and the first lines of the story fit in the last third of a
+     page rather than leaving it blank and starting overleaf. */
+  .edition-article-columns > .edition-figure.lead img { max-height: 80mm; }
   .edition-figure img {
     max-width: 100% !important;
     height: auto !important;

@@ -138,7 +138,7 @@ export async function handleEditionPdf(
         // the bytes pass straight through. Anything already a JPEG is left.
         for (const image of images) {
           if (!image.naturalWidth || /\.jpe?g(\?|$)/i.test(image.currentSrc || image.src)) continue;
-          const scale = Math.min(1, 1800 / Math.max(image.naturalWidth, image.naturalHeight));
+          const scale = Math.min(1, 1400 / Math.max(image.naturalWidth, image.naturalHeight));
           const canvas = page.document.createElement("canvas");
           canvas.width = Math.round(image.naturalWidth * scale);
           canvas.height = Math.round(image.naturalHeight * scale);

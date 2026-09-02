@@ -341,7 +341,12 @@ const statusLabel =
          it. Every picture is a link to itself, so it opens larger with or
          without script; the lightbox in script.js takes over when it can. */
       const pictures = [article.image, ...(article.images || [])].filter(Boolean);
-      const [lead, ...gallery] = pictures;
+      /* One picture sits in the text column. Several go in one grid, the
+         first marked as the lead: full width on screen, one cell of the
+         grid on paper, where a lone picture in column one left column two
+         empty beside it. */
+      const lead = pictures.length === 1 ? pictures[0] : null;
+      const gallery = pictures.length > 1 ? pictures : [];
       const captionOf = (image) => [image.credit, image.caption || image.note].filter(Boolean);
       return (
         <article class:list={["edition-article", { "edition-poem": isPoem }]} id={articleAnchor(article)}>
@@ -362,6 +367,26 @@ const statusLabel =
               </div>
             )}
           </header>
+          {/* The pictures sit between the headline and the columns. As the first
+              child of the column container, a full-width grid made Chromium
+              push the whole piece to a fresh page whenever it started mid-page. */}
+          {gallery.length > 0 && (
+            <div class="edition-figures-grid">
+              {gallery.map((image, index) => (
+                <figure class:list={["edition-figure", { lead: index === 0, small: image.display === "small" }]}>
+                  <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
+                    <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
+                  </a>
+                  {captionOf(image).length > 0 && (
+                    <figcaption>
+                      {captionOf(image)[0]}
+                      {captionOf(image)[1] && <span> · {captionOf(image)[1]}</span>}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          )}
           <div class="edition-article-columns">
             {lead && (
               <figure class:list={["edition-figure", "lead", { small: lead.display === "small" }]}>
@@ -375,23 +400,6 @@ const statusLabel =
                   </figcaption>
                 )}
               </figure>
-            )}
-            {gallery.length > 0 && (
-              <div class="edition-figures-grid">
-                {gallery.map((image) => (
-                  <figure class:list={["edition-figure", { small: image.display === "small" }]}>
-                    <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
-                      <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
-                    </a>
-                    {captionOf(image).length > 0 && (
-                      <figcaption>
-                        {captionOf(image)[0]}
-                        {captionOf(image)[1] && <span> · {captionOf(image)[1]}</span>}
-                      </figcaption>
-                    )}
-                  </figure>
-                ))}
-              </div>
             )}
             <div class:list={["edition-article-body", { "poem-body": isPoem }]}>
               <Fragment set:html={renderBody(article.body, isPoem)} />

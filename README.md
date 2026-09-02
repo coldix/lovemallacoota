@@ -2,7 +2,7 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.10-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.18-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-133%20passing-22c55e.svg)](tests/)
 
 ---
@@ -95,7 +95,7 @@ Over 120 verified listings categorized into 5 primary task-based sections:
 * **Server / Edge Runtime**: Cloudflare Workers with TypeScript API routes (`src/worker.ts`, `src/submit.ts`, `src/admin.ts`, `src/listing.ts`).
 * **Database**: Cloudflare D1 (`lovemallacoota-directory`) for pending submissions, verification tokens, and audit logs.
 * **Design System**: Custom Vanilla CSS featuring an Antigravity Glassmorphism theme with dark/light mode support, vibrant accents, and smooth micro-animations.
-* **Image Optimization**: Automated conversion of uploaded photos to WebP format via Sharp (`tools/convert-uploaded-lawson-photos.mjs`, `uploads.yml`).
+* **Image Optimization**: Photographs are converted to WebP with Sharp - submissions by `tools/process-uploads.mjs` (`uploads.yml`), and everything else by the `tools/prepare-*.mjs` scripts.
 * **Build Manifest & Versioning**: Version hash and timestamp dynamically generated in `data/site-version.json` and displayed in the site footer stamp.
 
 ---
@@ -144,7 +144,7 @@ Love Mallacoota (lovemallacoota.au)
 ## Local Development
 
 ### Requirements
-* Node.js v18+
+* Node.js v22.13+ (see `engines` in `package.json`)
 * `pnpm` package manager
 
 ### Getting Started
@@ -156,7 +156,7 @@ pnpm install
 # 2. Run type check & verification
 pnpm run check
 
-# 3. Run unit test suite (125 tests)
+# 3. Run unit test suite (138 tests)
 pnpm run test
 
 # 4. Start local development server
@@ -189,15 +189,48 @@ pnpm run version:site
 
 ### Deployment Commands
 
-```sh
-# Deploy to preview environment (workers.dev)
-pnpm run deploy:preview
+Production is deployed from GitHub Actions, never from a laptop:
 
-# Deploy to live production (lovemallacoota.au)
-pnpm run deploy
+```sh
+gh workflow run deploy.yml -f target=production
 ```
 
+**Do not run `pnpm run deploy` locally.** It builds without
+`PUBLIC_TURNSTILE_SITE_KEY`, which lives in GitHub secrets, and ships the
+always-passes Turnstile test key to production - every form on the site then
+accepts anything. The same applies to `pnpm run deploy:preview`; push to `main`
+and the workflow deploys the preview for you.
+
 For detailed deployment runbooks, secret configuration, and DNS setup, see [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
+---
+
+## Tools
+
+Everything under `tools/` is run by hand or by a workflow; none of it runs at
+build time except `build-og.mjs`, `build-static.mjs` and `public-files.mjs`.
+
+| Script | What it does |
+| --- | --- |
+| `refresh-weekly.mjs` | Builds the automatic half of an edition: forecast, tides, moon, events. `pnpm run weekly` |
+| `roll-edition.mjs` | Closes the week and opens the next. `pnpm run roll` |
+| `check-images.mjs` | Listing images the data names but the repository lacks; `--gaps` lists listings with no photograph at all. `pnpm run check:images` |
+| `process-uploads.mjs` | Converts photographs submitted through the form. Run by `uploads.yml`. |
+| `prepare-cover.mjs` | One photograph into the two derivatives an edition cover needs. |
+| `prepare-article-image.mjs` | One image per article, WebP at 1280px on the longest side. |
+| `prepare-bank.mjs` | Adds a photograph to the filler bank at 1920px. |
+| `sync-trails.mjs` | Copies TrailBound trails within a two-hour drive. `pnpm run trails:sync` |
+| `push-secrets.sh` | Verifies each secret against the service that owns it, then pushes it. |
+| `update-version.mjs` | Writes `data/site-version.json`. `pnpm run version:site` |
+| `build-og.mjs`, `build-static.mjs`, `public-files.mjs` | Build steps. `public-files.mjs` is the allow-list of what ships. |
+| `fetch-calendar.mjs` | Reads the community calendar's iCal feed for the weekly diary. Does nothing until `data/community-calendar.json` names a calendar. |
+
+Three are spent one-shots, kept only as a record of how their images were made:
+`import-nas-images.mjs`, `import-stay-images.mjs` and
+`convert-uploaded-lawson-photos.mjs`. `import-nas-images.mjs` is the useful one
+to read - it maps business photographs on the NAS at
+`/Volumes/Media/Docs/OZonLine/A-Businesses` to listing images, and it covered 26
+of the 44 folders there.
 
 ---
 
@@ -210,6 +243,11 @@ For detailed deployment runbooks, secret configuration, and DNS setup, see [`doc
 - [`docs/WEEKLY-MOUTH.md`](docs/WEEKLY-MOUTH.md) - Weekly edition design decisions.
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) - Cloudflare Workers deployment details.
 - [`docs/SOCIAL-MEDIA-POST.md`](docs/SOCIAL-MEDIA-POST.md) - Community invitation & outreach social media post templates.
+- [`docs/MISSION.md`](docs/MISSION.md) - What the site is for, and what it refuses to be.
+- [`docs/DIRECTORY-IA.md`](docs/DIRECTORY-IA.md) - How the directory's sections and tags are shaped.
+- [`docs/ARCHIVE.md`](docs/ARCHIVE.md) - The Mouth back-issue archive and its rights position.
+- [`docs/GOVERNMENT.md`](docs/GOVERNMENT.md) - Official listings and where their data comes from.
+- [`docs/NEXTSTEPS.md`](docs/NEXTSTEPS.md) - A critical review of release v0.07. Largely addressed; kept for the reasoning.
 
 ---
 

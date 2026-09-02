@@ -1,7 +1,34 @@
-# Handover — 2 September 2026
+# Handover — 3 September 2026
 
-Live release **v1.10** at [lovemallacoota.au](https://lovemallacoota.au).
-133 tests passing. Written for whoever picks this up next (Colin said Opus 5).
+Live release **v1.18** at [lovemallacoota.au](https://lovemallacoota.au).
+138 tests passing. Written for whoever picks this up next (Colin said Opus 5).
+
+---
+
+## 3 September: privacy, dead code, the survey, a clean-up
+
+Eight releases, v1.11 to v1.18. Each one is a commit with its reasoning.
+
+- **v1.11 - the personal calendar is out.** What's On embedded `crdixon@gmail.com`, base64'd in the iframe src, which is how it went unnoticed. An embedded Google Calendar is downloadable in full, so the page handed anyone a private diary. `tools/fetch-calendar.mjs` read the same calendar into the weekly diary behind a keyword denylist ("doctor", "birthday", "flight:") - one unusual title from publishing something. Both now read `data/community-calendar.json`, which is empty until a calendar made for the town exists, and the build refuses a consumer mail address.
+- **v1.12 - the asset headers.** `assets/` ships to the browser verbatim, comments and all, so `style.css` and `script.js` published `crdixon@gmail.com` to every visitor and scraper. Now `coota@lovemallacoota.au`, guarded by a test scoped to those two files - the directory publishes business addresses at gmail and bigpond on purpose.
+- **v1.13 - claim and submit-event resolve their listing.** Both pages are static, so `Astro.url` carried no query string and the `entity` lookup was hardcoded null: the claim form never named the listing, never said the code goes to the published address, never refused an official one. They now ship `listingIndex()` as a JSON data block and resolve `?slug=` in the browser. Two bugs fell out: `.form-grid { display: grid }` beats the `hidden` attribute, and both scripts read `form.elements.slug` before the guard for a missing form.
+- **v1.14 - dead survey CSS.** 31 lines for a panel removed on 30 August. `.eyebrow` was defined inside that block and is not a survey class; it styles the masthead, every PageHero and the 404, so it kept its own rule.
+- **v1.15 - `push-secrets.sh` sees production.** Worker secret *names* can be listed even though values cannot, so the script now warns for any secret set in production and blank in `.env.secrets`. It names `STRIPE_WEBHOOK_SECRET` at the top of every run until Colin pastes it.
+- **v1.16 - the community survey banner.** On 126 of 128 pages; not on the emergency page or the 404. It expires itself on 30 September 2026 from a constant that also formats the date in the copy, so the two cannot drift. Dismissal is per browser and per survey id.
+- **v1.17 - listing photographs, honestly counted.** See the row in Still open: 28 of 99, not 0, and sixteen listings referenced files that had never existed in any commit. Those references are gone and a build test now fails on any image the data names and the repository lacks.
+- **v1.18 - end of day.** The banner lost its first sentence at Colin's request. Deleted: `images/logo.webp`, `images/oze-logo.webp` and `images/sunriselake.webp` (superseded by the sized versions, referenced nowhere, not in the ship list), and four dead import files - `data/coota-arch.json`, `data/coota-new.json`, `data/coota-old.json`, `data/listings-masterV2.json`, 203 KB of raw material for a migration long finished. All are in git history. README gained a tools table and lost a dangerous instruction: it told the reader to run `pnpm run deploy` locally, which ships the always-passes Turnstile test key.
+
+Also done, in the adnet repo: the relay's `send_email` binding now names `coota@oze.com.au` instead of accepting any verified destination, with a test holding the binding and `TARGETS` in step. Deployed.
+
+### The photographs are on the NAS
+
+`tools/import-nas-images.mjs` maps business photographs from
+`/Volumes/Media/Docs/OZonLine/A-Businesses` into `images/bus/`. It covered 26 of
+the 44 folders on that volume. Folders like Abalone Coop, Bank, Hardware, Inlet
+Bowling Club, Caltex, Bunker, 3MGB and Gabo Island have never been imported, and
+several of them are listings showing no picture today. This is the cheapest
+remaining lever on the directory and it needs no owner's permission - the
+photographs are already Colin's.
 
 ---
 
@@ -16,7 +43,7 @@ Colin read the live edition and listed what was wrong. Every item is fixed and g
 - **Print.** Headline and byline now live in their own block outside the text columns, and print refuses to break after it. "Local of the Week" no longer sits alone at the foot of a page. A running footer with `Page n of m` prints from the browser (Chrome 131+ page margin boxes); the PDF route keeps its own footer and switches those off. Print columns fill in order rather than balancing, which is what moved the story onto the same page as its headline.
 - **The PDF was 43MB.** Chromium stores a WebP as raw pixels. The PDF route now re-encodes each picture as JPEG in the page before printing, so the bytes pass straight through. Not yet measured on the live Worker; the logic was run in a browser against the built page, where 68MB of pixels became 4.2MB of JPEG.
 
-Two things found and left: `data/coota-new.json` is not valid JSON (nothing reads it), and the console messages in `tools/*.mjs` still use em dashes (they are never published).
+Two things found and left at the time: `data/coota-new.json` was not valid JSON (nothing read it), and the console messages in `tools/*.mjs` still use em dashes (they are never published). The first was deleted in the 3 September clean-up below; the second stands.
 
 ## Later that evening: the printed edition, page by page
 
@@ -241,7 +268,7 @@ manage page is a much smaller change that may cover it.
 | **Rotate two credentials** | An 84-character and a 390-character string went through the shell and out to Cloudflare's siteverify during debugging, and one spent time in the Worker as `TURNSTILE_SECRET_KEY`. If either was a GitHub or Cloudflare token, reissue it. |
 | ~~`allowed_destination_addresses` on the relay~~ | **Done, 2 Sept.** `serve/wrangler.jsonc` in the adnet repo now names `coota@oze.com.au`, so a wrong destination fails at deploy rather than at send. `TARGETS` in `serve/src/relay.ts` is exported and `tests/relay.test.ts` holds the two lists in step, both directions. Takes effect on the next `npm run serve:deploy` in adnet. |
 | **Community calendar not yet created** | The personal calendar is out of the page and out of the weekly fetcher as of v1.11; `data/community-calendar.json` is empty, so What's On shows the regular meetings and an "add an event" panel instead of an embed. Colin creates a Google Calendar for the town, makes it public, and pastes its `@group.calendar.google.com` id into `calendarId`. The build refuses a consumer mail address. |
-| **No listing has a photograph** | `images/listings/` is empty. The biggest lever on how the site feels to someone arriving from Facebook. |
+| **Most listings have no photograph** | 28 of 99 show one, not 0 as this row used to say: `images/listings/` holds one submitted photograph, and 27 more come from `images/bus/`. The gaps by section are eat & drink 8 of 16, stay 6 of 18, services 23 of 27 and community all 34. `pnpm run check:images --gaps` lists every one with the filename it is waiting for. To add one, save it as `images/listings/<slug>.webp` - no data edit, it wins over everything else. Sourcing them is the real work and it is Colin's or the owners': a photograph off a business's Facebook page is theirs, not ours. |
 | **Promotion** | The blockers are the calendar above and the photographs. This Week is the strongest thing to lead with; `docs/outreach/promotional-material.md` has the copy. |
 
 ---

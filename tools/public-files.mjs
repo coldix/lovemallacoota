@@ -26,6 +26,7 @@ export const publicFiles = [
   "audio/frank-stokes-diver.mp3",
   "audio/lawson-brady-camp.mp3",
   "audio/the-bar-lawson.mp3",
+  "audio/farewell-to-barbara.mp3",
   "pdf/Love-of-Mallacoota.pdf",
   "robots.txt",
   "site.webmanifest",

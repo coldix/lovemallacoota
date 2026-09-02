@@ -1,14 +1,19 @@
-# Handover — 31 August 2026, end of day
+# Handover — 2 September 2026
 
-Live release **v0.70** at [lovemallacoota.au](https://lovemallacoota.au).
-Working tree clean, `main` pushed, 121 tests passing.
+Live release **v1.08** at [lovemallacoota.au](https://lovemallacoota.au).
+Working tree clean, `main` pushed, 125 tests passing.
 
-Two days of work: the navigation and SEO mission on the 30th, and on the 31st a
-single small issue — "the form does not send an email" — that turned out to be
-five independent faults stacked on top of each other, plus a sixth found while
-testing the fix. All are fixed. The full account is in
-[`docs/EMAIL.md`](EMAIL.md), written so the next person spends an hour rather
-than a day.
+---
+
+## Recent Highlights (1–2 September 2026)
+
+- **Automated Google Calendar iCal Fetcher & RRULE Recurrence Expansion**: Built `tools/fetch-calendar.mjs` to fetch `crdixon@gmail.com` public iCal feed and expand weekly/monthly recurring events for the current edition week. Integrated into `tools/refresh-weekly.mjs`.
+- **Compact 1-Page What's On Layout**: Curated What's On section capped at 14 items (2 per day), styled in 2-column print CSS (`columns: 2`, `break-inside: avoid`), guaranteeing the entire section fits on 1 page in print & PDF.
+- **Event Submission Form (`/submit-event.html`)**: Added frequency selector (*One-off*, *Weekly*, *Fortnightly*, *Monthly*, *Other*) and recurrence checkboxes (*Only during school term*, *Does not run on public holidays*, *School holidays only*).
+- **Back Section Reordering**: Structured flow: Classifieds, What's On This Week, Weekly Weather Forecast, Tide Times, Buses and Transport, ending with 3MGB Wilderness Radio strictly last.
+- **Community Contributions**: Published Shirley Dixon's approved submission *Farewell to Barbara (2009)* with photo (`exercise-girls-2009.webp`) and MP3 poetry recital (`audio/farewell-to-barbara.mp3`).
+- **Clean Typography & Encoding Protections**: Resolved all double-encoded UTF-8 artifacts (`â€™`, `â€”`, `360Â°`) and verified via automated test suite.
+- **Version Rollover**: Updated `tools/update-version.mjs` to support version rollover past `.99` (`v1.00`+ through `v1.08`).
 
 ---
 

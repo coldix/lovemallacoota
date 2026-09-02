@@ -2,7 +2,7 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v0.94-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.08-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-125%20passing-22c55e.svg)](tests/)
 
 ---
@@ -19,18 +19,21 @@ Historical project documentation and earlier README iterations have been preserv
 
 ### 1. This Week (`/edition.html`)
 The primary weekly news destination published every Monday (`YY:WK` format, e.g. Edition 26:36).
+* **Automated Google Calendar Schedule**: Automated iCal parser (`tools/fetch-calendar.mjs`) fetching and expanding recurring `RRULE` events for the week, formatted into a 1-page compact 2-column print layout.
+* **Reordered Back Sections**: Structured flow featuring Classifieds, What's On This Week, Weekly Weather Forecast, Tide Times, Buses and Transport, ending with 3MGB Wilderness Radio strictly last.
 * **Local History & Bush Poetry**: Heritage articles, historical photo restorations (e.g. Henry Lawson and E.J. Brady at Captain's Point), and Lawson's 1910 poem *The Bar*.
-* **Embedded Audio Narration**: HTML5 audio players for local history pieces and recitations (`/audio/*.mp3`), hidden cleanly during printing (`@media print`).
-* **Multi-Column Poetry Layout**: 2-column stanza grid formatting (`format: "poem"`) ensuring every verse stays on one line.
-* **Community & Editorial**: Local news, notices, classifieds, and contributor pieces.
+* **Embedded Audio Narration & Recitals**: HTML5 audio players for local history pieces and poetry recitations (`/audio/*.mp3`), such as Shirley Dixon's recitation of *Farewell to Barbara*, hidden cleanly during printing (`@media print`).
+* **Multi-Column Poetry Layout**: Full-width stanza formatting ensuring every verse stays on one line.
+* **Community & Editorial**: Local news, notices, classifieds (e.g., gardener wanted notice under Trilogy Care), and contributor submissions.
 * **Live Conditions**: Open-Meteo weather forecasts, marine sea-level tides, and lunar cycle indicator.
 * **Local Transport**: PTV coach & bus timetables.
 * **Weekly Rotations**: Trail of the Week, Business of the Week, and featured videos.
-* **Printable PDF**: Automatic server-side rendering of each weekly edition as a formatted A4 document.
+* **Printable PDF & 1-Page Layout**: Automatic server-side rendering of each weekly edition as a formatted A4 document, with page-break avoidance preventing orphan headlines.
 
-### 2. Article Submissions & Admin Dashboard (`/submit.html` & `/admin.html`)
-* **Community Submissions**: Anyone can submit articles or historical notices via `/submit.html`.
-* **Multi-Photo Attachments**: Supports up to 3 high-resolution photographs per submission with captions and credits.
+### 2. Article & Event Submissions (`/submit.html` & `/submit-event.html`)
+* **Community Submissions**: Anyone can submit articles, notices, or photos via `/submit.html`.
+* **Event Submission Form (`/submit-event.html`)**: Features event frequency options (*One-off*, *Weekly*, *Fortnightly*, *Monthly*, *Other*) and recurrence conditions (*Only during school term*, *Does not run on public holidays*, *School holidays only*).
+* **Multi-Photo Attachments**: Supports high-resolution photographs per submission with captions and credits.
 * **Guest & Contributor Safeguards**:
   * Authenticated contributors are published instantly upon passing automated policy checks.
   * Guest (unauthenticated) submissions require a valid email and phone number, automatically staging photos and placing articles in the `pending_approval` queue in the D1 database.
@@ -202,6 +205,7 @@ For detailed deployment runbooks, secret configuration, and DNS setup, see [`doc
 - [`docs/DIRECTORY.md`](docs/DIRECTORY.md) - Directory schema and management workflows.
 - [`docs/WEEKLY-MOUTH.md`](docs/WEEKLY-MOUTH.md) - Weekly edition design decisions.
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) - Cloudflare Workers deployment details.
+- [`docs/SOCIAL-MEDIA-POST.md`](docs/SOCIAL-MEDIA-POST.md) - Community invitation & outreach social media post templates.
 
 ---
 

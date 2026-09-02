@@ -76,6 +76,26 @@ for KEY in $(grep -oE '^[A-Z_]+=' "$ROOT/.env.secrets.template" | tr -d '='); do
 done
 echo
 
+# The line existing is not the same as the value existing. Worker secrets are
+# write-only, so a value held only in Cloudflare is readable by nobody and this
+# file cannot rebuild it — which is the whole reason the file exists. Names can
+# be listed even though values cannot, and that is enough to catch the drift.
+# STRIPE_WEBHOOK_SECRET sat like this from the day it was set until 2 September
+# 2026: working in production, blank in the record, and silently skipped here.
+LIVE="$(npx wrangler secret list --env="" 2>/dev/null \
+  | grep -o '"name": *"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')"
+if [ -z "$LIVE" ]; then
+  warn "Could not list the Worker's secrets, so the record was not checked against production."
+else
+  for KEY in $LIVE; do
+    if [ -z "$(value_of "$KEY")" ]; then
+      warn "$KEY is set in production but blank in .env.secrets. Nothing can read it back,"
+      warn "  so copy it from the service that issued it or this record cannot rebuild production."
+    fi
+  done
+fi
+echo
+
 # --- Turnstile -------------------------------------------------------------
 echo "TURNSTILE_SECRET_KEY"
 V="$(value_of TURNSTILE_SECRET_KEY)"

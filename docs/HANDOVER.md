@@ -237,7 +237,7 @@ manage page is a much smaller change that may cover it.
 | | |
 | --- | --- |
 | ~~Finish a submission end to end~~ | **Done, 31 Aug.** `colin-dixon` went add → code → verify → commit → live. First complete submission in the site's history. |
-| **`STRIPE_WEBHOOK_SECRET` not in `.env.secrets`** | It is set in production and working; the local record is incomplete. Add it when convenient. |
+| **`STRIPE_WEBHOOK_SECRET` blank in `.env.secrets`** | The line is there, the value is not. Production holds a working one, so nothing is broken; the record just cannot rebuild it, which is the one thing the file is for. As of v1.15 `push-secrets.sh` lists the Worker's secret names and says so at the top of every run. Only Colin can fill it: Stripe dashboard, Developers → Webhooks → the `lovemallacoota.au/api/stripe` endpoint → Signing secret → Reveal. |
 | **Rotate two credentials** | An 84-character and a 390-character string went through the shell and out to Cloudflare's siteverify during debugging, and one spent time in the Worker as `TURNSTILE_SECRET_KEY`. If either was a GitHub or Cloudflare token, reissue it. |
 | **`allowed_destination_addresses` on the relay** | `serve/wrangler.jsonc` in the adnet repo. Would make a wrong destination fail at deploy rather than at send. |
 | **Community calendar not yet created** | The personal calendar is out of the page and out of the weekly fetcher as of v1.11; `data/community-calendar.json` is empty, so What's On shows the regular meetings and an "add an event" panel instead of an embed. Colin creates a Google Calendar for the town, makes it public, and pastes its `@group.calendar.google.com` id into `calendarId`. The build refuses a consumer mail address. |

@@ -13,6 +13,7 @@ import {
   SHOP_SLUGS,
   SITE_ORIGIN,
   assembleEntities,
+  canClaim,
   collectionSchema,
   displayTags,
   entityBySlug as findBySlug,
@@ -21,6 +22,7 @@ import {
   formatAddress,
   getPrimaryLink,
   getPrimaryLinkLabel,
+  isOfficialEntity,
   mapLinks,
   searchText,
   tagFilters,
@@ -145,6 +147,29 @@ export function listingPhoto(entity) {
 
 export function listingPagePath(entity) {
   return `/listing/${entity.slug}.html`;
+}
+
+/**
+ * What a static form needs to name the listing behind `?slug=…`.
+ *
+ * The claim and event forms are built once, so `Astro.url` carries no query
+ * string and the build-time lookup was always null: every branch that named the
+ * listing, or refused an unclaimable one, had never rendered. The page now
+ * ships this index and resolves the slug in the browser.
+ *
+ * Booleans, not addresses. The form only has to say whether a published address
+ * exists, not what it is. The listing path is left out and rebuilt from the
+ * slug in the page: it is one template string, and repeating it 99 times cost
+ * more than it was worth.
+ */
+export function listingIndex() {
+  return loadDirectory().map((entity) => ({
+    slug: entity.slug,
+    name: entity.name,
+    claimable: canClaim(entity),
+    official: Boolean(isOfficialEntity(entity)),
+    hasEmail: Boolean(entity.email),
+  }));
 }
 
 export function photoAbsoluteUrl(entity) {

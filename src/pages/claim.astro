@@ -1,21 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
-import { canClaim, entityBySlug, listingPagePath } from "../lib/directory.mjs";
+import ListingIndex from "../components/ListingIndex.astro";
+import { listingIndex } from "../lib/directory.mjs";
 
 /*
  * The slug is NOT read here. This is a static build, so Astro.url is the URL at
- * build time and carries no query string; ?slug=… never reached the page. It is
- * filled from location.search at runtime, below.
+ * build time and carries no query string; ?slug=… never reached the page. The
+ * listing is resolved in the browser against the index this page ships, which
+ * is what the dead build-time `entity` branches were reaching for.
  */
-/*
- * Always null on a static build. It used to be looked up from the build-time
- * slug, which never had a value, so every `entity ?` branch below has been dead
- * since the page was written. Kept as a named constant rather than deleted
- * because the branches it guards are the shape this page wants once the listing
- * is resolved in the browser — see the runtime prefill in the script.
- */
-const entity = null;
+const claimable = listingIndex().filter((listing) => listing.claimable);
 const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 import { CARDS } from "../lib/social.mjs";
@@ -35,79 +30,155 @@ import { CARDS } from "../lib/social.mjs";
   />
   <main>
     <section class="glass-card sheen content-block reveal">
-      {entity && !canClaim(entity) ? (
-        <p>
-          <strong>{entity.name}</strong> cannot be claimed through this form.
-          {entity.official
-            ? " Official services are maintained from authoritative sources."
-            : ""}
-          {" "}
-          <a href={`/contact.html?business=${encodeURIComponent(entity.name)}`}>Suggest a correction</a>
-          {entity && <> or <a href={listingPagePath(entity)}>return to the listing</a>.</>}
-        </p>
-      ) : (
-        <form id="listing-form" class="form-grid" method="post" action="/api/listing">
-          <input type="hidden" name="kind" value="claim" />
-          <div class="field full">
-            <label for="slug">Listing</label>
-            {entity ? (
-              <>
-                <input type="hidden" name="slug" value={entity.slug} />
-                <p><strong>{entity.name}</strong> - {entity.email ? "we will email the published address." : "this listing has no public email yet, so the request goes to Love Mallacoota for a human to check."}</p>
-              </>
-            ) : (
-              <input id="slug" name="slug" type="text" required placeholder="listing-slug" />
-            )}
-          </div>
-          <div class="field">
-            <label for="contactName">Your name</label>
-            <input id="contactName" name="contactName" type="text" required maxlength="120" />
-          </div>
-          <div class="field">
-            <label for="email">Your email</label>
-            <input id="email" name="email" type="email" required maxlength="120" />
-            <p class="field-hint">
-              {entity?.email
-                ? "Must be able to receive mail at the address already on the listing."
-                : "Used to contact you. A listing with no public email needs a human to approve the claim."}
-            </p>
-          </div>
-          <div class="field full">
-            <label class="check-label">
-              <input name="authorised" type="checkbox" value="yes" required />
-              I am authorised to submit or maintain this listing.
-            </label>
-          </div>
-          <div class="field visually-hidden" aria-hidden="true">
-            {/* A trap for bots that fill every field. Named so no password
-                manager or browser autofill recognises it - it used to be
-                "website", beside a real website_url field, and autofill
-                walked straight into it, silently discarding the submission. */}
-            <label for="lm_leave_blank">Leave this field empty</label>
-            <input id="lm_leave_blank" name="lm_leave_blank" type="text" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true" data-form-type="other" />
-          </div>
-          <div class="field full"><div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto"></div></div>
-          <div class="form-actions full">
-            <button class="btn btn-primary" type="submit" id="submit-btn">Send the code</button>
-            <a href={entity ? listingPagePath(entity) : "/directory.html"} class="btn btn-ghost">Cancel</a>
-          </div>
-        </form>
-      )}
+      <ListingIndex />
+      <p id="claim-blocked" hidden>
+        <strong id="blocked-name"></strong>
+        <span> cannot be claimed through this form. </span>
+        <span id="blocked-reason"></span>
+        <span> You can </span>
+        <a id="blocked-correction" href="/contact.html">suggest a correction</a>
+        <span> or </span>
+        <a id="blocked-listing" href="/directory.html">return to the listing</a>.
+      </p>
+      <form id="listing-form" class="form-grid" method="post" action="/api/listing">
+        <input type="hidden" name="kind" value="claim" />
+        <div class="field full">
+          <label for="slug">Listing</label>
+          <input
+            id="slug"
+            name="slug"
+            type="text"
+            required
+            list="listing-options"
+            autocomplete="off"
+            placeholder="Start typing the name of your listing"
+          />
+          {/* Typing a name is what people do; the API wants the slug. The
+              script below swaps one for the other before the form is sent. */}
+          <datalist id="listing-options">
+            {claimable.map((listing) => (
+              <option value={listing.slug} label={listing.name} />
+            ))}
+          </datalist>
+          <p id="slug-summary" class="field-hint" hidden></p>
+        </div>
+        <div class="field">
+          <label for="contactName">Your name</label>
+          <input id="contactName" name="contactName" type="text" required maxlength="120" />
+        </div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input id="email" name="email" type="email" required maxlength="120" />
+          <p class="field-hint" id="email-hint">
+            Used to contact you. Where the listing publishes an address, the code goes there.
+          </p>
+        </div>
+        <div class="field full">
+          <label class="check-label">
+            <input name="authorised" type="checkbox" value="yes" required />
+            I am authorised to submit or maintain this listing.
+          </label>
+        </div>
+        <div class="field visually-hidden" aria-hidden="true">
+          {/* A trap for bots that fill every field. Named so no password
+              manager or browser autofill recognises it - it used to be
+              "website", beside a real website_url field, and autofill
+              walked straight into it, silently discarding the submission. */}
+          <label for="lm_leave_blank">Leave this field empty</label>
+          <input id="lm_leave_blank" name="lm_leave_blank" type="text" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true" data-form-type="other" />
+        </div>
+        <div class="field full"><div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto"></div></div>
+        <div class="form-actions full">
+          <button class="btn btn-primary" type="submit" id="submit-btn">Send the code</button>
+          <a href="/directory.html" class="btn btn-ghost" id="cancel-link">Cancel</a>
+        </div>
+      </form>
       <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
     </section>
   </main>
   <script slot="scripts" is:inline>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("listing-form");
+      if (!form) return;
+
+      const listings = JSON.parse(
+        document.getElementById("listing-index")?.textContent || "[]"
+      );
+      const bySlug = new Map(listings.map((listing) => [listing.slug, listing]));
+      const byName = new Map(
+        listings.map((listing) => [listing.name.trim().toLowerCase(), listing])
+      );
+      const listingPath = (listing) => `/listing/${listing.slug}.html`;
+
+      const slugField = form.elements.slug;
+      const summary = document.getElementById("slug-summary");
+      const emailHint = document.getElementById("email-hint");
+      const cancel = document.getElementById("cancel-link");
+      const blocked = document.getElementById("claim-blocked");
+
+      /** Someone typed or followed a link to a listing that cannot be claimed. */
+      function refuse(listing) {
+        document.getElementById("blocked-name").textContent = listing.name;
+        document.getElementById("blocked-reason").textContent = listing.official
+          ? "Official services are maintained from authoritative sources."
+          : "It has already been claimed, or its owner asked us not to offer it.";
+        document.getElementById("blocked-correction").href =
+          `/contact.html?business=${encodeURIComponent(listing.name)}`;
+        document.getElementById("blocked-listing").href = listingPath(listing);
+        blocked.hidden = false;
+        form.hidden = true;
+      }
+
+      /** Name the listing behind the slug, or say plainly that we cannot find it. */
+      function describe() {
+        const typed = slugField.value.trim();
+        const listing = bySlug.get(typed) || byName.get(typed.toLowerCase());
+        blocked.hidden = true;
+        form.hidden = false;
+
+        if (!typed) {
+          summary.hidden = true;
+          cancel.href = "/directory.html";
+          return;
+        }
+        if (!listing) {
+          summary.hidden = false;
+          // Static markup, no typed text interpolated into it.
+          summary.innerHTML =
+            'No listing of that name yet. Check the spelling, or ' +
+            '<a href="/add-listing.html">add it as a new listing</a>.';
+          cancel.href = "/directory.html";
+          return;
+        }
+        // The API wants the slug even when a name was typed.
+        slugField.value = listing.slug;
+        cancel.href = listingPath(listing);
+        if (!listing.claimable) {
+          refuse(listing);
+          return;
+        }
+        summary.hidden = false;
+        summary.textContent = listing.hasEmail
+          ? `${listing.name}: the code goes to the address published on the listing.`
+          : `${listing.name} publishes no email yet, so the request goes to Love Mallacoota for a person to check.`;
+        emailHint.textContent = listing.hasEmail
+          ? "Must be able to receive mail at the address already on the listing."
+          : "Used to contact you. A listing with no public email needs a person to approve the claim.";
+      }
 
       // Static page: the slug can only come from the address bar at runtime.
       const fromLink = new URLSearchParams(location.search).get("slug");
-      if (fromLink && form.elements.slug) form.elements.slug.value = fromLink;
-      if (!form) return;
+      if (fromLink) slugField.value = fromLink;
+      describe();
+      slugField.addEventListener("change", describe);
+      slugField.addEventListener("blur", describe);
+
       const submitBtn = document.getElementById("submit-btn");
       const statusMsg = document.getElementById("form-status");
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        describe();
+        if (form.hidden) return;
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending...";
         try {

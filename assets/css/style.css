@@ -787,6 +787,10 @@ button.suggest-link { border-style: dashed; }
 
 /* --- Contact form --- */
 .form-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; max-width: 640px; margin: 0 auto; }
+/* display:grid beats the hidden attribute, so a form the page hides stays on
+   screen without this - the same trap already sprung on .nav-menu and the
+   listing cards. */
+.form-grid[hidden] { display: none !important; }
 @media (min-width: 700px) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .full { grid-column: 1 / -1; } }
 .field label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; letter-spacing: 0.02em; }
 .field input, .field select, .field textarea {

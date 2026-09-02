@@ -1,21 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
-import { entityBySlug } from "../lib/directory.mjs";
+import ListingIndex from "../components/ListingIndex.astro";
+import { listingIndex } from "../lib/directory.mjs";
 
 /*
  * The slug is NOT read here. This is a static build, so Astro.url is the URL at
- * build time and carries no query string; ?slug=… never reached the page. It is
- * filled from location.search at runtime, below.
+ * build time and carries no query string; ?slug=… never reached the page. The
+ * organisation is resolved in the browser against the index this page ships,
+ * which is what the dead build-time `entity` branches were reaching for.
  */
-/*
- * Always null on a static build. It used to be looked up from the build-time
- * slug, which never had a value, so every `entity ?` branch below has been dead
- * since the page was written. Kept as a named constant rather than deleted
- * because the branches it guards are the shape this page wants once the listing
- * is resolved in the browser — see the runtime prefill in the script.
- */
-const entity = null;
+const organisations = listingIndex();
 const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 import { CARDS } from "../lib/social.mjs";
@@ -34,19 +29,29 @@ import { CARDS } from "../lib/social.mjs";
   />
   <main>
     <section class="glass-card sheen content-block reveal">
+      <ListingIndex />
       <form id="listing-form" class="form-grid" method="post" action="/api/listing">
         <input type="hidden" name="kind" value="event" />
         <input type="hidden" name="token" id="token" />
         <div class="field full">
           <label for="slug">Organisation</label>
-          {entity ? (
-            <>
-              <input type="hidden" name="slug" value={entity.slug} />
-              <p><strong>{entity.name}</strong></p>
-            </>
-          ) : (
-            <input id="slug" name="slug" type="text" required placeholder="Your organisation's directory slug, or name" />
-          )}
+          <input
+            id="slug"
+            name="slug"
+            type="text"
+            required
+            list="organisation-options"
+            autocomplete="off"
+            placeholder="Start typing your organisation's name"
+          />
+          {/* Typing a name is what people do; the API wants the slug. The
+              script below swaps one for the other before the form is sent. */}
+          <datalist id="organisation-options">
+            {organisations.map((listing) => (
+              <option value={listing.slug} label={listing.name} />
+            ))}
+          </datalist>
+          <p id="slug-summary" class="field-hint" hidden></p>
         </div>
         <div class="field full">
           <label for="title">Event name</label>
@@ -132,17 +137,55 @@ import { CARDS } from "../lib/social.mjs";
   </main>
   <script slot="scripts" is:inline>
     document.addEventListener("DOMContentLoaded", () => {
-      const token = new URLSearchParams(location.search).get("token") || "";
+      const params = new URLSearchParams(location.search);
+      const token = params.get("token") || "";
       if (token) document.getElementById("token").value = token;
       const form = document.getElementById("listing-form");
+      if (!form) return;
+
+      const listings = JSON.parse(
+        document.getElementById("listing-index")?.textContent || "[]"
+      );
+      const bySlug = new Map(listings.map((listing) => [listing.slug, listing]));
+      const byName = new Map(
+        listings.map((listing) => [listing.name.trim().toLowerCase(), listing])
+      );
+      const slugField = form.elements.slug;
+      const summary = document.getElementById("slug-summary");
+
+      /** Name the organisation behind the slug, so the sender can see we found it. */
+      function describe() {
+        const typed = slugField.value.trim();
+        const listing = bySlug.get(typed) || byName.get(typed.toLowerCase());
+        if (!typed) {
+          summary.hidden = true;
+          return;
+        }
+        summary.hidden = false;
+        if (!listing) {
+          // Not a blocker: an organisation with no listing can still run an
+          // event, and the submission goes to a person either way.
+          summary.textContent =
+            "No directory listing of that name. Send it anyway and we will match it up, or add your listing first.";
+          return;
+        }
+        // The API wants the slug even when a name was typed.
+        slugField.value = listing.slug;
+        summary.textContent = `${listing.name}, from the directory.`;
+      }
 
       // Static page: the slug can only come from the address bar at runtime.
-      const fromLink = new URLSearchParams(location.search).get("slug");
-      if (fromLink && form.elements.slug) form.elements.slug.value = fromLink;
+      const fromLink = params.get("slug");
+      if (fromLink) slugField.value = fromLink;
+      describe();
+      slugField.addEventListener("change", describe);
+      slugField.addEventListener("blur", describe);
+
       const submitBtn = document.getElementById("submit-btn");
       const statusMsg = document.getElementById("form-status");
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        describe();
         submitBtn.disabled = true;
         try {
           const response = await fetch("/api/listing", { method: "POST", body: new FormData(form) });

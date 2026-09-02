@@ -53,6 +53,47 @@ const generatedPages = [
   "404.html",
 ];
 
+test("the claim and event forms can name the listing behind ?slug=", async () => {
+  const { listingIndex } = await import("../src/lib/directory.mjs");
+  const listings = listingIndex();
+  const claimable = listings.filter((listing) => listing.claimable);
+
+  // These pages are built once, so Astro.url carries no query string and the
+  // build-time lookup was always null: the branches that named the listing, or
+  // refused an unclaimable one, had never rendered. They ship the directory as
+  // a data block and resolve the slug in the browser instead.
+  for (const page of ["claim.html", "submit-event.html"]) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    const block = /<script type="application\/json" id="listing-index">([\s\S]*?)<\/script>/.exec(html);
+    assert.ok(block, `${page} ships no listing index`);
+    const shipped = JSON.parse(block[1].replace(/\\u003c/g, "<"));
+    assert.equal(shipped.length, listings.length);
+    // Booleans, not addresses: the form says whether a published address exists.
+    assert.deepEqual(Object.keys(shipped[0]).sort(), [
+      "claimable",
+      "hasEmail",
+      "name",
+      "official",
+      "slug",
+    ]);
+    assert.ok(!JSON.stringify(shipped).includes("@"), `${page} ships mail addresses`);
+    assert.match(html, /id="slug-summary"/);
+  }
+
+  const claim = await readFile(new URL("../dist/claim.html", import.meta.url), "utf8");
+  // Only listings that can be claimed are offered for completion.
+  const offered = [...claim.matchAll(/<option value="([^"]+)" label=/g)].map((m) => m[1]);
+  assert.equal(offered.length, claimable.length);
+  assert.ok(offered.every((slug) => claimable.some((listing) => listing.slug === slug)));
+  assert.match(claim, /id="claim-blocked"/);
+  assert.match(claim, /id="blocked-reason"/);
+
+  // display:grid beats the hidden attribute, so the refusal path leaves the
+  // form on screen without this rule.
+  const css = await readFile(new URL("../assets/css/style.css", import.meta.url), "utf8");
+  assert.match(css, /\.form-grid\[hidden\]\s*{\s*display:\s*none/);
+});
+
 test("the shipped stylesheet and script carry the site's address, not a personal one", async () => {
   // assets/ goes to the browser verbatim, header comments and all, so anything
   // in them is published to every visitor and every scraper. Both files headed

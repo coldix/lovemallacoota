@@ -1,0 +1,19 @@
+---
+/*
+ * The directory, in the smallest form a static form page can use.
+ *
+ * claim.html and submit-event.html are built once and then linked to with
+ * `?slug=…`. Astro.url has no query string at build time, so the listing behind
+ * the link can only be named in the browser; this data block is how the page
+ * knows the slug is real, what the listing is called, and whether it can be
+ * claimed. A JSON data block rather than a fetch: it is 12 KB, it is needed on
+ * first paint, and a round trip to name the listing would show the wrong thing
+ * first.
+ */
+import { listingIndex } from "../lib/directory.mjs";
+
+// A name containing "</script>" would end the block early. None does, and this
+// makes sure none ever can.
+const payload = JSON.stringify(listingIndex()).replace(/</g, "\\u003c");
+---
+<script type="application/json" id="listing-index" set:html={payload}></script>

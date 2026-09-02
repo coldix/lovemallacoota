@@ -53,6 +53,27 @@ const generatedPages = [
   "404.html",
 ];
 
+test("every listing image the data names is actually in the repository", async () => {
+  const { loadDirectory } = await import("../src/lib/directory.mjs");
+  // listingPhoto() drops a reference whose file is missing, so a wrong path
+  // costs a picture and says nothing. Sixteen listings carried a reference to a
+  // file that had never existed in any commit; the cards had been quietly
+  // photoless since the data was written. Only `pnpm run check:images` knew,
+  // and only when somebody ran it.
+  const missing = [];
+  for (const entity of loadDirectory()) {
+    for (const image of entity.images || []) {
+      if (!image.url) continue;
+      try {
+        await access(new URL(`..${image.url}`, import.meta.url));
+      } catch {
+        missing.push(`${entity.slug} -> ${image.url}`);
+      }
+    }
+  }
+  assert.deepEqual(missing, [], `listing images referenced but not in the repository:\n  ${missing.join("\n  ")}`);
+});
+
 test("the survey banner is on the ordinary pages and off the urgent ones", async () => {
   for (const page of ["index.html", "directory.html", "edition.html", "calendar.html", "contact.html"]) {
     const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");

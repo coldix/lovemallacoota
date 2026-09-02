@@ -15,6 +15,7 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { moonWeek } from "../src/lib/moon.mjs";
+import { fetchCalendarEvents } from "./fetch-calendar.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -276,6 +277,19 @@ try {
   if (previous?.tides) tides = previous.tides;
 }
 
+let events = [];
+try {
+  const mon = mondayOf(week);
+  const sun = new Date(mon);
+  sun.setUTCDate(mon.getUTCDate() + 6);
+  const startStr = mon.toISOString().slice(0, 10) + "T00:00:00";
+  const endStr = sun.toISOString().slice(0, 10) + "T23:59:59";
+  events = await fetchCalendarEvents(startStr, endStr);
+} catch (error) {
+  console.warn(`calendar fetch failed: ${error.message}`);
+  events = previous?.events?.length ? previous.events : pickEvents(week);
+}
+
 const payload = {
   week,
   generatedAt: new Date().toISOString(),
@@ -283,7 +297,7 @@ const payload = {
   tides,
   // Computed, not fetched: the moon is arithmetic, and the tides follow it.
   moon: moonWeek(mondayOf(week).toISOString().slice(0, 10)),
-  events: pickEvents(week),
+  events,
   trail: pickTrail(week),
   business: pickBusiness(week),
 };

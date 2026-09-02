@@ -1,7 +1,7 @@
 /*
 # Project:     lovemallacoota.au
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
-# Contact:     crdixon@gmail.com
+# Contact:     coota@lovemallacoota.au
 # Assistant:   Claude Fable 5
 # Timestamp:   14/07/2026 10:30 PM AEST (Mallacoota)
 # Version:     [26.07.001]

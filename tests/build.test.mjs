@@ -53,6 +53,23 @@ const generatedPages = [
   "404.html",
 ];
 
+test("the shipped stylesheet and script carry the site's address, not a personal one", async () => {
+  // assets/ goes to the browser verbatim, header comments and all, so anything
+  // in them is published to every visitor and every scraper. Both files headed
+  // themselves with crdixon@gmail.com until v1.12. Business addresses in the
+  // directory are published on purpose; these two files hold no listing data,
+  // so any consumer-mail address in them is a leak.
+  for (const file of ["../assets/css/style.css", "../assets/js/script.js"]) {
+    const source = await readFile(new URL(file, import.meta.url), "utf8");
+    assert.doesNotMatch(
+      source,
+      /[A-Za-z0-9._%+-]+@(?:gmail|googlemail|hotmail|outlook|live|yahoo|bigpond|icloud|me|mac)\.[A-Za-z.]+/,
+      `${file} publishes a personal mail address`
+    );
+    assert.match(source, /# Contact:\s+coota@lovemallacoota\.au/);
+  }
+});
+
 test("What's On embeds no personal calendar", async () => {
   const html = await readFile(new URL("../dist/calendar.html", import.meta.url), "utf8");
   const { isPersonalCalendarId } = await import("../src/lib/calendar.mjs");

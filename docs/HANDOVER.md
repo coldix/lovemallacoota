@@ -105,7 +105,7 @@ at all.
 
 ## Recent Highlights (1-2 September 2026)
 
-- **Automated Google Calendar iCal Fetcher & RRULE Recurrence Expansion**: Built `tools/fetch-calendar.mjs` to fetch `crdixon@gmail.com` public iCal feed and expand weekly/monthly recurring events for the current edition week. Integrated into `tools/refresh-weekly.mjs`.
+- **Automated Google Calendar iCal Fetcher & RRULE Recurrence Expansion**: Built `tools/fetch-calendar.mjs` to fetch the configured community calendar's public iCal feed (`crdixon@gmail.com` until v1.11, now `data/community-calendar.json`) and expand weekly/monthly recurring events for the current edition week. Integrated into `tools/refresh-weekly.mjs`.
 - **Compact 1-Page What's On Layout**: Curated What's On section capped at 14 items (2 per day), styled in 2-column print CSS (`columns: 2`, `break-inside: avoid`), guaranteeing the entire section fits on 1 page in print & PDF.
 - **Event Submission Form (`/submit-event.html`)**: Added frequency selector (*One-off*, *Weekly*, *Fortnightly*, *Monthly*, *Other*) and recurrence checkboxes (*Only during school term*, *Does not run on public holidays*, *School holidays only*).
 - **Back Section Reordering**: Structured flow: Classifieds, What's On This Week, Weekly Weather Forecast, Tide Times, Buses and Transport, ending with 3MGB Wilderness Radio strictly last.
@@ -242,7 +242,7 @@ manage page is a much smaller change that may cover it.
 | **`allowed_destination_addresses` on the relay** | `serve/wrangler.jsonc` in the adnet repo. Would make a wrong destination fail at deploy rather than at send. |
 | **Dead `entity` branches on claim / submit-event** | The build-time lookup was always null, so the branch telling a claimant "we will email the published address" has never rendered. Resolving the listing client-side would make that page considerably better. |
 | **Dead `.survey-*` CSS** | ~12 lines with no markup rendering them. Flagged as a background task. |
-| **Personal calendar behind What's On** | `/calendar.html` embeds `crdixon@gmail.com`, whose full history is publicly downloadable — it contains a doctor's appointment and two named birthday parties. Move the community events to a dedicated calendar before promoting the page. |
+| **Community calendar not yet created** | The personal calendar is out of the page and out of the weekly fetcher as of v1.11; `data/community-calendar.json` is empty, so What's On shows the regular meetings and an "add an event" panel instead of an embed. Colin creates a Google Calendar for the town, makes it public, and pastes its `@group.calendar.google.com` id into `calendarId`. The build refuses a consumer mail address. |
 | **No listing has a photograph** | `images/listings/` is empty. The biggest lever on how the site feels to someone arriving from Facebook. |
 | **Promotion** | The blockers are the calendar above and the photographs. This Week is the strongest thing to lead with; `docs/outreach/promotional-material.md` has the copy. |
 

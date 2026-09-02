@@ -23,6 +23,15 @@ const escapeEntities = (value) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
+/** Google takes the calendar id in the src plain or base64, so tests check both. */
+function safeAtob(value) {
+  try {
+    return atob(value.padEnd(Math.ceil(value.length / 4) * 4, "="));
+  } catch {
+    return value;
+  }
+}
+
 const generatedPages = [
   "index.html",
   "food.html",
@@ -44,15 +53,41 @@ const generatedPages = [
   "404.html",
 ];
 
-test("the community calendar is the Google Calendar Colin supplied, and the policy lets it load", async () => {
+test("What's On embeds no personal calendar", async () => {
   const html = await readFile(new URL("../dist/calendar.html", import.meta.url), "utf8");
-  // The embed Colin supplied encodes the same address in base64 (unpadded) and
-  // starts the week on Monday.
-  assert.match(html, /calendar\.google\.com\/calendar\/embed\?/);
-  assert.match(html, /src=Y3JkaXhvbkBnbWFpbC5jb20/);
-  assert.equal(atob("Y3JkaXhvbkBnbWFpbC5jb20="), "crdixon@gmail.com");
-  assert.match(html, /wkst=2/);
+  const { isPersonalCalendarId } = await import("../src/lib/calendar.mjs");
+  // An embedded Google Calendar is downloadable in full, so a personal one puts
+  // its whole history on the page. What's On carried crdixon@gmail.com until
+  // v1.11, base64'd in the src, which is how it stayed unnoticed.
+  assert.doesNotMatch(html, /crdixon/i);
+  for (const [, raw] of html.matchAll(/calendar\.google\.com\/calendar\/[^"']*[?&]src=([^"'&]+)/g)) {
+    const value = decodeURIComponent(raw.replace(/&amp;/g, "&"));
+    const decoded = /^[A-Za-z0-9+/]+=*$/.test(value) ? safeAtob(value) : value;
+    assert.ok(!isPersonalCalendarId(value), `calendar.html embeds ${value}`);
+    assert.ok(!isPersonalCalendarId(decoded), `calendar.html embeds ${decoded}`);
+  }
   assert.match(html, /id="nav-menu-toggle"/);
+});
+
+test("the calendar embed comes from the config, and refuses a personal address", async () => {
+  const { communityCalendar, isPersonalCalendarId } = await import("../src/lib/calendar.mjs");
+  assert.equal(isPersonalCalendarId("crdixon@gmail.com"), true);
+  assert.equal(isPersonalCalendarId("someone@bigpond.net.au"), true);
+  assert.equal(isPersonalCalendarId("abc123@group.calendar.google.com"), false);
+
+  const html = await readFile(new URL("../dist/calendar.html", import.meta.url), "utf8");
+  const calendar = communityCalendar();
+  if (calendar) {
+    // Agenda view, week starting Monday, Melbourne time.
+    assert.match(html, /calendar\.google\.com\/calendar\/embed\?/);
+    assert.match(html, /wkst=2/);
+    assert.ok(html.includes(encodeURIComponent(calendar.calendarId)) || html.includes(calendar.calendarId));
+  } else {
+    // No calendar yet: the page says so rather than showing an empty frame.
+    assert.doesNotMatch(html, /calendar\.google\.com\/calendar\/embed/);
+    assert.match(html, /shared calendar is on its way/i);
+    assert.match(html, /submit-event\.html/);
+  }
 });
 
 test("Astro produces every public route with canonical metadata", async () => {

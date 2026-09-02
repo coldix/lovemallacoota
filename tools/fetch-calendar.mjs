@@ -8,11 +8,25 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { plainEdition } from "../src/lib/editions.mjs";
+import { communityCalendar } from "../src/lib/calendar.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 
-const CALENDAR_ICS_URL = "https://calendar.google.com/calendar/ical/crdixon%40gmail.com/public/basic.ics";
+/**
+ * The feed follows the same calendar the What's On page embeds, from
+ * `data/community-calendar.json`. It was a personal calendar until v1.11, which
+ * put a private diary one URL away from the whole town and left this tool
+ * filtering private titles out by keyword. Nothing is fetched until a calendar
+ * made for the community is configured.
+ */
+function calendarIcsUrl() {
+  const calendar = communityCalendar();
+  if (!calendar) return null;
+  return `https://calendar.google.com/calendar/ical/${encodeURIComponent(
+    calendar.calendarId
+  )}/public/basic.ics`;
+}
 
 const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
@@ -67,7 +81,15 @@ function cleanText(text) {
 }
 
 export async function fetchCalendarEvents(startDateStr, endDateStr) {
-  const response = await fetch(CALENDAR_ICS_URL);
+  const url = calendarIcsUrl();
+  if (!url) {
+    // Thrown rather than returned empty: refresh-weekly catches this and keeps
+    // the diary it already has instead of publishing an empty week.
+    throw new Error(
+      "no community calendar configured in data/community-calendar.json"
+    );
+  }
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} fetching iCal feed`);
   }
@@ -94,6 +116,8 @@ export async function fetchCalendarEvents(startDateStr, endDateStr) {
 
     if (!eventDate) continue;
 
+    // Belt and braces from the personal-calendar days. A calendar made for the
+    // community should never carry these, and this costs nothing if it doesn't.
     const titleLower = title.toLowerCase();
     if (
       titleLower.includes("flight:") ||

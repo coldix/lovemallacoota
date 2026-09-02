@@ -10,10 +10,15 @@ import { currentEdition, loadWeekly } from "../lib/editions.mjs";
 const edition = currentEdition();
 const weekly = edition ? loadWeekly(edition.week) : null;
 import { loadDirectory, listingPagePath } from "../lib/directory.mjs";
+import { communityCalendar } from "../lib/calendar.mjs";
 
 const meetings = loadDirectory()
   .filter((entity) => entity.meetingTimes)
   .sort((a, b) => a.name.localeCompare(b.name));
+
+// Null until a calendar made for the community exists. What's On used to embed
+// a personal one, and an embedded calendar is downloadable in full.
+const calendar = communityCalendar();
 ---
 <BaseLayout
   title="What's on in Mallacoota - events, markets and club nights"
@@ -25,15 +30,27 @@ const meetings = loadDirectory()
   <PageHero prefix="What's" accent="On" lede="Markets, meetups, workshops and club nights - the community calendar, plus regular meetings from the directory." />
   <main>
     <Breadcrumbs trail={[{ name: "What's On", path: "/calendar.html" }]} />
-    <section class="glass-card sheen content-block reveal">
-      <div class="calendar-frame">
-        <iframe
-          title="Mallacoota Community Calendar"
-          src="https://calendar.google.com/calendar/embed?mode=AGENDA&wkst=2&ctz=Australia%2FMelbourne&title=Love%20Mallacoota&src=Y3JkaXhvbkBnbWFpbC5jb20&color=%237986cb"
-          loading="lazy"
-        ></iframe>
-      </div>
-    </section>
+    {calendar ? (
+      <section class="glass-card sheen content-block reveal">
+        <div class="calendar-frame">
+          <iframe
+            title="Mallacoota Community Calendar"
+            src={calendar.embedUrl}
+            loading="lazy"
+          ></iframe>
+        </div>
+      </section>
+    ) : (
+      <section class="glass-card sheen content-block reveal">
+        <h2 class="section-title">The shared calendar is on its way</h2>
+        <p class="section-sub">
+          Until it is up, what is on is here in two places: the regular club and
+          group meetings further down this page, taken from the directory, and
+          the diary in <a href="/edition.html">This Week</a>. Send us an event
+          and it goes into both.
+        </p>
+      </section>
+    )}
     <section class="glass-card sheen content-block reveal">
       <h2 class="section-title">Something missing, or wrong?</h2>
       <p class="section-sub">
@@ -77,11 +94,20 @@ const meetings = loadDirectory()
           <h3>Directory</h3>
           <p>Every business, club and service, with contacts and meeting times.</p>
         </a>
-        <div class="link-card">
-          <span class="emoji" aria-hidden="true">📅</span>
-          <h3>Take it with you</h3>
-          <p>Use the "+ Google Calendar" button on the calendar to add these events to your own phone.</p>
-        </div>
+        {calendar ? (
+          <div class="link-card">
+            <span class="emoji" aria-hidden="true">📅</span>
+            <h3>Take it with you</h3>
+            <p>Use the "+ Google Calendar" button on the calendar to add these events to your own phone.</p>
+          </div>
+        ) : (
+          <a href="/submit-event.html" class="link-card">
+            <span class="arrow" aria-hidden="true">↗</span>
+            <span class="emoji" aria-hidden="true">📅</span>
+            <h3>Add an event</h3>
+            <p>Markets, meetings, working bees, gigs - send it in and it goes up.</p>
+          </a>
+        )}
       </div>
     </section>
     {meetings.length > 0 && (

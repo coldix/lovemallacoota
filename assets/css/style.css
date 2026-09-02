@@ -500,14 +500,8 @@ main { margin-top: 2rem; }
 .section-title { font-size: 1.9rem; text-align: center; margin-bottom: 0.4rem; letter-spacing: -0.3px; }
 .section-sub { text-align: center; color: var(--muted); margin-bottom: 2rem; font-size: 0.98rem; }
 
-/* --- Community survey campaign --- */
-.survey-callout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.7fr) minmax(230px, 0.7fr);
-    gap: clamp(1.4rem, 4vw, 3rem);
-    border-color: rgba(255, 157, 92, 0.48);
-}
-.survey-copy { max-width: 760px; }
+/* Small coral line above a heading: the edition masthead, the page heroes, the
+   404. It was written for the MADRA survey panel and outlived it. */
 .eyebrow {
     margin-bottom: 0.55rem;
     color: var(--coral);
@@ -516,31 +510,6 @@ main { margin-top: 2rem; }
     letter-spacing: 0.12em;
     text-transform: uppercase;
 }
-.survey-copy h2 {
-    margin-bottom: 0.85rem;
-    font-size: clamp(1.65rem, 4vw, 2.35rem);
-    line-height: 1.2;
-}
-.survey-copy > p:not(.eyebrow) { color: var(--muted); margin-top: 0.65rem; }
-.survey-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.9rem 1.2rem;
-    margin-top: 1.4rem;
-}
-.survey-actions span { color: var(--muted); font-size: 0.9rem; font-weight: 600; }
-.survey-note {
-    align-self: stretch;
-    padding: 1.35rem;
-    border: 1px solid rgba(255, 157, 92, 0.28);
-    border-radius: 15px;
-    background: rgba(255, 157, 92, 0.08);
-}
-.survey-note strong { display: block; color: var(--coral); font-family: 'Poppins', sans-serif; }
-.survey-note p { margin-top: 0.65rem; color: var(--muted); font-size: 0.9rem; }
-.survey-note .survey-byline { margin-top: 1rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; }
-@media (max-width: 760px) { .survey-callout { grid-template-columns: 1fr; } }
 
 /* --- Ice link-cards (portal nav) --- */
 .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; perspective: 1300px; }

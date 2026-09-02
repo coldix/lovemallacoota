@@ -53,6 +53,27 @@ const generatedPages = [
   "404.html",
 ];
 
+test("the survey banner is on the ordinary pages and off the urgent ones", async () => {
+  for (const page of ["index.html", "directory.html", "edition.html", "calendar.html", "contact.html"]) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    assert.match(html, /class="survey-banner"/, `${page} carries no survey banner`);
+    assert.match(html, /https:\/\/survey\.oze\.net\.au\/s\/love-mallacoota/);
+    // The closing date is rendered from the same constant that expires it.
+    assert.match(html, /Open now through 30 September 2026\./);
+  }
+
+  // Somebody reaching the emergency page is not there to answer a survey, and
+  // the 404 is not a place to ask either.
+  for (const page of ["emergency.html", "404.html"]) {
+    const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    assert.doesNotMatch(html, /survey-banner/, `${page} should carry no survey banner`);
+  }
+
+  // display:grid beats the hidden attribute, and the close button sets it.
+  const css = await readFile(new URL("../assets/css/style.css", import.meta.url), "utf8");
+  assert.match(css, /\.survey-banner\[hidden\]\s*{\s*display:\s*none/);
+});
+
 test("the claim and event forms can name the listing behind ?slug=", async () => {
   const { listingIndex } = await import("../src/lib/directory.mjs");
   const listings = listingIndex();

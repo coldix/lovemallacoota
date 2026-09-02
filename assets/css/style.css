@@ -500,6 +500,56 @@ main { margin-top: 2rem; }
 .section-title { font-size: 1.9rem; text-align: center; margin-bottom: 0.4rem; letter-spacing: -0.3px; }
 .section-sub { text-align: center; color: var(--muted); margin-bottom: 2rem; font-size: 0.98rem; }
 
+/* --- Community survey banner (closes 30 September 2026) --- */
+.survey-banner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(240px, 0.8fr);
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.2rem);
+    margin-bottom: 1.8rem;
+    padding: 1.15rem clamp(1.1rem, 3vw, 1.8rem);
+    border: 1px solid rgba(255, 157, 92, 0.42);
+    border-radius: 16px;
+    background: rgba(255, 157, 92, 0.09);
+}
+/* display:grid beats the hidden attribute, and the close button sets it. */
+.survey-banner[hidden] { display: none !important; }
+.survey-banner-lede { color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+.survey-banner-ask {
+    margin-top: 0.4rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+}
+.survey-banner-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+.survey-banner-note { color: var(--muted); font-size: 0.78rem; }
+.survey-banner-close {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.6rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--muted);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.survey-banner-close:hover { color: var(--coral); background: rgba(255, 157, 92, 0.14); }
+.survey-banner-close:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
+@media (max-width: 760px) {
+    .survey-banner { grid-template-columns: 1fr; }
+    /* One column puts the first line under the close button. */
+    .survey-banner-copy { padding-right: 1.7rem; }
+    .survey-banner-actions { align-items: stretch; }
+    .survey-banner-actions .btn { text-align: center; }
+}
+@media print { .survey-banner { display: none; } }
+
 /* Small coral line above a heading: the edition masthead, the page heroes, the
    404. It was written for the MADRA survey panel and outlived it. */
 .eyebrow {

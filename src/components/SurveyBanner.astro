@@ -1,0 +1,57 @@
+---
+/*
+ * The community survey, at the top of nearly every page.
+ *
+ * It closes on a fixed date, so the banner is built with an expiry rather than
+ * left for somebody to remember: after the closing date a build renders nothing
+ * at all. The site rebuilds weekly, so the last banner can outlive the survey by
+ * a few days at most - delete the component from BaseLayout to end it sooner.
+ *
+ * Plain punctuation throughout: the site publishes straight quotes and hyphens,
+ * and a build test fails on a curly apostrophe or an en dash.
+ */
+const SURVEY = {
+  /** Bumped if a later survey reuses the banner, so an old dismissal does not hide it. */
+  id: "coota-2026-09",
+  url: "https://survey.oze.net.au/s/love-mallacoota",
+  /** Last day it accepts answers, Melbourne time. */
+  closes: "2026-09-30",
+};
+
+const melbourneToday = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Australia/Melbourne",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
+
+const open = melbourneToday <= SURVEY.closes;
+
+// One source for the date, so the sentence cannot drift from the expiry above.
+const closingDate = new Intl.DateTimeFormat("en-AU", {
+  timeZone: "Australia/Melbourne",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(`${SURVEY.closes}T12:00:00+10:00`));
+---
+{open && (
+  <aside class="survey-banner" data-survey={SURVEY.id} aria-labelledby="survey-banner-ask">
+    <div class="survey-banner-copy">
+      <p class="survey-banner-lede">
+        lovemallacoota.au will continue. This Week in Mallacoota is the weekly.
+        The monthly edition will be Coota in September '26.
+      </p>
+      <p class="survey-banner-ask" id="survey-banner-ask">
+        What should it publish, and how should it be supported?
+      </p>
+    </div>
+    <div class="survey-banner-actions">
+      <a class="btn btn-coral" href={SURVEY.url} target="_blank" rel="noopener noreferrer">
+        Take the anonymous survey (6-8 minutes)
+      </a>
+      <p class="survey-banner-note">Open now through {closingDate}.</p>
+    </div>
+    <button type="button" class="survey-banner-close" aria-label="Hide this notice">&times;</button>
+  </aside>
+)}

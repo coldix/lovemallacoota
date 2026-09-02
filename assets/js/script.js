@@ -418,6 +418,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })();
 
+  // --- Survey banner ---
+  // Dismissal is per browser and per survey: the id in data-survey changes when
+  // a later survey reuses the banner, so an old dismissal cannot hide a new one.
+  // Storage throws in a locked-down browser, so every access is guarded.
+  const surveyBanner = document.querySelector(".survey-banner");
+  if (surveyBanner) {
+    const surveyId = surveyBanner.dataset.survey || "survey";
+    try {
+      if (localStorage.getItem("lm-survey-dismissed") === surveyId) surveyBanner.hidden = true;
+    } catch {}
+    const closeBtn = surveyBanner.querySelector(".survey-banner-close");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        surveyBanner.hidden = true;
+        try {
+          localStorage.setItem("lm-survey-dismissed", surveyId);
+        } catch {}
+      });
+    }
+  }
+
   // --- Suggest-link handler (delegated) ---
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".suggest-link");

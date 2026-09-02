@@ -16,6 +16,8 @@ interface Props {
   socialImage?: string;
   /** The trail's last step, so the reader can see where the page sits. */
   crumb?: string;
+  /** Passed through: the emergency page carries no survey banner. */
+  showSurvey?: boolean;
 }
 const props = Astro.props;
 const crumb = props.crumb || `${props.prefix} ${props.accent}`;
@@ -26,6 +28,7 @@ const crumb = props.crumb || `${props.prefix} ${props.accent}`;
   canonicalPath={props.canonicalPath}
   active={props.active || ""}
   socialImage={props.socialImage}
+  showSurvey={props.showSurvey ?? true}
 >
   <PageHero prefix={props.prefix} accent={props.accent} lede={props.lede} />
   <main>

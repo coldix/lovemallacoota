@@ -1,6 +1,7 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteNav from "../components/SiteNav.astro";
+import SurveyBanner from "../components/SurveyBanner.astro";
 import { DEFAULT_CARD, OG_DIR, cardAlt } from "../lib/social.mjs";
 import { versioned } from "../lib/asset-version.mjs";
 
@@ -18,6 +19,8 @@ interface Props {
   socialImageAlt?: string;
   /** "article" for editorial pages, "website" for everything else. */
   ogType?: string;
+  /** The survey banner. Off where a reader has come for something urgent. */
+  showSurvey?: boolean;
 }
 
 const {
@@ -31,6 +34,7 @@ const {
   socialImage: socialImagePath,
   socialImageAlt,
   ogType = "website",
+  showSurvey = true,
 } = Astro.props;
 const canonical = new URL(canonicalPath, Astro.site);
 const socialPath = socialImagePath || DEFAULT_CARD;
@@ -104,6 +108,7 @@ const socialAlt = socialImageAlt || cardAlt(title.split(" - ")[0]);
     <canvas id="motes" class="motes" aria-hidden="true"></canvas>
     <SiteNav active={active} />
     <div class="page-wrapper">
+      {showSurvey && <SurveyBanner />}
       <slot />
       <SiteFooter />
     </div>

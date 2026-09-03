@@ -1,7 +1,136 @@
-# Handover — 3 September 2026
+# Handover — 4 September 2026
 
-Live release **v1.18** at [lovemallacoota.au](https://lovemallacoota.au).
+Live release **v1.42** at [lovemallacoota.au](https://lovemallacoota.au).
 138 tests passing. Written for whoever picks this up next (Colin said Opus 5).
+
+---
+
+## Read this before you deploy
+
+**The live site is serving Cloudflare's always-passes Turnstile test key.**
+`data-sitekey="1x00000000000000000000AA"` is on the contact, claim, add-listing
+and submit-event forms right now. I put it there: the whole of 3 and 4
+September went out through `pnpm run deploy` from this machine, which is the
+one thing the "Where things are" table below tells you never to do, and I did
+not read it until the end of the second day. A local build has no
+`PUBLIC_TURNSTILE_SITE_KEY`, so every page fell back to the test key.
+
+Two consequences, and I have confirmed the first only:
+
+- The widget passes anything. Whatever bot protection Turnstile was giving
+  those four forms, it is not giving it now.
+- If the Worker still holds the **real** `TURNSTILE_SECRET_KEY`, then a token
+  minted by the test site key will fail `siteverify`, and the forms will be
+  rejecting genuine people. I did not test this, because testing it means
+  sending real mail from a real form. **Check it.**
+
+The fix is one command, and it must run from GitHub so the site key comes out
+of the repository secrets:
+
+```
+gh workflow run deploy.yml -f target=production
+```
+
+Do that before anything else. Then load `/contact.html` and confirm the
+`data-sitekey` is not `1x0000...`.
+
+---
+
+## 4 September: photographs, coordinates, a phone, and the coach
+
+Twenty-four releases, v1.19 to v1.42, each one a commit with its reasoning.
+The short version: the directory went from 99 listings to 117 and from 2
+photographs to 67, and a lot of what it said about where things are was
+wrong.
+
+**Photographs.** 61 town photographs came in over two drops and are wired to
+their listings. A listing shows `images/listings/<slug>.webp` and now also
+`<slug>-anything.webp` beneath it as a gallery, which reuses the edition
+lightbox. Alt text moved from being keyed by slug to being keyed by filename,
+because a listing with six photographs needs six descriptions. Every one of
+the 67 is written; none falls back to the listing's name.
+
+Six photographs are **not** published, and are held in `images/unmatched/`
+with names saying what they actually show. Two named for Adobe (Mudbrick)
+Holiday Flats are buildings at Lions Park, 2.7km from that listing; one named
+for the community precinct is signed Lions Park; one named for the Youth and
+Sports Club is a public toilet block; one is a private house with an agent's
+sign on the hedge. Rename any of them to a listing slug and it wires itself
+in.
+
+**Coordinates.** This was the worst of it. Four listings sat on one point in
+Karbeethong and four more on one point in the middle of town, and the rest of
+the original set was out by 50 to 300 metres. 37 coordinates now come from
+photograph EXIF and 21 from Google Maps pins Colin supplied. Nothing shares a
+point with a business on a different street any more; the seven remaining
+shared points are genuine shared buildings, and each says so.
+
+Two addresses were wrong and only surfaced because of that check: Beachcomber
+Caravan Park is 85-87 Betka Rd, not 16 Karbeethong Avenue, and Adobe Holiday
+Flats is 9 Karbeethong Ave, not the 17-19 that belongs to Adobe Abodes next
+door. Karbeethong Lodge is 16 Schnapper Point Drive, which is the public
+access; the grounds take in 12 as well.
+
+**A note on Google Maps links.** A link carries two coordinates. `@lat,lng`
+near the front is where the map was centred; the place itself is further
+along as `!3d<lat>!4d<lng>`. On one batch the two differed by 17 to 377
+metres. Take the pin, or better, keep the link and read it later.
+
+**Filters.** `category_tags` and `categories` were fifty tags: Consumer
+Affairs headings, accommodation subtypes, and one-off menu words - Chinese,
+Kayak, Brunch, Radio - that named a single listing each. They are now 19
+filters, one or two to a listing, defined in `SECTION_FILTERS` in
+`directory-model.mjs`. The captions those singleton tags were really doing
+moved to a new `kind` field, which is what the page title and the meta
+description use: "Mallacoota Meats - Butcher", not "- Shopping". I diffed all
+99 titles before and after; none came out worse.
+
+**Mobile.** `body` has `overflow-x: hidden`, so anything too wide was being
+silently cut off rather than scrolled to, which is why none of this had been
+noticed. The coach timetable was 432px of table in a 274px card and lost its
+Days and Departs columns entirely. Every directory card lost 11px off its
+right edge. Every form field ran 26px past the card. Three of those are the
+same root cause: a grid track that cannot shrink below its content's minimum.
+Also: every control that is not a link inside a sentence is now at least 44px
+on a touch screen, and every image on the site declares its width and height,
+read from the file's own header at build time by `imageSize()` in
+`editions.mjs`.
+
+**The coach timetable** was a four-column from/to grid of stop names. It now
+reads as one service to a line, split into "Through Genoa" and "Getting to
+Genoa", and carries the three things the feed does not: a coach passes Genoa
+every day in both directions, the time changes from day to day, and tickets
+come from Bribes. The connection from Mallacoota runs Mon, Thu and Fri only,
+which is derived from the services rather than typed in, so it stays true
+after a refresh.
+
+**Version numbering was one behind itself.** `version:site` built the pages
+and *then* raised the number, so every page rendered the previous version
+into its own footer and only the footer's fetch of `site-version.json`
+corrected it. It is now stamp, build, hash. `updateRuntimeFallback()` is
+deleted: it rewrote `FILE_VERSION` and `FILE_DATE` in `script.js`, neither of
+which had existed there for some time.
+
+---
+
+## Two AI pictures, and what they are labelled
+
+Karbeethong Lodge sent a portrait of Frederick and Helena Buckland from its
+hallway, and an AI colour version of it. Both are published side by side in
+this week's edition. The colour one is **not** a restoration: set beside the
+original the pose and dress follow, but the faces are not the same faces. It
+is credited "AI reconstruction, not a photograph" and the caption asks the
+reader to treat it as an impression. Colin was asked before it went up and
+kept that wording.
+
+The Frank Stokes article carries a second one. It was credited to the
+*Geelong Advertiser* of 23 March 1968 and noted as "colourised from the
+original black and white print", which reads as the newspaper's photograph
+with colour added. It is an AI reconstruction, and it is **wrong in a way the
+article now contradicts**: it draws the diver with a cylinder on his back,
+and Frank worked on a hose. The caption says all of that, but the picture
+wants replacing. Colin has a corrected version; it had not reached the
+repository when this was written.
 
 ---
 
@@ -283,7 +412,12 @@ manage page is a much smaller change that may cover it.
 | **Rotate two credentials** | An 84-character and a 390-character string went through the shell and out to Cloudflare's siteverify during debugging, and one spent time in the Worker as `TURNSTILE_SECRET_KEY`. If either was a GitHub or Cloudflare token, reissue it. |
 | ~~`allowed_destination_addresses` on the relay~~ | **Done, 2 Sept.** `serve/wrangler.jsonc` in the adnet repo now names `coota@oze.com.au`, so a wrong destination fails at deploy rather than at send. `TARGETS` in `serve/src/relay.ts` is exported and `tests/relay.test.ts` holds the two lists in step, both directions. Takes effect on the next `npm run serve:deploy` in adnet. |
 | **Community calendar not yet created** | The personal calendar is out of the page and out of the weekly fetcher as of v1.11; `data/community-calendar.json` is empty, so What's On shows the regular meetings and an "add an event" panel instead of an embed. Colin creates a Google Calendar for the town, makes it public, and pastes its `@group.calendar.google.com` id into `calendarId`. The build refuses a consumer mail address. |
-| **Most listings have no photograph** | 28 of 99 show one, not 0 as this row used to say: `images/listings/` holds one submitted photograph, and 27 more come from `images/bus/`. The gaps by section are eat & drink 8 of 16, stay 6 of 18, services 23 of 27 and community all 34. `pnpm run check:images --gaps` lists every one with the filename it is waiting for. To add one, save it as `images/listings/<slug>.webp` - no data edit, it wins over everything else. Sourcing them is the real work and it is Colin's or the owners': a photograph off a business's Facebook page is theirs, not ours. |
+| ~~Most listings have no photograph~~ | **62 of 117 as of 4 Sept**, up from 28 of 99. `images/listings/` holds 67 photographs. To add one, save it as `images/listings/<slug>.webp` - no data edit, it wins over everything else, and `<slug>-anything.webp` joins the gallery beneath it. `pnpm run check:images --gaps` still lists what is missing. Sourcing the rest is Colin's or the owners': a photograph off a business's Facebook page is theirs, not ours. |
+| **Turnstile test key is live** | See the top of this file. `gh workflow run deploy.yml -f target=production`, then check `data-sitekey` on `/contact.html`. Also confirm whether the real `TURNSTILE_SECRET_KEY` in the Worker has been rejecting genuine form submissions in the meantime. |
+| **Five listings have no coordinate** | The airport, the health service, the medical centre, the P-12 college and the police station. 18 more carry the original unverified values, roughly right and out by 50 to 300m. `docs/coordinates-wanted.md` is the worklist and the format; send Google Maps links rather than numbers and the pin can be read out of them. |
+| **The Frank Stokes picture wants replacing** | It is an AI reconstruction that draws the diver on a cylinder when he worked on a hose. Labelled honestly for now. Colin has a corrected version. |
+| **Three uploads are stuck** | `uploads/` holds article photographs for `2026-w36-community-farwell-to-barbara-2009` and two for the Lawson piece. `tools/process-uploads.mjs` cannot place them because no article in `2026-w36` carries those ids - the ids changed after the photographs were staged. They have been there since before 3 September. Either rename the sidecars to the live article ids or delete them. |
+| **A submitted listing arrives with no filter** | `listingFromForm()` in `src/listing.ts` sets `categories: []`, so a new listing is reachable by search and by nothing else. Bega Valley Garage Doors came in that way on 3 September and was tagged Trades by hand. The form should offer the four filters for the chosen section. |
 | **Promotion** | The blockers are the calendar above and the photographs. This Week is the strongest thing to lead with; `docs/outreach/promotional-material.md` has the copy. |
 
 ---

@@ -1,11 +1,13 @@
 {
   "id": "bega-valley-garage-doos",
   "slug": "bega-valley-garage-doos",
-  "name": "Bega Valley Garage Doos",
+  "name": "Bega Valley Garage Doors",
   "commonName": null,
   "entityType": "trade",
   "section": "services",
-  "categories": [],
+  "categories": [
+    "Trades"
+  ],
   "description": "Bega Valley Garage Doors supplies, installs and services garage doors.",
   "descriptionShort": "Bega Valley Garage Doors supplies, installs and services garage doors.",
   "address": {
@@ -51,5 +53,9 @@
     "lastReviewedAt": "2026-09-03"
   },
   "createdAt": "2026-09-03T01:23:40.157Z",
-  "updatedAt": "2026-09-03T01:24:09.002Z"
+  "updatedAt": "2026-09-03T01:24:09.002Z",
+  "category_tags": [
+    "Trades"
+  ],
+  "kind": "Garage doors"
 }

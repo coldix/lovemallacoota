@@ -1288,6 +1288,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .edition-byline, .edition-source, .edition-figure figcaption { font-size: 8.5pt; }
   .edition-figure figcaption { font-size: 8pt; }
   .forecast, .timetable { font-size: 9pt; }
+  .bus-service { border: 0; background: none; padding: 0; }
+  .bus-list { gap: 0.2rem; }
+  .bus-heading { margin: 0.6rem 0 0.2rem; }
   .table-scroll { overflow-x: visible; }
 
   /* Classifieds and the family notices are scanned, not read, so the narrow
@@ -1402,6 +1405,45 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
    table keeps its own width and scrolls sideways inside this box rather than
    being clipped by the card, which loses the right-hand columns entirely.
    On paper there is room, so the wrapper gets out of the way. */
+/* Touch targets. A finger is not a mouse pointer, so on a touch screen every
+   control the reader aims at is given at least 44px of height to be hit.
+   It sits behind pointer: coarse so the mouse layout is untouched, and links
+   inside a sentence are deliberately left out: WCAG excepts them, and padding
+   a word mid-paragraph breaks the line it sits in. */
+@media (pointer: coarse) {
+  /* Chips and buttons: the label sits centred in a 44px box. */
+  .site-nav a,
+  .nav-brand,
+  .footer-nav a,
+  .breadcrumbs a,
+  .breadcrumbs [aria-current="page"],
+  .edition-toc-section,
+  .tag-btn,
+  .links a,
+  .links button,
+  button.suggest-link,
+  .listing-kicker a.listing-badge {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Text that happens to be a link keeps its own alignment: centring a card
+     title or a contents entry would move the words, not just the box. */
+  .edition-toc-entry > a,
+  .listing-card h3 a,
+  .edition-link-card h4 a,
+  .archive-toc summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .theme-toggle,
+  .nav-menu-toggle,
+  .survey-banner-close { min-width: 44px; min-height: 44px; }
+}
+
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 /* A 300x250 ad cannot shrink, and a card on a 375px phone leaves it 274px.
    Rather than crop the creative, the ad row borrows back some of the card's
@@ -1743,6 +1785,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .radio-show.postponed .radio-title,
 .radio-show.postponed .radio-presenter { opacity: 0.72; }
 
+/* The coach services. A from/to table needed four columns and 432px; this
+   needs one column and reads the way somebody asks the question: where the
+   coach goes, then which days and at what time. */
+.bus-advice { margin: 0 0 0.6rem; font-weight: 600; }
+.bus-tickets { margin: 0 0 1.1rem; }
+.bus-heading { margin: 1.3rem 0 0.5rem; font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.06em; }
+/* The days a leg runs is the first thing to know about it, so it gets its own
+   line under the heading rather than trailing off the end of one. */
+.bus-only { display: block; text-transform: none; letter-spacing: 0; color: var(--accent); font-weight: 700; font-size: 0.92rem; margin-top: 0.15rem; }
+.bus-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+.bus-service {
+  display: grid; gap: 0.15rem;
+  padding: 0.55rem 0.7rem; border-radius: 10px;
+  border: 1px solid var(--glass-border); background: rgba(0,0,0,0.12);
+}
+html[data-theme="light"] .bus-service { background: rgba(255,255,255,0.45); }
+.bus-route { margin: 0; font-weight: 600; }
+.bus-when { margin: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 0.7rem; font-size: 0.9rem; }
+.bus-days { color: var(--muted); }
+.bus-times { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent); }
+.bus-stops { margin: 1rem 0 0; font-size: 0.85rem; color: var(--muted); }
 .timetable th, .timetable td { font-size: 0.86rem; vertical-align: top; }
 .timetable tbody th { font-weight: 600; }
 

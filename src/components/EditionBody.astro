@@ -9,7 +9,7 @@ import {
   tableOfContents,
 } from "../lib/editions.mjs";
 import { renderBody } from "../lib/markup.mjs";
-import { adsForSection, fillerPhoto, fullPageAds, socialForSection, youTubeId } from "../lib/editions.mjs";
+import { adsForSection, busGroups, busPlace, fillerPhoto, fullPageAds, socialForSection, youTubeId } from "../lib/editions.mjs";
 import WeekWeather from "./WeekWeather.astro";
 import WeekTides from "./WeekTides.astro";
 
@@ -210,30 +210,56 @@ const statusLabel =
       </div>
     )}
 
-    {section.auto?.type === "timetable" && (
+    {section.auto?.type === "timetable" && (() => {
+      const bus = busGroups(section.auto.data.services);
+      const tickets = section.auto.data.tickets;
+      return (
       <div class="edition-auto">
-        <div class="table-scroll">
-        <table class="forecast timetable">
-          <thead>
-            <tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Days</th><th scope="col">Departs</th></tr>
-          </thead>
-          <tbody>
-            {section.auto.data.services.map((service) => (
-              <tr>
-                <th scope="row">{service.from}</th>
-                <td>{service.to}</td>
-                <td>{service.days}</td>
-                <td>{service.departures.join(", ")}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </div>
+        {section.auto.data.advice && <p class="bus-advice">{section.auto.data.advice}</p>}
+        {tickets && (
+          <p class="bus-tickets">
+            Tickets from <a href={tickets.listing}>{tickets.where}</a>, {tickets.street}.
+          </p>
+        )}
+
+        <h4 class="bus-heading">Through Genoa</h4>
+        <ul class="bus-list">
+          {bus.through.map((service) => (
+            <li class="bus-service">
+              <p class="bus-route">{busPlace(service.from)} to {busPlace(service.to)}</p>
+              <p class="bus-when">
+                <span class="bus-days">{service.days}</span>
+                <span class="bus-times">{service.departures.join(", ")}</span>
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <h4 class="bus-heading">
+          Getting to Genoa
+          {bus.connectionDays.length > 0 && <span class="bus-only">{bus.connectionDays.join(", ")} only</span>}
+        </h4>
+        <ul class="bus-list">
+          {bus.connection.map((service) => (
+            <li class="bus-service">
+              <p class="bus-route">{busPlace(service.from)} to {busPlace(service.to)}</p>
+              <p class="bus-when">
+                <span class="bus-days">{service.days}</span>
+                <span class="bus-times">{service.departures.join(", ")}</span>
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <p class="bus-stops">
+          The Mallacoota stop is at the Bendigo Bank on Maurice Avenue, Gipsy Point is on Gipsy Point Road, and Genoa is the Genoa Hotel on Alexanders Road.
+        </p>
         <p class="edition-source">
           {section.auto.data.route}. Times from the <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a>, {section.auto.data.licence}, valid {section.auto.data.validFrom} to {section.auto.data.validTo}. Coaches must be booked ahead; check before travelling.
         </p>
       </div>
-    )}
+      );
+    })()}
 
     {section.auto?.type === "radio" && (
       <div class="edition-auto">

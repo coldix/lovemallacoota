@@ -436,3 +436,51 @@ export function panoramaOfTheWeek(week) {
   const view = views[index % views.length];
   return { ...view, position: (index % views.length) + 1, of: views.length };
 }
+
+/**
+ * The three stops the coach uses around here are named for a landmark in the
+ * PTV feed, which is no help to somebody deciding where to stand. These are
+ * the towns they are in; anywhere else keeps the feed's own name, because
+ * guessing at a town from a stop called "Post Office/Princes Hwy" would be
+ * inventing it.
+ */
+const BUS_PLACE = {
+  "Bendigo Bank/Maurice Ave": "Mallacoota",
+  "Township/Gipsy Point Rd": "Gipsy Point",
+  "Genoa Hotel/Alexanders Rd": "Genoa",
+};
+
+export function busPlace(stop) {
+  return BUS_PLACE[stop] || stop;
+}
+
+/**
+ * Split the coach services into the two journeys a reader is actually making:
+ * the long-distance coach that passes through Genoa, and the local connection
+ * that gets you to Genoa from Mallacoota or Gipsy Point.
+ *
+ * The old display was one four-column table of stop names, which on a phone
+ * was 432px wide inside a 274px card and lost its right-hand columns. Worse,
+ * it answered the wrong question: a from/to grid does not tell you that the
+ * connection only runs three days a week.
+ */
+export function busGroups(services = []) {
+  const local = (stop) => Boolean(BUS_PLACE[stop]);
+  const connection = services.filter((s) => local(s.from) && local(s.to));
+  const through = services.filter((s) => !(local(s.from) && local(s.to)));
+  // Every day the connection runs, in week order, so the page can say so
+  // rather than leaving the reader to work it out from four rows.
+  const order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const days = new Set();
+  for (const s of connection) {
+    for (const d of String(s.days || "").split(",")) {
+      const day = d.trim();
+      if (order.includes(day)) days.add(day);
+    }
+  }
+  return {
+    through,
+    connection,
+    connectionDays: order.filter((d) => days.has(d)),
+  };
+}

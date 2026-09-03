@@ -119,6 +119,18 @@ def main(archive: str) -> None:
         "sourceUrl": "https://data.vic.gov.au/data/dataset/ptv-timetable-and-geographic-information-gtfs",
         "licence": "CC BY 4.0, Department of Transport and Planning",
         "route": "V/Line coach, Batemans Bay – Melbourne via Bairnsdale, and the Genoa connection",
+        # Neither fact is in the feed, and both are what a person actually
+        # needs before they walk to the stop, so they are carried here rather
+        # than being wiped by the next refresh.
+        "tickets": {
+            "where": "Bribes Gift Shop and Fresh Flowers",
+            "street": "Maurice Avenue, Mallacoota",
+            "listing": "/listing/bribes-gift-shop-and-fresh-flowers.html",
+        },
+        "advice": (
+            "A coach passes Genoa every day, in both directions. The time is "
+            "different on different days, so check the day you are travelling."
+        ),
         "validFrom": f"{starts[0][:4]}-{starts[0][4:6]}-{starts[0][6:]}",
         "validTo": f"{ends[-1][:4]}-{ends[-1][4:6]}-{ends[-1][6:]}",
         "refreshedAt": datetime.date.today().isoformat(),

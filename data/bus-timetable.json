@@ -3,6 +3,12 @@
   "sourceUrl": "https://data.vic.gov.au/data/dataset/ptv-timetable-and-geographic-information-gtfs",
   "licence": "CC BY 4.0, Department of Transport and Planning",
   "route": "V/Line coach, Batemans Bay - Melbourne via Bairnsdale, and the Genoa connection",
+  "tickets": {
+    "where": "Bribes Gift Shop and Fresh Flowers",
+    "street": "Maurice Avenue, Mallacoota",
+    "listing": "/listing/bribes-gift-shop-and-fresh-flowers.html"
+  },
+  "advice": "A coach passes Genoa every day, in both directions. The time is different on different days, so check the day you are travelling.",
   "validFrom": "2026-08-28",
   "validTo": "2026-11-29",
   "refreshedAt": "2026-08-28",

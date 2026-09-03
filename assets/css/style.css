@@ -1534,6 +1534,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-figures-grid .edition-figure.small img { aspect-ratio: 1 / 1; }
 .edition-figures-grid .edition-figure.lead { grid-column: 1 / -1; }
 .edition-figures-grid .edition-figure.lead img { width: auto; max-width: 100%; aspect-ratio: auto; object-fit: contain; }
+/* Exactly two pictures sit side by side, the same size as each other.
+   They used to be a full-width lead and then a lone thumbnail: the lead's
+   span across every auto-fit track kept the empty tracks alive, so the second
+   picture was left in a quarter-width cell with a stretch of nothing beside
+   it. A pair is a comparison - an original and its reconstruction, a before
+   and an after - so both are given equal room and neither is cropped. */
+.edition-figures-grid.pair img { aspect-ratio: auto; object-fit: contain; max-height: 420px; }
+@media (min-width: 620px) {
+  .edition-figures-grid.pair { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
+}
 /* The first picture leads the piece: centred, and never cropped. The rest sit
    in the grid beneath it. */
 .edition-figure.lead { text-align: center; }

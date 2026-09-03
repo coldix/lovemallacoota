@@ -406,9 +406,9 @@ const statusLabel =
               child of the column container, a full-width grid made Chromium
               push the whole piece to a fresh page whenever it started mid-page. */}
           {gallery.length > 0 && (
-            <div class="edition-figures-grid">
+            <div class:list={["edition-figures-grid", { pair: gallery.length === 2 }]}>
               {gallery.map((image, index) => (
-                <figure class:list={["edition-figure", { lead: index === 0, small: image.display === "small" }]}>
+                <figure class:list={["edition-figure", { lead: index === 0 && gallery.length > 2, small: image.display === "small" }]}>
                   <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
                     <img src={image.url} alt={image.alt} width={imageSize(image.url)?.width} height={imageSize(image.url)?.height} loading="lazy" decoding="async" />
                   </a>

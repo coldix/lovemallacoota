@@ -566,7 +566,12 @@
     "verification": {
       "lastReviewedAt": "2026-08-29"
     },
-    "kind": "Transfer station"
+    "kind": "Transfer station",
+    "geo": {
+      "latitude": -37.573265,
+      "longitude": 149.745225,
+      "source": "google-maps"
+    }
   },
   {
     "id": "gov-mallacoota-airport",
@@ -712,5 +717,436 @@
       "lastReviewedAt": "2026-08-29"
     },
     "kind": "Electricity faults"
+  },
+  {
+    "id": "shop-salt-home-living",
+    "slug": "salt-home-living",
+    "name": "Salt Home Living",
+    "entityType": "business",
+    "section": "services",
+    "categories": [
+      "Shops"
+    ],
+    "kind": "Homewares and gifts",
+    "schema_type": "Store",
+    "description": "Homewares and gift shop on Maurice Avenue: coast-inspired decor, clothing, jewellery, candles, soaps and artisan produce, including Mallacoota honey and East Gippsland makers.",
+    "descriptionShort": "Coast-inspired décor, clothing, jewellery, gifts and artisan products in Mallacoota.",
+    "website": null,
+    "links": [
+      {
+        "url": "https://www.instagram.com/salthomeliving/",
+        "text": "Instagram"
+      },
+      {
+        "url": "https://www.facebook.com/salthomeliving/",
+        "text": "Facebook"
+      }
+    ],
+    "phone": "0474 097 026",
+    "address": {
+      "street": "1/60 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558194,
+      "longitude": 149.757631,
+      "source": "photo-exif"
+    },
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Salt Home Living",
+      "url": "https://visitmallacoota.com.au/businesses/salt-home-and-living/"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "fuel-bp-mallacoota",
+    "slug": "bp-mallacoota",
+    "name": "BP Mallacoota",
+    "entityType": "business",
+    "section": "services",
+    "categories": [
+      "Shops"
+    ],
+    "kind": "Service station",
+    "schema_type": "GasStation",
+    "description": "BP service station on Maurice Avenue, with bait, tackle and camping supplies alongside the fuel.",
+    "descriptionShort": "BP service station on Maurice Avenue.",
+    "website": "https://map.bp.com/en-AU/AU/gas-station/mallacoota/bp-mallacoota/1053",
+    "phone": "0451 514 209",
+    "address": {
+      "street": "40-46 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558822,
+      "longitude": 149.756181,
+      "source": "photo-exif"
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "06:00",
+        "closes": "18:00"
+      },
+      {
+        "dayOfWeek": [
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "07:00",
+        "closes": "17:00"
+      }
+    ],
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "BP Mallacoota",
+      "url": "https://map.bp.com/en-AU/AU/gas-station/mallacoota/bp-mallacoota/1053"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "fuel-ampol-mallacoota",
+    "slug": "ampol-mallacoota",
+    "name": "Ampol Mallacoota",
+    "entityType": "business",
+    "section": "services",
+    "categories": [
+      "Shops"
+    ],
+    "kind": "Service station",
+    "schema_type": "GasStation",
+    "description": "Service station on Maurice Avenue, next to BP. Ampol-branded, and still signed Caltex on the forecourt.",
+    "descriptionShort": "Ampol (still often signed Caltex) service station on Maurice Avenue.",
+    "website": null,
+    "phone": "03 5158 0354",
+    "address": {
+      "street": "40-42 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.559075,
+      "longitude": 149.756089,
+      "source": "photo-exif"
+    },
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Ampol Mallacoota",
+      "url": "https://visitmallacoota.com.au/businesses/caltex-mallacoota/"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "trade-mallacoota-automotive",
+    "slug": "mallacoota-automotive-and-towing",
+    "name": "Mallacoota Automotive & Towing",
+    "entityType": "trade",
+    "section": "services",
+    "categories": [
+      "Trades"
+    ],
+    "kind": "Mechanic and towing",
+    "schema_type": "AutoRepair",
+    "description": "Local mechanic on Maurice Avenue offering repairs, servicing, tyres and 24-hour towing.",
+    "descriptionShort": "Local mechanic and 24-hour towing. Photo is of the closed workshop front.",
+    "website": null,
+    "links": [
+      {
+        "url": "https://www.facebook.com/mallacootaauto/",
+        "text": "Facebook"
+      }
+    ],
+    "phone": "03 5158 0188",
+    "address": {
+      "street": "40 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558447,
+      "longitude": 149.755981,
+      "source": "photo-exif"
+    },
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Mallacoota Automotive & Towing",
+      "url": "https://visitmallacoota.com.au/businesses/mallacoota-automotive-towing/"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "bank-community-bank-mallacoota",
+    "slug": "community-bank-mallacoota",
+    "name": "Community Bank Mallacoota",
+    "entityType": "professional",
+    "section": "services",
+    "categories": [
+      "Shops"
+    ],
+    "kind": "Bank",
+    "schema_type": "BankOrCreditUnion",
+    "description": "Bendigo Bank community branch on Maurice Avenue, with an ATM on site. BSB 633-000. Run by Mallacoota Community Enterprises Limited, so branch profits return to local projects.",
+    "descriptionShort": "Bendigo Bank community branch. ATM on site. BSB 633-000.",
+    "website": "https://www.bendigobank.com.au/branch/vic/community-bank-mallacoota/",
+    "phone": "03 5158 0111",
+    "address": {
+      "street": "57B Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.557514,
+      "longitude": 149.757753,
+      "source": "photo-exif"
+    },
+    "legalName": "Mallacoota Community Enterprises Limited",
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Tuesday",
+          "Wednesday",
+          "Thursday"
+        ],
+        "opens": "09:30",
+        "closes": "12:00"
+      },
+      {
+        "dayOfWeek": [
+          "Tuesday",
+          "Wednesday",
+          "Thursday"
+        ],
+        "opens": "13:00",
+        "closes": "16:00"
+      }
+    ],
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Community Bank Mallacoota",
+      "url": "https://www.bendigobank.com.au/branch/vic/community-bank-mallacoota/"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "health-mallacoota-pharmacy",
+    "slug": "mallacoota-pharmacy",
+    "name": "Mallacoota Pharmacy",
+    "entityType": "professional",
+    "section": "services",
+    "categories": [
+      "Health"
+    ],
+    "kind": "Pharmacy",
+    "schema_type": "Pharmacy",
+    "description": "Community pharmacy on Maurice Avenue and an NDSS agent. Open Sunday at Christmas and Easter.",
+    "descriptionShort": "Community pharmacy on Maurice Avenue. No own website found.",
+    "website": null,
+    "phone": "03 5158 0421",
+    "email": "pharmacy.mallacoota@gmail.com",
+    "address": {
+      "street": "52 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558392,
+      "longitude": 149.757356,
+      "source": "photo-exif"
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      {
+        "dayOfWeek": [
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "12:00"
+      }
+    ],
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Mallacoota Pharmacy",
+      "url": "https://www.healthdirect.gov.au/australian-health-services/healthcare-service/mallacoota-3892-vic/mallacoota-pharmacy/pharmacy/1aa97d4d-fdab-454a-9aeb-a2a3f8725951"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "post-mallacoota-lpo",
+    "slug": "mallacoota-lpo",
+    "name": "Australia Post Mallacoota LPO",
+    "entityType": "business",
+    "section": "services",
+    "categories": [
+      "Government"
+    ],
+    "kind": "Post office",
+    "schema_type": "PostOffice",
+    "description": "Licensed post office in the arcade at 60 Maurice Avenue, with the private boxes along the walkway. Agent for CBA, NAB and Bendigo Bank. Opening hours are not published here: check the Australia Post locator.",
+    "descriptionShort": "Licensed post office, shop 2 at 60 Maurice Avenue.",
+    "website": "https://auspost.com.au/locate/showpop/337383",
+    "phone": "03 5158 0227",
+    "address": {
+      "street": "Shop 2/60 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558158,
+      "longitude": 149.757675,
+      "source": "photo-exif"
+    },
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Australia Post Mallacoota LPO",
+      "url": "https://auspost.com.au/locate/showpop/337383"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "shop-south-eastern-home-hardware",
+    "slug": "south-eastern-home-hardware",
+    "name": "South Eastern Home Hardware",
+    "entityType": "business",
+    "section": "services",
+    "categories": [
+      "Shops",
+      "Trades"
+    ],
+    "kind": "Hardware store",
+    "schema_type": "HardwareStore",
+    "description": "Independent Home Hardware store on Lincoln Lane, carrying timber, building supplies, garden and general hardware.",
+    "descriptionShort": "Independent Home Hardware store, 1 Lincoln Lane.",
+    "website": "https://www.homehardware.com.au/stores/vic/mallacoota-south-eastern-home-hardware-871913",
+    "phone": "03 5158 0217",
+    "address": {
+      "street": "1 Lincoln Lane",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.557892,
+      "longitude": 149.756119,
+      "source": "photo-exif"
+    },
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "South Eastern Home Hardware",
+      "url": "https://www.homehardware.com.au/stores/vic/mallacoota-south-eastern-home-hardware-871913"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "gov-mallacoota-ev-charging",
+    "slug": "mallacoota-ev-charging",
+    "name": "Mallacoota EV charging station",
+    "entityType": "government",
+    "section": "services",
+    "categories": [
+      "Government"
+    ],
+    "kind": "EV charging",
+    "schema_type": "ElectricVehicleChargingStation",
+    "description": "Public fast charger in the car park off Greer Street, by the Croajingolong Centre. East Gippsland Shire lists a 50kW DC unit with two CCS2 cables.",
+    "descriptionShort": "Public DC charger on Greer Street (Charging the Regions / Croajingolong Centre).",
+    "website": "https://yoursay.eastgippsland.vic.gov.au/electric-vehicle-charging-stations",
+    "phone": null,
+    "address": {
+      "street": "4 Greer Street",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558025,
+      "longitude": 149.758361,
+      "source": "photo-exif"
+    },
+    "official": true,
+    "claimable": false,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "Mallacoota EV charging station",
+      "url": "https://yoursay.eastgippsland.vic.gov.au/electric-vehicle-charging-stations"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
   }
 ]

@@ -161,5 +161,54 @@
       "kind": "existing-listing",
       "note": "From the site's social-links list."
     }
+  },
+  {
+    "id": "church-st-peters-mallacoota",
+    "slug": "st-peters-mallacoota",
+    "name": "St Peter's Co-operating Church",
+    "entityType": "church",
+    "section": "community",
+    "categories": [
+      "Church & volunteer"
+    ],
+    "kind": "Church",
+    "schema_type": "Church",
+    "description": "Anglican and Uniting churches in co-operation, on the corner at Allan Drive. Sunday services at 9am. The parish op shop is behind the church, and the Beanie coffee van trades on the same grounds.",
+    "descriptionShort": "Anglican and Uniting congregation. Sunday services 9am, op shop behind the church.",
+    "website": null,
+    "links": [
+      {
+        "url": "https://victas.uca.org.au/church/mallacoota-st-peters-uca-ang/",
+        "text": "Uniting Church listing"
+      }
+    ],
+    "phone": "03 5158 0096",
+    "email": "revjudebenton@outlook.com",
+    "address": {
+      "street": "1 Allan Drive",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558381,
+      "longitude": 149.760453,
+      "source": "photo-exif"
+    },
+    "related": [
+      "beanie-coffee-van"
+    ],
+    "claimable": true,
+    "official": false,
+    "locationKind": "physical",
+    "source": {
+      "kind": "authoritative",
+      "name": "St Peter's Co-operating Church",
+      "url": "https://victas.uca.org.au/church/mallacoota-st-peters-uca-ang/"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
   }
 ]

@@ -975,5 +975,40 @@
     ],
     "notes_seasonal": "Bookings essential.",
     "kind": "B&B"
+  },
+  {
+    "id": "accom-gabo-views",
+    "slug": "gabo-views",
+    "business_name": "Gabo Views",
+    "category_primary": "Accommodation",
+    "category_tags": [
+      "Holiday house"
+    ],
+    "kind": "Holiday cottage",
+    "schema_type": "LodgingBusiness",
+    "description_short": "Heritage holiday cottage on Allan Drive, a short walk from the inlet.",
+    "description_long": "A heritage holiday cottage on Allan Drive with a deck looking out towards the water, booked through Hammond Properties.",
+    "phone": "0401 825 547",
+    "email": "amelia@hammondproperties.com.au",
+    "links": [
+      {
+        "url": "https://hammondproperties.com.au/properties/gabo-views",
+        "text": "Website"
+      }
+    ],
+    "social_links": [],
+    "address": {
+      "street": "8 Allan Drive",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.557536,
+      "longitude": 149.759247,
+      "source": "photo-exif"
+    },
+    "opening_hours": []
   }
 ]

@@ -484,3 +484,79 @@ export function busGroups(services = []) {
     connectionDays: order.filter((d) => days.has(d)),
   };
 }
+
+/**
+ * Intrinsic pixel size of a picture in the repository, read from the file's
+ * own header. No dependency and no decoding: the first few dozen bytes of a
+ * WebP, PNG, JPEG or GIF carry the dimensions.
+ *
+ * The point is the width and height attributes on the <img>. Without them a
+ * lazily loaded photograph occupies no space until it arrives and then shoves
+ * the story down the page as it lands, which on a phone means the paragraph
+ * you were reading jumps away mid-sentence.
+ */
+const sizeCache = new Map();
+
+function readImageSize(buffer) {
+  // PNG: IHDR is the first chunk, width and height big-endian at 16.
+  if (buffer.length > 24 && buffer.toString("ascii", 1, 4) === "PNG") {
+    return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+  }
+  // GIF: logical screen descriptor, little-endian at 6.
+  if (buffer.length > 10 && buffer.toString("ascii", 0, 3) === "GIF") {
+    return { width: buffer.readUInt16LE(6), height: buffer.readUInt16LE(8) };
+  }
+  // WebP: RIFF container, and three different chunk layouts inside it.
+  if (buffer.length > 30 && buffer.toString("ascii", 0, 4) === "RIFF" && buffer.toString("ascii", 8, 12) === "WEBP") {
+    const chunk = buffer.toString("ascii", 12, 16);
+    if (chunk === "VP8 ") {
+      return { width: buffer.readUInt16LE(26) & 0x3fff, height: buffer.readUInt16LE(28) & 0x3fff };
+    }
+    if (chunk === "VP8L") {
+      const bits = buffer.readUInt32LE(21);
+      return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 };
+    }
+    if (chunk === "VP8X") {
+      const at = (offset) => buffer[offset] | (buffer[offset + 1] << 8) | (buffer[offset + 2] << 16);
+      return { width: at(24) + 1, height: at(27) + 1 };
+    }
+    return null;
+  }
+  // JPEG: walk the segments to the frame header that carries the size.
+  if (buffer.length > 4 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+    let offset = 2;
+    while (offset + 9 < buffer.length) {
+      if (buffer[offset] !== 0xff) {
+        offset += 1;
+        continue;
+      }
+      const marker = buffer[offset + 1];
+      // Start of frame, in any of its flavours, but not the restart or
+      // huffman-table markers that share the range.
+      if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+        return { height: buffer.readUInt16BE(offset + 5), width: buffer.readUInt16BE(offset + 7) };
+      }
+      offset += 2 + buffer.readUInt16BE(offset + 2);
+    }
+  }
+  return null;
+}
+
+/** Size of a site-absolute image path, or null when it cannot be read. */
+export function imageSize(url) {
+  if (!url || typeof url !== "string" || !url.startsWith("/")) return null;
+  if (sizeCache.has(url)) return sizeCache.get(url);
+  const file = path.join(rootDir, url.replace(/^\//, "").split("?")[0]);
+  let size = null;
+  if (existsSync(file)) {
+    try {
+      // The header is all that is needed, so only the first 64KB is read.
+      const buffer = readFileSync(file);
+      size = readImageSize(buffer.subarray(0, Math.min(buffer.length, 65536)));
+    } catch {
+      size = null;
+    }
+  }
+  sizeCache.set(url, size);
+  return size;
+}

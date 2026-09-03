@@ -9,7 +9,7 @@ import {
   tableOfContents,
 } from "../lib/editions.mjs";
 import { renderBody } from "../lib/markup.mjs";
-import { adsForSection, busGroups, busPlace, fillerPhoto, fullPageAds, socialForSection, youTubeId } from "../lib/editions.mjs";
+import { adsForSection, busGroups, busPlace, fillerPhoto, fullPageAds, imageSize, socialForSection, youTubeId } from "../lib/editions.mjs";
 import WeekWeather from "./WeekWeather.astro";
 import WeekTides from "./WeekTides.astro";
 
@@ -57,7 +57,7 @@ const statusLabel =
         the hero, and a second one told crawlers the page was about the word
         "Mallacoota" rather than about the week. */}
     <section class="edition-cover" aria-hidden="true">
-      <img src={edition.cover.print || edition.cover.web} alt="" />
+      <img src={edition.cover.print || edition.cover.web} alt="" width={imageSize(edition.cover.print || edition.cover.web)?.width} height={imageSize(edition.cover.print || edition.cover.web)?.height} />
       <div class="edition-cover-mast">
         <p class="edition-cover-eyebrow">This Week in</p>
         <p class="edition-cover-title">Mallacoota</p>
@@ -73,7 +73,7 @@ const statusLabel =
     </section>
 
     <figure class="glass-card sheen content-block reveal edition-cover-web">
-      <img src={edition.cover.web} alt={edition.cover.caption || "This week's cover photograph"} loading="eager" decoding="async" />
+      <img src={edition.cover.web} alt={edition.cover.caption || "This week's cover photograph"} width={imageSize(edition.cover.web)?.width} height={imageSize(edition.cover.web)?.height} loading="eager" decoding="async" />
       {(edition.cover.caption || edition.cover.credit) && (
         <figcaption>
           {edition.cover.caption}
@@ -193,7 +193,7 @@ const statusLabel =
     {section.auto?.type === "trail" && (
       <div class="edition-auto edition-feature">
         {section.auto.data.photo && (
-          <img class="edition-photo" src={section.auto.data.photo} alt={section.auto.data.name} loading="lazy" decoding="async" />
+          <img class="edition-photo" src={section.auto.data.photo} alt={section.auto.data.name} width={imageSize(section.auto.data.photo)?.width} height={imageSize(section.auto.data.photo)?.height} loading="lazy" decoding="async" />
         )}
         <h3>{section.auto.data.name}</h3>
         <p class="edition-feature-meta">
@@ -357,8 +357,8 @@ const statusLabel =
       <aside class={`edition-ad edition-ad-${ad.size}`} aria-label="Advertisement">
         <p class="edition-ad-label">Advertisement</p>
         {ad.url
-          ? <a href={ad.url} rel="noopener noreferrer" target="_blank"><img src={ad.image} alt={ad.alt || ad.advertiser} /></a>
-          : <img src={ad.image} alt={ad.alt || ad.advertiser} />}
+          ? <a href={ad.url} rel="noopener noreferrer" target="_blank"><img src={ad.image} alt={ad.alt || ad.advertiser} width={imageSize(ad.image)?.width} height={imageSize(ad.image)?.height} /></a>
+          : <img src={ad.image} alt={ad.alt || ad.advertiser} width={imageSize(ad.image)?.width} height={imageSize(ad.image)?.height} />}
         {ad.advertiser && <p class="edition-ad-by">{ad.advertiser}</p>}
       </aside>
     ))}
@@ -403,7 +403,7 @@ const statusLabel =
               {gallery.map((image, index) => (
                 <figure class:list={["edition-figure", { lead: index === 0, small: image.display === "small" }]}>
                   <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
-                    <img src={image.url} alt={image.alt} loading="lazy" decoding="async" />
+                    <img src={image.url} alt={image.alt} width={imageSize(image.url)?.width} height={imageSize(image.url)?.height} loading="lazy" decoding="async" />
                   </a>
                   {captionOf(image).length > 0 && (
                     <figcaption>
@@ -419,7 +419,7 @@ const statusLabel =
             {lead && (
               <figure class:list={["edition-figure", "lead", { small: lead.display === "small" }]}>
                 <a class="edition-zoom" href={lead.url} aria-label={`Enlarge: ${lead.alt || article.title}`}>
-                  <img src={lead.url} alt={lead.alt} loading="lazy" decoding="async" />
+                  <img src={lead.url} alt={lead.alt} width={imageSize(lead.url)?.width} height={imageSize(lead.url)?.height} loading="lazy" decoding="async" />
                 </a>
                 {captionOf(lead).length > 0 && (
                   <figcaption>
@@ -459,8 +459,8 @@ const statusLabel =
   <aside class="edition-ad edition-ad-full" aria-label="Advertisement">
     <p class="edition-ad-label">Advertisement</p>
     {ad.url
-      ? <a href={ad.url} rel="noopener noreferrer" target="_blank"><img src={ad.image} alt={ad.alt || ad.advertiser} /></a>
-      : <img src={ad.image} alt={ad.alt || ad.advertiser} />}
+      ? <a href={ad.url} rel="noopener noreferrer" target="_blank"><img src={ad.image} alt={ad.alt || ad.advertiser} width={imageSize(ad.image)?.width} height={imageSize(ad.image)?.height} /></a>
+      : <img src={ad.image} alt={ad.alt || ad.advertiser} width={imageSize(ad.image)?.width} height={imageSize(ad.image)?.height} />}
     {ad.advertiser && <p class="edition-ad-by">{ad.advertiser}</p>}
   </aside>
 ))}
@@ -468,7 +468,7 @@ const statusLabel =
 {filler && (
   <section class="glass-card sheen content-block reveal edition-filler">
     <figure class="edition-figure">
-      <img src={filler.url} alt={filler.alt} loading="lazy" decoding="async" />
+      <img src={filler.url} alt={filler.alt} width={imageSize(filler.url)?.width} height={imageSize(filler.url)?.height} loading="lazy" decoding="async" />
       <figcaption>{filler.caption}{filler.credit && <span> - {filler.credit}</span>}</figcaption>
     </figure>
   </section>

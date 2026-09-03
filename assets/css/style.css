@@ -1738,6 +1738,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* An article photograph always carries its credit. */
 .edition-figure { margin: 0 0 1.2rem; }
+/* The anchor around a photograph wraps a block image, so it is a block too.
+   Left inline it collapsed to a 1px box: the picture was tappable, its link
+   was not. */
+.edition-zoom { display: block; }
 .edition-figure img {
   width: auto;
   max-width: 100%;

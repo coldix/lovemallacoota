@@ -14,6 +14,8 @@ const counts = sectionCounts();
 const eat = counts["eat-drink"];
 const stay = counts.stay;
 const community = counts.community;
+const doSee = counts["do-see"];
+const services = counts.services;
 
 const directoryCards = [
   { ...SECTIONS["eat-drink"], count: counts["eat-drink"], countLabel: "places to eat" },
@@ -95,7 +97,9 @@ const publisherSchema = {
       <div class="stat"><b id="stat-total" data-count={listingCount}>{listingCount}</b><span>Total listings</span></div>
       <div class="stat"><b id="stat-food" data-count={eat}>{eat}</b><span>Places to eat</span></div>
       <div class="stat"><b id="stat-stay" data-count={stay}>{stay}</b><span>Places to stay</span></div>
+      <div class="stat"><b id="stat-do" data-count={doSee}>{doSee}</b><span>Things to do</span></div>
       <div class="stat"><b id="stat-community" data-count={community}>{community}</b><span>Community groups</span></div>
+      <div class="stat"><b id="stat-services" data-count={services}>{services}</b><span>Local services</span></div>
     </div>
   </PageHero>
 

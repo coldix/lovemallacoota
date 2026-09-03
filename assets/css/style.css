@@ -1469,6 +1469,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .edition-diary-where { color: var(--muted); font-size: 0.85rem; width: 100%; }
 .edition-feature h3 { margin-bottom: 0.25rem; }
 .edition-feature-meta { color: var(--muted); font-size: 0.88rem; margin-bottom: 0.8rem; }
+.edition-feature-credit { color: var(--muted); font-size: 0.8rem; margin: -0.6rem 0 0.9rem; }
 
 /* --- Weekly edition: contents, links and wide-screen columns --- */
 

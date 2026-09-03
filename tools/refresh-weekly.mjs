@@ -16,6 +16,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { moonWeek } from "../src/lib/moon.mjs";
 import { plainEdition } from "../src/lib/editions.mjs";
+import { entityBySlug, listingPhoto } from "../src/lib/directory.mjs";
 import { fetchCalendarEvents } from "./fetch-calendar.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -229,6 +230,11 @@ function pickBusiness(week) {
     business.links?.[0] ||
     business.social_links?.[0];
 
+  // A business of the week with a photograph is worth looking at; one without
+  // is a paragraph. Where the listing has a picture, it comes along.
+  const entity = entityBySlug(business.slug);
+  const photo = entity ? listingPhoto(entity) : null;
+
   return {
     slug: business.slug,
     name: business.business_name,
@@ -236,6 +242,7 @@ function pickBusiness(week) {
     category: business.category_primary || null,
     locality: business.address?.locality || null,
     url: link?.url || null,
+    ...(photo ? { photo: photo.url, photoAlt: photo.alt } : {}),
     rotation: { position: (rotationIndex(week) % businesses.length) + 1, of: businesses.length },
   };
 }

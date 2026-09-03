@@ -326,6 +326,10 @@ const statusLabel =
 
     {section.auto?.type === "business" && (
       <div class="edition-auto edition-feature">
+        {section.auto.data.photo && (
+          <img class="edition-photo" src={section.auto.data.photo} alt={section.auto.data.photoAlt || section.auto.data.name} width={imageSize(section.auto.data.photo)?.width} height={imageSize(section.auto.data.photo)?.height} loading="lazy" decoding="async" />
+        )}
+        {section.auto.data.photoCredit && <p class="edition-feature-credit">Photograph: {section.auto.data.photoCredit}</p>}
         <h3>{section.auto.data.name}</h3>
         {section.auto.data.category && <p class="edition-feature-meta">{section.auto.data.category}{section.auto.data.locality ? ` · ${section.auto.data.locality}` : ""}</p>}
         <p>{section.auto.data.description}</p>
@@ -341,8 +345,11 @@ const statusLabel =
           )}
           <a class="btn btn-ghost" href="/directory.html">The whole directory</a>
         </p>
+        {/* A hand-picked business has no rotation, and must not claim one. */}
         <p class="edition-source">
-          Chosen in turn from the {section.auto.data.rotation.of} listings in the directory - number {section.auto.data.rotation.position}. Not paid placement.
+          {section.auto.data.rotation
+            ? `Chosen in turn from the ${section.auto.data.rotation.of} listings in the directory - number ${section.auto.data.rotation.position}. Not paid placement.`
+            : "Chosen by the editor this week, out of the usual rotation. Not paid placement."}
         </p>
       </div>
     )}

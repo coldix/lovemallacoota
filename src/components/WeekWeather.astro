@@ -9,6 +9,7 @@ const DAY = new Intl.DateTimeFormat("en-AU", {
 const dayName = (iso: string) => DAY.format(new Date(`${iso}T00:00:00+10:00`));
 ---
 <div class="edition-auto">
+  <div class="table-scroll">
   <table class="forecast">
     <thead>
       <tr><th scope="col">Day</th><th scope="col">Forecast</th><th scope="col">Min</th><th scope="col">Max</th><th scope="col">Rain</th></tr>
@@ -25,6 +26,7 @@ const dayName = (iso: string) => DAY.format(new Date(`${iso}T00:00:00+10:00`));
       ))}
     </tbody>
   </table>
+  </div>
   <p class="edition-source">
     Forecast from <a href={weather.sourceUrl} rel="noopener noreferrer" target="_blank">{weather.source}</a>, {weather.licence}.
     Not an official warning service - see <a href="/emergency.html">emergency information</a>.

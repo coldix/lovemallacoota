@@ -562,7 +562,7 @@ main { margin-top: 2rem; }
 }
 
 /* --- Ice link-cards (portal nav) --- */
-.links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; perspective: 1300px; }
+.links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 1.5rem; perspective: 1300px; }
 .link-card {
     position: relative; display: block; text-decoration: none; padding: 1.7rem 1.6rem; border-radius: 16px;
     background: linear-gradient(158deg, rgba(255,255,255,0.15), rgba(36,200,232,0.06) 55%, rgba(8,30,48,0.34));
@@ -672,7 +672,7 @@ html[data-theme="light"] .tag-btn.active {
 .archive-principles span { color: var(--muted); font-size: 0.9rem; }
 .archive-contribute { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem 1.4rem; text-align: center; }
 .archive-contribute p { font-weight: 600; }
-.archive-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.archive-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
 .archive-card[hidden] { display: none !important; }
 .archive-card {
     display: flex;
@@ -695,17 +695,20 @@ html[data-theme="light"] .archive-card { background: rgba(255,255,255,0.52); bor
 .archive-toc { margin: 0 0 1rem; font-size: 0.84rem; }
 .archive-toc summary { cursor: pointer; color: var(--accent); font-weight: 700; }
 .archive-toc ol { margin: 0.55rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.28rem; }
-.archive-toc li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.4rem; color: var(--muted); }
+.archive-toc li { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 0.4rem; color: var(--muted); }
 .archive-toc-page { color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 700; }
 .archive-metadata dt { color: var(--muted); font-weight: 700; }
 .archive-metadata dd { min-width: 0; }
 .archive-topics { margin-bottom: 1.1rem; }
 .archive-availability { margin-top: auto; }
 .archive-status { display: inline-flex; padding: 0.48rem 0.8rem; border: 1px solid rgba(255,157,92,0.35); border-radius: 999px; color: var(--coral); font-size: 0.76rem; font-weight: 700; }
-@media (max-width: 520px) { .archive-grid { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .archive-grid { grid-template-columns: 1fr; } .archive-grid > * { min-width: 0; } }
 
 /* --- Directory listings grid --- */
-.listings-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); perspective: 1300px; }
+/* min() so the track can go narrower than its own minimum. A bare
+   minmax(285px, 1fr) keeps a 285px column inside a 274px card on a 375px
+   phone, and the cards are clipped down their right-hand edge. */
+.listings-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fill, minmax(min(285px, 100%), 1fr)); perspective: 1300px; }
 .listing-card[hidden] { display: none !important; }
 .listing-card {
     position: relative;
@@ -806,6 +809,10 @@ button.suggest-link { border-style: dashed; }
 
 /* --- Contact form --- */
 .form-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; max-width: 640px; margin: 0 auto; }
+/* A grid item will not go below its content's minimum, and a text input's
+   minimum is its default twenty characters - about 300px, wider than the card
+   on a phone, so the fields were clipped down their right edge. */
+.form-grid > *, .field input, .field select, .field textarea { min-width: 0; }
 /* display:grid beats the hidden attribute, so a form the page hides stays on
    screen without this - the same trap already sprung on .nav-menu and the
    listing cards. */
@@ -1281,6 +1288,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .edition-byline, .edition-source, .edition-figure figcaption { font-size: 8.5pt; }
   .edition-figure figcaption { font-size: 8pt; }
   .forecast, .timetable { font-size: 9pt; }
+  .table-scroll { overflow-x: visible; }
 
   /* Classifieds and the family notices are scanned, not read, so the narrow
      measure that fails for prose is right for them. */
@@ -1390,6 +1398,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* Automatic edition sections: forecast, diary, trail and business features. */
 .edition-auto { max-width: 68ch; margin: 0 auto; text-align: left; }
+/* A timetable has as many columns as it has, and a phone is 375px wide. The
+   table keeps its own width and scrolls sideways inside this box rather than
+   being clipped by the card, which loses the right-hand columns entirely.
+   On paper there is room, so the wrapper gets out of the way. */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* A 300x250 ad cannot shrink, and a card on a 375px phone leaves it 274px.
+   Rather than crop the creative, the ad row borrows back some of the card's
+   padding on the narrowest screens. It stays inside the card, and the width
+   stays under the 580px container query, so it is still a single column. */
+@media (max-width: 420px) {
+  /* A 300x250 creative does not shrink, and a 320px phone leaves the card
+     about 220px inside its padding. The row reaches out to the viewport,
+     keeping 4px either side, so the ad is shown whole rather than cropped. */
+  .glass-card .ad-row-wrap {
+    margin-left: calc(50% - 50vw + 4px);
+    margin-right: calc(50% - 50vw + 4px);
+  }
+}
 .forecast { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
 .forecast th, .forecast td { padding: 0.45rem 0.5rem; text-align: left; border-bottom: 1px solid var(--line, rgba(255,255,255,0.12)); }
 .forecast thead th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }

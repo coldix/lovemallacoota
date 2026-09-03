@@ -212,6 +212,7 @@ const statusLabel =
 
     {section.auto?.type === "timetable" && (
       <div class="edition-auto">
+        <div class="table-scroll">
         <table class="forecast timetable">
           <thead>
             <tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Days</th><th scope="col">Departs</th></tr>
@@ -227,6 +228,7 @@ const statusLabel =
             ))}
           </tbody>
         </table>
+        </div>
         <p class="edition-source">
           {section.auto.data.route}. Times from the <a href={section.auto.data.sourceUrl} rel="noopener noreferrer" target="_blank">{section.auto.data.source}</a>, {section.auto.data.licence}, valid {section.auto.data.validFrom} to {section.auto.data.validTo}. Coaches must be booked ahead; check before travelling.
         </p>

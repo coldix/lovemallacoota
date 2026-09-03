@@ -108,7 +108,10 @@
       }
     ],
     "notes_seasonal": "Hours may vary seasonally.",
-    "kind": "Surf and clothing shop"
+    "kind": "Surf and clothing shop",
+    "related": [
+      "surf-shack-mini-golf"
+    ]
   },
   {
     "id": "do-003",
@@ -410,8 +413,8 @@
     ],
     "kind": "Mini golf",
     "schema_type": "TouristAttraction",
-    "description_short": "Mini golf course in the town centre, run by the Mallacoota Surf Shack.",
-    "description_long": "An outdoor mini golf course beside the Surf Shack in the town centre, its holes laid out around a courtyard. Signed Surf Shack Mini Golf; ask at the shop.",
+    "description_short": "Mini golf course in the town centre, next door to and owned by the Mallacoota Surf Shack.",
+    "description_long": "An outdoor mini golf course in the town centre, its holes laid out around a sandy courtyard. It is its own attraction, next door to the Mallacoota Surf Shack and owned by it. Signed Surf Shack Mini Golf; ask at the shop.",
     "images": [],
     "phone": null,
     "email": null,

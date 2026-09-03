@@ -2,7 +2,7 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.34-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.35-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-138%20passing-22c55e.svg)](tests/)
 
 ---

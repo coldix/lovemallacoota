@@ -28,7 +28,12 @@
         "url": "https://www.facebook.com/3MGB-Community-Radio-694244590613659"
       }
     ],
-    "kind": "Community radio"
+    "kind": "Community radio",
+    "geo": {
+      "latitude": -37.558245,
+      "longitude": 149.758196,
+      "source": "google-maps"
+    }
   },
   "A0110781S": {
     "commonName": "MADRA",
@@ -158,7 +163,12 @@
     "verification": {
       "lastReviewedAt": "2026-08-29"
     },
-    "commonName": "Mallacoota Golf and Country Club (MGCC)"
+    "commonName": "Mallacoota Golf and Country Club (MGCC)",
+    "geo": {
+      "latitude": -37.575096,
+      "longitude": 149.751375,
+      "source": "google-maps"
+    }
   },
   "A0042120A": {
     "name": "Mallacoota Surf Lifesaving Club",
@@ -179,7 +189,12 @@
     "verification": {
       "lastReviewedAt": "2026-08-29"
     },
-    "commonName": "Mallacoota Surf Life Saving Club"
+    "commonName": "Mallacoota Surf Life Saving Club",
+    "geo": {
+      "latitude": -37.559603,
+      "longitude": 149.749994,
+      "source": "google-maps"
+    }
   },
   "A0045005X": {
     "related": [
@@ -203,7 +218,12 @@
     },
     "categories": [
       "Arts & culture"
-    ]
+    ],
+    "geo": {
+      "latitude": -37.593249,
+      "longitude": 149.727235,
+      "source": "unknown"
+    }
   },
   "A0095823N": {
     "commonName": "CHIRF",
@@ -334,7 +354,12 @@
     "categories": [
       "Trades"
     ],
-    "kind": "Tool library"
+    "kind": "Tool library",
+    "geo": {
+      "latitude": -37.561867,
+      "longitude": 149.74949,
+      "source": "google-maps"
+    }
   },
   "A0034419L": {
     "commonName": "Mallacoota and District Angling Club",
@@ -511,7 +536,12 @@
     },
     "categories": [
       "Sport"
-    ]
+    ],
+    "geo": {
+      "latitude": -37.561281,
+      "longitude": 149.754175,
+      "source": "google-maps"
+    }
   },
   "A0005516G": {
     "commonName": "Mallacoota Pony Club",
@@ -530,7 +560,12 @@
     },
     "categories": [
       "Sport"
-    ]
+    ],
+    "geo": {
+      "latitude": -37.542902,
+      "longitude": 149.726973,
+      "source": "google-maps"
+    }
   },
   "A0060432H": {
     "commonName": "Mallacoota Progress Association (MPA)",

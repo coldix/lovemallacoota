@@ -44,7 +44,12 @@
       "mallacoota-transfer-station",
       "mallacoota-airport"
     ],
-    "kind": "Council"
+    "kind": "Council",
+    "geo": {
+      "latitude": -37.557217,
+      "longitude": 149.758636,
+      "source": "photo-exif"
+    }
   },
   {
     "id": "gov-parks-victoria",
@@ -194,7 +199,12 @@
       "postcode": "3892",
       "country": "Australia"
     },
-    "kind": "Ambulance"
+    "kind": "Ambulance",
+    "geo": {
+      "latitude": -37.560235,
+      "longitude": 149.75551,
+      "source": "google-maps"
+    }
   },
   {
     "id": "gov-vic-ses",
@@ -235,7 +245,12 @@
       "postcode": "3892",
       "country": "Australia"
     },
-    "kind": "State Emergency Service"
+    "kind": "State Emergency Service",
+    "geo": {
+      "latitude": -37.559603,
+      "longitude": 149.749994,
+      "source": "google-maps"
+    }
   },
   {
     "id": "gov-vicemergency",
@@ -467,7 +482,12 @@
     "verification": {
       "lastReviewedAt": "2026-08-29"
     },
-    "kind": "Service centre"
+    "kind": "Service centre",
+    "geo": {
+      "latitude": -37.557217,
+      "longitude": 149.758636,
+      "source": "photo-exif"
+    }
   },
   {
     "id": "gov-mallacoota-vic",
@@ -659,7 +679,12 @@
     "verification": {
       "lastReviewedAt": "2026-08-29"
     },
-    "kind": "Marine rescue"
+    "kind": "Marine rescue",
+    "geo": {
+      "latitude": -37.559603,
+      "longitude": 149.749994,
+      "source": "google-maps"
+    }
   },
   {
     "id": "gov-east-gippsland-water",

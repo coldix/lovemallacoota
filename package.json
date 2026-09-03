@@ -15,7 +15,7 @@
     "roll": "node tools/roll-edition.mjs",
     "trails:sync": "node tools/sync-trails.mjs",
     "astro": "astro",
-    "version:site": "pnpm run build && node tools/update-version.mjs",
+    "version:site": "node tools/update-version.mjs --stamp && pnpm run build && node tools/update-version.mjs --files",
     "dev": "pnpm run build && wrangler dev",
     "types": "wrangler types",
     "test": "pnpm run build && tsc --noEmit && node --experimental-strip-types --test tests/*.test.mjs",

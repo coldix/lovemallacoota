@@ -32,10 +32,9 @@ function timestampFromParts(parts) {
   return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:${parts.second} ${parts.timeZoneName} (Melbourne)`;
 }
 
-async function readCurrentVersion() {
+async function readManifest() {
   try {
-    const current = JSON.parse(await readFile(manifestPath, "utf8"));
-    return typeof current.version === "string" ? current.version : null;
+    return JSON.parse(await readFile(manifestPath, "utf8"));
   } catch {
     return null;
   }
@@ -101,29 +100,37 @@ async function fileRecord(relativePath) {
   };
 }
 
-async function updateRuntimeFallback(version, generatedAt) {
-  const runtimePath = path.join(rootDir, "assets", "js", "script.js");
-  const current = await readFile(runtimePath, "utf8");
-  const next = current
-    .replace(/const FILE_VERSION = ".*?";/, `const FILE_VERSION = "${version}";`)
-    .replace(/const FILE_DATE = ".*?";/, `const FILE_DATE = "${generatedAt}";`);
+/*
+ * Two phases, because the pages carry the version number in their own footer.
+ *
+ *   --stamp   raise the version and the date, before the build
+ *   --files   hash what the build produced, keeping that version and date
+ *
+ * Run as one step the build would render the previous version into every
+ * page, and only the footer's fetch of this file would say otherwise: the
+ * HTML said v1.26 while the manifest said v1.27. With no flag it still does
+ * both, for anyone calling it by hand.
+ */
+const stampOnly = args.has("--stamp");
+const filesOnly = args.has("--files");
 
-  if (next !== current) {
-    await writeFile(runtimePath, next);
-  }
+const existing = await readManifest();
+const version = filesOnly
+  ? existing?.version || nextVersion(null)
+  : nextVersion(existing?.version || null);
+const generatedAt = filesOnly
+  ? existing?.generatedAt || timestampFromParts(melbourneParts(new Date()))
+  : timestampFromParts(melbourneParts(new Date()));
+
+// Stamping happens before there is a build to hash, so the previous file list
+// is carried over rather than emptied.
+let records = existing?.files || [];
+if (!stampOnly) {
+  const files = (await collectDirectoryFiles(outputDir))
+    .filter((file) => file !== "data/site-version.json")
+    .sort();
+  records = await Promise.all(files.map(fileRecord));
 }
-
-const now = new Date();
-const parts = melbourneParts(now);
-const version = nextVersion(await readCurrentVersion());
-const generatedAt = timestampFromParts(parts);
-
-await updateRuntimeFallback(version, generatedAt);
-
-const files = (await collectDirectoryFiles(outputDir))
-  .filter((file) => file !== "data/site-version.json")
-  .sort();
-const records = await Promise.all(files.map(fileRecord));
 
 const manifest = {
   project: "lovemallacoota.au",
@@ -135,5 +142,5 @@ const manifest = {
 };
 
 await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
-await writeFile(builtManifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+if (!stampOnly) await writeFile(builtManifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Wrote ${path.relative(rootDir, manifestPath)} version ${manifest.version}`);

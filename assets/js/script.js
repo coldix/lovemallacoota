@@ -386,13 +386,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     document.addEventListener("click", (e) => {
-      const target = e.target.closest("a.edition-zoom, .edition-figure img, .edition-cover-web img");
+      const target = e.target.closest("a.edition-zoom, .edition-figure img, .edition-cover-web img, img.listing-figure");
       if (!target) return;
       const img = target.tagName === "IMG" ? target : target.querySelector("img");
       if (!img) return;
       e.preventDefault();
-      const scope = img.closest(".edition-article") || img.closest("figure") || document;
-      set = [...scope.querySelectorAll(".edition-figure img, .edition-cover-web img")];
+      const scope =
+        img.closest(".edition-article") || img.closest(".listing-detail") || img.closest("figure") || document;
+      set = [...scope.querySelectorAll(".edition-figure img, .edition-cover-web img, img.listing-figure")];
       if (!set.includes(img)) set = [img];
       show(set.indexOf(img));
       if (!overlay.open) overlay.showModal();

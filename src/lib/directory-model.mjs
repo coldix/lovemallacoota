@@ -110,6 +110,47 @@ const SECTION_FROM_IA = {
   Services: "services",
 };
 
+/**
+ * The filters offered inside a section, and the whole of the tag vocabulary.
+ *
+ * The old tags were three things at once: the Consumer Affairs headings a
+ * listing arrived with, accommodation subtypes, and one-off menu words -
+ * Chinese, Kayak, Brunch, Radio - that named a single listing each. A filter
+ * that matches one listing is not a filter, it is a caption, so those moved to
+ * the listing's `kind` (see listingKind) where they read as a description
+ * rather than pretending to be a way through the directory.
+ *
+ * One or two per listing. The section is the tree; this is the only level
+ * below it.
+ */
+export const SECTION_FILTERS = {
+  "eat-drink": ["Cafe & coffee", "Pub & restaurant", "Takeaway", "Groceries"],
+  stay: ["Camping & caravan", "Motel & units", "Holiday house"],
+  "do-see": ["Boating & fishing", "Walks & beaches", "Arts & culture"],
+  community: ["Sport", "Clubs & groups", "Arts & culture", "Church & volunteer", "Facebook & media"],
+  services: ["Shops", "Health", "Trades", "Government"],
+};
+
+/** Every filter name, for validation and for the broad-tag test below. */
+export const ALL_FILTERS = new Set(Object.values(SECTION_FILTERS).flat());
+
+/**
+ * Where an association's Consumer Affairs heading lands when no enrichment
+ * record has chosen a filter for it by hand. A fallback, not the main path:
+ * every published association is tagged explicitly in the enrichment file.
+ */
+const FILTER_FROM_IA = {
+  "Clubs & Groups": "Clubs & groups",
+  "Sport & Recreation": "Sport",
+  "Arts & Social": "Arts & culture",
+  "Churches & Community Organisations": "Church & volunteer",
+  "Local Media & Facebook Groups": "Facebook & media",
+  "Trades & Home Services": "Trades",
+  "Health & Aged Care": "Health",
+  "Shops & Local Businesses": "Shops",
+  "Government & Public Services": "Government",
+};
+
 const TYPE_FROM_CATEGORY = {
   "Clubs & Groups": "community-organisation",
   "Sport & Recreation": "sporting-club",
@@ -467,6 +508,10 @@ export function normalizeListing(raw, defaults = {}) {
     section,
     categories: categories.length ? categories : raw.category_tags || [],
     category_tags: raw.category_tags || categories,
+    // What this listing is, in the words a person would use. The filters above
+    // are shelves; this is the thing on the shelf, and it is what the page
+    // title and the meta description say.
+    kind: raw.kind || null,
     description: raw.description || raw.description_long || raw.description_short || "",
     descriptionShort: raw.descriptionShort || raw.description_short || "",
     description_short: raw.description_short || raw.descriptionShort || "",
@@ -525,7 +570,9 @@ export function associationToEntity(assoc, enrichment = {}) {
       commonName: enrichment.commonName || null,
       entityType,
       section,
-      categories: enrichment.categories || (iaCategory ? [iaCategory] : ["Clubs & Groups"]),
+      categories:
+        enrichment.categories || [FILTER_FROM_IA[iaCategory] || "Clubs & groups"],
+      kind: enrichment.kind || null,
       description: seedNote,
       descriptionShort:
         enrichment.descriptionShort ||
@@ -667,14 +714,7 @@ function clamp(text, limit) {
  * the reader is choosing between them, and useless in a page title, where they
  * describe a shelf rather than the thing on it.
  */
-const BROAD_TAG = new Set([
-  "Government & Public Services",
-  "Local Media & Facebook Groups",
-  "Clubs & Groups",
-  "Churches & Community Organisations",
-  "Shops & Local Businesses",
-  "Trades & Home Services",
-]);
+const BROAD_TAG = ALL_FILTERS;
 
 /** Short enough for a title, where the ENTITY_TYPES labels are not. */
 const KIND_BY_TYPE = {
@@ -697,6 +737,10 @@ const KIND_BY_TYPE = {
 
 /** What this listing is, in as few words as the record supports. */
 export function listingKind(entity) {
+  // The listing's own word for itself wins: a bakery is a bakery, however it
+  // is filed. Only then the tags, and only a tag narrow enough to be worth
+  // saying, which since the filters shrank means a tag from an older record.
+  if (entity.kind) return entity.kind;
   const specific = displayTags(entity).find((tag) => !BROAD_TAG.has(tag));
   if (specific) return specific;
   return KIND_BY_TYPE[entity.entityType] || displayTags(entity)[0] || "Listing";

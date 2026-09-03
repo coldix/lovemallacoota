@@ -6,8 +6,7 @@
     "entityType": "media",
     "schema_type": "RadioStation",
     "categories": [
-      "Local Media & Facebook Groups",
-      "Radio"
+      "Facebook & media"
     ],
     "description": "Community radio for Mallacoota, Genoa and surrounding Far East Gippsland, run by volunteers. On air as 3MGB - Mallacoota 101.7 FM and Genoa 96.9 FM. The legal entity is Mallacoota Genoa Broadcasting Association Inc.",
     "descriptionShort": "Volunteer community radio for Mallacoota and Genoa.",
@@ -28,7 +27,8 @@
         "platform": "facebook",
         "url": "https://www.facebook.com/3MGB-Community-Radio-694244590613659"
       }
-    ]
+    ],
+    "kind": "Community radio"
   },
   "A0110781S": {
     "commonName": "MADRA",
@@ -36,7 +36,7 @@
     "slug": "madra",
     "entityType": "community-organisation",
     "categories": [
-      "Churches & Community Organisations"
+      "Church & volunteer"
     ],
     "description": "MADRA was established after the 2019-20 bushfires so the needs of Mallacoota and district are considered as part of recovery. It is an incorporated association and a registered charity. Legal name: Mallacoota And District Recovery Association Incorporated.",
     "descriptionShort": "Community-led recovery association for Mallacoota and district.",
@@ -59,7 +59,7 @@
     "slug": "mallacoota-arts-council",
     "entityType": "arts",
     "categories": [
-      "Arts & Social"
+      "Arts & culture"
     ],
     "description": "Hosts, presents and produces professional and community arts activities in and around Mallacoota, including Mallacoota Arts Space (MA Space) at the Croajingolong Centre.",
     "descriptionShort": "Community arts council and MA Space gallery.",
@@ -73,6 +73,12 @@
     },
     "verification": {
       "lastReviewedAt": "2026-08-29"
+    },
+    "kind": "Arts council",
+    "geo": {
+      "latitude": -37.557797,
+      "longitude": 149.757994,
+      "source": "photo-exif"
     }
   },
   "A0012127E": {
@@ -82,7 +88,7 @@
     "entityType": "community-organisation",
     "section": "services",
     "categories": [
-      "Health & Aged Care"
+      "Health"
     ],
     "schema_type": "MedicalOrganization",
     "description": "Community health, in-home aged and disability support, allied health clinics and the Mallacoota District Health Neighbourhood House. Not a hospital emergency department - in an emergency call 000.",
@@ -119,14 +125,15 @@
         "platform": "facebook",
         "url": "https://www.facebook.com/MallacootaDistrictHealthandSupportService/"
       }
-    ]
+    ],
+    "kind": "Health and support service"
   },
   "A0004620V": {
     "name": "Mallacoota Golf and Country Club",
     "slug": "mallacoota-golf-and-country-club",
     "entityType": "sporting-club",
     "categories": [
-      "Sport & Recreation"
+      "Sport"
     ],
     "description": "The golf club itself - the sporting organisation. Meals and drinks are listed separately as Mallacoota Golf Club Bistro under Eat & Drink.",
     "descriptionShort": "Golf club. Bistro listed separately under Eat & Drink.",
@@ -158,7 +165,7 @@
     "slug": "mallacoota-surf-lifesaving-club",
     "entityType": "sporting-club",
     "categories": [
-      "Sport & Recreation"
+      "Sport"
     ],
     "description": "Volunteer surf lifesaving club patrolling Mallacoota's ocean beaches. Public contact published by the club is the email and Instagram below; patrol times vary with the season.",
     "descriptionShort": "Volunteer surf lifesaving club for Mallacoota's ocean beaches.",
@@ -193,7 +200,10 @@
     },
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Arts & culture"
+    ]
   },
   "A0095823N": {
     "commonName": "CHIRF",
@@ -202,7 +212,7 @@
     "entityType": "community-organisation",
     "section": "services",
     "categories": [
-      "Health & Aged Care"
+      "Health"
     ],
     "description": "A health promotion charity and fundraising body, not a clinic or hospital. Do not contact CHIRF for medical care - see Mallacoota Medical Centre or Mallacoota District Health and Support Service. The public phone on CHIRF's site is also used by the Sea Eagles dragon boat club.",
     "descriptionShort": "Health infrastructure fundraising body. Not a clinic.",
@@ -211,14 +221,15 @@
     "phone": "0413 736 545",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "kind": "Health and resilience fund"
   },
   "A0108792I": {
     "name": "Mallacoota Volunteer Fire Fighters Fund",
     "slug": "mallacoota-volunteer-fire-fighters-fund",
     "entityType": "community-organisation",
     "categories": [
-      "Churches & Community Organisations"
+      "Church & volunteer"
     ],
     "description": "A fundraising body supporting volunteer firefighters. This is not the CFA brigade and must not be used for fire reports or emergency contact. For fire and warnings use VicEmergency; in an emergency call 000.",
     "descriptionShort": "Fundraising body, not the CFA brigade.",
@@ -235,7 +246,7 @@
     "slug": "mallacoota-marine-search-and-rescue",
     "entityType": "community-organisation",
     "categories": [
-      "Sport & Recreation"
+      "Church & volunteer"
     ],
     "description": "A registered incorporated association and community proposal. Its own site says it is not operational. The official marine rescue unit for Mallacoota is Australian Volunteer Coast Guard VF15. In an emergency call 000 and ask for Water Police.",
     "descriptionShort": "Registered proposal - not the operational marine rescue. In an emergency call 000.",
@@ -267,7 +278,10 @@
     ],
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ]
   },
   "A0010791G": {
     "commonName": "Lions Club of Mallacoota & District",
@@ -277,7 +291,11 @@
     "email": "yungerup@gmail.com",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ],
+    "kind": "Service club"
   },
   "A0108697L": {
     "commonName": "Mallacoota & District Car & Bike Club",
@@ -285,7 +303,11 @@
     "descriptionShort": "Social club for local car and bike enthusiasts in isolated Far East Gippsland so members need not travel to other districts (CAV purpose extract).",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ],
+    "kind": "Social club"
   },
   "A0113625O": {
     "commonName": "Mallacoota and District Tool Library (MADTL)",
@@ -308,7 +330,11 @@
     ],
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Trades"
+    ],
+    "kind": "Tool library"
   },
   "A0034419L": {
     "commonName": "Mallacoota and District Angling Club",
@@ -317,7 +343,10 @@
     "website": "https://www.mallacootaanglingclub.com.au/",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Sport"
+    ]
   },
   "A0045736X": {
     "commonName": "Mallacoota District Business and Tourism Association (MDBTA)",
@@ -326,7 +355,11 @@
     "website": "https://visitmallacoota.com.au/",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ],
+    "kind": "Business association"
   },
   "A0017902U": {
     "commonName": "Mallacoota and District Kids",
@@ -334,7 +367,10 @@
     "descriptionShort": "Supports and advocates for children (emphasis 0-12 years) in Mallacoota and surrounding districts (CAV purpose).",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ]
   },
   "A0047738S": {
     "commonName": "U3A Mallacoota",
@@ -350,7 +386,11 @@
     ],
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ],
+    "kind": "Adult learning"
   },
   "A0062795R": {
     "commonName": "Mallacoota Boardriders",
@@ -358,7 +398,10 @@
     "descriptionShort": "Not-for-profit surfing social club: all-ages surf comps, learn-to-surf days, movie nights and The Far Easter surf festival.",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Sport"
+    ]
   },
   "A0039214C": {
     "commonName": "Mallacoota Community Opportunity Shop",
@@ -366,6 +409,15 @@
     "descriptionShort": "Volunteer op shop that accepts donated goods and sells them to locals and visitors (My Community Directory description).",
     "verification": {
       "lastReviewedAt": "2026-08-29"
+    },
+    "categories": [
+      "Shops"
+    ],
+    "kind": "Opportunity shop",
+    "geo": {
+      "latitude": -37.55825,
+      "longitude": 149.756881,
+      "source": "photo-exif"
     }
   },
   "A0017539X": {
@@ -374,7 +426,11 @@
     "descriptionShort": "CAV purpose: support people in the Mallacoota district aged not less than 50, including holding regular social functions.",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ],
+    "kind": "Senior citizens"
   },
   "A0108043O": {
     "commonName": "Mallacoota Events",
@@ -383,7 +439,10 @@
     "website": "https://www.wildharvestseafoodfestival.com/",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ]
   },
   "A0012033U": {
     "commonName": "Mallacoota Gun Club",
@@ -391,7 +450,10 @@
     "descriptionShort": "Clay target / shooting club using a range on Council-managed Crown land at 46 Airport Road.",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Sport"
+    ]
   },
   "A0044537F": {
     "commonName": "Mallacoota Halls and Recreation (Community Precinct / GUM)",
@@ -402,6 +464,15 @@
     "phone": "0468 818 344",
     "verification": {
       "lastReviewedAt": "2026-08-29"
+    },
+    "categories": [
+      "Clubs & groups"
+    ],
+    "kind": "Community precinct",
+    "geo": {
+      "latitude": -37.558586,
+      "longitude": 149.760422,
+      "source": "photo-exif"
     }
   },
   "A0026537X": {
@@ -410,7 +481,11 @@
     "descriptionShort": "Charitable association working toward aged care / residential and day-care facilities.",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Health"
+    ],
+    "kind": "Aged care"
   },
   "A0037634R": {
     "commonName": "Mallacoota Inlet Bowling Club",
@@ -433,7 +508,10 @@
     ],
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Sport"
+    ]
   },
   "A0005516G": {
     "commonName": "Mallacoota Pony Club",
@@ -449,7 +527,10 @@
     },
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Sport"
+    ]
   },
   "A0060432H": {
     "commonName": "Mallacoota Progress Association (MPA)",
@@ -457,7 +538,10 @@
     "descriptionShort": "Community progress association (old site tagline: community, local economy and environment).",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ]
   },
   "A0100520L": {
     "commonName": "Mallacoota Sea Eagles Dragon Boat Club",
@@ -468,7 +552,10 @@
     "phone": "0413 736 545",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Sport"
+    ]
   },
   "A0027422K": {
     "commonName": "Mallacoota Soccer Club",
@@ -476,7 +563,10 @@
     "descriptionShort": "Local soccer club (purpose not published on CAV beyond the rules).",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Sport"
+    ]
   },
   "A0009159K": {
     "commonName": "Mallacoota Youth & Sports Club",
@@ -494,6 +584,14 @@
     },
     "verification": {
       "lastReviewedAt": "2026-08-29"
+    },
+    "categories": [
+      "Sport"
+    ],
+    "geo": {
+      "latitude": -37.558383,
+      "longitude": 149.758897,
+      "source": "photo-exif"
     }
   },
   "A0109127E": {
@@ -502,7 +600,11 @@
     "descriptionShort": "CAV purpose: provide physical premises created by and for ordinary members, promote the welfare of young people of and in Mallacoota, and encourage youth activity (register extract truncated).",
     "verification": {
       "lastReviewedAt": "2026-08-29"
-    }
+    },
+    "categories": [
+      "Clubs & groups"
+    ],
+    "kind": "Youth group"
   },
   "A0116122X": {
     "commonName": "The Wilderness Collective",
@@ -529,6 +631,14 @@
     ],
     "verification": {
       "lastReviewedAt": "2026-08-29"
+    },
+    "categories": [
+      "Clubs & groups"
+    ],
+    "geo": {
+      "latitude": -37.558219,
+      "longitude": 149.757478,
+      "source": "photo-exif"
     }
   }
 }

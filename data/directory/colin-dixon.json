@@ -7,8 +7,12 @@
   "commonName": null,
   "entityType": "professional",
   "section": "services",
-  "categories": [],
-  "category_tags": [],
+  "categories": [
+    "Trades"
+  ],
+  "category_tags": [
+    "Trades"
+  ],
   "description": "I provide practical IT and digital media services for small businesses, community organisations and individuals, including website design and development, AI-assisted software and online services, technical consulting, automation, SEO, digital publishing, drone photography and video, 360° media, and general technology support. I focus on clear, reliable solutions that are easy to manage, suited to the client's real needs, and built without unnecessary complexity.",
   "descriptionShort": "I provide practical IT and digital media services for small businesses, community organisations and individuals, including website design and development, AI-assisted software and online services, technical consulting, a",
   "description_short": "I provide practical IT and digital media services for small businesses, community organisations and individuals, including website design and development, AI-assisted software and online services, technical consulting, a",
@@ -76,5 +80,6 @@
   },
   "schema_type": "ProfessionalService",
   "createdAt": "2026-08-31T12:19:44.900Z",
-  "updatedAt": "2026-08-31T12:36:27.859Z"
+  "updatedAt": "2026-08-31T12:36:27.859Z",
+  "kind": "IT and web services"
 }

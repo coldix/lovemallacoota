@@ -14,6 +14,7 @@ import {
   listingDescription,
   listingPagePath,
   listingPhoto,
+  listingPhotos,
   listingTitle,
   loadDirectory,
   mapLinks,
@@ -39,6 +40,7 @@ const section = SECTIONS[entity.section];
 const typeLabel = ENTITY_TYPES[entity.entityType]?.label;
 const official = isOfficialEntity(entity);
 const photo = listingPhoto(entity);
+const gallery = listingPhotos(entity).slice(1);
 const verification = verificationLine(entity);
 const primary = getPrimaryLink(entity);
 const primaryLabel = getPrimaryLinkLabel(entity);
@@ -87,7 +89,22 @@ const canonicalPath = listingPagePath(entity);
     )}
     <section class="glass-card sheen content-block reveal listing-detail">
       {photo && (
-        <img class="listing-detail-photo" src={photo.url} alt={photo.alt} width="1280" height="720" />
+        <img class="listing-detail-photo listing-figure" src={photo.url} alt={photo.alt} width="1280" height="720" />
+      )}
+      {gallery.length > 0 && (
+        <div class="listing-gallery">
+          {gallery.map((shot) => (
+            <img
+              class="listing-figure"
+              src={shot.url}
+              alt={shot.alt}
+              width="1280"
+              height="960"
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
+        </div>
       )}
       <p class="listing-kicker">
         {official && <span class="listing-badge official">Official</span>}

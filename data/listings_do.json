@@ -5,9 +5,7 @@
     "business_name": "Bribes Gift Shop and Fresh Flowers",
     "category_primary": "Shopping",
     "category_tags": [
-      "Shopping",
-      "Gifts",
-      "Florist"
+      "Shops"
     ],
     "schema_type": "Store",
     "description_short": "A charming local gift shop with a beautiful selection of items and fresh flowers.",
@@ -36,8 +34,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.556036,
-      "longitude": 149.757421
+      "latitude": -37.556092,
+      "longitude": 149.757506,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -53,7 +52,8 @@
         "closes": "16:00"
       }
     ],
-    "notes_seasonal": "Check locally for current hours."
+    "notes_seasonal": "Check locally for current hours.",
+    "kind": "Gift shop"
   },
   {
     "id": "do-002",
@@ -61,9 +61,7 @@
     "business_name": "Mallacoota Surf Shack",
     "category_primary": "Shopping",
     "category_tags": [
-      "Shopping",
-      "Apparel",
-      "Surf"
+      "Shops"
     ],
     "schema_type": "Store",
     "description_short": "Your one-stop shop for surf gear, apparel, and beach essentials in Mallacoota.",
@@ -90,8 +88,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.557,
-      "longitude": 149.75716
+      "latitude": -37.558153,
+      "longitude": 149.756547,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -108,7 +107,8 @@
         "closes": "17:00"
       }
     ],
-    "notes_seasonal": "Hours may vary seasonally."
+    "notes_seasonal": "Hours may vary seasonally.",
+    "kind": "Surf and clothing shop"
   },
   {
     "id": "do-003",
@@ -116,8 +116,7 @@
     "business_name": "MAPA Pearls",
     "category_primary": "Shopping",
     "category_tags": [
-      "Shopping",
-      "Jewellery"
+      "Shops"
     ],
     "schema_type": "Store",
     "description_short": "Exquisite, locally sourced pearls and fine jewellery from the Wilderness Coast.",
@@ -143,7 +142,8 @@
       "longitude": 149.755
     },
     "opening_hours": [],
-    "notes_seasonal": "Check website or contact for viewing/purchase options."
+    "notes_seasonal": "Check website or contact for viewing/purchase options.",
+    "kind": "Jewellery"
   },
   {
     "id": "do-004",
@@ -151,8 +151,7 @@
     "business_name": "Wilderness Coast Candles",
     "category_primary": "Shopping",
     "category_tags": [
-      "Shopping",
-      "Gifts"
+      "Shops"
     ],
     "schema_type": "Store",
     "description_short": "Locally made, high-quality candles perfect for gifts or a personal treat.",
@@ -185,7 +184,8 @@
       "longitude": 149.755
     },
     "opening_hours": [],
-    "notes_seasonal": "Check website for purchase options and stockists."
+    "notes_seasonal": "Check website for purchase options and stockists.",
+    "kind": "Candles and gifts"
   },
   {
     "id": "do-005",
@@ -193,9 +193,7 @@
     "business_name": "Buckland Jetty Boat Hire",
     "category_primary": "Tours & Activities",
     "category_tags": [
-      "Tours & Activities",
-      "Boating",
-      "For Hire"
+      "Boating & fishing"
     ],
     "schema_type": "LocalBusiness",
     "description_short": "Hire a boat from Buckland Jetty to explore the beautiful Mallacoota Inlet at your own pace.",
@@ -251,7 +249,8 @@
         "closes": "17:00"
       }
     ],
-    "notes_seasonal": "Hours may vary seasonally."
+    "notes_seasonal": "Hours may vary seasonally.",
+    "kind": "Boat hire"
   },
   {
     "id": "do-006",
@@ -259,11 +258,7 @@
     "business_name": "Mallacoota Hireboats",
     "category_primary": "Tours & Activities",
     "category_tags": [
-      "Tours & Activities",
-      "Boating",
-      "Fishing",
-      "For Hire",
-      "Kayak"
+      "Boating & fishing"
     ],
     "schema_type": "LocalBusiness",
     "description_short": "Hire boats and kayaks from Buckland Drive - perfect for fishing or exploring the inlet.",
@@ -314,7 +309,8 @@
         "closes": "17:00"
       }
     ],
-    "notes_seasonal": "Hours vary seasonally. Bookings recommended."
+    "notes_seasonal": "Hours vary seasonally. Bookings recommended.",
+    "kind": "Boat and kayak hire"
   },
   {
     "id": "do-007",
@@ -322,9 +318,7 @@
     "business_name": "MV Loch-Ard - Dale Winward",
     "category_primary": "Tours & Activities",
     "category_tags": [
-      "Tours & Activities",
-      "Cruises",
-      "Fishing"
+      "Boating & fishing"
     ],
     "schema_type": "TouristAttraction",
     "description_short": "Enjoy scenic cruises and fishing charters on the historic MV Loch-Ard with a local expert.",
@@ -357,7 +351,8 @@
       "longitude": 149.7516
     },
     "opening_hours": [],
-    "notes_seasonal": "Operates seasonally based on demand and weather. Bookings essential."
+    "notes_seasonal": "Operates seasonally based on demand and weather. Bookings essential.",
+    "kind": "Cruises"
   },
   {
     "id": "do-008",
@@ -365,9 +360,7 @@
     "business_name": "Mallacoota RSL Bunker Museum",
     "category_primary": "Tours & Activities",
     "category_tags": [
-      "Tours & Activities",
-      "Museum",
-      "History"
+      "Arts & culture"
     ],
     "schema_type": "Museum",
     "description_short": "Historic WWII bunker and museum showcasing local and military history.",
@@ -404,6 +397,7 @@
       "longitude": 149.727235
     },
     "opening_hours": [],
-    "notes_seasonal": "Opening hours can vary. Please check the website or call ahead before visiting."
+    "notes_seasonal": "Opening hours can vary. Please check the website or call ahead before visiting.",
+    "kind": "Museum"
   }
 ]

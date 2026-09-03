@@ -5,16 +5,26 @@
     "name": "Mallacoota Now",
     "entityType": "facebook-group",
     "section": "community",
-    "categories": ["Local Media & Facebook Groups"],
+    "categories": [
+      "Facebook & media"
+    ],
     "schema_type": "Organization",
     "description": "The main local Facebook group - what is happening today, road and power news, lost dogs, and everything that does not wait for a weekly.",
     "descriptionShort": "The busiest local Facebook group.",
     "website": "https://www.facebook.com/groups/mallacootanow",
-    "links": [{ "url": "https://www.facebook.com/groups/mallacootanow", "text": "Facebook group" }],
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/mallacootanow",
+        "text": "Facebook group"
+      }
+    ],
     "claimable": false,
     "official": false,
     "locationKind": "none",
-    "source": { "kind": "existing-listing", "note": "From the site's social-links list." }
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
   },
   {
     "id": "media-mallacoota-bss",
@@ -22,16 +32,26 @@
     "name": "Mallacoota Buy, Swap and Sell",
     "entityType": "facebook-group",
     "section": "community",
-    "categories": ["Local Media & Facebook Groups"],
+    "categories": [
+      "Facebook & media"
+    ],
     "schema_type": "Organization",
     "description": "Where the town's classifieds actually happen. Boats, firewood, furniture, and work wanted or offered.",
     "descriptionShort": "The town's buy, swap and sell Facebook group.",
     "website": "https://www.facebook.com/groups/mallacootaBSS",
-    "links": [{ "url": "https://www.facebook.com/groups/mallacootaBSS", "text": "Facebook group" }],
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/mallacootaBSS",
+        "text": "Facebook group"
+      }
+    ],
     "claimable": false,
     "official": false,
     "locationKind": "none",
-    "source": { "kind": "existing-listing", "note": "From the site's social-links list." }
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
   },
   {
     "id": "media-mallacoota-weather",
@@ -39,16 +59,26 @@
     "name": "Mallacoota Weather",
     "entityType": "facebook-group",
     "section": "community",
-    "categories": ["Local Media & Facebook Groups"],
+    "categories": [
+      "Facebook & media"
+    ],
     "schema_type": "Organization",
     "description": "Local observation rather than forecast - what the wind and the bar are actually doing, from people looking at them.",
     "descriptionShort": "Local weather observations on Facebook.",
     "website": "https://www.facebook.com/groups/mallacootaweather",
-    "links": [{ "url": "https://www.facebook.com/groups/mallacootaweather", "text": "Facebook group" }],
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/mallacootaweather",
+        "text": "Facebook group"
+      }
+    ],
     "claimable": false,
     "official": false,
     "locationKind": "none",
-    "source": { "kind": "existing-listing", "note": "From the site's social-links list." }
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
   },
   {
     "id": "media-love-mallacoota-group",
@@ -56,16 +86,26 @@
     "name": "Love Mallacoota (Facebook group)",
     "entityType": "facebook-group",
     "section": "community",
-    "categories": ["Local Media & Facebook Groups"],
+    "categories": [
+      "Facebook & media"
+    ],
     "schema_type": "Organization",
     "description": "The Facebook group for this website. Suggestions, corrections, and what you would like the weekly edition to carry.",
     "descriptionShort": "The Facebook group for lovemallacoota.au.",
     "website": "https://www.facebook.com/groups/lovemallacoota",
-    "links": [{ "url": "https://www.facebook.com/groups/lovemallacoota", "text": "Facebook group" }],
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/lovemallacoota",
+        "text": "Facebook group"
+      }
+    ],
     "claimable": false,
     "official": false,
     "locationKind": "none",
-    "source": { "kind": "existing-listing", "note": "From the site's social-links list." }
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
   },
   {
     "id": "media-gippsland-vic",
@@ -73,17 +113,27 @@
     "name": "Gippsland, Victoria",
     "entityType": "facebook-group",
     "section": "community",
-    "categories": ["Local Media & Facebook Groups"],
+    "categories": [
+      "Facebook & media"
+    ],
     "schema_type": "Organization",
     "description": "Wider than the town - the region either side of us, for when the news is bigger than Mallacoota.",
     "descriptionShort": "Regional Facebook group covering Gippsland.",
     "website": "https://www.facebook.com/groups/gippslandvic",
-    "links": [{ "url": "https://www.facebook.com/groups/gippslandvic", "text": "Facebook group" }],
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/gippslandvic",
+        "text": "Facebook group"
+      }
+    ],
     "claimable": false,
     "official": false,
     "locationKind": "none",
     "serviceArea": "Gippsland",
-    "source": { "kind": "existing-listing", "note": "From the site's social-links list." }
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
   },
   {
     "id": "media-mallacoota-birds",
@@ -91,15 +141,25 @@
     "name": "Mallacoota Birds",
     "entityType": "facebook-group",
     "section": "community",
-    "categories": ["Local Media & Facebook Groups"],
+    "categories": [
+      "Facebook & media"
+    ],
     "schema_type": "Organization",
     "description": "What is about and where - sightings, photographs and the arguments about which raptor that was.",
     "descriptionShort": "Local bird sightings on Facebook.",
     "website": "https://www.facebook.com/groups/mallacootabirds",
-    "links": [{ "url": "https://www.facebook.com/groups/mallacootabirds", "text": "Facebook group" }],
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/mallacootabirds",
+        "text": "Facebook group"
+      }
+    ],
     "claimable": false,
     "official": false,
     "locationKind": "none",
-    "source": { "kind": "existing-listing", "note": "From the site's social-links list." }
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
   }
 ]

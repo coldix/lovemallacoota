@@ -1353,6 +1353,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
   border-radius: 14px; margin-bottom: 1.1rem;
 }
+/* The rest of a listing's photographs. The leading picture keeps the wide crop
+   above; these keep their own shape, because a skate park and a shopfront are
+   not the same picture and cropping both to 16:9 loses whichever one matters. */
+.listing-gallery {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.6rem; margin: 0 0 1.2rem;
+}
+.listing-gallery img {
+  width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: 10px; display: block;
+}
+.listing-figure { cursor: zoom-in; }
 .listing-body { font-size: 1.02rem; margin: 0.8rem 0 1.1rem; }
 .listing-note { color: var(--muted); font-size: 0.92rem; }
 .listing-facts {

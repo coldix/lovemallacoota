@@ -129,25 +129,69 @@ export function sectionCounts() {
 }
 
 /**
+ * Every photograph in images/listings/, grouped by the listing that owns it.
+ *
+ * A file belongs to a listing when it is named for its slug: `<slug>.webp` is
+ * the one that leads, and `<slug>-anything.webp` follows it. Longest slug wins,
+ * so a listing whose slug begins with another listing's slug cannot quietly
+ * inherit its photographs.
+ */
+let photoFiles = null;
+
+function photosBySlug() {
+  if (photoFiles) return photoFiles;
+  photoFiles = new Map();
+  const dir = path.join(rootDir, "images", "listings");
+  if (!existsSync(dir)) return photoFiles;
+  // Longest first so `cafe-54-annex.webp` cannot be filed under `cafe-54`.
+  const slugs = loadDirectory()
+    .map((entity) => entity.slug)
+    .sort((a, b) => b.length - a.length);
+  for (const file of readdirSync(dir).filter((name) => name.endsWith(".webp")).sort()) {
+    const stem = file.slice(0, -".webp".length);
+    const slug = slugs.find((candidate) => stem === candidate || stem.startsWith(`${candidate}-`));
+    if (!slug) continue;
+    if (!photoFiles.has(slug)) photoFiles.set(slug, []);
+    photoFiles.get(slug).push(stem);
+  }
+  // The photograph named for the slug alone leads; the rest keep filename order.
+  for (const [slug, stems] of photoFiles) {
+    stems.sort((a, b) => (a === slug ? -1 : b === slug ? 1 : a.localeCompare(b)));
+  }
+  return photoFiles;
+}
+
+/**
+ * Every photograph for a listing, the leading one first.
+ *
+ * Alt text is the one thing a filename cannot carry, so
+ * data/listing-photos.json holds it, keyed by the file's own name rather than
+ * the slug: a listing with six photographs needs six descriptions, not one.
+ * The name of the listing is a poor description but better than nothing.
+ */
+export function listingPhotos(entity) {
+  const stems = photosBySlug().get(entity.slug);
+  if (!stems?.length) return [];
+  const described = readJson("data/listing-photos.json", {});
+  return stems.map((stem) => ({
+    url: `/images/listings/${stem}.webp`,
+    alt: described[stem]?.alt || entity.name,
+  }));
+}
+
+/**
  * Hero image for a listing, but only when the file is actually in the
  * repository. A dedicated listings photo wins over the older business image.
  */
 export function listingPhoto(entity) {
-  const dedicated = `/images/listings/${entity.slug}.webp`;
-  if (existsSync(path.join(rootDir, dedicated.replace(/^\//, "")))) {
-    // A photograph saved under the slug needs no data entry at all, which is
-    // the point of it. Alt text is the one thing the filename cannot carry, so
-    // data/listing-photos.json holds it where somebody has written one; the
-    // name of the listing is a poor description but better than nothing.
-    const described = readJson("data/listing-photos.json", {})[entity.slug];
-    return { url: dedicated, alt: described?.alt || entity.name };
-  }
+  const [hero] = listingPhotos(entity);
+  if (hero) return hero;
   const images = entity.images || [];
-  const hero = images.find((image) => image.is_hero) || images[0];
-  if (!hero?.url) return null;
-  const relative = hero.url.replace(/^\//, "");
+  const legacy = images.find((image) => image.is_hero) || images[0];
+  if (!legacy?.url) return null;
+  const relative = legacy.url.replace(/^\//, "");
   if (!existsSync(path.join(rootDir, relative))) return null;
-  return { url: hero.url, alt: hero.alt_text || entity.name || "" };
+  return { url: legacy.url, alt: legacy.alt_text || entity.name || "" };
 }
 
 export function listingPagePath(entity) {

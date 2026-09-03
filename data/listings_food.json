@@ -5,8 +5,6 @@
     "business_name": "Alf's Pizza",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Pizza",
       "Takeaway"
     ],
     "schema_type": "Restaurant",
@@ -38,7 +36,8 @@
       "longitude": 149.75471
     },
     "opening_hours": [],
-    "notes_seasonal": "Seasonal operation. Check Instagram for hours."
+    "notes_seasonal": "Seasonal operation. Check Instagram for hours.",
+    "kind": "Pizza"
   },
   {
     "id": "food-002",
@@ -46,9 +45,7 @@
     "business_name": "Beanie Coffee Van",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Coffee",
-      "Mobile Van"
+      "Cafe & coffee"
     ],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "A meeting place at St Peter's Church, often with live music.",
@@ -75,11 +72,13 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55835,
-      "longitude": 149.75344
+      "latitude": -37.558881,
+      "longitude": 149.760117,
+      "source": "photo-exif"
     },
     "opening_hours": [],
-    "notes_seasonal": "Check Instagram for current hours and days of operation."
+    "notes_seasonal": "Check Instagram for current hours and days of operation.",
+    "kind": "Coffee van"
   },
   {
     "id": "food-003",
@@ -87,8 +86,7 @@
     "business_name": "Cafe 54",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Cafe"
+      "Cafe & coffee"
     ],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "A well-loved local café with delicious, lovingly crafted food.",
@@ -112,8 +110,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55776,
-      "longitude": 149.75662
+      "latitude": -37.558231,
+      "longitude": 149.757492,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -130,7 +129,8 @@
         "closes": "15:00"
       }
     ],
-    "notes_seasonal": "Check locally for current hours."
+    "notes_seasonal": "Check locally for current hours.",
+    "kind": "Cafe"
   },
   {
     "id": "food-004",
@@ -138,10 +138,8 @@
     "business_name": "Gipsy Point Lodge Café-Restaurant",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Cafe",
-      "Restaurant",
-      "Accommodation"
+      "Cafe & coffee",
+      "Pub & restaurant"
     ],
     "schema_type": "Restaurant",
     "description_short": "Regional food and lake views at Gipsy Point. Also offers accommodation.",
@@ -179,7 +177,8 @@
       "longitude": 149.71887
     },
     "opening_hours": [],
-    "notes_seasonal": "Restaurant hours vary seasonally. Booking essential, especially for dinner."
+    "notes_seasonal": "Restaurant hours vary seasonally. Booking essential, especially for dinner.",
+    "kind": "Restaurant"
   },
   {
     "id": "food-005",
@@ -187,11 +186,7 @@
     "business_name": "IGA Local Grocer Mallacoota",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Shopping",
-      "Groceries",
-      "Deli",
-      "Liquor"
+      "Groceries"
     ],
     "schema_type": "GroceryStore",
     "description_short": "Supermarket with a deli, liquor section, and a good selection of groceries. Often stocks fresh local fish.",
@@ -213,8 +208,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55759,
-      "longitude": 149.75678
+      "latitude": -37.558056,
+      "longitude": 149.757094,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -231,7 +227,8 @@
         "closes": "19:00"
       }
     ],
-    "notes_seasonal": "Hours may vary on public holidays."
+    "notes_seasonal": "Hours may vary on public holidays.",
+    "kind": "Supermarket"
   },
   {
     "id": "food-006",
@@ -239,8 +236,6 @@
     "business_name": "Kelpy's Seafood",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Seafood",
       "Takeaway"
     ],
     "schema_type": "FoodEstablishment",
@@ -269,7 +264,8 @@
       "longitude": 149.7516
     },
     "opening_hours": [],
-    "notes_seasonal": "Highly seasonal operation, typically open during peak holiday periods and good weather. Check locally."
+    "notes_seasonal": "Highly seasonal operation, typically open during peak holiday periods and good weather. Check locally.",
+    "kind": "Seafood takeaway"
   },
   {
     "id": "food-007",
@@ -277,9 +273,7 @@
     "business_name": "Larry's Coffee Van",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Coffee",
-      "Mobile Van"
+      "Cafe & coffee"
     ],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "Mobile coffee van serving the Mallacoota area. Look for the van!",
@@ -300,7 +294,8 @@
       "longitude": 149.755
     },
     "opening_hours": [],
-    "notes_seasonal": "Mobile vendor. Hours and location vary, check locally."
+    "notes_seasonal": "Mobile vendor. Hours and location vary, check locally.",
+    "kind": "Coffee van"
   },
   {
     "id": "food-008",
@@ -308,10 +303,7 @@
     "business_name": "Lee's Pizza & Take Away",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Pizza",
-      "Takeaway",
-      "Fish & Chips"
+      "Takeaway"
     ],
     "schema_type": "Restaurant",
     "description_short": "Pizza, Fish & Chips, and tasty takeaways.",
@@ -335,8 +327,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55706,
-      "longitude": 149.75704
+      "latitude": -37.558256,
+      "longitude": 149.756867,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -356,7 +349,8 @@
       "state": "closed",
       "note": "Closed. The business is for sale.",
       "recordedAt": "2026-08-30"
-    }
+    },
+    "kind": "Pizza and takeaway"
   },
   {
     "id": "food-009",
@@ -364,9 +358,7 @@
     "business_name": "Lucy's Chinese Restaurant",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Restaurant",
-      "Chinese"
+      "Pub & restaurant"
     ],
     "schema_type": "Restaurant",
     "description_short": "Vibrant Chinese fare, homemade noodles, and house specials.",
@@ -395,8 +387,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55716,
-      "longitude": 149.75697
+      "latitude": -37.558006,
+      "longitude": 149.757689,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -412,7 +405,8 @@
         "closes": "21:00"
       }
     ],
-    "notes_seasonal": "Typically open for dinner, closed Mondays. Hours may vary seasonally."
+    "notes_seasonal": "Typically open for dinner, closed Mondays. Hours may vary seasonally.",
+    "kind": "Chinese restaurant"
   },
   {
     "id": "food-010",
@@ -420,8 +414,7 @@
     "business_name": "Mallacoota Bakery",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Bakery"
+      "Cafe & coffee"
     ],
     "schema_type": "Bakery",
     "description_short": "Iconic sausage rolls, breads, and fresh pastries.",
@@ -455,8 +448,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55823,
-      "longitude": 149.75626
+      "latitude": -37.555814,
+      "longitude": 149.757294,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -473,7 +467,8 @@
         "closes": "16:00"
       }
     ],
-    "notes_seasonal": "May close earlier on weekends."
+    "notes_seasonal": "May close earlier on weekends.",
+    "kind": "Bakery"
   },
   {
     "id": "food-011",
@@ -481,10 +476,7 @@
     "business_name": "Mallacoota Foodworks",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Shopping",
-      "Groceries",
-      "Deli"
+      "Groceries"
     ],
     "schema_type": "GroceryStore",
     "description_short": "Full-service supermarket with a great deli offering sliced meats, cheeses, smoked fish, roasted chickens, and warm pies.",
@@ -511,8 +503,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55749,
-      "longitude": 149.75685
+      "latitude": -37.558514,
+      "longitude": 149.757111,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -535,7 +528,8 @@
         "closes": "18:00"
       }
     ],
-    "notes_seasonal": "Hours may vary on public holidays."
+    "notes_seasonal": "Hours may vary on public holidays.",
+    "kind": "Supermarket"
   },
   {
     "id": "food-012",
@@ -543,9 +537,7 @@
     "business_name": "Mallacoota Golf Club Bistro",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Bistro",
-      "Restaurant"
+      "Pub & restaurant"
     ],
     "schema_type": "Restaurant",
     "description_short": "Classic pub-style meals and drinks at the golf club.",
@@ -583,7 +575,8 @@
       "longitude": 149.73489
     },
     "opening_hours": [],
-    "notes_seasonal": "Bistro hours vary seasonally and depend on club events. Check website or call for current times and bookings."
+    "notes_seasonal": "Bistro hours vary seasonally and depend on club events. Check website or call for current times and bookings.",
+    "kind": "Bistro"
   },
   {
     "id": "food-013",
@@ -591,9 +584,6 @@
     "business_name": "Mallacoota Meats",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Shopping",
-      "Butcher",
       "Groceries"
     ],
     "schema_type": "Butcher",
@@ -611,8 +601,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55706,
-      "longitude": 149.75704
+      "latitude": -37.558136,
+      "longitude": 149.756989,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
@@ -634,7 +625,8 @@
         "closes": "12:00"
       }
     ],
-    "notes_seasonal": "Closed Sundays. Hours may vary."
+    "notes_seasonal": "Closed Sundays. Hours may vary.",
+    "kind": "Butcher"
   },
   {
     "id": "food-014",
@@ -642,9 +634,7 @@
     "business_name": "Origami Coffee",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Cafe",
-      "Coffee"
+      "Cafe & coffee"
     ],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "Excellent coffee, treats, and lake views.",
@@ -696,7 +686,8 @@
         "closes": "14:00"
       }
     ],
-    "notes_seasonal": "Check Instagram for current hours."
+    "notes_seasonal": "Check Instagram for current hours.",
+    "kind": "Cafe"
   },
   {
     "id": "food-015",
@@ -704,10 +695,7 @@
     "business_name": "Scallywags Seafood & Winebar",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Seafood",
-      "Winebar",
-      "Restaurant"
+      "Pub & restaurant"
     ],
     "schema_type": "Restaurant",
     "description_short": "Seafood, healthy meals, friendly faces, and local wine.",
@@ -729,11 +717,13 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55648,
-      "longitude": 149.75482
+      "latitude": -37.556033,
+      "longitude": 149.757461,
+      "source": "photo-exif"
     },
     "opening_hours": [],
-    "notes_seasonal": "Hours vary seasonally. Bookings recommended. Check website for current times."
+    "notes_seasonal": "Hours vary seasonally. Bookings recommended. Check website for current times.",
+    "kind": "Seafood"
   },
   {
     "id": "food-016",
@@ -741,10 +731,7 @@
     "business_name": "Sundayss",
     "category_primary": "Food & Drink",
     "category_tags": [
-      "Food & Drink",
-      "Cafe",
-      "Coffee",
-      "Brunch"
+      "Cafe & coffee"
     ],
     "schema_type": "CafeOrCoffeeShop",
     "description_short": "Seasonal cafe located next to the bakery, serving coffee, brunch, and smoothies.",
@@ -771,10 +758,12 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55815,
-      "longitude": 149.7563
+      "latitude": -37.555806,
+      "longitude": 149.757294,
+      "source": "photo-exif"
     },
     "opening_hours": [],
-    "notes_seasonal": "Typically operates during warmer months/peak season. Check Instagram for current opening days and hours."
+    "notes_seasonal": "Typically operates during warmer months/peak season. Check Instagram for current opening days and hours.",
+    "kind": "Cafe"
   }
 ]

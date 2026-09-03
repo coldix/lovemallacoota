@@ -399,5 +399,39 @@
     "opening_hours": [],
     "notes_seasonal": "Opening hours can vary. Please check the website or call ahead before visiting.",
     "kind": "Museum"
+  },
+  {
+    "id": "do-surf-shack-mini-golf",
+    "slug": "surf-shack-mini-golf",
+    "business_name": "Surf Shack Mini Golf",
+    "category_primary": "Tours & Activities",
+    "category_tags": [
+      "Attractions"
+    ],
+    "kind": "Mini golf",
+    "schema_type": "TouristAttraction",
+    "description_short": "Mini golf course in the town centre, run by the Mallacoota Surf Shack.",
+    "description_long": "An outdoor mini golf course beside the Surf Shack in the town centre, its holes laid out around a courtyard. Signed Surf Shack Mini Golf; ask at the shop.",
+    "images": [],
+    "phone": null,
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "41 Maurice Ave",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558036,
+      "longitude": 149.756364,
+      "source": "photo-exif"
+    },
+    "opening_hours": [],
+    "related": [
+      "mallacoota-surf-shack"
+    ]
   }
 ]

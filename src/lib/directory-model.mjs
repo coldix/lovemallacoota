@@ -126,7 +126,7 @@ const SECTION_FROM_IA = {
 export const SECTION_FILTERS = {
   "eat-drink": ["Cafe & coffee", "Pub & restaurant", "Takeaway", "Groceries"],
   stay: ["Camping & caravan", "Motel & units", "Holiday house"],
-  "do-see": ["Boating & fishing", "Walks & beaches", "Arts & culture"],
+  "do-see": ["Boating & fishing", "Walks & beaches", "Arts & culture", "Attractions"],
   community: ["Sport", "Clubs & groups", "Arts & culture", "Church & volunteer", "Facebook & media"],
   services: ["Shops", "Health", "Trades", "Government"],
 };

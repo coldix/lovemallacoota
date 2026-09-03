@@ -210,5 +210,46 @@
     "verification": {
       "lastReviewedAt": "2026-09-03"
     }
+  },
+  {
+    "id": "social-morning-melodies",
+    "slug": "morning-melodies",
+    "name": "Morning Melodies",
+    "entityType": "social-group",
+    "section": "community",
+    "categories": [
+      "Arts & culture"
+    ],
+    "kind": "Music morning",
+    "schema_type": "Organization",
+    "description": "A regular morning of live music and singing, played by local musicians on accordion, guitar and drum, held at the Mallacoota Hotel and listed in the Gippsland gig guide. Come for the morning rather than for a ticket.",
+    "descriptionShort": "Regular morning of live music at the Mallacoota Hotel.",
+    "website": null,
+    "links": [
+      {
+        "url": "https://liveatthebundy.com.au/gippslandgigguide/",
+        "text": "Gippsland gig guide"
+      }
+    ],
+    "phone": null,
+    "geo": {
+      "latitude": -37.557811,
+      "longitude": 149.757019,
+      "source": "photo-exif"
+    },
+    "related": [
+      "mallacoota-hotel-motel-bistro"
+    ],
+    "claimable": true,
+    "official": false,
+    "locationKind": "none",
+    "serviceArea": "Mallacoota",
+    "source": {
+      "kind": "existing-listing",
+      "note": "Gippsland gig guide, and photographed on the morning."
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
   }
 ]

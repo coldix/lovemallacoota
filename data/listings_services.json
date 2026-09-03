@@ -1042,7 +1042,7 @@
     ],
     "kind": "Post office",
     "schema_type": "PostOffice",
-    "description": "Licensed post office in the arcade at 60 Maurice Avenue, with the private boxes along the walkway. Agent for CBA, NAB and Bendigo Bank. Opening hours are not published here: check the Australia Post locator.",
+    "description": "Licensed post office in the arcade at 60 Maurice Avenue, with the private boxes along the walkway. Agent for CBA, NAB and Bendigo Bank, and for POSTbillpay, GIROPost and CityLink passes.",
     "descriptionShort": "Licensed post office, shop 2 at 60 Maurice Avenue.",
     "website": "https://auspost.com.au/locate/showpop/337383",
     "phone": "03 5158 0227",
@@ -1068,7 +1068,27 @@
     },
     "verification": {
       "lastReviewedAt": "2026-09-03"
-    }
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      {
+        "dayOfWeek": [
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "11:00"
+      }
+    ]
   },
   {
     "id": "shop-south-eastern-home-hardware",
@@ -1144,6 +1164,178 @@
       "kind": "authoritative",
       "name": "Mallacoota EV charging station",
       "url": "https://yoursay.eastgippsland.vic.gov.au/electric-vehicle-charging-stations"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "shop-st-peters-op-shop",
+    "slug": "st-peters-op-shop",
+    "name": "St Peter's Op Shop",
+    "entityType": "business",
+    "section": "services",
+    "categories": [
+      "Shops"
+    ],
+    "kind": "Opportunity shop",
+    "schema_type": "Store",
+    "description": "The Parish of Croajingolong op shop, in the building behind St Peter's Church off Allan Drive. One of the town's two op shops: the other is the Mallacoota Community Opportunity Shop on Maurice Avenue.",
+    "descriptionShort": "Parish op shop behind St Peter's Church. Weekdays 10am-1pm, Saturday 10am-12 noon.",
+    "website": null,
+    "phone": "03 5158 0096",
+    "address": {
+      "street": "1 Allan Drive",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558772,
+      "longitude": 149.759994,
+      "source": "photo-exif"
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "10:00",
+        "closes": "13:00"
+      },
+      {
+        "dayOfWeek": [
+          "Saturday"
+        ],
+        "opens": "10:00",
+        "closes": "12:00"
+      }
+    ],
+    "related": [
+      "st-peters-mallacoota",
+      "mallacoota-community-opportunity-shop"
+    ],
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "photograph",
+      "name": "Sign at the shop",
+      "url": null
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "shop-mallacoota-laundromat",
+    "slug": "mallacoota-laundromat",
+    "name": "Mallacoota Laundromat",
+    "entityType": "business",
+    "section": "services",
+    "categories": [
+      "Shops"
+    ],
+    "kind": "Laundromat",
+    "schema_type": "LaundryOrDryCleaner",
+    "description": "Coin laundry at Shop 3, 57 Maurice Avenue, in the same building as the Community Bank. Washers and dryers; no attendant. Not the guest laundry at the foreshore holiday park.",
+    "descriptionShort": "Coin laundry on Maurice Avenue, in the same building as the Community Bank.",
+    "website": null,
+    "phone": null,
+    "address": {
+      "street": "57 Maurice Avenue",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.557597,
+      "longitude": 149.757614,
+      "source": "photo-exif"
+    },
+    "official": false,
+    "claimable": true,
+    "locationKind": "physical",
+    "source": {
+      "kind": "photograph",
+      "name": "Shopfront",
+      "url": null
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "agent-hammond-properties",
+    "slug": "hammond-properties",
+    "name": "Hammond Properties",
+    "entityType": "professional",
+    "section": "services",
+    "categories": [
+      "Shops"
+    ],
+    "kind": "Real estate and holiday letting",
+    "schema_type": "RealEstateAgent",
+    "description": "Local agency selling and letting Mallacoota property, and managing holiday houses in the town, including Gabo Views on Allan Drive.",
+    "descriptionShort": "Local real estate agency and holiday letting manager.",
+    "website": "https://hammondproperties.com.au/",
+    "phone": "0403 400 444",
+    "related": [
+      "gabo-views"
+    ],
+    "official": false,
+    "claimable": true,
+    "locationKind": "none",
+    "serviceArea": "Mallacoota and district",
+    "source": {
+      "kind": "authoritative",
+      "name": "Hammond Properties",
+      "url": "https://hammondproperties.com.au/"
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "facility-lions-park-toilets",
+    "slug": "mallacoota-park-toilet-block",
+    "name": "Lions Park public toilets",
+    "entityType": "community-facility",
+    "section": "services",
+    "categories": [
+      "Government"
+    ],
+    "kind": "Public toilets",
+    "schema_type": "PublicToilet",
+    "description": "Public toilets at Lions Park on Devlin Drive, beside the playground and the barbecue shelter.",
+    "descriptionShort": "Public toilets at Lions Park, Devlin Drive.",
+    "website": null,
+    "phone": null,
+    "address": {
+      "street": "Devlin Drive",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.559369,
+      "longitude": 149.757753,
+      "source": "photo-exif"
+    },
+    "official": true,
+    "claimable": false,
+    "locationKind": "physical",
+    "source": {
+      "kind": "photograph",
+      "name": "Photographed on site",
+      "url": null
     },
     "verification": {
       "lastReviewedAt": "2026-09-03"

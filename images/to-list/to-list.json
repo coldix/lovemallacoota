@@ -2,7 +2,7 @@
   "title": "Love Mallacoota — photographed, not yet listed",
   "created": "2026-09-03",
   "sourceFolder": "/Users/dixon/Pictures/26/Town/output",
-  "note": "GPS taken from original JPGs in /Users/dixon/Pictures/26/Town (the 1920 webps had EXIF stripped). Do not publish listingReady:false. Do not invent missing phones or websites. Records marked imported are now in data/listings_*.json and their photographs have moved to images/listings/; the rest are still held here.",
+  "note": "GPS taken from original JPGs in /Users/dixon/Pictures/26/Town (the 1920 webps had EXIF stripped). Every record here has been imported into data/listings_*.json and its photographs moved to images/listings/. Kept as the research trail: sources, notes and the reasoning behind each listing.",
   "listings": [
     {
       "slug": "salt-home-living",
@@ -534,7 +534,8 @@
       "sources": [
         "photo",
         "OpenStreetMap reverse geocode"
-      ]
+      ],
+      "imported": "2026-09-03"
     },
     {
       "slug": "mallacoota-laundromat",
@@ -567,7 +568,8 @@
       "sources": [
         "photo-exif",
         "OpenStreetMap reverse geocode"
-      ]
+      ],
+      "imported": "2026-09-03"
     },
     {
       "slug": "mallacoota-mini-golf",
@@ -593,7 +595,8 @@
       "notes": "OSM reverse geocode said Fairhaven Road, which is likely wrong for this GPS. Confirm on the ground before creating a second listing.",
       "sources": [
         "photo-exif"
-      ]
+      ],
+      "imported": "2026-09-03"
     },
     {
       "slug": "morning-melodies",
@@ -617,7 +620,8 @@
       "sources": [
         "https://liveatthebundy.com.au/gippslandgigguide/",
         "photo-exif"
-      ]
+      ],
+      "imported": "2026-09-03"
     },
     {
       "slug": "mallacoota-park-toilet-block",
@@ -651,7 +655,8 @@
       "sources": [
         "photo-exif",
         "OpenStreetMap reverse geocode"
-      ]
+      ],
+      "imported": "2026-09-03"
     }
   ]
 }

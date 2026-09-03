@@ -25,7 +25,11 @@
     "country": "Australia"
   },
   "locationKind": "physical",
-  "geo": null,
+  "geo": {
+    "latitude": -37.5484027,
+    "longitude": 149.7494993,
+    "source": "google-maps"
+  },
   "serviceArea": "The World",
   "trading": null,
   "phone": "+61419415000",

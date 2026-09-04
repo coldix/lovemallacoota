@@ -2,8 +2,16 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.49-0284c7.svg)](data/site-version.json)
-[![Build & Test](https://img.shields.io/badge/tests-139%20passing-22c55e.svg)](tests/)
+[![Site Version](https://img.shields.io/badge/version-v1.51-0284c7.svg)](data/site-version.json)
+[![Build & Test](https://img.shields.io/badge/tests-140%20passing-22c55e.svg)](tests/)
+
+<!-- version -->
+**v1.51** - built 4 September 2026.
+<!-- /version -->
+
+Both the line above and the version badge are written by
+`tools/update-version.mjs`, so `pnpm run version:site` keeps them true. Do not
+edit them by hand.
 
 ---
 
@@ -157,7 +165,7 @@ pnpm install
 # 2. Run type check & verification
 pnpm run check
 
-# 3. Run unit test suite (139 tests)
+# 3. Run unit test suite (140 tests)
 pnpm run test
 
 # 4. Start local development server

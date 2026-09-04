@@ -40,6 +40,7 @@ if (!entity) {
 const section = SECTIONS[entity.section];
 const typeLabel = ENTITY_TYPES[entity.entityType]?.label;
 const official = isOfficialEntity(entity);
+const emergency = entity.entityType === "emergency";
 const photo = listingPhoto(entity);
 const gallery = listingPhotos(entity).slice(1);
 const verification = verificationLine(entity);
@@ -86,7 +87,15 @@ const canonicalPath = listingPagePath(entity);
     {official && (
       <div class="emergency-banner listing-official-banner">
         <strong>Official service.</strong>
-        <span>Love Mallacoota does not speak for this organisation. Use the source links below. In an emergency call <a href="tel:000">000</a>.</span>
+        <span>
+          Love Mallacoota does not speak for this organisation. Use the source links below.
+          {/* Only where calling it is the point. Nineteen listings are official
+              and only six are emergency services: the rest are a cemetery, a
+              toilet block, a school, the library. Telling a reader to call 000
+              from a cemetery page is noise, and a banner that cries wolf on
+              thirteen pages is not read on the other six. */}
+          {emergency && <> In an emergency call <a href="tel:000">000</a>.</>}
+        </span>
       </div>
     )}
     <section class="glass-card sheen content-block reveal listing-detail">

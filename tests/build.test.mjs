@@ -761,3 +761,37 @@ test("the automatic sections are normalised like the pieces are", async () => {
   assert.equal(weekly.trail.name, "Betka - Quarry");
   assert.equal(weekly.trail.url, "https://example.com/a\u2019b", "a url is not prose");
 });
+
+test("the README states the version the site was actually built at", async () => {
+  // Written by hand, this drifted six releases behind, which is worse than
+  // saying nothing: a reader trusts a number that is there. It is stamped by
+  // tools/update-version.mjs now, and this fails if someone edits it back.
+  const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
+  const manifest = JSON.parse(
+    await readFile(new URL("../data/site-version.json", import.meta.url), "utf8")
+  );
+
+  const block = /<!-- version -->\n(.*)\n<!-- \/version -->/.exec(readme);
+  assert.ok(block, "no version block at the top of the README");
+  assert.match(
+    block[1],
+    new RegExp(`\\*\\*${manifest.version}\\*\\*`),
+    `the README says "${block[1]}" but the site was built at ${manifest.version}`
+  );
+
+  // The date has to be a real one, and the day the manifest records.
+  const [, day, month, year] = /built (\d{1,2}) (\w+) (\d{4})\./.exec(block[1]) || [];
+  assert.ok(day, `no readable build date in "${block[1]}"`);
+  const stated = new Date(`${day} ${month} ${year} 12:00:00 GMT+1000`);
+  assert.ok(!Number.isNaN(stated.valueOf()), `"${day} ${month} ${year}" is not a date`);
+  assert.equal(
+    stated.toISOString().slice(0, 10),
+    manifest.generatedAt.slice(0, 10),
+    "the README's build date is not the manifest's"
+  );
+
+  assert.ok(
+    readme.includes(`badge/version-${manifest.version}-`),
+    "the version badge is not the built version"
+  );
+});

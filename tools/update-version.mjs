@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputDir = path.join(rootDir, "dist");
 const manifestPath = path.join(rootDir, "data", "site-version.json");
+const readmePath = path.join(rootDir, "README.md");
 const builtManifestPath = path.join(outputDir, "data", "site-version.json");
 const timeZone = "Australia/Melbourne";
 const args = new Set(process.argv.slice(2));
@@ -101,6 +102,57 @@ async function fileRecord(relativePath) {
 }
 
 /*
+ * The README's own version line and badge, kept true by the same run that
+ * raises the version. Written by hand they drifted six releases behind, which
+ * is worse than absent: a reader trusts a number that is there.
+ *
+ * The date is read back out of the manifest rather than taken from the clock,
+ * so the --stamp and --files phases of one build cannot disagree.
+ */
+const READABLE_DATE = new Intl.DateTimeFormat("en-AU", {
+  timeZone,
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+function readableDate(generatedAtValue) {
+  const isoDay = /^(\d{4})-(\d{2})-(\d{2})/.exec(generatedAtValue || "");
+  if (!isoDay) return null;
+  // Midday, so no timezone shift can move it to the day before.
+  const parsed = new Date(`${isoDay[1]}-${isoDay[2]}-${isoDay[3]}T12:00:00+10:00`);
+  return Number.isNaN(parsed.valueOf()) ? null : READABLE_DATE.format(parsed);
+}
+
+async function stampReadme(versionValue, generatedAtValue) {
+  let readme;
+  try {
+    readme = await readFile(readmePath, "utf8");
+  } catch {
+    return;
+  }
+
+  const when = readableDate(generatedAtValue);
+  const line = when ? `**${versionValue}** - built ${when}.` : `**${versionValue}**`;
+  const block = `<!-- version -->\n${line}\n<!-- /version -->`;
+  const markers = /<!-- version -->[\s\S]*?<!-- \/version -->/;
+
+  if (!markers.test(readme)) {
+    console.warn("README.md has no <!-- version --> block; leaving it alone.");
+    return;
+  }
+
+  const updated = readme
+    .replace(markers, block)
+    .replace(/badge\/version-v[\d.]+-/, `badge/version-${versionValue}-`);
+
+  if (updated !== readme) {
+    await writeFile(readmePath, updated);
+    console.log(`Stamped README.md with ${versionValue}`);
+  }
+}
+
+/*
  * Two phases, because the pages carry the version number in their own footer.
  *
  *   --stamp   raise the version and the date, before the build
@@ -144,3 +196,4 @@ const manifest = {
 await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 if (!stampOnly) await writeFile(builtManifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Wrote ${path.relative(rootDir, manifestPath)} version ${manifest.version}`);
+await stampReadme(manifest.version, manifest.generatedAt);

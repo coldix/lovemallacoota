@@ -462,6 +462,130 @@
     "kind": "Bakery"
   },
   {
+    "id": "food-017",
+    "slug": "mallacoota-food-chariot",
+    "business_name": "Mallacoota Food Chariot",
+    "category_primary": "Food & Drink",
+    "category_tags": [
+      "Takeaway"
+    ],
+    "schema_type": "FoodEstablishment",
+    "description_short": "A food trailer cooking burgers, calamari and locally caught gummy shark to order.",
+    "description_long": "A two-couple food trailer with the menu chalked on its shutters, cooking burgers, hand crumbed calamari, hand made prawn burgers and locally caught gummy shark in beer batter. Everything is cooked to order and there is no bain-marie, so nothing sits under a lamp waiting for you. There is a chickpea and lentil burger for anyone off the meat, and a school kids price on calamari and chickentenders. Order at the window.",
+    "phone": null,
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": null,
+    "opening_hours": [],
+    "menu": {
+      "note": "Cooked to order. No bain-marie, so allow a little time at the window.",
+      "asAt": "2026-09-04",
+      "groups": [
+        {
+          "name": "Burgers",
+          "items": [
+            {
+              "name": "Cheese burger and fries",
+              "price": "$16"
+            },
+            {
+              "name": "Grilled chicken burger and fries",
+              "price": "$16"
+            },
+            {
+              "name": "Chickpea and lentil burger",
+              "price": "$14"
+            },
+            {
+              "name": "Hand made prawn burger",
+              "price": "$14"
+            },
+            {
+              "name": "Chickentender burger",
+              "price": "$12"
+            }
+          ]
+        },
+        {
+          "name": "From the fryer",
+          "items": [
+            {
+              "name": "Locally caught gummy shark in beer batter, and fries",
+              "price": "$19"
+            },
+            {
+              "name": "Hand crumbed calamari and fries",
+              "price": "$16"
+            }
+          ]
+        },
+        {
+          "name": "Snacks and sides",
+          "items": [
+            {
+              "name": "Marinated Aussie prawn skewer",
+              "price": "$9"
+            },
+            {
+              "name": "Onion rings",
+              "price": "$5"
+            },
+            {
+              "name": "Fries",
+              "price": "$4"
+            },
+            {
+              "name": "Sweet pineapple fritter",
+              "price": "$4"
+            },
+            {
+              "name": "Southern chicken strips",
+              "price": "$2.50 each"
+            }
+          ]
+        },
+        {
+          "name": "School kids only",
+          "items": [
+            {
+              "name": "Calamari and fries",
+              "price": "$9"
+            },
+            {
+              "name": "Chickentenders and fries",
+              "price": "$10"
+            }
+          ]
+        },
+        {
+          "name": "Drinks",
+          "items": [
+            {
+              "name": "Cans",
+              "price": "$3"
+            },
+            {
+              "name": "Water",
+              "price": "$1.50"
+            }
+          ]
+        }
+      ]
+    },
+    "notes_seasonal": "A trailer, so where and when it trades varies. No phone is published: the Chariot does not take phone orders, and everything is cooked to order at the window.",
+    "kind": "Food trailer",
+    "serviceArea": "Mallacoota and district - a trailer, location varies",
+    "verification": {
+      "lastReviewedAt": "2026-09-04"
+    },
+    "source": {
+      "kind": "operator",
+      "name": "The operators",
+      "note": "Menu and prices read from the trailer's own board, photographed 4 September 2026."
+    }
+  },
+  {
     "id": "food-011",
     "slug": "mallacoota-foodworks",
     "business_name": "Mallacoota Foodworks",

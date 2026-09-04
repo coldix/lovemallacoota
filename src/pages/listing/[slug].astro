@@ -8,6 +8,7 @@ import {
   entityBySlug,
   entitySchema,
   formatAddress,
+  formatVerificationDate,
   getPrimaryLink,
   getPrimaryLinkLabel,
   isOfficialEntity,
@@ -45,6 +46,7 @@ const verification = verificationLine(entity);
 const primary = getPrimaryLink(entity);
 const primaryLabel = getPrimaryLinkLabel(entity);
 const address = formatAddress(entity.address);
+const menuAsAt = formatVerificationDate(entity.menu?.asAt);
 const related = relatedEntities(loadDirectory(), entity);
 const schema = {
   "@context": "https://schema.org",
@@ -194,6 +196,30 @@ const canonicalPath = listingPagePath(entity);
           </>
         )}
       </dl>
+
+      {entity.menu?.groups?.length > 0 && (
+        <div class="listing-menu">
+          <h2 class="listing-menu-title">Menu</h2>
+          {entity.menu.note && <p class="listing-note">{entity.menu.note}</p>}
+          {entity.menu.groups.map((group) => (
+            <div class="listing-menu-group">
+              <h3>{group.name}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li>
+                    <span class="menu-item">{item.name}</span>
+                    <span class="menu-dots" aria-hidden="true"></span>
+                    <span class="menu-price">{item.price}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          {menuAsAt && (
+            <p class="listing-note">Prices copied from the board on {menuAsAt}. They are the operator's to change.</p>
+          )}
+        </div>
+      )}
 
       <div class="links listing-actions">
         {primary && <a href={primary} target="_blank" rel="noopener noreferrer">{primaryLabel}</a>}

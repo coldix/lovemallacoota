@@ -535,6 +535,11 @@ export function normalizeListing(raw, defaults = {}) {
     meetingTimes: raw.meetingTimes || null,
     accessibility: raw.accessibility || null,
     images: raw.images || [],
+    // A priced menu, for the places whose whole offer is the menu. Grouped
+    // rather than flat, because a board reads in courses and a single list of
+    // fourteen priced lines does not. Carries the date it was copied: a price
+    // is a fact about a day, and one shown without one is a promise.
+    menu: raw.menu || null,
     notes_seasonal: raw.notes_seasonal || null,
     status: raw.status || "published",
     claimable: raw.claimable === undefined ? !official && entityType !== "facebook-group" : raw.claimable,

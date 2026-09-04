@@ -1386,6 +1386,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .listing-facts dd { min-width: 0; }
 .listing-facts a { color: var(--link); }
 .listing-facts a:hover { color: var(--accent); }
+/* A priced menu. The dotted leader is a border on a flexed spacer, so the row
+   works at any width and the price stays hard against the right edge. */
+.listing-menu { margin: 1.6rem 0; padding-top: 1.2rem; border-top: 1px solid var(--glass-border); }
+.listing-menu-title { margin: 0 0 0.4rem; }
+.listing-menu-group { margin-top: 1.1rem; }
+.listing-menu-group h3 {
+  margin: 0 0 0.4rem; font-size: 0.82rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.listing-menu-group ul { list-style: none; margin: 0; padding: 0; }
+.listing-menu-group li {
+  display: flex; align-items: baseline; gap: 0.5rem;
+  padding: 0.22rem 0; font-size: 0.95rem;
+}
+.menu-dots { flex: 1 1 auto; min-width: 1.5rem; border-bottom: 1px dotted var(--glass-border); }
+.menu-price { flex: 0 0 auto; font-variant-numeric: tabular-nums; font-weight: 700; }
 .listing-actions { margin: 1rem 0; }
 .listing-claim { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--glass-border); }
 .listing-claim p { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }

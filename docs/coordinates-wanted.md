@@ -16,7 +16,7 @@ mallacoota-medical-centre | Mallacoota Medical Centre | 21-23 Maurice Avenue, Ma
 mallacoota-p-12-college | Mallacoota P-12 College | 25 Bucknall Street, Mallacoota, VIC 3892 |    -> 
 mallacoota-police-station | Mallacoota Police Station | 38 Maurice Avenue, Mallacoota, VIC 3892 |    -> 
 
-## Unverified, probably out by 50 to 300m (18)
+## Unverified, probably out by 50 to 300m (17)
 
 From the original data, never checked. Roughly right, not exact. Lowest
 priority.
@@ -27,7 +27,6 @@ mv-loch-ard-dale-winward | MV Loch-Ard - Dale Winward | Departs from Main Wharf,
 alfs-pizza | Alf's Pizza | 19 Dorron Ave, Mallacoota, VIC 3892 | -37.56138, 149.75471   -> 
 gipsy-point-lodge-cafe-restaurant | Gipsy Point Lodge Café-Restaurant | 35 Macdonald St, Gipsy Point, VIC 3891 | -37.51868, 149.71887   -> 
 kelpys-seafood | Kelpy's Seafood | The Wharf, Mallacoota, Mallacoota, VIC 3892 | -37.55930, 149.75160   -> 
-origami-coffee | Origami Coffee | 66 Maurice Ave, Mallacoota, VIC 3892 | -37.55836, 149.75628   -> 
 awangralea-caravan-park | A'Wangralea Caravan Park | 78 Betka Rd, Mallacoota, VIC 3892 | -37.57391, 149.74215   -> 
 bruces-waterside-units | Bruces Waterside Units | 4 Buckland Dr, Mallacoota, VIC 3892 | -37.55745, 149.75344   -> 
 gipsy-point-lodge | Gipsy Point Lodge | 35 Macdonald St, Gipsy Point, VIC 3891 | -37.51868, 149.71887   -> 

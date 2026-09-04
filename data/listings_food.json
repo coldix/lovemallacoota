@@ -573,9 +573,9 @@
         }
       ]
     },
-    "notes_seasonal": "A trailer, so where and when it trades varies. No phone is published: the Chariot does not take phone orders, and everything is cooked to order at the window.",
+    "notes_seasonal": "Pitched on the block behind Origami Coffee, a short walk from Sue's Bribes, when it was photographed on 4 September 2026. It is a trailer, so check before making the trip. No phone is published: the Chariot does not take phone orders, and everything is cooked to order at the window.",
     "kind": "Food trailer",
-    "serviceArea": "Mallacoota and district - a trailer, location varies",
+    "serviceArea": "Mallacoota - a trailer, pitched behind Origami Coffee",
     "verification": {
       "lastReviewedAt": "2026-09-04"
     },
@@ -583,6 +583,11 @@
       "kind": "operator",
       "name": "The operators",
       "note": "Menu and prices read from the trailer's own board, photographed 4 September 2026."
+    },
+    "geo": {
+      "latitude": -37.556306,
+      "longitude": 149.756972,
+      "source": "photo-exif"
     }
   },
   {
@@ -784,8 +789,9 @@
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.55836,
-      "longitude": 149.75628
+      "latitude": -37.556451,
+      "longitude": 149.756998,
+      "source": "google-maps"
     },
     "opening_hours": [
       {

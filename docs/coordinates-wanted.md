@@ -30,7 +30,7 @@ kelpys-seafood | Kelpy's Seafood | The Wharf, Mallacoota, Mallacoota, VIC 3892 |
 awangralea-caravan-park | A'Wangralea Caravan Park | 78 Betka Rd, Mallacoota, VIC 3892 | -37.57391, 149.74215   -> 
 bruces-waterside-units | Bruces Waterside Units | 4 Buckland Dr, Mallacoota, VIC 3892 | -37.55745, 149.75344   -> 
 gipsy-point-lodge | Gipsy Point Lodge | 35 Macdonald St, Gipsy Point, VIC 3891 | -37.51868, 149.71887   -> 
-gowings-of-mallacoota-holiday-units | Gowings of Mallacoota Holiday Units | 7 Dorron Ave, Mallacoota, VIC 3892 | -37.56061, 149.75508   -> 
+gowings-of-mallacoota-holiday-units | Gowings of Mallacoota Holiday Units | 5-7 Dorron Ave, Mallacoota, VIC 3892 | -37.56061, 149.75508   -> 
 harbour-lights-holiday-flats | Harbour Lights Holiday Flats | 88 Betka Rd, Mallacoota, VIC 3892 | -37.57582, 149.73976   -> 
 lakeside-at-mallacoota | Lakeside at Mallacoota | 12 Dorron Avenue, Mallacoota, VIC 3892 | -37.56138, 149.75549   -> 
 lin-cottage | Lin Cottage | Mallacoota, VIC 3892 | -37.56000, 149.75600   -> 

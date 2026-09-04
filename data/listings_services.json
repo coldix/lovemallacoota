@@ -247,9 +247,9 @@
     },
     "kind": "State Emergency Service",
     "geo": {
-      "latitude": -37.559603,
-      "longitude": 149.749994,
-      "source": "google-maps"
+      "latitude": -37.560387,
+      "longitude": 149.750353,
+      "source": "photo-exif"
     }
   },
   {
@@ -1364,6 +1364,42 @@
     },
     "verification": {
       "lastReviewedAt": "2026-09-03"
+    }
+  },
+  {
+    "id": "facility-mallacoota-cemetery",
+    "slug": "mallacoota-cemetery",
+    "name": "Mallacoota Cemetery",
+    "entityType": "government",
+    "section": "services",
+    "categories": [],
+    "kind": "Town cemetery",
+    "schema_type": "Cemetery",
+    "description": "The town's burial ground, on Mirrabooka Road, kept by the Mallacoota West Cemetery Trust and indexed in the burial registers as Mallacoota West Cemetery. It is the working cemetery and open to visitors. It is not the old Mallacoota cemetery at Cemetery Bight, which is inside Croajingolong National Park and reached by boat.",
+    "descriptionShort": "The town's working cemetery, on Mirrabooka Road.",
+    "website": null,
+    "links": [],
+    "phone": null,
+    "address": {
+      "street": "Mirrabooka Rd",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.548012,
+      "longitude": 149.739778,
+      "source": "photo-exif"
+    },
+    "claimable": false,
+    "official": true,
+    "source": {
+      "kind": "existing-listing",
+      "note": "Photographed 4 September 2026; the coordinate is the gate, from the photograph."
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-04"
     }
   }
 ]

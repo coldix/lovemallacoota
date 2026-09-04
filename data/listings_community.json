@@ -251,5 +251,48 @@
     "verification": {
       "lastReviewedAt": "2026-09-03"
     }
+  },
+  {
+    "id": "facility-mallacoota-mens-shed",
+    "slug": "mallacoota-mens-shed",
+    "name": "The Shed",
+    "commonName": "The Men's Shed",
+    "entityType": "community-facility",
+    "section": "community",
+    "categories": [],
+    "kind": "Community venue",
+    "schema_type": "CivicStructure",
+    "description": "The big shed in the health centre precinct off Mattsson Street. It was built as a men's shed and that is still what the town calls it, but it is a multi-purpose venue now, run as part of Mallacoota District Health and Support Service: the sign above the roller door reads Mallacoota Health Centre - The Shed. It is also home to the Mallacoota Lions Club, whose own sign is on the same wall.",
+    "descriptionShort": "Multi-purpose community venue in the health centre precinct, still known as the Men's Shed.",
+    "website": null,
+    "links": [],
+    "phone": null,
+    "email": "mallacootamensshed@gmail.com",
+    "address": {
+      "street": "Mallacoota Health Centre precinct, Mattsson St",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558658,
+      "longitude": 149.749633,
+      "source": "photo-exif"
+    },
+    "related": [
+      "mallacoota-district-health-and-support-service",
+      "lions-club-of-mallacoota-and-district"
+    ],
+    "claimable": true,
+    "official": false,
+    "notes_seasonal": "A venue rather than a club, so what is on there changes. Enquiries go through the health service.",
+    "source": {
+      "kind": "existing-listing",
+      "note": "Photographed 4 September 2026; the name and the health service connection confirmed locally."
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-04"
+    }
   }
 ]

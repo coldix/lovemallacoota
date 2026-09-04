@@ -2,8 +2,8 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.43-0284c7.svg)](data/site-version.json)
-[![Build & Test](https://img.shields.io/badge/tests-138%20passing-22c55e.svg)](tests/)
+[![Site Version](https://img.shields.io/badge/version-v1.49-0284c7.svg)](data/site-version.json)
+[![Build & Test](https://img.shields.io/badge/tests-139%20passing-22c55e.svg)](tests/)
 
 ---
 
@@ -51,13 +51,14 @@ The primary weekly news destination published every Monday (`YY:WK` format, e.g.
 * **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
 
 ### 4. Community Directory (`/directory.html`)
-Over 120 verified listings categorized into 5 primary task-based sections:
+120 listings across 5 task-based sections, 51 of them with a photograph:
 * **Eat & Drink** ([`/food.html`](https://lovemallacoota.au/food.html)): Cafes, pubs, takeaway, seafood, groceries.
 * **Stay** ([`/accom.html`](https://lovemallacoota.au/accom.html)): Lodges, motels, holiday units, caravan parks.
 * **Do & See** ([`/activity.html`](https://lovemallacoota.au/activity.html)): Boat hire, tours, attractions, parks.
 * **Community** ([`/community.html`](https://lovemallacoota.au/community.html)): Clubs, sports, arts, volunteer groups, 3MGB radio.
 * **Services** ([`/services.html`](https://lovemallacoota.au/services.html)): Trades, health, government, police, CFA, SES.
 * **Self-Service Verification**: Free listing registration ([`/add-listing.html`](https://lovemallacoota.au/add-listing.html)) and listing claiming ([`/claim.html`](https://lovemallacoota.au/claim.html)) using D1-backed email verification tokens.
+* **Priced Menus**: A listing whose whole offer is its menu can carry one - grouped items with prices, rendered as a leader-dotted list. Every menu states the date its prices were read, because a price is a fact about a day.
 
 ### 5. What's On Calendar (`/calendar.html`)
 * Community event listings and integrated Google Calendar.
@@ -156,7 +157,7 @@ pnpm install
 # 2. Run type check & verification
 pnpm run check
 
-# 3. Run unit test suite (138 tests)
+# 3. Run unit test suite (139 tests)
 pnpm run test
 
 # 4. Start local development server
@@ -215,11 +216,6 @@ build time except `build-og.mjs`, `build-static.mjs` and `public-files.mjs`.
 | `refresh-weekly.mjs` | Builds the automatic half of an edition: forecast, tides, moon, events. `pnpm run weekly` |
 | `roll-edition.mjs` | Closes the week and opens the next. `pnpm run roll` |
 | `check-images.mjs` | Listing images the data names but the repository lacks; `--gaps` lists listings with no photograph at all. `pnpm run check:images` |
-
-To give a listing a photograph, save it as `images/listings/<slug>.webp` - no
-data edit, and it wins over anything the listing data names. Alt text for one of
-those goes in `data/listing-photos.json`, keyed by slug; without an entry the
-alt text is the listing's name.
 | `process-uploads.mjs` | Converts photographs submitted through the form. Run by `uploads.yml`. |
 | `prepare-cover.mjs` | One photograph into the two derivatives an edition cover needs. |
 | `prepare-article-image.mjs` | One image per article, WebP at 1280px on the longest side. |
@@ -229,6 +225,25 @@ alt text is the listing's name.
 | `update-version.mjs` | Writes `data/site-version.json`. `pnpm run version:site` |
 | `build-og.mjs`, `build-static.mjs`, `public-files.mjs` | Build steps. `public-files.mjs` is the allow-list of what ships. |
 | `fetch-calendar.mjs` | Reads the community calendar's iCal feed for the weekly diary. Does nothing until `data/community-calendar.json` names a calendar. |
+
+### Giving a listing a photograph
+
+Save it as `images/listings/<slug>.webp`. No data edit is needed, and it wins
+over anything the listing data names. Further photographs go in the same folder
+as `<slug>-anything.webp` and follow the first one into a gallery.
+
+The slug in the filename must be the listing's actual slug, and the longest
+matching slug wins so that one listing cannot inherit another's pictures. A file
+whose stem matches no slug is **silently ignored** - it will not fail the build.
+`mallacoota-and-district-tool-library.webp` matched nothing, because the listing
+is `mallacoota-and-district-tool-library-madtl`.
+
+Alt text goes in `data/listing-photos.json`, keyed by the file's stem rather than
+the slug, so a listing with six photographs gets six descriptions. Without an
+entry the alt text falls back to the listing's name, which is a poor description
+of a photograph.
+
+### One-shots
 
 Three are spent one-shots, kept only as a record of how their images were made:
 `import-nas-images.mjs`, `import-stay-images.mjs` and
@@ -252,6 +267,7 @@ of the 44 folders there.
 - [`docs/DIRECTORY-IA.md`](docs/DIRECTORY-IA.md) - How the directory's sections and tags are shaped.
 - [`docs/ARCHIVE.md`](docs/ARCHIVE.md) - The Mouth back-issue archive and its rights position.
 - [`docs/GOVERNMENT.md`](docs/GOVERNMENT.md) - Official listings and where their data comes from.
+- [`docs/coordinates-wanted.md`](docs/coordinates-wanted.md) - Listings whose map pin is missing or unverified, and how to send one.
 - [`docs/NEXTSTEPS.md`](docs/NEXTSTEPS.md) - A critical review of release v0.07. Largely addressed; kept for the reasoning.
 
 ---

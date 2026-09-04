@@ -139,7 +139,11 @@ const canonicalPath = listingPagePath(entity);
             <dd>{entity.serviceArea}</dd>
           </>
         )}
-        {entity.locationKind === "none" && !address && (
+        {/* Only when nothing above has already answered "where". A listing with
+            a service area has said it, and following that with the generic
+            sentence read as a contradiction on a coffee van and as nonsense on
+            the Bureau of Meteorology. */}
+        {entity.locationKind === "none" && !address && !entity.serviceArea && (
           <>
             <dt>Location</dt>
             <dd>No public street address - many groups meet in different places or serve the whole district.</dd>

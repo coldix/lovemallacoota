@@ -47,6 +47,12 @@ const MOVED_PATHS = new Map([
   ["/add-listing", "/add-listing.html"],
   ["/claim", "/claim.html"],
   ["/listing", "/directory.html"],
+  // The gift shop dropped the flowers and went back to trading as Sue's Bribes.
+  // The old slug was the name, so the listing moved with it.
+  [
+    "/listing/bribes-gift-shop-and-fresh-flowers.html",
+    "/listing/sues-bribes.html",
+  ],
   ["/category", "/"],
   ["/category/news", "/"],
   ["/category/how", "/"],

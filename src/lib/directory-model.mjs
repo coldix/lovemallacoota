@@ -61,9 +61,9 @@ export const WHATS_ON = {
 
 /** Shops that used to sit under Do & See. They belong in Services. */
 export const SHOP_SLUGS = new Set([
-  "bribes-gift-shop-and-fresh-flowers",
   "mallacoota-surf-shack",
   "mapa-pearls",
+  "sues-bribes",
   "wilderness-coast-candles",
 ]);
 

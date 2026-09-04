@@ -123,13 +123,16 @@ def main(archive: str) -> None:
         # needs before they walk to the stop, so they are carried here rather
         # than being wiped by the next refresh.
         "tickets": {
-            "where": "Bribes Gift Shop and Fresh Flowers",
-            "street": "Maurice Avenue, Mallacoota",
-            "listing": "/listing/bribes-gift-shop-and-fresh-flowers.html",
+            "where": "Sue's Bribes",
+            "street": "14 Allan Drive, Mallacoota",
+            "listing": "/listing/sues-bribes.html",
         },
         "advice": (
             "A coach passes Genoa every day, in both directions. The time is "
-            "different on different days, so check the day you are travelling."
+            "different on different days, so check the day you are travelling. "
+            "Sue, who sells the tickets, says not to take a printed timetable "
+            "on trust: services change often enough that it is worth asking "
+            "her on the day."
         ),
         "validFrom": f"{starts[0][:4]}-{starts[0][4:6]}-{starts[0][6:]}",
         "validTo": f"{ends[-1][:4]}-{ends[-1][4:6]}-{ends[-1][6:]}",

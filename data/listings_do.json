@@ -1,24 +1,24 @@
 [
   {
     "id": "do-001",
-    "slug": "bribes-gift-shop-and-fresh-flowers",
-    "business_name": "Bribes Gift Shop and Fresh Flowers",
+    "slug": "sues-bribes",
+    "business_name": "Sue's Bribes",
     "category_primary": "Shopping",
     "category_tags": [
       "Shops"
     ],
     "schema_type": "Store",
-    "description_short": "A charming local gift shop with a beautiful selection of items and fresh flowers.",
-    "description_long": "Find unique gifts, homewares, cards, and beautiful fresh flower arrangements at this lovely local shop.",
+    "description_short": "Clothing, souvenirs, homewares and giftware in the middle of town, and the place to buy a coach ticket.",
+    "description_long": "Sue's Bribes has been on Allan Drive for more than fifteen years, selling clothing, souvenirs, homewares, giftware, jewellery and toys, with a range of Mallacoota tea towels, stickers, magnets and t-shirts you will not find anywhere else in town. Stock moves quickly and not all of it is online, so ring if you are after something in particular and Sue will put it aside. There is an online shop with postage around Australia and click-and-collect in store. Sue also sells tickets for the V/Line coach. The shop no longer sells fresh flowers, and no longer hires bikes.",
     "images": [
       {
-        "url": "/images/bus/shop/shop01-bribes-gift-shop-and-fresh-flowers1.webp",
-        "alt_text": "Display inside Bribes Gift Shop.",
+        "url": "/images/bus/shop/shop01-sues-bribes1.webp",
+        "alt_text": "Display inside Sue's Bribes.",
         "is_hero": true
       }
     ],
-    "phone": "03 5158 0877",
-    "email": "suesbribes@mallacoota.com",
+    "phone": "0400 177 122",
+    "email": "suesbribes@yahoo.com",
     "links": [
       {
         "url": "https://suesbribes.com",
@@ -27,7 +27,7 @@
     ],
     "social_links": [],
     "address": {
-      "street": "1/14 Allan Dr",
+      "street": "14 Allan Dr",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
@@ -41,7 +41,6 @@
     "opening_hours": [
       {
         "dayOfWeek": [
-          "Monday",
           "Tuesday",
           "Wednesday",
           "Thursday",
@@ -49,11 +48,14 @@
           "Saturday"
         ],
         "opens": "10:00",
-        "closes": "16:00"
+        "closes": "14:00"
       }
     ],
-    "notes_seasonal": "Check locally for current hours.",
-    "kind": "Gift shop"
+    "notes_seasonal": "Open Tuesday to Saturday, 10am to 2pm. Closed Sunday and Monday. Public holidays and the quiet weeks in winter run differently, so ring before making a special trip. If you are buying a coach ticket, ask Sue for the times rather than trusting a printed timetable: the coach changes often enough that it is worth checking on the day.",
+    "kind": "Gift shop and coach ticket agent",
+    "verification": {
+      "lastReviewedAt": "2026-09-04"
+    }
   },
   {
     "id": "do-002",

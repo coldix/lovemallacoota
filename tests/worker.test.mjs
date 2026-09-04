@@ -218,6 +218,18 @@ test("the retired Local of the Week page redirects to the archive that replaced 
   }
 });
 
+test("a listing that changed its name keeps its old address working", async () => {
+  const response = await worker.fetch(
+    new Request("https://lovemallacoota.au/listing/bribes-gift-shop-and-fresh-flowers.html"),
+    env
+  );
+  assert.equal(response.status, 301);
+  assert.equal(
+    response.headers.get("Location"),
+    "https://lovemallacoota.au/listing/sues-bribes.html"
+  );
+});
+
 test("a preview hostname is told not to index the production pages it serves", async () => {
   const preview = await worker.fetch(
     new Request("https://lovemallacoota-preview.workers.dev/edition.html"),

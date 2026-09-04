@@ -31,7 +31,7 @@ const imageMap = [
   { target: 'images/bus/acc/acc01-karbeethong-lodge1.webp', sourceAbs: path.join(repoRoot, 'images/bank/karbeethong-lodge.webp') },
 
   // SHOP
-  { target: 'images/bus/shop/shop01-bribes-gift-shop-and-fresh-flowers1.webp', source: 'Bribes/Bribes.jpg' },
+  { target: 'images/bus/shop/shop01-sues-bribes1.webp', source: 'Bribes/Bribes.jpg' },
   { target: 'images/bus/shop/shop02-wilderness-coast-candles1.webp', source: 'Wilderness Coast Candles/WilderNessCircle.jpg' },
 
   // ACTIVITIES & TOURS

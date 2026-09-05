@@ -18,6 +18,7 @@ import {
   telHref,
   verificationLine,
 } from "../lib/directory.mjs";
+import { loadDataFile } from "../lib/editions.mjs";
 
 const entities = loadDirectory();
 const schema = collectionSchema(entities, "Mallacoota directory", "/directory.html", (entity) =>
@@ -27,6 +28,17 @@ const sectionFilters = Object.values(SECTIONS);
 const typeFilters = [...new Set(entities.map((entity) => entity.entityType))]
   .map((id) => ({ id, label: ENTITY_TYPES[id]?.label || id }))
   .sort((a, b) => a.label.localeCompare(b.label));
+
+/* The button below says when the directory last moved. A date is an invitation;
+   "What's new" on its own is a link nobody has a reason to press. */
+const changes = loadDataFile("directory-changes.json", { entries: [] });
+const lastChanged = changes.entries?.[0]?.date
+  ? new Intl.DateTimeFormat("en-AU", {
+      day: "numeric",
+      month: "short",
+      timeZone: "Australia/Melbourne",
+    }).format(new Date(changes.entries[0].date))
+  : null;
 ---
 
 <BaseLayout
@@ -48,9 +60,11 @@ const typeFilters = [...new Set(entities.map((entity) => entity.entityType))]
     <section class="glass-card sheen content-block reveal">
       <p class="directory-add-banner">
         <a class="btn btn-primary" href="/add-listing.html">Add your listing - free</a>
+        <a class="btn btn-ghost btn-whats-new" href="/directory-changes.html">
+          What's new{lastChanged ? ` · ${lastChanged}` : ""}
+        </a>
         <a class="btn btn-ghost" href="/community.html">Community</a>
         <a class="btn btn-ghost" href="/services.html">Services</a>
-        <a class="btn btn-ghost" href="/directory-changes.html">What's new</a>
       </p>
       <div class="filter-bar">
         <div class="search-wrap">

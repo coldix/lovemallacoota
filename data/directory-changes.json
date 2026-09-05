@@ -7,6 +7,57 @@
   "listings": 120,
   "entries": [
     {
+      "commit": "446860a",
+      "date": "2026-09-05T15:37:07+10:00",
+      "subject": "The Wave Oasis is where the pin says, and Garage Doors gets its r (v1.56)",
+      "added": [],
+      "removed": [],
+      "renamed": [
+        {
+          "from": "bega-valley-garage-doos",
+          "to": "bega-valley-garage-doors",
+          "fromName": "Bega Valley Garage Doors",
+          "name": "Bega Valley Garage Doors",
+          "section": "services",
+          "fields": []
+        }
+      ],
+      "changed": [
+        {
+          "slug": "the-wave-oasis-self-contained-b-and-b",
+          "name": "The Wave Oasis Self-Contained B and B",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 2126
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "4f93468",
+      "date": "2026-09-05T14:58:34+10:00",
+      "subject": "What's new in the directory, read out of git rather than kept by hand (v1.55)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "the-wave-oasis-self-contained-b-and-b",
+          "name": "The Wave Oasis Self-Contained B and B",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
       "commit": "5849abe",
       "date": "2026-09-04T16:20:53+10:00",
       "subject": "The Shed has a direct line (v1.53)",

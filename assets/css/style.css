@@ -1405,6 +1405,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* What's new in the directory. A dated list, so the eye should find the day
    and then the marks; the listing names carry the weight, the field names do
    not. */
+/* The way into the changes page, from the directory. A ghost button among
+   three others is a link nobody presses, so this one keeps a dot of the accent
+   colour and the date of the last change. */
+.btn-whats-new { position: relative; padding-left: 1.6rem; }
+.btn-whats-new::before {
+  content: ""; position: absolute; left: 0.75rem; top: 50%;
+  width: 0.45rem; height: 0.45rem; margin-top: -0.225rem;
+  border-radius: 999px; background: var(--accent);
+}
 .changes-summary { font-size: 1.05rem; margin: 0 0 0.5rem; }
 .changes-day .section-title { margin-bottom: 0.2rem; }
 .changes-group { margin-top: 1.1rem; }

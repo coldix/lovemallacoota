@@ -158,7 +158,14 @@ const description =
               {group.renamed.map((item) => (
                 <li>
                   <a href={`/listing/${item.to}.html`}>{item.name}</a>
-                  <span class="changes-meta">was {item.fromName}</span>
+                  {/* A rename can move the name, the web address, or both.
+                      "Doors was Doors" is what saying it unconditionally gets
+                      you, so each half is stated only when it is true. */}
+                  <span class="changes-meta">
+                    {item.fromName !== item.name
+                      ? `was ${item.fromName}`
+                      : `web address: ${item.from} → ${item.to}`}
+                  </span>
                   {item.fields.length > 0 && (
                     <span class="changes-fields">{item.fields.map(phrase).join(" · ")}</span>
                   )}

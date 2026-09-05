@@ -168,7 +168,24 @@
       "latitude": -37.5724731,
       "longitude": 149.7566603,
       "source": "google-maps"
-    }
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "09:00",
+        "closes": "16:00"
+      }
+    ],
+    "meetingTimes": "Wednesday ladies 9 and 18 hole 9am, Wednesday men's 9 hole 1pm, Friday mixed 9 hole 2pm, Saturday men's and ladies 11am",
+    "notes_seasonal": "Golf shop 9am-4pm daily. The bar opens 4pm seven days over the festive season and 4pm Thursday to Sunday off season."
   },
   "A0042120A": {
     "name": "Mallacoota Surf Lifesaving Club",
@@ -359,7 +376,24 @@
       "latitude": -37.5618711,
       "longitude": 149.7520705,
       "source": "google-maps"
-    }
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Thursday"
+        ],
+        "opens": "09:00",
+        "closes": "11:00"
+      },
+      {
+        "dayOfWeek": [
+          "Saturday"
+        ],
+        "opens": "10:00",
+        "closes": "12:00"
+      }
+    ],
+    "notes_seasonal": "Open Thursdays 9-11am and Saturdays 10am-12 noon. The shed does not publish its hours anywhere else: if the banner is out the front, they are open."
   },
   "A0034419L": {
     "commonName": "Mallacoota and District Angling Club",

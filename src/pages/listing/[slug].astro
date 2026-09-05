@@ -16,6 +16,7 @@ import {
   listingPagePath,
   listingPhoto,
   listingPhotos,
+  openingHoursLines,
   listingTitle,
   loadDirectory,
   mapLinks,
@@ -48,6 +49,7 @@ const primary = getPrimaryLink(entity);
 const primaryLabel = getPrimaryLinkLabel(entity);
 const address = formatAddress(entity.address);
 const menuAsAt = formatVerificationDate(entity.menu?.asAt);
+const hours = openingHoursLines(entity);
 const related = relatedEntities(loadDirectory(), entity);
 const schema = {
   "@context": "https://schema.org",
@@ -168,6 +170,12 @@ const canonicalPath = listingPagePath(entity);
           <>
             <dt>Email</dt>
             <dd><a href={`mailto:${entity.email}`}>{entity.email}</a></dd>
+          </>
+        )}
+        {hours.length > 0 && (
+          <>
+            <dt>Open</dt>
+            <dd>{hours.join(" · ")}</dd>
           </>
         )}
         {entity.meetingTimes && (

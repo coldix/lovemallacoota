@@ -263,6 +263,73 @@ export function getPrimaryLinkLabel(entity) {
   return "Website";
 }
 
+const DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const DAY_SHORT = { Monday: "Mon", Tuesday: "Tue", Wednesday: "Wed", Thursday: "Thu", Friday: "Fri", Saturday: "Sat", Sunday: "Sun" };
+
+/** 09:30 as a person writes it: 9.30am, and 4pm rather than 4.00pm. */
+function clockTime(value) {
+  const match = /^(\d{1,2}):(\d{2})$/.exec(String(value || "").trim());
+  if (!match) return null;
+  const hour24 = Number(match[1]);
+  const minutes = match[2];
+  const suffix = hour24 >= 12 ? "pm" : "am";
+  const hour = hour24 % 12 === 0 ? 12 : hour24 % 12;
+  return minutes === "00" ? `${hour}${suffix}` : `${hour}.${minutes}${suffix}`;
+}
+
+/** Mon, Tue, Wed, Thu, Fri becomes Mon-Fri; the gaps stay gaps. */
+function dayRanges(days) {
+  const indexes = [...new Set(days.map((day) => DAY_ORDER.indexOf(day)))]
+    .filter((index) => index >= 0)
+    .sort((a, b) => a - b);
+  if (!indexes.length) return "";
+  if (indexes.length === 7) return "Every day";
+  const parts = [];
+  let start = indexes[0];
+  let end = indexes[0];
+  for (const index of indexes.slice(1)) {
+    if (index === end + 1) {
+      end = index;
+      continue;
+    }
+    parts.push([start, end]);
+    start = index;
+    end = index;
+  }
+  parts.push([start, end]);
+  return parts
+    .map(([from, to]) =>
+      from === to
+        ? DAY_SHORT[DAY_ORDER[from]]
+        : to === from + 1
+          ? `${DAY_SHORT[DAY_ORDER[from]]}, ${DAY_SHORT[DAY_ORDER[to]]}`
+          : `${DAY_SHORT[DAY_ORDER[from]]}-${DAY_SHORT[DAY_ORDER[to]]}`
+    )
+    .join(", ");
+}
+
+/**
+ * Opening hours as lines a person can read.
+ *
+ * Thirty-nine listings carried these and not one of them reached the page: the
+ * hours went into the JSON-LD for search engines and nowhere a visitor could
+ * see. Two blocks on the same days are one line with both times, which is how a
+ * shop that closes for lunch is actually written.
+ */
+export function openingHoursLines(entity) {
+  const blocks = entity.openingHours || entity.opening_hours || [];
+  const byDays = new Map();
+  for (const block of blocks) {
+    const days = dayRanges(block.dayOfWeek || []);
+    const opens = clockTime(block.opens);
+    const closes = clockTime(block.closes);
+    if (!days || !opens || !closes) continue;
+    if (!byDays.has(days)) byDays.set(days, []);
+    byDays.get(days).push(`${opens}-${closes}`);
+  }
+  return [...byDays].map(([days, times]) => `${days} ${times.join(" and ")}`);
+}
+
 export function mapLinks(entity) {
   const links = [];
   if (entity.geo?.latitude && entity.geo?.longitude) {

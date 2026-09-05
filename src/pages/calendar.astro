@@ -10,7 +10,7 @@ import { currentEdition, loadWeekly } from "../lib/editions.mjs";
 const edition = currentEdition();
 const weekly = edition ? loadWeekly(edition.week) : null;
 import { loadDirectory, listingPagePath } from "../lib/directory.mjs";
-import { communityCalendar } from "../lib/calendar.mjs";
+import { communityCalendar, partnerCalendars } from "../lib/calendar.mjs";
 
 const meetings = loadDirectory()
   .filter((entity) => entity.meetingTimes)
@@ -19,6 +19,9 @@ const meetings = loadDirectory()
 // Null until a calendar made for the community exists. What's On used to embed
 // a personal one, and an embedded calendar is downloadable in full.
 const calendar = communityCalendar();
+// Other organisations' own public calendars, each in its own frame and named,
+// so nobody reads an MDHSS program as something Love Mallacoota is running.
+const partners = partnerCalendars();
 ---
 <BaseLayout
   title="What's on in Mallacoota - events, markets and club nights"
@@ -51,6 +54,27 @@ const calendar = communityCalendar();
         </p>
       </section>
     )}
+    {partners.map((partner) => (
+      <section class="glass-card sheen content-block reveal">
+        <h2 class="section-title">{partner.title}</h2>
+        <p class="section-sub">
+          Their calendar, kept by them and shown here as they publish it.
+          {partner.listing && (
+            <> <a href={partner.listing}>See the listing</a>.</>
+          )}
+          {partner.publishedAt && (
+            <>
+              {" "}Also on{" "}
+              <a href={partner.publishedAt} rel="noopener noreferrer" target="_blank">their own site</a>.
+            </>
+          )}
+        </p>
+        <div class="calendar-frame">
+          <iframe title={`${partner.title} calendar`} src={partner.embedUrl} loading="lazy"></iframe>
+        </div>
+      </section>
+    ))}
+
     <section class="glass-card sheen content-block reveal">
       <h2 class="section-title">Something missing, or wrong?</h2>
       <p class="section-sub">

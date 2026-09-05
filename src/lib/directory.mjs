@@ -44,6 +44,7 @@ export {
   entitiesForSection,
   formatAddress,
   formatVerificationDate,
+  openingHoursLines,
   getPrimaryLink,
   getPrimaryLinkLabel,
   isOfficialEntity,

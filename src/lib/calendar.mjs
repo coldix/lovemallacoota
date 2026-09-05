@@ -73,3 +73,51 @@ export function communityCalendar() {
     publicUrl: String(config?.publicUrl || "").trim() || null,
   };
 }
+
+/**
+ * Another organisation's calendar, embedded alongside ours.
+ *
+ * MDHSS keeps its programs in a calendar under a gmail.com address, which the
+ * guard above refuses. The guard is right about the risk and wrong about this
+ * calendar: `mallacootahealthextcal@gmail.com` is an account made to hold a
+ * public calendar, not somebody's mailbox, and MDHSS already embed it on their
+ * own site.
+ *
+ * So the exception is not "trust me". A partner on a personal domain must name
+ * `publishedAt`, the page where its owner already publishes it. If the owner
+ * has put it in front of the public themselves, embedding it here exposes
+ * nothing new; if nobody can point at such a page, the build fails exactly as
+ * it did before.
+ */
+export function partnerCalendars() {
+  const config = loadDataFile("community-calendar.json", null);
+  const partners = Array.isArray(config?.partners) ? config.partners : [];
+  return partners.map((partner) => {
+    const calendarId = String(partner?.calendarId || "").trim();
+    if (!calendarId) throw new Error("data/community-calendar.json: a partner with no calendarId.");
+    if (isPersonalCalendarId(calendarId) && !String(partner?.publishedAt || "").trim()) {
+      throw new Error(
+        `data/community-calendar.json: "${calendarId}" is on a personal mail domain and names no ` +
+          "publishedAt. Embedding it would publish whatever is in it. Give the page where its " +
+          "owner already publishes it, or use a calendar id under @group.calendar.google.com."
+      );
+    }
+    const params = new URLSearchParams({
+      mode: "AGENDA",
+      wkst: "2",
+      ctz: "Australia/Melbourne",
+      title: partner.title || "Calendar",
+      src: calendarId,
+      showTitle: "0",
+      showPrint: "0",
+      showCalendars: "0",
+    });
+    return {
+      calendarId,
+      title: partner.title || "Calendar",
+      listing: partner.listing || null,
+      publishedAt: String(partner.publishedAt || "").trim() || null,
+      embedUrl: `https://calendar.google.com/calendar/embed?${params.toString()}`,
+    };
+  });
+}

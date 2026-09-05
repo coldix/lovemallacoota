@@ -1,5 +1,14 @@
 {
   "calendarId": "",
   "publicUrl": "",
-  "note": "The public Google Calendar the What's On page embeds. Leave calendarId empty until a dedicated community calendar exists: the page then shows the regular meetings and the 'add an event' panel instead of an embed. Never put a personal address here - the whole history of an embedded calendar is publicly downloadable. A calendar made for this purpose has an id ending in @group.calendar.google.com; the build refuses a consumer mail address. publicUrl is optional and only used for the 'open in Google Calendar' link."
+  "note": "The public Google Calendar the What's On page embeds. Leave calendarId empty until a dedicated community calendar exists: the page then shows the regular meetings and the 'add an event' panel instead of an embed. Never put a personal address here - the whole history of an embedded calendar is publicly downloadable. A calendar made for this purpose has an id ending in @group.calendar.google.com; the build refuses a consumer mail address. publicUrl is optional and only used for the 'open in Google Calendar' link.",
+  "partners": [
+    {
+      "calendarId": "mallacootahealthextcal@gmail.com",
+      "title": "Mallacoota District Health and Support Service",
+      "listing": "/listing/mallacoota-district-health-and-support-service.html",
+      "publishedAt": "https://mallacoota.org.au/our-calendar/",
+      "why": "MDHSS's own external calendar. The address is a gmail one, but it is an account made to hold this calendar rather than a person's mailbox, and MDHSS already embed it publicly on their own site, which is what publishedAt records."
+    }
+  ]
 }

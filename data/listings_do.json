@@ -384,9 +384,20 @@
       "longitude": 149.7272131,
       "source": "google-maps"
     },
-    "opening_hours": [],
-    "notes_seasonal": "Opening hours can vary. Please check the website or call ahead before visiting.",
-    "kind": "Museum"
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Tuesday"
+        ],
+        "opens": "09:30",
+        "closes": "11:30"
+      }
+    ],
+    "notes_seasonal": "Open Tuesday mornings, 9.30am with last entry 11.30am. Other openings depend on volunteer availability, so ring before making a special trip.",
+    "kind": "Museum",
+    "verification": {
+      "lastReviewedAt": "2026-09-05"
+    }
   },
   {
     "id": "do-surf-shack-mini-golf",

@@ -160,12 +160,36 @@ test("What's On embeds no personal calendar", async () => {
   // its whole history on the page. What's On carried crdixon@gmail.com until
   // v1.11, base64'd in the src, which is how it stayed unnoticed.
   assert.doesNotMatch(html, /crdixon/i);
-  for (const [, raw] of html.matchAll(/calendar\.google\.com\/calendar\/[^"']*[?&]src=([^"'&]+)/g)) {
-    const value = decodeURIComponent(raw.replace(/&amp;/g, "&"));
+
+  // Entities first. The scan used to run over the raw HTML looking for "?src="
+  // or "&src=", and an embed built by Astro writes "&amp;src=", so anything but
+  // the first parameter went unread. A personal calendar could have sat in the
+  // second position and passed.
+  const plain = html.replace(/&amp;/g, "&");
+  const { partnerCalendars, communityCalendar } = await import("../src/lib/calendar.mjs");
+  const vouched = new Map(partnerCalendars().map((partner) => [partner.calendarId, partner]));
+  const expected = vouched.size + (communityCalendar() ? 1 : 0);
+
+  let embeds = 0;
+  for (const [, raw] of plain.matchAll(/calendar\.google\.com\/calendar\/[^"']*?[?&]src=([^"'&]+)/g)) {
+    embeds += 1;
+    const value = decodeURIComponent(raw);
     const decoded = /^[A-Za-z0-9+/]+=*$/.test(value) ? safeAtob(value) : value;
-    assert.ok(!isPersonalCalendarId(value), `calendar.html embeds ${value}`);
-    assert.ok(!isPersonalCalendarId(decoded), `calendar.html embeds ${decoded}`);
+    for (const candidate of [value, decoded]) {
+      if (!isPersonalCalendarId(candidate)) continue;
+      // One exception, and it has to be earned: a calendar its owner already
+      // publishes themselves, named in the config with the page that proves it.
+      const partner = vouched.get(candidate);
+      assert.ok(partner, `calendar.html embeds ${candidate}, which is nobody's declared partner`);
+      assert.ok(
+        partner.publishedAt,
+        `${candidate} is embedded on a personal domain without a publishedAt to justify it`
+      );
+    }
   }
+  // The scan proving nothing because it matched nothing is the failure mode
+  // this test already had once.
+  assert.equal(embeds, expected, "the embed scan found the wrong number of calendars");
   assert.match(html, /id="nav-menu-toggle"/);
 });
 
@@ -183,10 +207,27 @@ test("the calendar embed comes from the config, and refuses a personal address",
     assert.match(html, /wkst=2/);
     assert.ok(html.includes(encodeURIComponent(calendar.calendarId)) || html.includes(calendar.calendarId));
   } else {
-    // No calendar yet: the page says so rather than showing an empty frame.
-    assert.doesNotMatch(html, /calendar\.google\.com\/calendar\/embed/);
+    // No community calendar yet: the page says so rather than showing an empty
+    // frame. Partner calendars are a different thing and may still be embedded,
+    // so this asks that ours is absent, not that the page has no iframe at all.
     assert.match(html, /shared calendar is on its way/i);
     assert.match(html, /submit-event\.html/);
+  }
+
+  const { partnerCalendars } = await import("../src/lib/calendar.mjs");
+  for (const partner of partnerCalendars()) {
+    assert.ok(partner.title, `${partner.calendarId} is embedded without a name on it`);
+    if (isPersonalCalendarId(partner.calendarId)) {
+      assert.ok(
+        partner.publishedAt,
+        `${partner.calendarId} is on a personal domain and names no page where its owner publishes it`
+      );
+    }
+    // A partner's calendar is theirs, and the page has to say so.
+    assert.ok(
+      html.includes(encodeURIComponent(partner.calendarId)) || html.includes(partner.calendarId),
+      `${partner.calendarId} is configured but not on the page`
+    );
   }
 });
 

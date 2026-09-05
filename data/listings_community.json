@@ -1,20 +1,75 @@
 [
   {
-    "id": "media-mallacoota-now",
-    "slug": "mallacoota-now",
-    "name": "Mallacoota Now",
+    "id": "media-gippsland-vic",
+    "slug": "gippsland-victoria",
+    "name": "Gippsland, Victoria",
     "entityType": "facebook-group",
     "section": "community",
     "categories": [
       "Facebook & media"
     ],
     "schema_type": "Organization",
-    "description": "The main local Facebook group - what is happening today, road and power news, lost dogs, and everything that does not wait for a weekly.",
-    "descriptionShort": "The busiest local Facebook group.",
-    "website": "https://www.facebook.com/groups/mallacootanow",
+    "description": "Wider than the town - the region either side of us, for when the news is bigger than Mallacoota.",
+    "descriptionShort": "Regional Facebook group covering Gippsland.",
+    "website": "https://www.facebook.com/groups/gippslandvic",
     "links": [
       {
-        "url": "https://www.facebook.com/groups/mallacootanow",
+        "url": "https://www.facebook.com/groups/gippslandvic",
+        "text": "Facebook group"
+      }
+    ],
+    "claimable": false,
+    "official": false,
+    "locationKind": "none",
+    "serviceArea": "Gippsland",
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
+  },
+  {
+    "id": "media-love-mallacoota-group",
+    "slug": "love-mallacoota-facebook-group",
+    "name": "Love Mallacoota (Facebook group)",
+    "entityType": "facebook-group",
+    "section": "community",
+    "categories": [
+      "Facebook & media"
+    ],
+    "schema_type": "Organization",
+    "description": "The Facebook group for this website. Suggestions, corrections, and what you would like the weekly edition to carry.",
+    "descriptionShort": "The Facebook group for lovemallacoota.au.",
+    "website": "https://www.facebook.com/groups/lovemallacoota",
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/lovemallacoota",
+        "text": "Facebook group"
+      }
+    ],
+    "claimable": false,
+    "official": false,
+    "locationKind": "none",
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
+  },
+  {
+    "id": "media-mallacoota-birds",
+    "slug": "mallacoota-birds",
+    "name": "Mallacoota Birds",
+    "entityType": "facebook-group",
+    "section": "community",
+    "categories": [
+      "Facebook & media"
+    ],
+    "schema_type": "Organization",
+    "description": "What is about and where - sightings, photographs and the arguments about which raptor that was.",
+    "descriptionShort": "Local bird sightings on Facebook.",
+    "website": "https://www.facebook.com/groups/mallacootabirds",
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/mallacootabirds",
         "text": "Facebook group"
       }
     ],
@@ -54,6 +109,118 @@
     }
   },
   {
+    "id": "facility-mallacoota-mens-shed",
+    "slug": "mallacoota-mens-shed",
+    "name": "The Shed",
+    "commonName": "The Men's Shed",
+    "entityType": "community-facility",
+    "section": "community",
+    "categories": [],
+    "kind": "Community venue",
+    "schema_type": "CivicStructure",
+    "description": "The big shed in the health centre precinct off Mattsson Street. It was built as a men's shed and that is still what the town calls it, but it is a multi-purpose venue now, run as part of Mallacoota District Health and Support Service: the sign above the roller door reads Mallacoota Health Centre - The Shed. It is also home to the Mallacoota Lions Club, whose own sign is on the same wall.",
+    "descriptionShort": "Multi-purpose community venue in the health centre precinct, still known as the Men's Shed.",
+    "website": null,
+    "links": [],
+    "phone": "03 5158 0274",
+    "email": "mallacootamensshed@gmail.com",
+    "address": {
+      "street": "Mallacoota Health Centre precinct, Mattsson St",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558658,
+      "longitude": 149.749633,
+      "source": "photo-exif"
+    },
+    "related": [
+      "mallacoota-district-health-and-support-service",
+      "lions-club-of-mallacoota-and-district"
+    ],
+    "claimable": true,
+    "official": false,
+    "notes_seasonal": "A venue rather than a club, so what is on there changes. The number above is the direct line to The Shed. If nobody answers it, the health service switchboard is 03 5158 0243, and bookings go through them.",
+    "source": {
+      "kind": "existing-listing",
+      "note": "Photographed 4 September 2026. The name, the health service connection and the direct line all confirmed locally."
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-04"
+    }
+  },
+  {
+    "id": "media-mallacoota-now",
+    "slug": "mallacoota-now",
+    "name": "Mallacoota Now",
+    "entityType": "facebook-group",
+    "section": "community",
+    "categories": [
+      "Facebook & media"
+    ],
+    "schema_type": "Organization",
+    "description": "The main local Facebook group - what is happening today, road and power news, lost dogs, and everything that does not wait for a weekly.",
+    "descriptionShort": "The busiest local Facebook group.",
+    "website": "https://www.facebook.com/groups/mallacootanow",
+    "links": [
+      {
+        "url": "https://www.facebook.com/groups/mallacootanow",
+        "text": "Facebook group"
+      }
+    ],
+    "claimable": false,
+    "official": false,
+    "locationKind": "none",
+    "source": {
+      "kind": "existing-listing",
+      "note": "From the site's social-links list."
+    }
+  },
+  {
+    "id": "facility-mallacoota-sporting-club-rooms",
+    "slug": "mallacoota-sporting-club-rooms",
+    "name": "Mallacoota Sporting Club Rooms",
+    "commonName": "The Muddie",
+    "entityType": "community-facility",
+    "section": "community",
+    "categories": [],
+    "kind": "Community hall",
+    "schema_type": "CivicStructure",
+    "description": "The hall most of the town's regular groups meet in, known to everyone as the Muddie and signed as the Mudbrick Hall. Google has it as Muddie (Mudbrick Hall) and the community calendar books it as the Muddie, the Mudbrick Pavilion and the clubrooms, all of which are this building. Line dancing, the strength and balance program, the coffee and quiz morning, chair yoga, toddler music, the community bookshop and the monthly market are all held here.",
+    "descriptionShort": "The hall most of the town's regular groups meet in, known as the Muddie.",
+    "website": null,
+    "links": [],
+    "phone": null,
+    "address": {
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.5593198,
+      "longitude": 149.7583725,
+      "source": "google-maps"
+    },
+    "related": [
+      "mallacoota-halls-and-recreation-community-precinct-gum",
+      "mallacoota-community-bookshop",
+      "coffee-and-quiz"
+    ],
+    "claimable": true,
+    "official": false,
+    "notes_seasonal": "A venue rather than a group, so what is on there changes. Hall hire goes through Mallacoota Halls and Recreation.",
+    "source": {
+      "kind": "existing-listing",
+      "note": "Map pin from Colin; the local name and that many groups are based here, from Colin."
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-05"
+    }
+  },
+  {
     "id": "media-mallacoota-weather",
     "slug": "mallacoota-weather",
     "name": "Mallacoota Weather",
@@ -81,86 +248,46 @@
     }
   },
   {
-    "id": "media-love-mallacoota-group",
-    "slug": "love-mallacoota-facebook-group",
-    "name": "Love Mallacoota (Facebook group)",
-    "entityType": "facebook-group",
+    "id": "social-morning-melodies",
+    "slug": "morning-melodies",
+    "name": "Morning Melodies",
+    "entityType": "social-group",
     "section": "community",
     "categories": [
-      "Facebook & media"
+      "Arts & culture"
     ],
+    "kind": "Music morning",
     "schema_type": "Organization",
-    "description": "The Facebook group for this website. Suggestions, corrections, and what you would like the weekly edition to carry.",
-    "descriptionShort": "The Facebook group for lovemallacoota.au.",
-    "website": "https://www.facebook.com/groups/lovemallacoota",
+    "description": "A monthly morning of live music and singing, played by local musicians on accordion, guitar and drum, held at the Mallacoota Hotel and listed in the Gippsland gig guide. Come for the morning rather than for a ticket.",
+    "descriptionShort": "Monthly morning of live music at the Mallacoota Hotel.",
+    "website": null,
     "links": [
       {
-        "url": "https://www.facebook.com/groups/lovemallacoota",
-        "text": "Facebook group"
+        "url": "https://liveatthebundy.com.au/gippslandgigguide/",
+        "text": "Gippsland gig guide"
       }
     ],
-    "claimable": false,
+    "phone": null,
+    "geo": {
+      "latitude": -37.557811,
+      "longitude": 149.757019,
+      "source": "photo-exif"
+    },
+    "related": [
+      "mallacoota-hotel-motel-bistro"
+    ],
+    "claimable": true,
     "official": false,
     "locationKind": "none",
+    "serviceArea": "Mallacoota",
     "source": {
       "kind": "existing-listing",
-      "note": "From the site's social-links list."
-    }
-  },
-  {
-    "id": "media-gippsland-vic",
-    "slug": "gippsland-victoria",
-    "name": "Gippsland, Victoria",
-    "entityType": "facebook-group",
-    "section": "community",
-    "categories": [
-      "Facebook & media"
-    ],
-    "schema_type": "Organization",
-    "description": "Wider than the town - the region either side of us, for when the news is bigger than Mallacoota.",
-    "descriptionShort": "Regional Facebook group covering Gippsland.",
-    "website": "https://www.facebook.com/groups/gippslandvic",
-    "links": [
-      {
-        "url": "https://www.facebook.com/groups/gippslandvic",
-        "text": "Facebook group"
-      }
-    ],
-    "claimable": false,
-    "official": false,
-    "locationKind": "none",
-    "serviceArea": "Gippsland",
-    "source": {
-      "kind": "existing-listing",
-      "note": "From the site's social-links list."
-    }
-  },
-  {
-    "id": "media-mallacoota-birds",
-    "slug": "mallacoota-birds",
-    "name": "Mallacoota Birds",
-    "entityType": "facebook-group",
-    "section": "community",
-    "categories": [
-      "Facebook & media"
-    ],
-    "schema_type": "Organization",
-    "description": "What is about and where - sightings, photographs and the arguments about which raptor that was.",
-    "descriptionShort": "Local bird sightings on Facebook.",
-    "website": "https://www.facebook.com/groups/mallacootabirds",
-    "links": [
-      {
-        "url": "https://www.facebook.com/groups/mallacootabirds",
-        "text": "Facebook group"
-      }
-    ],
-    "claimable": false,
-    "official": false,
-    "locationKind": "none",
-    "source": {
-      "kind": "existing-listing",
-      "note": "From the site's social-links list."
-    }
+      "note": "Gippsland gig guide, and photographed on the morning."
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-03"
+    },
+    "meetingTimes": "Monthly, at the Mallacoota Hotel"
   },
   {
     "id": "church-st-peters-mallacoota",
@@ -211,90 +338,5 @@
       "lastReviewedAt": "2026-09-03"
     },
     "meetingTimes": "Sunday service, 9am"
-  },
-  {
-    "id": "social-morning-melodies",
-    "slug": "morning-melodies",
-    "name": "Morning Melodies",
-    "entityType": "social-group",
-    "section": "community",
-    "categories": [
-      "Arts & culture"
-    ],
-    "kind": "Music morning",
-    "schema_type": "Organization",
-    "description": "A monthly morning of live music and singing, played by local musicians on accordion, guitar and drum, held at the Mallacoota Hotel and listed in the Gippsland gig guide. Come for the morning rather than for a ticket.",
-    "descriptionShort": "Monthly morning of live music at the Mallacoota Hotel.",
-    "website": null,
-    "links": [
-      {
-        "url": "https://liveatthebundy.com.au/gippslandgigguide/",
-        "text": "Gippsland gig guide"
-      }
-    ],
-    "phone": null,
-    "geo": {
-      "latitude": -37.557811,
-      "longitude": 149.757019,
-      "source": "photo-exif"
-    },
-    "related": [
-      "mallacoota-hotel-motel-bistro"
-    ],
-    "claimable": true,
-    "official": false,
-    "locationKind": "none",
-    "serviceArea": "Mallacoota",
-    "source": {
-      "kind": "existing-listing",
-      "note": "Gippsland gig guide, and photographed on the morning."
-    },
-    "verification": {
-      "lastReviewedAt": "2026-09-03"
-    },
-    "meetingTimes": "Monthly, at the Mallacoota Hotel"
-  },
-  {
-    "id": "facility-mallacoota-mens-shed",
-    "slug": "mallacoota-mens-shed",
-    "name": "The Shed",
-    "commonName": "The Men's Shed",
-    "entityType": "community-facility",
-    "section": "community",
-    "categories": [],
-    "kind": "Community venue",
-    "schema_type": "CivicStructure",
-    "description": "The big shed in the health centre precinct off Mattsson Street. It was built as a men's shed and that is still what the town calls it, but it is a multi-purpose venue now, run as part of Mallacoota District Health and Support Service: the sign above the roller door reads Mallacoota Health Centre - The Shed. It is also home to the Mallacoota Lions Club, whose own sign is on the same wall.",
-    "descriptionShort": "Multi-purpose community venue in the health centre precinct, still known as the Men's Shed.",
-    "website": null,
-    "links": [],
-    "phone": "03 5158 0274",
-    "email": "mallacootamensshed@gmail.com",
-    "address": {
-      "street": "Mallacoota Health Centre precinct, Mattsson St",
-      "locality": "Mallacoota",
-      "state": "VIC",
-      "postcode": "3892",
-      "country": "Australia"
-    },
-    "geo": {
-      "latitude": -37.558658,
-      "longitude": 149.749633,
-      "source": "photo-exif"
-    },
-    "related": [
-      "mallacoota-district-health-and-support-service",
-      "lions-club-of-mallacoota-and-district"
-    ],
-    "claimable": true,
-    "official": false,
-    "notes_seasonal": "A venue rather than a club, so what is on there changes. The number above is the direct line to The Shed. If nobody answers it, the health service switchboard is 03 5158 0243, and bookings go through them.",
-    "source": {
-      "kind": "existing-listing",
-      "note": "Photographed 4 September 2026. The name, the health service connection and the direct line all confirmed locally."
-    },
-    "verification": {
-      "lastReviewedAt": "2026-09-04"
-    }
   }
 ]

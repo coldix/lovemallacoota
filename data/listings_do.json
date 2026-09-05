@@ -80,7 +80,7 @@
     "links": [],
     "social_links": [],
     "address": {
-      "street": "Mudbrick Pavilion (the Muddie)",
+      "street": "Mallacoota Sporting Club Rooms",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
@@ -96,7 +96,15 @@
     "source": {
       "kind": "existing-listing",
       "note": "Venue, time and that it is free from the Coota community calendar; the monthly frequency from Colin."
-    }
+    },
+    "geo": {
+      "latitude": -37.5593198,
+      "longitude": 149.7583725,
+      "source": "google-maps"
+    },
+    "related": [
+      "mallacoota-sporting-club-rooms"
+    ]
   },
   {
     "id": "do-community-bookshop",
@@ -114,7 +122,7 @@
     "links": [],
     "social_links": [],
     "address": {
-      "street": "Mudbrick Pavilion (the Muddie)",
+      "street": "Josef's Bookshop, Mallacoota Sporting Club Rooms",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
@@ -144,7 +152,15 @@
     "source": {
       "kind": "existing-listing",
       "note": "Times and venue from the Coota community calendar, June to December 2025."
-    }
+    },
+    "geo": {
+      "latitude": -37.5593198,
+      "longitude": 149.7583725,
+      "source": "google-maps"
+    },
+    "related": [
+      "mallacoota-sporting-club-rooms"
+    ]
   },
   {
     "id": "do-006",

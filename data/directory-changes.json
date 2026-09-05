@@ -4,8 +4,157 @@
     "date": "2025-10-23T14:11:21+11:00",
     "listings": 41
   },
-  "listings": 122,
+  "listings": 123,
   "entries": [
+    {
+      "commit": "fef2147",
+      "date": "2026-09-05T17:33:37+10:00",
+      "subject": "The Muddie gets a listing, and the Angling Club gets a pin (v1.60)",
+      "added": [
+        {
+          "slug": "mallacoota-sporting-club-rooms",
+          "name": "Mallacoota Sporting Club Rooms",
+          "section": "community",
+          "kind": "Community hall"
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "coffee-and-quiz",
+          "name": "Coffee & Quiz",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Mudbrick Pavilion (the Muddie), Mallacoota",
+              "to": "Mallacoota Sporting Club Rooms, Mallacoota"
+            },
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-community-bookshop",
+          "name": "Community Bookshop",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Mudbrick Pavilion (the Muddie), Mallacoota",
+              "to": "Josef's Bookshop, Mallacoota Sporting Club Rooms, Mallacoota"
+            },
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-angling-club",
+          "name": "Mallacoota and District Angling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "b95f32e",
+      "date": "2026-09-05T17:28:44+10:00",
+      "subject": "Op shop hours, the shire's officer, and two more in Do & See (v1.59)",
+      "added": [
+        {
+          "slug": "coffee-and-quiz",
+          "name": "Coffee & Quiz",
+          "section": "do-see",
+          "kind": "Community morning"
+        },
+        {
+          "slug": "mallacoota-community-bookshop",
+          "name": "Community Bookshop",
+          "section": "do-see",
+          "kind": "Community bookshop"
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-community-opportunity-shop",
+          "name": "Mallacoota Community Opportunity Shop",
+          "section": "services",
+          "fields": [
+            {
+              "field": "opening hours"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "b8b1055",
+      "date": "2026-09-05T16:21:08+10:00",
+      "subject": "Opening hours that people can see, and MDHSS's calendar (v1.58)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-and-district-tool-library-madtl",
+          "name": "Mallacoota and District Tool Library (MADTL)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "opening hours"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-golf-and-country-club",
+          "name": "Mallacoota Golf and Country Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "opening hours"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-rsl-bunker-museum",
+          "name": "Mallacoota RSL Bunker Museum",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "note"
+            },
+            {
+              "field": "opening hours"
+            }
+          ]
+        },
+        {
+          "slug": "morning-melodies",
+          "name": "Morning Melodies",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        }
+      ]
+    },
     {
       "commit": "8b8f1e1",
       "date": "2026-09-05T15:37:07+10:00",

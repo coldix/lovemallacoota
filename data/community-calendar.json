@@ -1,6 +1,6 @@
 {
-  "calendarId": "",
-  "publicUrl": "",
+  "calendarId": "db00fe3a21eb1a1d385c3cc61c4353bfcad5be0993aeb36833b98e6544fe9f9e@group.calendar.google.com",
+  "publicUrl": "https://calendar.google.com/calendar/u/0?cid=ZGIwMGZlM2EyMWViMWExZDM4NWMzY2M2MWM0MzUzYmZjYWQ1YmUwOTkzYWViMzY4MzNiOThlNjU0NGZlOWY5ZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
   "note": "The public Google Calendar the What's On page embeds. Leave calendarId empty until a dedicated community calendar exists: the page then shows the regular meetings and the 'add an event' panel instead of an embed. Never put a personal address here - the whole history of an embedded calendar is publicly downloadable. A calendar made for this purpose has an id ending in @group.calendar.google.com; the build refuses a consumer mail address. publicUrl is optional and only used for the 'open in Google Calendar' link.",
   "partners": [
     {

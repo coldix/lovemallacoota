@@ -7,6 +7,26 @@
   "listings": 123,
   "entries": [
     {
+      "commit": "a5266d6",
+      "date": "2026-09-05T17:56:59+10:00",
+      "subject": "The Community Op Shop is open five days, not one (v1.61)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-community-opportunity-shop",
+          "name": "Mallacoota Community Opportunity Shop",
+          "section": "services",
+          "fields": [
+            {
+              "field": "opening hours"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "commit": "847a947",
       "date": "2026-09-05T17:33:37+10:00",
       "subject": "The Muddie gets a listing, and the Angling Club gets a pin (v1.60)",

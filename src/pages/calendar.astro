@@ -118,7 +118,17 @@ const partners = partnerCalendars();
           <h3>Directory</h3>
           <p>Every business, club and service, with contacts and meeting times.</p>
         </a>
-        {calendar ? (
+        {/* A card that says "find the button on the calendar" is a card that
+            makes the reader do the work. publicUrl is the subscribe link, so
+            when it is configured this is one tap instead. */}
+        {calendar?.publicUrl ? (
+          <a href={calendar.publicUrl} class="link-card" rel="noopener noreferrer" target="_blank">
+            <span class="arrow" aria-hidden="true">↗</span>
+            <span class="emoji" aria-hidden="true">📅</span>
+            <h3>Take it with you</h3>
+            <p>Add the community calendar to your own phone, so what is on turns up in your diary.</p>
+          </a>
+        ) : calendar ? (
           <div class="link-card">
             <span class="emoji" aria-hidden="true">📅</span>
             <h3>Take it with you</h3>

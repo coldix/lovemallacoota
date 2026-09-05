@@ -734,6 +734,24 @@
       "latitude": -37.558219,
       "longitude": 149.757478,
       "source": "photo-exif"
-    }
+    },
+    "openingHours": [
+      {
+        "dayOfWeek": [
+          "Tuesday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      {
+        "dayOfWeek": [
+          "Wednesday",
+          "Thursday"
+        ],
+        "opens": "09:00",
+        "closes": "13:00"
+      }
+    ],
+    "notes_seasonal": "Winter hours as they posted them in August: Tuesday 9am-5pm, Wednesday and Thursday 9am-1pm, and closed the rest of the week. They change these with the season, so check before coming a long way. Desk hire and the study hub run 24/7 on an access card, and the meeting room is bookable by the hour through their website."
   }
 }

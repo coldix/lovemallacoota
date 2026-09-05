@@ -80,7 +80,7 @@
     "links": [],
     "social_links": [],
     "address": {
-      "street": "Mallacoota Sporting Club Rooms",
+      "street": "Mudbrick Pavilion (the Muddie)",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
@@ -102,9 +102,9 @@
       "longitude": 149.7583725,
       "source": "google-maps"
     },
-    "related": [
-      "mallacoota-sporting-club-rooms"
-    ]
+    "related": [],
+    "entityType": "social-group",
+    "section": "do-see"
   },
   {
     "id": "do-community-bookshop",
@@ -122,7 +122,7 @@
     "links": [],
     "social_links": [],
     "address": {
-      "street": "Josef's Bookshop, Mallacoota Sporting Club Rooms",
+      "street": "Josef's Bookshop, Mudbrick Pavilion (the Muddie)",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
@@ -158,9 +158,9 @@
       "longitude": 149.7583725,
       "source": "google-maps"
     },
-    "related": [
-      "mallacoota-sporting-club-rooms"
-    ]
+    "related": [],
+    "entityType": "community-organisation",
+    "section": "do-see"
   },
   {
     "id": "do-006",
@@ -405,6 +405,49 @@
     "opening_hours": [],
     "notes_seasonal": "Operates seasonally based on demand and weather. Bookings essential.",
     "kind": "Cruises"
+  },
+  {
+    "id": "do-pizza-lunch",
+    "slug": "pizza-lunch",
+    "business_name": "Pizza Lunch",
+    "entityType": "community-organisation",
+    "section": "do-see",
+    "category_primary": "Do & See",
+    "category_tags": [],
+    "schema_type": "Event",
+    "description_short": "Wednesday lunch from the outdoor pizza oven at the health centre precinct.",
+    "description_long": "A Wednesday lunch cooked in the outdoor pizza oven beside The Shed, in the Mallacoota District Health and Support Service precinct. Run by the health service, and it runs every week rather than as a one-off.",
+    "phone": "03 5158 0243",
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "Outdoor pizza oven beside The Shed, Mallacoota Health Centre precinct",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.558658,
+      "longitude": 149.749633,
+      "source": "photo-exif"
+    },
+    "opening_hours": [],
+    "meetingTimes": "Wednesdays, 12 noon to 1pm",
+    "kind": "Community lunch",
+    "related": [
+      "mallacoota-mens-shed",
+      "mallacoota-district-health-and-support-service"
+    ],
+    "notes_seasonal": "Run by the health service, so it also appears on their own calendar on the What's On page. The number above is their switchboard.",
+    "verification": {
+      "lastReviewedAt": "2026-09-05"
+    },
+    "source": {
+      "kind": "existing-listing",
+      "note": "Times from the MDHSS calendar; the pizza oven beside The Shed named by Colin."
+    }
   },
   {
     "id": "do-001",

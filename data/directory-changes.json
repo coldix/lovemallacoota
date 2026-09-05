@@ -4,8 +4,43 @@
     "date": "2025-10-23T14:11:21+11:00",
     "listings": 41
   },
-  "listings": 123,
+  "listings": 124,
   "entries": [
+    {
+      "commit": "38bdbb1",
+      "date": "2026-09-05T19:34:54+10:00",
+      "subject": "The Golf Club bistro is closed, and a closed listing now says so (v1.65)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-golf-and-country-club",
+          "name": "Mallacoota Golf and Country Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "note"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-golf-club-bistro",
+          "name": "Mallacoota Golf Club Bistro",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "note"
+            },
+            {
+              "field": "trading status",
+              "from": null,
+              "to": "closed"
+            }
+          ]
+        }
+      ]
+    },
     {
       "commit": "7f39624",
       "date": "2026-09-05T19:14:55+10:00",

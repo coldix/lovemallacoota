@@ -26,6 +26,7 @@ import {
   verificationLine,
 } from "../../lib/directory.mjs";
 import { ENTITY_TYPES } from "../../lib/directory-model.mjs";
+import { youTubeId } from "../../lib/editions.mjs";
 import { listingCard } from "../../lib/social.mjs";
 
 export function getStaticPaths() {
@@ -50,6 +51,7 @@ const primaryLabel = getPrimaryLinkLabel(entity);
 const address = formatAddress(entity.address);
 const menuAsAt = formatVerificationDate(entity.menu?.asAt);
 const hours = openingHoursLines(entity);
+const videoId = youTubeId(entity.video?.url);
 const related = relatedEntities(loadDirectory(), entity);
 const schema = {
   "@context": "https://schema.org",
@@ -252,6 +254,27 @@ const canonicalPath = listingPagePath(entity);
           {menuAsAt && (
             <p class="listing-note">Prices copied from the board on {menuAsAt}. They are the operator's to change.</p>
           )}
+        </div>
+      )}
+
+      {videoId && (
+        <div class="listing-video">
+          <div class="media-frame">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+              title={entity.video.title || `${entity.name} on video`}
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="listing-note">
+            {entity.video.note}
+            {entity.video.note && " "}
+            <a href={entity.video.url} rel="noopener noreferrer" target="_blank">Watch on YouTube</a>
+            {entity.video.credit && <> - {entity.video.credit}</>}
+          </p>
         </div>
       )}
 

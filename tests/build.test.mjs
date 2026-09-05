@@ -889,7 +889,7 @@ test("what an enrichment row sets actually reaches the listing", async () => {
 
   // Fields the listing page renders. Add to this list when the page learns to
   // show something new, and this test will say whether it arrives.
-  const CARRIED = ["notes_seasonal", "meetingTimes", "trading", "menu", "accessibility", "phone", "email"];
+  const CARRIED = ["notes_seasonal", "meetingTimes", "trading", "menu", "video", "accessibility", "phone", "email"];
   let checked = 0;
 
   for (const [number, row] of Object.entries(enrichment)) {

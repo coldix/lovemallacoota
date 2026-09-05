@@ -1975,6 +1975,12 @@ html[data-theme="light"] .bus-service { background: rgba(255,255,255,0.45); }
 @media print { .moon-symbol { font-size: 1em; } }
 
 /* A closed business keeps its listing, and says so. */
+.listing-video { margin: 1.2rem 0; }
+.listing-video .media-frame { margin-bottom: 0.4rem; }
+.listing-has-video {
+  margin-left: 0.4rem; font-size: 0.7em; color: var(--accent);
+  vertical-align: middle;
+}
 .listing-status-when { color: var(--muted); }
 .listing-status {
   margin: 0.4rem 0 0.6rem;

@@ -126,7 +126,10 @@ const card = CARDS[props.active] || CARDS.directory;
                 {official && <span class="listing-badge official">Official</span>}
                 {typeLabel && <span class="listing-badge">{typeLabel}</span>}
               </p>
-              <h3><a href={href}>{entity.name}</a></h3>
+              <h3>
+                <a href={href}>{entity.name}</a>
+                {entity.video?.url && <span class="listing-has-video" title="This listing has a video">▶</span>}
+              </h3>
               {entity.trading && entity.trading.state !== "open" && (
                 <p class="listing-status">
                   <strong>{entity.trading.state === "closed" ? "Closed" : entity.trading.state}.</strong>

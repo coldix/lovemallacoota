@@ -607,6 +607,10 @@ export function normalizeListing(raw, defaults = {}) {
     // fourteen priced lines does not. Carries the date it was copied: a price
     // is a fact about a day, and one shown without one is a promise.
     menu: raw.menu || null,
+    // A video the listing owns: {url, title, credit, note}. Rendered from the
+    // YouTube id, so a link that is not one embeds nothing rather than a frame
+    // pointed at nowhere.
+    video: raw.video || null,
     notes_seasonal: raw.notes_seasonal || null,
     status: raw.status || "published",
     claimable: raw.claimable === undefined ? !official && entityType !== "facebook-group" : raw.claimable,
@@ -672,6 +676,7 @@ export function associationToEntity(assoc, enrichment = {}) {
       notes_seasonal: enrichment.notes_seasonal || null,
       trading: enrichment.trading || null,
       menu: enrichment.menu || null,
+      video: enrichment.video || null,
       accessibility: enrichment.accessibility || null,
       images: enrichment.images || [],
       status: "published",

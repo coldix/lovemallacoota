@@ -1,0 +1,4105 @@
+{
+  "generator": "tools/build-directory-changes.mjs",
+  "baseline": {
+    "date": "2025-10-23T14:11:21+11:00",
+    "listings": 41
+  },
+  "listings": 120,
+  "entries": [
+    {
+      "commit": "5849abe",
+      "date": "2026-09-04T16:20:53+10:00",
+      "subject": "The Shed has a direct line (v1.53)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-mens-shed",
+          "name": "The Shed",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": "03 5158 0243",
+              "to": "03 5158 0274"
+            },
+            {
+              "field": "note"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "8a47b9c",
+      "date": "2026-09-04T16:10:39+10:00",
+      "subject": "The Shed answers on the health service's number (v1.52)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-mens-shed",
+          "name": "The Shed",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "03 5158 0243"
+            },
+            {
+              "field": "note"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "04fae4b",
+      "date": "2026-09-04T13:47:29+10:00",
+      "subject": "Fifteen town photographs, The Shed and the cemetery (v1.49)",
+      "added": [
+        {
+          "slug": "mallacoota-cemetery",
+          "name": "Mallacoota Cemetery",
+          "section": "services",
+          "kind": "Town cemetery"
+        },
+        {
+          "slug": "mallacoota-mens-shed",
+          "name": "The Shed",
+          "section": "community",
+          "kind": "Community venue"
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "ambulance-victoria",
+          "name": "Ambulance Victoria - Mallacoota branch",
+          "section": "services",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "beachcomber-caravan-park",
+          "name": "Beachcomber Caravan Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 48
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "gowings-of-mallacoota-holiday-units",
+          "name": "Gowings of Mallacoota Holiday Units",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "address",
+              "from": "7 Dorron Ave, Mallacoota",
+              "to": "5-7 Dorron Ave, Mallacoota"
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-tool-library-madtl",
+          "name": "Mallacoota and District Tool Library (MADTL)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-district-health-and-support-service",
+          "name": "Mallacoota District Health and Support Service",
+          "section": "services",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-hotel-motel-bistro",
+          "name": "Mallacoota Hotel Motel & Bistro",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-inlet-bowling-club",
+          "name": "Mallacoota Inlet Bowling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "south-eastern-home-hardware",
+          "name": "South Eastern Home Hardware",
+          "section": "services",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "victoria-state-emergency-service",
+          "name": "VICSES - Mallacoota Unit",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 93
+            },
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "d7019bd",
+      "date": "2026-09-04T13:30:46+10:00",
+      "subject": "Put the Food Chariot on the map, and move Origami 222m to its real pin (v1.48)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-food-chariot",
+          "name": "Mallacoota Food Chariot",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "note"
+            },
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "origami-coffee",
+          "name": "Origami Coffee",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 222
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "47a3e87",
+      "date": "2026-09-04T13:06:11+10:00",
+      "subject": "The Food Chariot has its photograph, and the prices are confirmed (v1.46)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-food-chariot",
+          "name": "Mallacoota Food Chariot",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "3fb9a16",
+      "date": "2026-09-04T13:00:14+10:00",
+      "subject": "The Food Chariot, and a menu block to put its board on the page (v1.45)",
+      "added": [
+        {
+          "slug": "mallacoota-food-chariot",
+          "name": "Mallacoota Food Chariot",
+          "section": "eat-drink",
+          "kind": "Food trailer"
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": []
+    },
+    {
+      "commit": "f1a7830",
+      "date": "2026-09-04T10:38:25+10:00",
+      "subject": "Frank's new recording, and Bribes is Sue's Bribes again (v1.44)",
+      "added": [],
+      "removed": [],
+      "renamed": [
+        {
+          "from": "bribes-gift-shop-and-fresh-flowers",
+          "to": "sues-bribes",
+          "fromName": "Bribes Gift Shop and Fresh Flowers",
+          "name": "Sue's Bribes",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": "Gift shop",
+              "to": "Gift shop and coach ticket agent"
+            },
+            {
+              "field": "phone",
+              "from": "03 5158 0877",
+              "to": "0400 177 122"
+            },
+            {
+              "field": "email",
+              "from": "suesbribes@mallacoota.com",
+              "to": "suesbribes@yahoo.com"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "note"
+            },
+            {
+              "field": "address",
+              "from": "1/14 Allan Dr, Mallacoota",
+              "to": "14 Allan Dr, Mallacoota"
+            },
+            {
+              "field": "opening hours"
+            }
+          ]
+        }
+      ],
+      "changed": []
+    },
+    {
+      "commit": "5cf912c",
+      "date": "2026-09-04T09:51:49+10:00",
+      "subject": "End of day: the new listing, its photograph, and the handover (v1.43)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "bega-valley-garage-doos",
+          "name": "Bega Valley Garage Doors",
+          "section": "services",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Bega Valley Garage Doos",
+              "to": "Bega Valley Garage Doors"
+            },
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Garage doors"
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "58db064",
+      "date": "2026-09-04T09:48:23+10:00",
+      "subject": "Merge origin/main: a submitted listing and the weekly refresh",
+      "added": [
+        {
+          "slug": "bega-valley-garage-doos",
+          "name": "Bega Valley Garage Doos",
+          "section": "services",
+          "kind": null
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": []
+    },
+    {
+      "commit": "921e423",
+      "date": "2026-09-04T08:16:46+10:00",
+      "subject": "Call it Adobe Holiday Flats, which is what it calls itself (v1.38)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "adobe-mudbrick-holiday-flats",
+          "name": "Adobe Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Adobe (Mudbrick) Holiday Flats",
+              "to": "Adobe Holiday Flats"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "946fe44",
+      "date": "2026-09-04T08:10:14+10:00",
+      "subject": "Adobe (Mudbrick) Holiday Flats sits on its own pin (v1.37)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "adobe-mudbrick-holiday-flats",
+          "name": "Adobe (Mudbrick) Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 19
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "982984a",
+      "date": "2026-09-03T23:21:43+10:00",
+      "subject": "Take the coordinates from the place pin, not the map centre (v1.36)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "colin-dixon",
+          "name": "Colin Dixon",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-historical-society",
+          "name": "Mallacoota and District Historical Society",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 20
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-tool-library-madtl",
+          "name": "Mallacoota and District Tool Library (MADTL)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 228
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-golf-and-country-club",
+          "name": "Mallacoota Golf and Country Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 550
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-golf-club-bistro",
+          "name": "Mallacoota Golf Club Bistro",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 1973
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-inlet-bowling-club",
+          "name": "Mallacoota Inlet Bowling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 74
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-pony-club",
+          "name": "Mallacoota Pony Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 475
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-rsl-bunker-museum",
+          "name": "Mallacoota RSL Bunker Museum",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "c10b569",
+      "date": "2026-09-03T23:12:21+10:00",
+      "subject": "Put the misplaced listings where they actually are (v1.35)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "3mgb-wilderness-radio",
+          "name": "3MGB Wilderness Radio",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "adobe-mudbrick-holiday-flats",
+          "name": "Adobe (Mudbrick) Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "address",
+              "from": "17-19 Karbeethong Ave, Mallacoota",
+              "to": "9 Karbeethong Ave, Mallacoota"
+            },
+            {
+              "field": "map pin",
+              "moved": 1835
+            }
+          ]
+        },
+        {
+          "slug": "adobe-abodes",
+          "name": "Adobe Abodes",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 1747
+            }
+          ]
+        },
+        {
+          "slug": "ambulance-victoria",
+          "name": "Ambulance Victoria - Mallacoota branch",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "australian-volunteer-coast-guard-vf15",
+          "name": "Australian Volunteer Coast Guard VF15 Mallacoota",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "beachcomber-caravan-park",
+          "name": "Beachcomber Caravan Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "address",
+              "from": "16 Karbeethong Avenue, Mallacoota",
+              "to": "85-87 Betka Rd, Mallacoota"
+            },
+            {
+              "field": "map pin",
+              "moved": 2510
+            }
+          ]
+        },
+        {
+          "slug": "eagle-view-stay",
+          "name": "Eagle View Stay",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 1010
+            }
+          ]
+        },
+        {
+          "slug": "east-gippsland-shire-council",
+          "name": "East Gippsland Shire Council",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "karbeethong-lodge",
+          "name": "Karbeethong Lodge",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 1975
+            }
+          ]
+        },
+        {
+          "slug": "larrys-coffee-van",
+          "name": "Larry's Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Location Varies, Mallacoota",
+              "to": null
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-historical-society",
+          "name": "Mallacoota and District Historical Society",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-tool-library-madtl",
+          "name": "Mallacoota and District Tool Library (MADTL)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-foreshore-holiday-park",
+          "name": "Mallacoota Foreshore Holiday Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "map pin",
+              "moved": 463
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-golf-and-country-club",
+          "name": "Mallacoota Golf and Country Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-inlet-bowling-club",
+          "name": "Mallacoota Inlet Bowling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-pony-club",
+          "name": "Mallacoota Pony Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-service-centre-and-library",
+          "name": "Mallacoota Service Centre and Library",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-surf-lifesaving-club",
+          "name": "Mallacoota Surf Lifesaving Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "mapa-pearls",
+          "name": "MAPA Pearls",
+          "section": "services",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Mallacoota",
+              "to": null
+            }
+          ]
+        },
+        {
+          "slug": "victoria-state-emergency-service",
+          "name": "VICSES - Mallacoota Unit",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        },
+        {
+          "slug": "wilderness-coast-candles",
+          "name": "Wilderness Coast Candles",
+          "section": "services",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Mallacoota",
+              "to": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "4ce5268",
+      "date": "2026-09-03T22:20:54+10:00",
+      "subject": "Karbeethong Lodge is at 16 Schnapper Point Drive (v1.34)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "karbeethong-lodge",
+          "name": "Karbeethong Lodge",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": "12 Schnapper Point Dr, Mallacoota",
+              "to": "16 Schnapper Point Drive, Mallacoota"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "5e13df8",
+      "date": "2026-09-03T21:36:33+10:00",
+      "subject": "All five sections on the front page, three listings photographed, and the Bucklands (v1.32)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "3mgb-wilderness-radio",
+          "name": "3MGB Wilderness Radio",
+          "section": "community",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "harbour-lights-holiday-flats",
+          "name": "Harbour Lights Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "a15dda9",
+      "date": "2026-09-03T17:51:14+10:00",
+      "subject": "Link the mini golf and the surf shack both ways (v1.23)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "surf-shack-mini-golf",
+          "name": "Surf Shack Mini Golf",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "f3aae80",
+      "date": "2026-09-03T17:45:20+10:00",
+      "subject": "List the last five, and give the second op shop its own card (v1.22)",
+      "added": [
+        {
+          "slug": "hammond-properties",
+          "name": "Hammond Properties",
+          "section": "services",
+          "kind": "Real estate and holiday letting"
+        },
+        {
+          "slug": "mallacoota-park-toilet-block",
+          "name": "Lions Park public toilets",
+          "section": "services",
+          "kind": "Public toilets"
+        },
+        {
+          "slug": "mallacoota-laundromat",
+          "name": "Mallacoota Laundromat",
+          "section": "services",
+          "kind": "Laundromat"
+        },
+        {
+          "slug": "morning-melodies",
+          "name": "Morning Melodies",
+          "section": "community",
+          "kind": "Music morning"
+        },
+        {
+          "slug": "st-peters-op-shop",
+          "name": "St Peter's Op Shop",
+          "section": "services",
+          "kind": "Opportunity shop"
+        },
+        {
+          "slug": "surf-shack-mini-golf",
+          "name": "Surf Shack Mini Golf",
+          "section": "do-see",
+          "kind": "Mini golf"
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-lpo",
+          "name": "Australia Post Mallacoota LPO",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            },
+            {
+              "field": "opening hours"
+            }
+          ]
+        },
+        {
+          "slug": "st-peters-mallacoota",
+          "name": "St Peter's Co-operating Church",
+          "section": "community",
+          "fields": [
+            {
+              "field": "photographs",
+              "removed": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "a1d859a",
+      "date": "2026-09-03T17:35:40+10:00",
+      "subject": "Add eleven listings from the photo survey, and put the tip on Betka Road (v1.21)",
+      "added": [
+        {
+          "slug": "ampol-mallacoota",
+          "name": "Ampol Mallacoota",
+          "section": "services",
+          "kind": "Service station"
+        },
+        {
+          "slug": "mallacoota-lpo",
+          "name": "Australia Post Mallacoota LPO",
+          "section": "services",
+          "kind": "Post office"
+        },
+        {
+          "slug": "bp-mallacoota",
+          "name": "BP Mallacoota",
+          "section": "services",
+          "kind": "Service station"
+        },
+        {
+          "slug": "community-bank-mallacoota",
+          "name": "Community Bank Mallacoota",
+          "section": "services",
+          "kind": "Bank"
+        },
+        {
+          "slug": "gabo-views",
+          "name": "Gabo Views",
+          "section": "stay",
+          "kind": "Holiday cottage"
+        },
+        {
+          "slug": "mallacoota-automotive-and-towing",
+          "name": "Mallacoota Automotive & Towing",
+          "section": "services",
+          "kind": "Mechanic and towing"
+        },
+        {
+          "slug": "mallacoota-ev-charging",
+          "name": "Mallacoota EV charging station",
+          "section": "services",
+          "kind": "EV charging"
+        },
+        {
+          "slug": "mallacoota-pharmacy",
+          "name": "Mallacoota Pharmacy",
+          "section": "services",
+          "kind": "Pharmacy"
+        },
+        {
+          "slug": "salt-home-living",
+          "name": "Salt Home Living",
+          "section": "services",
+          "kind": "Homewares and gifts"
+        },
+        {
+          "slug": "south-eastern-home-hardware",
+          "name": "South Eastern Home Hardware",
+          "section": "services",
+          "kind": "Hardware store"
+        },
+        {
+          "slug": "st-peters-mallacoota",
+          "name": "St Peter's Co-operating Church",
+          "section": "community",
+          "kind": "Church"
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-transfer-station",
+          "name": "Mallacoota Transfer Station",
+          "section": "services",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "918afed",
+      "date": "2026-09-03T15:56:50+10:00",
+      "subject": "Give listings their photographs, a gallery, and honest coordinates (v1.20)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "3mgb-wilderness-radio",
+          "name": "3MGB Wilderness Radio",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Community radio"
+            }
+          ]
+        },
+        {
+          "slug": "awangralea-caravan-park",
+          "name": "A'Wangralea Caravan Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Caravan park"
+            }
+          ]
+        },
+        {
+          "slug": "adobe-mudbrick-holiday-flats",
+          "name": "Adobe (Mudbrick) Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday flats"
+            }
+          ]
+        },
+        {
+          "slug": "adobe-abodes",
+          "name": "Adobe Abodes",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday flats"
+            }
+          ]
+        },
+        {
+          "slug": "alfs-pizza",
+          "name": "Alf's Pizza",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Pizza"
+            }
+          ]
+        },
+        {
+          "slug": "ambulance-victoria",
+          "name": "Ambulance Victoria - Mallacoota branch",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Ambulance"
+            }
+          ]
+        },
+        {
+          "slug": "ausnet-electricity-faults",
+          "name": "AusNet Services - electricity faults",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Electricity faults"
+            }
+          ]
+        },
+        {
+          "slug": "australian-volunteer-coast-guard-vf15",
+          "name": "Australian Volunteer Coast Guard VF15 Mallacoota",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Marine rescue"
+            }
+          ]
+        },
+        {
+          "slug": "beachcomber-caravan-park",
+          "name": "Beachcomber Caravan Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Caravan park"
+            }
+          ]
+        },
+        {
+          "slug": "beanie-coffee-van",
+          "name": "Beanie Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Coffee van"
+            },
+            {
+              "field": "map pin",
+              "moved": 592
+            },
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        },
+        {
+          "slug": "bribes-gift-shop-and-fresh-flowers",
+          "name": "Bribes Gift Shop and Fresh Flowers",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Gift shop"
+            },
+            {
+              "field": "map pin",
+              "moved": 10
+            },
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        },
+        {
+          "slug": "bruces-waterside-units",
+          "name": "Bruces Waterside Units",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday units"
+            }
+          ]
+        },
+        {
+          "slug": "buckland-jetty-boat-hire",
+          "name": "Buckland Jetty Boat Hire",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Boat hire"
+            }
+          ]
+        },
+        {
+          "slug": "bureau-of-meteorology",
+          "name": "Bureau of Meteorology",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Weather bureau"
+            }
+          ]
+        },
+        {
+          "slug": "cafe-54",
+          "name": "Cafe 54",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Cafe"
+            },
+            {
+              "field": "map pin",
+              "moved": 93
+            },
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        },
+        {
+          "slug": "colin-dixon",
+          "name": "Colin Dixon",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "IT and web services"
+            }
+          ]
+        },
+        {
+          "slug": "eagle-view-stay",
+          "name": "Eagle View Stay",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday house"
+            }
+          ]
+        },
+        {
+          "slug": "east-gippsland-shire-council",
+          "name": "East Gippsland Shire Council",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Council"
+            }
+          ]
+        },
+        {
+          "slug": "east-gippsland-water",
+          "name": "East Gippsland Water",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Water authority"
+            }
+          ]
+        },
+        {
+          "slug": "gipsy-point-lodge",
+          "name": "Gipsy Point Lodge",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Lodge"
+            }
+          ]
+        },
+        {
+          "slug": "gipsy-point-lodge-cafe-restaurant",
+          "name": "Gipsy Point Lodge Café-Restaurant",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Restaurant"
+            }
+          ]
+        },
+        {
+          "slug": "gowings-of-mallacoota-holiday-units",
+          "name": "Gowings of Mallacoota Holiday Units",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday units"
+            }
+          ]
+        },
+        {
+          "slug": "harbour-lights-holiday-flats",
+          "name": "Harbour Lights Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday flats"
+            }
+          ]
+        },
+        {
+          "slug": "iga-local-grocer-mallacoota",
+          "name": "IGA Local Grocer Mallacoota",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Supermarket"
+            },
+            {
+              "field": "map pin",
+              "moved": 59
+            },
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        },
+        {
+          "slug": "karbeethong-lodge",
+          "name": "Karbeethong Lodge",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Lodge"
+            }
+          ]
+        },
+        {
+          "slug": "kelpys-seafood",
+          "name": "Kelpy's Seafood",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Seafood takeaway"
+            }
+          ]
+        },
+        {
+          "slug": "lakeside-at-mallacoota",
+          "name": "Lakeside at Mallacoota",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday units"
+            }
+          ]
+        },
+        {
+          "slug": "larrys-coffee-van",
+          "name": "Larry's Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Coffee van"
+            }
+          ]
+        },
+        {
+          "slug": "lees-pizza-take-away",
+          "name": "Lee's Pizza & Take Away",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Pizza and takeaway"
+            },
+            {
+              "field": "map pin",
+              "moved": 134
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "lin-cottage",
+          "name": "Lin Cottage",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday house"
+            }
+          ]
+        },
+        {
+          "slug": "lions-club-of-mallacoota-and-district",
+          "name": "Lions Club of Mallacoota & District",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Service club"
+            }
+          ]
+        },
+        {
+          "slug": "lucys-chinese-restaurant",
+          "name": "Lucy's Chinese Restaurant",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Chinese restaurant"
+            },
+            {
+              "field": "map pin",
+              "moved": 114
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-car-and-bike-club",
+          "name": "Mallacoota & District Car & Bike Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Social club"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-airport",
+          "name": "Mallacoota Airport",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Airport"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-tool-library-madtl",
+          "name": "Mallacoota and District Tool Library (MADTL)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Tool library"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-arts-council",
+          "name": "Mallacoota Arts Council",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Arts council"
+            },
+            {
+              "field": "map pin",
+              "added": true
+            },
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-bakery",
+          "name": "Mallacoota Bakery",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Bakery"
+            },
+            {
+              "field": "map pin",
+              "moved": 284
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "chirf",
+          "name": "Mallacoota Community Health, Infrastructure and Resilience Fund",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Health and resilience fund"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-community-opportunity-shop",
+          "name": "Mallacoota Community Opportunity Shop",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Opportunity shop"
+            },
+            {
+              "field": "map pin",
+              "added": true
+            },
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-district-business-and-tourism-association-mdbta",
+          "name": "Mallacoota District Business and Tourism Association (MDBTA)",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Business association"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-district-health-and-support-service",
+          "name": "Mallacoota District Health and Support Service",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Health and support service"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-district-senior-citizens-club",
+          "name": "Mallacoota District Senior Citizens Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Senior citizens"
+            }
+          ]
+        },
+        {
+          "slug": "cfa-mallacoota-fire-brigade",
+          "name": "Mallacoota Fire Brigade (CFA)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Fire brigade"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-foodworks",
+          "name": "Mallacoota Foodworks",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Supermarket"
+            },
+            {
+              "field": "map pin",
+              "moved": 116
+            },
+            {
+              "field": "photographs",
+              "added": 3
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-foreshore-holiday-park",
+          "name": "Mallacoota Foreshore Holiday Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday park"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-golf-club-bistro",
+          "name": "Mallacoota Golf Club Bistro",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Bistro"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-halls-and-recreation-community-precinct-gum",
+          "name": "Mallacoota Halls and Recreation (Community Precinct / GUM)",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Community precinct"
+            },
+            {
+              "field": "map pin",
+              "added": true
+            },
+            {
+              "field": "photographs",
+              "added": 5
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-hireboats",
+          "name": "Mallacoota Hireboats",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Boat and kayak hire"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-hotel-motel-bistro",
+          "name": "Mallacoota Hotel Motel & Bistro",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Hotel and motel"
+            },
+            {
+              "field": "map pin",
+              "moved": 48
+            },
+            {
+              "field": "photographs",
+              "added": 4
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-inlet-aged-care-miac",
+          "name": "Mallacoota Inlet Aged Care (MIAC)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Aged care"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-meats",
+          "name": "Mallacoota Meats",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Butcher"
+            },
+            {
+              "field": "map pin",
+              "moved": 120
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-medical-centre",
+          "name": "Mallacoota Medical Centre",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Medical centre"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-p-12-college",
+          "name": "Mallacoota P-12 College",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "School"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-police-station",
+          "name": "Mallacoota Police Station",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Police station"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-rsl-bunker-museum",
+          "name": "Mallacoota RSL Bunker Museum",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Museum"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-service-centre-and-library",
+          "name": "Mallacoota Service Centre and Library",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Service centre"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-surf-shack",
+          "name": "Mallacoota Surf Shack",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Surf and clothing shop"
+            },
+            {
+              "field": "map pin",
+              "moved": 139
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-transfer-station",
+          "name": "Mallacoota Transfer Station",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Transfer station"
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-visitor-information",
+          "name": "Mallacoota Visitor Information Centre",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Visitor information"
+            },
+            {
+              "field": "map pin",
+              "added": true
+            },
+            {
+              "field": "photographs",
+              "added": 3
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-youth-and-sports-club",
+          "name": "Mallacoota Youth & Sports Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            },
+            {
+              "field": "photographs",
+              "added": 3
+            }
+          ]
+        },
+        {
+          "slug": "mallamaurice-holiday-units",
+          "name": "MallaMaurice Holiday Units",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Holiday units"
+            }
+          ]
+        },
+        {
+          "slug": "mapa-pearls",
+          "name": "MAPA Pearls",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Jewellery"
+            }
+          ]
+        },
+        {
+          "slug": "mv-loch-ard-dale-winward",
+          "name": "MV Loch-Ard - Dale Winward",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Cruises"
+            }
+          ]
+        },
+        {
+          "slug": "origami-coffee",
+          "name": "Origami Coffee",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Cafe"
+            }
+          ]
+        },
+        {
+          "slug": "parks-victoria-croajingolong",
+          "name": "Parks Victoria - Croajingolong National Park",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "National park"
+            }
+          ]
+        },
+        {
+          "slug": "scallywags-seafood-winebar",
+          "name": "Scallywags Seafood & Winebar",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Seafood"
+            },
+            {
+              "field": "map pin",
+              "moved": 238
+            },
+            {
+              "field": "photographs",
+              "added": 2
+            }
+          ]
+        },
+        {
+          "slug": "shady-gully-caravan-park",
+          "name": "Shady Gully Caravan Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Caravan park"
+            }
+          ]
+        },
+        {
+          "slug": "silver-bream-motel-flats",
+          "name": "Silver Bream Motel & Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Motel and flats"
+            }
+          ]
+        },
+        {
+          "slug": "sundayss",
+          "name": "Sundayss",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Cafe"
+            },
+            {
+              "field": "map pin",
+              "moved": 275
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "the-mallacoota-sanctuary-youth-group",
+          "name": "The Mallacoota Sanctuary Youth Group",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Youth group"
+            }
+          ]
+        },
+        {
+          "slug": "the-wave-oasis-self-contained-b-and-b",
+          "name": "The Wave Oasis Self-Contained B and B",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "B&B"
+            }
+          ]
+        },
+        {
+          "slug": "the-wilderness-collective",
+          "name": "The Wilderness Collective",
+          "section": "community",
+          "fields": [
+            {
+              "field": "map pin",
+              "added": true
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "u3a-mallacoota",
+          "name": "U3A Mallacoota",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Adult learning"
+            }
+          ]
+        },
+        {
+          "slug": "vicemergency",
+          "name": "VicEmergency",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Emergency warnings"
+            }
+          ]
+        },
+        {
+          "slug": "victoria-state-emergency-service",
+          "name": "VICSES - Mallacoota Unit",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "State Emergency Service"
+            }
+          ]
+        },
+        {
+          "slug": "wilderness-coast-candles",
+          "name": "Wilderness Coast Candles",
+          "section": "services",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Candles and gifts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "8797ab2",
+      "date": "2026-09-03T00:53:01+10:00",
+      "subject": "Give the pony club its photograph, and dropped-in photographs their alt text (v1.19)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-pony-club",
+          "name": "Mallacoota Pony Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "e2e6ead",
+      "date": "2026-09-02T19:03:27+10:00",
+      "subject": "Fix edition page: mojibake, duplicate article, poem layout, photos, print (v1.09)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "3mgb-wilderness-radio",
+          "name": "3MGB Wilderness Radio",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "alfs-pizza",
+          "name": "Alf's Pizza",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Alf’s Pizza",
+              "to": "Alf's Pizza"
+            }
+          ]
+        },
+        {
+          "slug": "ambulance-victoria",
+          "name": "Ambulance Victoria - Mallacoota branch",
+          "section": "services",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Ambulance Victoria — Mallacoota branch",
+              "to": "Ambulance Victoria - Mallacoota branch"
+            }
+          ]
+        },
+        {
+          "slug": "ausnet-electricity-faults",
+          "name": "AusNet Services - electricity faults",
+          "section": "services",
+          "fields": [
+            {
+              "field": "name",
+              "from": "AusNet Services — electricity faults",
+              "to": "AusNet Services - electricity faults"
+            }
+          ]
+        },
+        {
+          "slug": "australian-volunteer-coast-guard-vf15",
+          "name": "Australian Volunteer Coast Guard VF15 Mallacoota",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "beanie-coffee-van",
+          "name": "Beanie Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "summary"
+            }
+          ]
+        },
+        {
+          "slug": "bureau-of-meteorology",
+          "name": "Bureau of Meteorology",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "colin-dixon",
+          "name": "Colin Dixon",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "east-gippsland-shire-council",
+          "name": "East Gippsland Shire Council",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "east-gippsland-water",
+          "name": "East Gippsland Water",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "gippsland-victoria",
+          "name": "Gippsland, Victoria",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "kelpys-seafood",
+          "name": "Kelpy's Seafood",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Kelpy’s Seafood",
+              "to": "Kelpy's Seafood"
+            }
+          ]
+        },
+        {
+          "slug": "larrys-coffee-van",
+          "name": "Larry's Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Larry’s Coffee Van",
+              "to": "Larry's Coffee Van"
+            }
+          ]
+        },
+        {
+          "slug": "lees-pizza-take-away",
+          "name": "Lee's Pizza & Take Away",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Lee’s Pizza & Take Away",
+              "to": "Lee's Pizza & Take Away"
+            }
+          ]
+        },
+        {
+          "slug": "lucys-chinese-restaurant",
+          "name": "Lucy's Chinese Restaurant",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Lucy’s Chinese Restaurant",
+              "to": "Lucy's Chinese Restaurant"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-kids",
+          "name": "Mallacoota and District Kids",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "madra",
+          "name": "Mallacoota and District Recovery Association",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-tool-library-madtl",
+          "name": "Mallacoota and District Tool Library (MADTL)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-birds",
+          "name": "Mallacoota Birds",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "chirf",
+          "name": "Mallacoota Community Health, Infrastructure and Resilience Fund",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-district-health-and-support-service",
+          "name": "Mallacoota District Health and Support Service",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-events",
+          "name": "Mallacoota Events",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-golf-and-country-club",
+          "name": "Mallacoota Golf and Country Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-hireboats",
+          "name": "Mallacoota Hireboats",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "summary"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-marine-search-and-rescue",
+          "name": "Mallacoota Marine Search and Rescue",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-medical-centre",
+          "name": "Mallacoota Medical Centre",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-now",
+          "name": "Mallacoota Now",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-p-12-college",
+          "name": "Mallacoota P-12 College",
+          "section": "services",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "note"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-police-station",
+          "name": "Mallacoota Police Station",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-surf-lifesaving-club",
+          "name": "Mallacoota Surf Lifesaving Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-visitor-information",
+          "name": "Mallacoota Visitor Information Centre",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-weather",
+          "name": "Mallacoota Weather",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "parks-victoria-croajingolong",
+          "name": "Parks Victoria - Croajingolong National Park",
+          "section": "services",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Parks Victoria — Croajingolong National Park",
+              "to": "Parks Victoria - Croajingolong National Park"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "victoria-state-emergency-service",
+          "name": "VICSES - Mallacoota Unit",
+          "section": "services",
+          "fields": [
+            {
+              "field": "name",
+              "from": "VICSES — Mallacoota Unit",
+              "to": "VICSES - Mallacoota Unit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "6c73792",
+      "date": "2026-08-31T12:55:48Z",
+      "subject": "Convert submitted photographs",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "colin-dixon",
+          "name": "Colin Dixon",
+          "section": "services",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "2de30ba",
+      "date": "2026-08-31T22:36:26+10:00",
+      "subject": "Update directory listing Colin Dixon",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "colin-dixon",
+          "name": "Colin Dixon",
+          "section": "services",
+          "fields": [
+            {
+              "field": "address",
+              "from": "2 Fern Court PO Box 327 Mallacoota, Mallacoota",
+              "to": "2 Fern Crt, Mallacoota"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "1d58d3c",
+      "date": "2026-08-31T22:22:19+10:00",
+      "subject": "Update directory listing Colin Dixon",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "colin-dixon",
+          "name": "Colin Dixon",
+          "section": "services",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "note"
+            },
+            {
+              "field": "address",
+              "from": "2 Fern Court PO Box 327, Mallacoota",
+              "to": "2 Fern Court PO Box 327 Mallacoota, Mallacoota"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "777c2d7",
+      "date": "2026-08-31T22:20:12+10:00",
+      "subject": "Add directory listing Colin Dixon",
+      "added": [
+        {
+          "slug": "colin-dixon",
+          "name": "Colin Dixon",
+          "section": "services",
+          "kind": null
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": []
+    },
+    {
+      "commit": "ccf24a2",
+      "date": "2026-08-30T13:27:45+10:00",
+      "subject": "Take the editor's note off forty-one listing pages",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "awangralea-caravan-park",
+          "name": "A'Wangralea Caravan Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "adobe-mudbrick-holiday-flats",
+          "name": "Adobe (Mudbrick) Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "adobe-abodes",
+          "name": "Adobe Abodes",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "alfs-pizza",
+          "name": "Alf’s Pizza",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "beachcomber-caravan-park",
+          "name": "Beachcomber Caravan Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "beanie-coffee-van",
+          "name": "Beanie Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "bribes-gift-shop-and-fresh-flowers",
+          "name": "Bribes Gift Shop and Fresh Flowers",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "bruces-waterside-units",
+          "name": "Bruces Waterside Units",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "buckland-jetty-boat-hire",
+          "name": "Buckland Jetty Boat Hire",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "cafe-54",
+          "name": "Cafe 54",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "eagle-view-stay",
+          "name": "Eagle View Stay",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "gipsy-point-lodge",
+          "name": "Gipsy Point Lodge",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "gipsy-point-lodge-cafe-restaurant",
+          "name": "Gipsy Point Lodge Café-Restaurant",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "gowings-of-mallacoota-holiday-units",
+          "name": "Gowings of Mallacoota Holiday Units",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "harbour-lights-holiday-flats",
+          "name": "Harbour Lights Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "iga-local-grocer-mallacoota",
+          "name": "IGA Local Grocer Mallacoota",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "karbeethong-lodge",
+          "name": "Karbeethong Lodge",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "kelpys-seafood",
+          "name": "Kelpy’s Seafood",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "lakeside-at-mallacoota",
+          "name": "Lakeside at Mallacoota",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "larrys-coffee-van",
+          "name": "Larry’s Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "lees-pizza-take-away",
+          "name": "Lee’s Pizza & Take Away",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "lin-cottage",
+          "name": "Lin Cottage",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "lucys-chinese-restaurant",
+          "name": "Lucy’s Chinese Restaurant",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-bakery",
+          "name": "Mallacoota Bakery",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-foodworks",
+          "name": "Mallacoota Foodworks",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-foreshore-holiday-park",
+          "name": "Mallacoota Foreshore Holiday Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-golf-club-bistro",
+          "name": "Mallacoota Golf Club Bistro",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-hireboats",
+          "name": "Mallacoota Hireboats",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-hotel-motel-bistro",
+          "name": "Mallacoota Hotel Motel & Bistro",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-meats",
+          "name": "Mallacoota Meats",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-surf-shack",
+          "name": "Mallacoota Surf Shack",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallamaurice-holiday-units",
+          "name": "MallaMaurice Holiday Units",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mapa-pearls",
+          "name": "MAPA Pearls",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mv-loch-ard-dale-winward",
+          "name": "MV Loch-Ard - Dale Winward",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "origami-coffee",
+          "name": "Origami Coffee",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "scallywags-seafood-winebar",
+          "name": "Scallywags Seafood & Winebar",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "shady-gully-caravan-park",
+          "name": "Shady Gully Caravan Park",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "silver-bream-motel-flats",
+          "name": "Silver Bream Motel & Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "sundayss",
+          "name": "Sundayss",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "the-wave-oasis-self-contained-b-and-b",
+          "name": "The Wave Oasis Self-Contained B and B",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "wilderness-coast-candles",
+          "name": "Wilderness Coast Candles",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "5adbaa0",
+      "date": "2026-08-30T06:06:16+10:00",
+      "subject": "Keep Lee's listed as closed, and give the 360 six pills",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "lees-pizza-take-away",
+          "name": "Lee’s Pizza & Take Away",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "trading status",
+              "from": null,
+              "to": "closed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "4df7152",
+      "date": "2026-08-29T23:06:05+10:00",
+      "subject": "Put the extra pages in a top menu, and let the calendar load",
+      "added": [
+        {
+          "slug": "ausnet-electricity-faults",
+          "name": "AusNet Services — electricity faults",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "australian-volunteer-coast-guard-vf15",
+          "name": "Australian Volunteer Coast Guard VF15 Mallacoota",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "east-gippsland-water",
+          "name": "East Gippsland Water",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-airport",
+          "name": "Mallacoota Airport",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-service-centre-and-library",
+          "name": "Mallacoota Service Centre and Library",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-transfer-station",
+          "name": "Mallacoota Transfer Station",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-visitor-information",
+          "name": "Mallacoota Visitor Information Centre",
+          "section": "services",
+          "kind": null
+        }
+      ],
+      "removed": [],
+      "renamed": [
+        {
+          "from": "mallacoota-and-district-tool-library",
+          "to": "mallacoota-and-district-tool-library-madtl",
+          "fromName": "Mallacoota & District Tool Library",
+          "name": "Mallacoota and District Tool Library (MADTL)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "email",
+              "from": null,
+              "to": "madtoollibrary@gmail.com"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=5c45fc64-27fe-eb11-94ee-0022481725b2",
+              "to": "https://madtl.org.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "96 Bastion Point Road, Mallacoota"
+            }
+          ]
+        },
+        {
+          "from": "mallacoota-and-district-business-and-tourism-association",
+          "to": "mallacoota-district-business-and-tourism-association-mdbta",
+          "fromName": "Mallacoota and District Business and Tourism Association",
+          "name": "Mallacoota District Business and Tourism Association (MDBTA)",
+          "section": "community",
+          "fields": [
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=184638da-e52e-4968-8b59-7a0055d6c0ca",
+              "to": "https://visitmallacoota.com.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "from": "mallacoota-and-district-university-of-the-third-age-u3a",
+          "to": "u3a-mallacoota",
+          "fromName": "Mallacoota and District University of the Third Age (U3A)",
+          "name": "U3A Mallacoota",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "0408 996 768"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=776f5590-3cb8-40e6-b2d8-7eb06f3eb9a4",
+              "to": "https://u3amallacoota.org.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "from": "mallacoota-boardriders-club",
+          "to": "mallacoota-boardriders",
+          "fromName": "Mallacoota Boardriders Club",
+          "name": "Mallacoota Boardriders",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "from": "mallacoota-halls-and-recreation-reserve-grounds-management-committee",
+          "to": "mallacoota-halls-and-recreation-community-precinct-gum",
+          "fromName": "Mallacoota Halls and Recreation Reserve Grounds Management Committee",
+          "name": "Mallacoota Halls and Recreation (Community Precinct / GUM)",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "0468 818 344"
+            },
+            {
+              "field": "email",
+              "from": null,
+              "to": "coothandr@gmail.com"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=ab9b48ef-1bcc-433e-8d5a-6c57b5691d56",
+              "to": "https://mallacootahallsandrec.org.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "from": "mallacoota-inlet-aged-care",
+          "to": "mallacoota-inlet-aged-care-miac",
+          "fromName": "Mallacoota Inlet Aged Care",
+          "name": "Mallacoota Inlet Aged Care (MIAC)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "from": "mallacoota-progress-association",
+          "to": "mallacoota-progress-association-mpa",
+          "fromName": "Mallacoota Progress Association",
+          "name": "Mallacoota Progress Association (MPA)",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "from": "the-mallacoota-wilderness-collective",
+          "to": "the-wilderness-collective",
+          "fromName": "The Mallacoota Wilderness Collective",
+          "name": "The Wilderness Collective",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "0487 639 955"
+            },
+            {
+              "field": "website",
+              "from": null,
+              "to": "https://wildernesscollective.org.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "56 Maurice Avenue, Mallacoota"
+            }
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "slug": "3mgb-wilderness-radio",
+          "name": "3MGB Wilderness Radio",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "(03) 5158 0929"
+            }
+          ]
+        },
+        {
+          "slug": "ambulance-victoria",
+          "name": "Ambulance Victoria — Mallacoota branch",
+          "section": "services",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Ambulance Victoria",
+              "to": "Ambulance Victoria — Mallacoota branch"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "82 Betka Road, Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "east-gippsland-shire-council",
+          "name": "East Gippsland Shire Council",
+          "section": "services",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "03 5153 9500"
+            },
+            {
+              "field": "email",
+              "from": null,
+              "to": "feedback@egipps.vic.gov.au"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "70 Maurice Avenue, Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "friends-of-mallacoota",
+          "name": "Friends of Mallacoota",
+          "section": "community",
+          "fields": [
+            {
+              "field": "email",
+              "from": null,
+              "to": "friendsofmallacoota@gmail.com"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=bb6d3f12-4be0-444e-aab9-4c38a9522c14",
+              "to": "https://friendsofmallacoota.com.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "lions-club-of-mallacoota-and-district",
+          "name": "Lions Club of Mallacoota & District",
+          "section": "community",
+          "fields": [
+            {
+              "field": "email",
+              "from": null,
+              "to": "yungerup@gmail.com"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=744c34e2-ba98-43a4-87ba-bb234872961a",
+              "to": "https://lionsclubs.org.au/map-location/mallacoota-district/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-car-and-bike-club",
+          "name": "Mallacoota & District Car & Bike Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-angling-club",
+          "name": "Mallacoota and District Angling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=3587f352-d537-4b3d-a268-7ce12dcd7e67",
+              "to": "https://www.mallacootaanglingclub.com.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-historical-society",
+          "name": "Mallacoota and District Historical Society",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "0474 858 584"
+            },
+            {
+              "field": "email",
+              "from": null,
+              "to": "secretarymallacootadhs@gmail.com"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=909a81cc-4df0-4ebe-83be-2eb61578ef73",
+              "to": "https://www.mallacootabunker.com.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "Airport Road, Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-kids",
+          "name": "Mallacoota and District Kids",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "chirf",
+          "name": "Mallacoota Community Health, Infrastructure and Resilience Fund",
+          "section": "services",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "0413 736 545"
+            },
+            {
+              "field": "email",
+              "from": null,
+              "to": "secretary@chirf.org"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=d88810c4-791c-e611-8111-3863bb343d78",
+              "to": "https://www.chirf.org.au/"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-community-opportunity-shop",
+          "name": "Mallacoota Community Opportunity Shop",
+          "section": "services",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-district-senior-citizens-club",
+          "name": "Mallacoota District Senior Citizens Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-events",
+          "name": "Mallacoota Events",
+          "section": "community",
+          "fields": [
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=865cf7e7-28ee-e911-a811-000d3a854410",
+              "to": "https://www.wildharvestseafoodfestival.com/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "cfa-mallacoota-fire-brigade",
+          "name": "Mallacoota Fire Brigade (CFA)",
+          "section": "services",
+          "fields": [
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-gun-club",
+          "name": "Mallacoota Gun Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-inlet-bowling-club",
+          "name": "Mallacoota Inlet Bowling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "03 5158 0284"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=877fb5bd-77f8-4a19-97a5-ee7aaa46430c",
+              "to": "http://www.mallacootabowls.com.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "63 Betka Rd, Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-marine-search-and-rescue",
+          "name": "Mallacoota Marine Search and Rescue",
+          "section": "community",
+          "fields": [
+            {
+              "field": "email",
+              "from": null,
+              "to": "mallacootamsar@gmail.com"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=02709887-1b85-ef11-ac21-000d3a800ab8",
+              "to": "https://mmsar.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-p-12-college",
+          "name": "Mallacoota P-12 College",
+          "section": "services",
+          "fields": [
+            {
+              "field": "note"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-pony-club",
+          "name": "Mallacoota Pony Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=877112ae-51f2-4124-b42e-74ab1d968b78",
+              "to": "https://ponyclubvic.org.au/club/mallacoota-pony-club/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "1943 Genoa-Mallacoota Road, Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-sea-eagles-dragon-boat-club",
+          "name": "Mallacoota Sea Eagles Dragon Boat Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "0413 736 545"
+            },
+            {
+              "field": "email",
+              "from": null,
+              "to": "rjacobsch@gmail.com"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=72bf8f01-93ac-e711-811e-3863bb2ebb78",
+              "to": "https://www.revolutionise.com.au/mallacootadbc"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-soccer-club",
+          "name": "Mallacoota Soccer Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-youth-and-sports-club",
+          "name": "Mallacoota Youth & Sports Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Mallacoota Youth and Sports Club",
+              "to": "Mallacoota Youth & Sports Club"
+            },
+            {
+              "field": "phone",
+              "from": null,
+              "to": "0417 340 995"
+            },
+            {
+              "field": "email",
+              "from": null,
+              "to": "myscsecretary42@gmail.com"
+            },
+            {
+              "field": "website",
+              "from": "https://registers.consumer.vic.gov.au/IaSearch/IaDetails?Identifier=b0e4537e-40fd-4816-b694-8ca79f5fd3bb",
+              "to": "https://play.tennis.com.au/mallacootayouthandsportsclub/Contact"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "Lions Park, Devlin Drive, Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "parks-victoria-croajingolong",
+          "name": "Parks Victoria — Croajingolong National Park",
+          "section": "services",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "13 1963"
+            },
+            {
+              "field": "email",
+              "from": null,
+              "to": "info@parks.vic.gov.au"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "the-mallacoota-sanctuary-youth-group",
+          "name": "The Mallacoota Sanctuary Youth Group",
+          "section": "community",
+          "fields": [
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "vicemergency",
+          "name": "VicEmergency",
+          "section": "services",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "1800 226 226"
+            },
+            {
+              "field": "description"
+            }
+          ]
+        },
+        {
+          "slug": "victoria-state-emergency-service",
+          "name": "VICSES — Mallacoota Unit",
+          "section": "services",
+          "fields": [
+            {
+              "field": "name",
+              "from": "Victoria State Emergency Service",
+              "to": "VICSES — Mallacoota Unit"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "Lees Road, Mallacoota"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "2fd2784",
+      "date": "2026-08-29T22:45:09+10:00",
+      "subject": "Open Community and Services, and let organisations keep their own listings",
+      "added": [
+        {
+          "slug": "3mgb-wilderness-radio",
+          "name": "3MGB Wilderness Radio",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "ambulance-victoria",
+          "name": "Ambulance Victoria",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "bureau-of-meteorology",
+          "name": "Bureau of Meteorology",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "east-gippsland-shire-council",
+          "name": "East Gippsland Shire Council",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "friends-of-mallacoota",
+          "name": "Friends of Mallacoota",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "gippsland-victoria",
+          "name": "Gippsland, Victoria",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "lions-club-of-mallacoota-and-district",
+          "name": "Lions Club of Mallacoota & District",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "love-mallacoota-facebook-group",
+          "name": "Love Mallacoota (Facebook group)",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-and-district-car-and-bike-club",
+          "name": "Mallacoota & District Car & Bike Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-and-district-tool-library",
+          "name": "Mallacoota & District Tool Library",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-and-district-angling-club",
+          "name": "Mallacoota and District Angling Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-and-district-business-and-tourism-association",
+          "name": "Mallacoota and District Business and Tourism Association",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-and-district-historical-society",
+          "name": "Mallacoota and District Historical Society",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-and-district-kids",
+          "name": "Mallacoota and District Kids",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "madra",
+          "name": "Mallacoota and District Recovery Association",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-and-district-university-of-the-third-age-u3a",
+          "name": "Mallacoota and District University of the Third Age (U3A)",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-arts-council",
+          "name": "Mallacoota Arts Council",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-birds",
+          "name": "Mallacoota Birds",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-boardriders-club",
+          "name": "Mallacoota Boardriders Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-buy-swap-and-sell",
+          "name": "Mallacoota Buy, Swap and Sell",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "chirf",
+          "name": "Mallacoota Community Health, Infrastructure and Resilience Fund",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-community-opportunity-shop",
+          "name": "Mallacoota Community Opportunity Shop",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-district-health-and-support-service",
+          "name": "Mallacoota District Health and Support Service",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-district-senior-citizens-club",
+          "name": "Mallacoota District Senior Citizens Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-events",
+          "name": "Mallacoota Events",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "cfa-mallacoota-fire-brigade",
+          "name": "Mallacoota Fire Brigade (CFA)",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-golf-and-country-club",
+          "name": "Mallacoota Golf and Country Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-gun-club",
+          "name": "Mallacoota Gun Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-halls-and-recreation-reserve-grounds-management-committee",
+          "name": "Mallacoota Halls and Recreation Reserve Grounds Management Committee",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-inlet-aged-care",
+          "name": "Mallacoota Inlet Aged Care",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-inlet-bowling-club",
+          "name": "Mallacoota Inlet Bowling Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-marine-search-and-rescue",
+          "name": "Mallacoota Marine Search and Rescue",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-medical-centre",
+          "name": "Mallacoota Medical Centre",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-now",
+          "name": "Mallacoota Now",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-p-12-college",
+          "name": "Mallacoota P-12 College",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-police-station",
+          "name": "Mallacoota Police Station",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-pony-club",
+          "name": "Mallacoota Pony Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-progress-association",
+          "name": "Mallacoota Progress Association",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-sea-eagles-dragon-boat-club",
+          "name": "Mallacoota Sea Eagles Dragon Boat Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-soccer-club",
+          "name": "Mallacoota Soccer Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-surf-lifesaving-club",
+          "name": "Mallacoota Surf Lifesaving Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-volunteer-fire-fighters-fund",
+          "name": "Mallacoota Volunteer Fire Fighters Fund",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-weather",
+          "name": "Mallacoota Weather",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "mallacoota-youth-and-sports-club",
+          "name": "Mallacoota Youth and Sports Club",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "parks-victoria-croajingolong",
+          "name": "Parks Victoria — Croajingolong National Park",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "the-mallacoota-sanctuary-youth-group",
+          "name": "The Mallacoota Sanctuary Youth Group",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "the-mallacoota-wilderness-collective",
+          "name": "The Mallacoota Wilderness Collective",
+          "section": "community",
+          "kind": null
+        },
+        {
+          "slug": "vicemergency",
+          "name": "VicEmergency",
+          "section": "services",
+          "kind": null
+        },
+        {
+          "slug": "victoria-state-emergency-service",
+          "name": "Victoria State Emergency Service",
+          "section": "services",
+          "kind": null
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-hireboats",
+          "name": "Mallacoota Hireboats",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "website",
+              "from": "httpsBoth://www.mallacootahireboats.com/",
+              "to": "https://www.mallacootahireboats.com/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "fd90900",
+      "date": "2026-08-28T10:23:09+10:00",
+      "subject": "Render the directory at build time, protect the contact form",
+      "added": [
+        {
+          "slug": "mallacoota-rsl-bunker-museum",
+          "name": "Mallacoota RSL Bunker Museum",
+          "section": "do-see",
+          "kind": null
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": []
+    },
+    {
+      "commit": "f43779a",
+      "date": "2025-10-24T10:02:33+11:00",
+      "subject": "New address for Bribes",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "bribes-gift-shop-and-fresh-flowers",
+          "name": "Bribes Gift Shop and Fresh Flowers",
+          "section": "services",
+          "fields": [
+            {
+              "field": "address",
+              "from": "56 Maurice Ave, Mallacoota",
+              "to": "1/14 Allan Dr, Mallacoota"
+            },
+            {
+              "field": "map pin",
+              "moved": 218
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

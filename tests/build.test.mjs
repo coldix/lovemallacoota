@@ -795,3 +795,41 @@ test("the README states the version the site was actually built at", async () =>
     "the version badge is not the built version"
   );
 });
+
+test("what's new in the directory reports real changes, not renames as deaths", async () => {
+  const record = JSON.parse(
+    await readFile(new URL("../data/directory-changes.json", import.meta.url), "utf8")
+  );
+  const html = await readFile(new URL("../dist/directory-changes.html", import.meta.url), "utf8");
+  const directory = loadDirectory();
+  const slugs = new Set(directory.map((entity) => entity.slug));
+
+  assert.ok(record.entries.length > 0, "no directory history was recorded");
+  assert.equal(record.listings, directory.length, "the record's listing count is not the directory's");
+
+  for (const entry of record.entries) {
+    // A slug cannot be added and removed in the same breath: that is a rename,
+    // and reporting it as a removal tells readers a group folded when it did not.
+    const added = new Set(entry.added.map((item) => item.slug));
+    for (const item of entry.removed) {
+      assert.ok(!added.has(item.slug), `${item.slug} is both added and removed on ${entry.date}`);
+    }
+    for (const item of entry.renamed || []) {
+      assert.notEqual(item.from, item.to, "a rename that renames nothing");
+      assert.ok(item.name, `${item.to} was renamed to nothing`);
+    }
+    // Every listing named as added or changed must still be reachable, or the
+    // page offers a link to a 404.
+    for (const item of [...entry.added, ...entry.changed]) {
+      if (!slugs.has(item.slug)) continue;
+      assert.ok(
+        html.includes(`/listing/${item.slug}.html`),
+        `${item.slug} is in the record but not linked on the page`
+      );
+    }
+  }
+
+  // The page has to state where the record begins, or "79 added" means nothing.
+  assert.ok(record.baseline?.date, "the record does not say when it starts");
+  assert.match(html, /listings now/, "the page does not state the current count");
+});

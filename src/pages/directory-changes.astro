@@ -1,0 +1,225 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import PageHero from "../components/PageHero.astro";
+import { loadDirectory } from "../lib/directory.mjs";
+import { loadDataFile } from "../lib/editions.mjs";
+
+/*
+ * What has changed in the directory, read out of git rather than kept by hand.
+ *
+ * data/directory-changes.json is built by tools/build-directory-changes.mjs,
+ * which replays every source loadDirectory() reads at each commit and compares
+ * consecutive states. A hand-kept list would be a promise to remember; this one
+ * cannot disagree with the data it describes.
+ */
+const record = loadDataFile("directory-changes.json", { entries: [], baseline: null });
+const entries = record.entries || [];
+const listings = loadDirectory().length;
+
+const AU_DATE = new Intl.DateTimeFormat("en-AU", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "Australia/Melbourne",
+});
+const day = (iso) => AU_DATE.format(new Date(iso));
+
+/* One heading per day, not one per commit: a reader cares that the tool library
+ * got its photograph on Thursday, not that it took three commits to do it. */
+const byDay = [];
+for (const entry of entries) {
+  const date = entry.date.slice(0, 10);
+  let group = byDay.find((candidate) => candidate.date === date);
+  if (!group) {
+    group = { date, iso: entry.date, added: [], removed: [], renamed: [], changed: [] };
+    byDay.push(group);
+  }
+  group.added.push(...entry.added);
+  group.removed.push(...entry.removed);
+  group.renamed.push(...(entry.renamed || []));
+  for (const change of entry.changed) {
+    // The same listing touched twice in a day is one line with both reasons.
+    const existing = group.changed.find((candidate) => candidate.slug === change.slug);
+    if (!existing) {
+      group.changed.push({ ...change, fields: [...change.fields] });
+      continue;
+    }
+    for (const field of change.fields) {
+      if (!existing.fields.some((seen) => seen.field === field.field)) existing.fields.push(field);
+    }
+  }
+}
+
+const totals = {
+  added: entries.reduce((sum, entry) => sum + entry.added.length, 0),
+  removed: entries.reduce((sum, entry) => sum + entry.removed.length, 0),
+  renamed: entries.reduce((sum, entry) => sum + (entry.renamed || []).length, 0),
+};
+
+const SECTION_LABEL = {
+  "eat-drink": "Eat & Drink",
+  stay: "Stay",
+  "do-see": "Do & See",
+  community: "Community",
+  services: "Services",
+};
+
+/** A field change in words a reader would use, not a diff. */
+function phrase(field) {
+  if (field.field === "map pin") {
+    if (field.added) return "put on the map";
+    return `map pin moved ${field.moved} m`;
+  }
+  if (field.field === "photographs") {
+    if (field.added) return field.added === 1 ? "photograph added" : `${field.added} photographs added`;
+    return field.removed === 1 ? "photograph removed" : `${field.removed} photographs removed`;
+  }
+  if (field.field === "menu") return field.added ? "menu added" : "menu updated";
+  if (field.from && field.to) return `${field.field}: ${field.from} → ${field.to}`;
+  if (field.to && !field.from) return `${field.field} added`;
+  if (field.from && !field.to) return `${field.field} removed`;
+  return `${field.field} updated`;
+}
+
+const description =
+  "Everything added to, renamed in, or changed in the Mallacoota community directory, newest first.";
+---
+
+<BaseLayout
+  title="What's new in the directory - Love Mallacoota"
+  description={description}
+  canonicalPath="/directory-changes.html"
+  active="directory"
+>
+  <PageHero
+    prefix="What's new in the"
+    accent="Directory"
+    lede={description}
+  />
+  <main>
+    <Breadcrumbs
+      trail={[
+        { name: "Directory", path: "/directory.html" },
+        { name: "What's new", path: "/directory-changes.html" },
+      ]}
+    />
+
+    <section class="glass-card sheen content-block reveal">
+      <p class="changes-summary">
+        <strong>{listings}</strong> listings now.
+        {record.baseline && (
+          <>
+            {" "}Since {day(record.baseline.date)}, when this record starts at{" "}
+            {record.baseline.listings}: <strong>{totals.added}</strong> added
+            {totals.renamed > 0 && <>, <strong>{totals.renamed}</strong> renamed</>}
+            {totals.removed > 0 && <>, <strong>{totals.removed}</strong> removed</>}.
+          </>
+        )}
+      </p>
+      <p class="listing-note">
+        This page is built from the repository's own history rather than written
+        by hand, so it cannot fall behind the directory it describes. Days on
+        which nothing changed are not listed. To have something corrected, use
+        the <a href="/contact.html">update form</a>.
+      </p>
+    </section>
+
+    {byDay.length === 0 && (
+      <section class="glass-card sheen content-block reveal">
+        <p>Nothing has changed yet.</p>
+      </section>
+    )}
+
+    {byDay.map((group) => (
+      <section class="glass-card sheen content-block reveal changes-day">
+        <h2 class="section-title">{day(group.iso)}</h2>
+
+        {group.added.length > 0 && (
+          <div class="changes-group">
+            <h3><span class="changes-mark added" aria-hidden="true">+</span> Added</h3>
+            <ul class="changes-list">
+              {group.added.map((item) => (
+                <li>
+                  <a href={`/listing/${item.slug}.html`}>{item.name}</a>
+                  <span class="changes-meta">
+                    {item.kind ? `${item.kind} · ` : ""}{SECTION_LABEL[item.section] || item.section}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {group.renamed.length > 0 && (
+          <div class="changes-group">
+            <h3><span class="changes-mark renamed" aria-hidden="true">→</span> Renamed</h3>
+            <ul class="changes-list">
+              {group.renamed.map((item) => (
+                <li>
+                  <a href={`/listing/${item.to}.html`}>{item.name}</a>
+                  <span class="changes-meta">was {item.fromName}</span>
+                  {item.fields.length > 0 && (
+                    <span class="changes-fields">{item.fields.map(phrase).join(" · ")}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {group.changed.length > 0 && (
+          <div class="changes-group">
+            <h3><span class="changes-mark changed" aria-hidden="true">~</span> Updated</h3>
+            <ul class="changes-list">
+              {group.changed.map((item) => (
+                <li>
+                  <a href={`/listing/${item.slug}.html`}>{item.name}</a>
+                  <span class="changes-fields">{item.fields.map(phrase).join(" · ")}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {group.removed.length > 0 && (
+          <div class="changes-group">
+            <h3><span class="changes-mark removed" aria-hidden="true">−</span> Removed</h3>
+            <ul class="changes-list">
+              {group.removed.map((item) => (
+                <li>
+                  <span>{item.name}</span>
+                  <span class="changes-meta">{SECTION_LABEL[item.section] || item.section}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
+    ))}
+
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Keep Exploring</h2>
+      <div class="links-grid">
+        <a href="/directory.html" class="link-card">
+          <span class="arrow" aria-hidden="true">↗</span>
+          <span class="emoji" aria-hidden="true">⌕</span>
+          <h3>Whole directory</h3>
+          <p>Search every listing in Mallacoota and district.</p>
+        </a>
+        <a href="/add-listing.html" class="link-card">
+          <span class="arrow" aria-hidden="true">↗</span>
+          <span class="emoji" aria-hidden="true">✍️</span>
+          <h3>Add a listing</h3>
+          <p>Free for businesses, clubs and community organisations.</p>
+        </a>
+        <a href="/corrections.html" class="link-card">
+          <span class="arrow" aria-hidden="true">↗</span>
+          <span class="emoji" aria-hidden="true">✎</span>
+          <h3>Corrections</h3>
+          <p>How we fix what is wrong, and how we record it.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -61,6 +61,7 @@ forecast, tides, transport, a walk and a business compiled automatically.
 - [Services](https://lovemallacoota.au/services.html): trades, health, shops, government and emergency services (${counts.services} listings)
 - [Whole directory](https://lovemallacoota.au/directory.html): ${directory.length} listings
 - [Add a listing](https://lovemallacoota.au/add-listing.html): free, email-verified, no account
+- [What's new in the directory](https://lovemallacoota.au/directory-changes.html): dated record of additions, renames and changes, built from the repository history
 
 Each listing has its own page at /listing/<slug>.html. Government and emergency
 listings are marked official and cannot be claimed. Incorporated associations

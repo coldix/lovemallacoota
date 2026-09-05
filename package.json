@@ -8,7 +8,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "node tools/build-og.mjs && astro build && node tools/build-static.mjs",
+    "build": "node tools/build-directory-changes.mjs && node tools/build-og.mjs && astro build && node tools/build-static.mjs",
     "check:images": "node tools/check-images.mjs",
     "og": "node tools/build-og.mjs",
     "weekly": "node tools/refresh-weekly.mjs",
@@ -21,7 +21,8 @@
     "test": "pnpm run build && tsc --noEmit && node --experimental-strip-types --test tests/*.test.mjs",
     "check": "pnpm run types && pnpm run test && wrangler deploy --env=\"\" --dry-run",
     "deploy:preview": "pnpm run build && wrangler deploy --env preview",
-    "deploy": "pnpm run build && wrangler deploy --env=\"\""
+    "deploy": "pnpm run build && wrangler deploy --env=\"\"",
+    "changes": "node tools/build-directory-changes.mjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260826.1",

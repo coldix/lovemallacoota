@@ -7,6 +7,57 @@
   "listings": 124,
   "entries": [
     {
+      "commit": "4b2e401",
+      "date": "2026-09-05T19:42:59+10:00",
+      "subject": "Lee's stops advertising, and Do & See stops calling everyone a business (v1.66)",
+      "added": [
+        {
+          "slug": "pizza-lunch",
+          "name": "Pizza Lunch",
+          "section": "do-see",
+          "kind": "Community lunch"
+        }
+      ],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "coffee-and-quiz",
+          "name": "Coffee & Quiz",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Mallacoota Sporting Club Rooms, Mallacoota",
+              "to": "Mudbrick Pavilion (the Muddie), Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-community-bookshop",
+          "name": "Community Bookshop",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Josef's Bookshop, Mallacoota Sporting Club Rooms, Mallacoota",
+              "to": "Josef's Bookshop, Mudbrick Pavilion (the Muddie), Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "lees-pizza-take-away",
+          "name": "Lee's Pizza & Take Away",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "note"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "commit": "38bdbb1",
       "date": "2026-09-05T19:34:54+10:00",
       "subject": "The Golf Club bistro is closed, and a closed listing now says so (v1.65)",

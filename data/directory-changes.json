@@ -4,8 +4,57 @@
     "date": "2025-10-23T14:11:21+11:00",
     "listings": 41
   },
-  "listings": 124,
+  "listings": 127,
   "entries": [
+    {
+      "commit": "c5b347d",
+      "date": "2026-09-05T19:53:08+10:00",
+      "subject": "The Muddie is addressed by the park and found by its pin (v1.67)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "coffee-and-quiz",
+          "name": "Coffee & Quiz",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Mudbrick Pavilion (the Muddie), Mallacoota",
+              "to": "Mudbrick Hall, Lions Park, 1 Develling Dr, Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-community-bookshop",
+          "name": "Community Bookshop",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "address",
+              "from": "Josef's Bookshop, Mudbrick Pavilion (the Muddie), Mallacoota",
+              "to": "Josef's Bookshop, Mudbrick Hall, Lions Park, Mallacoota"
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-sporting-club-rooms",
+          "name": "Mallacoota Sporting Club Rooms",
+          "section": "community",
+          "fields": [
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": "Mallacoota",
+              "to": "Mudbrick Hall, Lions Park, 1 Develling Dr, Mallacoota"
+            }
+          ]
+        }
+      ]
+    },
     {
       "commit": "4b2e401",
       "date": "2026-09-05T19:42:59+10:00",

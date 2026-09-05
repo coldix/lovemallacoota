@@ -179,46 +179,44 @@
     }
   },
   {
-    "id": "facility-mallacoota-sporting-club-rooms",
-    "slug": "mallacoota-sporting-club-rooms",
-    "name": "Mallacoota Sporting Club Rooms",
-    "commonName": "The Muddie",
-    "entityType": "community-facility",
+    "id": "club-mallacoota-tennis",
+    "slug": "mallacoota-tennis-club",
+    "name": "Mallacoota Tennis Club",
+    "entityType": "sporting-club",
     "section": "community",
     "categories": [],
-    "kind": "Community hall",
-    "schema_type": "CivicStructure",
-    "description": "The hall most of the town's regular groups meet in, known to everyone as the Muddie and signed as the Mudbrick Hall. It stands inside Lions Park, which is why it is addressed both as 1 Develling Drive and by its own pin 300 metres into the park. Line dancing, the strength and balance program, the coffee and quiz morning, chair yoga, toddler music, the community bookshop and the monthly market are all held here.",
-    "descriptionShort": "The hall most of the town's regular groups meet in, known as the Muddie.",
+    "kind": "Tennis club",
+    "schema_type": "SportsOrganization",
+    "description": "The tennis courts in the Lions Park precinct, beside the Mudbrick Hall and the skate park. Pickleball on Monday mornings, kids tennis on Saturday and social tennis on Sunday, all of which are on the community calendar.",
+    "descriptionShort": "Tennis courts in Lions Park, with pickleball, kids and social tennis.",
     "website": null,
     "links": [],
     "phone": null,
     "address": {
-      "street": "Mudbrick Hall, Lions Park, 1 Develling Dr",
+      "street": "Lions Park, 1 Develling Dr",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.5593198,
-      "longitude": 149.7583725,
+      "latitude": -37.558959,
+      "longitude": 149.7578091,
       "source": "google-maps"
     },
+    "meetingTimes": "Pickleball Monday 10am, kids tennis Saturday 9.30am, social tennis Sunday 9am",
     "related": [
-      "mallacoota-halls-and-recreation-community-precinct-gum",
-      "mallacoota-community-bookshop",
-      "coffee-and-quiz"
+      "mudbrick-hall",
+      "mallacoota-skatepark"
     ],
     "claimable": true,
     "official": false,
-    "notes_seasonal": "A venue rather than a group, so what is on there changes. Hall hire goes through Mallacoota Halls and Recreation.",
-    "source": {
-      "kind": "existing-listing",
-      "note": "Map pin from Colin; the local name and that many groups are based here, from Colin."
-    },
     "verification": {
       "lastReviewedAt": "2026-09-05"
+    },
+    "source": {
+      "kind": "existing-listing",
+      "note": "Map pin from Colin; session times from the community calendar."
     }
   },
   {
@@ -289,6 +287,49 @@
       "lastReviewedAt": "2026-09-03"
     },
     "meetingTimes": "Monthly, at the Mallacoota Hotel"
+  },
+  {
+    "id": "facility-mudbrick-hall",
+    "slug": "mudbrick-hall",
+    "name": "Mudbrick Hall",
+    "commonName": "The Muddie",
+    "entityType": "community-facility",
+    "section": "community",
+    "categories": [],
+    "kind": "Community hall",
+    "schema_type": "CivicStructure",
+    "description": "The hall most of the town's regular groups meet in, known to everyone as the Muddie. It stands inside Lions Park, which is why it is addressed both as 1 Develling Drive and by its own pin 300 metres into the park. Line dancing, the strength and balance program, the coffee and quiz morning, chair yoga, toddler music, the community bookshop and the monthly market are all held here. It is not the Clubrooms, which is the Angling Club building a hundred metres away.",
+    "descriptionShort": "The hall most of the town's regular groups meet in, known as the Muddie.",
+    "website": null,
+    "links": [],
+    "phone": null,
+    "address": {
+      "street": "Mudbrick Hall, Lions Park, 1 Develling Dr",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.5593198,
+      "longitude": 149.7583725,
+      "source": "google-maps"
+    },
+    "related": [
+      "mallacoota-halls-and-recreation-community-precinct-gum",
+      "mallacoota-and-district-angling-club",
+      "mallacoota-skatepark"
+    ],
+    "claimable": true,
+    "official": false,
+    "notes_seasonal": "A venue rather than a group, so what is on there changes. Hall hire goes through Mallacoota Halls and Recreation.",
+    "source": {
+      "kind": "existing-listing",
+      "note": "Map pin from Colin; the local name and that many groups are based here, from Colin."
+    },
+    "verification": {
+      "lastReviewedAt": "2026-09-05"
+    }
   },
   {
     "id": "church-st-peters-mallacoota",

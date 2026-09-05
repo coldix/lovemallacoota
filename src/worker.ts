@@ -53,6 +53,13 @@ const MOVED_PATHS = new Map([
     "/listing/bribes-gift-shop-and-fresh-flowers.html",
     "/listing/sues-bribes.html",
   ],
+  // The hall was listed as the Sporting Club Rooms for a few hours on a
+  // misreading: the Clubrooms is the Angling Club building, and this one is the
+  // Mudbrick Hall.
+  [
+    "/listing/mallacoota-sporting-club-rooms.html",
+    "/listing/mudbrick-hall.html",
+  ],
   ["/category", "/"],
   ["/category/news", "/"],
   ["/category/how", "/"],

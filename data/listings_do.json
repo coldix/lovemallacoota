@@ -223,6 +223,49 @@
     "kind": "Boat and kayak hire"
   },
   {
+    "id": "do-lions-park-playground",
+    "slug": "mallacoota-lions-park-playground",
+    "business_name": "Lions Park Playground",
+    "entityType": "community-facility",
+    "section": "do-see",
+    "category_primary": "Do & See",
+    "category_tags": [
+      "Attractions"
+    ],
+    "schema_type": "CivicStructure",
+    "description_short": "The playground in Lions Park, beside the hall and the skate park.",
+    "description_long": "The playground in Lions Park, a short walk from the Mudbrick Hall, the skate park and the tennis courts. The park also holds the monthly market and the outdoor stage.",
+    "phone": null,
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "Lions Park, 1 Develling Dr",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.5593094,
+      "longitude": 149.7579918,
+      "source": "google-maps"
+    },
+    "opening_hours": [],
+    "kind": "Playground",
+    "related": [
+      "mallacoota-skatepark",
+      "mudbrick-hall"
+    ],
+    "verification": {
+      "lastReviewedAt": "2026-09-05"
+    },
+    "source": {
+      "kind": "existing-listing",
+      "note": "Map pin from Colin."
+    }
+  },
+  {
     "id": "do-008",
     "slug": "mallacoota-rsl-bunker-museum",
     "business_name": "Mallacoota RSL Bunker Museum",
@@ -278,6 +321,50 @@
     "kind": "Museum",
     "verification": {
       "lastReviewedAt": "2026-09-05"
+    }
+  },
+  {
+    "id": "do-mallacoota-skatepark",
+    "slug": "mallacoota-skatepark",
+    "business_name": "Mallacoota Skatepark",
+    "entityType": "community-facility",
+    "section": "do-see",
+    "category_primary": "Do & See",
+    "category_tags": [
+      "Attractions"
+    ],
+    "schema_type": "CivicStructure",
+    "description_short": "Concrete skate park in Lions Park, with a shade shelter and picnic tables.",
+    "description_long": "A concrete skate park in the Lions Park precinct: ramps, a bowl and a flat section, with a roofed shelter over part of it and picnic tables under the gums beside it. Free and open, no booking. The playground, the tennis courts and the Mudbrick Hall are all within a hundred metres.",
+    "phone": null,
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "Lions Park, 1 Develling Dr",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.5598083,
+      "longitude": 149.7578579,
+      "source": "google-maps"
+    },
+    "opening_hours": [],
+    "kind": "Skate park",
+    "related": [
+      "mudbrick-hall",
+      "mallacoota-lions-park-playground"
+    ],
+    "notes_seasonal": "Open all the time. The shelter covers part of it, not all of it.",
+    "verification": {
+      "lastReviewedAt": "2026-09-05"
+    },
+    "source": {
+      "kind": "existing-listing",
+      "note": "Photographed 3 September 2026; map pin from Colin."
     }
   },
   {

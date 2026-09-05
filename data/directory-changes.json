@@ -7,6 +7,47 @@
   "listings": 128,
   "entries": [
     {
+      "commit": "152facf",
+      "date": "2026-09-05T21:32:34+10:00",
+      "subject": "The bridge club folded, and the listing goes looking for three players (v1.70)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "bridge-cards-club",
+          "name": "Bridge (Cards) Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "kind",
+              "from": null,
+              "to": "Bridge club"
+            },
+            {
+              "field": "website",
+              "from": null,
+              "to": "https://bridge.oze.au/"
+            },
+            {
+              "field": "summary"
+            },
+            {
+              "field": "description"
+            },
+            {
+              "field": "note"
+            },
+            {
+              "field": "trading status",
+              "from": null,
+              "to": "closed"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "commit": "ad02a56",
       "date": "2026-09-05T21:13:09+10:00",
       "subject": "Add directory listing Bridge (Cards) Club",

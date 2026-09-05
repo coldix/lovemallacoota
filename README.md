@@ -2,11 +2,11 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.70-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.71-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-142%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
-**v1.70** - built 5 September 2026.
+**v1.71** - built 5 September 2026.
 <!-- /version -->
 
 Both the line above and the version badge are written by
@@ -59,7 +59,7 @@ The primary weekly news destination published every Monday (`YY:WK` format, e.g.
 * **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
 
 ### 4. Community Directory (`/directory.html`)
-127 listings across 5 task-based sections, 53 of them with a photograph:
+128 listings across 5 task-based sections, 53 of them with a photograph:
 * **Eat & Drink** ([`/food.html`](https://lovemallacoota.au/food.html)): Cafes, pubs, takeaway, seafood, groceries.
 * **Stay** ([`/accom.html`](https://lovemallacoota.au/accom.html)): Lodges, motels, holiday units, caravan parks.
 * **Do & See** ([`/activity.html`](https://lovemallacoota.au/activity.html)): Boat hire, tours, attractions, parks.

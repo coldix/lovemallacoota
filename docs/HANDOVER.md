@@ -1,13 +1,14 @@
 # Handover — 5 September 2026
 
-Live release **v1.69** at [lovemallacoota.au](https://lovemallacoota.au).
-142 tests passing. Fifteen releases today, v1.54 to v1.69.
+Live release **v1.71** at [lovemallacoota.au](https://lovemallacoota.au).
+142 tests passing. Seventeen releases today, v1.54 to v1.71.
 
 The previous handover, written 4 September, is in the git history at
 `docs/HANDOVER.md` before this commit. Its one urgent item — the live site
 serving Cloudflare's always-passes Turnstile test key — **is fixed**. Every
 deploy since has come out of GitHub, and the four forms carry the real site key
-`0x4AAAAAAE…`. The unverified half of that warning is below, still unverified.
+`0x4AAAAAAE…`. **The unverified half is now verified too** — see the form test
+below. Nothing from that warning is still outstanding.
 
 ---
 
@@ -27,6 +28,40 @@ went wrong on 3 and 4 September.
 today while the scheduled weekly job held the branch, and the deploy fired
 anyway — it went out green, from origin, without the commit. The workflow says
 "success" because it deployed *something*. Read the run's `headSha`.
+
+---
+
+## The add-listing form was tested end to end, and passed
+
+Asked for by the two previous handovers and finally done on the evening of 5
+September, with `wrangler tail` running throughout. Every step, in order:
+
+| Step | Result |
+| --- | --- |
+| `POST /api/listing` | 200, no logs, no exceptions |
+| Email delivered | the verify link was opened |
+| `POST /api/listing/verify` | code accepted |
+| GitHub write | commit `ad02a56`, `data/directory/bridge-cards-club.json` |
+| `GET /api/listing/manage?token=…` | 200, the owner's link works |
+| Auto-publish | fired on its own and deployed |
+
+**Zero error lines in the whole Worker stream.** So Turnstile, D1, the mail relay
+and the GitHub token are all good, and — the specific thing two handovers asked
+about — **a real token minted by the live site key was accepted by the secret in
+the Worker.** They are a matching pair. Genuine people are not being rejected.
+
+Two things learned in the doing:
+
+- **`./tools/push-secrets.sh --check` proves less than it looks.** It confirms a
+  secret is a real, valid Turnstile secret; it cannot tell you the secret belongs
+  to the site key on the page. Only a real submission does that.
+- **An agent cannot run this test.** Turnstile issues no token to an automated
+  browser — correctly — so the widget never produces one and the form cannot be
+  submitted. The three minutes have to be a person's. Watching `wrangler tail`
+  while they click is the right division of labour.
+
+The listing it produced is real and stayed: the Bridge Club, which had folded, is
+now listed as closed with an offer to restart it if three players turn up.
 
 ---
 
@@ -153,8 +188,8 @@ got wrong first:
 
 ## Where the directory stands
 
-127 listings, 53 with a photograph. Do & See went from five listings to ten
-today.
+128 listings, 53 with a photograph. Do & See went from five listings to ten
+today, and the Bridge Club arrived through the form in the evening.
 
 **The Lions Park precinct is now mapped.** Five things stand within a hundred
 metres of each other and the directory had two of them: the Mudbrick Hall (the
@@ -175,11 +210,7 @@ ask which link the sentence belongs to.**
   — the place pin sits later in the link as `!3d…!4d…`.
 - Three accommodation listings have no photograph: Eagle View Stay, Lin Cottage,
   MallaMaurice Holiday Units.
-- **The forms have still not been tested end to end.** Submit the add-listing
-  form, follow the emailed code to `/verify.html`, and watch the listing save.
-  That one path exercises Turnstile, D1, the mail relay and the GitHub token in
-  order — the four things that can be independently broken. The previous handover
-  asked for this and it has still not been done.
+- Nothing outstanding on the forms. See below.
 
 ---
 

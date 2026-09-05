@@ -2,11 +2,11 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.68-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.69-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-142%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
-**v1.68** - built 5 September 2026.
+**v1.69** - built 5 September 2026.
 <!-- /version -->
 
 Both the line above and the version badge are written by
@@ -59,7 +59,7 @@ The primary weekly news destination published every Monday (`YY:WK` format, e.g.
 * **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
 
 ### 4. Community Directory (`/directory.html`)
-120 listings across 5 task-based sections, 51 of them with a photograph:
+127 listings across 5 task-based sections, 53 of them with a photograph:
 * **Eat & Drink** ([`/food.html`](https://lovemallacoota.au/food.html)): Cafes, pubs, takeaway, seafood, groceries.
 * **Stay** ([`/accom.html`](https://lovemallacoota.au/accom.html)): Lodges, motels, holiday units, caravan parks.
 * **Do & See** ([`/activity.html`](https://lovemallacoota.au/activity.html)): Boat hire, tours, attractions, parks.
@@ -67,9 +67,13 @@ The primary weekly news destination published every Monday (`YY:WK` format, e.g.
 * **Services** ([`/services.html`](https://lovemallacoota.au/services.html)): Trades, health, government, police, CFA, SES.
 * **Self-Service Verification**: Free listing registration ([`/add-listing.html`](https://lovemallacoota.au/add-listing.html)) and listing claiming ([`/claim.html`](https://lovemallacoota.au/claim.html)) using D1-backed email verification tokens.
 * **Priced Menus**: A listing whose whole offer is its menu can carry one - grouped items with prices, rendered as a leader-dotted list. Every menu states the date its prices were read, because a price is a fact about a day.
+* **Opening Hours and Trading Status**: Hours render as lines a person reads - "Tue-Thu 9.30am-12pm and 1pm-4pm" - and a closed business says so on its own page, with the date that was recorded, not only on the section list.
+* **What's New** ([`/directory-changes.html`](https://lovemallacoota.au/directory-changes.html)): A dated record of everything added, renamed and changed, built from the repository's git history rather than kept by hand, so it cannot fall behind the directory it describes. Renames are detected and shown as renames, not as a removal and a stranger.
 
 ### 5. What's On Calendar (`/calendar.html`)
-* Community event listings and integrated Google Calendar.
+* **Community Calendar**: The town's own Google Calendar, embedded in agenda view. The id must be a calendar made for the purpose (`@group.calendar.google.com`); `src/lib/calendar.mjs` fails the build on a consumer mail address, because an embedded calendar is downloadable in full.
+* **Partner Calendars**: Other organisations' own public calendars, each in its own frame under its own name - MDHSS run theirs. A partner on a consumer domain must name `publishedAt`, the page where its owner already publishes it, or the build refuses it.
+* **Weekly Diary**: `tools/fetch-calendar.mjs` reads the same calendar for the edition's diary, so what is in the calendar is what the paper prints.
 * Public event submission form ([`/submit-event.html`](https://lovemallacoota.au/submit-event.html)).
 
 ### 6. Mouth Back-Issue Catalogue (`/mouth.html`)
@@ -132,6 +136,8 @@ Love Mallacoota (lovemallacoota.au)
 │   ├── Services                        /services.html
 │   ├── Add Listing                     /add-listing.html
 │   └── Claim Listing                   /claim.html
+│
+├── What's New in the Directory         /directory-changes.html
 │
 ├── Archive Hub                         /archive.html
 │   ├── Mallacoota Mouth Catalogue     /mouth.html
@@ -224,6 +230,7 @@ build time except `build-og.mjs`, `build-static.mjs` and `public-files.mjs`.
 | `refresh-weekly.mjs` | Builds the automatic half of an edition: forecast, tides, moon, events. `pnpm run weekly` |
 | `roll-edition.mjs` | Closes the week and opens the next. `pnpm run roll` |
 | `check-images.mjs` | Listing images the data names but the repository lacks; `--gaps` lists listings with no photograph at all. `pnpm run check:images` |
+| `build-directory-changes.mjs` | Builds the What's New record from git history. Runs first in every build. `pnpm run changes` |
 | `process-uploads.mjs` | Converts photographs submitted through the form. Run by `uploads.yml`. |
 | `prepare-cover.mjs` | One photograph into the two derivatives an edition cover needs. |
 | `prepare-article-image.mjs` | One image per article, WebP at 1280px on the longest side. |
@@ -276,6 +283,13 @@ of the 44 folders there.
 - [`docs/ARCHIVE.md`](docs/ARCHIVE.md) - The Mouth back-issue archive and its rights position.
 - [`docs/GOVERNMENT.md`](docs/GOVERNMENT.md) - Official listings and where their data comes from.
 - [`docs/coordinates-wanted.md`](docs/coordinates-wanted.md) - Listings whose map pin is missing or unverified, and how to send one.
+- [`docs/DIRECTORY-SUBMISSIONS.md`](docs/DIRECTORY-SUBMISSIONS.md) - How a business adds and maintains its own listing, and how verification dates are kept.
+- [`docs/INCORPORATED-ASSOCIATIONS.md`](docs/INCORPORATED-ASSOCIATIONS.md) - The Consumer Affairs Victoria register seed behind a third of the directory.
+- [`docs/ASSOCIATION-RESEARCH.md`](docs/ASSOCIATION-RESEARCH.md) - Research notes behind those listings. Contact details are never invented.
+- [`docs/MISSION-COMMUNITY-DIRECTORY.md`](docs/MISSION-COMMUNITY-DIRECTORY.md) - The brief for building out the directory.
+- [`docs/MISSION-NAVIGATION-SEO.md`](docs/MISSION-NAVIGATION-SEO.md) - The brief for navigation, SEO and social sharing.
+- [`docs/MISSION-RADIO-PROGRAM.md`](docs/MISSION-RADIO-PROGRAM.md) - The brief for carrying 3MGB's weekly program.
+- [`docs/REBUILD-PLAN.md`](docs/REBUILD-PLAN.md) - The original rebuild plan, August 2026. Kept for the reasoning.
 - [`docs/NEXTSTEPS.md`](docs/NEXTSTEPS.md) - A critical review of release v0.07. Largely addressed; kept for the reasoning.
 
 ---

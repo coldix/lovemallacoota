@@ -7,6 +7,57 @@
   "listings": 127,
   "entries": [
     {
+      "commit": "a2ffa12",
+      "date": "2026-09-05T20:08:48+10:00",
+      "subject": "The Clubrooms is the Angling Club, not the hall (v1.68)",
+      "added": [
+        {
+          "slug": "mallacoota-lions-park-playground",
+          "name": "Lions Park Playground",
+          "section": "do-see",
+          "kind": "Playground"
+        },
+        {
+          "slug": "mallacoota-skatepark",
+          "name": "Mallacoota Skatepark",
+          "section": "do-see",
+          "kind": "Skate park"
+        },
+        {
+          "slug": "mallacoota-tennis-club",
+          "name": "Mallacoota Tennis Club",
+          "section": "community",
+          "kind": "Tennis club"
+        },
+        {
+          "slug": "mudbrick-hall",
+          "name": "Mudbrick Hall",
+          "section": "community",
+          "kind": "Community hall"
+        }
+      ],
+      "removed": [
+        {
+          "slug": "mallacoota-sporting-club-rooms",
+          "name": "Mallacoota Sporting Club Rooms",
+          "section": "community"
+        }
+      ],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-and-district-angling-club",
+          "name": "Mallacoota and District Angling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "note"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "commit": "c5b347d",
       "date": "2026-09-05T19:53:08+10:00",
       "subject": "The Muddie is addressed by the park and found by its pin (v1.67)",

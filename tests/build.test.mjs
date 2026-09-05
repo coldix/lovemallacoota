@@ -874,3 +874,42 @@ test("what's new in the directory reports real changes, not renames as deaths", 
   assert.ok(record.baseline?.date, "the record does not say when it starts");
   assert.match(html, /listings now/, "the page does not state the current count");
 });
+
+test("what an enrichment row sets actually reaches the listing", async () => {
+  // associationToEntity copies enrichment field by field, so a field nobody
+  // remembered to add is accepted and silently dropped. Four listings went live
+  // with opening hours and without the notes that qualified them, because
+  // notes_seasonal was one of the ones nobody had added.
+  const { loadDirectory } = await import("../src/lib/directory.mjs");
+  const enrichment = JSON.parse(
+    await readFile(new URL("../data/directory-enrichment.json", import.meta.url), "utf8")
+  );
+  const directory = loadDirectory();
+  const bySlug = new Map(directory.map((entity) => [entity.slug, entity]));
+
+  // Fields the listing page renders. Add to this list when the page learns to
+  // show something new, and this test will say whether it arrives.
+  const CARRIED = ["notes_seasonal", "meetingTimes", "trading", "menu", "accessibility", "phone", "email"];
+  let checked = 0;
+
+  for (const [number, row] of Object.entries(enrichment)) {
+    const entity = bySlug.get(row.slug) || directory.find((e) => e.registration?.number === number);
+    if (!entity) continue;
+    for (const field of CARRIED) {
+      if (row[field] === undefined || row[field] === null) continue;
+      checked += 1;
+      assert.deepEqual(
+        entity[field],
+        row[field],
+        `${number} (${entity.slug}) sets ${field} in enrichment, but the listing does not carry it`
+      );
+    }
+    if (row.openingHours?.length) {
+      checked += 1;
+      assert.deepEqual(entity.openingHours, row.openingHours, `${entity.slug} loses its opening hours`);
+    }
+  }
+
+  // A test that checks nothing passes for the wrong reason.
+  assert.ok(checked > 5, `only ${checked} enrichment fields were checked`);
+});

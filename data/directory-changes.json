@@ -7,6 +7,29 @@
   "listings": 123,
   "entries": [
     {
+      "commit": "7f39624",
+      "date": "2026-09-05T19:14:55+10:00",
+      "subject": "The Wilderness Collective's hours, and FRI-YAY Wine Down stays out (v1.63)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "the-wilderness-collective",
+          "name": "The Wilderness Collective",
+          "section": "community",
+          "fields": [
+            {
+              "field": "note"
+            },
+            {
+              "field": "opening hours"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "commit": "a5266d6",
       "date": "2026-09-05T17:56:59+10:00",
       "subject": "The Community Op Shop is open five days, not one (v1.61)",
@@ -19,6 +42,9 @@
           "name": "Mallacoota Community Opportunity Shop",
           "section": "services",
           "fields": [
+            {
+              "field": "note"
+            },
             {
               "field": "opening hours"
             }
@@ -113,6 +139,9 @@
           "section": "services",
           "fields": [
             {
+              "field": "note"
+            },
+            {
               "field": "opening hours"
             }
           ]
@@ -133,6 +162,9 @@
           "section": "services",
           "fields": [
             {
+              "field": "note"
+            },
+            {
               "field": "opening hours"
             }
           ]
@@ -142,6 +174,9 @@
           "name": "Mallacoota Golf and Country Club",
           "section": "community",
           "fields": [
+            {
+              "field": "note"
+            },
             {
               "field": "opening hours"
             }

@@ -663,6 +663,15 @@ export function associationToEntity(assoc, enrichment = {}) {
       social: enrichment.social || [],
       openingHours: enrichment.openingHours || [],
       meetingTimes: enrichment.meetingTimes || null,
+      // These three were absent, and the page renders all of them, so anything
+      // written into an enrichment row was accepted and silently dropped. The
+      // hours of four listings went live without the notes that qualified them
+      // - "the bar opens 4pm", "if the banner is out the front, we're open" -
+      // which is worse than publishing neither, because unqualified hours read
+      // as settled fact.
+      notes_seasonal: enrichment.notes_seasonal || null,
+      trading: enrichment.trading || null,
+      menu: enrichment.menu || null,
       accessibility: enrichment.accessibility || null,
       images: enrichment.images || [],
       status: "published",

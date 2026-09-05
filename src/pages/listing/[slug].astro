@@ -134,6 +134,19 @@ const canonicalPath = listingPagePath(entity);
       <p class:list={["listing-verified", { unverified: !verification.verified }]}>
         {verification.verified ? "✓ " : ""}{verification.text}
       </p>
+      {/* A closed business says so on its own page, not only on the section
+          list. Lee's Pizza has been closed and for sale since August and its
+          page still read "typically open evenings": the one page a search sends
+          somebody to was the one page that did not mention it. */}
+      {entity.trading && entity.trading.state !== "open" && (
+        <p class="listing-status">
+          <strong>{entity.trading.state === "closed" ? "Closed" : entity.trading.state}.</strong>
+          {entity.trading.note && <span> {entity.trading.note.replace(/^Closed\.\s*/, "")}</span>}
+          {entity.trading.recordedAt && (
+            <span class="listing-status-when"> Recorded {formatVerificationDate(entity.trading.recordedAt)}.</span>
+          )}
+        </p>
+      )}
       <p class="listing-body">{entity.description}</p>
       {entity.notes_seasonal && <p class="listing-note">{entity.notes_seasonal}</p>}
 

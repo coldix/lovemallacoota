@@ -696,8 +696,13 @@
       "source": "google-maps"
     },
     "opening_hours": [],
-    "notes_seasonal": "Bistro hours vary seasonally and depend on club events. Check website or call for current times and bookings.",
-    "kind": "Bistro"
+    "notes_seasonal": "Closed for renovations, with no reopening date announced. The club bar is still open but closing earlier than its usual hours while the work is on.",
+    "kind": "Bistro",
+    "trading": {
+      "state": "closed",
+      "note": "Renovations under way, with no reopening date announced yet.",
+      "recordedAt": "2026-09-05"
+    }
   },
   {
     "id": "food-013",

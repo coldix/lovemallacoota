@@ -26,6 +26,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { assembleEntities } from "../src/lib/directory-model.mjs";
+import { loadDirectory } from "../src/lib/directory.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outFile = path.join(rootDir, "data", "directory-changes.json");
@@ -345,7 +346,11 @@ entries.reverse();
 const record = {
   generator: "tools/build-directory-changes.mjs",
   baseline,
-  listings: previous.bySlug.size,
+  // The working tree, not the last commit. The page says "N listings now", and
+  // now means the directory this build is publishing: a listing added since the
+  // last commit is already on the site being built, and counting the commit
+  // instead made the page understate itself by however many were in flight.
+  listings: loadDirectory().length,
   entries,
 };
 

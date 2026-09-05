@@ -1,60 +1,267 @@
 [
   {
-    "id": "do-001",
-    "slug": "sues-bribes",
-    "business_name": "Sue's Bribes",
-    "category_primary": "Shopping",
+    "id": "do-005",
+    "slug": "buckland-jetty-boat-hire",
+    "business_name": "Buckland Jetty Boat Hire",
+    "category_primary": "Tours & Activities",
     "category_tags": [
-      "Shops"
+      "Boating & fishing"
     ],
-    "schema_type": "Store",
-    "description_short": "Clothing, souvenirs, homewares and giftware in the middle of town, and the place to buy a coach ticket.",
-    "description_long": "Sue's Bribes has been on Allan Drive for more than fifteen years, selling clothing, souvenirs, homewares, giftware, jewellery and toys, with a range of Mallacoota tea towels, stickers, magnets and t-shirts you will not find anywhere else in town. Stock moves quickly and not all of it is online, so ring if you are after something in particular and Sue will put it aside. There is an online shop with postage around Australia and click-and-collect in store. Sue also sells tickets for the V/Line coach. The shop no longer sells fresh flowers, and no longer hires bikes.",
+    "schema_type": "LocalBusiness",
+    "description_short": "Hire a boat from Buckland Jetty to explore the beautiful Mallacoota Inlet at your own pace.",
+    "description_long": "Located at Buckland's Jetty, offering a range of hire boats suitable for fishing, cruising, and enjoying the beautiful Mallacoota Lakes system.",
     "images": [
       {
-        "url": "/images/bus/shop/shop01-sues-bribes1.webp",
-        "alt_text": "Display inside Sue's Bribes.",
+        "url": "/images/bus/act/tour01-buckland-jetty-boat-hire1.webp",
+        "alt_text": "Boats for hire at Buckland Jetty.",
         "is_hero": true
       }
     ],
-    "phone": "0400 177 122",
-    "email": "suesbribes@yahoo.com",
+    "phone": "0428 580 660",
+    "email": "bjboathire@bigpond.com",
     "links": [
       {
-        "url": "https://suesbribes.com",
+        "url": "https://boathiremallacoota.com",
         "text": "Website"
+      },
+      {
+        "url": "https://maps.app.goo.gl/yjSa93z25jA3esCG6",
+        "text": "Map"
       }
     ],
-    "social_links": [],
+    "social_links": [
+      {
+        "platform": "facebook",
+        "url": "https://www.facebook.com/BucklandsJettyBoatHire/"
+      }
+    ],
     "address": {
-      "street": "14 Allan Dr",
+      "street": "Buckland Jetty, Lakeside Dr",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.556092,
-      "longitude": 149.757506,
-      "source": "photo-exif"
+      "latitude": -37.530575,
+      "longitude": 149.741186
     },
     "opening_hours": [
       {
         "dayOfWeek": [
+          "Monday",
           "Tuesday",
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Saturday",
+          "Sunday"
         ],
-        "opens": "10:00",
-        "closes": "14:00"
+        "opens": "08:00",
+        "closes": "17:00"
       }
     ],
-    "notes_seasonal": "Open Tuesday to Saturday, 10am to 2pm. Closed Sunday and Monday. Public holidays and the quiet weeks in winter run differently, so ring before making a special trip. If you are buying a coach ticket, ask Sue for the times rather than trusting a printed timetable: the coach changes often enough that it is worth checking on the day.",
-    "kind": "Gift shop and coach ticket agent",
+    "notes_seasonal": "Hours may vary seasonally.",
+    "kind": "Boat hire"
+  },
+  {
+    "id": "do-coffee-and-quiz",
+    "slug": "coffee-and-quiz",
+    "business_name": "Coffee & Quiz",
+    "category_primary": "Do & See",
+    "category_tags": [
+      "Arts & culture"
+    ],
+    "schema_type": "Event",
+    "description_short": "Free morning of coffee, nibbles, a chat and maybe some trivia, at the Muddie.",
+    "description_long": "A Reclink morning at the Mudbrick Pavilion: coffee, nibbles, a chat and maybe some trivia. Free, and no need to book or be any good at quizzes. Turn up.",
+    "phone": null,
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "Mudbrick Pavilion (the Muddie)",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "opening_hours": [],
+    "meetingTimes": "First Friday of the month, 10am to 12 noon",
+    "notes_seasonal": "Free. Run by Reclink.",
+    "kind": "Community morning",
     "verification": {
-      "lastReviewedAt": "2026-09-04"
+      "lastReviewedAt": "2026-09-05"
+    },
+    "source": {
+      "kind": "existing-listing",
+      "note": "Venue, time and that it is free from the Coota community calendar; the monthly frequency from Colin."
+    }
+  },
+  {
+    "id": "do-community-bookshop",
+    "slug": "mallacoota-community-bookshop",
+    "business_name": "Community Bookshop",
+    "category_primary": "Do & See",
+    "category_tags": [
+      "Arts & culture"
+    ],
+    "schema_type": "Store",
+    "description_short": "Second-hand books at the Mudbrick Pavilion, with coffee, cards and a chat.",
+    "description_long": "Josef's Bookshop at the Mudbrick Pavilion, open two sessions a week. Thursday mornings run as coffee, cards, games and a chat as much as a bookshop, and Friday afternoons carry Reclink events alongside the shelves. Volunteer run, so it opens for those sessions rather than all week.",
+    "phone": null,
+    "email": null,
+    "links": [],
+    "social_links": [],
+    "address": {
+      "street": "Mudbrick Pavilion (the Muddie)",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Thursday"
+        ],
+        "opens": "10:00",
+        "closes": "13:00"
+      },
+      {
+        "dayOfWeek": [
+          "Friday"
+        ],
+        "opens": "13:00",
+        "closes": "17:00"
+      }
+    ],
+    "notes_seasonal": "Thursday 10am-1pm and Friday 1-5pm. Thursday is the coffee-and-cards session; Friday afternoon has Reclink events on as well.",
+    "kind": "Community bookshop",
+    "verification": {
+      "lastReviewedAt": "2026-09-05"
+    },
+    "source": {
+      "kind": "existing-listing",
+      "note": "Times and venue from the Coota community calendar, June to December 2025."
+    }
+  },
+  {
+    "id": "do-006",
+    "slug": "mallacoota-hireboats",
+    "business_name": "Mallacoota Hireboats",
+    "category_primary": "Tours & Activities",
+    "category_tags": [
+      "Boating & fishing"
+    ],
+    "schema_type": "LocalBusiness",
+    "description_short": "Hire boats and kayaks from Buckland Drive - perfect for fishing or exploring the inlet.",
+    "description_long": "A wide range of tinnies, cruisers, and kayaks for hire to explore Mallacoota Inlet. Easy pickup at Buckland Drive, close to the main wharf. Book ahead in peak periods.",
+    "images": [
+      {
+        "url": "/images/bus/act/tour03-mallacoota-hire-boats1.webp",
+        "alt_text": "Selection of hire boats available.",
+        "is_hero": true
+      }
+    ],
+    "phone": "0474 818 058",
+    "email": "hireboats@mallacoota.com",
+    "links": [
+      {
+        "url": "https://www.mallacootahireboats.com/",
+        "text": "Website"
+      },
+      {
+        "url": "https://maps.app.goo.gl/zxaRXSuXiHfSCm9U9",
+        "text": "Map"
+      }
+    ],
+    "social_links": [],
+    "address": {
+      "street": "10 Buckland Dr",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.555563,
+      "longitude": 149.755411
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "17:00"
+      }
+    ],
+    "notes_seasonal": "Hours vary seasonally. Bookings recommended.",
+    "kind": "Boat and kayak hire"
+  },
+  {
+    "id": "do-008",
+    "slug": "mallacoota-rsl-bunker-museum",
+    "business_name": "Mallacoota RSL Bunker Museum",
+    "category_primary": "Tours & Activities",
+    "category_tags": [
+      "Arts & culture"
+    ],
+    "schema_type": "Museum",
+    "description_short": "Historic WWII bunker and museum showcasing local and military history.",
+    "description_long": "Discover Mallacoota's fascinating military history at the RSL Bunker Museum, a restored WWII advanced operations bunker. The museum features displays on local history, maritime history, and Australia's military heritage.",
+    "images": [
+      {
+        "url": "/images/bus/act/do008-bunker-museum.webp",
+        "alt_text": "The entrance to the Mallacoota RSL Bunker Museum.",
+        "is_hero": true
+      }
+    ],
+    "phone": "0474 858 584",
+    "email": "admin@mallacootabunker.com.au",
+    "links": [
+      {
+        "url": "https://www.mallacootabunker.com.au/",
+        "text": "Website"
+      },
+      {
+        "url": "https://maps.app.goo.gl/UL3t2LVks9W5MDep6",
+        "text": "Map"
+      }
+    ],
+    "social_links": [],
+    "address": {
+      "street": "Airport Rd",
+      "locality": "Mallacoota",
+      "state": "VIC",
+      "postcode": "3892",
+      "country": "Australia"
+    },
+    "geo": {
+      "latitude": -37.5934278,
+      "longitude": 149.7272131,
+      "source": "google-maps"
+    },
+    "opening_hours": [
+      {
+        "dayOfWeek": [
+          "Tuesday"
+        ],
+        "opens": "09:30",
+        "closes": "11:30"
+      }
+    ],
+    "notes_seasonal": "Open Tuesday mornings, 9.30am with last entry 11.30am. Other openings depend on volunteer availability, so ring before making a special trip.",
+    "kind": "Museum",
+    "verification": {
+      "lastReviewedAt": "2026-09-05"
     }
   },
   {
@@ -142,164 +349,6 @@
     "serviceArea": "Mallacoota - at markets and events"
   },
   {
-    "id": "do-004",
-    "slug": "wilderness-coast-candles",
-    "business_name": "Wilderness Coast Candles",
-    "category_primary": "Shopping",
-    "category_tags": [
-      "Shops"
-    ],
-    "schema_type": "Store",
-    "description_short": "Locally made, high-quality candles perfect for gifts or a personal treat.",
-    "description_long": "Handcrafted candles made locally in Mallacoota, often featuring scents inspired by the surrounding natural environment. Available online or potentially through local stockists.",
-    "images": [
-      {
-        "url": "/images/bus/shop/shop02-wilderness-coast-candles1.webp",
-        "alt_text": "Wilderness Coast Candles product display.",
-        "is_hero": true
-      }
-    ],
-    "phone": "0491 115 525",
-    "email": "hancockfam01@gmail.com",
-    "links": [
-      {
-        "url": "https://wildernesscoastcandles.com",
-        "text": "Website"
-      }
-    ],
-    "social_links": [],
-    "address": null,
-    "opening_hours": [],
-    "notes_seasonal": "Check website for purchase options and stockists.",
-    "kind": "Candles and gifts",
-    "serviceArea": "Mallacoota - at markets and events"
-  },
-  {
-    "id": "do-005",
-    "slug": "buckland-jetty-boat-hire",
-    "business_name": "Buckland Jetty Boat Hire",
-    "category_primary": "Tours & Activities",
-    "category_tags": [
-      "Boating & fishing"
-    ],
-    "schema_type": "LocalBusiness",
-    "description_short": "Hire a boat from Buckland Jetty to explore the beautiful Mallacoota Inlet at your own pace.",
-    "description_long": "Located at Buckland's Jetty, offering a range of hire boats suitable for fishing, cruising, and enjoying the beautiful Mallacoota Lakes system.",
-    "images": [
-      {
-        "url": "/images/bus/act/tour01-buckland-jetty-boat-hire1.webp",
-        "alt_text": "Boats for hire at Buckland Jetty.",
-        "is_hero": true
-      }
-    ],
-    "phone": "0428 580 660",
-    "email": "bjboathire@bigpond.com",
-    "links": [
-      {
-        "url": "https://boathiremallacoota.com",
-        "text": "Website"
-      },
-      {
-        "url": "https://maps.app.goo.gl/yjSa93z25jA3esCG6",
-        "text": "Map"
-      }
-    ],
-    "social_links": [
-      {
-        "platform": "facebook",
-        "url": "https://www.facebook.com/BucklandsJettyBoatHire/"
-      }
-    ],
-    "address": {
-      "street": "Buckland Jetty, Lakeside Dr",
-      "locality": "Mallacoota",
-      "state": "VIC",
-      "postcode": "3892",
-      "country": "Australia"
-    },
-    "geo": {
-      "latitude": -37.530575,
-      "longitude": 149.741186
-    },
-    "opening_hours": [
-      {
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "08:00",
-        "closes": "17:00"
-      }
-    ],
-    "notes_seasonal": "Hours may vary seasonally.",
-    "kind": "Boat hire"
-  },
-  {
-    "id": "do-006",
-    "slug": "mallacoota-hireboats",
-    "business_name": "Mallacoota Hireboats",
-    "category_primary": "Tours & Activities",
-    "category_tags": [
-      "Boating & fishing"
-    ],
-    "schema_type": "LocalBusiness",
-    "description_short": "Hire boats and kayaks from Buckland Drive - perfect for fishing or exploring the inlet.",
-    "description_long": "A wide range of tinnies, cruisers, and kayaks for hire to explore Mallacoota Inlet. Easy pickup at Buckland Drive, close to the main wharf. Book ahead in peak periods.",
-    "images": [
-      {
-        "url": "/images/bus/act/tour03-mallacoota-hire-boats1.webp",
-        "alt_text": "Selection of hire boats available.",
-        "is_hero": true
-      }
-    ],
-    "phone": "0474 818 058",
-    "email": "hireboats@mallacoota.com",
-    "links": [
-      {
-        "url": "https://www.mallacootahireboats.com/",
-        "text": "Website"
-      },
-      {
-        "url": "https://maps.app.goo.gl/zxaRXSuXiHfSCm9U9",
-        "text": "Map"
-      }
-    ],
-    "social_links": [],
-    "address": {
-      "street": "10 Buckland Dr",
-      "locality": "Mallacoota",
-      "state": "VIC",
-      "postcode": "3892",
-      "country": "Australia"
-    },
-    "geo": {
-      "latitude": -37.555563,
-      "longitude": 149.755411
-    },
-    "opening_hours": [
-      {
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "08:00",
-        "closes": "17:00"
-      }
-    ],
-    "notes_seasonal": "Hours vary seasonally. Bookings recommended.",
-    "kind": "Boat and kayak hire"
-  },
-  {
     "id": "do-007",
     "slug": "mv-loch-ard-dale-winward",
     "business_name": "MV Loch-Ard - Dale Winward",
@@ -342,61 +391,61 @@
     "kind": "Cruises"
   },
   {
-    "id": "do-008",
-    "slug": "mallacoota-rsl-bunker-museum",
-    "business_name": "Mallacoota RSL Bunker Museum",
-    "category_primary": "Tours & Activities",
+    "id": "do-001",
+    "slug": "sues-bribes",
+    "business_name": "Sue's Bribes",
+    "category_primary": "Shopping",
     "category_tags": [
-      "Arts & culture"
+      "Shops"
     ],
-    "schema_type": "Museum",
-    "description_short": "Historic WWII bunker and museum showcasing local and military history.",
-    "description_long": "Discover Mallacoota's fascinating military history at the RSL Bunker Museum, a restored WWII advanced operations bunker. The museum features displays on local history, maritime history, and Australia's military heritage.",
+    "schema_type": "Store",
+    "description_short": "Clothing, souvenirs, homewares and giftware in the middle of town, and the place to buy a coach ticket.",
+    "description_long": "Sue's Bribes has been on Allan Drive for more than fifteen years, selling clothing, souvenirs, homewares, giftware, jewellery and toys, with a range of Mallacoota tea towels, stickers, magnets and t-shirts you will not find anywhere else in town. Stock moves quickly and not all of it is online, so ring if you are after something in particular and Sue will put it aside. There is an online shop with postage around Australia and click-and-collect in store. Sue also sells tickets for the V/Line coach. The shop no longer sells fresh flowers, and no longer hires bikes.",
     "images": [
       {
-        "url": "/images/bus/act/do008-bunker-museum.webp",
-        "alt_text": "The entrance to the Mallacoota RSL Bunker Museum.",
+        "url": "/images/bus/shop/shop01-sues-bribes1.webp",
+        "alt_text": "Display inside Sue's Bribes.",
         "is_hero": true
       }
     ],
-    "phone": "0474 858 584",
-    "email": "admin@mallacootabunker.com.au",
+    "phone": "0400 177 122",
+    "email": "suesbribes@yahoo.com",
     "links": [
       {
-        "url": "https://www.mallacootabunker.com.au/",
+        "url": "https://suesbribes.com",
         "text": "Website"
-      },
-      {
-        "url": "https://maps.app.goo.gl/UL3t2LVks9W5MDep6",
-        "text": "Map"
       }
     ],
     "social_links": [],
     "address": {
-      "street": "Airport Rd",
+      "street": "14 Allan Dr",
       "locality": "Mallacoota",
       "state": "VIC",
       "postcode": "3892",
       "country": "Australia"
     },
     "geo": {
-      "latitude": -37.5934278,
-      "longitude": 149.7272131,
-      "source": "google-maps"
+      "latitude": -37.556092,
+      "longitude": 149.757506,
+      "source": "photo-exif"
     },
     "opening_hours": [
       {
         "dayOfWeek": [
-          "Tuesday"
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
         ],
-        "opens": "09:30",
-        "closes": "11:30"
+        "opens": "10:00",
+        "closes": "14:00"
       }
     ],
-    "notes_seasonal": "Open Tuesday mornings, 9.30am with last entry 11.30am. Other openings depend on volunteer availability, so ring before making a special trip.",
-    "kind": "Museum",
+    "notes_seasonal": "Open Tuesday to Saturday, 10am to 2pm. Closed Sunday and Monday. Public holidays and the quiet weeks in winter run differently, so ring before making a special trip. If you are buying a coach ticket, ask Sue for the times rather than trusting a printed timetable: the coach changes often enough that it is worth checking on the day.",
+    "kind": "Gift shop and coach ticket agent",
     "verification": {
-      "lastReviewedAt": "2026-09-05"
+      "lastReviewedAt": "2026-09-04"
     }
   },
   {
@@ -432,5 +481,38 @@
     "related": [
       "mallacoota-surf-shack"
     ]
+  },
+  {
+    "id": "do-004",
+    "slug": "wilderness-coast-candles",
+    "business_name": "Wilderness Coast Candles",
+    "category_primary": "Shopping",
+    "category_tags": [
+      "Shops"
+    ],
+    "schema_type": "Store",
+    "description_short": "Locally made, high-quality candles perfect for gifts or a personal treat.",
+    "description_long": "Handcrafted candles made locally in Mallacoota, often featuring scents inspired by the surrounding natural environment. Available online or potentially through local stockists.",
+    "images": [
+      {
+        "url": "/images/bus/shop/shop02-wilderness-coast-candles1.webp",
+        "alt_text": "Wilderness Coast Candles product display.",
+        "is_hero": true
+      }
+    ],
+    "phone": "0491 115 525",
+    "email": "hancockfam01@gmail.com",
+    "links": [
+      {
+        "url": "https://wildernesscoastcandles.com",
+        "text": "Website"
+      }
+    ],
+    "social_links": [],
+    "address": null,
+    "opening_hours": [],
+    "notes_seasonal": "Check website for purchase options and stockists.",
+    "kind": "Candles and gifts",
+    "serviceArea": "Mallacoota - at markets and events"
   }
 ]

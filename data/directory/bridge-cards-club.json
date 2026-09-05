@@ -6,18 +6,23 @@
   "entityType": "social-group",
   "section": "community",
   "categories": [],
-  "description": "Play and teach Bridge groups of 4",
-  "descriptionShort": "Play and teach Bridge groups of 4",
+  "description": "The Mallacoota bridge club folded for lack of interest. Colin Dixon will start a weekly game if three other people want one, so this listing is here to find them rather than to describe something already running. He also has two Bridge+More dealing machines, bought in 2021 and barely used since: they deal real cards, run barometer scoring and play the hand back for analysis afterwards, and he lends them out and demonstrates them for free.",
+  "descriptionShort": "Folded for lack of interest. Three more players and it starts again.",
   "address": null,
   "serviceArea": null,
   "phone": "0419415000",
   "email": "col@dixon.net.au",
-  "website": null,
-  "links": [],
+  "website": "https://bridge.oze.au/",
+  "links": [
+    {
+      "url": "https://bridge.oze.au/",
+      "text": "Bridge+More demos"
+    }
+  ],
   "social": [],
   "openingHours": [],
   "meetingTimes": null,
-  "notes_seasonal": null,
+  "notes_seasonal": "Not running at the moment. If you would play weekly, say so: three people is the whole difference between this and a game.",
   "accessibility": null,
   "images": [],
   "status": "published",
@@ -36,5 +41,11 @@
     "lastReviewedAt": "2026-09-05"
   },
   "createdAt": "2026-09-05T11:12:42.421Z",
-  "updatedAt": "2026-09-05T11:13:08.997Z"
+  "updatedAt": "2026-09-05T11:31:38.821134Z",
+  "kind": "Bridge club",
+  "trading": {
+    "state": "closed",
+    "note": "Folded for lack of interest. Three more players who want a weekly game and it starts again - ring or email.",
+    "recordedAt": "2026-09-05"
+  }
 }

@@ -188,8 +188,9 @@ got wrong first:
 
 ## Where the directory stands
 
-127 listings, 56 with a photograph. Do & See went from five listings to ten
-today, and the Bridge Club arrived through the form in the evening.
+127 listings, 57 with a photograph. Eat & Drink now has a picture on every
+listing. Do & See went from five listings to ten today, and the Bridge Club
+arrived through the form in the evening.
 
 **The Lions Park precinct is now mapped.** Five things stand within a hundred
 metres of each other and the directory had two of them: the Mudbrick Hall (the

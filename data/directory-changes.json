@@ -7,6 +7,34 @@
   "listings": 127,
   "entries": [
     {
+      "commit": "bb0822b",
+      "date": "2026-09-06T15:29:07+10:00",
+      "subject": "MallaMaurice is gone, and Larry's number is the one on the van (v1.74)",
+      "added": [],
+      "removed": [
+        {
+          "slug": "mallamaurice-holiday-units",
+          "name": "MallaMaurice Holiday Units",
+          "section": "stay"
+        }
+      ],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "larrys-coffee-van",
+          "name": "Larry's Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "phone",
+              "from": "0410 550 228",
+              "to": "0403 550 228"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "commit": "b2d4aa7",
       "date": "2026-09-06T14:06:26+10:00",
       "subject": "Eagle View, Lin Cottage and Larry's van get their photographs (v1.73)",

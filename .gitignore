@@ -19,6 +19,10 @@ mouth/
 # photo backup — keep these in your own library.
 images/thisweek/
 
+# Drop-zone for listing photographs waiting to be converted. Save the WebP
+# under images/listings/<slug>.webp, then delete the original.
+to-do/
+
 # Local Worker secrets. The templates carry no values and are tracked; anything
 # holding a real one is not. Order matters here — the negations must follow the
 # .env.* rule to take effect.

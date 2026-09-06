@@ -16,7 +16,7 @@ mallacoota-medical-centre | Mallacoota Medical Centre | 21-23 Maurice Avenue, Ma
 mallacoota-p-12-college | Mallacoota P-12 College | 25 Bucknall Street, Mallacoota, VIC 3892 |    -> 
 mallacoota-police-station | Mallacoota Police Station | 38 Maurice Avenue, Mallacoota, VIC 3892 |    -> 
 
-## Unverified, probably out by 50 to 300m (16)
+## Unverified, probably out by 50 to 300m (15)
 
 From the original data, never checked. Roughly right, not exact. Lowest
 priority.
@@ -34,7 +34,6 @@ gowings-of-mallacoota-holiday-units | Gowings of Mallacoota Holiday Units | 5-7 
 harbour-lights-holiday-flats | Harbour Lights Holiday Flats | 88 Betka Rd, Mallacoota, VIC 3892 | -37.57582, 149.73976   -> 
 lakeside-at-mallacoota | Lakeside at Mallacoota | 12 Dorron Avenue, Mallacoota, VIC 3892 | -37.56138, 149.75549   -> 
 lin-cottage | Lin Cottage | Mallacoota, VIC 3892 | -37.56000, 149.75600   -> 
-mallamaurice-holiday-units | MallaMaurice Holiday Units | 2 Maurice Ave, Mallacoota, VIC 3892 | -37.55347, 149.75631   -> 
 shady-gully-caravan-park | Shady Gully Caravan Park | Lot 5 Genoa Rd, Mallacoota, VIC 3892 | -37.55600, 149.75200   -> 
 silver-bream-motel-flats | Silver Bream Motel & Flats | 32-34 Maurice Ave, Mallacoota, VIC 3892 | -37.55621, 149.75739   -> 
 

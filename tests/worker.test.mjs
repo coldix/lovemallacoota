@@ -230,6 +230,15 @@ test("a listing that changed its name keeps its old address working", async () =
   );
 });
 
+test("a listing that closed is sent to its section, not left as a 404", async () => {
+  const response = await worker.fetch(
+    new Request("https://lovemallacoota.au/listing/mallamaurice-holiday-units.html"),
+    env
+  );
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get("Location"), "https://lovemallacoota.au/accom.html");
+});
+
 test("a preview hostname is told not to index the production pages it serves", async () => {
   const preview = await worker.fetch(
     new Request("https://lovemallacoota-preview.workers.dev/edition.html"),

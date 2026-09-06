@@ -188,7 +188,7 @@ got wrong first:
 
 ## Where the directory stands
 
-128 listings, 56 with a photograph. Do & See went from five listings to ten
+127 listings, 56 with a photograph. Do & See went from five listings to ten
 today, and the Bridge Club arrived through the form in the evening.
 
 **The Lions Park precinct is now mapped.** Five things stand within a hundred
@@ -205,10 +205,9 @@ ask which link the sentence belongs to.**
 
 ### Still wanted
 
-- `docs/coordinates-wanted.md`: five listings with no coordinate, sixteen
+- `docs/coordinates-wanted.md`: five listings with no coordinate, fifteen
   unverified. Send the Google map link, not the `@lat,lng` from the address bar
   — the place pin sits later in the link as `!3d…!4d…`.
-- One accommodation listing has no photograph: MallaMaurice Holiday Units.
 - Nothing outstanding on the forms. See below.
 
 ---

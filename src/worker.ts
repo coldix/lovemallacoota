@@ -60,6 +60,9 @@ const MOVED_PATHS = new Map([
     "/listing/mallacoota-sporting-club-rooms.html",
     "/listing/mudbrick-hall.html",
   ],
+  // MallaMaurice Holiday Units no longer operate. The listing is gone; the old
+  // address sends people to Stay rather than a 404.
+  ["/listing/mallamaurice-holiday-units.html", "/accom.html"],
   ["/category", "/"],
   ["/category/news", "/"],
   ["/category/how", "/"],

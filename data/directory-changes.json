@@ -4,8 +4,56 @@
     "date": "2025-10-23T14:11:21+11:00",
     "listings": 41
   },
-  "listings": 128,
+  "listings": 127,
   "entries": [
+    {
+      "commit": "b2d4aa7",
+      "date": "2026-09-06T14:06:26+10:00",
+      "subject": "Eagle View, Lin Cottage and Larry's van get their photographs (v1.73)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "eagle-view-stay",
+          "name": "Eagle View Stay",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "larrys-coffee-van",
+          "name": "Larry's Coffee Van",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "phone",
+              "from": null,
+              "to": "0410 550 228"
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "lin-cottage",
+          "name": "Lin Cottage",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        }
+      ]
+    },
     {
       "commit": "152facf",
       "date": "2026-09-05T21:32:34+10:00",

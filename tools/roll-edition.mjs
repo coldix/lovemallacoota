@@ -107,33 +107,41 @@ export function plan(editions, today) {
   return { freezes, create: weeks.has(openWeek) ? null : openWeek };
 }
 
-const today = todayArg || melbourneToday();
-const editions = loadEditions();
-const { freezes, create } = plan(editions, today);
-
-console.log(`today ${today} (${isoWeekOf(today)})`);
-
-for (const { file, edition } of editions) {
-  if (!freezes.includes(edition.week)) continue;
-  console.log(`  freeze ${edition.week} (${(edition.articles || []).length} items)`);
-  if (dryRun) continue;
-  edition.status = "frozen";
-  edition.frozenAt = new Date().toISOString();
-  writeFileSync(file, `${JSON.stringify(edition, null, 2)}\n`);
+function isInvokedDirectly() {
+  const invoked = process.argv[1];
+  if (!invoked) return false;
+  return path.resolve(invoked) === fileURLToPath(import.meta.url);
 }
 
-if (create) {
-  console.log(`  open   ${create}`);
-  if (!dryRun) {
-    mkdirSync(editionsDir, { recursive: true });
-    writeFileSync(
-      path.join(editionsDir, `${create}.json`),
-      `${JSON.stringify(newEdition(create), null, 2)}\n`
-    );
+if (isInvokedDirectly()) {
+  const today = todayArg || melbourneToday();
+  const editions = loadEditions();
+  const { freezes, create } = plan(editions, today);
+
+  console.log(`today ${today} (${isoWeekOf(today)})`);
+
+  for (const { file, edition } of editions) {
+    if (!freezes.includes(edition.week)) continue;
+    console.log(`  freeze ${edition.week} (${(edition.articles || []).length} items)`);
+    if (dryRun) continue;
+    edition.status = "frozen";
+    edition.frozenAt = new Date().toISOString();
+    writeFileSync(file, `${JSON.stringify(edition, null, 2)}\n`);
   }
-} else {
-  console.log("  open   nothing to create");
-}
 
-if (!freezes.length && !create) console.log("  nothing to do");
-if (dryRun) console.log("\n(dry run — nothing written)");
+  if (create) {
+    console.log(`  open   ${create}`);
+    if (!dryRun) {
+      mkdirSync(editionsDir, { recursive: true });
+      writeFileSync(
+        path.join(editionsDir, `${create}.json`),
+        `${JSON.stringify(newEdition(create), null, 2)}\n`
+      );
+    }
+  } else {
+    console.log("  open   nothing to create");
+  }
+
+  if (!freezes.length && !create) console.log("  nothing to do");
+  if (dryRun) console.log("\n(dry run — nothing written)");
+}

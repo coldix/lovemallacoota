@@ -239,6 +239,15 @@ test("a listing that closed is sent to its section, not left as a 404", async ()
   assert.equal(response.headers.get("Location"), "https://lovemallacoota.au/accom.html");
 });
 
+test("the week that was opened by mistake goes back to This Week", async () => {
+  const response = await worker.fetch(
+    new Request("https://lovemallacoota.au/edition/2026-w37.html"),
+    env
+  );
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get("Location"), "https://lovemallacoota.au/edition.html");
+});
+
 test("a preview hostname is told not to index the production pages it serves", async () => {
   const preview = await worker.fetch(
     new Request("https://lovemallacoota-preview.workers.dev/edition.html"),

@@ -1,10 +1,8 @@
 name: Close the week
 
 on:
-  schedule:
-    # 06:00 UTC Sunday = Sunday 16:00 AEST. The edition is published at four on
-    # Sunday afternoon: the week closes, the next one opens.
-    - cron: "0 6 * * 0"
+  # The first weekly edition is closed. The next publication is a monthly
+  # online edition, to be opened by hand. Do not auto-open another week.
   workflow_dispatch:
 
 permissions:

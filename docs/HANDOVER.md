@@ -83,6 +83,11 @@ consumer domain must name `publishedAt`, the page where its owner already
 publishes it. MDHSS embed it on mallacoota.org.au, so embedding it here exposes
 nothing new. No such page, and the build fails.
 
+**The first weekly edition is closed.** Week 36 (31 Aug–6 Sep) is frozen and
+is still This Week. Week 37 was opened by mistake on Sunday night and taken
+out again. `roll.yml` no longer runs on a schedule. On Monday: archive that
+week's PDF, then start the monthly online edition.
+
 **The weekly diary now comes from the calendar.** `refresh-weekly.mjs` replaces
 the diary with whatever `fetch-calendar.mjs` returns, and `weekly.yml` runs daily
 at 15:10 Melbourne and deploys production itself. What's On shows the next seven

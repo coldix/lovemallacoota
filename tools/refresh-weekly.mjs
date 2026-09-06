@@ -3,12 +3,14 @@
 # File Name:   refresh-weekly.mjs
 # Description: Builds the automatic parts of a weekly edition — forecast, the
 #              week's events, a trail from TrailBound and a business from the
-#              directory — into data/weekly/<week>.json. Run on a schedule and
-#              committed, so the build itself never depends on the network and
-#              a past edition keeps the forecast it was published with.
+#              directory — into data/weekly/<week>.json. Also writes
+#              data/weekly/coming.json, the next seven days from today, which
+#              What's On shows. Run on a schedule and committed, so the build
+#              itself never depends on the network and a past edition keeps the
+#              forecast it was published with.
 #
 # Usage:
-#   node tools/refresh-weekly.mjs            # current week, writes the file
+#   node tools/refresh-weekly.mjs            # current week + coming seven days
 #   node tools/refresh-weekly.mjs --week=2026-w35
 #   node tools/refresh-weekly.mjs --dry-run
 */
@@ -18,6 +20,7 @@ import { moonWeek } from "../src/lib/moon.mjs";
 import { plainEdition } from "../src/lib/editions.mjs";
 import { entityBySlug, listingPhoto } from "../src/lib/directory.mjs";
 import { fetchCalendarEvents } from "./fetch-calendar.mjs";
+import { melbourneToday } from "./roll-edition.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -92,19 +95,30 @@ function readJson(relativePath, fallback) {
  */
 function startDateFor(week) {
   const monday = mondayOf(week).toISOString().slice(0, 10);
-  const today = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Australia/Melbourne",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(new Date());
+  const today = melbourneToday();
   return today < monday ? today : monday;
 }
 
-async function fetchForecast(week) {
+/** Calendar-date arithmetic on an ISO day, no clock and no DST. */
+export function addIsoDays(isoDate, days) {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day + days)).toISOString().slice(0, 10);
+}
+
+/** Today through today+6 in Melbourne — the window What's On shows. */
+export function comingRange(today = melbourneToday()) {
+  return { start: today, end: addIsoDays(today, 6) };
+}
+
+function editionRange(week) {
   const monday = mondayOf(week);
-  const start = startDateFor(week);
-  const end = new Date(monday.getTime() + 6 * 86400000).toISOString().slice(0, 10);
+  return {
+    start: startDateFor(week),
+    end: new Date(monday.getTime() + 6 * 86400000).toISOString().slice(0, 10),
+  };
+}
+
+async function fetchForecast({ start, end }) {
   const url =
     `https://api.open-meteo.com/v1/forecast?latitude=${MALLACOOTA.latitude}` +
     `&longitude=${MALLACOOTA.longitude}` +
@@ -144,10 +158,7 @@ async function fetchForecast(week) {
  * numbers are indicative. The edition says so, and still links to the official
  * predictions.
  */
-async function fetchTides(week) {
-  const monday = mondayOf(week);
-  const start = startDateFor(week);
-  const end = new Date(monday.getTime() + 6 * 86400000).toISOString().slice(0, 10);
+async function fetchTides({ start, end }) {
   const url =
     "https://marine-api.open-meteo.com/v1/marine?" +
     `latitude=${MALLACOOTA.latitude}&longitude=${MALLACOOTA.longitude}` +
@@ -257,75 +268,106 @@ function pickEvents(week) {
     .sort((a, b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || ""));
 }
 
-const week = weekArg || isoWeek(new Date());
-
-const previous = existsSync(path.join(weeklyDir, `${week}.json`))
-  ? JSON.parse(readFileSync(path.join(weeklyDir, `${week}.json`), "utf8"))
-  : null;
-
-let weather = null;
-try {
-  weather = await fetchForecast(week);
-} catch (error) {
-  // A forecast is never invented. But a transient outage must not delete the
-  // one we already have: yesterday's forecast, clearly dated, beats no forecast
-  // at all, and beats a section that silently vanishes from the edition.
-  console.warn(`forecast unavailable: ${error.message}`);
-  if (previous?.weather) {
-    weather = previous.weather;
-    console.warn(`keeping the forecast fetched at ${previous.weather.fetchedAt}`);
+async function loadOrKeep(label, previousValue, fetchFn) {
+  try {
+    return await fetchFn();
+  } catch (error) {
+    // A forecast is never invented. But a transient outage must not delete the
+    // one we already have: yesterday's forecast, clearly dated, beats no forecast
+    // at all, and beats a section that silently vanishes from the edition.
+    console.warn(`${label} unavailable: ${error.message}`);
+    if (previousValue) {
+      console.warn(`keeping the ${label} fetched at ${previousValue.fetchedAt}`);
+      return previousValue;
+    }
+    return null;
   }
 }
 
-let tides = null;
-try {
-  tides = await fetchTides(week);
-} catch (error) {
-  console.warn(`tides unavailable: ${error.message}`);
-  if (previous?.tides) tides = previous.tides;
-}
+async function refresh() {
+  const week = weekArg || isoWeek(new Date());
+  const weekFile = path.join(weeklyDir, `${week}.json`);
+  const comingFile = path.join(weeklyDir, "coming.json");
+  const previous = existsSync(weekFile) ? JSON.parse(readFileSync(weekFile, "utf8")) : null;
+  const previousComing = existsSync(comingFile) ? JSON.parse(readFileSync(comingFile, "utf8")) : null;
+  const weekWindow = editionRange(week);
+  const comingWindow = comingRange();
 
-let events = [];
-try {
-  const mon = mondayOf(week);
-  const sun = new Date(mon);
-  sun.setUTCDate(mon.getUTCDate() + 6);
-  const startStr = mon.toISOString().slice(0, 10) + "T00:00:00";
-  const endStr = sun.toISOString().slice(0, 10) + "T23:59:59";
-  events = await fetchCalendarEvents(startStr, endStr);
-} catch (error) {
-  console.warn(`calendar fetch failed: ${error.message}`);
-  events = previous?.events?.length ? previous.events : pickEvents(week);
-}
+  const weather = await loadOrKeep("forecast", previous?.weather, () => fetchForecast(weekWindow));
+  const tides = await loadOrKeep("tides", previous?.tides, () => fetchTides(weekWindow));
 
-const payload = {
-  week,
-  generatedAt: new Date().toISOString(),
-  weather,
-  tides,
-  // Computed, not fetched: the moon is arithmetic, and the tides follow it.
-  moon: moonWeek(mondayOf(week).toISOString().slice(0, 10)),
-  events,
-  trail: pickTrail(week),
-  business: pickBusiness(week),
-};
+  let events = [];
+  try {
+    const mon = mondayOf(week);
+    const sun = new Date(mon);
+    sun.setUTCDate(mon.getUTCDate() + 6);
+    const startStr = mon.toISOString().slice(0, 10) + "T00:00:00";
+    const endStr = sun.toISOString().slice(0, 10) + "T23:59:59";
+    events = await fetchCalendarEvents(startStr, endStr);
+  } catch (error) {
+    console.warn(`calendar fetch failed: ${error.message}`);
+    events = previous?.events?.length ? previous.events : pickEvents(week);
+  }
 
-console.log(`week ${week} (rotation ${rotationIndex(week)})`);
-console.log(`  forecast: ${weather ? `${weather.days.length} days` : "unavailable"}`);
-console.log(`  tides:    ${tides ? `${tides.extremes.length} highs and lows` : "no key configured — linking to the Bureau"}`);
-console.log(`  moon:     ${payload.moon[0].name} → ${payload.moon.at(-1).name}`);
-console.log(`  events:   ${payload.events.length}`);
-console.log(`  trail:    ${payload.trail ? payload.trail.name : "none"}`);
-console.log(`  business: ${payload.business ? payload.business.name : "none"}`);
+  const payload = {
+    week,
+    generatedAt: new Date().toISOString(),
+    weather,
+    tides,
+    // Computed, not fetched: the moon is arithmetic, and the tides follow it.
+    moon: moonWeek(mondayOf(week).toISOString().slice(0, 10)),
+    events,
+    trail: pickTrail(week),
+    business: pickBusiness(week),
+  };
 
-if (dryRun) {
-  console.log("\n(dry run — nothing written)");
-} else {
+  const comingWeather = await loadOrKeep("coming forecast", previousComing?.weather, () =>
+    fetchForecast(comingWindow)
+  );
+  const comingTides = await loadOrKeep("coming tides", previousComing?.tides, () =>
+    fetchTides(comingWindow)
+  );
+  const coming = {
+    start: comingWindow.start,
+    end: comingWindow.end,
+    generatedAt: new Date().toISOString(),
+    weather: comingWeather,
+    tides: comingTides,
+    moon: moonWeek(comingWindow.start),
+  };
+
+  console.log(`week ${week} (rotation ${rotationIndex(week)}) ${weekWindow.start} → ${weekWindow.end}`);
+  console.log(`  forecast: ${weather ? `${weather.days.length} days` : "unavailable"}`);
+  console.log(`  tides:    ${tides ? `${tides.extremes.length} highs and lows` : "no key configured — linking to the Bureau"}`);
+  console.log(`  moon:     ${payload.moon[0].name} → ${payload.moon.at(-1).name}`);
+  console.log(`  events:   ${payload.events.length}`);
+  console.log(`  trail:    ${payload.trail ? payload.trail.name : "none"}`);
+  console.log(`  business: ${payload.business ? payload.business.name : "none"}`);
+  console.log(`coming ${comingWindow.start} → ${comingWindow.end}`);
+  console.log(`  forecast: ${comingWeather ? `${comingWeather.days.length} days` : "unavailable"}`);
+  console.log(`  tides:    ${comingTides ? `${comingTides.extremes.length} highs and lows` : "unavailable"}`);
+
+  if (dryRun) {
+    console.log("\n(dry run — nothing written)");
+    return;
+  }
+
   mkdirSync(weeklyDir, { recursive: true });
-  const file = path.join(weeklyDir, `${week}.json`);
   // Plain punctuation in the committed file as well as on the page.
-  writeFileSync(file, `${JSON.stringify(plainEdition(payload), null, 2)}\n`);
-  console.log(`\nwrote ${path.relative(rootDir, file)}`);
+  writeFileSync(weekFile, `${JSON.stringify(plainEdition(payload), null, 2)}\n`);
+  writeFileSync(comingFile, `${JSON.stringify(plainEdition(coming), null, 2)}\n`);
+  console.log(`\nwrote ${path.relative(rootDir, weekFile)}`);
+  console.log(`wrote ${path.relative(rootDir, comingFile)}`);
+}
+
+function isInvokedDirectly() {
+  const invoked = process.argv[1];
+  if (!invoked) return false;
+  return path.resolve(invoked) === fileURLToPath(import.meta.url);
+}
+
+if (isInvokedDirectly()) {
+  await refresh();
 }
 
 export { TRAIL_RADIUS_KM, haversineKm, isoWeek, mondayOf, rotationIndex };

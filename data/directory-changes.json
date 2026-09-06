@@ -7,6 +7,27 @@
   "listings": 127,
   "entries": [
     {
+      "commit": "52d5643",
+      "date": "2026-09-06T15:55:13+10:00",
+      "subject": "Alf's Pizza gets its photograph (v1.75)",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "alfs-pizza",
+          "name": "Alf's Pizza",
+          "section": "eat-drink",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
       "commit": "bb0822b",
       "date": "2026-09-06T15:29:07+10:00",
       "subject": "MallaMaurice is gone, and Larry's number is the one on the van (v1.74)",

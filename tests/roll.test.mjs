@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { isoWeekOf, newEdition, plan } from "../tools/roll-edition.mjs";
+import { isoWeekOf, melbourneToday, newEdition, plan } from "../tools/roll-edition.mjs";
+import { addIsoDays, comingRange } from "../tools/refresh-weekly.mjs";
 
 const open35 = {
   edition: { week: "2026-w35", weekStart: "2026-08-24", weekEnd: "2026-08-30", status: "open" },
@@ -54,4 +55,14 @@ test("the week a date belongs to is the ISO week", () => {
   assert.equal(isoWeekOf("2026-08-24"), "2026-w35");
   assert.equal(isoWeekOf("2026-08-30"), "2026-w35");
   assert.equal(isoWeekOf("2026-08-31"), "2026-w36");
+});
+
+test("What's On looks seven days forward from today, not back to Monday", () => {
+  assert.deepEqual(comingRange("2026-09-06"), { start: "2026-09-06", end: "2026-09-12" });
+  assert.deepEqual(comingRange("2026-12-30"), { start: "2026-12-30", end: "2027-01-05" });
+  assert.equal(addIsoDays("2026-09-06", 0), "2026-09-06");
+  assert.equal(addIsoDays("2026-09-06", 6), "2026-09-12");
+  const today = melbourneToday();
+  assert.equal(comingRange().start, today);
+  assert.equal(comingRange().end, addIsoDays(today, 6));
 });

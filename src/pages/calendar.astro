@@ -5,12 +5,11 @@ import PageHero from "../components/PageHero.astro";
 import { CARDS } from "../lib/social.mjs";
 import WeekWeather from "../components/WeekWeather.astro";
 import WeekTides from "../components/WeekTides.astro";
-import { currentEdition, loadWeekly } from "../lib/editions.mjs";
-
-const edition = currentEdition();
-const weekly = edition ? loadWeekly(edition.week) : null;
+import { loadComingWeek } from "../lib/editions.mjs";
 import { loadDirectory, listingPagePath } from "../lib/directory.mjs";
 import { communityCalendar, partnerCalendars } from "../lib/calendar.mjs";
+
+const coming = loadComingWeek();
 
 const meetings = loadDirectory()
   .filter((entity) => entity.meetingTimes)
@@ -88,18 +87,18 @@ const partners = partnerCalendars();
       </div>
     </section>
 
-    {weekly?.weather && (
+    {coming?.weather && (
       <section class="glass-card sheen content-block reveal" aria-labelledby="calendar-weather">
-        <h2 id="calendar-weather" class="section-title">This week's weather</h2>
-        <WeekWeather weather={weekly.weather} />
+        <h2 id="calendar-weather" class="section-title">The next seven days</h2>
+        <WeekWeather weather={coming.weather} />
       </section>
     )}
 
-    {(weekly?.tides || weekly?.moon) && (
+    {(coming?.tides || coming?.moon) && (
       <section class="glass-card sheen content-block reveal" aria-labelledby="calendar-tides">
         <h2 id="calendar-tides" class="section-title">Tides and the moon</h2>
         <div class="edition-auto">
-          <WeekTides tides={weekly.tides} moon={weekly.moon} />
+          <WeekTides tides={coming.tides} moon={coming.moon} />
         </div>
       </section>
     )}

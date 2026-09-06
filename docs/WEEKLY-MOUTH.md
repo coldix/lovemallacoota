@@ -60,6 +60,10 @@ committed file rather than fetching during the build means the build never
 depends on a third party being up, and a past edition keeps the forecast it was
 actually published with instead of silently acquiring today's.
 
+What's On is different: it shows the **next seven days from today**, written to
+`data/weekly/coming.json` by the same daily job. The edition keeps Monday to
+Sunday of its own week. The calendar always looks forward.
+
 **W6. Tide times are linked, not republished.** The Mouth printed tides taken at
 Gabo Island. There is no free, authoritative Australian tide source we may
 republish, and a wrong tide time at the Bastion Point bar is the kind of error

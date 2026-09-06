@@ -204,6 +204,18 @@ export function loadWeekly(week) {
 }
 
 /**
+ * The next seven days from today, for What's On. Separate from the edition
+ * week so the calendar always looks forward, and a frozen edition still
+ * carries the Monday–Sunday it was published with.
+ */
+export function loadComingWeek() {
+  if (!rootDir) return null;
+  const file = path.join(rootDir, "data", "weekly", "coming.json");
+  if (!existsSync(file)) return null;
+  return plainEdition(JSON.parse(readFileSync(file, "utf8")));
+}
+
+/**
  * Tide times are not generated. There is no free, authoritative Australian tide
  * source we may republish, and wrong tide times at a bar crossing are the kind
  * of error that hurts somebody. The section points at the official predictions

@@ -85,7 +85,9 @@ nothing new. No such page, and the build fails.
 
 **The weekly diary now comes from the calendar.** `refresh-weekly.mjs` replaces
 the diary with whatever `fetch-calendar.mjs` returns, and `weekly.yml` runs daily
-at 15:10 Melbourne and deploys production itself. So:
+at 15:10 Melbourne and deploys production itself. What's On shows the next seven
+days from today (`data/weekly/coming.json`), not Monday–Sunday of the open
+edition. So:
 
 > **What is in the Coota calendar is what the paper prints.**
 

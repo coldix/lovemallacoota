@@ -231,6 +231,34 @@ test("the calendar embed comes from the config, and refuses a personal address",
   }
 });
 
+test("What's On shows the next seven days from today, not the edition's Monday", async () => {
+  const html = await readFile(new URL("../dist/calendar.html", import.meta.url), "utf8");
+  const { currentEdition, loadComingWeek, loadWeekly } = await import("../src/lib/editions.mjs");
+  const { melbourneToday } = await import("../tools/roll-edition.mjs");
+  const coming = loadComingWeek();
+  const today = melbourneToday();
+
+  assert.ok(coming?.weather?.days?.length === 7, "coming week has no seven-day forecast");
+  assert.equal(coming.start, today, "coming week does not start today");
+  assert.equal(coming.weather.days[0].date, today, "the first forecast day is not today");
+  assert.match(html, /The next seven days/);
+  assert.doesNotMatch(html, /This week's weather/);
+
+  const edition = currentEdition();
+  const weekly = edition ? loadWeekly(edition.week) : null;
+  const editionStart = weekly?.weather?.days?.[0]?.date;
+  if (editionStart && editionStart !== today) {
+    assert.notEqual(
+      coming.weather.days[0].date,
+      editionStart,
+      "What's On is still showing the edition's first day"
+    );
+  }
+
+  const editionHtml = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  assert.match(editionHtml, /Weekly Weather Forecast/);
+});
+
 test("Astro produces every public route with canonical metadata", async () => {
   for (const page of generatedPages) {
     const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");

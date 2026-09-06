@@ -2,11 +2,11 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.75-0284c7.svg)](data/site-version.json)
-[![Build & Test](https://img.shields.io/badge/tests-143%20passing-22c55e.svg)](tests/)
+[![Site Version](https://img.shields.io/badge/version-v1.76-0284c7.svg)](data/site-version.json)
+[![Build & Test](https://img.shields.io/badge/tests-145%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
-**v1.75** - built 6 September 2026.
+**v1.76** - built 6 September 2026.
 <!-- /version -->
 
 Both the line above and the version badge are written by
@@ -227,7 +227,7 @@ build time except `build-og.mjs`, `build-static.mjs` and `public-files.mjs`.
 
 | Script | What it does |
 | --- | --- |
-| `refresh-weekly.mjs` | Builds the automatic half of an edition: forecast, tides, moon, events. `pnpm run weekly` |
+| `refresh-weekly.mjs` | Builds the automatic half of an edition (forecast, tides, moon, events) and the coming seven days What's On shows. `pnpm run weekly` |
 | `roll-edition.mjs` | Closes the week and opens the next. `pnpm run roll` |
 | `check-images.mjs` | Listing images the data names but the repository lacks; `--gaps` lists listings with no photograph at all. `pnpm run check:images` |
 | `build-directory-changes.mjs` | Builds the What's New record from git history. Runs first in every build. `pnpm run changes` |

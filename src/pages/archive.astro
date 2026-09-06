@@ -10,6 +10,7 @@ import {
   editionLabel,
   editionPath,
   editionTitle,
+  isMonthly,
   loadEditions,
 } from "../lib/editions.mjs";
 import { CARDS } from "../lib/social.mjs";
@@ -17,6 +18,8 @@ import { CARDS } from "../lib/social.mjs";
 const archive = loadArchive();
 const issues = archiveIssues(archive);
 const editions = loadEditions();
+const monthlies = editions.filter(isMonthly);
+const weeklies = editions.filter((edition) => !isMonthly(edition));
 ---
 <BaseLayout
   title="Mallacoota Community History & Archive Hub"
@@ -69,20 +72,34 @@ const editions = loadEditions();
       </div>
     </section>
 
-    {/* Weekly Digital Editions */}
-    {editions.length > 0 && (
-      <section class="glass-card sheen content-block reveal" aria-labelledby="archive-editions-title" id="editions">
-        <h2 id="archive-editions-title" class="section-title">Weekly Digital Editions</h2>
-        <p class="section-sub">Every week keeps a permanent page and a printable A4 PDF.</p>
+    {monthlies.length > 0 && (
+      <section class="glass-card sheen content-block reveal" aria-labelledby="archive-coota-title" id="editions">
+        <h2 id="archive-coota-title" class="section-title">Coota</h2>
+        <p class="section-sub">The monthly edition grows through the month, then keeps a permanent page and a printable A4 PDF.</p>
         <ul class="edition-index">
-          {editions.map((edition) => (
+          {monthlies.map((edition) => (
             <li>
               <a href={editionPath(edition)}>{editionTitle(edition)}</a>
               <span>{editionLabel(edition)} · {(edition.articles || []).length} items</span>
             </li>
           ))}
         </ul>
-        <p class="section-sub"><a href="/edition.html">Read this week's edition</a>.</p>
+        <p class="section-sub"><a href="/edition.html">Read this month's Coota</a>.</p>
+      </section>
+    )}
+
+    {weeklies.length > 0 && (
+      <section class="glass-card sheen content-block reveal" aria-labelledby="archive-editions-title" id="weekly-editions">
+        <h2 id="archive-editions-title" class="section-title">Weekly digital editions</h2>
+        <p class="section-sub">The first weekly edition, before Coota became a monthly.</p>
+        <ul class="edition-index">
+          {weeklies.map((edition) => (
+            <li>
+              <a href={editionPath(edition)}>{editionTitle(edition)}</a>
+              <span>{editionLabel(edition)} · {(edition.articles || []).length} items</span>
+            </li>
+          ))}
+        </ul>
       </section>
     )}
   </main>

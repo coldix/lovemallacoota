@@ -87,9 +87,25 @@ function loadEditions() {
  * What should change today. Returned rather than performed, so the decision can
  * be tested without touching the repository.
  */
+function isMonthlyEdition(edition) {
+  return edition?.kind === "monthly" || /^\d{4}-\d{2}$/.test(edition?.week || "");
+}
+
 export function plan(editions, today) {
+  // A monthly Coota is the live publication. This helper must not freeze it or
+  // open another weekly beside it. Sunday week-roll stays off.
+  const monthlyOpen = editions.some(
+    ({ edition }) => edition.status === "open" && isMonthlyEdition(edition)
+  );
+
   const freezes = editions
-    .filter(({ edition }) => edition.status === "open" && edition.weekEnd <= today)
+    .filter(
+      ({ edition }) =>
+        edition.status === "open" &&
+        !isMonthlyEdition(edition) &&
+        edition.weekEnd &&
+        edition.weekEnd <= today
+    )
     .map(({ edition }) => edition.week);
 
   const weeks = new Set(editions.map(({ edition }) => edition.week));
@@ -104,7 +120,7 @@ export function plan(editions, today) {
     ? isoWeekOf(new Date(new Date(`${today}T00:00:00Z`).getTime() + 86400000).toISOString().slice(0, 10))
     : currentWeek;
 
-  return { freezes, create: weeks.has(openWeek) ? null : openWeek };
+  return { freezes, create: monthlyOpen || weeks.has(openWeek) ? null : openWeek };
 }
 
 function isInvokedDirectly() {

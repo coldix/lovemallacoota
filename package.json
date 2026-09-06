@@ -13,6 +13,7 @@
     "og": "node tools/build-og.mjs",
     "weekly": "node tools/refresh-weekly.mjs",
     "roll": "node tools/roll-edition.mjs",
+    "roll:month": "node tools/roll-month.mjs",
     "trails:sync": "node tools/sync-trails.mjs",
     "astro": "astro",
     "version:site": "node tools/update-version.mjs --stamp && pnpm run build && node tools/update-version.mjs --files",

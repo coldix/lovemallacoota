@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { isoWeekOf, melbourneToday, newEdition, plan } from "../tools/roll-edition.mjs";
+import { monthBounds, monthDisplay, newMonthly, nextMonth, planMonth } from "../tools/roll-month.mjs";
 import { addIsoDays, comingRange } from "../tools/refresh-weekly.mjs";
 
 const open35 = {
@@ -55,6 +56,83 @@ test("the week a date belongs to is the ISO week", () => {
   assert.equal(isoWeekOf("2026-08-24"), "2026-w35");
   assert.equal(isoWeekOf("2026-08-30"), "2026-w35");
   assert.equal(isoWeekOf("2026-08-31"), "2026-w36");
+});
+
+test("a weekly roll does nothing while a monthly Coota is open", () => {
+  const monthly = {
+    edition: {
+      week: "2026-09",
+      kind: "monthly",
+      monthStart: "2026-09-01",
+      monthEnd: "2026-09-30",
+      status: "open",
+    },
+  };
+  assert.deepEqual(plan([monthly], "2026-09-06"), { freezes: [], create: null });
+  assert.deepEqual(plan([monthly], "2026-09-13"), { freezes: [], create: null });
+});
+
+test("a month stays open through its last day and closes the next morning", () => {
+  const openSep = {
+    edition: {
+      week: "2026-09",
+      kind: "monthly",
+      monthStart: "2026-09-01",
+      monthEnd: "2026-09-30",
+      status: "open",
+    },
+  };
+  assert.deepEqual(planMonth([openSep], "2026-09-30"), { freezes: [], create: null });
+  assert.deepEqual(planMonth([openSep], "2026-10-01"), {
+    freezes: ["2026-09"],
+    create: "2026-10",
+  });
+});
+
+test("running the month roll twice changes nothing", () => {
+  const frozenSep = {
+    edition: {
+      week: "2026-09",
+      kind: "monthly",
+      monthStart: "2026-09-01",
+      monthEnd: "2026-09-30",
+      status: "frozen",
+    },
+  };
+  const openOct = {
+    edition: {
+      week: "2026-10",
+      kind: "monthly",
+      monthStart: "2026-10-01",
+      monthEnd: "2026-10-31",
+      status: "open",
+    },
+  };
+  assert.deepEqual(planMonth([frozenSep, openOct], "2026-10-01"), { freezes: [], create: null });
+});
+
+test("a new monthly covers the calendar month and starts empty", () => {
+  const edition = newMonthly("2026-09");
+  assert.equal(edition.week, "2026-09");
+  assert.equal(edition.kind, "monthly");
+  assert.equal(edition.monthStart, "2026-09-01");
+  assert.equal(edition.monthEnd, "2026-09-30");
+  assert.equal(edition.displayDate, "September 2026");
+  assert.deepEqual(edition.articles, []);
+  assert.deepEqual(monthBounds("2026-02"), { start: "2026-02-01", end: "2026-02-28" });
+  assert.equal(nextMonth("2026-12"), "2027-01");
+  assert.equal(monthDisplay("2026-10"), "October 2026");
+});
+
+test("the next month carries last issue's crossword solution", () => {
+  const edition = newMonthly("2026-10", {
+    previousCrossword: { number: 2, title: "History and Pioneers" },
+  });
+  assert.equal(edition.crossword.solutionOfPrevious.number, 2);
+  assert.equal(
+    edition.crossword.solutionOfPrevious.pages[0],
+    "/images/editions/crossword-2-soln-1.webp"
+  );
 });
 
 test("What's On looks seven days forward from today, not back to Monday", () => {

@@ -1,5 +1,9 @@
 # The weekly Mouth
 
+> The live publication is now the monthly **Coota**. This file is the design
+> that produced the first weekly edition (26:36). See [`COOTA.md`](COOTA.md).
+
+
 A weekly community edition on lovemallacoota.au: contributed articles under the
 headings the Mouth actually used, automatic sections for the things nobody
 should have to type in, and an end-of-week freeze that produces a printable PDF

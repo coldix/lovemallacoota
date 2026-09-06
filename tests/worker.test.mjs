@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import worker from "../src/worker.ts";
-import { pdfFilename, weekFromPath } from "../src/edition-pdf.ts";
+import { editionPdfIsOpen, pdfFilename, weekFromPath } from "../src/edition-pdf.ts";
 
 const env = {
   ASSETS: {
@@ -116,10 +116,23 @@ test("redirects /index.html to the site root so only one URL serves the home pag
 
 test("only edition PDF paths are treated as PDF requests", async () => {
   assert.equal(weekFromPath("/edition/2026-w35.pdf"), "2026-w35");
+  assert.equal(weekFromPath("/edition/2026-09.pdf"), "2026-09");
   assert.equal(weekFromPath("/edition/2026-w35.html"), null);
   assert.equal(weekFromPath("/edition/../secrets.pdf"), null);
   assert.equal(weekFromPath("/edition/not-a-week.pdf"), null);
   assert.equal(pdfFilename("2026-w35"), "mallacoota-2026-w35.pdf");
+});
+
+test("an open monthly PDF is cached short, not for a year", () => {
+  assert.equal(
+    editionPdfIsOpen("Open - stories are still being added this month"),
+    true
+  );
+  assert.equal(
+    editionPdfIsOpen("Open - contributions for this week are still being accepted"),
+    true
+  );
+  assert.equal(editionPdfIsOpen("Closed - this month's edition is complete"), false);
 });
 
 test("a PDF for an edition that does not exist is a 404, not a render", async () => {

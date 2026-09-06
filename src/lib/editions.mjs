@@ -10,6 +10,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { editionCard } from "./social.mjs";
 import { plainPunctuation } from "./markup.mjs";
+import { isoWeekOf, melbourneToday } from "../../tools/roll-edition.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -42,6 +43,7 @@ export const SECTIONS = [
   { id: "church", title: "Church Times" },
   { id: "sport", title: "Sport" },
   { id: "kids", title: "Kids' Space" },
+  { id: "crossword", title: "The Coota Crossword", automatic: true },
   { id: "video", title: "Video of the Week", automatic: true },
   { id: "trail", title: "Trail of the Week", automatic: true },
   { id: "business", title: "Business of the Week", automatic: true },
@@ -78,13 +80,17 @@ export function plainEdition(value, key = null) {
   return value;
 }
 
+function editionSortKey(edition) {
+  return edition.monthStart || edition.weekStart || edition.week;
+}
+
 export function loadEditions({ includeDrafts = false } = {}) {
   if (!editionsDir || !existsSync(editionsDir)) return [];
   return readdirSync(editionsDir)
     .filter((file) => file.endsWith(".json"))
     .map((file) => plainEdition(JSON.parse(readFileSync(path.join(editionsDir, file), "utf8"))))
     .filter((edition) => includeDrafts || edition.status !== "draft")
-    .sort((a, b) => b.week.localeCompare(a.week));
+    .sort((a, b) => editionSortKey(b).localeCompare(editionSortKey(a)));
 }
 
 /** The edition on the front of the site: the open one, else the most recent. */
@@ -109,6 +115,13 @@ export function sectionsWithContent(edition) {
 function autoEntry(section) {
   const auto = section.auto;
   if (!auto) return null;
+  if (auto.type === "crossword") {
+    const number = auto.data.number;
+    const previous = auto.data.solutionOfPrevious?.number;
+    if (number && previous) return `Crossword no. ${number}, and last month's solution`;
+    if (number) return `Crossword no. ${number}${auto.data.title ? ` · ${auto.data.title}` : ""}`;
+    if (previous) return `Solution to crossword no. ${previous}`;
+  }
   if (auto.type === "weather") return `Seven-day forecast to ${auto.data.days.at(-1).date}`;
   if (auto.type === "tides") return "The week's moon, and where to find the times";
   if (auto.type === "tide-table") return `${auto.data.extremes.length} highs and lows, and the moon`;
@@ -144,23 +157,39 @@ export function articleAnchor(article) {
   return `article-${article.id}`;
 }
 
-/** 1 to 52, from the ISO week the edition covers. */
-export function weekNumber(edition) {
-  return Number(edition.week.split("-w")[1]);
+/** A calendar-month Coota issue, e.g. 2026-09. */
+export function isMonthly(edition) {
+  return edition?.kind === "monthly" || /^\d{4}-\d{2}$/.test(edition?.week || "");
 }
 
-/** Edition numbering is YY:WK — the 35th week of 2026 is Edition 26:35. */
+/** 1 to 52 for a weekly, 1 to 12 for a monthly. */
+export function weekNumber(edition) {
+  if (isMonthly(edition)) return Number(edition.week.split("-")[1]);
+  return Number(String(edition.week).split("-w")[1]);
+}
+
+/** YY:WK for a weekly (26:36), YY:MM for Coota (26:09). */
 export function editionNumber(edition) {
-  const [year, week] = edition.week.split("-w");
+  if (isMonthly(edition)) {
+    const [year, month] = edition.week.split("-");
+    return `${year.slice(2)}:${month}`;
+  }
+  const [year, week] = String(edition.week).split("-w");
   return `${year.slice(2)}:${week}`;
 }
 
 export function editionLabel(edition) {
+  if (isMonthly(edition)) return `Coota ${editionNumber(edition)}`;
   return `Week ${String(weekNumber(edition)).padStart(2, "0")} · Edition ${editionNumber(edition)}`;
 }
 
 export function editionTitle(edition) {
+  if (isMonthly(edition)) return edition.displayDate;
   return `Week of ${edition.displayDate}`;
+}
+
+export function publicationName(edition) {
+  return isMonthly(edition) ? "Coota" : "This Week in Mallacoota";
 }
 
 export function editionPath(edition) {
@@ -228,15 +257,46 @@ export const TIDE_SOURCE = {
   note: "The Mouth printed tides taken at Gabo Island. We publish the moon, which drives them, and link out for the times themselves rather than republish figures we have not licensed.",
 };
 
+/**
+ * Stories in this edition that landed in the current ISO week. The monthly
+ * page leads with these so a reader sees what is new without scrolling a month.
+ */
+export function articlesThisWeek(edition, today = melbourneToday()) {
+  const week = isoWeekOf(today);
+  return (edition.articles || []).filter((article) => {
+    const day = String(article.publishedAt || "").slice(0, 10);
+    return day && isoWeekOf(day) === week;
+  });
+}
+
+/** Auto sections for an edition: a frozen week keeps its own file; an open month uses the coming seven days. */
+function autoFeed(edition) {
+  if (!isMonthly(edition)) return loadWeekly(edition.week);
+  if (edition.status === "open") {
+    const coming = loadComingWeek() || {};
+    const thisWeek = loadWeekly(isoWeekOf(melbourneToday())) || {};
+    return {
+      weather: coming.weather,
+      tides: coming.tides,
+      moon: coming.moon,
+      events: coming.events?.length ? coming.events : thisWeek.events,
+      trail: thisWeek.trail,
+      business: thisWeek.business,
+    };
+  }
+  return loadWeekly(edition.week) || loadComingWeek();
+}
+
 /** Every section with something in it, contributed or automatic, in order. */
 export function editionSections(edition) {
   if (!edition) return [];
   const articles = edition.articles || [];
-  const weekly = loadWeekly(edition.week);
+  const weekly = autoFeed(edition);
 
   return SECTIONS.map((section) => {
     const own = articles.filter((article) => article.section === section.id);
     let auto = null;
+    if (section.id === "crossword" && edition.crossword) auto = { type: "crossword", data: edition.crossword };
     if (section.id === "weather" && weekly?.weather?.days?.length) auto = { type: "weather", data: weekly.weather };
     // Real predictions when we have licensed them, the official link otherwise.
     if (section.id === "tides") {
@@ -350,13 +410,13 @@ export function editionSchema(edition) {
   return {
     "@context": "https://schema.org",
     "@type": "PublicationIssue",
-    name: `This Week in Mallacoota - ${editionLabel(edition)}`,
+    name: `${publicationName(edition)} - ${editionLabel(edition)}`,
     issueNumber: editionNumber(edition),
-    datePublished: edition.weekStart,
+    datePublished: edition.monthStart || edition.weekStart,
     url: `${ORIGIN}${pagePath}`,
     isPartOf: {
       "@type": "Periodical",
-      name: "This Week in Mallacoota",
+      name: publicationName(edition),
       publisher: { "@type": "Organization", name: "Love Mallacoota", url: `${ORIGIN}/` },
     },
     hasPart: articles.length ? articles : undefined,
@@ -391,8 +451,7 @@ export function youTubeId(url) {
 export function fillerPhoto(edition) {
   const bank = loadDataFile("photo-bank.json", []);
   if (!bank.length) return null;
-  const [, week] = edition.week.split("-w");
-  return bank[Number(week) % bank.length];
+  return bank[weekNumber(edition) % bank.length];
 }
 
 /**

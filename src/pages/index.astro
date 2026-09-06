@@ -23,7 +23,7 @@ const directoryCards = [
   { ...SECTIONS["do-see"], count: counts["do-see"], countLabel: "things to do" },
   { ...SECTIONS.community, count: counts.community, countLabel: "groups" },
   { ...SECTIONS.services, count: counts.services, countLabel: "services" },
-  { ...WHATS_ON, count: null, countLabel: "calendar and this week" },
+  { ...WHATS_ON, count: null, countLabel: "calendar and this month" },
 ];
 
 const listingCount = loadDirectory().length;
@@ -74,7 +74,7 @@ const publisherSchema = {
 
 <BaseLayout
   title="Mallacoota - what's on, and where to find things"
-  description={`Mallacoota, Victoria: this week's community edition, what's on, and ${listingCount} listings for places to eat, stay and visit, plus clubs, trades and official services.`}
+  description={`Mallacoota, Victoria: Coota, the monthly community edition, what's on, and ${listingCount} listings for places to eat, stay and visit, plus clubs, trades and official services.`}
   canonicalPath="/"
   showAds={true}
   socialImage={CARDS.home}
@@ -88,7 +88,7 @@ const publisherSchema = {
     logo={true}
   >
     <div class="hero-cta">
-      <a href="/edition.html" class="btn btn-primary">This Week</a>
+      <a href="/edition.html" class="btn btn-primary">Coota</a>
       <a href="/calendar.html" class="btn btn-coral">What's On</a>
       <a href="/food.html" class="btn btn-ghost">Eat &amp; Drink</a>
       <a href="/accom.html" class="btn btn-ghost">Stay</a>
@@ -106,14 +106,14 @@ const publisherSchema = {
   <main>
 
     <section class="glass-card sheen content-block reveal edition-promo" aria-labelledby="this-week-title">
-      <p class="eyebrow">Weekly edition{edition ? ` · ${editionLabel(edition)}` : ""}</p>
-      <h2 id="this-week-title">This Week in <span class="grad">Mallacoota</span></h2>
+      <p class="eyebrow">{edition ? editionLabel(edition) : "Coota"}</p>
+      <h2 id="this-week-title">Coota <span class="grad">{edition?.displayDate || "this month"}</span></h2>
       <p class="lede">
-        Community notices, club and school news, the week's events, weather and
-        tides - contributed by the people and groups they belong to.
+        This month in Mallacoota - community notices, club and school news, the
+        crossword, weather and tides. The edition grows as pieces arrive.
       </p>
       <div class="hero-cta">
-        <a href="/edition.html" class="btn btn-primary">Read this week</a>
+        <a href="/edition.html" class="btn btn-primary">Read Coota</a>
         <a href="/calendar.html" class="btn btn-coral">What's On</a>
         <a href="/archive.html" class="btn btn-ghost">Past editions</a>
       </div>

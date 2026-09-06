@@ -1,7 +1,7 @@
 /*
 # Project:     lovemallacoota.au
 # File Name:   submit.ts
-# Description: POST /api/article — a contributor submits to this week's edition.
+# Description: POST /api/article — a contributor submits to the open Coota.
 #              Identity comes from Cloudflare Access, which has already proved
 #              the address; this only decides whether that address may publish,
 #              whether the writing clears the editorial policy, and then commits
@@ -150,7 +150,7 @@ export async function commitArticle(env: Env, week: string, article: Record<stri
   const file = (await current.json()) as { content: string; sha: string };
   const edition = JSON.parse(atob(file.content.replace(/\n/g, "")));
 
-  if (edition.status !== "open") throw new Error("This week's edition is closed.");
+  if (edition.status !== "open") throw new Error("This edition is closed.");
   appendArticle(edition, article);
 
   const body = new TextEncoder().encode(`${JSON.stringify(edition, null, 2)}\n`);

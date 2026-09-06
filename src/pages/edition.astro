@@ -10,8 +10,10 @@ import {
   editionSchema,
   editionSocialImage,
   editionTitle,
+  isMonthly,
   loadEditions,
   pastEditions,
+  publicationName,
   sectionsWithContent,
 } from "../lib/editions.mjs";
 import { CARDS } from "../lib/social.mjs";
@@ -33,11 +35,21 @@ const sectionNames = edition
       .toLowerCase()
   : "";
 const description = edition
-  ? clampMeta(`Mallacoota for the week of ${edition.displayDate}: ${sectionNames}. A new edition every week.`)
-  : "The weekly Mallacoota edition - community notices, club and school news, events, weather and tides for the week.";
+  ? clampMeta(
+      isMonthly(edition)
+        ? `Coota ${edition.displayDate}: ${sectionNames || "the month so far"}. Stories are added as they arrive.`
+        : `Mallacoota for the week of ${edition.displayDate}: ${sectionNames}. A new edition every week.`
+    )
+  : "Coota, the monthly Mallacoota edition - community notices, club and school news, events, weather and tides.";
 ---
 <BaseLayout
-  title={edition ? `This Week in Mallacoota - ${editionLabel(edition)}` : "This Week in Mallacoota"}
+  title={
+    edition
+      ? isMonthly(edition)
+        ? `${editionLabel(edition)} - This month in Mallacoota`
+        : `This Week in Mallacoota - ${editionLabel(edition)}`
+      : "Coota"
+  }
   description={description}
   canonicalPath="/edition.html"
   active="edition"
@@ -46,14 +58,23 @@ const description = edition
   socialImage={edition ? editionSocialImage(edition) : CARDS.edition}
 >
   {schema && <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />}
-  <PageHero eyebrow="Weekly edition" prefix="This Week in" accent="Mallacoota" lede="Community notices, club and school news, the week's events, weather and tides - contributed by the people and groups they belong to.">
+  <PageHero
+    eyebrow={edition && isMonthly(edition) ? editionLabel(edition) : "Weekly edition"}
+    prefix={edition && isMonthly(edition) ? "Coota" : "This Week in"}
+    accent={edition && isMonthly(edition) ? edition.displayDate : "Mallacoota"}
+    lede={
+      edition && isMonthly(edition)
+        ? "This month in Mallacoota - stories, notices, the crossword, weather and what's on. The edition grows as pieces arrive, and closes as a PDF at the end of the month."
+        : "Community notices, club and school news, the week's events, weather and tides - contributed by the people and groups they belong to."
+    }
+  >
     <div class="hero-cta">
       <a class="btn btn-coral" href="/submit.html">Submit an article or notice</a>
       <a class="btn btn-ghost" href="/archive.html#editions">Past editions archive</a>
     </div>
   </PageHero>
   <main>
-    <Breadcrumbs trail={[{ name: "This Week", path: "/edition.html" }]} />
+    <Breadcrumbs trail={[{ name: edition && isMonthly(edition) ? "Coota" : "This Week", path: "/edition.html" }]} />
     {edition ? (
       <EditionBody edition={edition} />
     ) : (

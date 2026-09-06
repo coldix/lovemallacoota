@@ -188,14 +188,14 @@ export const FIXED_CARDS = [
     photo: bankPath("the-mouth"),
     eyebrow: "East Gippsland, Victoria",
     title: "Mallacoota",
-    subtitle: "The town directory, the weekly edition and what's on",
+    subtitle: "The town directory, Coota and what's on",
   },
   {
     out: "edition.jpg",
     photo: bankPath("mallacoota-town"),
-    eyebrow: "Weekly edition",
-    title: "This Week in Mallacoota",
-    subtitle: "Notices, club and school news, weather and tides",
+    eyebrow: "Coota",
+    title: "This month in Mallacoota",
+    subtitle: "Notices, club and school news, the crossword, weather and tides",
   },
   {
     out: "calendar.jpg",
@@ -288,13 +288,16 @@ async function editionCards() {
     const edition = JSON.parse(readFileSync(path.join(editionsDir, file), "utf8"));
     if (edition.status === "draft") continue;
     const cover = edition.cover?.web && path.join(rootDir, edition.cover.web.replace(/^\//, ""));
-    const [year, week] = edition.week.split("-w");
+    const monthly = edition.kind === "monthly" || /^\d{4}-\d{2}$/.test(edition.week || "");
+    const [year, rest] = monthly ? edition.week.split("-") : edition.week.split("-w");
     cards.push({
       out: `edition-${edition.week}.jpg`,
       photo: cover && existsSync(cover) ? cover : bankPath("mallacoota-town"),
-      eyebrow: `Week ${week} · Edition ${year.slice(2)}:${week}`,
-      title: "This Week in Mallacoota",
-      subtitle: `Week of ${edition.displayDate}`,
+      eyebrow: monthly
+        ? `Coota ${year.slice(2)}:${rest}`
+        : `Week ${rest} · Edition ${year.slice(2)}:${rest}`,
+      title: monthly ? "This month in Mallacoota" : "This Week in Mallacoota",
+      subtitle: monthly ? edition.displayDate : `Week of ${edition.displayDate}`,
     });
   }
   return cards;

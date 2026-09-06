@@ -17,7 +17,7 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { moonWeek } from "../src/lib/moon.mjs";
-import { currentEdition, plainEdition } from "../src/lib/editions.mjs";
+import { currentEdition, isMonthly, plainEdition } from "../src/lib/editions.mjs";
 import { entityBySlug, listingPhoto } from "../src/lib/directory.mjs";
 import { fetchCalendarEvents } from "./fetch-calendar.mjs";
 import { isoWeekOf, melbourneToday } from "./roll-edition.mjs";
@@ -275,9 +275,12 @@ async function loadOrKeep(label, previousValue, fetchFn) {
 }
 
 async function refresh() {
-  // The open edition, not the UTC ISO week: on Sunday after the week rolls,
-  // today is still week N and the edition already belongs to week N+1.
-  const week = weekArg || currentEdition()?.week || isoWeekOf(melbourneToday());
+  // A weekly edition uses its own week. A monthly Coota still refreshes the
+  // current ISO week (trail/business rotation) and the coming seven days.
+  const open = currentEdition();
+  const week =
+    weekArg ||
+    (open && !isMonthly(open) ? open.week : isoWeekOf(melbourneToday()));
   const weekFile = path.join(weeklyDir, `${week}.json`);
   const comingFile = path.join(weeklyDir, "coming.json");
   const previous = existsSync(weekFile) ? JSON.parse(readFileSync(weekFile, "utf8")) : null;
@@ -319,6 +322,17 @@ async function refresh() {
   const comingTides = await loadOrKeep("coming tides", previousComing?.tides, () =>
     fetchTides(comingWindow)
   );
+  let comingEvents = [];
+  try {
+    comingEvents = await fetchCalendarEvents(
+      `${comingWindow.start}T00:00:00`,
+      `${comingWindow.end}T23:59:59`
+    );
+  } catch (error) {
+    console.warn(`coming calendar fetch failed: ${error.message}`);
+    comingEvents = previousComing?.events?.length ? previousComing.events : [];
+  }
+
   const coming = {
     start: comingWindow.start,
     end: comingWindow.end,
@@ -326,6 +340,9 @@ async function refresh() {
     weather: comingWeather,
     tides: comingTides,
     moon: moonWeek(comingWindow.start),
+    events: comingEvents,
+    trail: pickTrail(week),
+    business: pickBusiness(week),
   };
 
   console.log(`week ${week} (rotation ${rotationIndex(week)}) ${weekWindow.start} → ${weekWindow.end}`);
@@ -350,6 +367,14 @@ async function refresh() {
   writeFileSync(comingFile, `${JSON.stringify(plainEdition(coming), null, 2)}\n`);
   console.log(`\nwrote ${path.relative(rootDir, weekFile)}`);
   console.log(`wrote ${path.relative(rootDir, comingFile)}`);
+  if (open && isMonthly(open)) {
+    const monthFile = path.join(weeklyDir, `${open.week}.json`);
+    writeFileSync(
+      monthFile,
+      `${JSON.stringify(plainEdition({ week: open.week, generatedAt: coming.generatedAt, ...coming }), null, 2)}\n`
+    );
+    console.log(`wrote ${path.relative(rootDir, monthFile)}`);
+  }
 }
 
 function isInvokedDirectly() {

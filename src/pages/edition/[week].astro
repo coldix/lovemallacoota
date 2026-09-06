@@ -8,7 +8,9 @@ import {
   editionSchema,
   editionSocialImage,
   editionTitle,
+  isMonthly,
   loadEditions,
+  publicationName,
   sectionsWithContent,
 } from "../../lib/editions.mjs";
 import { clampMeta } from "../../lib/meta.mjs";
@@ -30,8 +32,8 @@ const schema = editionSchema(edition);
 const headlines = (edition.articles || []).map((article) => article.title).slice(0, 3);
 const description = clampMeta(
   headlines.length
-    ? `Mallacoota for the week of ${edition.displayDate}: ${headlines.join("; ")}.`
-    : `The Mallacoota weekly edition for the week of ${edition.displayDate} - ${sectionsWithContent(edition)
+    ? `${publicationName(edition)} ${edition.displayDate}: ${headlines.join("; ")}.`
+    : `${publicationName(edition)} for ${edition.displayDate} - ${sectionsWithContent(edition)
         .map((section) => section.title)
         .slice(0, 4)
         .join(", ")
@@ -39,7 +41,11 @@ const description = clampMeta(
 );
 ---
 <BaseLayout
-  title={`Mallacoota, week of ${edition.displayDate} - This Week in Mallacoota`}
+  title={
+    isMonthly(edition)
+      ? `${editionLabel(edition)} - ${edition.displayDate}`
+      : `Mallacoota, week of ${edition.displayDate} - This Week in Mallacoota`
+  }
   description={description}
   canonicalPath={`/edition/${edition.week}.html`}
   active="edition"
@@ -48,18 +54,23 @@ const description = clampMeta(
   socialImage={editionSocialImage(edition)}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
-  <PageHero eyebrow="Weekly edition" prefix="Week of" accent={edition.displayDate} lede={`${editionLabel(edition)} - community notices, club and school news, events, weather and tides.`} />
+  <PageHero
+    eyebrow={isMonthly(edition) ? "Coota" : "Weekly edition"}
+    prefix={isMonthly(edition) ? "Coota" : "Week of"}
+    accent={edition.displayDate}
+    lede={`${editionLabel(edition)} - community notices, club and school news, events, weather and tides.`}
+  />
   <main>
     <Breadcrumbs
       trail={[
-        { name: "This Week", path: "/edition.html" },
+        { name: isMonthly(edition) ? "Coota" : "This Week", path: "/edition.html" },
         { name: editionTitle(edition), path: `/edition/${edition.week}.html` },
       ]}
     />
     <EditionBody edition={edition} archived={edition.status !== "open"} />
     <section class="glass-card sheen content-block reveal edition-web-only">
       <div class="edition-actions">
-        <a class="btn btn-primary" href="/edition.html">This week's edition</a>
+        <a class="btn btn-primary" href="/edition.html">Coota</a>
         <a class="btn btn-ghost" href="/archive.html#editions">Every edition</a>
         <a class="btn btn-ghost" href="/calendar.html">What's on</a>
       </div>

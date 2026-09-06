@@ -32,22 +32,22 @@ Melbourne and 550 km south of Sydney, bordered by Croajingolong National Park.
 
 ## How to tell the three kinds of information apart
 
-- **Current**: /edition.html is this week and changes weekly. /calendar.html is
+- **Current**: /edition.html is this month's Coota and grows as stories arrive. /calendar.html is
   what is coming up. Anything on these is dated on the page.
-- **Permanent**: /edition/<year>-w<week>.html is a frozen record of one week and
-  will not change again. Directory listings under /listing/ carry the date each
-  was last checked.
+- **Permanent**: /edition/<year>-<month>.html is a frozen record of one month and
+  will not change again. The first weekly, /edition/2026-w36.html, is archived.
+  Directory listings under /listing/ carry the date each was last checked.
 - **Historical**: /archive.html catalogues the Mallacoota Mouth, indexes every
   past weekly edition, and indexes every Local of the Week profile.
 
 Emergency and safety information is relayed from official sources only and is
 never written here; /emergency.html links to the authority in every case.
 
-## The weekly edition
+## Coota, the monthly edition
 
 ${edition ? `Current: ${editionLabel(edition)}, published at https://lovemallacoota.au/edition.html
-Every week keeps a permanent page at /edition/<year>-w<week>.html and a printable
-PDF at /edition/<year>-w<week>.pdf. ${editions.length} edition(s) so far.` : "No edition is open."}
+A monthly issue keeps a permanent page at /edition/<year>-<month>.html and a printable
+PDF at /edition/<year>-<month>.pdf. The first weekly edition is archived at /edition/2026-w36.html. ${editions.length} edition(s) so far.` : "No edition is open."}
 
 Sections are contributed by the people and groups they belong to, with the
 forecast, tides, transport, a walk and a business compiled automatically.

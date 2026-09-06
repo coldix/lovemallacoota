@@ -2,11 +2,11 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.78-0284c7.svg)](data/site-version.json)
-[![Build & Test](https://img.shields.io/badge/tests-146%20passing-22c55e.svg)](tests/)
+[![Site Version](https://img.shields.io/badge/version-v1.79-0284c7.svg)](data/site-version.json)
+[![Build & Test](https://img.shields.io/badge/tests-153%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
-**v1.78** - built 6 September 2026.
+**v1.79** - built 6 September 2026.
 <!-- /version -->
 
 Both the line above and the version badge are written by
@@ -25,8 +25,8 @@ Historical project documentation and earlier README iterations have been preserv
 
 ## Platform Features
 
-### 1. This Week (`/edition.html`)
-The primary weekly news destination published every Monday (`YY:WK` format, e.g. Edition 26:36).
+### 1. Coota (`/edition.html`)
+The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as they arrive; the issue freezes as a PDF at month-end. The first weekly, Edition 26:36, is archived at `/edition/2026-w36.html`.
 * **Automated Google Calendar Schedule**: Automated iCal parser (`tools/fetch-calendar.mjs`) fetching and expanding recurring `RRULE` events for the week, formatted into a 1-page compact 2-column print layout.
 * **Reordered Back Sections**: Structured flow featuring Classifieds, What's On This Week, Weekly Weather Forecast, Tide Times, Buses and Transport, ending with 3MGB Wilderness Radio strictly last.
 * **Local History & Bush Poetry**: Heritage articles, historical photo restorations (e.g. Henry Lawson and E.J. Brady at Captain's Point), and Lawson's 1910 poem *The Bar*.

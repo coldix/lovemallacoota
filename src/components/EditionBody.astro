@@ -1,10 +1,12 @@
 ---
 import {
   articleAnchor,
+  articlesThisWeek,
   countArticles,
   editionLabel,
   editionPdfPath,
   editionTitle,
+  isMonthly,
   sectionsWithContent,
   tableOfContents,
 } from "../lib/editions.mjs";
@@ -41,11 +43,17 @@ const isFillerUsed = edition.articles?.some(a =>
 );
 const filler = isFillerUsed ? null : rawFiller;
 const total = countArticles(edition);
+const monthly = isMonthly(edition);
+const newThisWeek = monthly ? articlesThisWeek(edition) : [];
 const statusLabel =
   edition.status === "open"
-    ? "Open - contributions for this week are still being accepted"
+    ? monthly
+      ? "Open - stories are still being added this month"
+      : "Open - contributions for this week are still being accepted"
     : edition.status === "frozen"
-      ? "Closed - this week's edition is complete"
+      ? monthly
+        ? "Closed - this month's edition is complete"
+        : "Closed - this week's edition is complete"
       : "Published";
 ---
 
@@ -59,8 +67,8 @@ const statusLabel =
     <section class="edition-cover" aria-hidden="true">
       <img src={edition.cover.print || edition.cover.web} alt="" width={imageSize(edition.cover.print || edition.cover.web)?.width} height={imageSize(edition.cover.print || edition.cover.web)?.height} />
       <div class="edition-cover-mast">
-        <p class="edition-cover-eyebrow">This Week in</p>
-        <p class="edition-cover-title">Mallacoota</p>
+        <p class="edition-cover-eyebrow">{monthly ? "Coota" : "This Week in"}</p>
+        <p class="edition-cover-title">{monthly ? edition.displayDate : "Mallacoota"}</p>
         <p class="edition-cover-date">{editionTitle(edition)}</p>
         <p class="edition-cover-number">{editionLabel(edition)}</p>
       </div>
@@ -73,7 +81,7 @@ const statusLabel =
     </section>
 
     <figure class="glass-card sheen content-block reveal edition-cover-web">
-      <img src={edition.cover.web} alt={edition.cover.caption || "This week's cover photograph"} width={imageSize(edition.cover.web)?.width} height={imageSize(edition.cover.web)?.height} loading="eager" decoding="async" />
+      <img src={edition.cover.web} alt={edition.cover.caption || "Cover photograph"} width={imageSize(edition.cover.web)?.width} height={imageSize(edition.cover.web)?.height} loading="eager" decoding="async" />
       {(edition.cover.caption || edition.cover.credit) && (
         <figcaption>
           {edition.cover.caption}
@@ -88,8 +96,10 @@ const statusLabel =
   <p class="eyebrow">{editionTitle(edition)} · {editionLabel(edition)}</p>
   <h2 class="section-title">
     {total > 0
-      ? `${total} ${total === 1 ? "item" : "items"} this week`
-      : "This week so far"}
+      ? `${total} ${total === 1 ? "item" : "items"} ${monthly ? "this month" : "this week"}`
+      : monthly
+        ? "This month so far"
+        : "This week so far"}
   </h2>
   <p class="section-sub">{statusLabel}</p>
   <div class="edition-actions">
@@ -98,7 +108,9 @@ const statusLabel =
   </div>
   {edition.status === "open" && (
     <p class="edition-pdf-pending">
-      The PDF is the week so far - it is complete once the week closes.
+      {monthly
+        ? `The PDF is the month so far - it is complete once ${edition.displayDate} closes.`
+        : "The PDF is the week so far - it is complete once the week closes."}
     </p>
   )}
 </section>
@@ -127,8 +139,9 @@ const statusLabel =
 {total === 0 && (
   <section class="glass-card sheen content-block reveal edition-web-only">
     <p class="no-results">
-      Nothing has been contributed to this week yet - the forecast and features
-      below are compiled automatically.
+      {monthly
+        ? "Nothing has been contributed this month yet - the crossword, forecast and features below are compiled automatically, and stories will appear here as they arrive."
+        : "Nothing has been contributed to this week yet - the forecast and features below are compiled automatically."}
     </p>
   </section>
 )}
@@ -139,9 +152,67 @@ const statusLabel =
   </section>
 )}
 
+{newThisWeek.length > 0 && (
+  <section class="glass-card sheen content-block reveal" id="section-new-this-week" aria-labelledby="heading-new-this-week">
+    <h2 class="section-title" id="heading-new-this-week">New this week</h2>
+    <p class="section-sub">Stories that landed in Coota this week. The rest of the month is below.</p>
+    <ul class="edition-diary">
+      {newThisWeek.map((article) => (
+        <li>
+          <a href={`#${articleAnchor(article)}`}>{article.title}</a>
+          {article.byline && <span> · {article.byline}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
 {sections.map((section) => (
   <section class="glass-card sheen content-block reveal" id={`section-${section.id}`} aria-labelledby={`heading-${section.id}`}>
     <h2 class="section-title" id={`heading-${section.id}`}>{section.title}</h2>
+    {section.auto?.type === "crossword" && (
+      <div class="edition-auto edition-crossword">
+        {section.auto.data.number && (
+          <>
+            <p>
+              Crossword no. {section.auto.data.number}
+              {section.auto.data.title && <> · {section.auto.data.title}</>}.
+              The solution will be in next month's Coota.
+            </p>
+            {section.auto.data.pages?.map((src: string) => (
+              <figure class="edition-figure">
+                <img src={src} alt={`Coota crossword number ${section.auto.data.number}`} width={imageSize(src)?.width} height={imageSize(src)?.height} />
+              </figure>
+            ))}
+            {section.auto.data.pdf && (
+              <p class="edition-source">
+                <a href={section.auto.data.pdf}>Download the puzzle as a PDF</a>
+                {section.auto.data.credit && <span> · {section.auto.data.credit}</span>}
+              </p>
+            )}
+          </>
+        )}
+        {section.auto.data.solutionOfPrevious && (
+          <div class="edition-crossword-solution">
+            <h3 class="edition-subhead">Last month's solution</h3>
+            <p>
+              Crossword no. {section.auto.data.solutionOfPrevious.number}
+              {section.auto.data.solutionOfPrevious.title && <> · {section.auto.data.solutionOfPrevious.title}</>}.
+            </p>
+            {section.auto.data.solutionOfPrevious.pages?.map((src: string) => (
+              <figure class="edition-figure">
+                <img src={src} alt={`Solution to Coota crossword number ${section.auto.data.solutionOfPrevious.number}`} width={imageSize(src)?.width} height={imageSize(src)?.height} />
+              </figure>
+            ))}
+            {section.auto.data.solutionOfPrevious.pdf && (
+              <p class="edition-source">
+                <a href={section.auto.data.solutionOfPrevious.pdf}>Download last month's solution as a PDF</a>
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    )}
     {section.auto?.type === "weather" && (
       <WeekWeather weather={section.auto.data} />
     )}
@@ -500,5 +571,5 @@ const statusLabel =
 )}
 
 <footer class="edition-print-footer edition-print-only">
-  <p>Love Mallacoota · lovemallacoota.au · Published {publishedOn(edition.weekStart)} · Documenting East Gippsland's coast, community & history with care.</p>
+  <p>Love Mallacoota · lovemallacoota.au · Published {publishedOn(edition.monthStart || edition.weekStart)} · Documenting East Gippsland's coast, community & history with care.</p>
 </footer>

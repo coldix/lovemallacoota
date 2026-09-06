@@ -57,7 +57,9 @@ export function sitemapEntries(today) {
       path: `/edition/${edition.week}.html`,
       changefreq: edition.status === "open" ? "daily" : "yearly",
       priority: edition.status === "open" ? "0.8" : "0.6",
-      lastmod: edition.frozenAt ? edition.frozenAt.slice(0, 10) : edition.weekStart,
+      lastmod: edition.frozenAt
+        ? edition.frozenAt.slice(0, 10)
+        : edition.monthStart || edition.weekStart,
     });
   }
 

@@ -55,7 +55,7 @@ export const WHATS_ON = {
   label: "What's On",
   href: "/calendar.html",
   emoji: "📅",
-  blurb: "Events, the community calendar and this week's edition.",
+  blurb: "Events, the community calendar and this month's Coota.",
   active: "calendar",
 };
 

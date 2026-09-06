@@ -1,0 +1,94 @@
+name: Close the month
+
+on:
+  # Run by hand on the first of the month until this has been done once
+  # successfully. Do not add a cron until then. Do not turn Sunday week-roll on.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  roll:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Close the month and open the next
+        run: node tools/roll-month.mjs
+
+      - name: Stop here unless a month actually closed
+        id: changed
+        run: |
+          if git diff --quiet -- data/editions; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No month closed today."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --name-only -- data/editions
+          fi
+
+      - name: Build the new month's automatic sections
+        if: steps.changed.outputs.changed == 'true'
+        run: node tools/refresh-weekly.mjs
+
+      - name: Stamp the release
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+        run: pnpm run version:site
+
+      - name: Check before publishing
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+        run: pnpm run check
+
+      - name: Commit the closed month
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          git config user.name "Love Mallacoota bot"
+          git config user.email "coota@lovemallacoota.au"
+          git add data/editions data/weekly data/site-version.json assets/js/script.js images/editions pdf tools/public-files.mjs README.md
+          git diff --cached --quiet || git commit -m "Close the month and open the next"
+          git push
+
+      - name: Deploy lovemallacoota.au
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY }}
+        run: pnpm run deploy
+
+      - name: Warm the closed edition's PDF
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          MONTH=$(node -p "
+            const fs = require('node:fs');
+            const editions = fs.readdirSync('data/editions')
+              .map((f) => JSON.parse(fs.readFileSync('data/editions/' + f, 'utf8')))
+              .filter((e) => e.status === 'frozen' && (e.kind === 'monthly' || /^\d{4}-\d{2}$/.test(e.week)))
+              .sort((a, b) => b.week.localeCompare(a.week));
+            editions[0] ? editions[0].week : '';
+          ")
+          if [ -n "$MONTH" ]; then
+            echo "Warming https://lovemallacoota.au/edition/$MONTH.pdf"
+            curl -sS -o /dev/null -w "%{http_code} %{size_download} bytes\n" \
+              --max-time 120 "https://lovemallacoota.au/edition/$MONTH.pdf"
+          fi

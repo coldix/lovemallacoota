@@ -1,11 +1,11 @@
 {
   "week": "2026-w36",
-  "generatedAt": "2026-09-06T07:00:39.547Z",
+  "generatedAt": "2026-09-06T13:03:29.867Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-09-06T07:00:36.589Z",
+    "fetchedAt": "2026-09-06T13:03:26.468Z",
     "days": [
       {
         "date": "2026-08-31",
@@ -59,9 +59,9 @@
         "date": "2026-09-06",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 16.1,
-        "minC": 9.6,
-        "rainMm": 0.1
+        "maxC": 16,
+        "minC": 10.3,
+        "rainMm": 0.3
       }
     ]
   },
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-09-06T07:00:38.205Z",
+    "fetchedAt": "2026-09-06T13:03:28.176Z",
     "extremes": [
       {
         "time": "2026-08-31T03:00",
@@ -190,14 +190,14 @@
         "heightM": -0.28
       },
       {
-        "time": "2026-09-06T04:00",
+        "time": "2026-09-06T03:00",
         "type": "High",
-        "heightM": 0.41
+        "heightM": 0.4
       },
       {
         "time": "2026-09-06T09:00",
         "type": "Low",
-        "heightM": 0.03
+        "heightM": 0.04
       },
       {
         "time": "2026-09-06T15:00",
@@ -733,7 +733,7 @@
       },
       {
         "time": "2026-09-05T10:00",
-        "heightM": 0.22
+        "heightM": 0.21
       },
       {
         "time": "2026-09-05T11:00",
@@ -785,7 +785,7 @@
       },
       {
         "time": "2026-09-05T23:00",
-        "heightM": -0.17
+        "heightM": -0.16
       },
       {
         "time": "2026-09-06T00:00",
@@ -805,11 +805,11 @@
       },
       {
         "time": "2026-09-06T04:00",
-        "heightM": 0.41
+        "heightM": 0.4
       },
       {
         "time": "2026-09-06T05:00",
-        "heightM": 0.34
+        "heightM": 0.33
       },
       {
         "time": "2026-09-06T06:00",
@@ -821,23 +821,23 @@
       },
       {
         "time": "2026-09-06T08:00",
-        "heightM": 0.04
+        "heightM": 0.05
       },
       {
         "time": "2026-09-06T09:00",
-        "heightM": 0.03
+        "heightM": 0.04
       },
       {
         "time": "2026-09-06T10:00",
-        "heightM": 0.1
+        "heightM": 0.11
       },
       {
         "time": "2026-09-06T11:00",
-        "heightM": 0.24
+        "heightM": 0.25
       },
       {
         "time": "2026-09-06T12:00",
-        "heightM": 0.42
+        "heightM": 0.43
       },
       {
         "time": "2026-09-06T13:00",
@@ -857,7 +857,7 @@
       },
       {
         "time": "2026-09-06T17:00",
-        "heightM": 0.65
+        "heightM": 0.66
       },
       {
         "time": "2026-09-06T18:00",
@@ -865,15 +865,15 @@
       },
       {
         "time": "2026-09-06T19:00",
-        "heightM": 0.13
+        "heightM": 0.14
       },
       {
         "time": "2026-09-06T20:00",
-        "heightM": -0.14
+        "heightM": -0.13
       },
       {
         "time": "2026-09-06T21:00",
-        "heightM": -0.35
+        "heightM": -0.34
       },
       {
         "time": "2026-09-06T22:00",
@@ -971,26 +971,26 @@
     {
       "date": "Thu 3 Sept",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
-    },
-    {
-      "date": "Thu 3 Sept",
-      "time": "9:30 am",
       "title": "Wilderness Collective (CCR)",
       "location": "The Oval"
     },
     {
-      "date": "Fri 4 Sept",
+      "date": "Thu 3 Sept",
       "time": "9:30 am",
-      "title": "Playgroup",
-      "location": "Mallacoota Preschool and Toy Library"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Fri 4 Sept",
       "time": "9:30 am",
       "title": "Croquet (Reclink)",
       "location": "Mallacoota Golf and Country Club"
+    },
+    {
+      "date": "Fri 4 Sept",
+      "time": "9:30 am",
+      "title": "Playgroup",
+      "location": "Mallacoota Preschool and Toy Library"
     },
     {
       "date": "Sat 5 Sept",
@@ -1007,14 +1007,14 @@
     {
       "date": "Sun 6 Sept",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     },
     {
       "date": "Sun 6 Sept",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     }
   ],
   "trail": {

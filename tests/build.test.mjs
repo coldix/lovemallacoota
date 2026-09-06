@@ -257,9 +257,36 @@ test("What's On shows the next seven days from today, not the edition's Monday",
 
   const editionHtml = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
   assert.match(editionHtml, /Weekly Weather Forecast/);
-  if (editionStart) {
+  if (editionStart && edition.weekStart) {
     assert.equal(editionStart, edition.weekStart, "the edition forecast does not start on its Monday");
   }
+});
+
+test("Coota 26:09 is the live monthly and carries the crossword", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const { currentEdition, isMonthly } = await import("../src/lib/editions.mjs");
+  const edition = currentEdition();
+  assert.ok(isMonthly(edition), "the live edition is not monthly");
+  assert.equal(edition.week, "2026-09");
+  assert.match(html, /Coota 26:09/);
+  assert.match(html, /The Coota Crossword/);
+  assert.match(html, /crossword-2-1\.webp/);
+  assert.match(html, /crossword-2\.pdf/);
+  assert.doesNotMatch(html, /crossword-2-soln/);
+  assert.doesNotMatch(html, /crossword-2-solution/);
+  const weekly = await readFile(new URL("../dist/edition/2026-w36.html", import.meta.url), "utf8");
+  assert.match(weekly, /Edition 26:36/);
+  const liveTitle = html.match(/<title>([\s\S]*?)<\/title>/)[1];
+  const permanent = await readFile(new URL("../dist/edition/2026-09.html", import.meta.url), "utf8");
+  const permanentTitle = permanent.match(/<title>([\s\S]*?)<\/title>/)[1];
+  assert.notEqual(liveTitle, permanentTitle, "the live page and the permanent monthly share a title");
+  await assert.rejects(access(new URL("../dist/images/editions/crossword-2-soln-1.webp", import.meta.url)));
+  await assert.rejects(access(new URL("../dist/pdf/crossword-2-solution.pdf", import.meta.url)));
+
+  const archive = await readFile(new URL("../dist/archive.html", import.meta.url), "utf8");
+  assert.match(archive, /id="archive-coota-title"/);
+  assert.match(archive, /id="archive-editions-title"/);
+  assert.match(archive, /Weekly digital editions/);
 });
 
 test("Astro produces every public route with canonical metadata", async () => {
@@ -611,12 +638,18 @@ test("the coach timetable publishes times, not a link telling people to look", a
   assert.ok(html.includes(timetable.source), "the timetable does not credit its source");
 });
 
-test("the edition is numbered by week and by year", async () => {
+test("the edition is numbered by year and month or week", async () => {
   const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
   const edition = currentEdition();
-  const [year, week] = edition.week.split("-w");
-  assert.ok(html.includes(`Week ${week}`), "no week number on the page");
-  assert.ok(html.includes(`Edition ${year.slice(2)}:${week}`), "no YY:WK edition number");
+  const { editionLabel, isMonthly } = await import("../src/lib/editions.mjs");
+  assert.ok(html.includes(editionLabel(edition)), "no edition label on the page");
+  if (isMonthly(edition)) {
+    assert.match(html, /Coota 26:09/);
+  } else {
+    const [year, week] = edition.week.split("-w");
+    assert.ok(html.includes(`Week ${week}`), "no week number on the page");
+    assert.ok(html.includes(`Edition ${year.slice(2)}:${week}`), "no YY:WK edition number");
+  }
 });
 
 test("advertisements are booked per edition, at a known size, one to a page", async () => {

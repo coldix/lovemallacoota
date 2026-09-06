@@ -9,7 +9,7 @@
 
 import { OZE_LOGO_DATA_URI } from "./oze-logo.ts";
 
-const WEEK = /^\/edition\/(\d{4}-w\d{2})\.pdf$/;
+const WEEK = /^\/edition\/(\d{4}-(?:w\d{2}|\d{2}))\.pdf$/;
 
 /**
  * A frozen edition never changes, so the render is worth caching hard. An open
@@ -32,10 +32,24 @@ export function pdfFilename(week: string): string {
   return `mallacoota-${week}.pdf`;
 }
 
+/** An open edition still changes, so its PDF must not be cached for a year. */
+export function editionPdfIsOpen(html: string): boolean {
+  return (
+    html.includes("stories are still being added this month") ||
+    html.includes("contributions for this week are still being accepted")
+  );
+}
+
 /** Issue number and cover date, read from the page rather than recomputed. */
 function editionDetails(html: string): { issue: string; date: string } {
-  const issue = /Edition (\d{2}:\d{2})/.exec(html)?.[1] ?? "";
-  const date = /Week of ([0-9]{1,2} [A-Za-z]+ [0-9]{4})/.exec(html)?.[1] ?? "";
+  const issue =
+    /Coota (\d{2}:\d{2})/.exec(html)?.[1] ??
+    /Edition (\d{2}:\d{2})/.exec(html)?.[1] ??
+    "";
+  const date =
+    /Week of ([0-9]{1,2} [A-Za-z]+ [0-9]{4})/.exec(html)?.[1] ??
+    /Coota[^<]*([A-Za-z]+ [0-9]{4})/.exec(html)?.[1] ??
+    "";
   return { issue, date };
 }
 
@@ -87,7 +101,7 @@ export async function handleEditionPdf(
   const page = await env.ASSETS.fetch(new Request(pageUrl));
   if (!page.ok) return new Response("No such edition", { status: 404 });
   const html = await page.text();
-  const isOpen = html.includes("contributions for this week are still being accepted");
+  const isOpen = editionPdfIsOpen(html);
 
   if (!env.BROWSER) {
     return new Response("PDF rendering is not configured.", { status: 503 });

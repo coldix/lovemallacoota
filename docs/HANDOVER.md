@@ -83,10 +83,10 @@ consumer domain must name `publishedAt`, the page where its owner already
 publishes it. MDHSS embed it on mallacoota.org.au, so embedding it here exposes
 nothing new. No such page, and the build fails.
 
-**The first weekly edition is closed.** Week 36 (31 Aug–6 Sep) is frozen and
-is still This Week. Week 37 was opened by mistake on Sunday night and taken
-out again. `roll.yml` no longer runs on a schedule. On Monday: archive that
-week's PDF, then start the monthly online edition.
+**Coota 26:09 is the live monthly.** Week 36 (31 Aug–6 Sep) is the last weekly,
+frozen at `/edition/2026-w36.html`. `roll.yml` has no schedule. Crossword no. 2
+is on 26:09; its solution is held in `data/crossword/` for 26:10. Month-end
+freeze is `month.yml`, dispatch-only until it has been run by hand once.
 
 **The weekly diary now comes from the calendar.** `refresh-weekly.mjs` replaces
 the diary with whatever `fetch-calendar.mjs` returns, and `weekly.yml` runs daily

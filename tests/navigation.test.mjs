@@ -31,12 +31,12 @@ async function allPages(dir = "", into = []) {
 const meta = (html, property) =>
   html.match(new RegExp(`<meta (?:property|name)="${property}" content="([^"]*)"`))?.[1];
 
-test("This Week leads the navigation, and the directory follows it", async () => {
+test("Coota leads the navigation, and the directory follows it", async () => {
   const html = await read("index.html");
   const bar = html.match(/<div class="nav-inline">([\s\S]*?)<\/div>/)[1];
   const labels = [...bar.matchAll(/>([^<>]+)<\/a>/g)].map((match) => match[1].trim());
   assert.deepEqual(labels, [
-    "This Week",
+    "Coota",
     "What&#39;s On",
     "Directory",
     "Eat &amp; Drink",
@@ -168,7 +168,7 @@ test("breadcrumbs match the navigation, and start at Home", async () => {
   const expected = {
     "food.html": ["Home", "Directory", "Eat & Drink"],
     "accom.html": ["Home", "Directory", "Stay"],
-    "edition.html": ["Home", "This Week"],
+    "edition.html": ["Home", "Coota"],
     "archive.html": ["Home", "Archive"],
     "calendar.html": ["Home", "What's On"],
     "emergency.html": ["Home", "Emergency"],

@@ -64,7 +64,7 @@ const MOVED_PATHS = new Map([
   // address sends people to Stay rather than a 404.
   ["/listing/mallamaurice-holiday-units.html", "/accom.html"],
   // Week 37 was opened for a few hours on Sunday night, then taken down. The
-  // first weekly edition is still This Week.
+  // first weekly edition is archived; Coota is the live monthly.
   ["/edition/2026-w37.html", "/edition.html"],
   ["/edition/2026-w37", "/edition.html"],
   ["/category", "/"],

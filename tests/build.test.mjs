@@ -257,6 +257,9 @@ test("What's On shows the next seven days from today, not the edition's Monday",
 
   const editionHtml = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
   assert.match(editionHtml, /Weekly Weather Forecast/);
+  if (editionStart) {
+    assert.equal(editionStart, edition.weekStart, "the edition forecast does not start on its Monday");
+  }
 });
 
 test("Astro produces every public route with canonical metadata", async () => {
@@ -553,23 +556,39 @@ test("a headline is never left at the foot of a page without its story", async (
   // The headline and byline sit in their own block, outside the text columns,
   // and print refuses to break after it. "Local of the Week" once sat alone at
   // the bottom of page six with the story overleaf.
-  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
-  assert.ok(html.includes('class="edition-article-head"'), "articles have no head block");
-  assert.ok(html.includes('class="edition-article-columns"'), "articles have no column block");
+  //
+  // After Sunday's roll the open edition can be empty. The rule still has to
+  // hold on every week that actually has a story.
   const css = await readFile(new URL("../assets/css/style.css", import.meta.url), "utf8");
   const print = css.slice(css.indexOf("@media print"));
   assert.match(print, /\.edition-article-head\s*\{[^}]*break-after:\s*avoid/, "print does not keep the head with the story");
   assert.match(print, /@bottom-right\s*\{[^}]*counter\(page\)/, "print has no page number");
+
+  const withStories = loadEditions().filter((edition) => (edition.articles || []).length);
+  assert.ok(withStories.length, "no edition has a story to check");
+  for (const edition of withStories) {
+    const html = await readFile(new URL(`../dist/edition/${edition.week}.html`, import.meta.url), "utf8");
+    assert.ok(html.includes('class="edition-article-head"'), `${edition.week} has no head block`);
+    assert.ok(html.includes('class="edition-article-columns"'), `${edition.week} has no column block`);
+  }
 });
 
 test("every picture in the edition opens larger, with its own words", async () => {
-  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  // A newly opened week may have no photographs yet. The caption still has to
+  // render on the week that carries it.
+  let html = "";
+  for (const edition of loadEditions()) {
+    const page = await readFile(new URL(`../dist/edition/${edition.week}.html`, import.meta.url), "utf8");
+    if (page.includes("farewell Barb in 2009")) {
+      html = page;
+      break;
+    }
+  }
+  assert.ok(html, "a caption in the caption field is dropped");
   const figures = html.match(/<figure class="edition-figure[^"]*">/g) || [];
   const zooms = html.match(/<a class="edition-zoom" href="\/images\/[^"]+"/g) || [];
   assert.ok(figures.length > 0, "no figures in the edition");
   assert.equal(zooms.length, figures.length, "a figure is not a link to its picture");
-  // The photograph with a caption field, not a note, shows it.
-  assert.ok(html.includes("farewell Barb in 2009"), "a caption in the caption field is dropped");
 });
 
 test("the coach timetable publishes times, not a link telling people to look", async () => {

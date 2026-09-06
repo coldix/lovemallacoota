@@ -224,9 +224,14 @@ test("a page that says noindex is not linked from the navigation", async () => {
 test("the featured business points at its own listing, not at a section it is not in", async () => {
   const html = await read("edition.html");
   const week = loadEditions().find((edition) => edition.status === "open");
-  const weekly = JSON.parse(
-    await readFile(new URL(`../data/weekly/${week.week}.json`, import.meta.url), "utf8")
-  );
+  let weekly;
+  try {
+    weekly = JSON.parse(
+      await readFile(new URL(`../data/weekly/${week.week}.json`, import.meta.url), "utf8")
+    );
+  } catch {
+    return; // a newly opened week has no automatic sections yet
+  }
   if (!weekly.business?.slug) return; // no business featured this week
 
   assert.ok(

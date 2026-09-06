@@ -20,6 +20,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Whole history: the check step rebuilds directory-changes from git.
+          # A shallow clone failed the Sunday roll, so the new week never went live.
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v6
 

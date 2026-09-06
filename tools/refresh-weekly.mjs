@@ -17,10 +17,10 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { moonWeek } from "../src/lib/moon.mjs";
-import { plainEdition } from "../src/lib/editions.mjs";
+import { currentEdition, plainEdition } from "../src/lib/editions.mjs";
 import { entityBySlug, listingPhoto } from "../src/lib/directory.mjs";
 import { fetchCalendarEvents } from "./fetch-calendar.mjs";
-import { melbourneToday } from "./roll-edition.mjs";
+import { isoWeekOf, melbourneToday } from "./roll-edition.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -88,32 +88,22 @@ function readJson(relativePath, fallback) {
   return JSON.parse(readFileSync(file, "utf8"));
 }
 
-/**
- * Where the week's data should begin. An edition published on Sunday for the
- * week ahead would otherwise open with a forecast that starts tomorrow, which
- * is no use to somebody reading it today.
- */
-function startDateFor(week) {
-  const monday = mondayOf(week).toISOString().slice(0, 10);
-  const today = melbourneToday();
-  return today < monday ? today : monday;
-}
-
 /** Calendar-date arithmetic on an ISO day, no clock and no DST. */
 export function addIsoDays(isoDate, days) {
   const [year, month, day] = isoDate.split("-").map(Number);
   return new Date(Date.UTC(year, month - 1, day + days)).toISOString().slice(0, 10);
 }
 
-/** Today through today+6 in Melbourne — the window What's On shows. */
+/** Today through today+6 in Melbourne — the window the calendar page shows. */
 export function comingRange(today = melbourneToday()) {
   return { start: today, end: addIsoDays(today, 6) };
 }
 
+/** Monday to Sunday of an edition week. The edition always covers that week. */
 function editionRange(week) {
   const monday = mondayOf(week);
   return {
-    start: startDateFor(week),
+    start: monday.toISOString().slice(0, 10),
     end: new Date(monday.getTime() + 6 * 86400000).toISOString().slice(0, 10),
   };
 }
@@ -285,7 +275,9 @@ async function loadOrKeep(label, previousValue, fetchFn) {
 }
 
 async function refresh() {
-  const week = weekArg || isoWeek(new Date());
+  // The open edition, not the UTC ISO week: on Sunday after the week rolls,
+  // today is still week N and the edition already belongs to week N+1.
+  const week = weekArg || currentEdition()?.week || isoWeekOf(melbourneToday());
   const weekFile = path.join(weeklyDir, `${week}.json`);
   const comingFile = path.join(weeklyDir, "coming.json");
   const previous = existsSync(weekFile) ? JSON.parse(readFileSync(weekFile, "utf8")) : null;

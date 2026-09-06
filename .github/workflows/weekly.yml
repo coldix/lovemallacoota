@@ -21,6 +21,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Whole history: build-directory-changes walks git, and a shallow
+          # clone made "what's new" fail the daily refresh so the forecast
+          # never shipped.
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v6
 

@@ -280,8 +280,8 @@ function autoFeed(edition) {
       tides: coming.tides,
       moon: coming.moon,
       events: coming.events?.length ? coming.events : thisWeek.events,
-      trail: thisWeek.trail,
-      business: thisWeek.business,
+      trail: thisWeek.trail || coming.trail,
+      business: thisWeek.business || coming.business,
     };
   }
   return loadWeekly(edition.week) || loadComingWeek();

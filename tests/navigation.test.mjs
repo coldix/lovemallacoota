@@ -223,16 +223,13 @@ test("a page that says noindex is not linked from the navigation", async () => {
 
 test("the featured business points at its own listing, not at a section it is not in", async () => {
   const html = await read("edition.html");
-  const week = loadEditions().find((edition) => edition.status === "open");
-  let weekly;
-  try {
-    weekly = JSON.parse(
-      await readFile(new URL(`../data/weekly/${week.week}.json`, import.meta.url), "utf8")
-    );
-  } catch {
-    return; // a newly opened week has no automatic sections yet
-  }
-  if (!weekly.business?.slug) return; // no business featured this week
+  const { currentEdition, isMonthly, loadComingWeek, loadWeekly } = await import("../src/lib/editions.mjs");
+  const { isoWeekOf, melbourneToday } = await import("../tools/roll-edition.mjs");
+  const open = currentEdition();
+  const weekly = isMonthly(open)
+    ? loadWeekly(isoWeekOf(melbourneToday())) || loadComingWeek()
+    : loadWeekly(open?.week);
+  if (!weekly?.business?.slug) return; // no business featured this week
 
   assert.ok(
     html.includes(`href="/listing/${weekly.business.slug}.html"`),

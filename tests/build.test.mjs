@@ -10,6 +10,7 @@ import {
   currentEdition,
   editionAds,
   editionSections,
+  isMonthly,
   loadEditions,
   tableOfContents,
 } from "../src/lib/editions.mjs";
@@ -269,6 +270,10 @@ test("Coota 26:09 is the live monthly and carries the crossword", async () => {
   assert.ok(isMonthly(edition), "the live edition is not monthly");
   assert.equal(edition.week, "2026-09");
   assert.match(html, /Coota 26:09/);
+  assert.equal((edition.articles || []).length, 15, "Coota 26:09 is missing last week's stories");
+  assert.match(html, /A weekly edition, starting small/);
+  assert.match(html, /Farewell to Barbara/);
+  assert.match(html, /The Bar/);
   assert.match(html, /The Coota Crossword/);
   assert.match(html, /crossword-2-1\.webp/);
   assert.match(html, /crossword-2\.pdf/);
@@ -605,6 +610,9 @@ test("every picture in the edition opens larger, with its own words", async () =
   // render on the week that carries it.
   let html = "";
   for (const edition of loadEditions()) {
+    // The monthly also carries these stories, plus a crossword figure that is
+    // not a photograph. The caption rule is checked on the weekly that ran it.
+    if (isMonthly(edition)) continue;
     const page = await readFile(new URL(`../dist/edition/${edition.week}.html`, import.meta.url), "utf8");
     if (page.includes("farewell Barb in 2009")) {
       html = page;

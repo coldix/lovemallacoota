@@ -1,11 +1,11 @@
 {
   "week": "2026-w37",
-  "generatedAt": "2026-09-08T00:19:06.477Z",
+  "generatedAt": "2026-09-08T09:33:49.338Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-09-08T00:19:03.568Z",
+    "fetchedAt": "2026-09-08T09:33:47.581Z",
     "days": [
       {
         "date": "2026-09-07",
@@ -19,48 +19,48 @@
         "date": "2026-09-08",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 16.8,
-        "minC": 7.9,
+        "maxC": 17.2,
+        "minC": 8.2,
         "rainMm": 0
       },
       {
         "date": "2026-09-09",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 13.3,
-        "minC": 7.2,
+        "maxC": 13.6,
+        "minC": 7.5,
         "rainMm": 0.5
       },
       {
         "date": "2026-09-10",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 13.8,
-        "minC": 8.8,
+        "maxC": 14.1,
+        "minC": 9.2,
         "rainMm": 0.4
       },
       {
         "date": "2026-09-11",
-        "code": 1,
-        "summary": "Mostly clear",
-        "maxC": 16.8,
-        "minC": 6.6,
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 16.4,
+        "minC": 7.7,
         "rainMm": 0
       },
       {
         "date": "2026-09-12",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 19.1,
-        "minC": 7.5,
+        "code": 1,
+        "summary": "Mostly clear",
+        "maxC": 20.9,
+        "minC": 6.6,
         "rainMm": 0
       },
       {
         "date": "2026-09-13",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 21.5,
-        "minC": 7.9,
+        "maxC": 21.4,
+        "minC": 9.1,
         "rainMm": 0
       }
     ]
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-09-08T00:19:05.169Z",
+    "fetchedAt": "2026-09-08T09:33:48.201Z",
     "extremes": [
       {
         "time": "2026-09-07T04:00",
@@ -947,14 +947,14 @@
     {
       "date": "Mon 7 Sept",
       "time": "10:00 am",
-      "title": "Pickleball",
-      "location": "Mallacoota Tennis Club"
+      "title": "Toddler Music and Movement (Reclink)",
+      "location": ""
     },
     {
       "date": "Mon 7 Sept",
       "time": "10:00 am",
-      "title": "Toddler Music and Movement (Reclink)",
-      "location": ""
+      "title": "Pickleball",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Tue 8 Sept",
@@ -983,26 +983,26 @@
     {
       "date": "Thu 10 Sept",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
-    },
-    {
-      "date": "Thu 10 Sept",
-      "time": "9:30 am",
       "title": "Wilderness Collective (CCR)",
       "location": "The Oval"
     },
     {
-      "date": "Fri 11 Sept",
+      "date": "Thu 10 Sept",
       "time": "9:30 am",
-      "title": "Croquet (Reclink)",
-      "location": "Mallacoota Golf and Country Club"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Fri 11 Sept",
       "time": "9:30 am",
       "title": "Playgroup",
       "location": "Mallacoota Preschool and Toy Library"
+    },
+    {
+      "date": "Fri 11 Sept",
+      "time": "9:30 am",
+      "title": "Croquet (Reclink)",
+      "location": "Mallacoota Golf and Country Club"
     },
     {
       "date": "Sat 12 Sept",

@@ -2,11 +2,11 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.80-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.81-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-153%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
-**v1.80** - built 7 September 2026.
+**v1.81** - built 8 September 2026.
 <!-- /version -->
 
 Both the line above and the version badge are written by

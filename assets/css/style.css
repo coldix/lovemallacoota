@@ -1832,6 +1832,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   border-radius: 12px;
   display: block;
 }
+.edition-figure.qr img {
+  border-radius: 0;
+  background: #fff;
+  image-rendering: pixelated;
+  max-height: 220px;
+}
 .edition-figure.wide img { max-height: 560px; width: 100%; object-fit: cover; }
 .edition-figure figcaption {
   margin-top: 0.45rem;

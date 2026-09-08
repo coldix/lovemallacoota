@@ -479,7 +479,7 @@ const statusLabel =
           {gallery.length > 0 && (
             <div class:list={["edition-figures-grid", { pair: gallery.length === 2 }]}>
               {gallery.map((image, index) => (
-                <figure class:list={["edition-figure", { lead: index === 0 && gallery.length > 2, small: image.display === "small" }]}>
+                <figure class:list={["edition-figure", { lead: index === 0 && gallery.length > 2, small: image.display === "small", qr: image.kind === "qr" }]}>
                   <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
                     <img src={image.url} alt={image.alt} width={imageSize(image.url)?.width} height={imageSize(image.url)?.height} loading="lazy" decoding="async" />
                   </a>
@@ -495,7 +495,7 @@ const statusLabel =
           )}
           <div class="edition-article-columns">
             {lead && (
-              <figure class:list={["edition-figure", "lead", { small: lead.display === "small" }]}>
+              <figure class:list={["edition-figure", "lead", { small: lead.display === "small", qr: lead.kind === "qr" }]}>
                 <a class="edition-zoom" href={lead.url} aria-label={`Enlarge: ${lead.alt || article.title}`}>
                   <img src={lead.url} alt={lead.alt} width={imageSize(lead.url)?.width} height={imageSize(lead.url)?.height} loading="lazy" decoding="async" />
                 </a>

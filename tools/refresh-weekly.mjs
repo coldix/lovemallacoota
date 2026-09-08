@@ -215,17 +215,37 @@ function pickTrail(week) {
   };
 }
 
-function pickBusiness(week) {
+/** May–September: do not feature a summer-only operator as if it were open. */
+function isCoolSeason(today = melbourneToday()) {
+  const month = Number(today.slice(5, 7));
+  return month >= 5 && month <= 9;
+}
+
+function isSummerSeasonal(business) {
+  const text = [business.notes_seasonal, business.description_short, business.description_long]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  return /seasonal operation|available seasonally|warmer months|peak (?:holiday|season)/.test(text);
+}
+
+export function pickBusiness(week) {
   const files = ["listings_food.json", "listings_accom.json", "listings_do.json"];
-  const businesses = files
+  let businesses = files
     .flatMap((file) => readJson(`data/${file}`, []))
     .filter(Boolean)
     // Featuring a business that has closed sends people to a locked door.
     .filter((business) => !business.trading || business.trading.state === "open")
     .sort((a, b) => (a.slug || "").localeCompare(b.slug || ""));
+  if (isCoolSeason()) {
+    businesses = businesses.filter((business) => !isSummerSeasonal(business));
+  }
   if (!businesses.length) return null;
 
-  const business = businesses[rotationIndex(week) % businesses.length];
+  const overrideSlug = currentEdition()?.featuredBusiness;
+  const business =
+    (overrideSlug && businesses.find((entry) => entry.slug === overrideSlug)) ||
+    businesses[rotationIndex(week) % businesses.length];
   const link =
     business.links?.find((entry) => (entry.text || "").toLowerCase() === "website") ||
     business.links?.[0] ||
@@ -244,7 +264,9 @@ function pickBusiness(week) {
     locality: business.address?.locality || null,
     url: link?.url || null,
     ...(photo ? { photo: photo.url, photoAlt: photo.alt } : {}),
-    rotation: { position: (rotationIndex(week) % businesses.length) + 1, of: businesses.length },
+    ...(overrideSlug && business.slug === overrideSlug
+      ? {}
+      : { rotation: { position: (rotationIndex(week) % businesses.length) + 1, of: businesses.length } }),
   };
 }
 

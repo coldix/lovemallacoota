@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { isoWeekOf, melbourneToday, newEdition, plan } from "../tools/roll-edition.mjs";
+import { pickBusiness } from "../tools/refresh-weekly.mjs";
 import { monthBounds, monthDisplay, newMonthly, nextMonth, planMonth } from "../tools/roll-month.mjs";
 import { addIsoDays, comingRange } from "../tools/refresh-weekly.mjs";
 
@@ -133,6 +134,13 @@ test("the next month carries last issue's crossword solution", () => {
     edition.crossword.solutionOfPrevious.pages[0],
     "/images/editions/crossword-2-soln-1.webp"
   );
+});
+
+test("the featured business in the cool months is not a summer-only operator", () => {
+  const featured = pickBusiness("2026-w37");
+  assert.equal(featured.slug, "mallacoota-food-chariot");
+  assert.equal(featured.rotation, undefined);
+  assert.doesNotMatch(featured.description || "", /seasonal/i);
 });
 
 test("What's On looks seven days forward from today, not back to Monday", () => {

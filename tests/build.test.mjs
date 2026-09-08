@@ -270,10 +270,16 @@ test("Coota 26:09 is the live monthly and carries the crossword", async () => {
   assert.ok(isMonthly(edition), "the live edition is not monthly");
   assert.equal(edition.week, "2026-09");
   assert.match(html, /Coota 26:09/);
-  assert.equal((edition.articles || []).length, 15, "Coota 26:09 is missing last week's stories");
+  assert.equal((edition.articles || []).length, 17, "Coota 26:09 is missing last week's stories");
   assert.match(html, /A weekly edition, starting small/);
   assert.match(html, /Farewell to Barbara/);
   assert.match(html, /The Bar/);
+  assert.match(html, /Found: Gardener/);
+  assert.match(html, /Mallacoota Buy, Swap and Sell/);
+  assert.match(html, /qr-ozol-bbs\.webp/);
+  assert.match(html, /ozol\.au\/bbs/);
+  assert.match(html, /Food Chariot/);
+  assert.doesNotMatch(html, /Alf's Pizza/);
   assert.match(html, /The Coota Crossword/);
   assert.match(html, /crossword-2-1\.webp/);
   assert.match(html, /crossword-2\.pdf/);

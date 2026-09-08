@@ -6,6 +6,7 @@
   "monthEnd": "2026-09-30",
   "status": "open",
   "editor": "Colin Dixon",
+  "featuredBusiness": "mallacoota-food-chariot",
   "articles": [
     {
       "id": "w35-editorial",
@@ -252,24 +253,49 @@
         "The survey covers local news, notices, events, community groups, school and youth activities, local history, business information, and community or emergency information. It takes about five minutes. [Take the community survey](https://www.surveymonkey.com/r/5KWFLG8) - responses close on Wednesday 9 September.",
         "Prefer paper? Copies are at Council's Information Centre, and completed surveys go in the MADRA suggestion box there.",
         "A word about where I stand. I have been building this weekly for a while now, so I am hardly a neutral party in a survey about what should replace the Mouth. That is exactly why it is worth filling in: if what the district wants is not what I have built, I would rather find out from a few hundred answers than from my own assumptions. Say what you actually want. I will publish what the survey finds either way.",
-        "MADRA Â· madrecovery.com"
+        "MADRA - madrecovery.com"
       ]
     },
     {
       "id": "w36-classified-gardener",
       "section": "classifieds",
-      "title": "Wanted: Gardener",
-      "byline": "Colin - 0419 415 000 Â· careplan.au",
+      "title": "Found: Gardener",
+      "byline": "Colin - 0419 415 000 - careplan.au",
       "authorEmail": "coota@lovemallacoota.au",
-      "publishedAt": "2026-09-01T09:00:00+10:00",
+      "publishedAt": "2026-09-08T10:00:00+10:00",
       "check": {
         "verdict": "author",
         "note": "Classified notice from local resident."
       },
       "body": [
+        "Found. Thank you to everyone who got in touch - the garden work is filled.",
         "Weeding, pruning and maintaining the garden - 4 hours per month offering $66 per hour paid under Trilogy Care.",
         "You need an ABN, insurance and to invoice... I can help with that, see [careplan.au](https://careplan.au). Contact Colin on 0419 415 000.",
         "Can be 1 hr per week, 2 hrs per fortnight, or a half-day per month - flexible schedule."
+      ]
+    },
+    {
+      "id": "2026-09-classifieds-buy-swap-sell",
+      "section": "classifieds",
+      "title": "Mallacoota Buy, Swap and Sell",
+      "byline": "Love Mallacoota",
+      "authorEmail": "coota@lovemallacoota.au",
+      "publishedAt": "2026-09-08T10:30:00+10:00",
+      "check": {
+        "verdict": "author",
+        "note": "Written by the publisher."
+      },
+      "image": {
+        "url": "/images/editions/qr-ozol-bbs.webp",
+        "alt": "QR code linking to Mallacoota Buy, Swap and Sell at ozol.au/bbs",
+        "caption": "Scan to open Mallacoota Buy, Swap and Sell.",
+        "credit": "Love Mallacoota",
+        "kind": "qr",
+        "display": "small"
+      },
+      "body": [
+        "The town's classifieds live on Facebook, in Mallacoota Buy, Swap and Sell. Boats, firewood, furniture, tools, and work wanted or offered - it is the noticeboard most people actually look at.",
+        "Anyone can join. Scan the QR code, or go to [ozol.au/bbs](https://ozol.au/bbs). It is a public group, run locally."
       ]
     },
     {

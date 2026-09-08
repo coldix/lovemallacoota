@@ -310,6 +310,36 @@ test("Coota 26:09 is the live monthly and carries the crossword", async () => {
   assert.match(archive, /Weekly digital editions/);
 });
 
+test("week 36 starts Sunday 6 September and looks a week ahead", async () => {
+  const { loadEditions, loadWeekly } = await import("../src/lib/editions.mjs");
+  const edition = loadEditions().find((entry) => entry.week === "2026-w36");
+  assert.ok(edition, "week 36 is missing");
+  assert.equal(edition.weekStart, "2026-09-06");
+  assert.equal(edition.weekEnd, "2026-09-12");
+
+  const weekly = loadWeekly("2026-w36");
+  assert.equal(weekly.weather.days[0].date, "2026-09-06", "tides and forecast still start on the old Monday");
+  assert.equal(weekly.weather.days.at(-1).date, "2026-09-12");
+  assert.equal(weekly.tides.extremes[0].time.slice(0, 10), "2026-09-06");
+  assert.equal(weekly.business.slug, "mallacoota-food-chariot");
+
+  const html = await readFile(new URL("../dist/edition/2026-w36.html", import.meta.url), "utf8");
+  assert.match(html, /Food Chariot/);
+  assert.doesNotMatch(html, /Adobe Holiday Flats/);
+  assert.match(html, /bastion-point\.webp/);
+  assert.match(html, /w35-local-frank-stokes-2\.webp/);
+  assert.match(html, /class="[^"]*edition-figure[^"]*wide/);
+  assert.match(html, /class="[^"]*edition-figures-grid stack/);
+  assert.match(html, /qr-mallacoota-now\.webp/);
+  assert.match(html, /qr-ozol-bbs\.webp/);
+  assert.match(html, /qr-mallacoota-weather\.webp/);
+  assert.match(html, /qr-love-mallacoota\.webp/);
+  assert.match(html, /qr-gippsland-vic\.webp/);
+  assert.match(html, /qr-mallacoota-birds\.webp/);
+  assert.match(html, /Pickleball/);
+  assert.doesNotMatch(html, /Tue 1 Sept/);
+});
+
 test("Astro produces every public route with canonical metadata", async () => {
   for (const page of generatedPages) {
     const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");

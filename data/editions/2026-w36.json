@@ -2,8 +2,8 @@
   "week": "2026-w36",
   "kind": "weekly",
   "displayDate": "6 September 2026",
-  "weekStart": "2026-08-31",
-  "weekEnd": "2026-09-06",
+  "weekStart": "2026-09-06",
+  "weekEnd": "2026-09-12",
   "status": "frozen",
   "editor": "Colin Dixon",
   "firstIssue": true,
@@ -145,19 +145,21 @@
         }
       ],
       "image": {
-        "url": "/images/articles/w35-local-frank-stokes.webp",
-        "alt": "Frank Stokes, photographed in Mallacoota",
-        "credit": "Supplied by Frank Stokes",
-        "note": null,
-        "rights": "permission_granted"
+        "url": "/images/articles/w35-local-frank-stokes-2.webp",
+        "alt": "An AI reconstruction of a 1968 newspaper photograph: a PMG pontoon carrying a tractor and backhoe on the river, with a diver in the water alongside it, air hoses running back to the surface.",
+        "credit": "AI reconstruction, not a photograph",
+        "note": "Rebuilt by software from the black and white original in the Geelong Advertiser, 23 March 1968. The detail is generated rather than recovered.",
+        "rights": "ai_reconstruction",
+        "display": "wide"
       },
       "images": [
         {
-          "url": "/images/articles/w35-local-frank-stokes-2.webp",
-          "alt": "An AI reconstruction of a 1968 newspaper photograph: a PMG pontoon carrying a tractor and backhoe on the river, with a diver in the water alongside it, air hoses running back to the surface.",
-          "credit": "AI reconstruction, not a photograph",
-          "note": "Rebuilt by software from the black and white original in the Geelong Advertiser, 23 March 1968. The detail is generated rather than recovered.",
-          "rights": "ai_reconstruction"
+          "url": "/images/articles/w35-local-frank-stokes.webp",
+          "alt": "Frank Stokes, photographed in Mallacoota",
+          "credit": "Supplied by Frank Stokes",
+          "note": null,
+          "rights": "permission_granted",
+          "display": "small"
         }
       ]
     },
@@ -356,7 +358,15 @@
         "**Posts go straight up.** It is not moderated in any real sense. A few automatic rules do the work: a profile photo is required, comments need at least ten characters, and Facebook's banned-words list is on. Your first post may be checked; after that it publishes itself.",
         "**A tip that improves almost any post:** say when it was taken, where, who or what is in it, and why you shared it. One or two lines is enough, and context is what starts a conversation rather than a row of likes.",
         "Hashtag is #MallacootaNow. Longer pieces and the weekly edition are here at [coota.au](https://coota.au)."
-      ]
+      ],
+      "image": {
+        "url": "/images/bank/bastion-point.webp",
+        "alt": "Bastion Point and the Mallacoota inlet from the air",
+        "credit": "Colin Dixon",
+        "note": "The place the group is about. Most of the people reading it are not standing here.",
+        "rights": "own_work",
+        "display": "wide"
+      }
     },
     {
       "id": "2026-w36-history-the-bar-henry-lawson-poem",
@@ -415,13 +425,15 @@
           "url": "/images/articles/w36-lawson-1.webp",
           "alt": "1910 meeting on Captain's Point between bush poet Henry Lawson and E.J. Brady",
           "credit": "Unknown AI Enhanced",
-          "note": "1910 meeting on Captain's Point between bush poet Henry Lawson and his close friend, writer and bush advocate Edwin James (E.J.) Brady."
+          "note": "1910 meeting on Captain's Point between bush poet Henry Lawson and his close friend, writer and bush advocate Edwin James (E.J.) Brady.",
+          "display": "full"
         },
         {
           "url": "/images/articles/w36-lawson-2.webp",
           "alt": "E.J. Brady, Tuppy and Norma",
           "credit": "Unknown AI Enhanced",
-          "note": "E.J. Brady, Tuppy and Norma"
+          "note": "E.J. Brady, Tuppy and Norma",
+          "display": "full"
         }
       ],
       "body": [
@@ -452,13 +464,15 @@
           "url": "/images/articles/w36-buckland-original.webp",
           "alt": "A faded sepia photograph of Frederick and Helena Buckland, he seated in a dark suit with a flower in his lapel, she beside him in a pale dress with wide sleeves.",
           "credit": "Karbeethong Lodge collection",
-          "note": "The original: Frederick Herbert Buckland and Helena Margaret Buckland, from the framed photographs in the hallway at Karbeethong Lodge."
+          "note": "The original: Frederick Herbert Buckland and Helena Margaret Buckland, from the framed photographs in the hallway at Karbeethong Lodge.",
+          "display": "full"
         },
         {
           "url": "/images/articles/w36-buckland-colour.webp",
           "alt": "An AI-generated colour portrait of a couple in period dress, a man in a dark suit standing beside a woman in a cream gown, in the manner of the original photograph.",
           "credit": "AI reconstruction, not a photograph",
-          "note": "The AI version. It follows the original's pose and dress, but the faces and the fine detail are generated rather than recovered: treat it as an impression, not a likeness."
+          "note": "The AI version. It follows the original's pose and dress, but the faces and the fine detail are generated rather than recovered: treat it as an impression, not a likeness.",
+          "display": "full"
         }
       ],
       "body": [

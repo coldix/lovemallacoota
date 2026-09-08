@@ -371,15 +371,20 @@ const statusLabel =
       <div class="edition-link-grid">
         {section.auto.data.map((item) => (
           <div class="edition-link-card">
-            <h4>
-              {item.url
-                ? <a href={item.url} rel="noopener noreferrer" target={item.url.startsWith("http") ? "_blank" : undefined}>{item.title}</a>
-                : item.title}
-            </h4>
-            {item.description && <p>{item.description}</p>}
-            {item.meta && <span class="meta">{item.meta}</span>}
-            {item.verified && (
-              <span class="meta verified-note">✓ {item.verifiedNote || "Verified"}</span>
+            <div class="edition-link-copy">
+              <h4>
+                {item.url
+                  ? <a href={item.url} rel="noopener noreferrer" target={item.url.startsWith("http") ? "_blank" : undefined}>{item.title}</a>
+                  : item.title}
+              </h4>
+              {item.description && <p>{item.description}</p>}
+              {item.meta && <span class="meta">{item.meta}</span>}
+              {item.verified && (
+                <span class="meta verified-note">✓ {item.verifiedNote || "Verified"}</span>
+              )}
+            </div>
+            {item.qr && (
+              <img class="edition-qr" src={item.qr} alt={`QR code for ${item.title}`} width={imageSize(item.qr)?.width} height={imageSize(item.qr)?.height} loading="eager" decoding="async" />
             )}
           </div>
         ))}
@@ -451,8 +456,16 @@ const statusLabel =
          first marked as the lead: full width on screen, one cell of the
          grid on paper, where a lone picture in column one left column two
          empty beside it. */
-      const lead = pictures.length === 1 ? pictures[0] : null;
-      const gallery = pictures.length > 1 ? pictures : [];
+      const gallery =
+        pictures.length > 1 || pictures.some((image) => image.display === "wide" || image.display === "full")
+          ? pictures
+          : [];
+      const lead = gallery.length === 0 ? pictures[0] || null : null;
+      const stacked = gallery.length > 1 && gallery.every((image) => image.display === "full");
+      const pair =
+        gallery.length === 2 &&
+        !stacked &&
+        !gallery.some((image) => image.display === "wide" || image.display === "full");
       const captionOf = (image) => [image.credit, image.caption || image.note].filter(Boolean);
       return (
         <article class:list={["edition-article", { "edition-poem": isPoem }]} id={articleAnchor(article)}>
@@ -477,9 +490,9 @@ const statusLabel =
               child of the column container, a full-width grid made Chromium
               push the whole piece to a fresh page whenever it started mid-page. */}
           {gallery.length > 0 && (
-            <div class:list={["edition-figures-grid", { pair: gallery.length === 2 }]}>
+            <div class:list={["edition-figures-grid", { pair, stack: stacked }]}>
               {gallery.map((image, index) => (
-                <figure class:list={["edition-figure", { lead: index === 0 && gallery.length > 2, small: image.display === "small", qr: image.kind === "qr" }]}>
+                <figure class:list={["edition-figure", { lead: image.display === "wide" || (index === 0 && gallery.length > 2 && image.display !== "full" && image.display !== "small"), small: image.display === "small", wide: image.display === "wide", full: image.display === "full", qr: image.kind === "qr" }]}>
                   <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
                     <img src={image.url} alt={image.alt} width={imageSize(image.url)?.width} height={imageSize(image.url)?.height} loading="eager" decoding="async" />
                   </a>
@@ -495,7 +508,7 @@ const statusLabel =
           )}
           <div class="edition-article-columns">
             {lead && (
-              <figure class:list={["edition-figure", "lead", { small: lead.display === "small", qr: lead.kind === "qr" }]}>
+              <figure class:list={["edition-figure", "lead", { small: lead.display === "small", wide: lead.display === "wide", full: lead.display === "full", qr: lead.kind === "qr" }]}>
                 <a class="edition-zoom" href={lead.url} aria-label={`Enlarge: ${lead.alt || article.title}`}>
                   <img src={lead.url} alt={lead.alt} width={imageSize(lead.url)?.width} height={imageSize(lead.url)?.height} loading="eager" decoding="async" />
                 </a>

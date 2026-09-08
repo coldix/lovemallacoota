@@ -285,6 +285,11 @@ test("Coota 26:09 is the live monthly and carries the crossword", async () => {
     /loading="lazy"/,
     "edition photographs are lazy and will not print"
   );
+  assert.match(
+    html,
+    /download="mallacoota-2026-09.pdf"/,
+    "the PDF link has no download filename, so the browser tries to preview it"
+  );
   assert.match(html, /The Coota Crossword/);
   assert.match(html, /crossword-2-1\.webp/);
   assert.match(html, /crossword-2\.pdf/);
@@ -608,6 +613,7 @@ test("a headline is never left at the foot of a page without its story", async (
   assert.match(print, /@bottom-right\s*\{[^}]*counter\(page\)/, "print has no page number");
   assert.match(print, /print-color-adjust:\s*exact/, "photographs would print as empty boxes");
   assert.match(print, /\.edition-crossword[\s\S]*max-height:\s*240mm/, "the crossword is capped too small to solve");
+  assert.match(print, /#section-classifieds[\s\S]*columns:\s*1/, "classifieds with a QR stay in three columns");
 
   const withStories = loadEditions().filter((edition) => (edition.articles || []).length);
   assert.ok(withStories.length, "no edition has a story to check");
@@ -616,6 +622,14 @@ test("a headline is never left at the foot of a page without its story", async (
     assert.ok(html.includes('class="edition-article-head"'), `${edition.week} has no head block`);
     assert.ok(html.includes('class="edition-article-columns"'), `${edition.week} has no column block`);
   }
+});
+
+test("the Worker does not set a CPU limit the Free plan rejects", async () => {
+  // v1.82 asked for cpu_ms: 60000 so a long PDF render would not be killed.
+  // Cloudflare refused both preview and production (code 100328). PDF time
+  // is spent waiting on Browser Rendering, not burning Worker CPU.
+  const config = await readFile(new URL("../wrangler.jsonc", import.meta.url), "utf8");
+  assert.doesNotMatch(config, /"cpu_ms"/, "cpu_ms cannot be deployed on the Free plan");
 });
 
 test("every picture in the edition opens larger, with its own words", async () => {

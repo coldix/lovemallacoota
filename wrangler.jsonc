@@ -98,8 +98,8 @@
     "logs": {
       "head_sampling_rate": 1
     }
-  },
-  "limits": {
-    "cpu_ms": 60000
   }
+  // Do not set limits.cpu_ms. This account is on the Workers Free plan, and
+  // Cloudflare rejects the whole deploy (code 100328). PDF rendering spends
+  // its time waiting on Browser Rendering, not burning Worker CPU.
 }

@@ -98,5 +98,8 @@
     "logs": {
       "head_sampling_rate": 1
     }
+  },
+  "limits": {
+    "cpu_ms": 60000
   }
 }

@@ -103,7 +103,7 @@ const statusLabel =
   </h2>
   <p class="section-sub">{statusLabel}</p>
   <div class="edition-actions">
-    <a class="btn btn-primary" href={editionPdfPath(edition)}>Download the PDF</a>
+    <a class="btn btn-primary" href={editionPdfPath(edition)} download={`mallacoota-${edition.week}.pdf`}>Download the PDF</a>
     <button class="btn btn-ghost" type="button" data-print-edition>Print this edition</button>
   </div>
   {edition.status === "open" && (
@@ -264,7 +264,7 @@ const statusLabel =
     {section.auto?.type === "trail" && (
       <div class="edition-auto edition-feature">
         {section.auto.data.photo && (
-          <img class="edition-photo" src={section.auto.data.photo} alt={section.auto.data.name} width={imageSize(section.auto.data.photo)?.width} height={imageSize(section.auto.data.photo)?.height} loading="lazy" decoding="async" />
+          <img class="edition-photo" src={section.auto.data.photo} alt={section.auto.data.name} width={imageSize(section.auto.data.photo)?.width} height={imageSize(section.auto.data.photo)?.height} loading="eager" decoding="async" />
         )}
         <h3>{section.auto.data.name}</h3>
         <p class="edition-feature-meta">
@@ -398,7 +398,7 @@ const statusLabel =
     {section.auto?.type === "business" && (
       <div class="edition-auto edition-feature">
         {section.auto.data.photo && (
-          <img class="edition-photo" src={section.auto.data.photo} alt={section.auto.data.photoAlt || section.auto.data.name} width={imageSize(section.auto.data.photo)?.width} height={imageSize(section.auto.data.photo)?.height} loading="lazy" decoding="async" />
+          <img class="edition-photo" src={section.auto.data.photo} alt={section.auto.data.photoAlt || section.auto.data.name} width={imageSize(section.auto.data.photo)?.width} height={imageSize(section.auto.data.photo)?.height} loading="eager" decoding="async" />
         )}
         {section.auto.data.photoCredit && <p class="edition-feature-credit">Photograph: {section.auto.data.photoCredit}</p>}
         <h3>{section.auto.data.name}</h3>
@@ -481,7 +481,7 @@ const statusLabel =
               {gallery.map((image, index) => (
                 <figure class:list={["edition-figure", { lead: index === 0 && gallery.length > 2, small: image.display === "small", qr: image.kind === "qr" }]}>
                   <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
-                    <img src={image.url} alt={image.alt} width={imageSize(image.url)?.width} height={imageSize(image.url)?.height} loading="lazy" decoding="async" />
+                    <img src={image.url} alt={image.alt} width={imageSize(image.url)?.width} height={imageSize(image.url)?.height} loading="eager" decoding="async" />
                   </a>
                   {captionOf(image).length > 0 && (
                     <figcaption>
@@ -497,7 +497,7 @@ const statusLabel =
             {lead && (
               <figure class:list={["edition-figure", "lead", { small: lead.display === "small", qr: lead.kind === "qr" }]}>
                 <a class="edition-zoom" href={lead.url} aria-label={`Enlarge: ${lead.alt || article.title}`}>
-                  <img src={lead.url} alt={lead.alt} width={imageSize(lead.url)?.width} height={imageSize(lead.url)?.height} loading="lazy" decoding="async" />
+                  <img src={lead.url} alt={lead.alt} width={imageSize(lead.url)?.width} height={imageSize(lead.url)?.height} loading="eager" decoding="async" />
                 </a>
                 {captionOf(lead).length > 0 && (
                   <figcaption>
@@ -546,7 +546,7 @@ const statusLabel =
 {filler && (
   <section class="glass-card sheen content-block reveal edition-filler">
     <figure class="edition-figure">
-      <img src={filler.url} alt={filler.alt} width={imageSize(filler.url)?.width} height={imageSize(filler.url)?.height} loading="lazy" decoding="async" />
+      <img src={filler.url} alt={filler.alt} width={imageSize(filler.url)?.width} height={imageSize(filler.url)?.height} loading="eager" decoding="async" />
       <figcaption>{filler.caption}{filler.credit && <span> - {filler.credit}</span>}</figcaption>
     </figure>
   </section>

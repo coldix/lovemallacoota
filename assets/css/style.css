@@ -1166,8 +1166,38 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     box-shadow: none !important;
     padding-left: 0;
     padding-right: 0;
+    overflow: visible !important;
   }
   .glass-card::before, .glass-card.sheen::after { display: none !important; }
+  img {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  /* A crossword is an A4 sheet. The ordinary figure cap of 105mm makes it
+     unreadable. Give it the page. */
+  .edition-crossword .edition-figure {
+    column-span: all;
+    width: 100%;
+    break-inside: avoid;
+  }
+  .edition-crossword .edition-figure img {
+    max-height: 240mm !important;
+    width: 100% !important;
+    object-fit: contain !important;
+  }
+  /* A QR in the classifieds three-column measure vanishes. Keep those
+     pieces as a single column with the code at a scannable size. */
+  #section-classifieds .edition-article:has(.edition-figure) .edition-article-columns {
+    columns: 1 !important;
+  }
+  .edition-figure.qr {
+    float: none !important;
+    width: 42mm !important;
+  }
+  .edition-figure.qr img {
+    max-height: 42mm !important;
+    width: 42mm !important;
+  }
   /* On screen a section is a padded card with a wide gap beneath it. On paper
      that was 12mm above and below every heading and 10mm between sections,
      which is what kept a headline, its pictures and its first lines from

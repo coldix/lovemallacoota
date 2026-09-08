@@ -330,8 +330,21 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 
   // --- Print this edition ---
+  // Lazy pictures that have not been scrolled into view are omitted from
+  // the print. Load them first, then print.
   document.addEventListener("click", (e) => {
-    if (e.target.closest("[data-print-edition]")) window.print();
+    if (!e.target.closest("[data-print-edition]")) return;
+    e.preventDefault();
+    const ready = [...document.images].map((img) => {
+      img.loading = "eager";
+      if (img.complete && img.naturalWidth) return Promise.resolve();
+      return new Promise((resolve) => {
+        img.addEventListener("load", resolve, { once: true });
+        img.addEventListener("error", resolve, { once: true });
+        img.src = img.src;
+      });
+    });
+    Promise.all(ready).then(() => window.print());
   });
 
   // --- Photo Lightbox (Click to Enlarge) ---

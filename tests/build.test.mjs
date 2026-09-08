@@ -280,6 +280,11 @@ test("Coota 26:09 is the live monthly and carries the crossword", async () => {
   assert.match(html, /ozol\.au\/bbs/);
   assert.match(html, /Food Chariot/);
   assert.doesNotMatch(html, /Alf's Pizza/);
+  assert.doesNotMatch(
+    html.match(/<img[^>]+class="edition-photo"[^>]*>/g)?.join(" ") || "",
+    /loading="lazy"/,
+    "edition photographs are lazy and will not print"
+  );
   assert.match(html, /The Coota Crossword/);
   assert.match(html, /crossword-2-1\.webp/);
   assert.match(html, /crossword-2\.pdf/);
@@ -601,6 +606,8 @@ test("a headline is never left at the foot of a page without its story", async (
   const print = css.slice(css.indexOf("@media print"));
   assert.match(print, /\.edition-article-head\s*\{[^}]*break-after:\s*avoid/, "print does not keep the head with the story");
   assert.match(print, /@bottom-right\s*\{[^}]*counter\(page\)/, "print has no page number");
+  assert.match(print, /print-color-adjust:\s*exact/, "photographs would print as empty boxes");
+  assert.match(print, /\.edition-crossword[\s\S]*max-height:\s*240mm/, "the crossword is capped too small to solve");
 
   const withStories = loadEditions().filter((edition) => (edition.articles || []).length);
   assert.ok(withStories.length, "no edition has a story to check");

@@ -115,7 +115,9 @@ export async function handleEditionPdf(
     const browser = await puppeteer.launch(env.BROWSER);
     try {
       const tab = await browser.newPage();
-      await tab.goto(pageUrl, { waitUntil: "networkidle0" });
+      tab.setDefaultTimeout(60_000);
+      await tab.emulateMediaType("print");
+      await tab.goto(pageUrl, { waitUntil: "networkidle0", timeout: 60_000 });
 
       // Images are lazy on the web, and a headless render never scrolls, so
       // every picture below the fold would print as an empty caption. Make
@@ -195,7 +197,7 @@ export async function handleEditionPdf(
   const response = new Response(pdf as unknown as BodyInit, {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `inline; filename="${pdfFilename(week)}"`,
+      "Content-Disposition": `attachment; filename="${pdfFilename(week)}"`,
       "Cache-Control": `public, max-age=${isOpen ? CACHE_SECONDS_OPEN : CACHE_SECONDS_FROZEN}`,
     },
   });

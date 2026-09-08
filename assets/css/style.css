@@ -1804,60 +1804,118 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     page-break-inside: avoid;
     break-inside: avoid;
   }
-  /* A set of pictures prints two to a row across the measure, rather than one
-     under another down a single column. */
+  /* Two to a row across the measure. The grid may break between rows so a
+     five-picture set does not jump a whole page and leave the previous one
+     blank; each picture still stays with its caption. */
   .edition-figures-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2mm 4mm;
-    break-inside: avoid;
-    break-after: avoid;
+    align-items: start;
+    break-inside: auto;
+    break-after: auto;
     margin: 0 0 3mm;
   }
   .edition-figures-grid .edition-figure { float: none !important; width: auto !important; margin: 0 !important; }
-  /* Pictures are cropped to the cell by clipping a fixed-height box, never by
-     object-fit: cover. A cover-cropped picture makes Chromium rasterise a new
-     bitmap and store it in the PDF uncompressed (2.6MB for one photograph);
-     a clipped one passes the JPEG through whole. Anchored at the top, so a
-     portrait keeps its head. */
-  .edition-figures-grid .edition-zoom { display: block; height: 50mm; overflow: hidden; }
-  .edition-figures-grid img {
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    aspect-ratio: auto !important;
-    object-fit: fill !important;
-  }
-  .edition-figures-grid .edition-figure.small .edition-zoom { height: 40mm; }
-  .edition-figures-grid .edition-figure.lead { grid-column: auto; }
-  .edition-figures-grid:has(> :nth-child(4)) { grid-template-columns: repeat(3, 1fr); }
-  .edition-figures-grid:has(> :nth-child(4)) .edition-zoom { height: 36mm; }
-  /* Wide landscapes and full portraits must print whole. The 50mm clip
-     above is for thumbnail grids; these are the pictures the story is about. */
-  .edition-figures-grid.stack,
-  .edition-figures-grid:has(.wide),
-  .edition-figures-grid:has(.full) {
-    grid-template-columns: 1fr !important;
-  }
-  .edition-figures-grid .edition-figure.wide,
-  .edition-figures-grid .edition-figure.full,
-  .edition-figures-grid.stack .edition-figure {
-    grid-column: 1 / -1;
-  }
-  .edition-figures-grid .edition-figure.wide .edition-zoom,
-  .edition-figures-grid .edition-figure.full .edition-zoom,
-  .edition-figures-grid.stack .edition-zoom {
+  /* Photographs print whole. A fixed-height clip cropped faces and verandahs;
+     object-fit: cover would crop them again and bloat the PDF. Contain, a
+     height cap, two to a row. */
+  .edition-figures-grid .edition-zoom {
+    display: block;
     height: auto !important;
     overflow: visible !important;
   }
-  .edition-figures-grid .edition-figure.wide img {
-    max-height: 110mm !important;
+  .edition-figures-grid img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 78mm !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    object-position: center center;
+  }
+  .edition-figures-grid .edition-figure.small .edition-zoom {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .edition-figures-grid .edition-figure.lead { grid-column: auto; }
+  /* Three or five pictures: the first takes the full measure so the last row
+     is a pair, not a single picture with a hole beside it. */
+  .edition-figures-grid:has(> :nth-child(3)):not(:has(> :nth-child(4))) .edition-figure.lead,
+  .edition-figures-grid:has(> :nth-child(5)):not(:has(> :nth-child(6))) .edition-figure.lead {
+    grid-column: 1 / -1;
+  }
+  .edition-figures-grid:has(> :nth-child(3)):not(:has(> :nth-child(4))) .edition-figure.lead img,
+  .edition-figures-grid:has(> :nth-child(5)):not(:has(> :nth-child(6))) .edition-figure.lead img {
+    max-height: 95mm !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin-inline: auto;
+  }
+  /* A then-and-now, or two portraits: side by side, whole, filling the cell.
+     Stacking them at 180mm each was a page of photograph and a page of white. */
+  .edition-figures-grid.pair,
+  .edition-figures-grid.stack:not(:has(> :nth-child(3))) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: end;
+  }
+  .edition-figures-grid.pair .edition-figure,
+  .edition-figures-grid.stack:not(:has(> :nth-child(3))) .edition-figure,
+  .edition-figures-grid .edition-figure.full {
+    grid-column: auto;
+  }
+  .edition-figures-grid.pair .edition-zoom,
+  .edition-figures-grid.stack:not(:has(> :nth-child(3))) .edition-zoom,
+  .edition-figures-grid .edition-figure.full .edition-zoom,
+  .edition-figures-grid .edition-figure.wide .edition-zoom {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .edition-figures-grid.pair img,
+  .edition-figures-grid.stack:not(:has(> :nth-child(3))) img,
+  .edition-figures-grid .edition-figure.full img {
+    max-height: 120mm !important;
     width: 100% !important;
     object-fit: contain !important;
   }
-  .edition-figures-grid .edition-figure.full img,
-  .edition-figures-grid.stack img {
-    max-height: 180mm !important;
+  /* A lone wide landscape: full measure, short enough to stay with the story. */
+  .edition-figures-grid:has(> .edition-figure.wide:only-child) {
+    grid-template-columns: 1fr !important;
+  }
+  .edition-figures-grid .edition-figure.wide {
+    grid-column: 1 / -1;
+  }
+  .edition-figures-grid .edition-figure.wide img {
+    max-height: 100mm !important;
+    width: 100% !important;
+    object-fit: contain !important;
+  }
+  /* Wide landscape beside a small portrait. */
+  .edition-figures-grid:has(.wide):has(.small) {
+    grid-template-columns: 1.6fr 1fr !important;
+    align-items: start;
+  }
+  .edition-figures-grid:has(.wide):has(.small) .edition-figure.wide {
+    grid-column: auto;
+  }
+  .edition-figures-grid:has(.wide):has(.small) .edition-figure.small .edition-zoom {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .edition-figures-grid:has(.wide):has(.small) .edition-figure.small img,
+  .edition-figures-grid:has(.wide):has(.small) .edition-figure.wide img {
+    max-height: 78mm !important;
+    width: 100% !important;
+    object-fit: contain !important;
+  }
+  /* Three or more full portraits still stack, but not at a page each. */
+  .edition-figures-grid.stack:has(> :nth-child(3)) {
+    grid-template-columns: 1fr !important;
+  }
+  .edition-figures-grid.stack:has(> :nth-child(3)) .edition-figure {
+    grid-column: 1 / -1;
+  }
+  .edition-figures-grid.stack:has(> :nth-child(3)) img {
+    max-height: 100mm !important;
     width: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
@@ -1873,11 +1931,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     height: 28mm !important;
     max-height: none !important;
   }
-  .edition-figures-grid figcaption { font-size: 7.5pt; }
+  .edition-figures-grid figcaption { font-size: 7.5pt; line-height: 1.25; margin-top: 1mm; }
   /* A lone picture in its column is capped lower than before, so a headline,
      its picture and the first lines of the story fit in the last third of a
      page rather than leaving it blank and starting overleaf. */
-  .edition-article-columns > .edition-figure.lead img { max-height: 80mm; }
+  .edition-article-columns > .edition-figure.lead img { max-height: 70mm; }
+  .edition-photo {
+    max-height: 70mm;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 0;
+  }
   .edition-figure img {
     max-width: 100% !important;
     height: auto !important;

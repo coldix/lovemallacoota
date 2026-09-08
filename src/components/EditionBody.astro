@@ -461,11 +461,14 @@ const statusLabel =
           ? pictures
           : [];
       const lead = gallery.length === 0 ? pictures[0] || null : null;
-      const stacked = gallery.length > 1 && gallery.every((image) => image.display === "full");
+      /* Three or more full portraits stack so none is cropped. Two is a pair:
+         an original and its reconstruction, or two portraits of the same
+         people, sit side by side on screen and in print. */
+      const stacked = gallery.length > 2 && gallery.every((image) => image.display === "full");
       const pair =
         gallery.length === 2 &&
         !stacked &&
-        !gallery.some((image) => image.display === "wide" || image.display === "full");
+        !gallery.some((image) => image.display === "wide");
       const captionOf = (image) => [image.credit, image.caption || image.note].filter(Boolean);
       return (
         <article class:list={["edition-article", { "edition-poem": isPoem }]} id={articleAnchor(article)}>

@@ -329,7 +329,8 @@ test("week 36 starts Sunday 6 September and looks a week ahead", async () => {
   assert.match(html, /bastion-point\.webp/);
   assert.match(html, /w35-local-frank-stokes-2\.webp/);
   assert.match(html, /class="[^"]*edition-figure[^"]*wide/);
-  assert.match(html, /class="[^"]*edition-figures-grid stack/);
+  assert.match(html, /class="[^"]*edition-figures-grid pair/);
+  assert.doesNotMatch(html, /class="[^"]*edition-figures-grid stack/);
   assert.match(html, /qr-mallacoota-now\.webp/);
   assert.match(html, /qr-ozol-bbs\.webp/);
   assert.match(html, /qr-mallacoota-weather\.webp/);
@@ -644,6 +645,11 @@ test("a headline is never left at the foot of a page without its story", async (
   assert.match(print, /print-color-adjust:\s*exact/, "photographs would print as empty boxes");
   assert.match(print, /\.edition-crossword[\s\S]*max-height:\s*240mm/, "the crossword is capped too small to solve");
   assert.match(print, /#section-classifieds[\s\S]*columns:\s*1/, "classifieds with a QR stay in three columns");
+  assert.match(print, /\.edition-figures-grid\s*\{[^}]*break-inside:\s*auto/, "a photo grid that cannot break jumps a page and leaves it blank");
+  assert.match(print, /\.edition-figures-grid\.pair[^}]*grid-template-columns:\s*repeat\(2/, "a pair of portraits stacks instead of sitting side by side");
+  assert.match(print, /\.edition-figures-grid \.edition-zoom\s*\{[^}]*overflow:\s*visible/, "photographs are still clipped in the grid");
+  assert.doesNotMatch(print, /max-height:\s*180mm/, "a full portrait is still capped at most of a page");
+  assert.doesNotMatch(print, /\.edition-figures-grid \.edition-zoom\s*\{[^}]*overflow:\s*hidden/, "the grid still clips photographs");
 
   const withStories = loadEditions().filter((edition) => (edition.articles || []).length);
   assert.ok(withStories.length, "no edition has a story to check");

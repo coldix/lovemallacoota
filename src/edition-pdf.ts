@@ -10,6 +10,8 @@
 import { OZE_LOGO_DATA_URI } from "./oze-logo.ts";
 
 const WEEK = /^\/edition\/(\d{4}-(?:w\d{2}|\d{2}))\.pdf$/;
+/** Bump when print CSS changes the edition layout, so a frozen PDF is rendered again. */
+const PDF_LAYOUT = "3";
 
 /**
  * A frozen edition never changes, so the render is worth caching hard. An open
@@ -93,7 +95,10 @@ export async function handleEditionPdf(
     typeof caches === "undefined"
       ? null
       : (caches as unknown as { default: Cache }).default;
-  const cached = cache ? await cache.match(request) : undefined;
+  const cacheUrl = new URL(request.url);
+  cacheUrl.searchParams.set("layout", PDF_LAYOUT);
+  const cacheRequest = new Request(cacheUrl, request);
+  const cached = cache ? await cache.match(cacheRequest) : undefined;
   if (cached) return cached;
 
   // The page is the source of truth. If it does not exist, neither does the PDF.
@@ -202,6 +207,6 @@ export async function handleEditionPdf(
     },
   });
 
-  if (cache) ctx.waitUntil(cache.put(request, response.clone()));
+  if (cache) ctx.waitUntil(cache.put(cacheRequest, response.clone()));
   return response;
 }

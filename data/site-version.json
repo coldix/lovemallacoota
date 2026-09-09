@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
   "version": "v1.85",
-  "generatedAt": "2026-09-08 21:47:56 AEST (Melbourne)",
+  "generatedAt": "2026-09-09 19:37:18 AEST (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -28,7 +28,7 @@
     {
       "path": "add-listing.html",
       "bytes": 17202,
-      "sha256": "14c6778e37e6510d69f7cc4764db010131485936ddb2c1bc22d03ec64a7bca9e"
+      "sha256": "6f3f2d80d2301297cb74d8bff4ccb2d750c93d3993de358e0f8b93cf36eb472b"
     },
     {
       "path": "admin.html",
@@ -117,13 +117,13 @@
     },
     {
       "path": "calendar.html",
-      "bytes": 28262,
-      "sha256": "c022cefbd67650b683568fa42b3564cba91c17d2c5358d3444e9551725546118"
+      "bytes": 28146,
+      "sha256": "996d547a9a84a79fcd05e118c29bdc5cf15d11f5a014fb91fd4893d794a4af2d"
     },
     {
       "path": "claim.html",
       "bytes": 39299,
-      "sha256": "54d87e04814ef35d2ab859efae8c965af8526cf28a450e9aa2c2fcad2d46fb86"
+      "sha256": "4282b73d4df5791454c8523a75ae74f3f3d0dde1a925821f7f1a3802beb90c66"
     },
     {
       "path": "community.html",
@@ -133,7 +133,7 @@
     {
       "path": "contact.html",
       "bytes": 18757,
-      "sha256": "64153fc63bb816a6d0623e1e5809a949ef38981ee0aecea77bb46bef90a71fd5"
+      "sha256": "2b8abd8fa2a24ccc6283a1899d5d27b073262c70103cde6cfd8cfc4678eca134"
     },
     {
       "path": "corrections.html",
@@ -202,18 +202,18 @@
     },
     {
       "path": "edition.html",
-      "bytes": 100461,
-      "sha256": "447dd3c92ef76238071af41b4ecbf29d0022ef3216302b3aeb1f43ce1121da97"
+      "bytes": 100347,
+      "sha256": "f88e8e0a969a4bbbc4bf07645ce062d6232715d7f22fbfd3d7dd7f907fd0184b"
     },
     {
       "path": "edition/2026-09.html",
-      "bytes": 100166,
-      "sha256": "524eee2ea5e36585e901560c3d56671ab08f78d66e5b1a825ff6ded9d8d0838e"
+      "bytes": 100052,
+      "sha256": "f6d5fa1ce5444d24a436add189a5f794c054331b26a44e112fa38b8be60e8068"
     },
     {
       "path": "edition/2026-w36.html",
-      "bytes": 92672,
-      "sha256": "603bedc0b1970de172cd7d5052847f7bc62dcfc2b821e5dce7be5ab0a8d63651"
+      "bytes": 92956,
+      "sha256": "905abed36bf7c48f6275713cae3993bccde0113eb8fac239a3b6aabe678e8f66"
     },
     {
       "path": "editorial-policy.html",
@@ -1778,12 +1778,12 @@
     {
       "path": "sitemap.xml",
       "bytes": 23997,
-      "sha256": "d076abd28261125cc8f96510ed0563e961c6043e4241d966ecdabbf9aba941df"
+      "sha256": "bcdbbf2a4ecbbe28332a71edab2bc4b8c416997de10178369fb52bf2eddf83ef"
     },
     {
       "path": "submit-event.html",
       "bytes": 41276,
-      "sha256": "6f851481135c2b0289cd672ee3202f57271dd4e557a692841d978ccba443fc79"
+      "sha256": "99b5ae5c2a20cfb5d5261e4ddec7f948ffdfb57564e65f8872a3a7d9822627d4"
     },
     {
       "path": "submit.html",

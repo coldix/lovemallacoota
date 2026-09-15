@@ -125,3 +125,21 @@ test("the same piece cannot be committed to an edition twice", async () => {
   appendArticle(edition, { id: "w1-c", title: "Something else" });
   assert.equal(edition.articles.length, 2);
 });
+
+test("an edition read from GitHub and committed back keeps its non-ASCII text", async () => {
+  const { fromBase64Utf8, toBase64 } = await import("../src/submit.ts");
+  const text = `${JSON.stringify({ body: ["aerial and 360° videos", "moon ☾ and ●"] }, null, 2)}\n`;
+  // GitHub wraps the base64 it returns.
+  const fromGithub = Buffer.from(text, "utf8").toString("base64").replace(/(.{60})/g, "$1\n");
+
+  const read = fromBase64Utf8(fromGithub);
+  assert.equal(read, text, "reading the file changed it");
+  const again = fromBase64Utf8(toBase64(new TextEncoder().encode(read)));
+  assert.equal(again, text, "a second submission changed text already in the edition");
+});
+
+test("a file far larger than an edition encodes without overflowing the stack", async () => {
+  const { toBase64 } = await import("../src/submit.ts");
+  const bytes = new Uint8Array(2 * 1024 * 1024).fill(0xb0);
+  assert.equal(toBase64(bytes), Buffer.from(bytes).toString("base64"));
+});

@@ -136,6 +136,27 @@ export function appendArticle(
   return edition;
 }
 
+/**
+ * The contents API returns base64 of the file's bytes, and atob() hands those
+ * bytes back one per character. Parsed that way, a UTF-8 edition came back as
+ * Latin-1 and was encoded again on the way out, so every story submitted added
+ * another layer of garbage to each non-ASCII character already in the month:
+ * four submissions turned a degree sign into eight characters of mojibake.
+ */
+export function fromBase64Utf8(content: string): string {
+  const binary = atob(content.replace(/\n/g, ""));
+  return new TextDecoder().decode(Uint8Array.from(binary, (char) => char.charCodeAt(0)));
+}
+
+/** Chunked so a month of stories or a multi-megabyte photograph does not blow the call stack. */
+export function toBase64(bytes: Uint8Array): string {
+  let binary = "";
+  for (let i = 0; i < bytes.length; i += 8192) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+  }
+  return btoa(binary);
+}
+
 export async function commitArticle(env: Env, week: string, article: Record<string, unknown>) {
   const path = `data/editions/${week}.json`;
   const api = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`;
@@ -148,7 +169,7 @@ export async function commitArticle(env: Env, week: string, article: Record<stri
   const current = await fetch(api, { headers });
   if (!current.ok) throw new Error(`Cannot read ${path}: ${current.status}`);
   const file = (await current.json()) as { content: string; sha: string };
-  const edition = JSON.parse(atob(file.content.replace(/\n/g, "")));
+  const edition = JSON.parse(fromBase64Utf8(file.content));
 
   if (edition.status !== "open") throw new Error("This edition is closed.");
   appendArticle(edition, article);
@@ -159,7 +180,7 @@ export async function commitArticle(env: Env, week: string, article: Record<stri
     headers: { ...headers, "Content-Type": "application/json" },
     body: JSON.stringify({
       message: `Add "${article.title}" to ${week}`,
-      content: btoa(String.fromCharCode(...body)),
+      content: toBase64(body),
       sha: file.sha,
     }),
   });
@@ -175,16 +196,10 @@ async function putFile(env: Env, filePath: string, bytes: Uint8Array, message: s
     "Content-Type": "application/json",
   };
 
-  // Chunked so a multi-megabyte photograph does not blow the call stack.
-  let binary = "";
-  for (let i = 0; i < bytes.length; i += 8192) {
-    binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
-  }
-
   const response = await fetch(api, {
     method: "PUT",
     headers,
-    body: JSON.stringify({ message, content: btoa(binary) }),
+    body: JSON.stringify({ message, content: toBase64(bytes) }),
   });
   if (!response.ok) throw new Error(`Cannot write ${filePath}: ${response.status}`);
 }

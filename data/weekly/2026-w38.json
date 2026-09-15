@@ -1,13 +1,20 @@
 {
-  "start": "2026-09-15",
-  "end": "2026-09-21",
-  "generatedAt": "2026-09-15T08:46:01.840Z",
+  "week": "2026-w38",
+  "generatedAt": "2026-09-15T08:45:59.945Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-09-15T08:46:00.247Z",
+    "fetchedAt": "2026-09-15T08:45:56.966Z",
     "days": [
+      {
+        "date": "2026-09-14",
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 24.8,
+        "minC": 12.5,
+        "rainMm": 0.3
+      },
       {
         "date": "2026-09-15",
         "code": 51,
@@ -55,14 +62,6 @@
         "maxC": 26.9,
         "minC": 10,
         "rainMm": 0
-      },
-      {
-        "date": "2026-09-21",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 14.7,
-        "minC": 11.6,
-        "rainMm": 0
       }
     ]
   },
@@ -73,8 +72,28 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-09-15T08:46:00.585Z",
+    "fetchedAt": "2026-09-15T08:45:58.681Z",
     "extremes": [
+      {
+        "time": "2026-09-14T03:00",
+        "type": "Low",
+        "heightM": -0.48
+      },
+      {
+        "time": "2026-09-14T10:00",
+        "type": "High",
+        "heightM": 0.56
+      },
+      {
+        "time": "2026-09-14T16:00",
+        "type": "Low",
+        "heightM": -0.41
+      },
+      {
+        "time": "2026-09-14T22:00",
+        "type": "High",
+        "heightM": 0.39
+      },
       {
         "time": "2026-09-15T04:00",
         "type": "Low",
@@ -189,24 +208,105 @@
         "time": "2026-09-20T22:00",
         "type": "Low",
         "heightM": -0.29
-      },
-      {
-        "time": "2026-09-21T04:00",
-        "type": "High",
-        "heightM": 0.27
-      },
-      {
-        "time": "2026-09-21T09:00",
-        "type": "Low",
-        "heightM": -0.05
-      },
-      {
-        "time": "2026-09-21T16:00",
-        "type": "High",
-        "heightM": 0.54
       }
     ],
     "series": [
+      {
+        "time": "2026-09-14T00:00",
+        "heightM": 0.05
+      },
+      {
+        "time": "2026-09-14T01:00",
+        "heightM": -0.19
+      },
+      {
+        "time": "2026-09-14T02:00",
+        "heightM": -0.38
+      },
+      {
+        "time": "2026-09-14T03:00",
+        "heightM": -0.48
+      },
+      {
+        "time": "2026-09-14T04:00",
+        "heightM": -0.45
+      },
+      {
+        "time": "2026-09-14T05:00",
+        "heightM": -0.32
+      },
+      {
+        "time": "2026-09-14T06:00",
+        "heightM": -0.11
+      },
+      {
+        "time": "2026-09-14T07:00",
+        "heightM": 0.14
+      },
+      {
+        "time": "2026-09-14T08:00",
+        "heightM": 0.37
+      },
+      {
+        "time": "2026-09-14T09:00",
+        "heightM": 0.53
+      },
+      {
+        "time": "2026-09-14T10:00",
+        "heightM": 0.56
+      },
+      {
+        "time": "2026-09-14T11:00",
+        "heightM": 0.46
+      },
+      {
+        "time": "2026-09-14T12:00",
+        "heightM": 0.26
+      },
+      {
+        "time": "2026-09-14T13:00",
+        "heightM": 0.02
+      },
+      {
+        "time": "2026-09-14T14:00",
+        "heightM": -0.2
+      },
+      {
+        "time": "2026-09-14T15:00",
+        "heightM": -0.36
+      },
+      {
+        "time": "2026-09-14T16:00",
+        "heightM": -0.41
+      },
+      {
+        "time": "2026-09-14T17:00",
+        "heightM": -0.36
+      },
+      {
+        "time": "2026-09-14T18:00",
+        "heightM": -0.21
+      },
+      {
+        "time": "2026-09-14T19:00",
+        "heightM": -0.02
+      },
+      {
+        "time": "2026-09-14T20:00",
+        "heightM": 0.18
+      },
+      {
+        "time": "2026-09-14T21:00",
+        "heightM": 0.33
+      },
+      {
+        "time": "2026-09-14T22:00",
+        "heightM": 0.39
+      },
+      {
+        "time": "2026-09-14T23:00",
+        "heightM": 0.34
+      },
       {
         "time": "2026-09-15T00:00",
         "heightM": 0.2
@@ -782,106 +882,18 @@
       {
         "time": "2026-09-20T23:00",
         "heightM": -0.24
-      },
-      {
-        "time": "2026-09-21T00:00",
-        "heightM": -0.14
-      },
-      {
-        "time": "2026-09-21T01:00",
-        "heightM": 0
-      },
-      {
-        "time": "2026-09-21T02:00",
-        "heightM": 0.13
-      },
-      {
-        "time": "2026-09-21T03:00",
-        "heightM": 0.23
-      },
-      {
-        "time": "2026-09-21T04:00",
-        "heightM": 0.27
-      },
-      {
-        "time": "2026-09-21T05:00",
-        "heightM": 0.24
-      },
-      {
-        "time": "2026-09-21T06:00",
-        "heightM": 0.17
-      },
-      {
-        "time": "2026-09-21T07:00",
-        "heightM": 0.08
-      },
-      {
-        "time": "2026-09-21T08:00",
-        "heightM": 0
-      },
-      {
-        "time": "2026-09-21T09:00",
-        "heightM": -0.05
-      },
-      {
-        "time": "2026-09-21T10:00",
-        "heightM": -0.05
-      },
-      {
-        "time": "2026-09-21T11:00",
-        "heightM": 0.03
-      },
-      {
-        "time": "2026-09-21T12:00",
-        "heightM": 0.15
-      },
-      {
-        "time": "2026-09-21T13:00",
-        "heightM": 0.3
-      },
-      {
-        "time": "2026-09-21T14:00",
-        "heightM": 0.44
-      },
-      {
-        "time": "2026-09-21T15:00",
-        "heightM": 0.53
-      },
-      {
-        "time": "2026-09-21T16:00",
-        "heightM": 0.54
-      },
-      {
-        "time": "2026-09-21T17:00",
-        "heightM": 0.45
-      },
-      {
-        "time": "2026-09-21T18:00",
-        "heightM": 0.29
-      },
-      {
-        "time": "2026-09-21T19:00",
-        "heightM": 0.09
-      },
-      {
-        "time": "2026-09-21T20:00",
-        "heightM": -0.12
-      },
-      {
-        "time": "2026-09-21T21:00",
-        "heightM": -0.3
-      },
-      {
-        "time": "2026-09-21T22:00",
-        "heightM": -0.42
-      },
-      {
-        "time": "2026-09-21T23:00",
-        "heightM": -0.45
       }
     ]
   },
   "moon": [
+    {
+      "date": "2026-09-14",
+      "name": "Waxing crescent",
+      "symbol": "☽",
+      "age": 2.2,
+      "illumination": 6,
+      "range": "between"
+    },
     {
       "date": "2026-09-15",
       "name": "Waxing crescent",
@@ -929,17 +941,21 @@
       "age": 8.2,
       "illumination": 59,
       "range": "neap"
-    },
-    {
-      "date": "2026-09-21",
-      "name": "Waxing gibbous",
-      "symbol": "◕",
-      "age": 9.2,
-      "illumination": 69,
-      "range": "between"
     }
   ],
   "events": [
+    {
+      "date": "Mon 14 Sept",
+      "time": "10:00 am",
+      "title": "Pickleball",
+      "location": "Mallacoota Tennis Club"
+    },
+    {
+      "date": "Mon 14 Sept",
+      "time": "10:00 am",
+      "title": "Toddler Music and Movement (Reclink)",
+      "location": ""
+    },
     {
       "date": "Tue 15 Sept",
       "time": "9:15 am",
@@ -967,26 +983,26 @@
     {
       "date": "Thu 17 Sept",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
-    },
-    {
-      "date": "Thu 17 Sept",
-      "time": "9:30 am",
       "title": "Wilderness Collective (CCR)",
       "location": "The Oval"
     },
     {
-      "date": "Fri 18 Sept",
+      "date": "Thu 17 Sept",
       "time": "9:30 am",
-      "title": "Playgroup",
-      "location": "Mallacoota Preschool and Toy Library"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Fri 18 Sept",
       "time": "9:30 am",
       "title": "Croquet (Reclink)",
       "location": "Mallacoota Golf and Country Club"
+    },
+    {
+      "date": "Fri 18 Sept",
+      "time": "9:30 am",
+      "title": "Playgroup",
+      "location": "Mallacoota Preschool and Toy Library"
     },
     {
       "date": "Sat 19 Sept",
@@ -1011,18 +1027,6 @@
       "time": "9:00 am",
       "title": "Church Service - St Peters",
       "location": "St Peters Church"
-    },
-    {
-      "date": "Mon 21 Sept",
-      "time": "10:00 am",
-      "title": "Pickleball",
-      "location": "Mallacoota Tennis Club"
-    },
-    {
-      "date": "Mon 21 Sept",
-      "time": "10:00 am",
-      "title": "Toddler Music and Movement (Reclink)",
-      "location": ""
     }
   ],
   "trail": {

@@ -75,7 +75,9 @@ jobs:
         run: |
           git config user.name "Love Mallacoota bot"
           git config user.email "coota@lovemallacoota.au"
-          git add data/weekly data/site-version.json
+          # README.md too: update-version restamps its build date, and leaving it
+          # behind fails the next push's check against the committed manifest.
+          git add data/weekly data/site-version.json README.md
           git commit -m "Refresh the weekly forecast and features"
           git push
 

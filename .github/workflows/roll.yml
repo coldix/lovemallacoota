@@ -73,7 +73,7 @@ jobs:
         run: |
           git config user.name "Love Mallacoota bot"
           git config user.email "coota@lovemallacoota.au"
-          git add data/editions data/weekly data/site-version.json assets/js/script.js
+          git add data/editions data/weekly data/site-version.json assets/js/script.js README.md
           git commit -m "Close the week and open the next"
           git push
 

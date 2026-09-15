@@ -270,7 +270,9 @@ test("Coota 26:09 is the live monthly and carries the crossword", async () => {
   assert.ok(isMonthly(edition), "the live edition is not monthly");
   assert.equal(edition.week, "2026-09");
   assert.match(html, /Coota 26:09/);
-  assert.equal((edition.articles || []).length, 17, "Coota 26:09 is missing last week's stories");
+  // Seventeen came over from the weekly editions. Contributors keep adding
+  // through the month, so this is a floor rather than a count.
+  assert.ok((edition.articles || []).length >= 17, "Coota 26:09 is missing last week's stories");
   assert.match(html, /A weekly edition, starting small/);
   assert.match(html, /Farewell to Barbara/);
   assert.match(html, /The Bar/);

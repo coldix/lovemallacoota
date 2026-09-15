@@ -23,6 +23,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Whole history: the check rebuilds directory-changes from git, and a
+          # shallow clone records nothing, which failed every conversion since
+          # that test arrived on 5 Sep.
+          fetch-depth: 0
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:

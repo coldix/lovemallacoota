@@ -11,8 +11,11 @@ time to observe newly created records.
 
 The Worker serves an explicit static build from `dist/`, redirects the `www` host,
 and preserves the old WordPress redirects previously defined in `.htaccess`.
-Legacy `.com.au` and `.com` redirect logic is ready in the Worker but those hostnames
-cannot be attached until their zones are present in the same Cloudflare account.
+The legacy `lovemallacoota.com.au` and `lovemallacoota.com` zones (and their `www`
+hosts) were added to the same Cloudflare account on 15 September 2026 and are
+attached as Custom Domains. The Worker answers them with one 301 to the matching
+`.au` URL. Neither legacy zone carries email: every record, MX included, was
+removed at the owner's direction.
 
 Pushes to `main` deploy only the isolated preview Worker. Production deployment is
 manual through the GitHub Actions **Run workflow** control with `production` selected,
@@ -25,8 +28,10 @@ or through the explicit local production command below.
   Cloudflare to create their DNS records and certificates.
 - `lovemallacoota.au` must use both assigned nameservers:
   `dilbert.ns.cloudflare.com` and `jewel.ns.cloudflare.com`.
-- Copy the existing Hostinger MX, SPF, verification, and any DKIM/DMARC records into
-  Cloudflare before changing nameservers for `.com.au` or `.com`.
+- `lovemallacoota.com.au` must use `kimora.ns.cloudflare.com` and
+  `rudy.ns.cloudflare.com`; `lovemallacoota.com` uses `dilbert` and `jewel`. Both
+  zones must hold no A, AAAA or CNAME record on the apex or `www`, or the Custom
+  Domain attach fails.
 - Add a GitHub Actions secret named `CLOUDFLARE_API_TOKEN` with the least privileges
   needed to deploy this Worker and manage routes for these zones.
 

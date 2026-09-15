@@ -21,6 +21,23 @@
     {
       "pattern": "www.lovemallacoota.au",
       "custom_domain": true
+    },
+    // Legacy hostnames. src/worker.ts answers each with a 301 to lovemallacoota.au.
+    {
+      "pattern": "lovemallacoota.com.au",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.lovemallacoota.com.au",
+      "custom_domain": true
+    },
+    {
+      "pattern": "lovemallacoota.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.lovemallacoota.com",
+      "custom_domain": true
     }
   ],
   "env": {

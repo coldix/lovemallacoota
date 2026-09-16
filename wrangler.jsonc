@@ -88,6 +88,23 @@
     "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
     "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
     "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a"
+
+    // One link per offered donation amount, so /donate?amount=25 opens ready to
+    // pay rather than at A$0.00 with the amount behind a pencil icon. Add each
+    // one as it is created in Stripe; an amount with no link here falls back to
+    // STRIPE_LINK_DONATE, so the buttons work in the meantime. Mirror any of
+    // these into env.preview.vars above when previewing the flow.
+    // "STRIPE_LINK_DONATE_5": "https://buy.stripe.com/…",
+    // "STRIPE_LINK_DONATE_10": "https://buy.stripe.com/…",
+    // "STRIPE_LINK_DONATE_25": "https://buy.stripe.com/…",
+    // "STRIPE_LINK_DONATE_50": "https://buy.stripe.com/…",
+
+    // The plink_… ids behind those buttons, so a payment is filed by what it was
+    // for rather than by its amount (see classifyPayment in src/stripe-webhook.ts).
+    // Without them a price rise silently refiles every payment.
+    // "STRIPE_AD_PAYMENT_LINK": "plink_…",
+    // "STRIPE_SUPPORTER_PAYMENT_LINK": "plink_…",
+    // "STRIPE_DONATION_PAYMENT_LINKS": "plink_…,plink_…,plink_…"
   },
   "browser": { "binding": "BROWSER" },
   "d1_databases": [

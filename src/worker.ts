@@ -14,6 +14,28 @@ const PAYMENT_PATHS: Record<string, "STRIPE_LINK_DONATE" | "STRIPE_LINK_SUBSCRIB
   "/advertise": "STRIPE_LINK_ADVERTISE",
 };
 
+/**
+ * One-off amounts offered on the page. The open donate link opens at A$0.00
+ * with the amount hidden behind a pencil icon, which is a poor thing to hand
+ * somebody who has just decided to give something. A named amount opens ready
+ * to pay instead.
+ *
+ * Each amount needs its own Stripe link, in STRIPE_LINK_DONATE_5 and so on.
+ * An amount with no link configured falls back to the open link rather than
+ * failing: the reader still reaches a page where they can pay, and the site
+ * works before the links exist.
+ */
+export const DONATE_PRESETS = [5, 10, 25, 50] as const;
+
+function donateLink(amount: string | null, env: Env): string | null {
+  if (!amount) return null;
+  const dollars = Number(amount);
+  if (!Number.isInteger(dollars)) return null;
+  if (!(DONATE_PRESETS as readonly number[]).includes(dollars)) return null;
+  const named = (env as unknown as Record<string, string | undefined>)[`STRIPE_LINK_DONATE_${dollars}`];
+  return named || null;
+}
+
 const REDIRECT_HOSTS = new Set([
   "www.lovemallacoota.au",
   "lovemallacoota.com.au",
@@ -176,7 +198,9 @@ export default {
     // temporary because a payment link can be regenerated.
     const payment = PAYMENT_PATHS[url.pathname];
     if (payment) {
-      const target = env[payment];
+      const target =
+        (url.pathname === "/donate" ? donateLink(url.searchParams.get("amount"), env) : null) ??
+        env[payment];
       if (target) return Response.redirect(target, 302);
       return applySecurityHeaders(
         new Response("That payment link is not configured yet.", { status: 503 })

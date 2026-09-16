@@ -20,8 +20,27 @@ interface Env {
   RESEND_API_KEY?: string;
   /** e.g. "Love Mallacoota <noreply@lovemallacoota.au>". A plain var, not a secret. */
   MAIL_FROM?: string;
-  /** Optional: the plink_… id of the advertising link, for exact matching. */
+  /*
+   * Which button was pressed, so a payment is filed by what it was for rather
+   * than by its amount. All optional: without them classifyPayment falls back
+   * to the shape of the payment, which is right until a price changes.
+   */
+  /** The plink_… id of the advertising link. */
   STRIPE_AD_PAYMENT_LINK?: string;
+  /** The plink_… id of the $10 supporter link. */
+  STRIPE_SUPPORTER_PAYMENT_LINK?: string;
+  /** Every donate link's plink_… id, comma separated: the presets and the open one. */
+  STRIPE_DONATION_PAYMENT_LINKS?: string;
+  /*
+   * One Stripe link per offered amount, so /donate?amount=25 opens ready to pay
+   * instead of at A$0.00 with the amount hidden behind a pencil. Any amount
+   * without a link falls back to STRIPE_LINK_DONATE, so the site works before
+   * these exist. Keep in step with DONATE_PRESETS in src/worker.ts.
+   */
+  STRIPE_LINK_DONATE_5?: string;
+  STRIPE_LINK_DONATE_10?: string;
+  STRIPE_LINK_DONATE_25?: string;
+  STRIPE_LINK_DONATE_50?: string;
   DB?: D1Database;
   LISTING_RATE?: RateLimit;
   CONTACT_RATE?: RateLimit;

@@ -90,12 +90,20 @@ export async function verifyStripeSignature(
  * advertising booking — which is how the first real donation would have been
  * recorded.
  *
- * Matched on the payment link where one is configured, and otherwise on the
- * shape of the payment: only advertising is a recurring thirty-five dollars.
+ * The payment link decides it wherever one is configured: that is a record of
+ * which button was pressed, where an amount is only a guess about it. Naming a
+ * price in two places is its own trap - raise the supporter price to twelve
+ * dollars and every supporter silently refiles as a donation - so the amounts
+ * below are the fallback, not the rule. Donations have several links, one per
+ * offered amount plus the open one, so that var is a comma-separated list.
  */
 export function classifyPayment(object: Record<string, any>, env?: Env): "advertising" | "supporter" | "donation" | "unknown" {
   const link = typeof object.payment_link === "string" ? object.payment_link : object.payment_link?.id;
-  if (link && env?.STRIPE_AD_PAYMENT_LINK && link === env.STRIPE_AD_PAYMENT_LINK) return "advertising";
+  if (link) {
+    if (env?.STRIPE_AD_PAYMENT_LINK && link === env.STRIPE_AD_PAYMENT_LINK) return "advertising";
+    if (env?.STRIPE_SUPPORTER_PAYMENT_LINK && link === env.STRIPE_SUPPORTER_PAYMENT_LINK) return "supporter";
+    if (donationLinks(env).includes(link)) return "donation";
+  }
 
   const amount = typeof object.amount_total === "number" ? object.amount_total / 100 : null;
   const recurring = object.mode === "subscription";
@@ -105,6 +113,14 @@ export function classifyPayment(object: Record<string, any>, env?: Env): "advert
   if (!recurring && amount !== null) return "donation";
   if (recurring) return "supporter";
   return "unknown";
+}
+
+/** Every donate link - one per offered amount, plus the open one - as a list. */
+function donationLinks(env?: Env): string[] {
+  return (env?.STRIPE_DONATION_PAYMENT_LINKS || "")
+    .split(",")
+    .map((id) => id.trim())
+    .filter(Boolean);
 }
 
 /** What we keep about a booking. Deliberately not the card, or anything near it. */

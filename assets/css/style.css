@@ -2211,9 +2211,9 @@ html[data-theme="light"] .bus-service { background: rgba(255,255,255,0.45); }
 /* A group we administer, so the listing can vouch for itself. */
 .verified-note { color: var(--accent); }
 
-/* The three ways to support the site. */
+/* Two ways to support the site, with advertising kept separate below them. */
 .support-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; margin: 1.4rem 0 0; }
-@media (min-width: 780px) { .support-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 780px) { .support-grid { grid-template-columns: repeat(2, 1fr); } }
 .support-card {
   display: flex;
   flex-direction: column;
@@ -2227,6 +2227,43 @@ html[data-theme="light"] .bus-service { background: rgba(255,255,255,0.45); }
 .support-card h3 { margin: 0; font-size: 1.15rem; }
 .support-card p { margin: 0; font-size: 0.92rem; color: var(--muted); flex: 1; }
 .support-card .btn { align-self: flex-start; margin-top: 0.4rem; }
-.support-kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
+.support-kicker { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; margin: 0; }
 .support-note { max-width: 70ch; margin-inline: auto; }
-@media print { .support-grid, .support-note { display: none; } }
+
+/* Named amounts, so a reader who has decided to give is not handed a blank
+   field. Each is a link to /donate?amount=… which the worker maps to a Stripe
+   link; "Another amount" is the open one. */
+.support-amounts { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.5rem 0 0; }
+.support-amount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.4rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.support-amount:hover, .support-amount:focus-visible { border-color: var(--accent); transform: translateY(-2px); }
+.support-amount-other { font-weight: 600; background: none; }
+
+/* Advertising is a sale, not a donation, so it sits apart from the two cards. */
+.support-ad {
+  margin: 1.1rem 0 0;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+}
+.support-ad h3 { margin: 0.15rem 0 0.4rem; font-size: 1.1rem; }
+.support-ad p { margin: 0 0 0.7rem; font-size: 0.92rem; color: var(--muted); }
+
+.support-legal { margin-top: 0.9rem; }
+.support-legal summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+.support-legal p { margin: 0.5rem 0 0; font-size: 0.86rem; }
+
+@media print { .support-grid, .support-note, .support-ad, .support-legal { display: none; } }

@@ -1,9 +1,18 @@
 ---
 /*
-  The three ways to put money behind the site. Prices are stated in full, and
-  so is what they are not: Love Mallacoota is not registered for GST and is not
-  a deductible gift recipient, so nobody should reach the payment page expecting
-  a tax invoice with GST on it or a deduction at tax time.
+  Two ways to help, and one thing to buy - kept apart on purpose. Asking for
+  support and selling advertising are different conversations, and a business
+  deciding whether to advertise should not have to read it as charity.
+
+  Donations name their amounts. The open Stripe link opens at A$0.00 with the
+  amount behind a pencil icon, so a reader who has already decided to give is
+  handed a form to work out; /donate?amount=25 opens ready to pay. The worker
+  maps each amount to its own Stripe link and falls back to the open one.
+
+  Prices are stated in full, and so is what they are not: Love Mallacoota is
+  not registered for GST and is not a deductible gift recipient, so nobody
+  should reach the payment page expecting GST on an invoice or a deduction at
+  tax time. That belongs near the money, but not on top of it.
 */
 interface Props {
   heading?: string;
@@ -11,35 +20,11 @@ interface Props {
 }
 const {
   heading = "Keeping this going",
-  lede = "The site is free to read and free to be listed in, and it costs something to run. Three ways to help, none of them obligatory.",
+  lede = "The site is free to read and free to be listed in, and it costs something to run. None of this is obligatory.",
 } = Astro.props;
 
-const options = [
-  {
-    href: "/donate",
-    kicker: "One-off",
-    title: "Chip in",
-    body: "Whatever you think it is worth. Covers hosting, the domains and the archive scanning - and supports the Mallacoota 2020 video channel.",
-    cta: "Donate",
-    tone: "btn-coral",
-  },
-  {
-    href: "/subscribe",
-    kicker: "$10 a month",
-    title: "Community supporter",
-    body: "Ongoing support for the weekly edition, local guides, photography, the archive and the Mallacoota 2020 videos. Cancel whenever you like.",
-    cta: "Become a supporter",
-    tone: "btn-primary",
-  },
-  {
-    href: "/advertise",
-    kicker: "$35 a month",
-    title: "Local business listing",
-    body: "Being listed in the directory is free and always will be. This is advertising: a featured placement and your advertisement in the weekly edition, in print and on the web.",
-    cta: "Book a spot",
-    tone: "btn-ghost",
-  },
-];
+/** Kept in step with DONATE_PRESETS in src/worker.ts. */
+const amounts = [5, 10, 25, 50];
 ---
 
 <section class="glass-card sheen content-block reveal" aria-labelledby="support-title">
@@ -47,25 +32,57 @@ const options = [
   <p class="section-sub">{lede}</p>
 
   <div class="support-grid">
-    {options.map((option) => (
-      <article class="support-card">
-        <p class="support-kicker">{option.kicker}</p>
-        <h3>{option.title}</h3>
-        <p>{option.body}</p>
-        <a class={`btn ${option.tone}`} href={option.href}>{option.cta}</a>
-      </article>
-    ))}
+    <article class="support-card">
+      <p class="support-kicker">Any amount, once</p>
+      <h3>Chip in</h3>
+      <p>
+        Whatever you think it is worth. Covers hosting, the domains and the archive
+        scanning - and supports the Mallacoota 2020 video channel.
+      </p>
+      <div class="support-amounts">
+        {amounts.map((amount) => (
+          <a class="support-amount" href={`/donate?amount=${amount}`}>${amount}</a>
+        ))}
+        <a class="support-amount support-amount-other" href="/donate">Another amount</a>
+      </div>
+    </article>
+
+    <article class="support-card">
+      <p class="support-kicker">$10 a month</p>
+      <h3>Community supporter</h3>
+      <p>
+        Ongoing support for the weekly edition, local guides, photography, the archive
+        and the Mallacoota 2020 videos. Cancel whenever you like.
+      </p>
+      <a class="btn btn-primary" href="/subscribe">Become a supporter</a>
+    </article>
   </div>
+
+  <aside class="support-ad" aria-labelledby="support-ad-title">
+    <p class="support-kicker">$35 a month</p>
+    <h3 id="support-ad-title">Advertise your business</h3>
+    <p>
+      A featured placement and your advertisement in the weekly edition, in print and
+      on the web. <strong>Being listed in the directory is free and always will be</strong> -
+      this is advertising, not a listing fee.
+    </p>
+    <a class="btn btn-ghost" href="/advertise">Book a spot</a>
+  </aside>
 
   <p class="edition-source support-note">
     Payments are handled by Stripe; no card details reach this site.
-    <strong>Being listed in the directory is free</strong> - the $35 is for advertising, not for a listing.
-    Love Mallacoota is <strong>not registered for GST</strong>, so no GST is charged and what you pay is the whole amount.
-    A business advertising here can normally claim it as a business expense; for everyone else this is not
-    tax deductible, because we are not a registered charity.
-    Colin Dixon, sole trader, ABN 68 758 286 944.
-    Questions: <a href="/contact.html?subject=support">ask us</a>.
   </p>
+
+  <details class="support-legal support-note">
+    <summary>Tax, GST and who runs this</summary>
+    <p>
+      Love Mallacoota is <strong>not registered for GST</strong>, so no GST is charged and
+      what you pay is the whole amount. A business advertising here can normally claim it
+      as a business expense; for everyone else this is not tax deductible, because we are
+      not a registered charity. Colin Dixon, sole trader, ABN 68 758 286 944.
+      Questions: <a href="/contact.html?subject=support">ask us</a>.
+    </p>
+  </details>
 
   <p class="edition-source support-note">
     Prefer to support the videos directly? Subscribe to

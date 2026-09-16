@@ -106,6 +106,27 @@ test("a payment is classified before anything is filed", async () => {
   );
 });
 
+test("the payment link decides the kind, whatever the amount happens to be", async () => {
+  const { classifyPayment } = await import("../src/stripe-webhook.ts");
+  const env = {
+    STRIPE_AD_PAYMENT_LINK: "plink_ad",
+    STRIPE_SUPPORTER_PAYMENT_LINK: "plink_supporter",
+    STRIPE_DONATION_PAYMENT_LINKS: "plink_d5, plink_d25 ,plink_open",
+  };
+
+  // Thirty-five dollars is the advertising price, but this one came from a
+  // donate button, and that is what it is.
+  assert.equal(classifyPayment({ payment_link: "plink_d25", mode: "payment", amount_total: 3500 }, env), "donation");
+  // A supporter whose price has risen is still a supporter.
+  assert.equal(classifyPayment({ payment_link: "plink_supporter", mode: "subscription", amount_total: 1200 }, env), "supporter");
+  // Stripe expands the link to an object on some events.
+  assert.equal(classifyPayment({ payment_link: { id: "plink_ad" }, mode: "subscription", amount_total: 3500 }, env), "advertising");
+  // Whitespace around an id in the list is tolerated.
+  assert.equal(classifyPayment({ payment_link: "plink_d5", mode: "payment", amount_total: 500 }, env), "donation");
+  // A link we do not know falls back to the shape of the payment.
+  assert.equal(classifyPayment({ payment_link: "plink_new", mode: "subscription", amount_total: 3500 }, env), "advertising");
+});
+
 test("only advertising creates work; the rest are just thanks", async () => {
   const { bookingFromEvent } = await import("../src/stripe-webhook.ts");
   const donation = bookingFromEvent({

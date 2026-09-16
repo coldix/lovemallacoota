@@ -38,6 +38,11 @@ to-do/
 *.swp
 *.tmp
 
+# Claude Code: launch.json is shared, the rest is one machine's own state and
+# can hold local permissions and secrets.
+.claude/*
+!.claude/launch.json
+
 # Native app workspace/user state is not part of the static website
 *.xcuserstate
 xcuserdata/

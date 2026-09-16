@@ -1,11 +1,11 @@
 {
   "week": "2026-w38",
-  "generatedAt": "2026-09-16T00:51:50.921Z",
+  "generatedAt": "2026-09-16T09:51:19.392Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-09-16T00:51:49.478Z",
+    "fetchedAt": "2026-09-16T09:51:17.951Z",
     "days": [
       {
         "date": "2026-09-14",
@@ -27,7 +27,7 @@
         "date": "2026-09-16",
         "code": 53,
         "summary": "Drizzle",
-        "maxC": 12.2,
+        "maxC": 12.6,
         "minC": 6.4,
         "rainMm": 2.1
       },
@@ -35,32 +35,32 @@
         "date": "2026-09-17",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 15.7,
-        "minC": 8.3,
+        "maxC": 15.6,
+        "minC": 9,
         "rainMm": 0
       },
       {
         "date": "2026-09-18",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 18.4,
-        "minC": 7.8,
+        "maxC": 18.3,
+        "minC": 7.2,
         "rainMm": 0
       },
       {
         "date": "2026-09-19",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 22.1,
-        "minC": 10.5,
+        "maxC": 23.6,
+        "minC": 9.9,
         "rainMm": 0
       },
       {
         "date": "2026-09-20",
-        "code": 0,
-        "summary": "Clear",
-        "maxC": 25.5,
-        "minC": 10.8,
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 28,
+        "minC": 9.7,
         "rainMm": 0
       }
     ]
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-09-16T00:51:50.058Z",
+    "fetchedAt": "2026-09-16T09:51:18.392Z",
     "extremes": [
       {
         "time": "2026-09-14T03:00",
@@ -965,8 +965,8 @@
     {
       "date": "Tue 15 Sept",
       "time": "10:00 am",
-      "title": "Library - Rhyme time",
-      "location": "Mallacoota Service Centre and Library"
+      "title": "Strength and Balance (a bit more support)",
+      "location": ""
     },
     {
       "date": "Wed 16 Sept",
@@ -983,14 +983,14 @@
     {
       "date": "Thu 17 Sept",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
+      "title": "Wilderness Collective (CCR)",
+      "location": "The Oval"
     },
     {
       "date": "Thu 17 Sept",
       "time": "9:30 am",
-      "title": "Wilderness Collective (CCR)",
-      "location": "The Oval"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Fri 18 Sept",
@@ -1019,14 +1019,14 @@
     {
       "date": "Sun 20 Sept",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Sun 20 Sept",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     }
   ],
   "trail": {

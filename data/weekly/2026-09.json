@@ -1,19 +1,19 @@
 {
   "week": "2026-09",
-  "generatedAt": "2026-09-16T00:51:52.022Z",
+  "generatedAt": "2026-09-16T09:51:20.410Z",
   "start": "2026-09-16",
   "end": "2026-09-22",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-09-16T00:51:51.082Z",
+    "fetchedAt": "2026-09-16T09:51:19.432Z",
     "days": [
       {
         "date": "2026-09-16",
         "code": 53,
         "summary": "Drizzle",
-        "maxC": 12.2,
+        "maxC": 12.6,
         "minC": 6.4,
         "rainMm": 2.1
       },
@@ -21,48 +21,48 @@
         "date": "2026-09-17",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 15.7,
-        "minC": 8.3,
+        "maxC": 15.6,
+        "minC": 9,
         "rainMm": 0
       },
       {
         "date": "2026-09-18",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 18.4,
-        "minC": 7.8,
+        "maxC": 18.3,
+        "minC": 7.2,
         "rainMm": 0
       },
       {
         "date": "2026-09-19",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 22.1,
-        "minC": 10.5,
+        "maxC": 23.6,
+        "minC": 9.9,
         "rainMm": 0
       },
       {
         "date": "2026-09-20",
-        "code": 0,
-        "summary": "Clear",
-        "maxC": 25.5,
-        "minC": 10.8,
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 28,
+        "minC": 9.7,
         "rainMm": 0
       },
       {
         "date": "2026-09-21",
-        "code": 53,
-        "summary": "Drizzle",
-        "maxC": 13.8,
-        "minC": 10.7,
-        "rainMm": 2.4
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 15.2,
+        "minC": 9.8,
+        "rainMm": 0.6
       },
       {
         "date": "2026-09-22",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 14.8,
-        "minC": 8.2,
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 14.9,
+        "minC": 6.7,
         "rainMm": 0
       }
     ]
@@ -74,7 +74,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-09-16T00:51:51.222Z",
+    "fetchedAt": "2026-09-16T09:51:19.543Z",
     "extremes": [
       {
         "time": "2026-09-16T04:00",
@@ -968,14 +968,14 @@
     {
       "date": "Fri 18 Sept",
       "time": "9:30 am",
-      "title": "Playgroup",
-      "location": "Mallacoota Preschool and Toy Library"
+      "title": "Croquet (Reclink)",
+      "location": "Mallacoota Golf and Country Club"
     },
     {
       "date": "Fri 18 Sept",
       "time": "9:30 am",
-      "title": "Croquet (Reclink)",
-      "location": "Mallacoota Golf and Country Club"
+      "title": "Playgroup",
+      "location": "Mallacoota Preschool and Toy Library"
     },
     {
       "date": "Sat 19 Sept",
@@ -992,19 +992,13 @@
     {
       "date": "Sun 20 Sept",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
-    },
-    {
-      "date": "Sun 20 Sept",
-      "time": "9:00 am",
       "title": "Church Service - St Peters",
       "location": "St Peters Church"
     },
     {
-      "date": "Mon 21 Sept",
-      "time": "10:00 am",
-      "title": "Pickleball",
+      "date": "Sun 20 Sept",
+      "time": "9:00 am",
+      "title": "Social Tennis",
       "location": "Mallacoota Tennis Club"
     },
     {
@@ -1012,6 +1006,12 @@
       "time": "10:00 am",
       "title": "Toddler Music and Movement (Reclink)",
       "location": ""
+    },
+    {
+      "date": "Mon 21 Sept",
+      "time": "10:00 am",
+      "title": "Pickleball",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Tue 22 Sept",
@@ -1022,8 +1022,8 @@
     {
       "date": "Tue 22 Sept",
       "time": "10:00 am",
-      "title": "Strength and Balance (a bit more support)",
-      "location": ""
+      "title": "Library - Rhyme time",
+      "location": "Mallacoota Service Centre and Library"
     }
   ],
   "trail": {

@@ -232,7 +232,20 @@ test("the calendar embed comes from the config, and refuses a personal address",
   }
 });
 
-test("What's On shows the next seven days from today, not the edition's Monday", async () => {
+/*
+ * The coming week is refreshed once a day by the "Refresh the weekly edition" workflow
+ * (05:10 UTC, 15:10 AEST) and committed. Asking that it start *today* therefore failed
+ * every check that ran before the day's refresh — including the deploy of a story a
+ * contributor had just published, which then sat unpublished until the afternoon. What
+ * matters is that the data is current enough to be useful and that the page looks
+ * forward rather than back, so this allows the ordinary one-day lag plus one missed run.
+ */
+const MAX_REFRESH_LAG_DAYS = 2;
+
+const daysBetween = (from, to) =>
+  Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000);
+
+test("What's On looks forward from a freshly refreshed week, not at the edition's Monday", async () => {
   const html = await readFile(new URL("../dist/calendar.html", import.meta.url), "utf8");
   const { currentEdition, loadComingWeek, loadWeekly } = await import("../src/lib/editions.mjs");
   const { melbourneToday } = await import("../tools/roll-edition.mjs");
@@ -240,15 +253,25 @@ test("What's On shows the next seven days from today, not the edition's Monday",
   const today = melbourneToday();
 
   assert.ok(coming?.weather?.days?.length === 7, "coming week has no seven-day forecast");
-  assert.equal(coming.start, today, "coming week does not start today");
-  assert.equal(coming.weather.days[0].date, today, "the first forecast day is not today");
+
+  const lag = daysBetween(coming.start, today);
+  assert.ok(lag >= 0, `the coming week starts ${coming.start}, which is after today (${today})`);
+  assert.ok(
+    lag <= MAX_REFRESH_LAG_DAYS,
+    `the coming week starts ${coming.start}, ${lag} days before today (${today}) - the daily refresh has not run`
+  );
+  assert.equal(
+    coming.weather.days[0].date,
+    coming.start,
+    "the first forecast day is not the day the coming week starts"
+  );
   assert.match(html, /The next seven days/);
   assert.doesNotMatch(html, /This week's weather/);
 
   const edition = currentEdition();
   const weekly = edition ? loadWeekly(edition.week) : null;
   const editionStart = weekly?.weather?.days?.[0]?.date;
-  if (editionStart && editionStart !== today) {
+  if (editionStart && editionStart !== coming.start) {
     assert.notEqual(
       coming.weather.days[0].date,
       editionStart,

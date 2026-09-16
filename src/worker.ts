@@ -15,10 +15,10 @@ const PAYMENT_PATHS: Record<string, "STRIPE_LINK_DONATE" | "STRIPE_LINK_SUBSCRIB
 };
 
 /**
- * One-off amounts offered on the page. The open donate link opens at A$0.00
- * with the amount hidden behind a pencil icon, which is a poor thing to hand
- * somebody who has just decided to give something. A named amount opens ready
- * to pay instead.
+ * One-off amounts offered on the page. A named amount opens ready to pay, so
+ * somebody who has just decided to give something is not handed a form to work
+ * out first. The open link is for anyone who wants a figure of their own; it
+ * opens at a suggested A$25 rather than at nothing.
  *
  * Each amount needs its own Stripe link, in STRIPE_LINK_DONATE_10 and so on.
  * An amount with no link configured falls back to the open link rather than

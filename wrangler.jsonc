@@ -51,7 +51,7 @@
         // refuses a From on it.
         "MAIL_FROM": "Love Mallacoota <coota@oze.com.au>",
         "RELAY_URL": "https://ads.oze.net.au/relay",
-        "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
+        "STRIPE_LINK_DONATE": "https://buy.stripe.com/aFaaEX5tk9f42wx0KZ77O0h",
         "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
         "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a",
         // The same live links as production: preview is for reading the flow,
@@ -91,7 +91,7 @@
     // refuses a From on it.
     "MAIL_FROM": "Love Mallacoota <coota@oze.com.au>",
     "RELAY_URL": "https://ads.oze.net.au/relay",
-    "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
+    "STRIPE_LINK_DONATE": "https://buy.stripe.com/aFaaEX5tk9f42wx0KZ77O0h",
     "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
     "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a",
 
@@ -100,12 +100,14 @@
     // Without them a price rise silently refiles every payment.
     "STRIPE_AD_PAYMENT_LINK": "plink_1U9u3hDRtLu90m8jPxklEL1u",
     "STRIPE_SUPPORTER_PAYMENT_LINK": "plink_1U9u4PDRtLu90m8jNoK1NAJm",
-    // The open link first, then one per offered amount.
-    "STRIPE_DONATION_PAYMENT_LINKS": "plink_1U9u8PDRtLu90m8jatdjYKQG,plink_1UGDa2DRtLu90m8jjz04WQcg,plink_1UGDa3DRtLu90m8jeTHvCqMl,plink_1UGDa4DRtLu90m8jLL2il9JT,plink_1UGDa6DRtLu90m8jOx5tbyCI",
+    // The open link first, then one per offered amount. The retired open link
+    // on the old product stays on the list: it is deactivated, but a checkout
+    // opened before that would otherwise be filed as nothing in particular.
+    "STRIPE_DONATION_PAYMENT_LINKS": "plink_1UGDmODRtLu90m8j3k9w7RXB,plink_1UGDa2DRtLu90m8jjz04WQcg,plink_1UGDa3DRtLu90m8jeTHvCqMl,plink_1UGDa4DRtLu90m8jLL2il9JT,plink_1UGDa6DRtLu90m8jOx5tbyCI,plink_1U9u8PDRtLu90m8jatdjYKQG",
 
     // One link per offered donation amount, so /donate?amount=20 opens ready to
-    // pay rather than at A$0.00 with the amount behind a pencil icon. The prices
-    // are on prod_VGkc2CtNg5zEaQ, one payment link each. An amount with no link
+    // pay rather than on the open link's editable field. The prices are on
+    // prod_VGkc2CtNg5zEaQ, one payment link each. An amount with no link
     // here falls back to STRIPE_LINK_DONATE, so a new amount can be offered
     // before its link exists. Mirror any of these into env.preview.vars above
     // when previewing the flow.

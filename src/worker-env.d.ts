@@ -33,9 +33,9 @@ interface Env {
   STRIPE_DONATION_PAYMENT_LINKS?: string;
   /*
    * One Stripe link per offered amount, so /donate?amount=20 opens ready to pay
-   * instead of at A$0.00 with the amount hidden behind a pencil. Any amount
-   * without a link falls back to STRIPE_LINK_DONATE, so the site works before
-   * these exist. Keep in step with DONATE_PRESETS in src/worker.ts.
+   * rather than on the open link's editable field. Any amount without a link
+   * falls back to STRIPE_LINK_DONATE, so a new amount can be offered before its
+   * link exists. Keep in step with DONATE_PRESETS in src/worker.ts.
    */
   STRIPE_LINK_DONATE_10?: string;
   STRIPE_LINK_DONATE_20?: string;

@@ -59,7 +59,12 @@
         "STRIPE_LINK_DONATE_10": "https://buy.stripe.com/dRmbJ10900Iy8UV8dr77O0d",
         "STRIPE_LINK_DONATE_20": "https://buy.stripe.com/eVq14ncVMgHwfjj9hv77O0e",
         "STRIPE_LINK_DONATE_50": "https://buy.stripe.com/28E5kDf3Uezo1st51f77O0f",
-        "STRIPE_LINK_DONATE_100": "https://buy.stripe.com/cNieVdaNE1MC7QR65j77O0g"
+        "STRIPE_LINK_DONATE_100": "https://buy.stripe.com/cNieVdaNE1MC7QR65j77O0g",
+        "STRIPE_PRICE_DONATE_OPEN": "price_1UGDloDRtLu90m8jTQlL0roR",
+        "STRIPE_PRICE_DONATE_10": "price_1UGD7cDRtLu90m8jYTD9mJ3J",
+        "STRIPE_PRICE_DONATE_20": "price_1UGD7cDRtLu90m8j3g8zBRfx",
+        "STRIPE_PRICE_DONATE_50": "price_1UGD7cDRtLu90m8jRZSfh4Qb",
+        "STRIPE_PRICE_DONATE_100": "price_1UGD7cDRtLu90m8jlVE2h5MS"
       },
       "browser": { "binding": "BROWSER" },
       "ai": { "binding": "AI" },
@@ -81,6 +86,11 @@
           "name": "LISTING_RATE",
           "namespace_id": "1002",
           "simple": { "limit": 8, "period": 60 }
+        },
+        {
+          "name": "CHECKOUT_RATE",
+          "namespace_id": "1003",
+          "simple": { "limit": 10, "period": 60 }
         }
       ]
     }
@@ -114,7 +124,18 @@
     "STRIPE_LINK_DONATE_10": "https://buy.stripe.com/dRmbJ10900Iy8UV8dr77O0d",
     "STRIPE_LINK_DONATE_20": "https://buy.stripe.com/eVq14ncVMgHwfjj9hv77O0e",
     "STRIPE_LINK_DONATE_50": "https://buy.stripe.com/28E5kDf3Uezo1st51f77O0f",
-    "STRIPE_LINK_DONATE_100": "https://buy.stripe.com/cNieVdaNE1MC7QR65j77O0g"
+    "STRIPE_LINK_DONATE_100": "https://buy.stripe.com/cNieVdaNE1MC7QR65j77O0g",
+
+    // The same amounts as prices, for the form that opens on the site instead
+    // of on Stripe's page. That needs a secret key too - `wrangler secret put
+    // STRIPE_SECRET_KEY` - and a publishable key at build time in
+    // PUBLIC_STRIPE_PUBLISHABLE_KEY. Missing either and the buttons stay
+    // ordinary links to the payment links above.
+    "STRIPE_PRICE_DONATE_OPEN": "price_1UGDloDRtLu90m8jTQlL0roR",
+    "STRIPE_PRICE_DONATE_10": "price_1UGD7cDRtLu90m8jYTD9mJ3J",
+    "STRIPE_PRICE_DONATE_20": "price_1UGD7cDRtLu90m8j3g8zBRfx",
+    "STRIPE_PRICE_DONATE_50": "price_1UGD7cDRtLu90m8jRZSfh4Qb",
+    "STRIPE_PRICE_DONATE_100": "price_1UGD7cDRtLu90m8jlVE2h5MS"
   },
   "browser": { "binding": "BROWSER" },
   "d1_databases": [
@@ -135,6 +156,11 @@
       "name": "LISTING_RATE",
       "namespace_id": "1002",
       "simple": { "limit": 8, "period": 60 }
+    },
+    {
+      "name": "CHECKOUT_RATE",
+      "namespace_id": "1003",
+      "simple": { "limit": 10, "period": 60 }
     }
   ],
   "observability": {

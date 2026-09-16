@@ -98,6 +98,14 @@ export async function verifyStripeSignature(
  * offered amount plus the open one, so that var is a comma-separated list.
  */
 export function classifyPayment(object: Record<string, any>, env?: Env): "advertising" | "supporter" | "donation" | "unknown" {
+  // A session opened by the form on our own page says what it is for, because
+  // we put it there (see checkout.ts). It has no payment link to be recognised
+  // by, and its amount is the reader's choice.
+  const declared = object.metadata?.kind;
+  if (declared === "donation" || declared === "supporter" || declared === "advertising") {
+    return declared;
+  }
+
   const link = typeof object.payment_link === "string" ? object.payment_link : object.payment_link?.id;
   if (link) {
     if (env?.STRIPE_AD_PAYMENT_LINK && link === env.STRIPE_AD_PAYMENT_LINK) return "advertising";

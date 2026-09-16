@@ -9,6 +9,12 @@
   amount to its own Stripe link, and anyone who wants a figure of their own
   falls back to the open link, which suggests A$25 and lets them change it.
 
+  Every amount is a plain link to that payment link, and stays one if the
+  script below does not run, if Stripe.js does not load, or if the Worker has
+  no keys yet. When it does run the same click opens the form here instead, in
+  a dialog over the page, so nobody is sent to a stranger's website holding
+  their card.
+
   Prices are stated in full, and so is what they are not: Love Mallacoota is
   not registered for GST and is not a deductible gift recipient, so nobody
   should reach the payment page expecting GST on an invoice or a deduction at
@@ -22,6 +28,10 @@ const {
   heading = "Keeping this going",
   lede = "The site is free to read and free to be listed in, and it costs something to run. None of this is obligatory.",
 } = Astro.props;
+
+// Publishable, so it belongs in the page. Without it the dialog never opens and
+// the buttons behave as they did before.
+const stripeKey = import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY || "";
 
 /** Kept in step with DONATE_PRESETS in src/worker.ts. */
 const amounts = [10, 20, 50, 100];
@@ -41,12 +51,12 @@ const amounts = [10, 20, 50, 100];
       </p>
       <div class="support-amounts">
         {amounts.map((amount) => (
-          <a class="support-amount" href={`/donate?amount=${amount}`}>${amount}</a>
+          <a class="support-amount" href={`/donate?amount=${amount}`} data-donate={String(amount)}>${amount}</a>
         ))}
       </div>
       <p class="support-amount-hint">
         Tap an amount and Stripe opens ready to pay, or
-        <a class="support-amount-other" href="/donate">give another amount</a>.
+        <a class="support-amount-other" href="/donate" data-donate="open">give another amount</a>.
       </p>
     </article>
 
@@ -92,4 +102,97 @@ const amounts = [10, 20, 50, 100];
     <a href="https://www.youtube.com/@mallacoota2020" rel="noopener noreferrer" target="_blank">@mallacoota2020</a> on YouTube - it costs nothing and it helps.
   </p>
 
+  <dialog class="donate-dialog" id="donate-dialog" aria-label="Donate to Love Mallacoota">
+    <div class="donate-dialog-head">
+      <p class="support-kicker">Donate to lovemallacoota.au</p>
+      <button type="button" class="donate-dialog-close" data-donate-close aria-label="Close">&times;</button>
+    </div>
+    <div class="donate-dialog-body" id="donate-mount"></div>
+    <p class="donate-dialog-note">Handled by Stripe. No card details reach this site.</p>
+  </dialog>
+
 </section>
+
+{stripeKey && (
+  <script is:inline define:vars={{ stripeKey }}>
+    /*
+      The donate buttons are links, and stay links: every failure here leaves
+      the click to the browser, which lands on the Stripe payment link the
+      href already points at. Nothing below is required for somebody to give
+      money - it only saves them the trip.
+    */
+    (() => {
+      const dialog = document.getElementById("donate-dialog");
+      const mount = document.getElementById("donate-mount");
+      if (!dialog || !mount || typeof dialog.showModal !== "function") return;
+
+      let stripeLoading = null;
+      let checkout = null;
+
+      function loadStripe() {
+        if (stripeLoading) return stripeLoading;
+        stripeLoading = new Promise((resolve, reject) => {
+          if (window.Stripe) return resolve(window.Stripe(stripeKey));
+          const script = document.createElement("script");
+          script.src = "https://js.stripe.com/v3";
+          script.onload = () => (window.Stripe ? resolve(window.Stripe(stripeKey)) : reject());
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+        return stripeLoading;
+      }
+
+      async function open(amount) {
+        const stripe = await loadStripe();
+        const response = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(amount === "open" ? {} : { amount }),
+        });
+        if (!response.ok) throw new Error("checkout unavailable");
+        const { clientSecret } = await response.json();
+        if (!clientSecret) throw new Error("no client secret");
+
+        // One dialog, reopened. Leaving the old form mounted stacks a second
+        // iframe behind the first, and the reader pays into whichever one
+        // happens to be on top.
+        if (checkout) checkout.destroy();
+        checkout = await stripe.initEmbeddedCheckout({ clientSecret });
+        checkout.mount("#donate-mount");
+        dialog.showModal();
+      }
+
+      for (const link of document.querySelectorAll("[data-donate]")) {
+        link.addEventListener("click", (event) => {
+          // A modified click is a deliberate new tab or window; leave it alone.
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+          event.preventDefault();
+          open(link.dataset.donate).catch(() => {
+            window.location.href = link.href;
+          });
+        });
+      }
+
+      function close() {
+        dialog.close();
+        if (checkout) {
+          checkout.destroy();
+          checkout = null;
+        }
+      }
+
+      dialog.querySelector("[data-donate-close]")?.addEventListener("click", close);
+      dialog.addEventListener("close", () => {
+        if (checkout) {
+          checkout.destroy();
+          checkout = null;
+        }
+      });
+      // A click on the backdrop lands on the dialog itself, never on its
+      // contents.
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) close();
+      });
+    })();
+  </script>
+)}

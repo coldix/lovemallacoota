@@ -2271,6 +2271,45 @@ html[data-theme="light"] .bus-service { background: rgba(255,255,255,0.45); }
 .support-card .support-amount-hint { margin: 0.55rem 0 0; font-size: 0.85rem; flex: none; }
 .support-amount-other { font-weight: 600; }
 
+/* The donate form, which opens over the page rather than on Stripe's own site.
+   Stripe draws the form itself inside an iframe; everything here is the frame
+   around it, and the white panel is deliberate - a payment form on a glass card
+   over a photograph of the inlet reads as a fake. */
+.donate-dialog {
+  width: min(30rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 3rem);
+  padding: 0;
+  border: none;
+  border-radius: 16px;
+  background: #fff;
+  color: #1a1a1a;
+  overflow: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+.donate-dialog::backdrop { background: rgba(10, 25, 35, 0.55); }
+.donate-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem 0;
+}
+.donate-dialog-head .support-kicker { color: var(--accent-deep); }
+.donate-dialog-close {
+  min-width: 44px;
+  min-height: 44px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: #555;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.donate-dialog-close:hover, .donate-dialog-close:focus-visible { background: #eee; color: #000; }
+.donate-dialog-body { padding: 0.5rem 1.1rem 0; min-height: 22rem; }
+.donate-dialog-note { margin: 0.6rem 0 1rem; padding: 0 1.1rem; font-size: 0.8rem; color: #666; }
+
 /* Advertising is a sale, not a donation, so it sits apart from the two cards. */
 .support-ad {
   margin: 1.1rem 0 0;

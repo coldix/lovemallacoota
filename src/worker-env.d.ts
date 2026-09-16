@@ -37,6 +37,19 @@ interface Env {
    * falls back to STRIPE_LINK_DONATE, so a new amount can be offered before its
    * link exists. Keep in step with DONATE_PRESETS in src/worker.ts.
    */
+  /*
+   * The donate form opens on the site rather than on Stripe's own page, which
+   * needs a secret key (a Worker secret, never a var) and the price behind each
+   * offered amount. Without them /api/checkout answers 503 and every button
+   * falls back to being an ordinary link to its payment link.
+   */
+  STRIPE_SECRET_KEY?: string;
+  STRIPE_PRICE_DONATE_OPEN?: string;
+  STRIPE_PRICE_DONATE_10?: string;
+  STRIPE_PRICE_DONATE_20?: string;
+  STRIPE_PRICE_DONATE_50?: string;
+  STRIPE_PRICE_DONATE_100?: string;
+  CHECKOUT_RATE?: RateLimit;
   STRIPE_LINK_DONATE_10?: string;
   STRIPE_LINK_DONATE_20?: string;
   STRIPE_LINK_DONATE_50?: string;

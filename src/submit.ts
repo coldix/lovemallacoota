@@ -9,6 +9,7 @@
 */
 
 import contributors from "../data/contributors.json" with { type: "json" };
+import { reportConversion } from "./adnet.ts";
 import { plainPunctuation } from "./lib/markup.mjs";
 
 const MAX = { title: 160, byline: 90, body: 12_000, email: 200, phone: 40, caption: 300 };
@@ -397,6 +398,7 @@ export async function handleArticleSubmit(request: Request, env: Env): Promise<R
     console.error("commit failed", error);
     return json({ ok: false, error: (error as Error).message }, 502);
   }
+  await reportConversion(env, "article", String(article.id));
 
   return json(
     { ok: true, id: article.id, note: `Published - live in about two minutes.${photoNote}` },

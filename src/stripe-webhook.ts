@@ -10,6 +10,8 @@
 #              who finds the URL could otherwise book free advertising.
 */
 
+import { reportConversion } from "./adnet.ts";
+
 const TOLERANCE_SECONDS = 300;
 const OWNER = "coldix";
 const REPO = "lovemallacoota";
@@ -233,6 +235,12 @@ export async function handleStripeWebhook(request: Request, env: Env): Promise<R
     console.error("stripe webhook failed", error);
     return json({ ok: false, error: (error as Error).message }, 500);
   }
+  await reportConversion(
+    env,
+    "payment",
+    String(booking.id),
+    typeof booking.amount === "number" ? Math.round(booking.amount * 100) : null
+  );
 
   return json({ ok: true, recorded: booking.id }, 200);
 }

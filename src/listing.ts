@@ -13,6 +13,7 @@ import stay from "../data/listings_accom.json" with { type: "json" };
 import doSee from "../data/listings_do.json" with { type: "json" };
 import services from "../data/listings_services.json" with { type: "json" };
 import associationsSeed from "../docs/incorporated-associations.json" with { type: "json" };
+import { reportConversion } from "./adnet.ts";
 import { canSendToPeople, sendToPerson } from "./mailer.ts";
 
 import {
@@ -757,6 +758,7 @@ export async function handleListingVerify(request: Request, env: Env): Promise<R
     .bind(nowIso(), id)
     .run();
   await audit(env, "listing-published", { slug: submission.slug, submissionId: id, actor: submission.email });
+  await reportConversion(env, "listing", submission.slug);
   return json(
     {
       ok: true,

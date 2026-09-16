@@ -5,9 +5,11 @@
 //   npx wrangler secret put GITHUB_TOKEN --env=""      # contents:write on the repo
 //   npx wrangler secret put STRIPE_WEBHOOK_SECRET --env=""
 //   npx wrangler secret put RESEND_API_KEY --env=""    # verification codes
+//   npx wrangler secret put ADNET_EVENT_KEY --env=""   # conversions counted on ads.oze.net.au
 interface Env {
   TURNSTILE_SECRET_KEY?: string;
   RELAY_KEY?: string;
+  ADNET_EVENT_KEY?: string;
   GITHUB_TOKEN?: string;
   STRIPE_WEBHOOK_SECRET?: string;
   /**

@@ -53,7 +53,13 @@
         "RELAY_URL": "https://ads.oze.net.au/relay",
         "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
         "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
-        "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a"
+        "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a",
+        // The same live links as production: preview is for reading the flow,
+        // and a donate button that falls back to the open link does not show it.
+        "STRIPE_LINK_DONATE_10": "https://buy.stripe.com/dRmbJ10900Iy8UV8dr77O0d",
+        "STRIPE_LINK_DONATE_20": "https://buy.stripe.com/eVq14ncVMgHwfjj9hv77O0e",
+        "STRIPE_LINK_DONATE_50": "https://buy.stripe.com/28E5kDf3Uezo1st51f77O0f",
+        "STRIPE_LINK_DONATE_100": "https://buy.stripe.com/cNieVdaNE1MC7QR65j77O0g"
       },
       "browser": { "binding": "BROWSER" },
       "ai": { "binding": "AI" },
@@ -87,24 +93,26 @@
     "RELAY_URL": "https://ads.oze.net.au/relay",
     "STRIPE_LINK_DONATE": "https://buy.stripe.com/7sYaEXcVMaj8dbb2T777O0c",
     "STRIPE_LINK_SUBSCRIBE": "https://buy.stripe.com/eVq8wP1d48b06MN3Xb77O0b",
-    "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a"
-
-    // One link per offered donation amount, so /donate?amount=25 opens ready to
-    // pay rather than at A$0.00 with the amount behind a pencil icon. Add each
-    // one as it is created in Stripe; an amount with no link here falls back to
-    // STRIPE_LINK_DONATE, so the buttons work in the meantime. Mirror any of
-    // these into env.preview.vars above when previewing the flow.
-    // "STRIPE_LINK_DONATE_5": "https://buy.stripe.com/…",
-    // "STRIPE_LINK_DONATE_10": "https://buy.stripe.com/…",
-    // "STRIPE_LINK_DONATE_25": "https://buy.stripe.com/…",
-    // "STRIPE_LINK_DONATE_50": "https://buy.stripe.com/…",
+    "STRIPE_LINK_ADVERTISE": "https://buy.stripe.com/bJefZh8Fw4YOb332T777O0a",
 
     // The plink_… ids behind those buttons, so a payment is filed by what it was
     // for rather than by its amount (see classifyPayment in src/stripe-webhook.ts).
     // Without them a price rise silently refiles every payment.
-    // "STRIPE_AD_PAYMENT_LINK": "plink_…",
-    // "STRIPE_SUPPORTER_PAYMENT_LINK": "plink_…",
-    // "STRIPE_DONATION_PAYMENT_LINKS": "plink_…,plink_…,plink_…"
+    "STRIPE_AD_PAYMENT_LINK": "plink_1U9u3hDRtLu90m8jPxklEL1u",
+    "STRIPE_SUPPORTER_PAYMENT_LINK": "plink_1U9u4PDRtLu90m8jNoK1NAJm",
+    // The open link first, then one per offered amount.
+    "STRIPE_DONATION_PAYMENT_LINKS": "plink_1U9u8PDRtLu90m8jatdjYKQG,plink_1UGDa2DRtLu90m8jjz04WQcg,plink_1UGDa3DRtLu90m8jeTHvCqMl,plink_1UGDa4DRtLu90m8jLL2il9JT,plink_1UGDa6DRtLu90m8jOx5tbyCI",
+
+    // One link per offered donation amount, so /donate?amount=20 opens ready to
+    // pay rather than at A$0.00 with the amount behind a pencil icon. The prices
+    // are on prod_VGkc2CtNg5zEaQ, one payment link each. An amount with no link
+    // here falls back to STRIPE_LINK_DONATE, so a new amount can be offered
+    // before its link exists. Mirror any of these into env.preview.vars above
+    // when previewing the flow.
+    "STRIPE_LINK_DONATE_10": "https://buy.stripe.com/dRmbJ10900Iy8UV8dr77O0d",
+    "STRIPE_LINK_DONATE_20": "https://buy.stripe.com/eVq14ncVMgHwfjj9hv77O0e",
+    "STRIPE_LINK_DONATE_50": "https://buy.stripe.com/28E5kDf3Uezo1st51f77O0f",
+    "STRIPE_LINK_DONATE_100": "https://buy.stripe.com/cNieVdaNE1MC7QR65j77O0g"
   },
   "browser": { "binding": "BROWSER" },
   "d1_databases": [

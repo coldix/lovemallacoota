@@ -20,17 +20,19 @@ const PAYMENT_PATHS: Record<string, "STRIPE_LINK_DONATE" | "STRIPE_LINK_SUBSCRIB
  * somebody who has just decided to give something. A named amount opens ready
  * to pay instead.
  *
- * Each amount needs its own Stripe link, in STRIPE_LINK_DONATE_5 and so on.
+ * Each amount needs its own Stripe link, in STRIPE_LINK_DONATE_10 and so on.
  * An amount with no link configured falls back to the open link rather than
  * failing: the reader still reaches a page where they can pay, and the site
  * works before the links exist.
  */
-export const DONATE_PRESETS = [5, 10, 25, 50] as const;
+export const DONATE_PRESETS = [10, 20, 50, 100] as const;
 
 function donateLink(amount: string | null, env: Env): string | null {
   if (!amount) return null;
+  // Digits only: Number() reads "20 " and "0x14" as twenty, and an amount that
+  // was not written plainly is not one of ours.
+  if (!/^[0-9]{1,4}$/.test(amount)) return null;
   const dollars = Number(amount);
-  if (!Number.isInteger(dollars)) return null;
   if (!(DONATE_PRESETS as readonly number[]).includes(dollars)) return null;
   const named = (env as unknown as Record<string, string | undefined>)[`STRIPE_LINK_DONATE_${dollars}`];
   return named || null;

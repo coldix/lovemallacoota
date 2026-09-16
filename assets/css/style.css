@@ -2232,25 +2232,44 @@ html[data-theme="light"] .bus-service { background: rgba(255,255,255,0.45); }
 
 /* Named amounts, so a reader who has decided to give is not handed a blank
    field. Each is a link to /donate?amount=… which the worker maps to a Stripe
-   link; "Another amount" is the open one. */
-.support-amounts { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.5rem 0 0; }
+   link, and one tap lands on a payment page with the amount already set.
+
+   They are sized as buttons, not chips: this is the most likely thing anybody
+   does on the page, and it sat quieter than the supporter button beside it.
+   44px is the smallest target a thumb should have to find. The open amount is
+   a sentence underneath rather than a fifth pill, where it was the widest
+   thing in the row and drew the eye first. */
+/* Four even columns rather than a wrapping row: at phone width the last amount
+   dropped to a line of its own, which read as an afterthought. */
+.support-amounts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0.6rem 0 0;
+}
 .support-amount {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 3.4rem;
-  padding: 0.45rem 0.8rem;
-  border: 1px solid var(--glass-border);
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--glass-border));
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
   color: inherit;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   text-decoration: none;
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
-.support-amount:hover, .support-amount:focus-visible { border-color: var(--accent); transform: translateY(-2px); }
-.support-amount-other { font-weight: 600; background: none; }
+.support-amount:hover, .support-amount:focus-visible {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  transform: translateY(-2px);
+}
+.support-card .support-amount-hint { margin: 0.55rem 0 0; font-size: 0.85rem; flex: none; }
+.support-amount-other { font-weight: 600; }
 
 /* Advertising is a sale, not a donation, so it sits apart from the two cards. */
 .support-ad {

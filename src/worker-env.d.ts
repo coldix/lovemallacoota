@@ -32,15 +32,15 @@ interface Env {
   /** Every donate link's plink_… id, comma separated: the presets and the open one. */
   STRIPE_DONATION_PAYMENT_LINKS?: string;
   /*
-   * One Stripe link per offered amount, so /donate?amount=25 opens ready to pay
+   * One Stripe link per offered amount, so /donate?amount=20 opens ready to pay
    * instead of at A$0.00 with the amount hidden behind a pencil. Any amount
    * without a link falls back to STRIPE_LINK_DONATE, so the site works before
    * these exist. Keep in step with DONATE_PRESETS in src/worker.ts.
    */
-  STRIPE_LINK_DONATE_5?: string;
   STRIPE_LINK_DONATE_10?: string;
-  STRIPE_LINK_DONATE_25?: string;
+  STRIPE_LINK_DONATE_20?: string;
   STRIPE_LINK_DONATE_50?: string;
+  STRIPE_LINK_DONATE_100?: string;
   DB?: D1Database;
   LISTING_RATE?: RateLimit;
   CONTACT_RATE?: RateLimit;

@@ -6,7 +6,7 @@
 
   Donations name their amounts. The open Stripe link opens at A$0.00 with the
   amount behind a pencil icon, so a reader who has already decided to give is
-  handed a form to work out; /donate?amount=25 opens ready to pay. The worker
+  handed a form to work out; /donate?amount=20 opens ready to pay. The worker
   maps each amount to its own Stripe link and falls back to the open one.
 
   Prices are stated in full, and so is what they are not: Love Mallacoota is
@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 
 /** Kept in step with DONATE_PRESETS in src/worker.ts. */
-const amounts = [5, 10, 25, 50];
+const amounts = [10, 20, 50, 100];
 ---
 
 <section class="glass-card sheen content-block reveal" aria-labelledby="support-title">
@@ -43,8 +43,11 @@ const amounts = [5, 10, 25, 50];
         {amounts.map((amount) => (
           <a class="support-amount" href={`/donate?amount=${amount}`}>${amount}</a>
         ))}
-        <a class="support-amount support-amount-other" href="/donate">Another amount</a>
       </div>
+      <p class="support-amount-hint">
+        Tap an amount and Stripe opens ready to pay, or
+        <a class="support-amount-other" href="/donate">give another amount</a>.
+      </p>
     </article>
 
     <article class="support-card">

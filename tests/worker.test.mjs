@@ -219,21 +219,21 @@ test("a named donation amount opens its own link, and anything else opens the op
   const configured = {
     ...env,
     STRIPE_LINK_DONATE: "https://buy.stripe.com/test_donate",
-    STRIPE_LINK_DONATE_25: "https://buy.stripe.com/test_donate_25",
+    STRIPE_LINK_DONATE_20: "https://buy.stripe.com/test_donate_20",
   };
   const location = async (path) =>
     (await worker.fetch(new Request(`https://lovemallacoota.au${path}`), configured, { waitUntil() {} }))
       .headers.get("Location");
 
-  assert.equal(await location("/donate?amount=25"), "https://buy.stripe.com/test_donate_25");
+  assert.equal(await location("/donate?amount=20"), "https://buy.stripe.com/test_donate_20");
 
   // An offered amount with no link of its own yet still reaches a page where
   // the reader can pay, rather than a 503 for a button we put on the page.
-  assert.equal(await location("/donate?amount=5"), "https://buy.stripe.com/test_donate");
+  assert.equal(await location("/donate?amount=100"), "https://buy.stripe.com/test_donate");
 
   // Anything that is not one of the offered amounts is ignored - including an
   // attempt to reach another var through the amount.
-  for (const amount of ["7", "0", "-25", "25.5", "abc", "__proto__", "5 "]) {
+  for (const amount of ["7", "0", "-20", "25", "20.5", "abc", "__proto__", "20 "]) {
     assert.equal(
       await location(`/donate?amount=${encodeURIComponent(amount)}`),
       "https://buy.stripe.com/test_donate",

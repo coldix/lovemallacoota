@@ -107,7 +107,10 @@ const amounts = [10, 20, 50, 100];
       <p class="support-kicker">Donate to lovemallacoota.au</p>
       <button type="button" class="donate-dialog-close" data-donate-close aria-label="Close">&times;</button>
     </div>
-    <div class="donate-dialog-body" id="donate-mount"></div>
+    <div class="donate-dialog-body">
+      <p class="donate-dialog-loading" data-donate-loading>Getting the payment form ready</p>
+      <div id="donate-mount"></div>
+    </div>
     <p class="donate-dialog-note">Handled by Stripe. No card details reach this site.</p>
   </dialog>
 
@@ -143,6 +146,12 @@ const amounts = [10, 20, 50, 100];
       }
 
       async function open(amount) {
+        // Open on the click, not when the form is ready. Stripe's script and
+        // the session together take a second or two, and a button that appears
+        // to do nothing gets pressed again.
+        dialog.showModal();
+        dialog.classList.add("is-loading");
+
         const stripe = await loadStripe();
         const response = await fetch("/api/checkout", {
           method: "POST",
@@ -156,10 +165,46 @@ const amounts = [10, 20, 50, 100];
         // One dialog, reopened. Leaving the old form mounted stacks a second
         // iframe behind the first, and the reader pays into whichever one
         // happens to be on top.
-        if (checkout) checkout.destroy();
+        if (checkout) {
+          checkout.destroy();
+          checkout = null;
+        }
+        mount.replaceChildren();
+
+        // Open first, mount second. Stripe measures its iframe as it mounts,
+        // and a dialog that has not been opened has no size at all: the second
+        // amount someone clicked opened an empty white box, because by then
+        // Stripe's script was cached and measured before the dialog existed to
+        // be measured against.
         checkout = await stripe.initEmbeddedCheckout({ clientSecret });
-        checkout.mount("#donate-mount");
-        dialog.showModal();
+        checkout.mount(mount);
+        waitForForm();
+      }
+
+      /*
+        Stripe's form takes a few seconds on a slow connection, and an empty
+        white box is a bad thing to show somebody who has just decided to give
+        money. The iframe is mounted at no height and grows when Stripe has
+        something to draw, so its height is the honest signal that the form has
+        arrived - "loaded" fires well before anything is visible.
+      */
+      function waitForForm() {
+        const frame = mount.querySelector("iframe");
+        const done = () => dialog.classList.remove("is-loading");
+        if (!frame || typeof ResizeObserver !== "function") return done();
+
+        const observer = new ResizeObserver(() => {
+          if (frame.getBoundingClientRect().height > 120) {
+            observer.disconnect();
+            done();
+          }
+        });
+        observer.observe(frame);
+        // However it goes, the reader is not left reading "getting ready".
+        setTimeout(() => {
+          observer.disconnect();
+          done();
+        }, 12000);
       }
 
       for (const link of document.querySelectorAll("[data-donate]")) {
@@ -167,7 +212,12 @@ const amounts = [10, 20, 50, 100];
           // A modified click is a deliberate new tab or window; leave it alone.
           if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
           event.preventDefault();
-          open(link.dataset.donate).catch(() => {
+          open(link.dataset.donate).catch((error) => {
+            dialog.classList.remove("is-loading");
+            if (dialog.open) dialog.close();
+            // The reader still gets to pay - the link does that. This is for
+            // whoever has to work out why the dialog stopped opening.
+            console.warn("Donate dialog unavailable, using the payment link:", error);
             window.location.href = link.href;
           });
         });

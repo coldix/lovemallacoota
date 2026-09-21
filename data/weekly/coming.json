@@ -1,68 +1,68 @@
 {
-  "start": "2026-09-20",
-  "end": "2026-09-26",
-  "generatedAt": "2026-09-20T09:44:18.940Z",
+  "start": "2026-09-21",
+  "end": "2026-09-27",
+  "generatedAt": "2026-09-21T10:37:08.999Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-09-20T09:44:18.054Z",
+    "fetchedAt": "2026-09-21T10:37:07.932Z",
     "days": [
-      {
-        "date": "2026-09-20",
-        "code": 0,
-        "summary": "Clear",
-        "maxC": 28.3,
-        "minC": 9.2,
-        "rainMm": 0
-      },
       {
         "date": "2026-09-21",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 18.2,
-        "minC": 8.2,
-        "rainMm": 0.5
+        "maxC": 17.3,
+        "minC": 9.8,
+        "rainMm": 1
       },
       {
         "date": "2026-09-22",
         "code": 2,
         "summary": "Partly cloudy",
-        "maxC": 15.8,
-        "minC": 6.3,
+        "maxC": 15.6,
+        "minC": 7.1,
         "rainMm": 0
       },
       {
         "date": "2026-09-23",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 21.3,
-        "minC": 10.3,
-        "rainMm": 0.1
+        "maxC": 20.1,
+        "minC": 8.6,
+        "rainMm": 0.5
       },
       {
         "date": "2026-09-24",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 23,
-        "minC": 11.7,
+        "maxC": 22.9,
+        "minC": 13.2,
         "rainMm": 0
       },
       {
         "date": "2026-09-25",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 30.4,
-        "minC": 13.4,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 27.6,
+        "minC": 12.9,
+        "rainMm": 0.9
       },
       {
         "date": "2026-09-26",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 19.1,
-        "minC": 12.3,
-        "rainMm": 2.4
+        "maxC": 17.3,
+        "minC": 13.2,
+        "rainMm": 0.4
+      },
+      {
+        "date": "2026-09-27",
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 16.7,
+        "minC": 12.9,
+        "rainMm": 0.8
       }
     ]
   },
@@ -73,28 +73,8 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-09-20T09:44:18.149Z",
+    "fetchedAt": "2026-09-21T10:37:08.053Z",
     "extremes": [
-      {
-        "time": "2026-09-20T03:00",
-        "type": "High",
-        "heightM": 0.17
-      },
-      {
-        "time": "2026-09-20T08:00",
-        "type": "Low",
-        "heightM": -0.05
-      },
-      {
-        "time": "2026-09-20T15:00",
-        "type": "High",
-        "heightM": 0.53
-      },
-      {
-        "time": "2026-09-20T22:00",
-        "type": "Low",
-        "heightM": -0.29
-      },
       {
         "time": "2026-09-21T04:00",
         "type": "High",
@@ -209,105 +189,29 @@
         "time": "2026-09-26T19:00",
         "type": "High",
         "heightM": 0.43
+      },
+      {
+        "time": "2026-09-27T02:00",
+        "type": "Low",
+        "heightM": -0.74
+      },
+      {
+        "time": "2026-09-27T08:00",
+        "type": "High",
+        "heightM": 0.38
+      },
+      {
+        "time": "2026-09-27T14:00",
+        "type": "Low",
+        "heightM": -0.73
+      },
+      {
+        "time": "2026-09-27T20:00",
+        "type": "High",
+        "heightM": 0.33
       }
     ],
     "series": [
-      {
-        "time": "2026-09-20T00:00",
-        "heightM": -0.08
-      },
-      {
-        "time": "2026-09-20T01:00",
-        "heightM": 0.04
-      },
-      {
-        "time": "2026-09-20T02:00",
-        "heightM": 0.13
-      },
-      {
-        "time": "2026-09-20T03:00",
-        "heightM": 0.17
-      },
-      {
-        "time": "2026-09-20T04:00",
-        "heightM": 0.16
-      },
-      {
-        "time": "2026-09-20T05:00",
-        "heightM": 0.11
-      },
-      {
-        "time": "2026-09-20T06:00",
-        "heightM": 0.04
-      },
-      {
-        "time": "2026-09-20T07:00",
-        "heightM": -0.02
-      },
-      {
-        "time": "2026-09-20T08:00",
-        "heightM": -0.05
-      },
-      {
-        "time": "2026-09-20T09:00",
-        "heightM": -0.02
-      },
-      {
-        "time": "2026-09-20T10:00",
-        "heightM": 0.05
-      },
-      {
-        "time": "2026-09-20T11:00",
-        "heightM": 0.16
-      },
-      {
-        "time": "2026-09-20T12:00",
-        "heightM": 0.3
-      },
-      {
-        "time": "2026-09-20T13:00",
-        "heightM": 0.42
-      },
-      {
-        "time": "2026-09-20T14:00",
-        "heightM": 0.51
-      },
-      {
-        "time": "2026-09-20T15:00",
-        "heightM": 0.53
-      },
-      {
-        "time": "2026-09-20T16:00",
-        "heightM": 0.47
-      },
-      {
-        "time": "2026-09-20T17:00",
-        "heightM": 0.34
-      },
-      {
-        "time": "2026-09-20T18:00",
-        "heightM": 0.17
-      },
-      {
-        "time": "2026-09-20T19:00",
-        "heightM": -0.01
-      },
-      {
-        "time": "2026-09-20T20:00",
-        "heightM": -0.16
-      },
-      {
-        "time": "2026-09-20T21:00",
-        "heightM": -0.27
-      },
-      {
-        "time": "2026-09-20T22:00",
-        "heightM": -0.29
-      },
-      {
-        "time": "2026-09-20T23:00",
-        "heightM": -0.24
-      },
       {
         "time": "2026-09-21T00:00",
         "heightM": -0.15
@@ -883,18 +787,106 @@
       {
         "time": "2026-09-26T23:00",
         "heightM": -0.34
+      },
+      {
+        "time": "2026-09-27T00:00",
+        "heightM": -0.58
+      },
+      {
+        "time": "2026-09-27T01:00",
+        "heightM": -0.73
+      },
+      {
+        "time": "2026-09-27T02:00",
+        "heightM": -0.74
+      },
+      {
+        "time": "2026-09-27T03:00",
+        "heightM": -0.61
+      },
+      {
+        "time": "2026-09-27T04:00",
+        "heightM": -0.37
+      },
+      {
+        "time": "2026-09-27T05:00",
+        "heightM": -0.09
+      },
+      {
+        "time": "2026-09-27T06:00",
+        "heightM": 0.16
+      },
+      {
+        "time": "2026-09-27T07:00",
+        "heightM": 0.33
+      },
+      {
+        "time": "2026-09-27T08:00",
+        "heightM": 0.38
+      },
+      {
+        "time": "2026-09-27T09:00",
+        "heightM": 0.27
+      },
+      {
+        "time": "2026-09-27T10:00",
+        "heightM": 0.04
+      },
+      {
+        "time": "2026-09-27T11:00",
+        "heightM": -0.24
+      },
+      {
+        "time": "2026-09-27T12:00",
+        "heightM": -0.5
+      },
+      {
+        "time": "2026-09-27T13:00",
+        "heightM": -0.68
+      },
+      {
+        "time": "2026-09-27T14:00",
+        "heightM": -0.73
+      },
+      {
+        "time": "2026-09-27T15:00",
+        "heightM": -0.65
+      },
+      {
+        "time": "2026-09-27T16:00",
+        "heightM": -0.45
+      },
+      {
+        "time": "2026-09-27T17:00",
+        "heightM": -0.19
+      },
+      {
+        "time": "2026-09-27T18:00",
+        "heightM": 0.07
+      },
+      {
+        "time": "2026-09-27T19:00",
+        "heightM": 0.26
+      },
+      {
+        "time": "2026-09-27T20:00",
+        "heightM": 0.33
+      },
+      {
+        "time": "2026-09-27T21:00",
+        "heightM": 0.26
+      },
+      {
+        "time": "2026-09-27T22:00",
+        "heightM": 0.07
+      },
+      {
+        "time": "2026-09-27T23:00",
+        "heightM": -0.2
       }
     ]
   },
   "moon": [
-    {
-      "date": "2026-09-20",
-      "name": "First quarter",
-      "symbol": "◑",
-      "age": 8.2,
-      "illumination": 59,
-      "range": "neap"
-    },
     {
       "date": "2026-09-21",
       "name": "Waxing gibbous",
@@ -942,19 +934,21 @@
       "age": 14.2,
       "illumination": 100,
       "range": "spring"
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Full moon",
+      "symbol": "○",
+      "age": 15.2,
+      "illumination": 100,
+      "range": "spring"
     }
   ],
   "events": [
     {
-      "date": "Sun 20 Sept",
-      "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
-    },
-    {
-      "date": "Sun 20 Sept",
-      "time": "9:00 am",
-      "title": "Social Tennis",
+      "date": "Mon 21 Sept",
+      "time": "10:00 am",
+      "title": "Pickleball",
       "location": "Mallacoota Tennis Club"
     },
     {
@@ -962,12 +956,6 @@
       "time": "10:00 am",
       "title": "Toddler Music and Movement (Reclink)",
       "location": ""
-    },
-    {
-      "date": "Mon 21 Sept",
-      "time": "10:00 am",
-      "title": "Pickleball",
-      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Tue 22 Sept",
@@ -978,8 +966,8 @@
     {
       "date": "Tue 22 Sept",
       "time": "10:00 am",
-      "title": "Library - Rhyme time",
-      "location": "Mallacoota Service Centre and Library"
+      "title": "Strength and Balance (a bit more support)",
+      "location": ""
     },
     {
       "date": "Wed 23 Sept",
@@ -1028,23 +1016,35 @@
       "time": "9:30 am",
       "title": "Kids Tennis",
       "location": "Mallacoota Tennis Club"
+    },
+    {
+      "date": "Sun 27 Sept",
+      "time": "9:00 am",
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
+    },
+    {
+      "date": "Sun 27 Sept",
+      "time": "9:00 am",
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     }
   ],
   "trail": {
-    "slug": "mallacoota-coastal-walk",
-    "name": "Mallacoota Coastal Walk",
+    "slug": "the-narrows-walk",
+    "name": "The Narrows Walk",
     "region": "Mallacoota, Croajingolong National Park",
     "state": "VIC",
-    "distance": "9.3 km one way, or staged",
-    "duration": "3-5 hours, or in stages",
-    "difficulty": "Moderate",
-    "terrain": "coastal heath and beaches",
-    "start": "Betka Road end, or the Betka River picnic area",
-    "summary": "The 9.3 km line of beaches south of town - Tip, Davis Creek, Betka, Quarry, Secret and Pebbly - walked in one go or, as most people do it, a beach at a time.",
-    "url": "https://trailbound.au/trails/mallacoota-coastal-walk",
+    "distance": "3-5 km one way",
+    "duration": "1.5-3 hours",
+    "difficulty": "Easy",
+    "terrain": "inlet shoreline",
+    "start": "Buckland's Jetty, Lakeside Drive",
+    "summary": "A local favourite along the waterway that joins Mallacoota's Bottom and Top Lakes, with shoreline views, birdlife and a restored boatshed picnic stop. Continue to Captain Creek Jetty for the longer version.",
+    "url": "https://trailbound.au/trails/the-narrows-walk",
     "directLineKm": 3,
     "rotation": {
-      "position": 4,
+      "position": 5,
       "of": 23
     }
   },

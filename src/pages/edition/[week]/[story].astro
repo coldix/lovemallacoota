@@ -1,0 +1,103 @@
+---
+/*
+# Project:     lovemallacoota.au
+# Timestamp:   25/09/2026 03:45 AM AEST (Mallacoota)
+# Version:     [26.09.001]
+# File Name:   edition/[week]/[story].astro
+# Description: One story from an edition on a page of its own, with Previous,
+#              Next and the contents. Easier to read on a phone than the whole
+#              issue, and a single story can be shared by its own link. The
+#              whole issue stays at /edition/<week>.html, which is also what
+#              prints and becomes the PDF.
+*/
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import EditionArticle from "../../../components/EditionArticle.astro";
+import {
+  currentEdition,
+  editionLabel,
+  editionPath,
+  editionSocialImage,
+  editionTitle,
+  loadEditions,
+  storiesInOrder,
+  storyPath,
+} from "../../../lib/editions.mjs";
+import { clampMeta } from "../../../lib/meta.mjs";
+
+export function getStaticPaths() {
+  return loadEditions().flatMap((edition) =>
+    storiesInOrder(edition).map(({ article, section }, index, all) => ({
+      params: { week: edition.week, story: article.id },
+      props: {
+        edition,
+        article,
+        section,
+        previous: all[index - 1]?.article || null,
+        next: all[index + 1]?.article || null,
+      },
+    }))
+  );
+}
+
+const { edition, article, section, previous, next } = Astro.props;
+
+// The live issue is read at /edition.html; a closed one at its own address.
+const issuePath = currentEdition()?.week === edition.week ? "/edition.html" : editionPath(edition);
+
+/** Markup stripped, so the search snippet reads as a sentence. */
+const plain = (article.body || [])
+  .join(" ")
+  .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+  .replace(/[*_#>]/g, "")
+  .replace(/\s+/g, " ")
+  .trim();
+// Led by the issue, because a piece carried from a weekly into the monthly
+// has a page in each, and two pages must not share a description.
+const description = clampMeta(`${editionLabel(edition)}: ${plain || article.title}`);
+const socialImage = article.image?.url || editionSocialImage(edition);
+---
+<BaseLayout
+  title={`${article.title} - ${editionLabel(edition)}`}
+  description={description}
+  canonicalPath={storyPath(edition, article)}
+  active="edition"
+  ogType="article"
+  socialImage={socialImage}
+  showSurvey={false}
+>
+  <main>
+    <Breadcrumbs
+      trail={[
+        { name: "Coota", path: "/edition.html" },
+        { name: editionTitle(edition), path: issuePath },
+        { name: article.title, path: storyPath(edition, article) },
+      ]}
+    />
+    <p class="edition-story-kicker">
+      <a href={`${issuePath}#contents`}>{editionLabel(edition)}</a> · {section.title}
+    </p>
+    <section class="glass-card content-block edition-story">
+      <EditionArticle article={article} standalone={true} />
+    </section>
+
+    <nav class="edition-story-nav" aria-label="More from this issue">
+      {previous ? (
+        <a class="edition-story-step prev" href={storyPath(edition, previous)} rel="prev">
+          <span class="edition-story-step-label">Previous</span>
+          <span class="edition-story-step-title">{previous.title}</span>
+        </a>
+      ) : <span class="edition-story-step empty"></span>}
+      <a class="edition-story-step contents" href={`${issuePath}#contents`}>
+        <span class="edition-story-step-label">Contents</span>
+        <span class="edition-story-step-title">All of {editionLabel(edition)}</span>
+      </a>
+      {next ? (
+        <a class="edition-story-step next" href={storyPath(edition, next)} rel="next">
+          <span class="edition-story-step-label">Next</span>
+          <span class="edition-story-step-title">{next.title}</span>
+        </a>
+      ) : <span class="edition-story-step empty"></span>}
+    </nav>
+  </main>
+</BaseLayout>

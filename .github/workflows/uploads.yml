@@ -1,8 +1,14 @@
 name: Convert submitted photographs
 
+# Version [26.09.001], 25/09/2026 03:00 AM AEST.
+# Also on edition changes: a guest's photograph is staged when the story is
+# sent, but the story only reaches data/editions when it is approved. Watching
+# uploads/ alone meant the conversion ran before the story existed, found
+# nothing to attach it to, and never ran again. With nothing waiting in
+# uploads/ the run stops at "Nothing to process".
 on:
   push:
-    paths: ["uploads/**"]
+    paths: ["uploads/**", "data/editions/**"]
   workflow_dispatch:
 
 permissions:

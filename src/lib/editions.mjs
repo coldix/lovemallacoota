@@ -196,6 +196,18 @@ export function editionPath(edition) {
   return `/edition/${edition.week}.html`;
 }
 
+/** Each contributed piece also has a page of its own, for phones and sharing. [26.09.001] */
+export function storyPath(edition, article) {
+  return `/edition/${edition.week}/${article.id}.html`;
+}
+
+/** The pieces in the order the issue prints them, for Previous and Next. */
+export function storiesInOrder(edition) {
+  return sectionsWithContent(edition).flatMap((section) =>
+    section.articles.map((article) => ({ article, section }))
+  );
+}
+
 /** Rendered on demand by the Worker, so every edition has one. */
 export function editionPdfPath(edition) {
   return `/edition/${edition.week}.pdf`;

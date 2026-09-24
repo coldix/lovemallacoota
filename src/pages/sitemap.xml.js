@@ -6,7 +6,7 @@
 #              older than the pages, and listed none of the weekly editions.
 */
 
-import { loadEditions } from "../lib/editions.mjs";
+import { loadEditions, storiesInOrder, storyPath } from "../lib/editions.mjs";
 import { loadArchive } from "../lib/archive.mjs";
 import { listingPagePath, loadDirectory } from "../lib/directory.mjs";
 
@@ -61,6 +61,15 @@ export function sitemapEntries(today) {
         ? edition.frozenAt.slice(0, 10)
         : edition.monthStart || edition.weekStart,
     });
+    // Each story's own page. [26.09.001] 25/09/2026 AEST
+    for (const { article } of storiesInOrder(edition)) {
+      entries.push({
+        path: storyPath(edition, article),
+        changefreq: edition.status === "open" ? "weekly" : "yearly",
+        priority: "0.6",
+        lastmod: (article.publishedAt || "").slice(0, 10) || undefined,
+      });
+    }
   }
 
   return entries;

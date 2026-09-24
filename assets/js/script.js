@@ -3,8 +3,8 @@
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     coota@lovemallacoota.au
 # Assistant:   Claude Fable 5
-# Timestamp:   14/07/2026 10:30 PM AEST (Mallacoota)
-# Version:     [26.07.001]
+# Timestamp:   25/09/2026 04:15 AM AEST (Mallacoota)
+# Version:     [26.09.001]
 # File Name:   script.js
 # Description: Aurora coastal behaviours — theme toggle, random photo backdrop,
 #              scroll reveals, floating motes, card cursor-glow, live search and
@@ -199,7 +199,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Floating light motes ---
   const canvas = document.getElementById("motes");
-  if (canvas && canvas.getContext && !reduceMotion) {
+  // Not on the edition's reading pages, where the canvas is hidden: drawing
+  // to it would only drain an older phone's battery. [26.09.001]
+  const readingPage = document.body.dataset.page === "edition";
+  if (canvas && canvas.getContext && !reduceMotion && !readingPage) {
     const ctx = canvas.getContext("2d");
     let w, h, motes = [];
     const COUNT = Math.min(46, Math.floor(window.innerWidth / 26));

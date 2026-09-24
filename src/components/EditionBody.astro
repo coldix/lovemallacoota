@@ -1,4 +1,12 @@
 ---
+/*
+# Timestamp:   25/09/2026 03:30 AM AEST (Mallacoota)
+# Version:     [26.09.001]
+# File Name:   EditionBody.astro
+# Description: The whole issue: masthead, contents, sections and stories. On
+#              screen the contents comes first and each story links to its
+#              own page; print and the PDF are built from this same page.
+*/
 import {
   articleAnchor,
   articlesThisWeek,
@@ -10,8 +18,8 @@ import {
   sectionsWithContent,
   tableOfContents,
 } from "../lib/editions.mjs";
-import { renderBody } from "../lib/markup.mjs";
-import { adsForSection, busGroups, busPlace, fillerPhoto, fullPageAds, imageSize, socialForSection, youTubeId } from "../lib/editions.mjs";
+import { adsForSection, busGroups, busPlace, fillerPhoto, fullPageAds, imageSize, socialForSection, storyPath, youTubeId } from "../lib/editions.mjs";
+import EditionArticle from "./EditionArticle.astro";
 import WeekWeather from "./WeekWeather.astro";
 import WeekTides from "./WeekTides.astro";
 
@@ -79,16 +87,6 @@ const statusLabel =
         </p>
       )}
     </section>
-
-    <figure class="glass-card sheen content-block reveal edition-cover-web">
-      <img src={edition.cover.web} alt={edition.cover.caption || "Cover photograph"} width={imageSize(edition.cover.web)?.width} height={imageSize(edition.cover.web)?.height} loading="eager" decoding="async" />
-      {(edition.cover.caption || edition.cover.credit) && (
-        <figcaption>
-          {edition.cover.caption}
-          {edition.cover.credit && <span> - {edition.cover.credit}</span>}
-        </figcaption>
-      )}
-    </figure>
   </>
 )}
 
@@ -105,6 +103,7 @@ const statusLabel =
   <div class="edition-actions">
     <a class="btn btn-primary" href={editionPdfPath(edition)} download={`mallacoota-${edition.week}.pdf`}>Download the PDF</a>
     <button class="btn btn-ghost" type="button" data-print-edition>Print this edition</button>
+    <a class="btn btn-ghost" href="/archive.html#editions">Past editions</a>
   </div>
   {edition.status === "open" && (
     <p class="edition-pdf-pending">
@@ -115,8 +114,24 @@ const statusLabel =
   )}
 </section>
 
+{/* Before the contents on screen, for the reader who was here last week.
+    Not printed: the archive copy of a month has no "this week". [26.09.001] */}
+{newThisWeek.length > 0 && (
+  <section class="glass-card content-block edition-new edition-web-only" id="section-new-this-week" aria-labelledby="heading-new-this-week">
+    <h2 class="section-title" id="heading-new-this-week">New this week</h2>
+    <ul class="edition-diary">
+      {newThisWeek.map((article) => (
+        <li>
+          <a href={`#${articleAnchor(article)}`}>{article.title}</a>
+          {article.byline && <span> · {article.byline}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
 {toc.length > 0 && (
-  <nav class="glass-card sheen content-block reveal edition-toc" aria-labelledby="edition-toc-title">
+  <nav class="glass-card sheen content-block reveal edition-toc" id="contents" aria-labelledby="edition-toc-title">
     <h2 id="edition-toc-title" class="section-title">In this edition</h2>
     <ol class="edition-toc-list">
       {toc.map((section) => (
@@ -136,6 +151,20 @@ const statusLabel =
   </nav>
 )}
 
+{/* The cover photograph follows the contents on screen, so a phone reaches
+    the stories without scrolling past a full-screen picture first. */}
+{edition.cover && (
+  <figure class="glass-card sheen content-block reveal edition-cover-web">
+    <img src={edition.cover.web} alt={edition.cover.caption || "Cover photograph"} width={imageSize(edition.cover.web)?.width} height={imageSize(edition.cover.web)?.height} loading="eager" decoding="async" />
+    {(edition.cover.caption || edition.cover.credit) && (
+      <figcaption>
+        {edition.cover.caption}
+        {edition.cover.credit && <span> - {edition.cover.credit}</span>}
+      </figcaption>
+    )}
+  </figure>
+)}
+
 {total === 0 && (
   <section class="glass-card sheen content-block reveal edition-web-only">
     <p class="no-results">
@@ -149,21 +178,6 @@ const statusLabel =
 {sections.length > 0 && (
   <section class="glass-card sheen content-block reveal edition-web-only" aria-label="Sponsored">
     <div class="ad-row-wrap"><div class="ad-row"><div class="ad-slot ad-300x250" data-ad-zone="in-content"></div><div class="ad-slot ad-300x250 ad-col-2" data-ad-zone="in-content-2"></div><div class="ad-slot ad-300x250 ad-col-3" data-ad-zone="in-content-3"></div></div></div>
-  </section>
-)}
-
-{newThisWeek.length > 0 && (
-  <section class="glass-card sheen content-block reveal" id="section-new-this-week" aria-labelledby="heading-new-this-week">
-    <h2 class="section-title" id="heading-new-this-week">New this week</h2>
-    <p class="section-sub">Stories that landed in Coota this week. The rest of the month is below.</p>
-    <ul class="edition-diary">
-      {newThisWeek.map((article) => (
-        <li>
-          <a href={`#${articleAnchor(article)}`}>{article.title}</a>
-          {article.byline && <span> · {article.byline}</span>}
-        </li>
-      ))}
-    </ul>
   </section>
 )}
 
@@ -446,106 +460,11 @@ const statusLabel =
       </aside>
     ))}
 
-    {section.articles.map((article) => {
-      const isPoem = article.format === "poem";
-      /* The first picture leads the piece; any others sit in a grid beneath
-         it. Every picture is a link to itself, so it opens larger with or
-         without script; the lightbox in script.js takes over when it can. */
-      const pictures = [article.image, ...(article.images || [])].filter(Boolean);
-      /* One picture sits in the text column. Several go in one grid, the
-         first marked as the lead: full width on screen, one cell of the
-         grid on paper, where a lone picture in column one left column two
-         empty beside it. */
-      const gallery =
-        pictures.length > 1 || pictures.some((image) => image.display === "wide" || image.display === "full")
-          ? pictures
-          : [];
-      const lead = gallery.length === 0 ? pictures[0] || null : null;
-      /* Three or more full portraits stack so none is cropped. Two is a pair:
-         an original and its reconstruction, or two portraits of the same
-         people, sit side by side on screen and in print. */
-      const stacked = gallery.length > 2 && gallery.every((image) => image.display === "full");
-      const pair =
-        gallery.length === 2 &&
-        !stacked &&
-        !gallery.some((image) => image.display === "wide");
-      const captionOf = (image) => [image.credit, image.caption || image.note].filter(Boolean);
-      return (
-        <article class:list={["edition-article", { "edition-poem": isPoem }]} id={articleAnchor(article)}>
-          {/* Headline and byline are kept outside the columns so print can hold
-              them together with the first lines of the story. */}
-          <header class="edition-article-head">
-            <h3>{article.title}</h3>
-            {article.byline && <p class="edition-byline">{article.byline}</p>}
-            {article.audio && (
-              <div class="edition-audio-block" style="margin: 0.85rem 0 1.25rem; padding: 0.75rem 1rem; border-radius: 12px; background: rgba(36,200,232,0.08); border: 1px solid var(--glass-border);">
-                <p style="margin: 0 0 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 0.4rem;">
-                  <span aria-hidden="true">🎧</span> {article.audio.title || "Listen to audio narration"}
-                </p>
-                <audio controls preload="none" style="width: 100%; height: 38px; border-radius: 999px;">
-                  <source src={article.audio.url} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-              </div>
-            )}
-          </header>
-          {/* The pictures sit between the headline and the columns. As the first
-              child of the column container, a full-width grid made Chromium
-              push the whole piece to a fresh page whenever it started mid-page. */}
-          {gallery.length > 0 && (
-            <div class:list={["edition-figures-grid", { pair, stack: stacked }]}>
-              {gallery.map((image, index) => (
-                <figure class:list={["edition-figure", { lead: image.display === "wide" || (index === 0 && gallery.length > 2 && image.display !== "full" && image.display !== "small"), small: image.display === "small", wide: image.display === "wide", full: image.display === "full", qr: image.kind === "qr" }]}>
-                  <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>
-                    <img src={image.url} alt={image.alt} width={imageSize(image.url)?.width} height={imageSize(image.url)?.height} loading="eager" decoding="async" />
-                  </a>
-                  {captionOf(image).length > 0 && (
-                    <figcaption>
-                      {captionOf(image)[0]}
-                      {captionOf(image)[1] && <span> · {captionOf(image)[1]}</span>}
-                    </figcaption>
-                  )}
-                </figure>
-              ))}
-            </div>
-          )}
-          <div class="edition-article-columns">
-            {lead && (
-              <figure class:list={["edition-figure", "lead", { small: lead.display === "small", wide: lead.display === "wide", full: lead.display === "full", qr: lead.kind === "qr" }]}>
-                <a class="edition-zoom" href={lead.url} aria-label={`Enlarge: ${lead.alt || article.title}`}>
-                  <img src={lead.url} alt={lead.alt} width={imageSize(lead.url)?.width} height={imageSize(lead.url)?.height} loading="eager" decoding="async" />
-                </a>
-                {captionOf(lead).length > 0 && (
-                  <figcaption>
-                    {captionOf(lead)[0]}
-                    {captionOf(lead)[1] && <span> · {captionOf(lead)[1]}</span>}
-                  </figcaption>
-                )}
-              </figure>
-            )}
-            <div class:list={["edition-article-body", { "poem-body": isPoem }]}>
-              <Fragment set:html={renderBody(article.body, isPoem)} />
-            </div>
-          </div>
-          {article.corrections?.length > 0 && (
-            <aside class="edition-correction">
-              <h4>Corrections</h4>
-              <ul>
-                {article.corrections.map((correction) => (
-                  <li><time datetime={correction.date}>{correction.date}</time> - {correction.note}</li>
-                ))}
-              </ul>
-            </aside>
-          )}
-          {article.contact?.public && (
-            <p class="edition-source">
-              Contact: <a href={`mailto:${article.contact.email}`}>{article.contact.email}</a>
-              {article.contact.phone && <span> · {article.contact.phone}</span>}
-            </p>
-          )}
-        </article>
-      );
-    })}
+    {section.articles.map((article) => (
+      <EditionArticle article={article} storyHref={storyPath(edition, article)} />
+    ))}
+
+    <p class="edition-back edition-web-only"><a href="#contents">Back to contents</a></p>
   </section>
 ))}
 
@@ -584,6 +503,11 @@ const statusLabel =
       <a class="btn btn-ghost" href="/editorial-policy.html">What we publish</a>
     </div>
   </section>
+)}
+
+{/* Always in reach on a long page. No script: it is a link. */}
+{toc.length > 0 && (
+  <a class="edition-fab edition-web-only" href="#contents" aria-label="Back to the contents">Contents</a>
 )}
 
 <footer class="edition-print-footer edition-print-only">

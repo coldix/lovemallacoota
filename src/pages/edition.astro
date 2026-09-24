@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import PageHero from "../components/PageHero.astro";
 import EditionBody from "../components/EditionBody.astro";
+import SurveyBanner from "../components/SurveyBanner.astro";
 import {
   currentEdition,
   editionLabel,
@@ -56,6 +57,7 @@ const description = edition
   showAds={true}
   ogType="article"
   socialImage={edition ? editionSocialImage(edition) : CARDS.edition}
+  showSurvey={false}
 >
   {schema && <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />}
   <PageHero
@@ -64,15 +66,10 @@ const description = edition
     accent={edition && isMonthly(edition) ? edition.displayDate : "Mallacoota"}
     lede={
       edition && isMonthly(edition)
-        ? "This month in Mallacoota - stories, notices, the crossword, weather and what's on. The edition grows as pieces arrive, and closes as a PDF at the end of the month."
+        ? "Stories, notices, the crossword, weather and what's on. It grows as pieces arrive."
         : "Community notices, club and school news, the week's events, weather and tides - contributed by the people and groups they belong to."
     }
-  >
-    <div class="hero-cta">
-      <a class="btn btn-coral" href="/submit.html">Submit an article or notice</a>
-      <a class="btn btn-ghost" href="/archive.html#editions">Past editions archive</a>
-    </div>
-  </PageHero>
+  />
   <main>
     <Breadcrumbs trail={[{ name: edition && isMonthly(edition) ? "Coota" : "This Week", path: "/edition.html" }]} />
     {edition ? (
@@ -82,6 +79,10 @@ const description = edition
         <p class="no-results">The first edition is still being put together.</p>
       </section>
     )}
+
+    {/* Below the stories, not above them: a reader came for the edition.
+        [26.09.001] 25/09/2026 AEST */}
+    <SurveyBanner />
 
     {past.length > 0 && (
       <section class="glass-card sheen content-block reveal">

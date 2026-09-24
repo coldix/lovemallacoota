@@ -1089,3 +1089,26 @@ test("what an enrichment row sets actually reaches the listing", async () => {
   // A test that checks nothing passes for the wrong reason.
   assert.ok(checked > 5, `only ${checked} enrichment fields were checked`);
 });
+
+test("every story has its own page, linked from the issue, with Previous and Next", async () => {
+  // [26.09.001] 25/09/2026 AEST. The whole issue stays one page for print and
+  // the PDF; each piece also gets a page a phone can read and a link can share.
+  const { storiesInOrder, storyPath } = await import("../src/lib/editions.mjs");
+  const edition = currentEdition();
+  const issue = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const stories = storiesInOrder(edition);
+  assert.ok(stories.length > 0, "no stories to give pages to");
+
+  for (const [index, { article }] of stories.entries()) {
+    const path = storyPath(edition, article);
+    assert.ok(issue.includes(`href="${path}"`), `the issue does not link to ${path}`);
+    const page = await readFile(new URL(`../dist${path}`, import.meta.url), "utf8");
+    assert.ok(page.includes(escapeEntities(article.title)), `${path} is missing its headline`);
+    assert.match(page, /href="\/edition\.html#contents"/, `${path} has no way back to the contents`);
+    const next = stories[index + 1]?.article;
+    if (next) assert.ok(page.includes(`href="${storyPath(edition, next)}"`), `${path} does not lead on to the next story`);
+  }
+
+  // The live issue opens with its contents, not with a page of furniture.
+  assert.ok(issue.indexOf('id="contents"') < issue.indexOf('class="edition-article'), "the contents comes after the stories");
+});

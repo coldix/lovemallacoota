@@ -22,3 +22,37 @@ hand once. Crossword solutions live in `data/crossword/` until the next issue
 copies them onto the page.
 
 The Sunday week-roll is off. Do not turn it back on.
+
+## Reading on screen (v26.09.001, 25/09/2026 04:00 AM AEST)
+
+Readers found the page clunky on phones, so the edition and its story pages
+now have a plain reading layout on screen. Print and the PDF are unchanged
+apart from the points marked below.
+
+- **Plain paper, no glass.** No photograph, blur, shimmer or fade-in behind
+  the text. Light and dark themes both work.
+- **One column on screen**, about 68 characters wide, in slightly larger type.
+  Two columns are for print only.
+- **Contents first.** Short heading, then the PDF, Print and Past editions
+  buttons, then "New this week", then the contents. The cover photograph
+  follows the contents on screen. The survey banner sits below the stories on
+  edition pages.
+- **Always a way back.** A "Contents" button stays at the bottom right, and
+  each section ends with "Back to contents".
+- **A page for each story** at `/edition/<issue>/<story-id>.html`, with
+  Previous, Contents and Next links. Easier on a phone, and a story can be
+  shared by its own link (with its own photo on Facebook). The whole issue
+  stays at `/edition/<issue>.html` and is what prints and becomes the PDF.
+  The story markup lives in `src/components/EditionArticle.astro`, so the
+  two can't drift apart.
+- **Print:** "New this week" and the on-screen links no longer print.
+  `PDF_LAYOUT` is bumped to 4, so cached PDFs are rendered again.
+
+## Photographs on held stories (v26.09.001)
+
+A guest's photograph is staged in `uploads/` when the story is sent, but the
+story only reaches `data/editions/` when it is approved. `uploads.yml` now also
+runs on edition changes, so approving a story converts its photographs.
+Second and third photographs (`<id>-2`, `<id>-3`) attach to the story's
+`images`. Photographs are rotated using the camera's orientation tag, so phone
+photos no longer come out sideways.

@@ -56,3 +56,15 @@ runs on edition changes, so approving a story converts its photographs.
 Second and third photographs (`<id>-2`, `<id>-3`) attach to the story's
 `images`. Photographs are rotated using the camera's orientation tag, so phone
 photos no longer come out sideways.
+
+## Fuller printed pages (v26.09.002, 25/09/2026 04:45 AM AEST)
+
+- Story columns are balanced, so a story that ends mid-page splits evenly
+  across both columns. Filling the left column first left the right one half
+  empty, and the next story could not start in that gap.
+- Tides, buses, radio and What's On may break between days or services. Kept
+  whole, each jumped to a fresh page (the weather page was 60% empty).
+- The closing photograph is capped at 85mm so the closing line isn't left
+  alone on the last page.
+- September went from 28 pages to 25; the week 36 archive from 19 to 18.
+  `PDF_LAYOUT` is 5.

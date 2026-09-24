@@ -3,8 +3,8 @@
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     coota@lovemallacoota.au
 # Assistant:   Claude Fable 5
-# Timestamp:   25/09/2026 04:00 AM AEST (Mallacoota)
-# Version:     [26.09.001]
+# Timestamp:   25/09/2026 04:45 AM AEST (Mallacoota)
+# Version:     [26.09.002]
 # File Name:   style.css
 # Description: OzeGlass V2 "Aurora" — coastal Mallacoota variant. Glass cards,
 #              aurora field over local sunrise photos, ice link-cards, listing
@@ -1037,8 +1037,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   }
   .edition-print-only { display: block !important; }
   .edition-print-footer {
-    margin-top: 5mm;
-    padding-top: 3mm;
+    margin-top: 2mm;
+    padding-top: 2mm;
+    break-before: avoid;
     border-top: 0.5pt solid #ccc;
     text-align: center;
     font-size: 8.5pt;
@@ -1243,9 +1244,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     columns: 2;
     column-gap: 6mm;
     break-inside: auto;
-    /* Fill the first column before the second. Balanced columns across a page
-       break left the picture alone in column one and the story overleaf. */
-    column-fill: auto;
+    /* Balanced [26.09.002]: Chrome now balances only the last page of a
+       story, so a story ending mid-page splits evenly across both columns
+       instead of filling the left one and leaving the right half empty,
+       where the next story could not start. "auto" (fill left first) left
+       about a fifth of the issue blank; checked that no picture is parted
+       from its story. */
+    column-fill: balance;
   }
   /* The headline and byline sit outside the columns and are never separated
      from the first lines of the story. A headline used to be left alone at
@@ -1306,6 +1311,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   tfoot { display: table-footer-group; }
   .edition-auto { break-inside: avoid-page; }
   .edition-auto { columns: 1; }
+  /* Tides, buses, radio and the diary are longer than the space left under
+     the section before them, so kept whole each one jumped to a fresh page
+     and left the weather page 60% empty. They may break between days and
+     services; each day card and service still holds together. [26.09.002] */
+  #section-tides .edition-auto,
+  #section-transport .edition-auto,
+  #section-radio .edition-auto,
+  #section-diary .edition-auto { break-inside: auto; }
+  .tide-day-card, .bus-service, .radio-day { break-inside: avoid; }
+  /* The closing photograph fills a gap, it should not make one: capped so it
+     and the closing line share the last page with the radio. [26.09.002] */
+  .edition-filler { margin-bottom: 0 !important; }
+  .edition-filler .edition-figure img { max-height: 85mm !important; width: auto !important; margin: 0 auto; }
   .edition-toc-list { columns: 3; column-gap: 5mm; column-rule: 0.5pt solid #ccc; font-size: 8.5pt; line-height: 1.25; }
   .edition-toc-group { border-bottom: 0.5pt solid #ddd; padding-bottom: 1.5mm; margin-bottom: 2mm; }
   .edition-toc-entry { margin: 0.4mm 0; }

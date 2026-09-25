@@ -8,9 +8,9 @@
 
 Related docs already in this folder:
 
-- [`MISSION.md`](MISSION.md) — why the platform exists, editorial and emergency rules
-- [`DEPLOYMENT.md`](DEPLOYMENT.md) — Cloudflare cutover and Hostinger rollback
-- [`ARCHIVE.md`](ARCHIVE.md) — Mouth PDF / R2 / rights workflow
+- [`MISSION.md`](../MISSION.md) — why the platform exists, editorial and emergency rules
+- [`DEPLOYMENT.md`](../DEPLOYMENT.md) — Cloudflare cutover and Hostinger rollback
+- [`ARCHIVE.md`](../ARCHIVE.md) — Mouth PDF / R2 / rights workflow
 
 Codex reviewed the supplied sample *Edition 1771 18th June 2020 Electronic Version.pdf* and the mission document.
 
@@ -83,7 +83,7 @@ Codex offered Turnstile setup next. Do not start that until Colin says proceed.
 
 **23:23** Colin: the domain is active. The old Mouth newsletter was publicly distributed like any community newsletter. He expects to collect a couple of dozen issues; someone may have around 100. Archive is a real project: indexed, searchable reproduction.
 
-**23:26** Archive added as a separate track (see [`ARCHIVE.md`](ARCHIVE.md)): issue catalogue, full-text index, searchable issue pages, original PDFs in R2. Public distribution is not automatically public domain. Record rights/permission per issue. Keep the archive technically ready without unsupported legal assumptions.
+**23:26** Archive added as a separate track (see [`ARCHIVE.md`](../ARCHIVE.md)): issue catalogue, full-text index, searchable issue pages, original PDFs in R2. Public distribution is not automatically public domain. Record rights/permission per issue. Keep the archive technically ready without unsupported legal assumptions.
 
 Seed record: Issue 1771, 18 June 2020, 28 pages, checksum recorded. Public index can show what is catalogued; source PDF stays in private working/docs until reuse basis is recorded.
 
@@ -274,7 +274,7 @@ Initially, moderation can occur through a simple protected dashboard. Approval s
 - Retain the original PDF unchanged.
 - Add OCR/search text as derivative metadata, clearly linked to its source issue.
 
-See [`ARCHIVE.md`](ARCHIVE.md) for the more detailed intake and rights model already written for this repo.
+See [`ARCHIVE.md`](../ARCHIVE.md) for the more detailed intake and rights model already written for this repo.
 
 ### Phase 7 — Reliability and handover
 
@@ -338,7 +338,7 @@ check:images` lists them.
 Landed alongside v0.08, from work SuperGrok did on the newsletter PDFs: 37 issues
 catalogued with cover captions and page-level contents, an extraction tool, and the
 archive page rendering both. Every issue is `review_required` with no PDF published.
-See [`ARCHIVE.md`](ARCHIVE.md) for the state, how to rebuild the metadata, and what is
+See [`ARCHIVE.md`](../ARCHIVE.md) for the state, how to rebuild the metadata, and what is
 still outstanding.
 
 The change was committed inside `a9c6982`, whose message describes only the Turnstile

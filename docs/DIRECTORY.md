@@ -4,7 +4,7 @@ How the Mallacoota directory is modelled, published and maintained.
 
 Related:
 
-- [`MISSION-COMMUNITY-DIRECTORY.md`](MISSION-COMMUNITY-DIRECTORY.md) — product mission
+- [`MISSION-COMMUNITY-DIRECTORY.md`](archive/MISSION-COMMUNITY-DIRECTORY.md) — product mission
 - [`DIRECTORY-IA.md`](DIRECTORY-IA.md) — public navigation
 - [`DIRECTORY-SUBMISSIONS.md`](DIRECTORY-SUBMISSIONS.md) — verification rules
 - [`INCORPORATED-ASSOCIATIONS.md`](INCORPORATED-ASSOCIATIONS.md) — CAV seed

@@ -71,6 +71,8 @@ photos no longer come out sideways.
 
 ## Crossword placement in print (v26.09.004, 25/09/2026 09:00 AM AEST)
 
+*Superseded by 26.09.005 and 26.09.006: the crossword now prints last, from a print-only copy.*
+
 The crossword needs a page to itself. Wherever it fell mid-issue it jumped to
 the next page and left most of the page before it empty (75% in September).
 On paper it now follows the contents, which already ends a page, so it takes
@@ -78,6 +80,8 @@ page 3 with no gap. This is print-only CSS (`order` on a flex `main`); the
 screen order and the contents list are unchanged. `PDF_LAYOUT` is 6.
 
 ## Crossword on the last printed page (v26.09.005, 25/09/2026 12:15 PM AEST)
+
+*The flex reordering described here was replaced in 26.09.006; the page order is the same.*
 
 Moved from page 3 to the back: the crossword is now the last page of the
 printed issue, a puzzle page, after the radio, the closing photograph and the

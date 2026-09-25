@@ -2,7 +2,7 @@
 
 **Status:** Colin’s structure, recorded 29 August 2026  
 **Purpose:** keep the public site simple for tourists and older residents.  
-**Does not replace:** [`MISSION-COMMUNITY-DIRECTORY.md`](MISSION-COMMUNITY-DIRECTORY.md) (product/build mission) or [`DIRECTORY-SUBMISSIONS.md`](DIRECTORY-SUBMISSIONS.md) (claim/verify flow).
+**Does not replace:** [`MISSION-COMMUNITY-DIRECTORY.md`](archive/MISSION-COMMUNITY-DIRECTORY.md) (product/build mission) or [`DIRECTORY-SUBMISSIONS.md`](DIRECTORY-SUBMISSIONS.md) (claim/verify flow).
 
 Mallacoota is a small coastal town of about 1,000 people, with a strong tourism economy and a large retired/older population. Do not create dozens of top-level categories. Do not give government, sport, health, trades, galleries or radio their own top-level menus. Those sit under Community or Services.
 

@@ -23,7 +23,7 @@ and every way it has broken — read that before touching a form.
 The project mission is [`docs/MISSION.md`](docs/MISSION.md). The directory
 mission, information architecture and operating workflow are:
 
-- [`docs/MISSION-COMMUNITY-DIRECTORY.md`](docs/MISSION-COMMUNITY-DIRECTORY.md)
+- [`docs/archive/MISSION-COMMUNITY-DIRECTORY.md`](docs/archive/MISSION-COMMUNITY-DIRECTORY.md)
 - [`docs/DIRECTORY-IA.md`](docs/DIRECTORY-IA.md)
 - [`docs/DIRECTORY.md`](docs/DIRECTORY.md)
 - [`docs/DIRECTORY-SUBMISSIONS.md`](docs/DIRECTORY-SUBMISSIONS.md)

@@ -61,7 +61,7 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
 
 ### 4. Community Directory (`/directory.html`)
-127 listings across 5 task-based sections, 57 of them with a photograph:
+127 listings across 5 task-based sections, 79 of them with a photograph:
 * **Eat & Drink** ([`/food.html`](https://lovemallacoota.au/food.html)): Cafes, pubs, takeaway, seafood, groceries.
 * **Stay** ([`/accom.html`](https://lovemallacoota.au/accom.html)): Lodges, motels, holiday units, caravan parks.
 * **Do & See** ([`/activity.html`](https://lovemallacoota.au/activity.html)): Boat hire, tours, attractions, parks.
@@ -263,12 +263,9 @@ of a photograph.
 
 ### One-shots
 
-Three are spent one-shots, kept only as a record of how their images were made:
-`import-nas-images.mjs`, `import-stay-images.mjs` and
-`convert-uploaded-lawson-photos.mjs`. `import-nas-images.mjs` is the useful one
-to read - it maps business photographs on the NAS at
-`/Volumes/Media/Docs/OZonLine/A-Businesses` to listing images, and it covered 26
-of the 44 folders there.
+The spent one-off import scripts (NAS business photos, Stay photos, the Lawson
+photographs) were removed on 25/09/2026 [26.09.009]. They are in git history if
+the method is ever needed again: `git log --all -- tools/import-nas-images.mjs`.
 
 ---
 
@@ -289,11 +286,11 @@ of the 44 folders there.
 - [`docs/DIRECTORY-SUBMISSIONS.md`](docs/DIRECTORY-SUBMISSIONS.md) - How a business adds and maintains its own listing, and how verification dates are kept.
 - [`docs/INCORPORATED-ASSOCIATIONS.md`](docs/INCORPORATED-ASSOCIATIONS.md) - The Consumer Affairs Victoria register seed behind a third of the directory.
 - [`docs/ASSOCIATION-RESEARCH.md`](docs/ASSOCIATION-RESEARCH.md) - Research notes behind those listings. Contact details are never invented.
-- [`docs/MISSION-COMMUNITY-DIRECTORY.md`](docs/MISSION-COMMUNITY-DIRECTORY.md) - The brief for building out the directory.
-- [`docs/MISSION-NAVIGATION-SEO.md`](docs/MISSION-NAVIGATION-SEO.md) - The brief for navigation, SEO and social sharing.
-- [`docs/MISSION-RADIO-PROGRAM.md`](docs/MISSION-RADIO-PROGRAM.md) - The brief for carrying 3MGB's weekly program.
-- [`docs/REBUILD-PLAN.md`](docs/REBUILD-PLAN.md) - The original rebuild plan, August 2026. Kept for the reasoning.
-- [`docs/NEXTSTEPS.md`](docs/NEXTSTEPS.md) - A critical review of release v0.07. Largely addressed; kept for the reasoning.
+- [`docs/archive/MISSION-COMMUNITY-DIRECTORY.md`](docs/archive/MISSION-COMMUNITY-DIRECTORY.md) - The brief for building out the directory.
+- [`docs/archive/MISSION-NAVIGATION-SEO.md`](docs/archive/MISSION-NAVIGATION-SEO.md) - The brief for navigation, SEO and social sharing.
+- [`docs/archive/MISSION-RADIO-PROGRAM.md`](docs/archive/MISSION-RADIO-PROGRAM.md) - The brief for carrying 3MGB's weekly program.
+- [`docs/archive/REBUILD-PLAN.md`](docs/archive/REBUILD-PLAN.md) - The original rebuild plan, August 2026. Kept for the reasoning.
+- [`docs/archive/NEXTSTEPS.md`](docs/archive/NEXTSTEPS.md) - A critical review of release v0.07. Largely addressed; kept for the reasoning.
 
 ---
 

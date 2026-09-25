@@ -102,3 +102,11 @@ What's On used to be kept whole on one printed page, so it jumped to a fresh
 page and left half the page after Classifieds empty. It can now run over two
 pages; each event still holds together and the heading stays with the first
 events. September prints at 25 pages (was 26). `PDF_LAYOUT` is 9.
+
+## Smaller photos in print for one story (v26.09.008, 25/09/2026 02:00 PM AEST)
+
+Add `"printPhotos": "small"` to a story in `data/editions/<issue>.json` to
+print its photographs at 80mm tall instead of up to 120mm. Useful for tall
+portrait pairs. The screen is unchanged. Set on "Sand dam busting". The
+underline of the photo link no longer prints as a line under photos.
+`PDF_LAYOUT` is 10.

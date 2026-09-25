@@ -3,8 +3,8 @@
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     coota@lovemallacoota.au
 # Assistant:   Claude Fable 5
-# Timestamp:   25/09/2026 01:30 PM AEST (Mallacoota)
-# Version:     [26.09.007]
+# Timestamp:   25/09/2026 02:00 PM AEST (Mallacoota)
+# Version:     [26.09.008]
 # File Name:   style.css
 # Description: OzeGlass V2 "Aurora" — coastal Mallacoota variant. Glass cards,
 #              aurora field over local sunrise photos, ice link-cards, listing
@@ -1902,6 +1902,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     width: 100% !important;
     object-fit: contain !important;
   }
+  /* A story marked "printPhotos": "small": its photographs at about two
+     thirds of the pair size, for tall portraits. [26.09.008] */
+  .edition-figures-grid.print-small img { max-height: 80mm !important; }
+  /* A photograph is a link to itself; on paper its underline showed as a
+     rule beneath any picture narrower than its cell. [26.09.008] */
+  .edition-zoom { border-bottom: 0 !important; }
   /* A lone wide landscape: full measure, short enough to stay with the story. */
   .edition-figures-grid:has(> .edition-figure.wide:only-child) {
     grid-template-columns: 1fr !important;

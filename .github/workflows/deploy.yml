@@ -57,8 +57,13 @@ jobs:
       # after they have confirmed their address with a code. Waiting for a
       # maintainer to deploy makes the site tell them "live in about two
       # minutes" and then do nothing for a day, which reads as a failure and
-      # gets retried. Content the Worker commits therefore goes live on its own;
-      # code changes still need a deliberate workflow_dispatch.
+      # gets retried. Content the Worker commits therefore goes live on its own.
+      #
+      # [26.09.010] 25/09/2026 AEST: code, styles and photographs now go live on
+      # their own too, once "Validate" above has passed. Merges that only
+      # touched them sat on the preview site while being reported as live (the
+      # Lions Park photographs). A push that changes nothing but notes (docs/,
+      # Markdown, tests/, .claude/) still stops at preview.
       - name: Did this push publish content?
         id: content
         if: github.event_name == 'push'
@@ -74,11 +79,17 @@ jobs:
             CHANGED="$(git show --name-only --format= HEAD)"
           fi
           echo "Changed in this push:"; echo "$CHANGED"
+          # Everything except notes. Held in a variable rather than piped into
+          # grep -q, which under pipefail can report a match as a failure.
+          SITE_CHANGES="$(echo "$CHANGED" | grep -vE '^(docs/|tests/|\.claude/)|\.md$' || true)"
           if echo "$CHANGED" | grep -qE '^(data/directory/|data/editions/)'; then
             echo "Publishing: this push carries submitted content."
             echo "publish=true" >> "$GITHUB_OUTPUT"
+          elif [ -n "$SITE_CHANGES" ]; then
+            echo "Publishing: this push changes the site (code, styles, data or photographs)."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
           else
-            echo "Not publishing: no submitted content in this push."
+            echo "Not publishing: this push only changes notes."
             echo "publish=false" >> "$GITHUB_OUTPUT"
           fi
 

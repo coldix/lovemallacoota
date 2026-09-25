@@ -237,7 +237,7 @@ Any future contributor revenue-sharing arrangement must be documented before mon
 - structured JSON for directory and weekly edition content
 - responsive, accessible output with WCAG 2.1 AA as the target
 
-Pushes to `main` deploy an isolated preview. Production deployment is a deliberate maintainer action.
+Pushes to `main` deploy an isolated preview, then go live once the build and tests pass, unless they change only notes (`docs/`, Markdown, `tests/`, `.claude/`). Changed 25/09/2026 (v26.09.010); production used to be a deliberate maintainer action for code changes.
 
 The design should remain portable. No important community content should depend on a proprietary editor or an inaccessible database export.
 

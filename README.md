@@ -61,7 +61,7 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
 
 ### 4. Community Directory (`/directory.html`)
-127 listings across 5 task-based sections, 79 of them with a photograph:
+121 listings across 5 task-based sections, 81 of them with a photograph. Facebook groups are not listings; they appear in the edition under Around the Socials:
 * **Eat & Drink** ([`/food.html`](https://lovemallacoota.au/food.html)): Cafes, pubs, takeaway, seafood, groceries.
 * **Stay** ([`/accom.html`](https://lovemallacoota.au/accom.html)): Lodges, motels, holiday units, caravan parks.
 * **Do & See** ([`/activity.html`](https://lovemallacoota.au/activity.html)): Boat hire, tours, attractions, parks.

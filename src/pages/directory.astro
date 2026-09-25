@@ -112,6 +112,14 @@ const lastChanged = changes.entries?.[0]?.date
                 <span class="listing-badge">{SECTIONS[entity.section]?.label}</span>
               </p>
               <h3><a href={href}>{entity.name}</a></h3>
+              {/* Closed or for sale says so here too, not only on the section
+                  list and the listing's own page. [26.09.012] */}
+              {entity.trading && entity.trading.state !== "open" && (
+                <p class="listing-status">
+                  <strong>{entity.trading.state === "closed" ? "Closed" : entity.trading.state}.</strong>
+                  {entity.trading.note && <span> {entity.trading.note.replace(/^Closed\.\s*/, "")}</span>}
+                </p>
+              )}
               {chips.length > 0 && (
                 <div class="chips">{chips.slice(0, 3).map((tag) => <span class="chip">{tag}</span>)}</div>
               )}

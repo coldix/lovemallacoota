@@ -67,12 +67,12 @@ A frozen edition's PDF is cached for a year (`CACHE_SECONDS_FROZEN` in
 `src/edition-pdf.ts`). That is right for the *content*. It is wrong for the
 *layout*.
 
-The Worker cache key includes `PDF_LAYOUT` (currently `"3"`). **Bump that
+The Worker cache key includes `PDF_LAYOUT` (currently `"10"`, 25/09/2026). **Bump that
 string when print CSS changes**, or the old PDF stays. Do not change the public
 URL.
 
 ```
-src/edition-pdf.ts  →  const PDF_LAYOUT = "3";
+src/edition-pdf.ts  →  const PDF_LAYOUT = "10";
 ```
 
 The response also sends `Cache-Control: public, max-age=31536000`. After a

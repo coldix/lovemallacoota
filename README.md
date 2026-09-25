@@ -3,7 +3,7 @@
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
 [![Site Version](https://img.shields.io/badge/version-v1.91-0284c7.svg)](data/site-version.json)
-[![Build & Test](https://img.shields.io/badge/tests-162%20passing-22c55e.svg)](tests/)
+[![Build & Test](https://img.shields.io/badge/tests-163%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
 **v1.91** - built 24 September 2026.
@@ -27,6 +27,8 @@ Historical project documentation and earlier README iterations have been preserv
 
 ### 1. Coota (`/edition.html`)
 The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as they arrive; the issue freezes as a PDF at month-end. The first weekly, Edition 26:36, is archived at `/edition/2026-w36.html`.
+* **Reading Mode on Screen**: Plain paper, one column of about 68 characters, no glass, blur or fade-in behind the text. The contents list comes first, a Contents button stays in reach, and each section ends with "Back to contents". See [`docs/COOTA.md`](docs/COOTA.md).
+* **A Page for Each Story**: `/edition/<issue>/<story-id>.html`, with Previous, Contents and Next, so a phone can read one story at a time and a story can be shared by its own link. The whole issue stays one page, because print and the PDF are built from it. Story markup lives in `src/components/EditionArticle.astro`.
 * **Automated Google Calendar Schedule**: Automated iCal parser (`tools/fetch-calendar.mjs`) fetching and expanding recurring `RRULE` events for the week, formatted into a compact 2-column print layout that may run over two pages.
 * **Reordered Back Sections**: Structured flow featuring Classifieds, What's On This Week, Weekly Weather Forecast, Tide Times, Buses and Transport, ending with 3MGB Wilderness Radio last on screen. In print the crossword takes the final page, after the radio.
 * **Local History & Bush Poetry**: Heritage articles, historical photo restorations (e.g. Henry Lawson and E.J. Brady at Captain's Point), and Lawson's 1910 poem *The Bar*.
@@ -39,7 +41,7 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * **Live Conditions**: Open-Meteo weather forecasts, marine sea-level tides, and lunar cycle indicator.
 * **Local Transport**: PTV coach & bus timetables.
 * **Weekly Rotations**: Trail of the Week, Business of the Week, and featured videos.
-* **Printable PDF**: Cloudflare Browser Rendering turns the edition page into A4, so print and web cannot drift. Photographs print whole — two to a row, a pair (original and reconstruction) side by side — never clipped to a strip and never `object-fit: cover` (that rasterises uncompressed and bloats the file). Headlines stay with their story. Pictures are re-encoded as JPEG at 1400px so the PDF is a few MB rather than 43MB. A frozen PDF is cached for a year; bump `PDF_LAYOUT` in `src/edition-pdf.ts` when the print CSS changes, or the old file stays. See [`docs/HANDOVER.md`](docs/HANDOVER.md).
+* **Printable PDF**: Cloudflare Browser Rendering turns the edition page into A4, so print and web cannot drift. Photographs print whole — two to a row, a pair (original and reconstruction) side by side — never clipped to a strip and never `object-fit: cover` (that rasterises uncompressed and bloats the file). Headlines stay with their story. Story columns are balanced, and the long back sections (What's On, tides, buses, radio) may break between days, so pages are not left half empty. The crossword prints on the last page and is listed last in the printed contents. A story can set `"printPhotos": "small"` to print its photographs at 80mm. Pictures are re-encoded as JPEG at 1400px so the PDF is a few MB rather than 43MB. A frozen PDF is cached for a year; bump `PDF_LAYOUT` in `src/edition-pdf.ts` when the print CSS changes, or the old file stays. See [`docs/HANDOVER.md`](docs/HANDOVER.md).
 * **Checking the print layout locally**: `pnpm run build`, serve `dist/` on a port, then `Google Chrome --headless=new --no-pdf-header-footer --host-resolver-rules='MAP * ~NOTFOUND, EXCLUDE localhost' --print-to-pdf=out.pdf http://localhost:PORT/edition/2026-w36.html` (blocking outside hosts stops the embeds hanging the render). `pdftoppm -r 40 -png out.pdf pg` gives a thumbnail per page; `pdftotext -layout out.pdf` is how you catch last week's weather without opening every page.
 
 ### 2. Article & Event Submissions (`/submit.html` & `/submit-event.html`)
@@ -117,7 +119,8 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 
 ```text
 Love Mallacoota (lovemallacoota.au)
-├── This Week                           /edition.html
+├── Coota                               /edition.html
+│   ├── Each story                      /edition/<issue>/<story-id>.html
 │   ├── Local History & Stories
 │   ├── Notices & Classifieds
 │   ├── Weather, Tides & Moon
@@ -171,7 +174,7 @@ pnpm install
 # 2. Run type check & verification
 pnpm run check
 
-# 3. Run unit test suite (142 tests)
+# 3. Run unit test suite (163 tests)
 pnpm run test
 
 # 4. Start local development server

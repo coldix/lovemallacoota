@@ -95,3 +95,10 @@ at 25 pages. The screen order is unchanged. `PDF_LAYOUT` is 7.
   the right edge.
 - September prints at 26 pages. What's On stays a whole page, as designed,
   so it starts on a fresh page after Classifieds. `PDF_LAYOUT` is 8.
+
+## What's On may run over two pages (v26.09.007, 25/09/2026 01:30 PM AEST)
+
+What's On used to be kept whole on one printed page, so it jumped to a fresh
+page and left half the page after Classifieds empty. It can now run over two
+pages; each event still holds together and the heading stays with the first
+events. September prints at 25 pages (was 26). `PDF_LAYOUT` is 9.

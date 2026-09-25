@@ -3,8 +3,8 @@
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     coota@lovemallacoota.au
 # Assistant:   Claude Fable 5
-# Timestamp:   25/09/2026 12:45 PM AEST (Mallacoota)
-# Version:     [26.09.006]
+# Timestamp:   25/09/2026 01:30 PM AEST (Mallacoota)
+# Version:     [26.09.007]
 # File Name:   style.css
 # Description: OzeGlass V2 "Aurora" — coastal Mallacoota variant. Glass cards,
 #              aurora field over local sunrise photos, ice link-cards, listing
@@ -1061,11 +1061,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     break-inside: avoid !important;
   }
 
+  /* What's On may run over two pages [26.09.007]. Kept whole, it jumped to
+     a fresh page and left half the page after Classifieds empty. Each event
+     still holds together (.edition-diary li), and the heading stays with the
+     first events. */
   #section-diary {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-    max-height: 265mm;
-    overflow: hidden;
+    break-inside: auto;
   }
   .edition-diary {
     columns: 2 !important;

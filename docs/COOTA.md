@@ -68,3 +68,11 @@ photos no longer come out sideways.
   alone on the last page.
 - September went from 28 pages to 25; the week 36 archive from 19 to 18.
   `PDF_LAYOUT` is 5.
+
+## Crossword placement in print (v26.09.004, 25/09/2026 09:00 AM AEST)
+
+The crossword needs a page to itself. Wherever it fell mid-issue it jumped to
+the next page and left most of the page before it empty (75% in September).
+On paper it now follows the contents, which already ends a page, so it takes
+page 3 with no gap. This is print-only CSS (`order` on a flex `main`); the
+screen order and the contents list are unchanged. `PDF_LAYOUT` is 6.

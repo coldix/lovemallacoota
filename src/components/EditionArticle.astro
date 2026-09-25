@@ -1,8 +1,8 @@
 ---
 /*
 # Project:     lovemallacoota.au
-# Timestamp:   25/09/2026 03:30 AM AEST (Mallacoota)
-# Version:     [26.09.001]
+# Timestamp:   25/09/2026 02:00 PM AEST (Mallacoota)
+# Version:     [26.09.008]
 # File Name:   EditionArticle.astro
 # Description: One contributed piece: headline, byline, audio, photographs,
 #              body, corrections and contact. Shared by the whole issue
@@ -44,6 +44,8 @@ const pair =
   gallery.length === 2 &&
   !stacked &&
   !gallery.some((image) => image.display === "wide");
+/* "printPhotos": "small" on a story prints its photographs smaller, for tall
+   portraits that took most of a page as a pair. Screen unchanged. [26.09.008] */
 const captionOf = (image) => [image.credit, image.caption || image.note].filter(Boolean);
 ---
 <article class:list={["edition-article", { "edition-poem": isPoem, "edition-article-standalone": standalone }]} id={articleAnchor(article)}>
@@ -71,7 +73,7 @@ const captionOf = (image) => [image.credit, image.caption || image.note].filter(
       child of the column container, a full-width grid made Chromium
       push the whole piece to a fresh page whenever it started mid-page. */}
   {gallery.length > 0 && (
-    <div class:list={["edition-figures-grid", { pair, stack: stacked }]}>
+    <div class:list={["edition-figures-grid", { pair, stack: stacked, "print-small": article.printPhotos === "small" }]}>
       {gallery.map((image, index) => (
         <figure class:list={["edition-figure", { lead: image.display === "wide" || (index === 0 && gallery.length > 2 && image.display !== "full" && image.display !== "small"), small: image.display === "small", wide: image.display === "wide", full: image.display === "full", qr: image.kind === "qr" }]}>
           <a class="edition-zoom" href={image.url} aria-label={`Enlarge: ${image.alt || article.title}`}>

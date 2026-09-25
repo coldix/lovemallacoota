@@ -11,7 +11,7 @@ import { OZE_LOGO_DATA_URI } from "./oze-logo.ts";
 
 const WEEK = /^\/edition\/(\d{4}-(?:w\d{2}|\d{2}))\.pdf$/;
 /** Bump when print CSS changes the edition layout, so a frozen PDF is rendered again. */
-const PDF_LAYOUT = "9"; // [26.09.007] 25/09/2026 AEST: What's On may run over two pages
+const PDF_LAYOUT = "10"; // [26.09.008] 25/09/2026 AEST: Sand dam photos smaller in print
 
 /**
  * A frozen edition never changes, so the render is worth caching hard. An open

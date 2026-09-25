@@ -207,7 +207,10 @@ pnpm run version:site
 
 ### Deployment Commands
 
-Production is deployed from GitHub Actions, never from a laptop:
+Production is deployed from GitHub Actions, never from a laptop. A push to
+`main` goes live on its own once the build and tests pass, unless it changes
+only notes (`docs/`, Markdown, `tests/`, `.claude/`), which stop at the preview
+[26.09.010]. To publish by hand, for example after a notes-only push:
 
 ```sh
 gh workflow run deploy.yml -f target=production

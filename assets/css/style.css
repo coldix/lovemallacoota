@@ -3,8 +3,8 @@
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     coota@lovemallacoota.au
 # Assistant:   Claude Fable 5
-# Timestamp:   25/09/2026 09:00 AM AEST (Mallacoota)
-# Version:     [26.09.004]
+# Timestamp:   25/09/2026 12:15 PM AEST (Mallacoota)
+# Version:     [26.09.005]
 # File Name:   style.css
 # Description: OzeGlass V2 "Aurora" — coastal Mallacoota variant. Glass cards,
 #              aurora field over local sunrise photos, ice link-cards, listing
@@ -1176,14 +1176,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   }
   /* The crossword needs a page to itself, so wherever it fell mid-issue it
      jumped to the next page and left most of the one before it empty. On
-     paper it now follows the contents, which already ends a page, so it
-     takes page 3 with no gap. The screen order is unchanged. [26.09.004] */
+     paper it is now the last page, a puzzle page at the back, after the
+     radio, the closing photograph and the closing line. The screen order is
+     unchanged. [26.09.005] */
   body[data-page="edition"] main { display: flex; flex-direction: column; }
-  body[data-page="edition"] main > * { order: 3; }
-  body[data-page="edition"] main > .edition-cover,
-  body[data-page="edition"] main > .edition-masthead,
-  body[data-page="edition"] main > #contents { order: 1; }
-  body[data-page="edition"] main > #section-crossword { order: 2; }
+  body[data-page="edition"] main > #section-crossword { order: 1; break-before: page; }
   /* A crossword is an A4 sheet. The ordinary figure cap of 105mm makes it
      unreadable. Give it the page. */
   .edition-crossword .edition-figure {

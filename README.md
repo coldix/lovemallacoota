@@ -28,7 +28,7 @@ Historical project documentation and earlier README iterations have been preserv
 ### 1. Coota (`/edition.html`)
 The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as they arrive; the issue freezes as a PDF at month-end. The first weekly, Edition 26:36, is archived at `/edition/2026-w36.html`.
 * **Automated Google Calendar Schedule**: Automated iCal parser (`tools/fetch-calendar.mjs`) fetching and expanding recurring `RRULE` events for the week, formatted into a 1-page compact 2-column print layout.
-* **Reordered Back Sections**: Structured flow featuring Classifieds, What's On This Week, Weekly Weather Forecast, Tide Times, Buses and Transport, ending with 3MGB Wilderness Radio strictly last.
+* **Reordered Back Sections**: Structured flow featuring Classifieds, What's On This Week, Weekly Weather Forecast, Tide Times, Buses and Transport, ending with 3MGB Wilderness Radio last on screen. In print the crossword takes the final page, after the radio.
 * **Local History & Bush Poetry**: Heritage articles, historical photo restorations (e.g. Henry Lawson and E.J. Brady at Captain's Point), and Lawson's 1910 poem *The Bar*.
 * **Embedded Audio Narration & Recitals**: HTML5 audio players for local history pieces and poetry recitations (`/audio/*.mp3`), such as Shirley Dixon's recitation of *Farewell to Barbara*, hidden cleanly during printing (`@media print`).
 * **Plain Punctuation, Guaranteed**: Every edition is published with straight quotes and hyphens. Text is normalised on submission (`src/submit.ts`), again when editions load (`src/lib/editions.mjs`), and a build test fails on any em dash, curly quote or mojibake in the rendered pages.

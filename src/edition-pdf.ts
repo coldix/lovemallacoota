@@ -11,7 +11,7 @@ import { OZE_LOGO_DATA_URI } from "./oze-logo.ts";
 
 const WEEK = /^\/edition\/(\d{4}-(?:w\d{2}|\d{2}))\.pdf$/;
 /** Bump when print CSS changes the edition layout, so a frozen PDF is rendered again. */
-const PDF_LAYOUT = "5"; // [26.09.002] 25/09/2026 AEST: balanced columns, back pages break between days
+const PDF_LAYOUT = "6"; // [26.09.004] 25/09/2026 AEST: crossword printed after the contents
 
 /**
  * A frozen edition never changes, so the render is worth caching hard. An open

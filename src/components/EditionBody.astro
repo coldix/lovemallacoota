@@ -1,7 +1,7 @@
 ---
 /*
-# Timestamp:   25/09/2026 03:30 AM AEST (Mallacoota)
-# Version:     [26.09.001]
+# Timestamp:   25/09/2026 12:45 PM AEST (Mallacoota)
+# Version:     [26.09.006]
 # File Name:   EditionBody.astro
 # Description: The whole issue: masthead, contents, sections and stories. On
 #              screen the contents comes first and each story links to its
@@ -20,6 +20,7 @@ import {
 } from "../lib/editions.mjs";
 import { adsForSection, busGroups, busPlace, fillerPhoto, fullPageAds, imageSize, socialForSection, storyPath, youTubeId } from "../lib/editions.mjs";
 import EditionArticle from "./EditionArticle.astro";
+import EditionCrossword from "./EditionCrossword.astro";
 import WeekWeather from "./WeekWeather.astro";
 import WeekTides from "./WeekTides.astro";
 
@@ -45,6 +46,7 @@ const TIDE_WHEN = new Intl.DateTimeFormat("en-AU", {
 });
 const tideWhen = (value) => TIDE_WHEN.format(new Date(value));
 const toc = tableOfContents(edition);
+const crossword = sections.find((section) => section.auto?.type === "crossword") || null;
 const rawFiller = fillerPhoto(edition);
 const isFillerUsed = edition.articles?.some(a => 
   a.image?.url === rawFiller?.url || a.images?.some(img => img.url === rawFiller?.url)
@@ -133,9 +135,15 @@ const statusLabel =
 {toc.length > 0 && (
   <nav class="glass-card sheen content-block reveal edition-toc" id="contents" aria-labelledby="edition-toc-title">
     <h2 id="edition-toc-title" class="section-title">In this edition</h2>
+    {/* The crossword prints on the last page, so on paper its entry is listed
+        last too: hidden in print where it falls, and repeated for print at
+        the end. The screen list is unchanged. [26.09.006] */}
     <ol class="edition-toc-list">
-      {toc.map((section) => (
-        <li class="edition-toc-group">
+      {[
+        ...toc.map((section) => ({ section, only: section.id === "crossword" ? "edition-web-only" : null })),
+        ...toc.filter((section) => section.id === "crossword").map((section) => ({ section, only: "edition-print-only" })),
+      ].map(({ section, only }) => (
+        <li class:list={["edition-toc-group", only]}>
           <a class="edition-toc-section" href={`#section-${section.id}`}>{section.title}</a>
           <ul>
             {section.entries.map((entry) => (
@@ -182,50 +190,10 @@ const statusLabel =
 )}
 
 {sections.map((section) => (
-  <section class="glass-card sheen content-block reveal" id={`section-${section.id}`} aria-labelledby={`heading-${section.id}`}>
+  <section class:list={["glass-card sheen content-block reveal", { "edition-web-only": section.id === "crossword" }]} id={`section-${section.id}`} aria-labelledby={`heading-${section.id}`}>
     <h2 class="section-title" id={`heading-${section.id}`}>{section.title}</h2>
     {section.auto?.type === "crossword" && (
-      <div class="edition-auto edition-crossword">
-        {section.auto.data.number && (
-          <>
-            <p>
-              Crossword no. {section.auto.data.number}
-              {section.auto.data.title && <> · {section.auto.data.title}</>}.
-              The solution will be in next month's Coota.
-            </p>
-            {section.auto.data.pages?.map((src: string) => (
-              <figure class="edition-figure">
-                <img src={src} alt={`Coota crossword number ${section.auto.data.number}`} width={imageSize(src)?.width} height={imageSize(src)?.height} />
-              </figure>
-            ))}
-            {section.auto.data.pdf && (
-              <p class="edition-source">
-                <a href={section.auto.data.pdf}>Download the puzzle as a PDF</a>
-                {section.auto.data.credit && <span> · {section.auto.data.credit}</span>}
-              </p>
-            )}
-          </>
-        )}
-        {section.auto.data.solutionOfPrevious && (
-          <div class="edition-crossword-solution">
-            <h3 class="edition-subhead">Last month's solution</h3>
-            <p>
-              Crossword no. {section.auto.data.solutionOfPrevious.number}
-              {section.auto.data.solutionOfPrevious.title && <> · {section.auto.data.solutionOfPrevious.title}</>}.
-            </p>
-            {section.auto.data.solutionOfPrevious.pages?.map((src: string) => (
-              <figure class="edition-figure">
-                <img src={src} alt={`Solution to Coota crossword number ${section.auto.data.solutionOfPrevious.number}`} width={imageSize(src)?.width} height={imageSize(src)?.height} />
-              </figure>
-            ))}
-            {section.auto.data.solutionOfPrevious.pdf && (
-              <p class="edition-source">
-                <a href={section.auto.data.solutionOfPrevious.pdf}>Download last month's solution as a PDF</a>
-              </p>
-            )}
-          </div>
-        )}
-      </div>
+      <EditionCrossword data={section.auto.data} />
     )}
     {section.auto?.type === "weather" && (
       <WeekWeather weather={section.auto.data} />
@@ -513,3 +481,13 @@ const statusLabel =
 <footer class="edition-print-footer edition-print-only">
   <p>Love Mallacoota · lovemallacoota.au · Published {publishedOn(edition.monthStart || edition.weekStart)} · Documenting East Gippsland's coast, community & history with care.</p>
 </footer>
+
+{/* The crossword needs a page to itself. Mid-issue it jumped to the next
+    page and left most of the one before it empty, so on paper it is the last
+    page: this copy prints, the one in its place above does not. [26.09.006] */}
+{crossword && (
+  <section class="edition-print-only edition-crossword-print" aria-hidden="true">
+    <h2 class="section-title">{crossword.title}</h2>
+    <EditionCrossword data={crossword.auto.data} />
+  </section>
+)}

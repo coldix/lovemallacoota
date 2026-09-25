@@ -1,0 +1,58 @@
+---
+/*
+# Project:     lovemallacoota.au
+# Timestamp:   25/09/2026 01:15 PM AEST (Mallacoota)
+# Version:     [26.09.006]
+# File Name:   EditionCrossword.astro
+# Description: The crossword and last month's solution. Rendered in its place
+#              on screen, and again at the very end for print, where it takes
+#              the last page.
+*/
+import { imageSize } from "../lib/editions.mjs";
+
+interface Props {
+  data: Record<string, any>;
+}
+const { data } = Astro.props;
+---
+<div class="edition-auto edition-crossword">
+  {data.number && (
+    <>
+      <p>
+        Crossword no. {data.number}
+        {data.title && <> · {data.title}</>}.
+        The solution will be in next month's Coota.
+      </p>
+      {data.pages?.map((src: string) => (
+        <figure class="edition-figure">
+          <img src={src} alt={`Coota crossword number ${data.number}`} width={imageSize(src)?.width} height={imageSize(src)?.height} />
+        </figure>
+      ))}
+      {data.pdf && (
+        <p class="edition-source">
+          <a href={data.pdf}>Download the puzzle as a PDF</a>
+          {data.credit && <span> · {data.credit}</span>}
+        </p>
+      )}
+    </>
+  )}
+  {data.solutionOfPrevious && (
+    <div class="edition-crossword-solution">
+      <h3 class="edition-subhead">Last month's solution</h3>
+      <p>
+        Crossword no. {data.solutionOfPrevious.number}
+        {data.solutionOfPrevious.title && <> · {data.solutionOfPrevious.title}</>}.
+      </p>
+      {data.solutionOfPrevious.pages?.map((src: string) => (
+        <figure class="edition-figure">
+          <img src={src} alt={`Solution to Coota crossword number ${data.solutionOfPrevious.number}`} width={imageSize(src)?.width} height={imageSize(src)?.height} />
+        </figure>
+      ))}
+      {data.solutionOfPrevious.pdf && (
+        <p class="edition-source">
+          <a href={data.solutionOfPrevious.pdf}>Download last month's solution as a PDF</a>
+        </p>
+      )}
+    </div>
+  )}
+</div>

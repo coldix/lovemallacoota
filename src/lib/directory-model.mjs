@@ -585,6 +585,10 @@ export function normalizeListing(raw, defaults = {}) {
     description_long: raw.description_long || raw.description || "",
     address: raw.address || null,
     locationKind: raw.locationKind || (raw.address?.street ? "physical" : "none"),
+    // Where post goes, when that is not where the place is (the Angling Club
+    // meets at the Clubrooms, its mail goes to Greer Street). Shown as its own
+    // row; never used for the map or the location schema. [26.09.013]
+    postalAddress: raw.postalAddress || null,
     geo: raw.geo || null,
     serviceArea: raw.serviceArea || null,
     // Whether the business is trading. Deliberately not called status: the
@@ -654,6 +658,7 @@ export function associationToEntity(assoc, enrichment = {}) {
         enrichment.descriptionShort ||
         "Registered Victorian incorporated association. Contact details not yet confirmed.",
       address: enrichment.address || null,
+      postalAddress: enrichment.postalAddress || null,
       geo: enrichment.geo || null,
       phone: enrichment.phone || null,
       email: enrichment.email || null,

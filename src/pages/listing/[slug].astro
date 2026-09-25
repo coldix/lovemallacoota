@@ -159,6 +159,12 @@ const canonicalPath = listingPagePath(entity);
             <dd>{[entity.address.street, entity.address.locality, entity.address.state, entity.address.postcode].filter(Boolean).join(", ")}</dd>
           </>
         )}
+        {entity.postalAddress && (
+          <>
+            <dt>Postal address</dt>
+            <dd>{[entity.postalAddress.street, entity.postalAddress.locality, entity.postalAddress.state, entity.postalAddress.postcode].filter(Boolean).join(", ")}</dd>
+          </>
+        )}
         {entity.serviceArea && (
           <>
             <dt>Serves</dt>
@@ -169,7 +175,10 @@ const canonicalPath = listingPagePath(entity);
             a service area has said it, and following that with the generic
             sentence read as a contradiction on a coffee van and as nonsense on
             the Bureau of Meteorology. */}
-        {entity.locationKind === "none" && !address && !entity.serviceArea && (
+        {/* Nor when the listing has a map pin: the Op Shop, the Surf Club and
+            the Angling Club's Clubrooms are places, not groups that move
+            about. [26.09.013] */}
+        {entity.locationKind === "none" && !address && !entity.serviceArea && !entity.geo && (
           <>
             <dt>Location</dt>
             <dd>No public street address - many groups meet in different places or serve the whole district.</dd>

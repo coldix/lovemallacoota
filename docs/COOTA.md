@@ -83,3 +83,15 @@ Moved from page 3 to the back: the crossword is now the last page of the
 printed issue, a puzzle page, after the radio, the closing photograph and the
 closing line (`order` plus `break-before: page`, print only). September stays
 at 25 pages. The screen order is unchanged. `PDF_LAYOUT` is 7.
+
+## Crossword last in the printed contents (v26.09.006, 25/09/2026 01:15 PM AEST)
+
+- The printed contents list now ends with the crossword, matching the page
+  it's on. The on-screen list is unchanged.
+- The crossword prints from a copy placed after the closing line
+  (`EditionCrossword.astro`, used in both places); the one in its screen
+  position doesn't print. This replaces the print-only flex reordering from
+  26.09.004/005, which cut the third column of the printed contents off at
+  the right edge.
+- September prints at 26 pages. What's On stays a whole page, as designed,
+  so it starts on a fresh page after Classifieds. `PDF_LAYOUT` is 8.

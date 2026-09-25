@@ -3,8 +3,8 @@
 # Author:      Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact:     coota@lovemallacoota.au
 # Assistant:   Claude Fable 5
-# Timestamp:   25/09/2026 12:15 PM AEST (Mallacoota)
-# Version:     [26.09.005]
+# Timestamp:   25/09/2026 12:45 PM AEST (Mallacoota)
+# Version:     [26.09.006]
 # File Name:   style.css
 # Description: OzeGlass V2 "Aurora" — coastal Mallacoota variant. Glass cards,
 #              aurora field over local sunrise photos, ice link-cards, listing
@@ -1174,13 +1174,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
-  /* The crossword needs a page to itself, so wherever it fell mid-issue it
-     jumped to the next page and left most of the one before it empty. On
-     paper it is now the last page, a puzzle page at the back, after the
-     radio, the closing photograph and the closing line. The screen order is
-     unchanged. [26.09.005] */
-  body[data-page="edition"] main { display: flex; flex-direction: column; }
-  body[data-page="edition"] main > #section-crossword { order: 1; break-before: page; }
+  /* The crossword needs a page to itself. Mid-issue it jumped to the next
+     page and left most of the one before it empty, so on paper a copy
+     printed after the closing line takes the last page, and the one in its
+     place does not print (EditionBody). A flex column reordering it cut the
+     three-column contents off at the right edge. [26.09.006] */
+  .edition-crossword-print { break-before: page; }
   /* A crossword is an A4 sheet. The ordinary figure cap of 105mm makes it
      unreadable. Give it the page. */
   .edition-crossword .edition-figure {

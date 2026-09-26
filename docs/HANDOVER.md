@@ -1,4 +1,64 @@
-# Handover — 9 September 2026
+# Handover — 26 September 2026
+
+Everything below is merged to `main` and live at
+[lovemallacoota.au](https://lovemallacoota.au). Nothing is pending, no branch
+holds unmerged work, and no pull request is open. Safe to reboot.
+
+Work was done in pull requests coldix/lovemallacoota#2 to #14 (24 to 25
+September, versions 26.09.001 to 26.09.013). Details of each are in
+[`COOTA.md`](COOTA.md) and the pull requests.
+
+## What changed, 24 to 25 September
+
+**Coota on screen** (`src/components/EditionBody.astro`, `EditionArticle.astro`,
+the "Coota reading mode" block at the end of `assets/css/style.css`)
+- Plain paper, one column, larger type; no glass, blur or fade-in.
+- Contents first; a Contents button stays in reach; "Back to contents" after
+  each section.
+- A page for each story: `/edition/<issue>/<story-id>.html`, with Previous,
+  Contents and Next.
+
+**Coota in print and the PDF**
+- Story columns balanced; What's On, tides, buses and radio may break across
+  pages. September prints at 25 pages.
+- The crossword prints on the last page (a print-only copy,
+  `EditionCrossword.astro`) and is listed last in the printed contents.
+- A story can set `"printPhotos": "small"` to print its photos at 80mm.
+- `PDF_LAYOUT` is `"10"`. Bump it whenever print CSS changes.
+
+**Photos from the submit form** (`tools/process-uploads.mjs`, `uploads.yml`)
+- Approving a held story now converts its photos (the workflow also runs on
+  `data/editions/` changes). Second and third photos attach. Phone photos are
+  turned the right way up.
+
+**Directory**
+- Facebook groups are not listings (six removed; they stay in the edition's
+  Around the Socials). The "Facebook & media" filter is now "Media".
+- New optional `postalAddress` on a listing (used by the Angling Club, 12
+  Greer Street). Shown as its own row; never used for the map.
+- Closed businesses show as closed on the Directory page too.
+- 121 listings, 81 with a photograph.
+
+**Deploy rule** (`.github/workflows/deploy.yml`) — see "Read this before you
+deploy" below. Check the **Deploy lovemallacoota.au** step, not only the run:
+a run can pass with that step skipped.
+
+**Tidy-up:** old briefs moved to [`archive/`](archive/); three spent import
+scripts removed (in git history).
+
+## Loose ends, if wanted
+
+- The Angling Club map pin is at the Clubrooms, as confirmed; 12 Greer Street
+  is postal only.
+- `.htaccess` (Apache rules from the old host) was left alone on purpose.
+- `docs/history.md` has old links written from the repo root that do not
+  resolve from `docs/`. Harmless.
+- The September issue closes as a PDF at month end (`pnpm run roll:month`, see
+  [`COOTA.md`](COOTA.md)).
+
+---
+
+# Earlier handover — 9 September 2026
 
 Live release **v1.85** at [lovemallacoota.au](https://lovemallacoota.au).
 Deployed from GitHub, run [34222874408](https://github.com/coldix/lovemallacoota/actions/runs/34222874408),
@@ -30,9 +90,10 @@ machine was committing v1.85. Rebase, rebuild the version hashes
 dispatch. The workflow says "success" because it deployed *something*. Read the
 run's `headSha`. Tonight it was `fe4a8a0`.
 
-A push to main deploys **preview** only, unless the push carries
-`data/directory/` or `data/editions/`. Print CSS and Worker changes need the
-dispatch.
+*Changed 25 September (v26.09.010):* a push to main that passes Validate now
+goes to production on its own, unless it changes only notes (`docs/`,
+Markdown, `tests/`, `.claude/`). The dispatch above is still how to publish a
+notes-only push or to redeploy by hand.
 
 ---
 

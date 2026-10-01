@@ -114,3 +114,29 @@ print its photographs at 80mm tall instead of up to 120mm. Useful for tall
 portrait pairs. The screen is unchanged. Set on "Sand dam busting". The
 underline of the photo link no longer prints as a line under photos.
 `PDF_LAYOUT` is 10.
+
+## First month-end roll: September closed, October opened (2 October 2026)
+
+`node tools/roll-month.mjs` was run by hand on 2 October 2026 (Melbourne), on a
+branch, rather than through `month.yml`, because that workflow commits and
+deploys straight to production.
+
+- `data/editions/2026-09.json` is `frozen` with all 23 stories. Its permanent
+  page `/edition/2026-09.html`, its story pages and its PDF are unchanged in
+  URL; the archive lists it under Coota.
+- `data/editions/2026-10.json` is open and empty. It carries crossword 2's
+  solution (copied from `data/crossword/` to `images/editions/` and `pdf/`).
+- `featuredBusiness` (`mallacoota-food-chariot`) was carried over by hand so
+  the business of the week does not change at the roll. The script does not
+  copy it; decide each month.
+- Still needed for October, by hand: a cover photograph (`cover`), crossword 3
+  (`crossword.number/title/pages/pdf/credit`, with its solution files placed in
+  `data/crossword/` for November), and the stories themselves.
+
+Why `month.yml` could not have done this on 1 October: two build tests named
+September as the live issue (a third, in `roll.test.mjs`, needs `featuredBusiness`
+set on the open month), and the survey-banner test still expected a
+banner the component expires after 30 September. That one also failed the
+daily refresh on 1 October, so the forecast stopped shipping. The tests now
+follow the open month and the banner's own closing date, so the next roll
+(1 November) should pass `pnpm run check` unattended.

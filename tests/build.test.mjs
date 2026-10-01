@@ -76,12 +76,37 @@ test("every listing image the data names is actually in the repository", async (
 });
 
 test("the survey banner is on the ordinary pages and off the urgent ones", async () => {
+  // The banner expires itself after its closing date (SurveyBanner.astro), so
+  // what a build should contain depends on the day it runs. Asserting it is
+  // always present failed every build from 1 October 2026 and stopped the daily
+  // refresh from shipping.
+  const banner = await readFile(new URL("../src/components/SurveyBanner.astro", import.meta.url), "utf8");
+  const closes = /closes:\s*"(\d{4}-\d{2}-\d{2})"/.exec(banner)?.[1];
+  assert.ok(closes, "SurveyBanner.astro has no closing date");
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Australia/Melbourne",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+  const open = today <= closes;
+
   for (const page of ["index.html", "directory.html", "edition.html", "calendar.html", "contact.html"]) {
     const html = await readFile(new URL(`../dist/${page}`, import.meta.url), "utf8");
+    if (!open) {
+      assert.doesNotMatch(html, /survey-banner/, `${page} still carries the survey banner after ${closes}`);
+      continue;
+    }
     assert.match(html, /class="survey-banner"/, `${page} carries no survey banner`);
     assert.match(html, /https:\/\/survey\.oze\.net\.au\/s\/love-mallacoota/);
     // The closing date is rendered from the same constant that expires it.
-    assert.match(html, /Open now through 30 September 2026\./);
+    const closingDate = new Intl.DateTimeFormat("en-AU", {
+      timeZone: "Australia/Melbourne",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(`${closes}T12:00:00+10:00`));
+    assert.ok(html.includes(`Open now through ${closingDate}.`), `${page} does not state the closing date`);
   }
 
   // Somebody reaching the emergency page is not there to answer a survey, and
@@ -286,15 +311,16 @@ test("What's On looks forward from a freshly refreshed week, not at the edition'
   }
 });
 
-test("Coota 26:09 is the live monthly and carries the crossword", async () => {
-  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
-  const { currentEdition, isMonthly } = await import("../src/lib/editions.mjs");
-  const edition = currentEdition();
-  assert.ok(isMonthly(edition), "the live edition is not monthly");
-  assert.equal(edition.week, "2026-09");
+test("Coota 26:09 is closed and archived with its stories and crossword", async () => {
+  // [Oct 2026] September was frozen by tools/roll-month.mjs on 2 October. It
+  // keeps its permanent page and PDF; the live page moves to the open month.
+  const html = await readFile(new URL("../dist/edition/2026-09.html", import.meta.url), "utf8");
+  const { loadEditions, isMonthly } = await import("../src/lib/editions.mjs");
+  const edition = loadEditions().find((entry) => entry.week === "2026-09");
+  assert.ok(edition && isMonthly(edition), "Coota 26:09 is missing or not monthly");
+  assert.equal(edition.status, "frozen", "Coota 26:09 was not closed at month-end");
   assert.match(html, /Coota 26:09/);
-  // Seventeen came over from the weekly editions. Contributors keep adding
-  // through the month, so this is a floor rather than a count.
+  // Seventeen came over from the weekly editions; a frozen month only keeps them.
   assert.ok((edition.articles || []).length >= 17, "Coota 26:09 is missing last week's stories");
   assert.match(html, /A weekly edition, starting small/);
   assert.match(html, /Farewell to Barbara/);
@@ -318,21 +344,43 @@ test("Coota 26:09 is the live monthly and carries the crossword", async () => {
   assert.match(html, /The Coota Crossword/);
   assert.match(html, /crossword-2-1\.webp/);
   assert.match(html, /crossword-2\.pdf/);
+  // Its own solution belongs to the next issue, not this one.
   assert.doesNotMatch(html, /crossword-2-soln/);
   assert.doesNotMatch(html, /crossword-2-solution/);
   const weekly = await readFile(new URL("../dist/edition/2026-w36.html", import.meta.url), "utf8");
   assert.match(weekly, /Edition 26:36/);
-  const liveTitle = html.match(/<title>([\s\S]*?)<\/title>/)[1];
-  const permanent = await readFile(new URL("../dist/edition/2026-09.html", import.meta.url), "utf8");
-  const permanentTitle = permanent.match(/<title>([\s\S]*?)<\/title>/)[1];
-  assert.notEqual(liveTitle, permanentTitle, "the live page and the permanent monthly share a title");
-  await assert.rejects(access(new URL("../dist/images/editions/crossword-2-soln-1.webp", import.meta.url)));
-  await assert.rejects(access(new URL("../dist/pdf/crossword-2-solution.pdf", import.meta.url)));
 
   const archive = await readFile(new URL("../dist/archive.html", import.meta.url), "utf8");
   assert.match(archive, /id="archive-coota-title"/);
   assert.match(archive, /id="archive-editions-title"/);
   assert.match(archive, /Weekly digital editions/);
+});
+
+test("the live page is the open month, and it prints last issue's crossword solution", async () => {
+  const html = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  const { currentEdition, isMonthly, loadEditions } = await import("../src/lib/editions.mjs");
+  const edition = currentEdition();
+  assert.ok(isMonthly(edition), "the live edition is not monthly");
+  assert.equal(edition.status, "open", "the live edition is not the open month");
+  assert.equal(
+    loadEditions().filter((entry) => entry.status === "open").length,
+    1,
+    "more than one edition is open"
+  );
+  const [year, month] = edition.week.split("-");
+  assert.match(html, new RegExp(`Coota ${year.slice(2)}:${month}`));
+  assert.match(html, new RegExp(`download="mallacoota-${edition.week}.pdf"`));
+  const liveTitle = html.match(/<title>([\s\S]*?)<\/title>/)[1];
+  const permanent = await readFile(new URL(`../dist/edition/${edition.week}.html`, import.meta.url), "utf8");
+  const permanentTitle = permanent.match(/<title>([\s\S]*?)<\/title>/)[1];
+  assert.notEqual(liveTitle, permanentTitle, "the live page and the permanent monthly share a title");
+
+  const solution = edition.crossword?.solutionOfPrevious;
+  if (solution) {
+    for (const file of [...(solution.pages || []), solution.pdf].filter(Boolean)) {
+      await access(new URL(`../dist${file}`, import.meta.url));
+    }
+  }
 });
 
 test("week 36 starts Sunday 6 September and looks a week ahead", async () => {
@@ -1094,8 +1142,16 @@ test("every story has its own page, linked from the issue, with Previous and Nex
   // [26.09.001] 25/09/2026 AEST. The whole issue stays one page for print and
   // the PDF; each piece also gets a page a phone can read and a link can share.
   const { storiesInOrder, storyPath } = await import("../src/lib/editions.mjs");
-  const edition = currentEdition();
-  const issue = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
+  // A month that has just opened has nothing in it yet, so check the live issue
+  // once it has stories, and the latest closed month until then.
+  const live = currentEdition();
+  const edition = storiesInOrder(live).length
+    ? live
+    : loadEditions()
+        .filter((entry) => entry.status === "frozen" && storiesInOrder(entry).length)
+        .sort((a, b) => b.week.localeCompare(a.week))[0];
+  const issuePath = edition === live ? "/edition.html" : `/edition/${edition.week}.html`;
+  const issue = await readFile(new URL(`../dist${issuePath}`, import.meta.url), "utf8");
   const stories = storiesInOrder(edition);
   assert.ok(stories.length > 0, "no stories to give pages to");
 
@@ -1104,7 +1160,7 @@ test("every story has its own page, linked from the issue, with Previous and Nex
     assert.ok(issue.includes(`href="${path}"`), `the issue does not link to ${path}`);
     const page = await readFile(new URL(`../dist${path}`, import.meta.url), "utf8");
     assert.ok(page.includes(escapeEntities(article.title)), `${path} is missing its headline`);
-    assert.match(page, /href="\/edition\.html#contents"/, `${path} has no way back to the contents`);
+    assert.ok(page.includes(`href="${issuePath}#contents"`), `${path} has no way back to the contents`);
     const next = stories[index + 1]?.article;
     if (next) assert.ok(page.includes(`href="${storyPath(edition, next)}"`), `${path} does not lead on to the next story`);
   }

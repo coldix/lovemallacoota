@@ -1,69 +1,69 @@
 {
   "week": "2026-10",
-  "generatedAt": "2026-10-01T23:20:48.786Z",
+  "generatedAt": "2026-10-02T11:01:47.007Z",
   "start": "2026-10-02",
   "end": "2026-10-08",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-01T23:20:47.630Z",
+    "fetchedAt": "2026-10-02T11:01:45.619Z",
     "days": [
       {
         "date": "2026-10-02",
         "code": 81,
         "summary": "Showers",
-        "maxC": 16.4,
-        "minC": 13.2,
-        "rainMm": 36.8
+        "maxC": 16.5,
+        "minC": 13.3,
+        "rainMm": 28.3
       },
       {
         "date": "2026-10-03",
         "code": 95,
         "summary": "Thunderstorms",
-        "maxC": 22.3,
-        "minC": 13.5,
-        "rainMm": 7
+        "maxC": 22.2,
+        "minC": 13.4,
+        "rainMm": 10.1
       },
       {
         "date": "2026-10-04",
-        "code": 51,
-        "summary": "Light drizzle",
-        "maxC": 17.7,
-        "minC": 12.1,
-        "rainMm": 0.2
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 16.4,
+        "minC": 10.3,
+        "rainMm": 0
       },
       {
         "date": "2026-10-05",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 17.3,
-        "minC": 10.8,
+        "maxC": 16.7,
+        "minC": 9.8,
         "rainMm": 0
       },
       {
         "date": "2026-10-06",
-        "code": 80,
-        "summary": "Showers",
-        "maxC": 20,
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 21.8,
         "minC": 9.4,
-        "rainMm": 8.3
+        "rainMm": 2.1
       },
       {
         "date": "2026-10-07",
-        "code": 80,
-        "summary": "Showers",
-        "maxC": 16,
-        "minC": 8.3,
-        "rainMm": 24.4
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 15.8,
+        "minC": 10.3,
+        "rainMm": 1.2
       },
       {
         "date": "2026-10-08",
-        "code": 80,
-        "summary": "Showers",
-        "maxC": 14.2,
-        "minC": 12.6,
-        "rainMm": 24
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 15.6,
+        "minC": 7.6,
+        "rainMm": 0.9
       }
     ]
   },
@@ -74,7 +74,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-01T23:20:47.797Z",
+    "fetchedAt": "2026-10-02T11:01:45.760Z",
     "extremes": [
       {
         "time": "2026-10-02T05:00",
@@ -980,14 +980,14 @@
     {
       "date": "Mon 5 Oct",
       "time": "10:00 am",
-      "title": "Pickleball",
-      "location": "Mallacoota Tennis Club"
+      "title": "Toddler Music and Movement (Reclink)",
+      "location": ""
     },
     {
       "date": "Mon 5 Oct",
       "time": "10:00 am",
-      "title": "Toddler Music and Movement (Reclink)",
-      "location": ""
+      "title": "Pickleball",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Tue 6 Oct",
@@ -1016,14 +1016,14 @@
     {
       "date": "Thu 8 Oct",
       "time": "9:30 am",
-      "title": "Wilderness Collective (CCR)",
-      "location": "The Oval"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Thu 8 Oct",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
+      "title": "Wilderness Collective (CCR)",
+      "location": "The Oval"
     }
   ],
   "trail": {

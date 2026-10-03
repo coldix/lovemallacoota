@@ -2419,6 +2419,10 @@ html[data-theme="light"] .bus-service { background: rgba(255,255,255,0.45); }
   body[data-page="edition"] .hero-section h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); margin-bottom: 0.4rem; animation: none; }
   body[data-page="edition"] .hero-section .lede { font-size: 1rem; animation: none; }
   body[data-page="edition"] .hero-section .grad { animation: none; }
+  /* The submit button in the heading: one line, small, no entrance delay,
+     so on a phone the contents start barely lower than before. [26.10.001] */
+  body[data-page="edition"] .edition-submit-cta { margin-top: 0.8rem; animation: none; }
+  body[data-page="edition"] .edition-submit-cta .btn { padding: 0.55rem 1.05rem; font-size: 0.9rem; }
 
   body[data-page="edition"] main .content-block { padding: clamp(1.1rem, 4vw, 2.4rem); margin-bottom: 1.2rem; }
   body[data-page="edition"] .edition-masthead .section-title { font-size: 1.35rem; }

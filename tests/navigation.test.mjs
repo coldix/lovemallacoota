@@ -253,3 +253,28 @@ test("the footer keeps the free listing apart from the things that cost money", 
   assert.ok(!free.includes("/advertise"), "advertising is listed beside the free listing links");
   assert.ok(paid.includes('href="/advertise"') && paid.includes('href="/subscribe"'));
 });
+
+test("every page's footer offers Submit a story, to the page the Contribute box uses", async () => {
+  // [26.10.001] 03/10/2026 AEST
+  const edition = await read("edition.html");
+  const contribute = edition.match(/<h2 class="section-title">Contribute<\/h2>([\s\S]*?)<\/section>/)?.[1] || "";
+  assert.match(contribute, /href="\/submit\.html"/, "the Contribute box no longer links to /submit.html");
+  await access(new URL("submit.html", dist));
+  for (const page of await allPages()) {
+    const html = await read(page);
+    const footer = html.match(/<footer class="glass-card site-footer[\s\S]*?<\/footer>/)?.[0];
+    assert.ok(footer, `${page} has no site footer`);
+    assert.match(footer, /<a href="\/submit\.html">Submit a story<\/a>/, `${page} footer has no Submit a story link`);
+  }
+});
+
+test("the edition page leads with the orange submit button, then the contents", async () => {
+  // Removed in reading mode [26.09.001], restored compact [26.10.001].
+  const html = await read("edition.html");
+  const button = html.indexOf('<a class="btn btn-coral" href="/submit.html">Submit an article or notice</a>');
+  assert.ok(button > -1, "edition.html has no Submit an article or notice button");
+  const hero = html.match(/<header class="glass-card sheen hero-section">[\s\S]*?<\/header>/)?.[0] || "";
+  assert.ok(hero.includes("Submit an article or notice"), "the submit button is not in the heading");
+  const contents = html.indexOf('id="contents"');
+  assert.ok(contents > button, "the contents should follow the heading");
+});

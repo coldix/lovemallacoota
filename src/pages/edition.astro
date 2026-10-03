@@ -69,7 +69,14 @@ const description = edition
         ? "Stories, notices, the crossword, weather and what's on. It grows as pieces arrive."
         : "Community notices, club and school news, the week's events, weather and tides - contributed by the people and groups they belong to."
     }
-  />
+  >
+    {/* Back in the heading, where it was before reading mode, but as one
+        compact button so the contents still come first on a phone. It does
+        not print: the heading is screen only. [26.10.001] 03/10/2026 AEST */}
+    <div class="hero-cta edition-submit-cta">
+      <a class="btn btn-coral" href="/submit.html">Submit an article or notice</a>
+    </div>
+  </PageHero>
   <main>
     <Breadcrumbs trail={[{ name: edition && isMonthly(edition) ? "Coota" : "This Week", path: "/edition.html" }]} />
     {edition ? (

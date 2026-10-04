@@ -27,6 +27,7 @@ export const CARDS = {
   archive: `${OG_DIR}/archive.jpg`,
   emergency: `${OG_DIR}/emergency.jpg`,
   "add-listing": `${OG_DIR}/add-listing.jpg`,
+  shop: `${OG_DIR}/shop.jpg`,
 };
 
 /** Directory section id to the card for that section. */

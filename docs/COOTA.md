@@ -4,8 +4,13 @@ The monthly community edition on lovemallacoota.au. The first weekly, Edition
 26:36 (31 August–6 September 2026), is closed and archived. From September 2026
 the live page is **Coota YY:MM**.
 
-See the original weekly design in [`WEEKLY-MOUTH.md`](WEEKLY-MOUTH.md). What
-changed:
+See the original weekly design in [`WEEKLY-MOUTH.md`](WEEKLY-MOUTH.md). The
+next change is in [`COOTA-PLAN.md`](COOTA-PLAN.md): September includes week
+36's stories; no weather/tides/forecast/business on Coota; those go to a
+Sunday/Monday weekly extract; calendar source is the oze almanac. Not live
+yet.
+
+What changed:
 
 - The open edition is a calendar month (`data/editions/2026-09.json`).
 - Stories are added as they arrive. People read the live page as it grows.

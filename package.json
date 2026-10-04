@@ -23,7 +23,8 @@
     "check": "pnpm run types && pnpm run test && wrangler deploy --env=\"\" --dry-run",
     "deploy:preview": "pnpm run build && wrangler deploy --env preview",
     "deploy": "pnpm run build && wrangler deploy --env=\"\"",
-    "changes": "node tools/build-directory-changes.mjs"
+    "changes": "node tools/build-directory-changes.mjs",
+    "sync": "git pull --rebase origin main && git remote prune origin"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260826.1",

@@ -29,6 +29,7 @@ export function sitemapEntries(today) {
     { path: "/activity.html", changefreq: "weekly", priority: "0.9" },
     { path: "/community.html", changefreq: "weekly", priority: "0.8" },
     { path: "/services.html", changefreq: "weekly", priority: "0.8" },
+    { path: "/shop.html", changefreq: "weekly", priority: "0.8" },
     { path: "/archive.html", changefreq: "weekly", priority: "0.8", lastmod: archive.updatedAt },
     { path: "/emergency.html", changefreq: "monthly", priority: "0.7" },
     { path: "/add-listing.html", changefreq: "yearly", priority: "0.6" },

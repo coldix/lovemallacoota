@@ -60,5 +60,6 @@ export const publicDirectories = [
   "images/editions",
   "images/bus",
   "images/og",
+  "images/logos",
   "data/directory",
 ];

@@ -66,6 +66,16 @@ import { CARDS } from "../lib/social.mjs";
               loading="lazy"
             />
             <span class="shop-badge">Fine Art Panoramas</span>
+            <div class="shop-partner-corner" title="Official OzeArt Panoramic Prints">
+              <img
+                src="/images/logos/ozeart-logo.webp"
+                alt="OzeArt Panoramic Prints logo"
+                width="64"
+                height="64"
+                class="shop-corner-logo"
+                loading="lazy"
+              />
+            </div>
           </div>
           <div class="shop-body">
             <h3>Wall Art at art.oze.au</h3>
@@ -176,7 +186,17 @@ import { CARDS } from "../lib/social.mjs";
 
       <div class="shop-info-grid">
         <div class="shop-info-card">
-          <h4>Archival Panoramic Wall Art</h4>
+          <div class="shop-info-header">
+            <img
+              src="/images/logos/ozeart-logo.webp"
+              alt="OzeArt Panoramic Prints"
+              width="44"
+              height="44"
+              class="shop-info-logo"
+              loading="lazy"
+            />
+            <h4>Archival Panoramic Wall Art</h4>
+          </div>
           <p>
             Fulfilled directly through <strong>art.oze.au</strong> via Stripe, PayPal, and ThriveCart.
           </p>
@@ -188,7 +208,9 @@ import { CARDS } from "../lib/social.mjs";
         </div>
 
         <div class="shop-info-card">
-          <h4>Everyday Merchandise &amp; Apparel</h4>
+          <div class="shop-info-header">
+            <h4>Everyday Merchandise &amp; Apparel</h4>
+          </div>
           <p>
             Fulfilled worldwide by <strong>Redbubble</strong> on demand.
           </p>
@@ -200,13 +222,81 @@ import { CARDS } from "../lib/social.mjs";
         </div>
       </div>
 
-      <div class="shop-companion-note">
-        <p>
-          <strong>Related regional sites:</strong> Explore our factual sister guide at
-          <a href="https://gaboisland.au/shop/" target="_blank" rel="noopener noreferrer">gaboisland.au/shop</a>,
-          and the fictional hospitality showcase at
-          <a href="https://girl.oze.au/shop" target="_blank" rel="noopener noreferrer">girl.oze.au/shop</a>.
-        </p>
+      <!-- Related Regional Sites Box -->
+      <div class="related-sites-box" id="regional-network">
+        <div class="related-sites-header">
+          <span class="related-sites-kicker">Regional Network</span>
+          <h3 class="related-sites-title">Related Regional Sites</h3>
+          <p class="related-sites-lead">
+            Related regional sites: Explore our factual sister guide at <a href="https://gaboisland.au/shop/" target="_blank" rel="noopener noreferrer">gaboisland.au/shop</a>, and the fictional hospitality showcase at <a href="https://girl.oze.au/shop" target="_blank" rel="noopener noreferrer">girl.oze.au/shop</a>.
+          </p>
+        </div>
+
+        <div class="related-sites-grid">
+          <!-- 1. Gabo Island Guide -->
+          <a
+            href="https://gaboisland.au/shop/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="related-site-card"
+            id="related-site-gaboisland"
+          >
+            <div class="related-site-logo-wrap">
+              <img
+                src="/images/logos/gaboisland-logo.webp"
+                alt="GaboIsland.au gold lighthouse emblem logo"
+                width="92"
+                height="92"
+                class="related-site-logo"
+                loading="lazy"
+              />
+            </div>
+            <div class="related-site-info">
+              <div class="related-site-tag-wrap">
+                <span class="related-site-tag tag-factual">Factual Sister Guide</span>
+              </div>
+              <h4>gaboisland.au/shop</h4>
+              <p>
+                Explore our factual sister guide to Gabo Island's red granite lighthouse, little penguin colony, airstrip, and wilderness art prints.
+              </p>
+              <span class="related-site-link">
+                Visit gaboisland.au/shop <span aria-hidden="true">&rarr;</span>
+              </span>
+            </div>
+          </a>
+
+          <!-- 2. Gabo Island Resort Lodge (GIRL) -->
+          <a
+            href="https://girl.oze.au/shop"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="related-site-card"
+            id="related-site-girl"
+          >
+            <div class="related-site-logo-wrap">
+              <img
+                src="/images/logos/girl-logo.webp"
+                alt="GIRL - Gabo Island Resort Lodge gold crest logo"
+                width="92"
+                height="92"
+                class="related-site-logo"
+                loading="lazy"
+              />
+            </div>
+            <div class="related-site-info">
+              <div class="related-site-tag-wrap">
+                <span class="related-site-tag tag-fictional">Fictional Hospitality Showcase</span>
+              </div>
+              <h4>girl.oze.au/shop</h4>
+              <p>
+                Step into the luxury world of GIRL — a fictional high-end wilderness retreat on the real Gabo Island, featuring signature apparel, luxury bathrobes, and resort boutique goods.
+              </p>
+              <span class="related-site-link">
+                Visit girl.oze.au/shop <span aria-hidden="true">&rarr;</span>
+              </span>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
   </main>

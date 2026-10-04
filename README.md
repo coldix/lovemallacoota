@@ -2,11 +2,11 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.93-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.94-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-166%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
-**v1.93** - built 5 October 2026.
+**v1.94** - built 5 October 2026.
 <!-- /version -->
 
 Both the line above and the version badge are written by
@@ -91,6 +91,7 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * **Fine Art Panoramas & Ocean Prints**: High-resolution Mallacoota and Gabo Island panoramas printed on museum-grade cotton rag, fine-art canvas, and framed prints fulfilled by Australian fine-art lab [art.oze.au](https://art.oze.au/browse.html).
 * **Wilderness Apparel & Goods**: Wildlife-inspired t-shirts, hoodies, caps, totes, and mugs featuring Mallacoota pelicans, sea eagles, lyrebirds, and historic coastal emblems fulfilled on-demand via Redbubble.
 * **Community Creator Support**: Promotes local artisans and links directly to creative studios in the Community Directory, alongside the Love Mallacoota YouTube video channel.
+* **Regional Network Showcase**: Boxed showcase linking our sister stores — the factual Gabo Island guide at [gaboisland.au/shop](https://gaboisland.au/shop/) and the fictional hospitality showcase at [girl.oze.au/shop](https://girl.oze.au/shop) — complete with their official emblems.
 * **Redesigned Site Footer & Modal**: Features transparent community support cards ($10/mo Supporter, Chip In, $35/mo Sponsor) opening an accessible, in-page HTML5 `<dialog>` modal without full-screen redirects, paired with a structured 4-column footer directory.
 
 ---

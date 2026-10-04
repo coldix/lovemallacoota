@@ -1,0 +1,213 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { CARDS } from "../lib/social.mjs";
+---
+
+<BaseLayout
+  title="Shop Mallacoota Art, Merch & Prints - Love Mallacoota"
+  description="Fine art panoramic photography at art.oze.au, wildlife apparel and merchandise on Redbubble, and ways to support the Love Mallacoota guide."
+  canonicalPath="/shop.html"
+  socialImage={CARDS.shop}
+  active="shop"
+>
+  <PageHero
+    prefix="Shop &"
+    accent="Support"
+    lede="Authentic photography, fine art panoramas, and wildlife merchandise by Colin Dixon. Purchases and subscriptions help keep this independent community guide and video channel running."
+  />
+
+  <main>
+    <!-- YouTube support strip -->
+    <section class="glass-card sheen content-block reveal" aria-labelledby="yt-support-title">
+      <div class="shop-support-strip">
+        <div class="shop-support-text">
+          <span class="support-kicker">Free way to help</span>
+          <h2 id="yt-support-title" class="section-title">Watch & subscribe on YouTube</h2>
+          <p class="section-sub" style="margin-bottom: 0;">
+            The songs, local history and drone films of the Inlet, Bastion Point and Gabo Island live on the
+            <strong>@mallacoota2020</strong> YouTube channel. Watching and subscribing is free, costs nothing, and is the easiest way to support this work.
+          </p>
+        </div>
+        <div class="shop-support-actions">
+          <a
+            href="https://www.youtube.com/@mallacoota2020?sub_confirmation=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+            id="shop-subscribe-btn"
+          >
+            Subscribe on YouTube &rarr;
+          </a>
+          <a
+            href="https://www.youtube.com/@mallacoota2020"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-ghost"
+          >
+            Watch videos &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Shop Cards Grid -->
+    <section class="content-block reveal" aria-labelledby="shop-grid-title">
+      <h2 id="shop-grid-title" class="visually-hidden">Mallacoota Art & Merchandise</h2>
+      <div class="shop-grid">
+        <!-- 1. Fine Art Wall Art at art.oze.au -->
+        <article class="glass-card sheen shop-card" id="shop-art">
+          <div class="shop-media">
+            <img
+              src="/images/bank/bastion-point.webp"
+              alt="Panoramic view of Bastion Point and ocean in Mallacoota by Colin Dixon"
+              width="600"
+              height="280"
+              loading="lazy"
+            />
+            <span class="shop-badge">Fine Art Panoramas</span>
+          </div>
+          <div class="shop-body">
+            <h3>Wall Art at art.oze.au</h3>
+            <p>
+              Wide-format 3:1 aerial and panoramic landscape photography of Mallacoota Inlet, Bastion Point, Betka Beach,
+              and Gabo Island captured by Colin Dixon. Printed on demand in Australia on archival canvas, framed in handcrafted
+              timber floating frames (black, white, oak, walnut), or presented as dramatic 3-panel triptychs.
+            </p>
+            <div class="shop-actions">
+              <a
+                href="https://art.oze.au/panoramas.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+              >
+                Browse Panoramas &rarr;
+              </a>
+              <a
+                href="https://art.oze.au/shop.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-ghost"
+              >
+                Prints &amp; Objects &rarr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Redbubble Wildlife & Heritage Merch -->
+        <article class="glass-card sheen shop-card" id="shop-redbubble">
+          <div class="shop-media">
+            <img
+              src="/images/bank/the-mouth.webp"
+              alt="The Mallacoota Mouth at sunrise"
+              width="600"
+              height="280"
+              loading="lazy"
+            />
+            <span class="shop-badge">Apparel &amp; Goods</span>
+          </div>
+          <div class="shop-body">
+            <h3>Wildlife &amp; Heritage on Redbubble</h3>
+            <p>
+              Ten original designs celebrating East Gippsland's coastal wildlife: White-bellied Sea-Eagles,
+              Little Penguins, Short-tailed Shearwaters, and Australian Fur Seals, plus the iconic 1862 pink granite lighthouse.
+              Available on premium cotton tees, warm hoodies, die-cut vinyl stickers, mugs, and tote bags.
+            </p>
+            <div class="shop-actions">
+              <a
+                href="https://www.redbubble.com/people/colindixon/shop?collections=4589955"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+              >
+                Shop Wildlife Collection &rarr;
+              </a>
+              <a
+                href="https://www.redbubble.com/people/colindixon/shop"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-ghost"
+              >
+                Full Store (66 Designs) &rarr;
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Local Community Connection -->
+        <article class="glass-card sheen shop-card" id="shop-local">
+          <div class="shop-media">
+            <img
+              src="/images/bank/karbeethong-view.webp"
+              alt="View across the Bottom Lake from Karbeethong"
+              width="600"
+              height="280"
+              loading="lazy"
+            />
+            <span class="shop-badge">Local Directory</span>
+          </div>
+          <div class="shop-body">
+            <h3>Support Local Mallacoota Traders</h3>
+            <p>
+              Looking for local artisans, gifts, books, or supplies in town? Love Mallacoota maintains a free,
+              verified community directory of local businesses, cafes, hire boats, and makers. Buying locally directly supports
+              our remote wilderness community.
+            </p>
+            <div class="shop-actions">
+              <a href="/directory.html" class="btn btn-primary">
+                Browse Town Directory &rarr;
+              </a>
+              <a href="/food.html" class="btn btn-ghost">
+                Eat &amp; Drink &rarr;
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Fulfillment and Partner Network Information -->
+    <section class="glass-card sheen content-block reveal" aria-labelledby="fulfillment-title">
+      <h2 id="fulfillment-title" class="section-title">About Ordering &amp; Fulfillment</h2>
+      <p class="section-sub">
+        Love Mallacoota is an independent community platform. All products linked from this shop are fulfilled by trusted, established Australian and international production partners.
+      </p>
+
+      <div class="shop-info-grid">
+        <div class="shop-info-card">
+          <h4>Archival Panoramic Wall Art</h4>
+          <p>
+            Fulfilled directly through <strong>art.oze.au</strong> via Stripe, PayPal, and ThriveCart.
+          </p>
+          <ul class="shop-info-list">
+            <li>Printed on museum-grade archival canvas and photo rag</li>
+            <li>Custom timber floating frames in 4 finishes (black, white, oak, walnut)</li>
+            <li>Insured, heavy-duty protective packaging dispatched Australia-wide</li>
+          </ul>
+        </div>
+
+        <div class="shop-info-card">
+          <h4>Everyday Merchandise &amp; Apparel</h4>
+          <p>
+            Fulfilled worldwide by <strong>Redbubble</strong> on demand.
+          </p>
+          <ul class="shop-info-list">
+            <li>Comfortable pre-shrunk cotton tees, hoodies, and jackets</li>
+            <li>Waterproof vinyl stickers, ceramic mugs, and cotton tote bags</li>
+            <li>Full buyer protection, tracked shipping, and easy returns</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="shop-companion-note">
+        <p>
+          <strong>Related regional sites:</strong> Explore our factual sister guide at
+          <a href="https://gaboisland.au/shop/" target="_blank" rel="noopener noreferrer">gaboisland.au/shop</a>,
+          and the fictional hospitality showcase at
+          <a href="https://girl.oze.au/shop" target="_blank" rel="noopener noreferrer">girl.oze.au/shop</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -272,6 +272,13 @@ export const FIXED_CARDS = [
     title: "Add your listing",
     subtitle: "Businesses, clubs and services, verified by email",
   },
+  {
+    out: "shop.jpg",
+    photo: bankPath("bastion-point"),
+    eyebrow: "Shop & Gallery",
+    title: "Mallacoota Art & Merchandise",
+    subtitle: "Panoramas at art.oze.au, wildlife apparel and local merchandise",
+  },
 ];
 
 /**

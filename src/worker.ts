@@ -68,6 +68,7 @@ const MOVED_PATHS = new Map([
   ["/archive", "/archive.html"],
   ["/community", "/community.html"],
   ["/services", "/services.html"],
+  ["/shop", "/shop.html"],
   ["/directory", "/directory.html"],
   ["/add-listing", "/add-listing.html"],
   ["/claim", "/claim.html"],

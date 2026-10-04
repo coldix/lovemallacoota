@@ -4,8 +4,160 @@
     "date": "2025-10-23T14:11:21+11:00",
     "listings": 41
   },
-  "listings": 127,
+  "listings": 121,
   "entries": [
+    {
+      "commit": "d2ea6ab",
+      "date": "2026-09-25T18:11:17-04:00",
+      "subject": "Merge pull request #14 from coldix/claude/quirky-cori-dmo8hy",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "mallacoota-and-district-angling-club",
+          "name": "Mallacoota and District Angling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "address",
+              "from": "12 Greer Street, Mallacoota",
+              "to": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "a2128d4",
+      "date": "2026-09-25T18:05:56-04:00",
+      "subject": "Merge pull request #13 from coldix/claude/quirky-cori-dmo8hy",
+      "added": [],
+      "removed": [
+        {
+          "slug": "gippsland-victoria",
+          "name": "Gippsland, Victoria",
+          "section": "community"
+        },
+        {
+          "slug": "love-mallacoota-facebook-group",
+          "name": "Love Mallacoota (Facebook group)",
+          "section": "community"
+        },
+        {
+          "slug": "mallacoota-birds",
+          "name": "Mallacoota Birds",
+          "section": "community"
+        },
+        {
+          "slug": "mallacoota-buy-swap-and-sell",
+          "name": "Mallacoota Buy, Swap and Sell",
+          "section": "community"
+        },
+        {
+          "slug": "mallacoota-now",
+          "name": "Mallacoota Now",
+          "section": "community"
+        },
+        {
+          "slug": "mallacoota-weather",
+          "name": "Mallacoota Weather",
+          "section": "community"
+        }
+      ],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "lions-club-of-mallacoota-and-district",
+          "name": "Lions Club of Mallacoota & District",
+          "section": "community",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-and-district-angling-club",
+          "name": "Mallacoota and District Angling Club",
+          "section": "community",
+          "fields": [
+            {
+              "field": "email",
+              "from": null,
+              "to": "mallacootaanglingclub@gmail.com"
+            },
+            {
+              "field": "address",
+              "from": null,
+              "to": "12 Greer Street, Mallacoota"
+            },
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "8f39f12",
+      "date": "2026-09-25T17:46:40-04:00",
+      "subject": "Merge pull request #12 from coldix/claude/quirky-cori-dmo8hy",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "adobe-mudbrick-holiday-flats",
+          "name": "Adobe Holiday Flats",
+          "section": "stay",
+          "fields": [
+            {
+              "field": "description"
+            },
+            {
+              "field": "address",
+              "from": "9 Karbeethong Ave, Mallacoota",
+              "to": "7 Karbeethong Ave, Mallacoota"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "d0c9285",
+      "date": "2026-09-25T07:33:36-04:00",
+      "subject": "Merge pull request #10 from coldix/claude/quirky-cori-dmo8hy",
+      "added": [],
+      "removed": [],
+      "renamed": [],
+      "changed": [
+        {
+          "slug": "hammond-properties",
+          "name": "Hammond Properties",
+          "section": "services",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 1
+            }
+          ]
+        },
+        {
+          "slug": "mallacoota-lions-park-playground",
+          "name": "Lions Park Playground",
+          "section": "do-see",
+          "fields": [
+            {
+              "field": "photographs",
+              "added": 3
+            }
+          ]
+        }
+      ]
+    },
     {
       "commit": "52d5643",
       "date": "2026-09-06T15:55:13+10:00",

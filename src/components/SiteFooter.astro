@@ -3,55 +3,292 @@ import siteVersion from "../../data/site-version.json";
 ---
 <footer class="glass-card site-footer reveal">
   <div class="footer-inner">
-    <nav class="footer-nav" aria-label="Coota">
-      <a href="/edition.html">Coota</a>
-      <a href="/calendar.html">What's On</a>
-      <a href="/archive.html">Archive</a>
-      <a href="/mouth.html">The Mouth</a>
-      <a href="/brady.html">Love of Mallacoota</a>
-      <a href="/emergency.html">Emergency</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
-    <nav class="footer-nav" aria-label="Directory">
-      <a href="/directory.html">Directory</a>
-      <a href="/food.html">Eat &amp; Drink</a>
-      <a href="/accom.html">Stay</a>
-      <a href="/activity.html">Do &amp; See</a>
-      <a href="/community.html">Community</a>
-      <a href="/services.html">Services</a>
-    </nav>
-    <nav class="footer-nav policy-nav" aria-label="Add or update">
-      <a href="/add-listing.html">Add your listing</a>
-      <a href="/directory-changes.html">What's new in the directory</a>
-      <a href="/claim.html">Claim a listing</a>
-      <a href="/contact.html?subject=edition">Submit a story</a>
-      <a href="/submit-event.html">Submit an event</a>
-      <a href="/contact.html">Suggest a correction</a>
-    </nav>
-    {/* Kept apart from "Add your listing" on purpose: a listing is free, and
-        the paid things must never look like a condition of being listed. */}
-    <nav class="footer-nav policy-nav" aria-label="Support the site">
-      <a href="/subscribe">Become a supporter</a>
-      <a href="/donate">Chip in</a>
-      <a href="/advertise">Advertise</a>
-    </nav>
-    <nav class="footer-nav policy-nav" aria-label="Policies">
-      <a href="/editorial-policy.html">Editorial</a>
-      <a href="/corrections.html">Corrections</a>
-      <a href="/accessibility.html">Accessibility</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-    </nav>
-    <div class="social-icons social-links">
-      <a href="https://www.facebook.com/lovemallacoota" target="_blank" rel="noopener noreferrer">Facebook</a>
-      <a href="https://www.instagram.com/lovemallacoota" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <a href="https://www.youtube.com/@mallacoota2020" target="_blank" rel="noopener noreferrer">YouTube</a>
+    <!-- Top Support & Payment Explanation Panel -->
+    <section class="footer-support-panel" aria-labelledby="footer-support-heading">
+      <div class="footer-support-header">
+        <span class="support-kicker">Keeping this going</span>
+        <h3 id="footer-support-heading" class="footer-support-title">Support Love Mallacoota</h3>
+        <p class="footer-support-desc">
+          Free to read, and free to be listed in. Independent hosting, archive scanning and local video production are supported by readers and local sponsors.
+        </p>
+      </div>
+
+      <nav class="footer-support-grid" aria-label="Support the site">
+        <!-- 1. Community Supporter -->
+        <article class="footer-support-card">
+          <span class="support-card-tag">$10 / month</span>
+          <h4>Community Supporter</h4>
+          <p>Ongoing monthly support for the monthly Coota publication, community guides, and historic archive scanning. Cancel anytime.</p>
+          <a href="/subscribe" class="btn btn-primary btn-sm footer-pay-btn" data-payment="subscribe">
+            Become a supporter &rarr;
+          </a>
+        </article>
+
+        <!-- 2. Chip in -->
+        <article class="footer-support-card">
+          <span class="support-card-tag">Any amount once</span>
+          <h4>Chip In (One-Off)</h4>
+          <p>Give $10, $20, $50, $100 or your choice. Helps cover web hosting, domain renewals, and video equipment.</p>
+          <a href="/donate" class="btn btn-ghost btn-sm footer-pay-btn" data-payment="donate">
+            Chip in &rarr;
+          </a>
+        </article>
+
+        <!-- 3. Advertise -->
+        <article class="footer-support-card">
+          <span class="support-card-tag">$35 / month</span>
+          <h4>Advertise Your Business</h4>
+          <p>Featured placement in Coota and newsletter. <strong>Directory listing is always free</strong> &mdash; this is paid advertising.</p>
+          <a href="/advertise" class="btn btn-ghost btn-sm footer-pay-btn" data-payment="advertise">
+            Advertise &rarr;
+          </a>
+        </article>
+      </nav>
+
+      <p class="footer-support-note">
+        Payments handled securely by Stripe; no card details reach this site. Love Mallacoota is not registered for GST.
+      </p>
+    </section>
+
+    <!-- 4-Column Structured Navigation Grid -->
+    <div class="footer-grid">
+      <!-- Col 1: Brand & About -->
+      <div class="footer-col footer-col-brand">
+        <div class="footer-brand-header">
+          <img src="/images/logo145x100.webp" alt="Love Mallacoota logo" class="footer-brand-logo" width="48" height="33" loading="lazy" />
+          <span class="footer-brand-title">Love Mallacoota</span>
+        </div>
+        <p class="footer-tagline">
+          The independent community directory, monthly Coota publication and historical archive for Mallacoota, Genoa and Gipsy Point. Research, directory and photography by Colin Dixon.
+        </p>
+        <div class="social-icons social-links">
+          <a href="https://www.facebook.com/lovemallacoota" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.326V1.326C24 .597 23.403 0 22.675 0z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/lovemallacoota" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@mallacoota2020" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 2: Coota & What's On -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Coota &amp; What's On</h4>
+        <nav class="footer-nav-col" aria-label="Coota">
+          <a href="/edition.html">Coota (Monthly)</a>
+          <a href="/calendar.html">What's On</a>
+          <a href="/archive.html">Full Archive Index</a>
+          <a href="/mouth.html">The Mouth Archive</a>
+          <a href="/brady.html">Love of Mallacoota (1983)</a>
+          <a href="/emergency.html">Emergency Contacts</a>
+          <a href="/contact.html">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Col 3: Directory -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Community Directory</h4>
+        <nav class="footer-nav-col" aria-label="Directory">
+          <a href="/directory.html">Directory Home</a>
+          <a href="/food.html">Eat &amp; Drink</a>
+          <a href="/accom.html">Stay</a>
+          <a href="/activity.html">Do &amp; See</a>
+          <a href="/community.html">Community</a>
+          <a href="/services.html">Services</a>
+          <a href="/directory-changes.html">What's New in Directory</a>
+        </nav>
+      </div>
+
+      <!-- Col 4: Contribute & Policies -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Contribute &amp; Policies</h4>
+        <nav class="footer-nav-col policy-nav" aria-label="Add or update">
+          <a href="/shop.html">Shop &amp; Gallery</a>
+          <a href="/contact.html?subject=edition">Submit a story</a>
+          <a href="/submit-event.html">Submit an event</a>
+          <a href="/add-listing.html">Add your listing</a>
+          <a href="/claim.html">Claim a listing</a>
+          <a href="/contact.html">Suggest a correction</a>
+        </nav>
+        <nav class="footer-nav-col policy-nav" aria-label="Policies">
+          <a href="/editorial-policy.html">Editorial Charter</a>
+          <a href="/corrections.html">Corrections</a>
+          <a href="/accessibility.html">Accessibility</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+        </nav>
+      </div>
     </div>
-    <a href="https://oze.au" target="_blank" rel="noopener noreferrer" class="footer-logo-link" aria-label="Oze - parent business">
-      <img src="/images/oze-logo216x100.webp" alt="Oze logo" class="footer-logo" width="216" height="100" />
-    </a>
-    <p class="copyright">
-      © <span class="copyright-year"></span> Colin Dixon · Content <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer license">CC BY 4.0</a> · Code <a href="https://github.com/coldix/lovemallacoota/blob/main/LICENSE" target="_blank" rel="noopener noreferrer license">MIT</a> · <span id="build-stamp" class="build-stamp">{siteVersion.version} · {siteVersion.generatedAt}</span>
-    </p>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <div class="footer-meta">
+        <p class="copyright">
+          &copy; <span class="copyright-year"></span> Colin Dixon &middot; Content <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer license">CC BY 4.0</a> &middot; Code <a href="https://github.com/coldix/lovemallacoota/blob/main/LICENSE" target="_blank" rel="noopener noreferrer license">MIT</a>
+        </p>
+        <span class="meta-sep">&middot;</span>
+        <span id="build-stamp" class="build-stamp">{siteVersion.version} &middot; {siteVersion.generatedAt}</span>
+      </div>
+      <div class="footer-credit">
+        <span class="footer-by-text">Website by</span>
+        <a href="https://oze.au" target="_blank" rel="noopener noreferrer" class="footer-logo-link" aria-label="Oze - parent business">
+          <img src="/images/oze-logo216x100.webp" alt="Oze logo" class="footer-logo" width="108" height="50" loading="lazy" />
+        </a>
+      </div>
+    </div>
   </div>
+
+  <!-- Popup Window over the page for Support / Payments (Modal Window, Not Full Screen) -->
+  <dialog id="footer-payment-dialog" class="payment-modal-dialog" closedby="any" aria-labelledby="pay-dialog-title">
+    <div class="payment-dialog-head">
+      <div>
+        <span class="support-kicker">Love Mallacoota</span>
+        <h3 id="pay-dialog-title" class="payment-dialog-title">Support &amp; Payments</h3>
+      </div>
+      <button type="button" class="payment-dialog-close" data-pay-close aria-label="Close dialog">&times;</button>
+    </div>
+
+    <div class="payment-dialog-body">
+      <!-- Option Selector Tabs -->
+      <div class="payment-tabs" role="tablist" aria-label="Payment Options">
+        <button type="button" class="pay-tab active" data-tab="donate" role="tab" aria-selected="true">Chip In</button>
+        <button type="button" class="pay-tab" data-tab="subscribe" role="tab" aria-selected="false">Supporter ($10/mo)</button>
+        <button type="button" class="pay-tab" data-tab="advertise" role="tab" aria-selected="false">Advertise ($35/mo)</button>
+      </div>
+
+      <!-- Tab Panels -->
+      <!-- Panel 1: Chip In -->
+      <div class="pay-panel active" id="panel-donate">
+        <p class="pay-panel-desc">
+          One-off contribution towards server hosting, domain renewals, archive scanning, and the Mallacoota 2020 video channel.
+        </p>
+        <div class="pay-amount-presets">
+          <button type="button" class="amount-btn active" data-amount="10">$10</button>
+          <button type="button" class="amount-btn" data-amount="20">$20</button>
+          <button type="button" class="amount-btn" data-amount="50">$50</button>
+          <button type="button" class="amount-btn" data-amount="100">$100</button>
+          <button type="button" class="amount-btn" data-amount="open">Other</button>
+        </div>
+        <div class="pay-panel-action">
+          <a id="btn-proceed-donate" class="btn btn-primary btn-block" href="/donate?amount=10">
+            Proceed to Secure Payment ($10) &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Panel 2: Supporter -->
+      <div class="pay-panel" id="panel-subscribe" hidden>
+        <p class="pay-panel-desc">
+          Ongoing community supporter at <strong>$10.00 / month</strong>. Helps ensure the monthly Coota publication, What's On guides, and regional history projects stay active and independent. Cancel anytime.
+        </p>
+        <div class="pay-panel-action">
+          <a class="btn btn-primary btn-block" href="/subscribe">
+            Subscribe as Supporter ($10/mo) &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Panel 3: Advertise -->
+      <div class="pay-panel" id="panel-advertise" hidden>
+        <p class="pay-panel-desc">
+          Featured business placement in the monthly Coota edition and newsletter at <strong>$35.00 / month</strong>.
+          <br /><em class="small-text">Note: Being listed in the community directory is 100% free and always will be.</em>
+        </p>
+        <div class="pay-panel-action">
+          <a class="btn btn-primary btn-block" href="/advertise">
+            Book Business Advertisement ($35/mo) &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-dialog-foot">
+      <p>Handled securely by Stripe. No credit card details reach this site. Love Mallacoota is not registered for GST.</p>
+    </div>
+  </dialog>
 </footer>
+
+<script is:inline>
+  (() => {
+    const dialog = document.getElementById("footer-payment-dialog");
+    if (!dialog || typeof dialog.showModal !== "function") return;
+
+    // Fallback light-dismiss for browsers lacking native closedby support
+    if (!("closedBy" in HTMLDialogElement.prototype)) {
+      dialog.addEventListener("click", (event) => {
+        if (event.target !== dialog) return;
+        const rect = dialog.getBoundingClientRect();
+        const isInDialog = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) dialog.close();
+      });
+    }
+
+    dialog.querySelector("[data-pay-close]")?.addEventListener("click", () => dialog.close());
+
+    // Tabs switching
+    const tabs = dialog.querySelectorAll(".pay-tab");
+    const panels = {
+      donate: dialog.querySelector("#panel-donate"),
+      subscribe: dialog.querySelector("#panel-subscribe"),
+      advertise: dialog.querySelector("#panel-advertise"),
+    };
+
+    function selectTab(name) {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.tab === name;
+        tab.classList.toggle("active", active);
+        tab.setAttribute("aria-selected", String(active));
+      });
+      Object.entries(panels).forEach(([key, panel]) => {
+        if (!panel) return;
+        const active = key === name;
+        panel.classList.toggle("active", active);
+        panel.hidden = !active;
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => selectTab(tab.dataset.tab));
+    });
+
+    // Donate preset amounts
+    const amountBtns = dialog.querySelectorAll(".amount-btn");
+    const donateProceedBtn = dialog.querySelector("#btn-proceed-donate");
+
+    amountBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        amountBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const amount = btn.dataset.amount;
+        if (donateProceedBtn) {
+          if (amount === "open") {
+            donateProceedBtn.href = "/donate";
+            donateProceedBtn.innerHTML = "Proceed to Custom Amount &rarr;";
+          } else {
+            donateProceedBtn.href = `/donate?amount=${amount}`;
+            donateProceedBtn.innerHTML = `Proceed to Secure Payment ($${amount}) &rarr;`;
+          }
+        }
+      });
+    });
+
+    // Intercept clicks on payment buttons in the footer
+    document.querySelectorAll("[data-payment]").forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+        event.preventDefault();
+        const payType = btn.dataset.payment || "donate";
+        selectTab(payType);
+        dialog.showModal();
+      });
+    });
+  })();
+</script>

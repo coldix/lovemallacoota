@@ -2,11 +2,11 @@
 
 Community information platform, weekly news edition, historical archive, and local guide for [lovemallacoota.au](https://lovemallacoota.au/).
 
-[![Site Version](https://img.shields.io/badge/version-v1.92-0284c7.svg)](data/site-version.json)
+[![Site Version](https://img.shields.io/badge/version-v1.93-0284c7.svg)](data/site-version.json)
 [![Build & Test](https://img.shields.io/badge/tests-166%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
-**v1.92** - built 4 October 2026.
+**v1.93** - built 5 October 2026.
 <!-- /version -->
 
 Both the line above and the version badge are written by
@@ -86,6 +86,13 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * Central historical archive hub for Mallacoota.
 * Features the Edna J. Brady collection (`/brady.html`), *The Mallacoota Mouth* back-issue catalogue (`/mouth.html`), and weekly digital editions index.
 
+### 8. Shop & Gallery (`/shop.html`)
+* **Dedicated Storefront & Gallery**: Brings together local art, coastal photography, wilderness merchandise, and community makers for visitors and locals ([`lovemallacoota.au/shop`](https://lovemallacoota.au/shop)).
+* **Fine Art Panoramas & Ocean Prints**: High-resolution Mallacoota and Gabo Island panoramas printed on museum-grade cotton rag, fine-art canvas, and framed prints fulfilled by Australian fine-art lab [art.oze.au](https://art.oze.au/browse.html).
+* **Wilderness Apparel & Goods**: Wildlife-inspired t-shirts, hoodies, caps, totes, and mugs featuring Mallacoota pelicans, sea eagles, lyrebirds, and historic coastal emblems fulfilled on-demand via Redbubble.
+* **Community Creator Support**: Promotes local artisans and links directly to creative studios in the Community Directory, alongside the Love Mallacoota YouTube video channel.
+* **Redesigned Site Footer & Modal**: Features transparent community support cards ($10/mo Supporter, Chip In, $35/mo Sponsor) opening an accessible, in-page HTML5 `<dialog>` modal without full-screen redirects, paired with a structured 4-column footer directory.
+
 ---
 
 ## Site Architecture & Tech Stack
@@ -109,7 +116,7 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * **Core Framework**: Astro (Static Site Generation with file-based routing).
 * **Server / Edge Runtime**: Cloudflare Workers with TypeScript API routes (`src/worker.ts`, `src/submit.ts`, `src/admin.ts`, `src/listing.ts`).
 * **Database**: Cloudflare D1 (`lovemallacoota-directory`) for pending submissions, verification tokens, and audit logs.
-* **Design System**: Custom Vanilla CSS featuring an Antigravity Glassmorphism theme with dark/light mode support, vibrant accents, and smooth micro-animations.
+* **Design System**: Custom Vanilla CSS featuring an Antigravity Glassmorphism theme with dark/light mode support, vibrant accents, smooth micro-animations, a responsive 4-column footer, and in-page `<dialog>` modals.
 * **Image Optimization**: Photographs are converted to WebP with Sharp - submissions by `tools/process-uploads.mjs` (`uploads.yml`), and everything else by the `tools/prepare-*.mjs` scripts.
 * **Build Manifest & Versioning**: Version hash and timestamp dynamically generated in `data/site-version.json` and displayed in the site footer stamp.
 
@@ -142,6 +149,11 @@ Love Mallacoota (lovemallacoota.au)
 │
 ├── What's New in the Directory         /directory-changes.html
 │
+├── Shop & Gallery                      /shop.html
+│   ├── Fine Art & Panoramas (art.oze.au)
+│   ├── Merch & Apparel (Redbubble)
+│   └── Creator Support & Local Makers
+│
 ├── Archive Hub                         /archive.html
 │   ├── Mallacoota Mouth Catalogue     /mouth.html
 │   └── Love of Mallacoota (1998)      /brady.html
@@ -153,6 +165,7 @@ Love Mallacoota (lovemallacoota.au)
 ├── Emergency                           /emergency.html
 │
 └── About & Contribute
+    ├── Support & Sponsor Modal         (In-page Footer Dialog)
     ├── Contact & Corrections           /contact.html
     └── Editorial & Terms               /editorial-policy.html
 ```

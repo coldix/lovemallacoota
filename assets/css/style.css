@@ -231,7 +231,7 @@ html[data-theme="light"] .glass-card::before { background: linear-gradient(135de
     color: inherit; text-decoration: none; padding: 0.2rem 0.6rem 0.2rem 0.2rem;
     white-space: nowrap;
 }
-.nav-brand img { height: 36px; width: auto; display: block; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+.nav-brand img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; display: block; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
 .nav-spacer { flex: 1; }
 .nav-link {
     padding: 0.42rem 0.95rem;
@@ -420,9 +420,9 @@ html[data-theme="light"] .glass-card::before { background: linear-gradient(135de
     margin-top: 1.6rem;
 }
 .hero-logo {
-    width: clamp(110px, 14vw, 160px); height: auto;
-    margin-bottom: 1.1rem;
-    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.4));
+    width: clamp(240px, 36vw, 440px); max-width: 92vw; height: auto;
+    margin-bottom: 1.2rem;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
     animation: fade-rise 0.9s var(--ease) both, logo-bob 7s ease-in-out 1s infinite;
 }
 @keyframes logo-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
@@ -987,8 +987,11 @@ html[data-theme="light"] .footer-support-panel {
   margin-bottom: 0.4rem;
 }
 .footer-brand-logo {
-  height: 36px;
-  width: auto;
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 .footer-brand-title {
   font-size: 1.25rem;

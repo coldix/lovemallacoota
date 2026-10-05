@@ -55,7 +55,7 @@ import siteVersion from "../../data/site-version.json";
       <!-- Col 1: Brand & About -->
       <div class="footer-col footer-col-brand">
         <div class="footer-brand-header">
-          <img src="/images/logo145x100.webp" alt="Love Mallacoota logo" class="footer-brand-logo" width="48" height="33" loading="lazy" />
+          <img src="/images/logos/love-mallacoota-emblem-512.webp" alt="Love Mallacoota logo" class="footer-brand-logo" width="44" height="44" loading="lazy" />
           <span class="footer-brand-title">Love Mallacoota</span>
         </div>
         <p class="footer-tagline">
@@ -288,6 +288,29 @@ import siteVersion from "../../data/site-version.json";
         const payType = btn.dataset.payment || "donate";
         selectTab(payType);
         dialog.showModal();
+      });
+    });
+
+    // Open final Stripe checkout in a compact popup window over the page
+    dialog.querySelectorAll(".pay-panel-action a").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+        event.preventDefault();
+        const url = link.href;
+        const width = Math.min(520, window.innerWidth - 30);
+        const height = Math.min(760, window.innerHeight - 40);
+        const left = Math.max(0, Math.round(window.screenX + (window.outerWidth - width) / 2));
+        const top = Math.max(0, Math.round(window.screenY + (window.outerHeight - height) / 2));
+        const popup = window.open(
+          url,
+          "stripeCheckout",
+          `width=${width},height=${height},left=${left},top=${top},menubar=no,toolbar=no,location=yes,status=no,resizable=yes,scrollbars=yes`
+        );
+        if (popup) {
+          popup.focus();
+        } else {
+          window.location.href = url;
+        }
       });
     });
   })();

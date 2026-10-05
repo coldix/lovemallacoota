@@ -1,12 +1,11 @@
 {
-  "start": "2026-10-05",
-  "end": "2026-10-11",
-  "generatedAt": "2026-10-05T12:12:31.363Z",
+  "week": "2026-w41",
+  "generatedAt": "2026-10-05T12:12:30.020Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-05T12:12:30.151Z",
+    "fetchedAt": "2026-10-05T12:12:28.563Z",
     "days": [
       {
         "date": "2026-10-05",
@@ -73,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-05T12:12:30.260Z",
+    "fetchedAt": "2026-10-05T12:12:28.999Z",
     "extremes": [
       {
         "time": "2026-10-05T04:00",
@@ -996,14 +995,14 @@
     {
       "date": "Fri 9 Oct",
       "time": "9:30 am",
-      "title": "Croquet (Reclink)",
-      "location": "Mallacoota Golf and Country Club"
+      "title": "Playgroup",
+      "location": "Mallacoota Preschool and Toy Library"
     },
     {
       "date": "Fri 9 Oct",
       "time": "9:30 am",
-      "title": "Playgroup",
-      "location": "Mallacoota Preschool and Toy Library"
+      "title": "Croquet (Reclink)",
+      "location": "Mallacoota Golf and Country Club"
     },
     {
       "date": "Sat 10 Oct",
@@ -1020,14 +1019,14 @@
     {
       "date": "Sun 11 Oct",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     },
     {
       "date": "Sun 11 Oct",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     }
   ],
   "trail": {

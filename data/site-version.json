@@ -1,7 +1,7 @@
 {
   "project": "lovemallacoota.au",
   "version": "v1.95",
-  "generatedAt": "2026-10-05 12:13:11 AEDT (Melbourne)",
+  "generatedAt": "2026-10-05 23:12:39 AEDT (Melbourne)",
   "timezone": "Australia/Melbourne",
   "generator": "tools/update-version.mjs",
   "files": [
@@ -38,7 +38,7 @@
     {
       "path": "archive.html",
       "bytes": 23767,
-      "sha256": "f37a729374c0b988afe4d9e33ee469d423b53fd6e4090dfd82b16b6fe0b987e2"
+      "sha256": "3a1d935da9c0f2c2beffa028a2447999dafd4d68580c01b93d31449631b13676"
     },
     {
       "path": "assets/css/adnet.css",
@@ -117,8 +117,8 @@
     },
     {
       "path": "calendar.html",
-      "bytes": 39183,
-      "sha256": "e3e8ac159330e00969182b215121ba45d05728d891d938b8a9cd1cfa512c6b62"
+      "bytes": 39701,
+      "sha256": "885b217ea8653e7ae8b3552a926e24624d193ee689af9d3657136f47a3a77f5a"
     },
     {
       "path": "claim.html",
@@ -202,13 +202,13 @@
     },
     {
       "path": "edition.html",
-      "bytes": 65045,
-      "sha256": "9c4b7df6fd7d524e60d972dc2c9daa0cc729e925b49ccabf9f25a69c72c86e4b"
+      "bytes": 71444,
+      "sha256": "f0f54b64bd7467174c4689c105bf77288a51f64511b811b009ef3c720e90a837"
     },
     {
       "path": "edition/2026-09.html",
-      "bytes": 137540,
-      "sha256": "1c07f698e8fe40d8fc8b273fc2f5ac8b7523de3806ccd253081d4f19e794f106"
+      "bytes": 137956,
+      "sha256": "0751cfe42e063efaac58e6ec5c9fec852e8cd38f75bb59b73a16828ff4c288a4"
     },
     {
       "path": "edition/2026-09/2026-09-classifieds-buy-swap-sell.html",
@@ -327,18 +327,28 @@
     },
     {
       "path": "edition/2026-10.html",
-      "bytes": 64645,
-      "sha256": "ce7a506bebdfa9c24fefb34a10b030979a8da53e1de09a0b8fe9ace5e22e9e3c"
+      "bytes": 71179,
+      "sha256": "24444222051880ddde6d0cd20708bae0c285b76d02ee8ed332f29cc09be9f845"
+    },
+    {
+      "path": "edition/2026-10/2026-10-community-fire-danger-period-starts-today-in-east-gippsland.html",
+      "bytes": 23412,
+      "sha256": "562d9412c28d884c8b8002e6e565142a004fd5c70f30bef0b175c56333bfd6b4"
     },
     {
       "path": "edition/2026-10/2026-10-community-recycling-champions-win-tidy-towns-litter-award.html",
-      "bytes": 24186,
-      "sha256": "fd113c2cdfb37749dbc11690b005c9f7935b43512877bdf55dd5e37c0de9b2a4"
+      "bytes": 24432,
+      "sha256": "809be33b201c8493ba64b8ddd74c4486353b2cd5dc432625931671846a8c84ff"
+    },
+    {
+      "path": "edition/2026-10/2026-10-school-mallacoota-p-12-students-visit-parliament-house.html",
+      "bytes": 22991,
+      "sha256": "9818863ce5bd64a42e4b3e2c6cbdc78ffe8b6ae026e03160f513d9f2d99e2897"
     },
     {
       "path": "edition/2026-w36.html",
-      "bytes": 107631,
-      "sha256": "25719c3ff82e701f754e5aaabfed6cba6abb65519a1b776c8e1e24abb24c9c04"
+      "bytes": 107915,
+      "sha256": "95cd2bf809b1f055fa77bf085c4bbaf695619ad834523afb69047510d136a745"
     },
     {
       "path": "edition/2026-w36/2026-w36-history-bringing-mallacoota-s-literary-history-to-life-henry-lawson-.html",
@@ -481,9 +491,19 @@
       "sha256": "4c701ee3d419ba12a4bfb362d8bfb15952fd76a97a17b646ca1cb43705d3b03d"
     },
     {
+      "path": "images/articles/2026-10-community-fire-danger-period-starts-today-in-east-gippsland.webp",
+      "bytes": 564004,
+      "sha256": "edde8843363174699c563aedf29ab42d1aa6524dc7ee7b8d0a5bac87915fc3bd"
+    },
+    {
       "path": "images/articles/2026-10-community-recycling-champions-win-tidy-towns-litter-award.webp",
       "bytes": 99300,
       "sha256": "92bb23d2a443a089f2b10a10e8809f433917be4183f5aa92b1bdbee1e96a32dd"
+    },
+    {
+      "path": "images/articles/2026-10-school-mallacoota-p-12-students-visit-parliament-house.webp",
+      "bytes": 227522,
+      "sha256": "d96391fd8919df3558bd922319774e1b5e3f4598144910f6b9df2a571896ef78"
     },
     {
       "path": "images/articles/w35-community-shirley-90-2.webp",
@@ -2097,8 +2117,8 @@
     },
     {
       "path": "sitemap.xml",
-      "bytes": 31771,
-      "sha256": "8f8bc4ebb1dd6bd63d6aedbcd574b42b4cdc896499675cf12247fd0c8d092105"
+      "bytes": 32258,
+      "sha256": "0745b3667503ef3cc12037c391f93216d0660ffcdcdfe3ef4b54dbc94583bb10"
     },
     {
       "path": "submit-event.html",

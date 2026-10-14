@@ -1,18 +1,18 @@
 {
   "week": "2026-w42",
-  "generatedAt": "2026-10-13T12:37:24.562Z",
+  "generatedAt": "2026-10-14T10:04:07.476Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-13T12:37:22.772Z",
+    "fetchedAt": "2026-10-14T10:04:06.191Z",
     "days": [
       {
         "date": "2026-10-12",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 30.3,
-        "minC": 13.7,
+        "maxC": 30.8,
+        "minC": 13.6,
         "rainMm": 1.2
       },
       {
@@ -20,47 +20,47 @@
         "code": 3,
         "summary": "Overcast",
         "maxC": 17.2,
-        "minC": 11.6,
+        "minC": 11.7,
         "rainMm": 0
       },
       {
         "date": "2026-10-14",
-        "code": 51,
-        "summary": "Light drizzle",
-        "maxC": 15,
-        "minC": 8.3,
-        "rainMm": 0.7
+        "code": 53,
+        "summary": "Drizzle",
+        "maxC": 15.2,
+        "minC": 8.4,
+        "rainMm": 1.5
       },
       {
         "date": "2026-10-15",
         "code": 51,
         "summary": "Light drizzle",
         "maxC": 16.1,
-        "minC": 7,
+        "minC": 7.6,
         "rainMm": 0.2
       },
       {
         "date": "2026-10-16",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 18.4,
-        "minC": 10.7,
-        "rainMm": 0.3
+        "maxC": 18.1,
+        "minC": 11.5,
+        "rainMm": 0.1
       },
       {
         "date": "2026-10-17",
-        "code": 1,
-        "summary": "Mostly clear",
-        "maxC": 20.3,
-        "minC": 10.5,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 19.6,
+        "minC": 11.1,
+        "rainMm": 0.9
       },
       {
         "date": "2026-10-18",
         "code": 0,
         "summary": "Clear",
-        "maxC": 21.6,
-        "minC": 13.4,
+        "maxC": 21.3,
+        "minC": 12,
         "rainMm": 0
       }
     ]
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-13T12:37:23.372Z",
+    "fetchedAt": "2026-10-14T10:04:06.813Z",
     "extremes": [
       {
         "time": "2026-10-12T03:00",
@@ -947,14 +947,14 @@
     {
       "date": "Mon 12 Oct",
       "time": "10:00 am",
-      "title": "Toddler Music and Movement (Reclink)",
-      "location": ""
+      "title": "Pickleball",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Mon 12 Oct",
       "time": "10:00 am",
-      "title": "Pickleball",
-      "location": "Mallacoota Tennis Club"
+      "title": "Toddler Music and Movement (Reclink)",
+      "location": ""
     },
     {
       "date": "Tue 13 Oct",
@@ -965,8 +965,8 @@
     {
       "date": "Tue 13 Oct",
       "time": "10:00 am",
-      "title": "Strength and Balance (a bit more support)",
-      "location": ""
+      "title": "Library - Rhyme time",
+      "location": "Mallacoota Service Centre and Library"
     },
     {
       "date": "Wed 14 Oct",
@@ -995,14 +995,14 @@
     {
       "date": "Fri 16 Oct",
       "time": "9:30 am",
-      "title": "Croquet (Reclink)",
-      "location": "Mallacoota Golf and Country Club"
+      "title": "Playgroup",
+      "location": "Mallacoota Preschool and Toy Library"
     },
     {
       "date": "Fri 16 Oct",
       "time": "9:30 am",
-      "title": "Playgroup",
-      "location": "Mallacoota Preschool and Toy Library"
+      "title": "Croquet (Reclink)",
+      "location": "Mallacoota Golf and Country Club"
     },
     {
       "date": "Sat 17 Oct",

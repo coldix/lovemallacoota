@@ -1,11 +1,11 @@
 {
   "week": "2026-w43",
-  "generatedAt": "2026-10-20T09:57:49.634Z",
+  "generatedAt": "2026-10-21T10:01:45.630Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-20T09:57:47.994Z",
+    "fetchedAt": "2026-10-21T10:01:44.081Z",
     "days": [
       {
         "date": "2026-10-19",
@@ -25,43 +25,43 @@
       },
       {
         "date": "2026-10-21",
-        "code": 2,
-        "summary": "Partly cloudy",
-        "maxC": 25.9,
-        "minC": 14.7,
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 26.7,
+        "minC": 15.3,
         "rainMm": 0
       },
       {
         "date": "2026-10-22",
-        "code": 1,
-        "summary": "Mostly clear",
-        "maxC": 23.5,
-        "minC": 15.1,
+        "code": 45,
+        "summary": "Fog",
+        "maxC": 23.6,
+        "minC": 15.5,
         "rainMm": 0
       },
       {
         "date": "2026-10-23",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 24.8,
-        "minC": 17,
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 24.6,
+        "minC": 17.2,
         "rainMm": 0
       },
       {
         "date": "2026-10-24",
-        "code": 53,
-        "summary": "Drizzle",
-        "maxC": 28.5,
-        "minC": 16.8,
-        "rainMm": 3.3
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 27.3,
+        "minC": 16.6,
+        "rainMm": 0
       },
       {
         "date": "2026-10-25",
         "code": 95,
         "summary": "Thunderstorms",
-        "maxC": 24.8,
-        "minC": 9.7,
-        "rainMm": 15.9
+        "maxC": 30.4,
+        "minC": 12.7,
+        "rainMm": 11.8
       }
     ]
   },
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-20T09:57:48.573Z",
+    "fetchedAt": "2026-10-21T10:01:44.663Z",
     "extremes": [
       {
         "time": "2026-10-19T03:00",
@@ -965,8 +965,8 @@
     {
       "date": "Tue 20 Oct",
       "time": "10:00 am",
-      "title": "Strength and Balance (a bit more support)",
-      "location": ""
+      "title": "Library - Rhyme time",
+      "location": "Mallacoota Service Centre and Library"
     },
     {
       "date": "Wed 21 Oct",
@@ -983,14 +983,14 @@
     {
       "date": "Thu 22 Oct",
       "time": "9:30 am",
-      "title": "Wilderness Collective (CCR)",
-      "location": "The Oval"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Thu 22 Oct",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
+      "title": "Wilderness Collective (CCR)",
+      "location": "The Oval"
     },
     {
       "date": "Fri 23 Oct",
@@ -1019,14 +1019,14 @@
     {
       "date": "Sun 25 Oct",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     },
     {
       "date": "Sun 25 Oct",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     }
   ],
   "trail": {

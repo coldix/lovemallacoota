@@ -4,7 +4,7 @@ import test, { afterEach } from "node:test";
 import { handleContactSubmit } from "../src/contact.ts";
 
 const SITEVERIFY = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-const RELAY_URL = "https://ads.oze.net.au/relay";
+const RELAY_URL = "https://ads.oze.au/relay";
 
 const realFetch = globalThis.fetch;
 afterEach(() => {

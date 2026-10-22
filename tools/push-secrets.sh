@@ -132,7 +132,7 @@ else
   push RELAY_KEY "$ADNET" --config serve/wrangler.jsonc
   if ! $CHECK_ONLY; then
     sleep 3
-    CODE="$(curl -s -o /dev/null -w '%{http_code}' -X POST https://ads.oze.net.au/relay \
+    CODE="$(curl -s -o /dev/null -w '%{http_code}' -X POST https://ads.oze.au/relay \
       -H 'Authorization: Bearer deliberately-wrong' -H 'Content-Type: application/json' \
       -d '{"site":"lovemallacoota"}')"
     case "$CODE" in

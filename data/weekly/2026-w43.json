@@ -1,11 +1,11 @@
 {
   "week": "2026-w43",
-  "generatedAt": "2026-10-21T10:01:45.630Z",
+  "generatedAt": "2026-10-22T10:02:43.456Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-21T10:01:44.081Z",
+    "fetchedAt": "2026-10-22T10:02:42.072Z",
     "days": [
       {
         "date": "2026-10-19",
@@ -33,10 +33,10 @@
       },
       {
         "date": "2026-10-22",
-        "code": 45,
-        "summary": "Fog",
-        "maxC": 23.6,
-        "minC": 15.5,
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 23.7,
+        "minC": 15.9,
         "rainMm": 0
       },
       {
@@ -44,24 +44,24 @@
         "code": 2,
         "summary": "Partly cloudy",
         "maxC": 24.6,
-        "minC": 17.2,
+        "minC": 16.2,
         "rainMm": 0
       },
       {
         "date": "2026-10-24",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 27.3,
-        "minC": 16.6,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 27.6,
+        "minC": 16.5,
+        "rainMm": 0.3
       },
       {
         "date": "2026-10-25",
-        "code": 95,
-        "summary": "Thunderstorms",
-        "maxC": 30.4,
-        "minC": 12.7,
-        "rainMm": 11.8
+        "code": 81,
+        "summary": "Showers",
+        "maxC": 32.5,
+        "minC": 12.9,
+        "rainMm": 10.3
       }
     ]
   },
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-21T10:01:44.663Z",
+    "fetchedAt": "2026-10-22T10:02:42.566Z",
     "extremes": [
       {
         "time": "2026-10-19T03:00",
@@ -947,14 +947,14 @@
     {
       "date": "Mon 19 Oct",
       "time": "10:00 am",
-      "title": "Toddler Music and Movement (Reclink)",
-      "location": ""
+      "title": "Pickleball",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Mon 19 Oct",
       "time": "10:00 am",
-      "title": "Pickleball",
-      "location": "Mallacoota Tennis Club"
+      "title": "Toddler Music and Movement (Reclink)",
+      "location": ""
     },
     {
       "date": "Tue 20 Oct",
@@ -965,8 +965,8 @@
     {
       "date": "Tue 20 Oct",
       "time": "10:00 am",
-      "title": "Library - Rhyme time",
-      "location": "Mallacoota Service Centre and Library"
+      "title": "Strength and Balance (a bit more support)",
+      "location": ""
     },
     {
       "date": "Wed 21 Oct",
@@ -1019,14 +1019,14 @@
     {
       "date": "Sun 25 Oct",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Sun 25 Oct",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     }
   ],
   "trail": {

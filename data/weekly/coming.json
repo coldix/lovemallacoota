@@ -1,27 +1,19 @@
 {
-  "start": "2026-10-21",
-  "end": "2026-10-27",
-  "generatedAt": "2026-10-21T10:01:47.009Z",
+  "start": "2026-10-22",
+  "end": "2026-10-28",
+  "generatedAt": "2026-10-22T10:02:44.457Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-21T10:01:45.951Z",
+    "fetchedAt": "2026-10-22T10:02:43.598Z",
     "days": [
       {
-        "date": "2026-10-21",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 26.7,
-        "minC": 15.3,
-        "rainMm": 0
-      },
-      {
         "date": "2026-10-22",
-        "code": 45,
-        "summary": "Fog",
-        "maxC": 23.6,
-        "minC": 15.5,
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 23.7,
+        "minC": 15.9,
         "rainMm": 0
       },
       {
@@ -29,40 +21,48 @@
         "code": 2,
         "summary": "Partly cloudy",
         "maxC": 24.6,
-        "minC": 17.2,
+        "minC": 16.2,
         "rainMm": 0
       },
       {
         "date": "2026-10-24",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 27.3,
-        "minC": 16.6,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 27.6,
+        "minC": 16.5,
+        "rainMm": 0.3
       },
       {
         "date": "2026-10-25",
-        "code": 95,
-        "summary": "Thunderstorms",
-        "maxC": 30.4,
-        "minC": 12.7,
-        "rainMm": 11.8
+        "code": 81,
+        "summary": "Showers",
+        "maxC": 32.5,
+        "minC": 12.9,
+        "rainMm": 10.3
       },
       {
         "date": "2026-10-26",
-        "code": 51,
-        "summary": "Light drizzle",
-        "maxC": 17.5,
-        "minC": 9.9,
-        "rainMm": 0.2
+        "code": 53,
+        "summary": "Drizzle",
+        "maxC": 16.6,
+        "minC": 9.2,
+        "rainMm": 2.4
       },
       {
         "date": "2026-10-27",
-        "code": 51,
-        "summary": "Light drizzle",
-        "maxC": 13.9,
-        "minC": 8.6,
-        "rainMm": 2.7
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 17.5,
+        "minC": 9.7,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-10-28",
+        "code": 3,
+        "summary": "Overcast",
+        "maxC": 19.5,
+        "minC": 9.3,
+        "rainMm": 0
       }
     ]
   },
@@ -73,28 +73,8 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-21T10:01:46.095Z",
+    "fetchedAt": "2026-10-22T10:02:43.718Z",
     "extremes": [
-      {
-        "time": "2026-10-21T05:00",
-        "type": "High",
-        "heightM": 0.24
-      },
-      {
-        "time": "2026-10-21T11:00",
-        "type": "Low",
-        "heightM": -0.18
-      },
-      {
-        "time": "2026-10-21T17:00",
-        "type": "High",
-        "heightM": 0.42
-      },
-      {
-        "time": "2026-10-21T23:00",
-        "type": "Low",
-        "heightM": -0.54
-      },
       {
         "time": "2026-10-22T06:00",
         "type": "High",
@@ -209,105 +189,24 @@
         "time": "2026-10-27T22:00",
         "type": "High",
         "heightM": 0.42
+      },
+      {
+        "time": "2026-10-28T03:00",
+        "type": "Low",
+        "heightM": -0.42
+      },
+      {
+        "time": "2026-10-28T10:00",
+        "type": "High",
+        "heightM": 0.75
+      },
+      {
+        "time": "2026-10-28T16:00",
+        "type": "Low",
+        "heightM": -0.71
       }
     ],
     "series": [
-      {
-        "time": "2026-10-21T00:00",
-        "heightM": -0.45
-      },
-      {
-        "time": "2026-10-21T01:00",
-        "heightM": -0.31
-      },
-      {
-        "time": "2026-10-21T02:00",
-        "heightM": -0.13
-      },
-      {
-        "time": "2026-10-21T03:00",
-        "heightM": 0.05
-      },
-      {
-        "time": "2026-10-21T04:00",
-        "heightM": 0.18
-      },
-      {
-        "time": "2026-10-21T05:00",
-        "heightM": 0.24
-      },
-      {
-        "time": "2026-10-21T06:00",
-        "heightM": 0.22
-      },
-      {
-        "time": "2026-10-21T07:00",
-        "heightM": 0.13
-      },
-      {
-        "time": "2026-10-21T08:00",
-        "heightM": 0.01
-      },
-      {
-        "time": "2026-10-21T09:00",
-        "heightM": -0.1
-      },
-      {
-        "time": "2026-10-21T10:00",
-        "heightM": -0.17
-      },
-      {
-        "time": "2026-10-21T11:00",
-        "heightM": -0.18
-      },
-      {
-        "time": "2026-10-21T12:00",
-        "heightM": -0.11
-      },
-      {
-        "time": "2026-10-21T13:00",
-        "heightM": 0.01
-      },
-      {
-        "time": "2026-10-21T14:00",
-        "heightM": 0.16
-      },
-      {
-        "time": "2026-10-21T15:00",
-        "heightM": 0.31
-      },
-      {
-        "time": "2026-10-21T16:00",
-        "heightM": 0.41
-      },
-      {
-        "time": "2026-10-21T17:00",
-        "heightM": 0.42
-      },
-      {
-        "time": "2026-10-21T18:00",
-        "heightM": 0.34
-      },
-      {
-        "time": "2026-10-21T19:00",
-        "heightM": 0.17
-      },
-      {
-        "time": "2026-10-21T20:00",
-        "heightM": -0.04
-      },
-      {
-        "time": "2026-10-21T21:00",
-        "heightM": -0.27
-      },
-      {
-        "time": "2026-10-21T22:00",
-        "heightM": -0.44
-      },
-      {
-        "time": "2026-10-21T23:00",
-        "heightM": -0.54
-      },
       {
         "time": "2026-10-22T00:00",
         "heightM": -0.53
@@ -883,18 +782,106 @@
       {
         "time": "2026-10-27T23:00",
         "heightM": 0.3
+      },
+      {
+        "time": "2026-10-28T00:00",
+        "heightM": 0.09
+      },
+      {
+        "time": "2026-10-28T01:00",
+        "heightM": -0.14
+      },
+      {
+        "time": "2026-10-28T02:00",
+        "heightM": -0.33
+      },
+      {
+        "time": "2026-10-28T03:00",
+        "heightM": -0.42
+      },
+      {
+        "time": "2026-10-28T04:00",
+        "heightM": -0.39
+      },
+      {
+        "time": "2026-10-28T05:00",
+        "heightM": -0.23
+      },
+      {
+        "time": "2026-10-28T06:00",
+        "heightM": 0.02
+      },
+      {
+        "time": "2026-10-28T07:00",
+        "heightM": 0.31
+      },
+      {
+        "time": "2026-10-28T08:00",
+        "heightM": 0.57
+      },
+      {
+        "time": "2026-10-28T09:00",
+        "heightM": 0.73
+      },
+      {
+        "time": "2026-10-28T10:00",
+        "heightM": 0.75
+      },
+      {
+        "time": "2026-10-28T11:00",
+        "heightM": 0.61
+      },
+      {
+        "time": "2026-10-28T12:00",
+        "heightM": 0.33
+      },
+      {
+        "time": "2026-10-28T13:00",
+        "heightM": 0
+      },
+      {
+        "time": "2026-10-28T14:00",
+        "heightM": -0.33
+      },
+      {
+        "time": "2026-10-28T15:00",
+        "heightM": -0.58
+      },
+      {
+        "time": "2026-10-28T16:00",
+        "heightM": -0.71
+      },
+      {
+        "time": "2026-10-28T17:00",
+        "heightM": -0.7
+      },
+      {
+        "time": "2026-10-28T18:00",
+        "heightM": -0.56
+      },
+      {
+        "time": "2026-10-28T19:00",
+        "heightM": -0.33
+      },
+      {
+        "time": "2026-10-28T20:00",
+        "heightM": -0.07
+      },
+      {
+        "time": "2026-10-28T21:00",
+        "heightM": 0.16
+      },
+      {
+        "time": "2026-10-28T22:00",
+        "heightM": 0.31
+      },
+      {
+        "time": "2026-10-28T23:00",
+        "heightM": 0.32
       }
     ]
   },
   "moon": [
-    {
-      "date": "2026-10-21",
-      "name": "Waxing gibbous",
-      "symbol": "◕",
-      "age": 9.7,
-      "illumination": 74,
-      "range": "between"
-    },
     {
       "date": "2026-10-22",
       "name": "Waxing gibbous",
@@ -942,32 +929,28 @@
       "age": 15.7,
       "illumination": 99,
       "range": "spring"
+    },
+    {
+      "date": "2026-10-28",
+      "name": "Waning gibbous",
+      "symbol": "◔",
+      "age": 16.7,
+      "illumination": 96,
+      "range": "between"
     }
   ],
   "events": [
     {
-      "date": "Wed 21 Oct",
-      "time": "6:15 am",
-      "title": "Fitness with Ebony (MBP)",
-      "location": "Lions Park"
-    },
-    {
-      "date": "Wed 21 Oct",
-      "time": "8:30 am",
-      "title": "Walk and Talk Wednesday for women",
-      "location": "Wilderness Collective Garden"
+      "date": "Thu 22 Oct",
+      "time": "9:30 am",
+      "title": "Wilderness Collective (CCR)",
+      "location": "The Oval"
     },
     {
       "date": "Thu 22 Oct",
       "time": "9:30 am",
       "title": "Bushcare Weeding Group",
       "location": ""
-    },
-    {
-      "date": "Thu 22 Oct",
-      "time": "9:30 am",
-      "title": "Wilderness Collective (CCR)",
-      "location": "The Oval"
     },
     {
       "date": "Fri 23 Oct",
@@ -1028,6 +1011,18 @@
       "time": "10:00 am",
       "title": "Library - Rhyme time",
       "location": "Mallacoota Service Centre and Library"
+    },
+    {
+      "date": "Wed 28 Oct",
+      "time": "6:15 am",
+      "title": "Fitness with Ebony (MBP)",
+      "location": "Lions Park"
+    },
+    {
+      "date": "Wed 28 Oct",
+      "time": "8:30 am",
+      "title": "Walk and Talk Wednesday for women",
+      "location": "Wilderness Collective Garden"
     }
   ],
   "trail": {

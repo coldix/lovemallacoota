@@ -16,7 +16,7 @@ There are two kinds of message, and they cannot use the same road.
 | | To Colin | To a stranger |
 | --- | --- | --- |
 | **Examples** | contact form, claim needing review, an event for the calendar | verification codes for add-listing, claim, submit-event |
-| **Goes via** | the adnet relay at `ads.oze.net.au/relay` | Resend, direct |
+| **Goes via** | the adnet relay at `ads.oze.au/relay` | Resend, direct |
 | **Code** | `sendMail()` in `src/listing.ts`, `src/contact.ts` | `src/mailer.ts` |
 | **Recipient chosen by** | the relay, from a fixed table | the person filling the form |
 
@@ -61,7 +61,7 @@ This cost hours.
 
 | Account | ID | Holds |
 | --- | --- | --- |
-| `Colin@oze.com.au's Account` | `1b494ec3…` | **`adnet-serve`**, `ads.oze.net.au`, the Email Routing destinations the relay sends to |
+| `Colin@oze.com.au's Account` | `1b494ec3…` | **`adnet-serve`**, `ads.oze.au`, the Email Routing destinations the relay sends to |
 | `Col@oze.com.au's Account` | `ab29454d…` | **`lovemallacoota`**, the `lovemallacoota.au` zone |
 | `col@dixon.net.au` | `b340df1d…` | — |
 | `Ss@oze.com.au's Account` | `fe8b3e9f…` | — |
@@ -231,7 +231,7 @@ Verify every secret against the service that owns it:
 Is the relay armed? A wrong bearer should give **401**, not 503:
 
 ```sh
-curl -s -X POST https://ads.oze.net.au/relay -H 'Authorization: Bearer wrong' \
+curl -s -X POST https://ads.oze.au/relay -H 'Authorization: Bearer wrong' \
   -H 'Content-Type: application/json' -d '{"site":"lovemallacoota"}'
 ```
 

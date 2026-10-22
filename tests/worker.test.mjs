@@ -170,7 +170,7 @@ test("responses carry the security headers, including a policy that allows what 
   for (const needed of [
     "https://fonts.gstatic.com",
     "https://www.googletagmanager.com",
-    "https://ads.oze.net.au",
+    "https://ads.oze.au",
     "https://challenges.cloudflare.com",
     "https://www.youtube.com",
     "https://calendar.google.com",
@@ -328,5 +328,5 @@ test("every third party the site loads is allowed in the directive it needs", as
 
   // The relay is called from the Worker, not the page, so it needs no entry —
   // but the ad tag is fetched by the browser and does.
-  assert.ok(directive("connect-src").includes("https://ads.oze.net.au"), "the ad tag cannot report");
+  assert.ok(directive("connect-src").includes("https://ads.oze.au"), "the ad tag cannot report");
 });

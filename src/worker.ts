@@ -129,7 +129,7 @@ function redirectToCanonical(url: URL): Response {
  * because a feature needs it:
  *   Google Fonts        the typefaces
  *   Google Analytics    the tag and its beacons
- *   ads.oze.net.au      the house ad tag, its decisions and its artwork
+ *   ads.oze.au          the house ad tag, its decisions and its artwork
  *   challenges.…        Turnstile on the contact form
  *   YouTube, Maps       the two embeds on the home page
  *   kuula.co            the weekly three-sixty view
@@ -146,16 +146,17 @@ function redirectToCanonical(url: URL): Response {
  */
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://ads.oze.net.au https://challenges.cloudflare.com https://static.cloudflareinsights.com https://js.stripe.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://ads.oze.au https://challenges.cloudflare.com https://static.cloudflareinsights.com https://js.stripe.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' data: https://ads.oze.net.au https://www.google-analytics.com https://*.stripe.com",
+  // ads.oze.net.au stays in img-src only until adnet serves its artwork from ads.oze.au.
+  "img-src 'self' data: https://ads.oze.au https://ads.oze.net.au https://www.google-analytics.com https://*.stripe.com",
   // challenges.cloudflare.com belongs here as well as in script-src and
   // frame-src. Turnstile loads its script, builds its container, and then calls
   // home to start the challenge — and that last call was blocked, so the widget
   // died without an iframe, without a token and without an error. Every form on
   // the site failed from launch until 31 August 2026 for this reason.
-  "connect-src 'self' https://challenges.cloudflare.com https://ads.oze.net.au https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://static.cloudflareinsights.com https://api.stripe.com https://merchant-ui-api.stripe.com https://r.stripe.com",
+  "connect-src 'self' https://challenges.cloudflare.com https://ads.oze.au https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://static.cloudflareinsights.com https://api.stripe.com https://merchant-ui-api.stripe.com https://r.stripe.com",
   "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://calendar.google.com https://challenges.cloudflare.com https://kuula.co https://js.stripe.com https://checkout.link.com",
   "form-action 'self'",
   "base-uri 'self'",

@@ -1,11 +1,11 @@
 {
   "week": "2026-w43",
-  "generatedAt": "2026-10-22T10:02:43.456Z",
+  "generatedAt": "2026-10-23T09:56:55.747Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-22T10:02:42.072Z",
+    "fetchedAt": "2026-10-23T09:56:54.435Z",
     "days": [
       {
         "date": "2026-10-19",
@@ -41,27 +41,27 @@
       },
       {
         "date": "2026-10-23",
-        "code": 2,
-        "summary": "Partly cloudy",
-        "maxC": 24.6,
-        "minC": 16.2,
+        "code": 1,
+        "summary": "Mostly clear",
+        "maxC": 24.5,
+        "minC": 17.1,
         "rainMm": 0
       },
       {
         "date": "2026-10-24",
-        "code": 51,
-        "summary": "Light drizzle",
-        "maxC": 27.6,
+        "code": 45,
+        "summary": "Fog",
+        "maxC": 24.7,
         "minC": 16.5,
-        "rainMm": 0.3
+        "rainMm": 0
       },
       {
         "date": "2026-10-25",
-        "code": 81,
-        "summary": "Showers",
+        "code": 96,
+        "summary": "Thunderstorms with hail",
         "maxC": 32.5,
-        "minC": 12.9,
-        "rainMm": 10.3
+        "minC": 12.4,
+        "rainMm": 27.7
       }
     ]
   },
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-22T10:02:42.566Z",
+    "fetchedAt": "2026-10-23T09:56:55.009Z",
     "extremes": [
       {
         "time": "2026-10-19T03:00",
@@ -983,26 +983,26 @@
     {
       "date": "Thu 22 Oct",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
-    },
-    {
-      "date": "Thu 22 Oct",
-      "time": "9:30 am",
       "title": "Wilderness Collective (CCR)",
       "location": "The Oval"
     },
     {
-      "date": "Fri 23 Oct",
+      "date": "Thu 22 Oct",
       "time": "9:30 am",
-      "title": "Playgroup",
-      "location": "Mallacoota Preschool and Toy Library"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Fri 23 Oct",
       "time": "9:30 am",
       "title": "Croquet (Reclink)",
       "location": "Mallacoota Golf and Country Club"
+    },
+    {
+      "date": "Fri 23 Oct",
+      "time": "9:30 am",
+      "title": "Playgroup",
+      "location": "Mallacoota Preschool and Toy Library"
     },
     {
       "date": "Sat 24 Oct",
@@ -1019,14 +1019,14 @@
     {
       "date": "Sun 25 Oct",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     },
     {
       "date": "Sun 25 Oct",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     }
   ],
   "trail": {

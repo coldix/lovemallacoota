@@ -1,67 +1,67 @@
 {
-  "start": "2026-10-22",
-  "end": "2026-10-28",
-  "generatedAt": "2026-10-22T10:02:44.457Z",
+  "start": "2026-10-23",
+  "end": "2026-10-29",
+  "generatedAt": "2026-10-23T09:56:56.817Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-22T10:02:43.598Z",
+    "fetchedAt": "2026-10-23T09:56:55.896Z",
     "days": [
       {
-        "date": "2026-10-22",
-        "code": 2,
-        "summary": "Partly cloudy",
-        "maxC": 23.7,
-        "minC": 15.9,
-        "rainMm": 0
-      },
-      {
         "date": "2026-10-23",
-        "code": 2,
-        "summary": "Partly cloudy",
-        "maxC": 24.6,
-        "minC": 16.2,
+        "code": 1,
+        "summary": "Mostly clear",
+        "maxC": 24.5,
+        "minC": 17.1,
         "rainMm": 0
       },
       {
         "date": "2026-10-24",
-        "code": 51,
-        "summary": "Light drizzle",
-        "maxC": 27.6,
+        "code": 45,
+        "summary": "Fog",
+        "maxC": 24.7,
         "minC": 16.5,
-        "rainMm": 0.3
+        "rainMm": 0
       },
       {
         "date": "2026-10-25",
-        "code": 81,
-        "summary": "Showers",
+        "code": 96,
+        "summary": "Thunderstorms with hail",
         "maxC": 32.5,
-        "minC": 12.9,
-        "rainMm": 10.3
+        "minC": 12.4,
+        "rainMm": 27.7
       },
       {
         "date": "2026-10-26",
-        "code": 53,
-        "summary": "Drizzle",
+        "code": 95,
+        "summary": "Thunderstorms",
         "maxC": 16.6,
-        "minC": 9.2,
-        "rainMm": 2.4
+        "minC": 10.8,
+        "rainMm": 1.4
       },
       {
         "date": "2026-10-27",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 17.5,
+        "maxC": 16.6,
         "minC": 9.7,
         "rainMm": 0
       },
       {
         "date": "2026-10-28",
+        "code": 2,
+        "summary": "Partly cloudy",
+        "maxC": 18.7,
+        "minC": 9.8,
+        "rainMm": 0
+      },
+      {
+        "date": "2026-10-29",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 19.5,
-        "minC": 9.3,
+        "maxC": 19.9,
+        "minC": 11.4,
         "rainMm": 0
       }
     ]
@@ -73,28 +73,8 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-22T10:02:43.718Z",
+    "fetchedAt": "2026-10-23T09:56:56.037Z",
     "extremes": [
-      {
-        "time": "2026-10-22T06:00",
-        "type": "High",
-        "heightM": 0.31
-      },
-      {
-        "time": "2026-10-22T11:00",
-        "type": "Low",
-        "heightM": -0.26
-      },
-      {
-        "time": "2026-10-22T17:00",
-        "type": "High",
-        "heightM": 0.42
-      },
-      {
-        "time": "2026-10-23T00:00",
-        "type": "Low",
-        "heightM": -0.58
-      },
       {
         "time": "2026-10-23T06:00",
         "type": "High",
@@ -204,105 +184,19 @@
         "time": "2026-10-28T16:00",
         "type": "Low",
         "heightM": -0.71
-      }
-    ],
-    "series": [
-      {
-        "time": "2026-10-22T00:00",
-        "heightM": -0.53
       },
       {
-        "time": "2026-10-22T01:00",
-        "heightM": -0.42
-      },
-      {
-        "time": "2026-10-22T02:00",
-        "heightM": -0.25
-      },
-      {
-        "time": "2026-10-22T03:00",
-        "heightM": -0.04
-      },
-      {
-        "time": "2026-10-22T04:00",
-        "heightM": 0.15
-      },
-      {
-        "time": "2026-10-22T05:00",
-        "heightM": 0.28
-      },
-      {
-        "time": "2026-10-22T06:00",
-        "heightM": 0.31
-      },
-      {
-        "time": "2026-10-22T07:00",
-        "heightM": 0.24
-      },
-      {
-        "time": "2026-10-22T08:00",
-        "heightM": 0.11
-      },
-      {
-        "time": "2026-10-22T09:00",
-        "heightM": -0.04
-      },
-      {
-        "time": "2026-10-22T10:00",
-        "heightM": -0.18
-      },
-      {
-        "time": "2026-10-22T11:00",
-        "heightM": -0.26
-      },
-      {
-        "time": "2026-10-22T12:00",
-        "heightM": -0.26
-      },
-      {
-        "time": "2026-10-22T13:00",
-        "heightM": -0.17
-      },
-      {
-        "time": "2026-10-22T14:00",
-        "heightM": -0.02
-      },
-      {
-        "time": "2026-10-22T15:00",
-        "heightM": 0.16
-      },
-      {
-        "time": "2026-10-22T16:00",
+        "time": "2026-10-28T23:00",
+        "type": "High",
         "heightM": 0.32
       },
       {
-        "time": "2026-10-22T17:00",
-        "heightM": 0.42
-      },
-      {
-        "time": "2026-10-22T18:00",
-        "heightM": 0.41
-      },
-      {
-        "time": "2026-10-22T19:00",
-        "heightM": 0.3
-      },
-      {
-        "time": "2026-10-22T20:00",
-        "heightM": 0.1
-      },
-      {
-        "time": "2026-10-22T21:00",
-        "heightM": -0.13
-      },
-      {
-        "time": "2026-10-22T22:00",
-        "heightM": -0.35
-      },
-      {
-        "time": "2026-10-22T23:00",
-        "heightM": -0.52
-      },
+        "time": "2026-10-29T04:00",
+        "type": "Low",
+        "heightM": -0.34
+      }
+    ],
+    "series": [
       {
         "time": "2026-10-23T00:00",
         "heightM": -0.58
@@ -878,18 +772,54 @@
       {
         "time": "2026-10-28T23:00",
         "heightM": 0.32
+      },
+      {
+        "time": "2026-10-29T00:00",
+        "heightM": 0.22
+      },
+      {
+        "time": "2026-10-29T01:00",
+        "heightM": 0.04
+      },
+      {
+        "time": "2026-10-29T02:00",
+        "heightM": -0.15
+      },
+      {
+        "time": "2026-10-29T03:00",
+        "heightM": -0.29
+      },
+      {
+        "time": "2026-10-29T04:00",
+        "heightM": -0.34
+      },
+      {
+        "time": "2026-10-29T05:00",
+        "heightM": -0.28
+      },
+      {
+        "time": "2026-10-29T06:00",
+        "heightM": -0.11
+      },
+      {
+        "time": "2026-10-29T07:00",
+        "heightM": 0.14
+      },
+      {
+        "time": "2026-10-29T08:00",
+        "heightM": 0.41
+      },
+      {
+        "time": "2026-10-29T09:00",
+        "heightM": 0.65
+      },
+      {
+        "time": "2026-10-29T10:00",
+        "heightM": 0.78
       }
     ]
   },
   "moon": [
-    {
-      "date": "2026-10-22",
-      "name": "Waxing gibbous",
-      "symbol": "◕",
-      "age": 10.7,
-      "illumination": 82,
-      "range": "between"
-    },
     {
       "date": "2026-10-23",
       "name": "Waxing gibbous",
@@ -937,32 +867,28 @@
       "age": 16.7,
       "illumination": 96,
       "range": "between"
+    },
+    {
+      "date": "2026-10-29",
+      "name": "Waning gibbous",
+      "symbol": "◔",
+      "age": 17.7,
+      "illumination": 91,
+      "range": "between"
     }
   ],
   "events": [
     {
-      "date": "Thu 22 Oct",
+      "date": "Fri 23 Oct",
       "time": "9:30 am",
-      "title": "Wilderness Collective (CCR)",
-      "location": "The Oval"
-    },
-    {
-      "date": "Thu 22 Oct",
-      "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
+      "title": "Croquet (Reclink)",
+      "location": "Mallacoota Golf and Country Club"
     },
     {
       "date": "Fri 23 Oct",
       "time": "9:30 am",
       "title": "Playgroup",
       "location": "Mallacoota Preschool and Toy Library"
-    },
-    {
-      "date": "Fri 23 Oct",
-      "time": "9:30 am",
-      "title": "Croquet (Reclink)",
-      "location": "Mallacoota Golf and Country Club"
     },
     {
       "date": "Sat 24 Oct",
@@ -1009,8 +935,8 @@
     {
       "date": "Tue 27 Oct",
       "time": "10:00 am",
-      "title": "Library - Rhyme time",
-      "location": "Mallacoota Service Centre and Library"
+      "title": "Strength and Balance (a bit more support)",
+      "location": ""
     },
     {
       "date": "Wed 28 Oct",
@@ -1023,6 +949,18 @@
       "time": "8:30 am",
       "title": "Walk and Talk Wednesday for women",
       "location": "Wilderness Collective Garden"
+    },
+    {
+      "date": "Thu 29 Oct",
+      "time": "9:30 am",
+      "title": "Wilderness Collective (CCR)",
+      "location": "The Oval"
+    },
+    {
+      "date": "Thu 29 Oct",
+      "time": "9:30 am",
+      "title": "Bushcare Weeding Group",
+      "location": ""
     }
   ],
   "trail": {

@@ -1,68 +1,68 @@
 {
-  "start": "2026-10-25",
-  "end": "2026-10-31",
-  "generatedAt": "2026-10-25T09:44:26.012Z",
+  "start": "2026-10-26",
+  "end": "2026-11-01",
+  "generatedAt": "2026-10-26T10:58:44.727Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-10-25T09:44:25.104Z",
+    "fetchedAt": "2026-10-26T10:58:43.603Z",
     "days": [
-      {
-        "date": "2026-10-25",
-        "code": 81,
-        "summary": "Showers",
-        "maxC": 30,
-        "minC": 12.7,
-        "rainMm": 14.9
-      },
       {
         "date": "2026-10-26",
         "code": 53,
         "summary": "Drizzle",
-        "maxC": 16.2,
-        "minC": 9.7,
-        "rainMm": 1.7
+        "maxC": 16.9,
+        "minC": 9.5,
+        "rainMm": 0.8
       },
       {
         "date": "2026-10-27",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 16.8,
-        "minC": 9.3,
+        "maxC": 16.3,
+        "minC": 9.6,
         "rainMm": 0
       },
       {
         "date": "2026-10-28",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 18.4,
-        "minC": 10.1,
+        "maxC": 18.3,
+        "minC": 9.5,
         "rainMm": 0
       },
       {
         "date": "2026-10-29",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 18.9,
-        "minC": 10.5,
-        "rainMm": 0
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 18.6,
+        "minC": 11,
+        "rainMm": 0.1
       },
       {
         "date": "2026-10-30",
-        "code": 3,
-        "summary": "Overcast",
-        "maxC": 23.5,
-        "minC": 10.5,
+        "code": 45,
+        "summary": "Fog",
+        "maxC": 23.1,
+        "minC": 8.2,
         "rainMm": 0
       },
       {
         "date": "2026-10-31",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 28,
-        "minC": 12.8,
-        "rainMm": 0.6
+        "maxC": 25.1,
+        "minC": 14.6,
+        "rainMm": 0.9
+      },
+      {
+        "date": "2026-11-01",
+        "code": 51,
+        "summary": "Light drizzle",
+        "maxC": 19.1,
+        "minC": 11.1,
+        "rainMm": 2.4
       }
     ]
   },
@@ -73,67 +73,47 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-10-25T09:44:25.213Z",
+    "fetchedAt": "2026-10-26T10:58:43.743Z",
     "extremes": [
-      {
-        "time": "2026-10-25T01:00",
-        "type": "Low",
-        "heightM": -0.45
-      },
-      {
-        "time": "2026-10-25T08:00",
-        "type": "High",
-        "heightM": 0.74
-      },
-      {
-        "time": "2026-10-25T14:00",
-        "type": "Low",
-        "heightM": -0.37
-      },
-      {
-        "time": "2026-10-25T20:00",
-        "type": "High",
-        "heightM": 0.63
-      },
       {
         "time": "2026-10-26T02:00",
         "type": "Low",
-        "heightM": -0.29
+        "heightM": -0.3
       },
       {
         "time": "2026-10-26T08:00",
         "type": "High",
-        "heightM": 0.9
+        "heightM": 0.91
       },
       {
         "time": "2026-10-26T15:00",
         "type": "Low",
-        "heightM": -0.44
+        "heightM": -0.46
       },
       {
         "time": "2026-10-26T21:00",
         "type": "High",
-        "heightM": 0.64
+        "heightM": 0.6
       },
       {
         "time": "2026-10-27T02:00",
         "type": "Low",
-        "heightM": -0.27
+        "heightM": -0.3
       },
       {
         "time": "2026-10-27T09:00",
         "type": "High",
-        "heightM": 0.91
+        "heightM": 0.87
       },
       {
-        "time": "2026-10-27T16:00",
+        "time": "2026-10-27T15:00",
         "type": "Low",
-        "heightM": -0.55
+        "heightM": -0.57
       },
       {
         "time": "2026-10-27T22:00",
         "type": "High",
-        "heightM": 0.47
+        "heightM": 0.48
       },
       {
         "time": "2026-10-28T03:00",
@@ -143,7 +123,7 @@
       {
         "time": "2026-10-28T10:00",
         "type": "High",
-        "heightM": 0.9
+        "heightM": 0.88
       },
       {
         "time": "2026-10-28T16:00",
@@ -153,12 +133,12 @@
       {
         "time": "2026-10-28T23:00",
         "type": "High",
-        "heightM": 0.51
+        "heightM": 0.49
       },
       {
         "time": "2026-10-29T04:00",
         "type": "Low",
-        "heightM": -0.19
+        "heightM": -0.2
       },
       {
         "time": "2026-10-29T10:00",
@@ -168,32 +148,32 @@
       {
         "time": "2026-10-29T17:00",
         "type": "Low",
-        "heightM": -0.58
+        "heightM": -0.6
       },
       {
         "time": "2026-10-30T00:00",
         "type": "High",
-        "heightM": 0.34
+        "heightM": 0.31
       },
       {
         "time": "2026-10-30T05:00",
         "type": "Low",
-        "heightM": -0.21
+        "heightM": -0.26
       },
       {
         "time": "2026-10-30T11:00",
         "type": "High",
-        "heightM": 0.83
+        "heightM": 0.76
       },
       {
         "time": "2026-10-30T18:00",
         "type": "Low",
-        "heightM": -0.58
+        "heightM": -0.63
       },
       {
         "time": "2026-10-31T01:00",
         "type": "High",
-        "heightM": 0.28
+        "heightM": 0.27
       },
       {
         "time": "2026-10-31T06:00",
@@ -208,129 +188,53 @@
       {
         "time": "2026-10-31T20:00",
         "type": "Low",
-        "heightM": -0.58
+        "heightM": -0.57
+      },
+      {
+        "time": "2026-11-01T02:00",
+        "type": "High",
+        "heightM": 0.27
+      },
+      {
+        "time": "2026-11-01T07:00",
+        "type": "Low",
+        "heightM": -0.14
+      },
+      {
+        "time": "2026-11-01T13:00",
+        "type": "High",
+        "heightM": 0.68
+      },
+      {
+        "time": "2026-11-01T21:00",
+        "type": "Low",
+        "heightM": -0.55
       }
     ],
     "series": [
       {
-        "time": "2026-10-25T00:00",
-        "heightM": -0.36
-      },
-      {
-        "time": "2026-10-25T01:00",
-        "heightM": -0.45
-      },
-      {
-        "time": "2026-10-25T02:00",
-        "heightM": -0.39
-      },
-      {
-        "time": "2026-10-25T03:00",
-        "heightM": -0.21
-      },
-      {
-        "time": "2026-10-25T04:00",
-        "heightM": 0.05
-      },
-      {
-        "time": "2026-10-25T05:00",
-        "heightM": 0.34
-      },
-      {
-        "time": "2026-10-25T06:00",
-        "heightM": 0.58
-      },
-      {
-        "time": "2026-10-25T07:00",
-        "heightM": 0.73
-      },
-      {
-        "time": "2026-10-25T08:00",
-        "heightM": 0.74
-      },
-      {
-        "time": "2026-10-25T09:00",
-        "heightM": 0.61
-      },
-      {
-        "time": "2026-10-25T10:00",
-        "heightM": 0.38
-      },
-      {
-        "time": "2026-10-25T11:00",
-        "heightM": 0.1
-      },
-      {
-        "time": "2026-10-25T12:00",
-        "heightM": -0.15
-      },
-      {
-        "time": "2026-10-25T13:00",
-        "heightM": -0.32
-      },
-      {
-        "time": "2026-10-25T14:00",
-        "heightM": -0.37
-      },
-      {
-        "time": "2026-10-25T15:00",
-        "heightM": -0.29
-      },
-      {
-        "time": "2026-10-25T16:00",
-        "heightM": -0.09
-      },
-      {
-        "time": "2026-10-25T17:00",
-        "heightM": 0.17
-      },
-      {
-        "time": "2026-10-25T18:00",
-        "heightM": 0.41
-      },
-      {
-        "time": "2026-10-25T19:00",
-        "heightM": 0.58
-      },
-      {
-        "time": "2026-10-25T20:00",
-        "heightM": 0.63
-      },
-      {
-        "time": "2026-10-25T21:00",
-        "heightM": 0.56
-      },
-      {
-        "time": "2026-10-25T22:00",
-        "heightM": 0.38
-      },
-      {
-        "time": "2026-10-25T23:00",
-        "heightM": 0.14
-      },
-      {
         "time": "2026-10-26T00:00",
-        "heightM": -0.09
+        "heightM": -0.11
       },
       {
         "time": "2026-10-26T01:00",
-        "heightM": -0.24
+        "heightM": -0.27
       },
       {
         "time": "2026-10-26T02:00",
-        "heightM": -0.29
+        "heightM": -0.3
       },
       {
         "time": "2026-10-26T03:00",
-        "heightM": -0.18
+        "heightM": -0.2
       },
       {
         "time": "2026-10-26T04:00",
-        "heightM": 0.03
+        "heightM": 0.01
       },
       {
         "time": "2026-10-26T05:00",
-        "heightM": 0.31
+        "heightM": 0.3
       },
       {
         "time": "2026-10-26T06:00",
@@ -342,7 +246,7 @@
       },
       {
         "time": "2026-10-26T08:00",
-        "heightM": 0.9
+        "heightM": 0.91
       },
       {
         "time": "2026-10-26T09:00",
@@ -350,7 +254,7 @@
       },
       {
         "time": "2026-10-26T10:00",
-        "heightM": 0.64
+        "heightM": 0.65
       },
       {
         "time": "2026-10-26T11:00",
@@ -358,123 +262,123 @@
       },
       {
         "time": "2026-10-26T12:00",
-        "heightM": 0.03
+        "heightM": 0.02
       },
       {
         "time": "2026-10-26T13:00",
-        "heightM": -0.25
+        "heightM": -0.26
       },
       {
         "time": "2026-10-26T14:00",
-        "heightM": -0.42
+        "heightM": -0.43
       },
       {
         "time": "2026-10-26T15:00",
-        "heightM": -0.44
+        "heightM": -0.46
       },
       {
         "time": "2026-10-26T16:00",
-        "heightM": -0.31
+        "heightM": -0.34
       },
       {
         "time": "2026-10-26T17:00",
-        "heightM": -0.08
-      },
-      {
-        "time": "2026-10-26T18:00",
-        "heightM": 0.19
-      },
-      {
-        "time": "2026-10-26T19:00",
-        "heightM": 0.44
-      },
-      {
-        "time": "2026-10-26T20:00",
-        "heightM": 0.61
-      },
-      {
-        "time": "2026-10-26T21:00",
-        "heightM": 0.64
-      },
-      {
-        "time": "2026-10-26T22:00",
-        "heightM": 0.54
-      },
-      {
-        "time": "2026-10-26T23:00",
-        "heightM": 0.33
-      },
-      {
-        "time": "2026-10-27T00:00",
-        "heightM": 0.09
-      },
-      {
-        "time": "2026-10-27T01:00",
-        "heightM": -0.13
-      },
-      {
-        "time": "2026-10-27T02:00",
-        "heightM": -0.27
-      },
-      {
-        "time": "2026-10-27T03:00",
-        "heightM": -0.27
-      },
-      {
-        "time": "2026-10-27T04:00",
-        "heightM": -0.14
-      },
-      {
-        "time": "2026-10-27T05:00",
-        "heightM": 0.1
-      },
-      {
-        "time": "2026-10-27T06:00",
-        "heightM": 0.38
-      },
-      {
-        "time": "2026-10-27T07:00",
-        "heightM": 0.66
-      },
-      {
-        "time": "2026-10-27T08:00",
-        "heightM": 0.85
-      },
-      {
-        "time": "2026-10-27T09:00",
-        "heightM": 0.91
-      },
-      {
-        "time": "2026-10-27T10:00",
-        "heightM": 0.8
-      },
-      {
-        "time": "2026-10-27T11:00",
-        "heightM": 0.55
-      },
-      {
-        "time": "2026-10-27T12:00",
-        "heightM": 0.22
-      },
-      {
-        "time": "2026-10-27T13:00",
         "heightM": -0.12
       },
       {
+        "time": "2026-10-26T18:00",
+        "heightM": 0.15
+      },
+      {
+        "time": "2026-10-26T19:00",
+        "heightM": 0.4
+      },
+      {
+        "time": "2026-10-26T20:00",
+        "heightM": 0.56
+      },
+      {
+        "time": "2026-10-26T21:00",
+        "heightM": 0.6
+      },
+      {
+        "time": "2026-10-26T22:00",
+        "heightM": 0.5
+      },
+      {
+        "time": "2026-10-26T23:00",
+        "heightM": 0.3
+      },
+      {
+        "time": "2026-10-27T00:00",
+        "heightM": 0.05
+      },
+      {
+        "time": "2026-10-27T01:00",
+        "heightM": -0.17
+      },
+      {
+        "time": "2026-10-27T02:00",
+        "heightM": -0.3
+      },
+      {
+        "time": "2026-10-27T03:00",
+        "heightM": -0.3
+      },
+      {
+        "time": "2026-10-27T04:00",
+        "heightM": -0.16
+      },
+      {
+        "time": "2026-10-27T05:00",
+        "heightM": 0.07
+      },
+      {
+        "time": "2026-10-27T06:00",
+        "heightM": 0.36
+      },
+      {
+        "time": "2026-10-27T07:00",
+        "heightM": 0.62
+      },
+      {
+        "time": "2026-10-27T08:00",
+        "heightM": 0.82
+      },
+      {
+        "time": "2026-10-27T09:00",
+        "heightM": 0.87
+      },
+      {
+        "time": "2026-10-27T10:00",
+        "heightM": 0.77
+      },
+      {
+        "time": "2026-10-27T11:00",
+        "heightM": 0.52
+      },
+      {
+        "time": "2026-10-27T12:00",
+        "heightM": 0.19
+      },
+      {
+        "time": "2026-10-27T13:00",
+        "heightM": -0.15
+      },
+      {
         "time": "2026-10-27T14:00",
-        "heightM": -0.39
+        "heightM": -0.42
       },
       {
         "time": "2026-10-27T15:00",
-        "heightM": -0.54
+        "heightM": -0.57
       },
       {
         "time": "2026-10-27T16:00",
-        "heightM": -0.55
+        "heightM": -0.56
       },
       {
         "time": "2026-10-27T17:00",
-        "heightM": -0.42
+        "heightM": -0.43
       },
       {
         "time": "2026-10-27T18:00",
@@ -482,7 +386,7 @@
       },
       {
         "time": "2026-10-27T19:00",
-        "heightM": 0.07
+        "heightM": 0.06
       },
       {
         "time": "2026-10-27T20:00",
@@ -490,27 +394,27 @@
       },
       {
         "time": "2026-10-27T21:00",
-        "heightM": 0.45
+        "heightM": 0.46
       },
       {
         "time": "2026-10-27T22:00",
-        "heightM": 0.47
+        "heightM": 0.48
       },
       {
         "time": "2026-10-27T23:00",
-        "heightM": 0.36
+        "heightM": 0.37
       },
       {
         "time": "2026-10-28T00:00",
-        "heightM": 0.16
+        "heightM": 0.17
       },
       {
         "time": "2026-10-28T01:00",
-        "heightM": -0.06
+        "heightM": -0.05
       },
       {
         "time": "2026-10-28T02:00",
-        "heightM": -0.24
+        "heightM": -0.23
       },
       {
         "time": "2026-10-28T03:00",
@@ -522,39 +426,39 @@
       },
       {
         "time": "2026-10-28T05:00",
-        "heightM": -0.11
+        "heightM": -0.12
       },
       {
         "time": "2026-10-28T06:00",
-        "heightM": 0.15
+        "heightM": 0.13
       },
       {
         "time": "2026-10-28T07:00",
-        "heightM": 0.44
+        "heightM": 0.41
       },
       {
         "time": "2026-10-28T08:00",
-        "heightM": 0.7
+        "heightM": 0.68
       },
       {
         "time": "2026-10-28T09:00",
-        "heightM": 0.88
+        "heightM": 0.85
       },
       {
         "time": "2026-10-28T10:00",
-        "heightM": 0.9
+        "heightM": 0.88
       },
       {
         "time": "2026-10-28T11:00",
-        "heightM": 0.76
+        "heightM": 0.74
       },
       {
         "time": "2026-10-28T12:00",
-        "heightM": 0.5
+        "heightM": 0.48
       },
       {
         "time": "2026-10-28T13:00",
-        "heightM": 0.17
+        "heightM": 0.15
       },
       {
         "time": "2026-10-28T14:00",
@@ -574,47 +478,47 @@
       },
       {
         "time": "2026-10-28T18:00",
-        "heightM": -0.37
+        "heightM": -0.38
       },
       {
         "time": "2026-10-28T19:00",
-        "heightM": -0.14
+        "heightM": -0.15
       },
       {
         "time": "2026-10-28T20:00",
-        "heightM": 0.12
+        "heightM": 0.11
       },
       {
         "time": "2026-10-28T21:00",
-        "heightM": 0.36
+        "heightM": 0.34
       },
       {
         "time": "2026-10-28T22:00",
-        "heightM": 0.5
+        "heightM": 0.48
       },
       {
         "time": "2026-10-28T23:00",
-        "heightM": 0.51
+        "heightM": 0.49
       },
       {
         "time": "2026-10-29T00:00",
-        "heightM": 0.4
+        "heightM": 0.38
       },
       {
         "time": "2026-10-29T01:00",
-        "heightM": 0.21
+        "heightM": 0.2
       },
       {
         "time": "2026-10-29T02:00",
-        "heightM": 0.02
+        "heightM": 0.01
       },
       {
         "time": "2026-10-29T03:00",
-        "heightM": -0.13
+        "heightM": -0.14
       },
       {
         "time": "2026-10-29T04:00",
-        "heightM": -0.19
+        "heightM": -0.2
       },
       {
         "time": "2026-10-29T05:00",
@@ -622,11 +526,11 @@
       },
       {
         "time": "2026-10-29T06:00",
-        "heightM": 0.03
+        "heightM": 0.02
       },
       {
         "time": "2026-10-29T07:00",
-        "heightM": 0.27
+        "heightM": 0.26
       },
       {
         "time": "2026-10-29T08:00",
@@ -642,7 +546,7 @@
       },
       {
         "time": "2026-10-29T11:00",
-        "heightM": 0.87
+        "heightM": 0.88
       },
       {
         "time": "2026-10-29T12:00",
@@ -662,151 +566,151 @@
       },
       {
         "time": "2026-10-29T16:00",
-        "heightM": -0.46
-      },
-      {
-        "time": "2026-10-29T17:00",
-        "heightM": -0.58
-      },
-      {
-        "time": "2026-10-29T18:00",
-        "heightM": -0.58
-      },
-      {
-        "time": "2026-10-29T19:00",
-        "heightM": -0.46
-      },
-      {
-        "time": "2026-10-29T20:00",
-        "heightM": -0.25
-      },
-      {
-        "time": "2026-10-29T21:00",
-        "heightM": -0.01
-      },
-      {
-        "time": "2026-10-29T22:00",
-        "heightM": 0.2
-      },
-      {
-        "time": "2026-10-29T23:00",
-        "heightM": 0.33
-      },
-      {
-        "time": "2026-10-30T00:00",
-        "heightM": 0.34
-      },
-      {
-        "time": "2026-10-30T01:00",
-        "heightM": 0.25
-      },
-      {
-        "time": "2026-10-30T02:00",
-        "heightM": 0.1
-      },
-      {
-        "time": "2026-10-30T03:00",
-        "heightM": -0.06
-      },
-      {
-        "time": "2026-10-30T04:00",
-        "heightM": -0.18
-      },
-      {
-        "time": "2026-10-30T05:00",
-        "heightM": -0.21
-      },
-      {
-        "time": "2026-10-30T06:00",
-        "heightM": -0.15
-      },
-      {
-        "time": "2026-10-30T07:00",
-        "heightM": 0.02
-      },
-      {
-        "time": "2026-10-30T08:00",
-        "heightM": 0.25
-      },
-      {
-        "time": "2026-10-30T09:00",
-        "heightM": 0.5
-      },
-      {
-        "time": "2026-10-30T10:00",
-        "heightM": 0.71
-      },
-      {
-        "time": "2026-10-30T11:00",
-        "heightM": 0.83
-      },
-      {
-        "time": "2026-10-30T12:00",
-        "heightM": 0.81
-      },
-      {
-        "time": "2026-10-30T13:00",
-        "heightM": 0.65
-      },
-      {
-        "time": "2026-10-30T14:00",
-        "heightM": 0.39
-      },
-      {
-        "time": "2026-10-30T15:00",
-        "heightM": 0.08
-      },
-      {
-        "time": "2026-10-30T16:00",
-        "heightM": -0.21
-      },
-      {
-        "time": "2026-10-30T17:00",
-        "heightM": -0.44
-      },
-      {
-        "time": "2026-10-30T18:00",
-        "heightM": -0.58
-      },
-      {
-        "time": "2026-10-30T19:00",
-        "heightM": -0.58
-      },
-      {
-        "time": "2026-10-30T20:00",
         "heightM": -0.47
       },
       {
+        "time": "2026-10-29T17:00",
+        "heightM": -0.6
+      },
+      {
+        "time": "2026-10-29T18:00",
+        "heightM": -0.6
+      },
+      {
+        "time": "2026-10-29T19:00",
+        "heightM": -0.48
+      },
+      {
+        "time": "2026-10-29T20:00",
+        "heightM": -0.27
+      },
+      {
+        "time": "2026-10-29T21:00",
+        "heightM": -0.03
+      },
+      {
+        "time": "2026-10-29T22:00",
+        "heightM": 0.17
+      },
+      {
+        "time": "2026-10-29T23:00",
+        "heightM": 0.29
+      },
+      {
+        "time": "2026-10-30T00:00",
+        "heightM": 0.31
+      },
+      {
+        "time": "2026-10-30T01:00",
+        "heightM": 0.21
+      },
+      {
+        "time": "2026-10-30T02:00",
+        "heightM": 0.06
+      },
+      {
+        "time": "2026-10-30T03:00",
+        "heightM": -0.11
+      },
+      {
+        "time": "2026-10-30T04:00",
+        "heightM": -0.22
+      },
+      {
+        "time": "2026-10-30T05:00",
+        "heightM": -0.26
+      },
+      {
+        "time": "2026-10-30T06:00",
+        "heightM": -0.21
+      },
+      {
+        "time": "2026-10-30T07:00",
+        "heightM": -0.05
+      },
+      {
+        "time": "2026-10-30T08:00",
+        "heightM": 0.18
+      },
+      {
+        "time": "2026-10-30T09:00",
+        "heightM": 0.43
+      },
+      {
+        "time": "2026-10-30T10:00",
+        "heightM": 0.64
+      },
+      {
+        "time": "2026-10-30T11:00",
+        "heightM": 0.76
+      },
+      {
+        "time": "2026-10-30T12:00",
+        "heightM": 0.74
+      },
+      {
+        "time": "2026-10-30T13:00",
+        "heightM": 0.58
+      },
+      {
+        "time": "2026-10-30T14:00",
+        "heightM": 0.33
+      },
+      {
+        "time": "2026-10-30T15:00",
+        "heightM": 0.02
+      },
+      {
+        "time": "2026-10-30T16:00",
+        "heightM": -0.27
+      },
+      {
+        "time": "2026-10-30T17:00",
+        "heightM": -0.5
+      },
+      {
+        "time": "2026-10-30T18:00",
+        "heightM": -0.63
+      },
+      {
+        "time": "2026-10-30T19:00",
+        "heightM": -0.63
+      },
+      {
+        "time": "2026-10-30T20:00",
+        "heightM": -0.52
+      },
+      {
         "time": "2026-10-30T21:00",
-        "heightM": -0.28
+        "heightM": -0.32
       },
       {
         "time": "2026-10-30T22:00",
-        "heightM": -0.06
+        "heightM": -0.09
       },
       {
         "time": "2026-10-30T23:00",
-        "heightM": 0.13
+        "heightM": 0.11
       },
       {
         "time": "2026-10-31T00:00",
-        "heightM": 0.26
+        "heightM": 0.24
       },
       {
         "time": "2026-10-31T01:00",
-        "heightM": 0.28
+        "heightM": 0.27
       },
       {
         "time": "2026-10-31T02:00",
-        "heightM": 0.22
+        "heightM": 0.2
       },
       {
         "time": "2026-10-31T03:00",
-        "heightM": 0.09
+        "heightM": 0.08
       },
       {
         "time": "2026-10-31T04:00",
-        "heightM": -0.04
+        "heightM": -0.05
       },
       {
         "time": "2026-10-31T05:00",
@@ -822,7 +726,7 @@
       },
       {
         "time": "2026-10-31T08:00",
-        "heightM": 0.01
+        "heightM": 0.02
       },
       {
         "time": "2026-10-31T09:00",
@@ -842,11 +746,11 @@
       },
       {
         "time": "2026-10-31T13:00",
-        "heightM": 0.72
+        "heightM": 0.73
       },
       {
         "time": "2026-10-31T14:00",
-        "heightM": 0.58
+        "heightM": 0.59
       },
       {
         "time": "2026-10-31T15:00",
@@ -854,47 +758,135 @@
       },
       {
         "time": "2026-10-31T16:00",
-        "heightM": 0.07
+        "heightM": 0.08
       },
       {
         "time": "2026-10-31T17:00",
-        "heightM": -0.21
+        "heightM": -0.2
       },
       {
         "time": "2026-10-31T18:00",
-        "heightM": -0.44
+        "heightM": -0.42
       },
       {
         "time": "2026-10-31T19:00",
-        "heightM": -0.57
+        "heightM": -0.55
       },
       {
         "time": "2026-10-31T20:00",
-        "heightM": -0.58
+        "heightM": -0.57
       },
       {
         "time": "2026-10-31T21:00",
-        "heightM": -0.49
+        "heightM": -0.47
       },
       {
         "time": "2026-10-31T22:00",
-        "heightM": -0.32
+        "heightM": -0.3
       },
       {
         "time": "2026-10-31T23:00",
+        "heightM": -0.09
+      },
+      {
+        "time": "2026-11-01T00:00",
+        "heightM": 0.1
+      },
+      {
+        "time": "2026-11-01T01:00",
+        "heightM": 0.23
+      },
+      {
+        "time": "2026-11-01T02:00",
+        "heightM": 0.27
+      },
+      {
+        "time": "2026-11-01T03:00",
+        "heightM": 0.23
+      },
+      {
+        "time": "2026-11-01T04:00",
+        "heightM": 0.13
+      },
+      {
+        "time": "2026-11-01T05:00",
+        "heightM": 0
+      },
+      {
+        "time": "2026-11-01T06:00",
+        "heightM": -0.1
+      },
+      {
+        "time": "2026-11-01T07:00",
+        "heightM": -0.14
+      },
+      {
+        "time": "2026-11-01T08:00",
         "heightM": -0.11
+      },
+      {
+        "time": "2026-11-01T09:00",
+        "heightM": 0.01
+      },
+      {
+        "time": "2026-11-01T10:00",
+        "heightM": 0.19
+      },
+      {
+        "time": "2026-11-01T11:00",
+        "heightM": 0.39
+      },
+      {
+        "time": "2026-11-01T12:00",
+        "heightM": 0.57
+      },
+      {
+        "time": "2026-11-01T13:00",
+        "heightM": 0.68
+      },
+      {
+        "time": "2026-11-01T14:00",
+        "heightM": 0.68
+      },
+      {
+        "time": "2026-11-01T15:00",
+        "heightM": 0.56
+      },
+      {
+        "time": "2026-11-01T16:00",
+        "heightM": 0.36
+      },
+      {
+        "time": "2026-11-01T17:00",
+        "heightM": 0.1
+      },
+      {
+        "time": "2026-11-01T18:00",
+        "heightM": -0.17
+      },
+      {
+        "time": "2026-11-01T19:00",
+        "heightM": -0.4
+      },
+      {
+        "time": "2026-11-01T20:00",
+        "heightM": -0.53
+      },
+      {
+        "time": "2026-11-01T21:00",
+        "heightM": -0.55
+      },
+      {
+        "time": "2026-11-01T22:00",
+        "heightM": -0.47
+      },
+      {
+        "time": "2026-11-01T23:00",
+        "heightM": -0.31
       }
     ]
   },
   "moon": [
-    {
-      "date": "2026-10-25",
-      "name": "Waxing gibbous",
-      "symbol": "◕",
-      "age": 13.7,
-      "illumination": 99,
-      "range": "spring"
-    },
     {
       "date": "2026-10-26",
       "name": "Full moon",
@@ -942,32 +934,28 @@
       "age": 19.7,
       "illumination": 75,
       "range": "between"
+    },
+    {
+      "date": "2026-11-01",
+      "name": "Waning gibbous",
+      "symbol": "◔",
+      "age": 20.7,
+      "illumination": 65,
+      "range": "between"
     }
   ],
   "events": [
     {
-      "date": "Sun 25 Oct",
-      "time": "9:00 am",
-      "title": "Social Tennis",
+      "date": "Mon 26 Oct",
+      "time": "10:00 am",
+      "title": "Pickleball",
       "location": "Mallacoota Tennis Club"
-    },
-    {
-      "date": "Sun 25 Oct",
-      "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
     },
     {
       "date": "Mon 26 Oct",
       "time": "10:00 am",
       "title": "Toddler Music and Movement (Reclink)",
       "location": ""
-    },
-    {
-      "date": "Mon 26 Oct",
-      "time": "10:00 am",
-      "title": "Pickleball",
-      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Tue 27 Oct",
@@ -978,8 +966,8 @@
     {
       "date": "Tue 27 Oct",
       "time": "10:00 am",
-      "title": "Library - Rhyme time",
-      "location": "Mallacoota Service Centre and Library"
+      "title": "Strength and Balance (a bit more support)",
+      "location": ""
     },
     {
       "date": "Wed 28 Oct",
@@ -1028,23 +1016,35 @@
       "time": "10:30 am",
       "title": "Gem Club",
       "location": "Miva Miva Flats"
+    },
+    {
+      "date": "Sun 1 Nov",
+      "time": "9:00 am",
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
+    },
+    {
+      "date": "Sun 1 Nov",
+      "time": "9:00 am",
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     }
   ],
   "trail": {
-    "slug": "genoa-peak-walk",
-    "name": "Genoa Peak Walk",
-    "region": "Croajingolong National Park",
+    "slug": "gabo-island-lightstation-walk",
+    "name": "Gabo Island Lightstation Walk",
+    "region": "Gabo Island Lighthouse Reserve",
     "state": "VIC",
-    "distance": "1.5 km return",
-    "duration": "1 hour",
-    "difficulty": "Hard",
-    "terrain": "summit track",
-    "start": "Genoa Peak car park",
-    "summary": "A steep forest climb with rock hopping, ladders and broad views over Mallacoota Lakes, Gabo Island and the coast.",
-    "url": "https://trailbound.au/trails/genoa-peak-walk",
-    "directLineKm": 13,
+    "distance": "2 km one way, 4.1 km return",
+    "duration": "About an hour each way, or a full day with the island",
+    "difficulty": "Easy",
+    "terrain": "pink granite island",
+    "start": "Gabo Island boat harbour, at the northern end",
+    "summary": "An island walk under the second tallest lighthouse in Australia, built from the pink granite it stands on, above one of the largest Little Penguin colonies in the world.",
+    "url": "https://trailbound.au/trails/gabo-island-lightstation-walk",
+    "directLineKm": 14,
     "rotation": {
-      "position": 9,
+      "position": 10,
       "of": 23
     }
   },

@@ -6,7 +6,7 @@ Community information platform, weekly news edition, historical archive, and loc
 [![Build & Test](https://img.shields.io/badge/tests-166%20passing-22c55e.svg)](tests/)
 
 <!-- version -->
-**v1.95** - built 30 October 2026.
+**v1.95** - built 31 October 2026.
 <!-- /version -->
 
 Both the line above and the version badge are written by

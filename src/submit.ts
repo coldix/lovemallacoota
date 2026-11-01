@@ -158,34 +158,61 @@ export function toBase64(bytes: Uint8Array): string {
   return btoa(binary);
 }
 
-export async function commitArticle(env: Env, week: string, article: Record<string, unknown>) {
-  const path = `data/editions/${week}.json`;
-  const api = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`;
+/** This calendar month in Melbourne, as an edition key: 2026-11. */
+export function melbourneMonth(now = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Australia/Melbourne", year: "numeric", month: "2-digit" })
+    .format(now)
+    .slice(0, 7);
+}
+
+/**
+ * A story keeps the issue it was submitted to. When that issue has closed by
+ * the time it is approved, as happens to anything waiting in the queue over a
+ * month-end roll, it goes into the open month instead of failing with "This
+ * edition is closed". The id is re-keyed so it matches the issue it lands in.
+ */
+export function retarget(article: Record<string, unknown>, from: string, to: string) {
+  const id = String(article.id || "");
+  return id.startsWith(`${from}-`) ? { ...article, id: `${to}${id.slice(from.length)}` } : { ...article };
+}
+
+export async function commitArticle(env: Env, week: string, article: Record<string, unknown>, now = new Date()) {
   const headers = {
     Authorization: `Bearer ${env.GITHUB_TOKEN}`,
     Accept: "application/vnd.github+json",
     "User-Agent": "lovemallacoota-worker",
   };
+  const read = async (key: string) => {
+    const path = `data/editions/${key}.json`;
+    const api = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`;
+    const current = await fetch(api, { headers });
+    if (!current.ok) throw new Error(`Cannot read ${path}: ${current.status}`);
+    const file = (await current.json()) as { content: string; sha: string };
+    return { key, path, api, sha: file.sha, edition: JSON.parse(fromBase64Utf8(file.content)) };
+  };
 
-  const current = await fetch(api, { headers });
-  if (!current.ok) throw new Error(`Cannot read ${path}: ${current.status}`);
-  const file = (await current.json()) as { content: string; sha: string };
-  const edition = JSON.parse(fromBase64Utf8(file.content));
+  let target = await read(week);
+  if (target.edition.status !== "open") {
+    const open = melbourneMonth(now);
+    if (open === week) throw new Error("This edition is closed.");
+    target = await read(open);
+    if (target.edition.status !== "open") throw new Error("This edition is closed.");
+    article = retarget(article, week, open);
+  }
+  appendArticle(target.edition, article);
 
-  if (edition.status !== "open") throw new Error("This edition is closed.");
-  appendArticle(edition, article);
-
-  const body = new TextEncoder().encode(`${JSON.stringify(edition, null, 2)}\n`);
-  const written = await fetch(api, {
+  const body = new TextEncoder().encode(`${JSON.stringify(target.edition, null, 2)}\n`);
+  const written = await fetch(target.api, {
     method: "PUT",
     headers: { ...headers, "Content-Type": "application/json" },
     body: JSON.stringify({
-      message: `Add "${article.title}" to ${week}`,
+      message: `Add "${article.title}" to ${target.key}`,
       content: toBase64(body),
-      sha: file.sha,
+      sha: target.sha,
     }),
   });
-  if (!written.ok) throw new Error(`Cannot write ${path}: ${written.status}`);
+  if (!written.ok) throw new Error(`Cannot write ${target.path}: ${written.status}`);
+  return target.key;
 }
 
 async function putFile(env: Env, filePath: string, bytes: Uint8Array, message: string) {

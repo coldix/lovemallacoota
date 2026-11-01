@@ -101,7 +101,11 @@ export async function handleAdminApprove(request: Request, env: Env): Promise<Re
       if (!env.GITHUB_TOKEN) {
         return json({ ok: false, error: "GitHub publishing not configured." }, 503);
       }
-      await commitArticle(env, parsed.week, parsed.article);
+      const landed = await commitArticle(env, parsed.week, parsed.article);
+      if (landed !== parsed.week) {
+        parsed.week = landed;
+        await env.DB.prepare(`UPDATE submissions SET payload = ? WHERE id = ?`).bind(JSON.stringify(parsed), body.id).run();
+      }
     }
 
     const now = new Date().toISOString();

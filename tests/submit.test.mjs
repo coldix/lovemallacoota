@@ -143,3 +143,39 @@ test("a file far larger than an edition encodes without overflowing the stack", 
   const bytes = new Uint8Array(2 * 1024 * 1024).fill(0xb0);
   assert.equal(toBase64(bytes), Buffer.from(bytes).toString("base64"));
 });
+
+test("a story approved after its month closed goes into the open month", async () => {
+  const { commitArticle, fromBase64Utf8 } = await import("../src/submit.ts");
+  const files = {
+    "2026-10": { week: "2026-10", status: "frozen", articles: [] },
+    "2026-11": { week: "2026-11", status: "open", articles: [] },
+  };
+  const realFetch = globalThis.fetch;
+  let written = null;
+  globalThis.fetch = async (url, init = {}) => {
+    const key = /editions\/(\d{4}-\d{2})\.json/.exec(String(url))[1];
+    if (init.method === "PUT") {
+      written = { key, edition: JSON.parse(fromBase64Utf8(JSON.parse(init.body).content)) };
+      return new Response("{}", { status: 200 });
+    }
+    const content = Buffer.from(JSON.stringify(files[key])).toString("base64");
+    return new Response(JSON.stringify({ content, sha: "x" }), { status: 200 });
+  };
+  try {
+    const landed = await commitArticle(
+      { GITHUB_TOKEN: "t" },
+      "2026-10",
+      { id: "2026-10-community-a-story", title: "A story" },
+      new Date("2026-11-02T00:00:00+11:00")
+    );
+    assert.equal(landed, "2026-11");
+    assert.equal(written.key, "2026-11");
+    assert.equal(written.edition.articles[0].id, "2026-11-community-a-story");
+    await assert.rejects(
+      commitArticle({ GITHUB_TOKEN: "t" }, "2026-10", { id: "2026-10-x", title: "X" }, new Date("2026-10-20T00:00:00+11:00")),
+      /closed/
+    );
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});

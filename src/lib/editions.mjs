@@ -30,7 +30,7 @@ export const SECTIONS = [
   { id: "community", title: "Community" },
   { id: "madra", title: "MADRA News" },
   { id: "school", title: "Out and About at MP-12" },
-  { id: "local", title: "Local of the Week" },
+  { id: "local", title: "Local of the Month" },
   { id: "region", title: "Gipsy Point, Genoa and District" },
   { id: "history", title: "Local History" },
   { id: "fishing", title: "Fishing Report" },
@@ -44,14 +44,14 @@ export const SECTIONS = [
   { id: "sport", title: "Sport" },
   { id: "kids", title: "Kids' Space" },
   { id: "crossword", title: "The Coota Crossword", automatic: true },
-  { id: "video", title: "Video of the Week", automatic: true },
-  { id: "trail", title: "Trail of the Week", automatic: true },
-  { id: "business", title: "Business of the Week", automatic: true },
+  { id: "video", title: "Video of the Month", automatic: true },
+  { id: "trail", title: "Featured Trail", automatic: true },
+  { id: "business", title: "Business of the Month", automatic: true },
   { id: "talking", title: "Talking Points", automatic: true },
   { id: "social", title: "Around the Socials", automatic: true },
   { id: "classifieds", title: "Classifieds" },
-  { id: "diary", title: "What's On This Week", automatic: true },
-  { id: "weather", title: "Weekly Weather Forecast", automatic: true },
+  { id: "diary", title: "What's On: The Next Seven Days", automatic: true },
+  { id: "weather", title: "Seven-Day Weather Forecast", automatic: true },
   { id: "tides", title: "Tide Times", automatic: true },
   { id: "transport", title: "Buses and Transport", automatic: true },
   { id: "radio", title: "3MGB Wilderness Radio", automatic: true },
@@ -123,10 +123,10 @@ function autoEntry(section) {
     if (previous) return `Solution to crossword no. ${previous}`;
   }
   if (auto.type === "weather") return `Seven-day forecast to ${auto.data.days.at(-1).date}`;
-  if (auto.type === "tides") return "The week's moon, and where to find the times";
+  if (auto.type === "tides") return "The moon, and where to find the times";
   if (auto.type === "tide-table") return `${auto.data.extremes.length} highs and lows, and the moon`;
-  if (auto.type === "diary") return `${auto.data.length} ${auto.data.length === 1 ? "event" : "events"} this week`;
-  if (auto.type === "video") return auto.data.title || "This week's video";
+  if (auto.type === "diary") return `${auto.data.length} ${auto.data.length === 1 ? "event" : "events"} in the next seven days`;
+  if (auto.type === "video") return auto.data.title || "This month's video";
   if (auto.type === "trail") return auto.data.name;
   if (auto.type === "business") return auto.data.name;
   if (auto.type === "links") return `${auto.data.length} ${auto.data.length === 1 ? "link" : "links"}`;

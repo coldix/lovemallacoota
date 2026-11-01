@@ -305,7 +305,7 @@ test("What's On looks forward from a freshly refreshed week, not at the edition'
   }
 
   const editionHtml = await readFile(new URL("../dist/edition.html", import.meta.url), "utf8");
-  assert.match(editionHtml, /Weekly Weather Forecast/);
+  assert.match(editionHtml, /Seven-Day Weather Forecast/);
   if (editionStart && edition.weekStart) {
     assert.equal(editionStart, edition.weekStart, "the edition forecast does not start on its Monday");
   }
@@ -845,7 +845,7 @@ test("a section that says it has content actually renders it", async () => {
   const edition = currentEdition();
 
   if (edition?.video) {
-    assert.ok(html.includes("Video of the Week"), "no video heading");
+    assert.ok(html.includes("Video of the Month"), "no video heading");
     assert.match(html, /youtube-nocookie\.com\/embed\/[A-Za-z0-9_-]{11}/, "heading with no embed");
   }
   for (const section of editionSections(edition)) {

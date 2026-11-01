@@ -21,10 +21,10 @@ export function GET() {
 
   const body = `# Love Mallacoota
 
-> Local guide, weekly community edition and historical archive for Mallacoota,
+> Local guide, monthly community edition and historical archive for Mallacoota,
 > Victoria, Australia (East Gippsland, postcode 3892). ${directory.length}
 > directory listings across food, stay, activities, community groups and
-> public services, a weekly edition of community news, and a catalogue of
+> public services, a monthly edition of community news, and a catalogue of
 > ${issues.length} issues of the local newspaper. Run by Colin Dixon (oze.au).
 
 Mallacoota is a coastal town at the Mallacoota Inlet, roughly 520 km east of
@@ -38,7 +38,7 @@ Melbourne and 550 km south of Sydney, bordered by Croajingolong National Park.
   will not change again. The first weekly, /edition/2026-w36.html, is archived.
   Directory listings under /listing/ carry the date each was last checked.
 - **Historical**: /archive.html catalogues the Mallacoota Mouth, indexes every
-  past weekly edition, and indexes every Local of the Week profile.
+  past weekly edition, and indexes every Local of the Month profile.
 
 Emergency and safety information is relayed from official sources only and is
 never written here; /emergency.html links to the authority in every case.
@@ -79,7 +79,7 @@ listing marked "Not yet verified" has not been confirmed by us.
 
 ## People and history
 
-- [Local of the Week](https://lovemallacoota.au/archive.html#locals): ${locals.length} profile(s) of Mallacoota people, each linking to the edition that published it
+- [Local of the Month](https://lovemallacoota.au/archive.html#locals): ${locals.length} profile(s) of Mallacoota people, each linking to the edition that published it
 - [Mallacoota Mouth archive](https://lovemallacoota.au/archive.html): ${issues.length} issues catalogued, ${issues.at(-1)?.publicationDate.slice(0, 4)}–${issues[0]?.publicationDate.slice(0, 4)}
 
 There is no standalone /locals.html; it redirects to the archive index, which

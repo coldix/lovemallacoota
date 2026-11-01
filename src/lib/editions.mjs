@@ -456,17 +456,6 @@ export function youTubeId(url) {
 }
 
 /**
- * A photograph to fill the space a short edition leaves. Chosen by rotation
- * from data/photo-bank.json so the same picture does not appear two weeks
- * running, and only used when there is a gap worth filling.
- */
-export function fillerPhoto(edition) {
-  const bank = loadDataFile("photo-bank.json", []);
-  if (!bank.length) return null;
-  return bank[weekNumber(edition) % bank.length];
-}
-
-/**
  * Advertisements printed in the edition. These are chosen and frozen per
  * edition rather than served by the ad network: a frozen week is cached for a
  * year, so whatever is in its PDF is there permanently, and that has to be a

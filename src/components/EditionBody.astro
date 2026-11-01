@@ -18,7 +18,7 @@ import {
   sectionsWithContent,
   tableOfContents,
 } from "../lib/editions.mjs";
-import { adsForSection, busGroups, busPlace, fillerPhoto, fullPageAds, imageSize, socialForSection, storyPath, youTubeId } from "../lib/editions.mjs";
+import { adsForSection, busGroups, busPlace, fullPageAds, imageSize, socialForSection, storyPath, youTubeId } from "../lib/editions.mjs";
 import EditionArticle from "./EditionArticle.astro";
 import EditionCrossword from "./EditionCrossword.astro";
 import WeekWeather from "./WeekWeather.astro";
@@ -47,11 +47,6 @@ const TIDE_WHEN = new Intl.DateTimeFormat("en-AU", {
 const tideWhen = (value) => TIDE_WHEN.format(new Date(value));
 const toc = tableOfContents(edition);
 const crossword = sections.find((section) => section.auto?.type === "crossword") || null;
-const rawFiller = fillerPhoto(edition);
-const isFillerUsed = edition.articles?.some(a => 
-  a.image?.url === rawFiller?.url || a.images?.some(img => img.url === rawFiller?.url)
-);
-const filler = isFillerUsed ? null : rawFiller;
 const total = countArticles(edition);
 const monthly = isMonthly(edition);
 const newThisWeek = monthly ? articlesThisWeek(edition) : [];
@@ -445,15 +440,6 @@ const statusLabel =
     {ad.advertiser && <p class="edition-ad-by">{ad.advertiser}</p>}
   </aside>
 ))}
-
-{filler && (
-  <section class="glass-card sheen content-block reveal edition-filler">
-    <figure class="edition-figure">
-      <img src={filler.url} alt={filler.alt} width={imageSize(filler.url)?.width} height={imageSize(filler.url)?.height} loading="eager" decoding="async" />
-      <figcaption>{filler.caption}{filler.credit && <span> - {filler.credit}</span>}</figcaption>
-    </figure>
-  </section>
-)}
 
 {!archived && (
   <section class="glass-card sheen content-block reveal edition-web-only">

@@ -145,3 +145,17 @@ banner the component expires after 30 September. That one also failed the
 daily refresh on 1 October, so the forecast stopped shipping. The tests now
 follow the open month and the banner's own closing date, so the next roll
 (1 November) should pass `pnpm run check` unattended.
+
+## Second month-end roll: October closed, November opened (1 November 2026)
+
+`node tools/roll-month.mjs --today=2026-11-01` was run by hand on a branch, then
+`node tools/refresh-weekly.mjs` for the automatic sections.
+
+- `data/editions/2026-10.json` is `frozen` with all 24 stories and its cover. Its
+  permanent page `/edition/2026-10.html`, story pages and PDF keep their URLs.
+- `data/editions/2026-11.json` is open and empty. `featuredBusiness`
+  (`mallacoota-food-chariot`) was carried over by hand.
+- No crossword solution carries over: October ran no new puzzle, and crossword
+  2's solution already appeared in October.
+- Still needed for November, by hand: a cover photograph, any new crossword, and
+  the stories.

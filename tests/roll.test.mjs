@@ -138,7 +138,7 @@ test("the next month carries last issue's crossword solution", () => {
 
 test("the featured business in the cool months is not a summer-only operator", () => {
   const featured = pickBusiness("2026-w37");
-  assert.equal(featured.slug, "mallacoota-food-chariot");
+  assert.equal(featured.slug, "mallacoota-bakery");
   assert.equal(featured.rotation, undefined);
   assert.doesNotMatch(featured.description || "", /seasonal/i);
 });

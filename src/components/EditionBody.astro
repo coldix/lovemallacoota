@@ -18,7 +18,7 @@ import {
   sectionsWithContent,
   tableOfContents,
 } from "../lib/editions.mjs";
-import { adsForSection, busGroups, busPlace, fillerPhoto, fullPageAds, imageSize, socialForSection, storyPath, youTubeId } from "../lib/editions.mjs";
+import { adsForSection, busGroups, busPlace, fullPageAds, imageSize, socialForSection, storyPath, youTubeId } from "../lib/editions.mjs";
 import EditionArticle from "./EditionArticle.astro";
 import EditionCrossword from "./EditionCrossword.astro";
 import WeekWeather from "./WeekWeather.astro";
@@ -47,11 +47,6 @@ const TIDE_WHEN = new Intl.DateTimeFormat("en-AU", {
 const tideWhen = (value) => TIDE_WHEN.format(new Date(value));
 const toc = tableOfContents(edition);
 const crossword = sections.find((section) => section.auto?.type === "crossword") || null;
-const rawFiller = fillerPhoto(edition);
-const isFillerUsed = edition.articles?.some(a => 
-  a.image?.url === rawFiller?.url || a.images?.some(img => img.url === rawFiller?.url)
-);
-const filler = isFillerUsed ? null : rawFiller;
 const total = countArticles(edition);
 const monthly = isMonthly(edition);
 const newThisWeek = monthly ? articlesThisWeek(edition) : [];
@@ -120,7 +115,7 @@ const statusLabel =
     Not printed: the archive copy of a month has no "this week". [26.09.001] */}
 {newThisWeek.length > 0 && (
   <section class="glass-card content-block edition-new edition-web-only" id="section-new-this-week" aria-labelledby="heading-new-this-week">
-    <h2 class="section-title" id="heading-new-this-week">New this week</h2>
+    <h2 class="section-title" id="heading-new-this-week">{monthly ? "New in the last seven days" : "New this week"}</h2>
     <ul class="edition-diary">
       {newThisWeek.map((article) => (
         <li>
@@ -204,7 +199,7 @@ const statusLabel =
         <div class="media-frame edition-web-only">
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${youTubeId(section.auto.data.url)}`}
-            title={section.auto.data.title || "Video of the week"}
+            title={section.auto.data.title || "Video of the month"}
             loading="lazy"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
@@ -237,7 +232,7 @@ const statusLabel =
           ))}
         </ul>
         <p class="edition-source">
-          This week only. Everything further out, and the regular club meetings,
+          The next seven days only. Everything further out, and the regular club meetings,
           are on <a href="/calendar.html">What's On</a>.
         </p>
       </>
@@ -258,7 +253,7 @@ const statusLabel =
           <a class="btn btn-primary" href={section.auto.data.url} rel="noopener noreferrer" target="_blank">Full notes on TrailBound</a>
         </p>
         <p class="edition-source">
-          Walk {section.auto.data.rotation.position} of {section.auto.data.rotation.of} within about two hours of Mallacoota. A different one each week.
+          Walk {section.auto.data.rotation.position} of {section.auto.data.rotation.of} within about two hours of Mallacoota.
         </p>
       </div>
     )}
@@ -407,7 +402,7 @@ const statusLabel =
         <p class="edition-source">
           {section.auto.data.rotation
             ? `Chosen in turn from the ${section.auto.data.rotation.of} listings in the directory - number ${section.auto.data.rotation.position}. Not paid placement.`
-            : "Chosen by the editor this week, out of the usual rotation. Not paid placement."}
+            : `Chosen by the editor for ${monthly ? "this month" : "this week"}, out of the usual rotation. Not paid placement.`}
         </p>
       </div>
     )}
@@ -445,15 +440,6 @@ const statusLabel =
     {ad.advertiser && <p class="edition-ad-by">{ad.advertiser}</p>}
   </aside>
 ))}
-
-{filler && (
-  <section class="glass-card sheen content-block reveal edition-filler">
-    <figure class="edition-figure">
-      <img src={filler.url} alt={filler.alt} width={imageSize(filler.url)?.width} height={imageSize(filler.url)?.height} loading="eager" decoding="async" />
-      <figcaption>{filler.caption}{filler.credit && <span> - {filler.credit}</span>}</figcaption>
-    </figure>
-  </section>
-)}
 
 {!archived && (
   <section class="glass-card sheen content-block reveal edition-web-only">

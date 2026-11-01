@@ -1,69 +1,69 @@
 {
   "week": "2026-11",
-  "generatedAt": "2026-11-01T04:30:03.455Z",
+  "generatedAt": "2026-11-01T11:46:58.044Z",
   "start": "2026-11-01",
   "end": "2026-11-07",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-11-01T04:30:02.672Z",
+    "fetchedAt": "2026-11-01T11:46:56.963Z",
     "days": [
       {
         "date": "2026-11-01",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 19.2,
-        "minC": 13.8,
+        "maxC": 19.6,
+        "minC": 12.9,
         "rainMm": 0.3
       },
       {
         "date": "2026-11-02",
-        "code": 53,
-        "summary": "Drizzle",
-        "maxC": 22.8,
-        "minC": 11.6,
-        "rainMm": 1.5
+        "code": 55,
+        "summary": "Heavy drizzle",
+        "maxC": 23.1,
+        "minC": 11.2,
+        "rainMm": 1.8
       },
       {
         "date": "2026-11-03",
         "code": 80,
         "summary": "Showers",
-        "maxC": 19.1,
-        "minC": 14.9,
-        "rainMm": 5.8
+        "maxC": 19.5,
+        "minC": 14.6,
+        "rainMm": 8.6
       },
       {
         "date": "2026-11-04",
-        "code": 81,
-        "summary": "Showers",
-        "maxC": 20.9,
-        "minC": 10.3,
-        "rainMm": 10.2
+        "code": 53,
+        "summary": "Drizzle",
+        "maxC": 20.1,
+        "minC": 12.5,
+        "rainMm": 3
       },
       {
         "date": "2026-11-05",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 16.5,
-        "minC": 9.8,
-        "rainMm": 1.5
+        "maxC": 16.7,
+        "minC": 9.9,
+        "rainMm": 0.4
       },
       {
         "date": "2026-11-06",
         "code": 3,
         "summary": "Overcast",
-        "maxC": 19.2,
-        "minC": 9.5,
+        "maxC": 20.8,
+        "minC": 8.2,
         "rainMm": 0
       },
       {
         "date": "2026-11-07",
         "code": 53,
         "summary": "Drizzle",
-        "maxC": 17.6,
-        "minC": 6.8,
-        "rainMm": 11.4
+        "maxC": 15.3,
+        "minC": 6.9,
+        "rainMm": 5.4
       }
     ]
   },
@@ -74,7 +74,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-11-01T04:30:02.831Z",
+    "fetchedAt": "2026-11-01T11:46:57.066Z",
     "extremes": [
       {
         "time": "2026-11-01T02:00",
@@ -961,14 +961,14 @@
     {
       "date": "Mon 2 Nov",
       "time": "10:00 am",
-      "title": "Toddler Music and Movement (Reclink)",
-      "location": ""
+      "title": "Pickleball",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Mon 2 Nov",
       "time": "10:00 am",
-      "title": "Pickleball",
-      "location": "Mallacoota Tennis Club"
+      "title": "Toddler Music and Movement (Reclink)",
+      "location": ""
     },
     {
       "date": "Tue 3 Nov",
@@ -997,26 +997,26 @@
     {
       "date": "Thu 5 Nov",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
-    },
-    {
-      "date": "Thu 5 Nov",
-      "time": "9:30 am",
       "title": "Wilderness Collective (CCR)",
       "location": "The Oval"
     },
     {
-      "date": "Fri 6 Nov",
+      "date": "Thu 5 Nov",
       "time": "9:30 am",
-      "title": "Croquet (Reclink)",
-      "location": "Mallacoota Golf and Country Club"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Fri 6 Nov",
       "time": "9:30 am",
       "title": "Playgroup",
       "location": "Mallacoota Preschool and Toy Library"
+    },
+    {
+      "date": "Fri 6 Nov",
+      "time": "9:30 am",
+      "title": "Croquet (Reclink)",
+      "location": "Mallacoota Golf and Country Club"
     },
     {
       "date": "Sat 7 Nov",

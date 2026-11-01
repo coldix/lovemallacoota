@@ -1,11 +1,11 @@
 {
   "week": "2026-w44",
-  "generatedAt": "2026-11-01T04:30:02.106Z",
+  "generatedAt": "2026-11-01T11:46:56.843Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-11-01T04:30:00.101Z",
+    "fetchedAt": "2026-11-01T11:46:55.679Z",
     "days": [
       {
         "date": "2026-10-26",
@@ -59,8 +59,8 @@
         "date": "2026-11-01",
         "code": 51,
         "summary": "Light drizzle",
-        "maxC": 19.2,
-        "minC": 13.8,
+        "maxC": 19.6,
+        "minC": 12.9,
         "rainMm": 0.3
       }
     ]
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-11-01T04:30:00.759Z",
+    "fetchedAt": "2026-11-01T11:46:56.137Z",
     "extremes": [
       {
         "time": "2026-10-26T02:00",
@@ -995,14 +995,14 @@
     {
       "date": "Fri 30 Oct",
       "time": "9:30 am",
-      "title": "Playgroup",
-      "location": "Mallacoota Preschool and Toy Library"
+      "title": "Croquet (Reclink)",
+      "location": "Mallacoota Golf and Country Club"
     },
     {
       "date": "Fri 30 Oct",
       "time": "9:30 am",
-      "title": "Croquet (Reclink)",
-      "location": "Mallacoota Golf and Country Club"
+      "title": "Playgroup",
+      "location": "Mallacoota Preschool and Toy Library"
     },
     {
       "date": "Sat 31 Oct",
@@ -1019,14 +1019,14 @@
     {
       "date": "Sun 1 Nov",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Sun 1 Nov",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     }
   ],
   "trail": {

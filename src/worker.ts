@@ -57,6 +57,10 @@ const MOVED_PATHS = new Map([
   // redirect whose Location has none of its own.
   ["/locals.html", "/archive.html"],
   ["/locals", "/archive.html"],
+  // Edna Brady asked for the Love of Mallacoota book page to come down; old
+  // links redirect home rather than keep a stub Brady page.
+  ["/brady.html", "/"],
+  ["/brady", "/"],
   ["/eat-drink", "/food.html"],
   ["/stay", "/accom.html"],
   ["/do-see", "/activity.html"],

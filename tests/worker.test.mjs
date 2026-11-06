@@ -258,6 +258,21 @@ test("the retired Local of the Week page redirects to the archive that replaced 
   }
 });
 
+
+test("the retired Brady book page redirects to the homepage", async () => {
+  for (const path of ["/brady.html", "/brady", "/brady/"]) {
+    const response = await worker.fetch(
+      new Request(`https://lovemallacoota.au${path}`),
+      env
+    );
+    assert.equal(response.status, 301, `${path} did not redirect`);
+    assert.equal(
+      response.headers.get("Location"),
+      "https://lovemallacoota.au/"
+    );
+  }
+});
+
 test("a listing that changed its name keeps its old address working", async () => {
   const response = await worker.fetch(
     new Request("https://lovemallacoota.au/listing/bribes-gift-shop-and-fresh-flowers.html"),

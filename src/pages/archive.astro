@@ -23,7 +23,7 @@ const weeklies = editions.filter((edition) => !isMonthly(edition));
 ---
 <BaseLayout
   title="Mallacoota Community History & Archive Hub"
-  description="Historical archive hub for Mallacoota, featuring past editions of Coota, the Edna J. Brady collection, and catalogued issues of The Mallacoota Mouth."
+  description="Historical archive hub for Mallacoota, featuring past editions of Coota and catalogued issues of The Mallacoota Mouth."
   canonicalPath="/archive.html"
   active="archive"
   socialImage={CARDS.archive}
@@ -36,26 +36,6 @@ const weeklies = editions.filter((edition) => !isMonthly(edition));
   />
   <main>
     <Breadcrumbs trail={[{ name: "Archive", path: "/archive.html" }]} />
-
-    {/* Featured Collection: Love of Mallacoota */}
-    <section class="glass-card sheen content-block reveal" style="border: 1px solid var(--accent); background: linear-gradient(135deg, rgba(36,200,232,0.12), rgba(15,23,42,0.6));">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
-        <div>
-          <span style="display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(36,200,232,0.2); color: var(--accent); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem;">
-            Featured Collection
-          </span>
-          <h2 class="section-title" style="margin: 0 0 0.5rem;">Love of Mallacoota (1998)</h2>
-          <p class="section-sub" style="max-width: 680px; margin-bottom: 1.25rem;">
-            Compiled by <strong>Edna J. Brady</strong> - A 100+ page regional history collection featuring coastal bush poetry by Henry Lawson, E.J. Brady, Louis Esson, and Ted Harrington, along with early selector maps, lighthouse memoirs, and historical photos.
-          </p>
-        </div>
-      </div>
-      <div class="edition-actions">
-        <a class="btn btn-coral" href="/brady.html">Open Love of Mallacoota page →</a>
-        <a class="btn btn-primary" href="https://loveofmallacoota.com/" target="_blank" rel="noopener noreferrer">Visit Love of Mallacoota Website</a>
-        <a class="btn btn-ghost" href="https://loveofmallacoota.com/wp-content/uploads/2020/03/Love-of-Mallacoota.pdf" target="_blank" rel="noopener noreferrer">Download Original PDF (3.3 MB)</a>
-      </div>
-    </section>
 
     {/* Dedicated Mallacoota Mouth Back-Issues Feature Card */}
     <section class="glass-card sheen content-block reveal" style="border: 1px solid rgba(255,255,255,0.15);">

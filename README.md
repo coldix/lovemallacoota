@@ -53,14 +53,7 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
   * Guest (unauthenticated) submissions require a valid email and phone number, automatically staging photos and placing articles in the `pending_approval` queue in the D1 database.
 * **Admin Dashboard (`/admin.html`)**: Maintains an administrative dashboard for single-click review, approval, publishing, or rejection of pending submissions.
 
-### 3. Edna J. Brady *Love of Mallacoota* Collection (`/brady.html`)
-* Dedicated interactive page for Edna J. Brady's 1998 100+ page regional history compilation.
-* **Split-Pane Interactive Reader**:
-  * **Live Search**: Instant client-side filtering across 50+ chapters, poems, photos, and lighthouse memoirs by keyword, author, or title.
-  * **Large View Window & Reliable Jump**: 860px tall viewer with query cache-busting (`/pdf/Love-of-Mallacoota.pdf?p=X#page=X&pagemode=none&navpanes=0&view=FitH`) allowing instant jumps and collapsing PDF thumbnail sidebars on load.
-* **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
-
-### 4. Community Directory (`/directory.html`)
+### 3. Community Directory (`/directory.html`)
 121 listings across 5 task-based sections, 81 of them with a photograph. Facebook groups are not listings; they appear in the edition under Around the Socials:
 * **Eat & Drink** ([`/food.html`](https://lovemallacoota.au/food.html)): Cafes, pubs, takeaway, seafood, groceries.
 * **Stay** ([`/accom.html`](https://lovemallacoota.au/accom.html)): Lodges, motels, holiday units, caravan parks.
@@ -72,21 +65,21 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * **Opening Hours and Trading Status**: Hours render as lines a person reads - "Tue-Thu 9.30am-12pm and 1pm-4pm" - and a closed business says so on its own page, with the date that was recorded, not only on the section list.
 * **What's New** ([`/directory-changes.html`](https://lovemallacoota.au/directory-changes.html)): A dated record of everything added, renamed and changed, built from the repository's git history rather than kept by hand, so it cannot fall behind the directory it describes. Renames are detected and shown as renames, not as a removal and a stranger.
 
-### 5. What's On Calendar (`/calendar.html`)
+### 4. What's On Calendar (`/calendar.html`)
 * **Community Calendar**: The town's own Google Calendar, embedded in agenda view. The id must be a calendar made for the purpose (`@group.calendar.google.com`); `src/lib/calendar.mjs` fails the build on a consumer mail address, because an embedded calendar is downloadable in full.
 * **Partner Calendars**: Other organisations' own public calendars, each in its own frame under its own name - MDHSS run theirs. A partner on a consumer domain must name `publishedAt`, the page where its owner already publishes it, or the build refuses it.
 * **Weekly Diary**: `tools/fetch-calendar.mjs` reads the same calendar for the edition's diary, so what is in the calendar is what the paper prints.
 * Public event submission form ([`/submit-event.html`](https://lovemallacoota.au/submit-event.html)).
 
-### 6. Mouth Back-Issue Catalogue (`/mouth.html`)
+### 5. Mouth Back-Issue Catalogue (`/mouth.html`)
 * Dedicated searchable catalog of historic *Mallacoota Mouth* back-issues (1990s–2020s).
 * Search by issue number, date, cover photo credits, or article headlines, with single-year filter tags.
 
-### 7. Archive Hub (`/archive.html`)
+### 6. Archive Hub (`/archive.html`)
 * Central historical archive hub for Mallacoota.
-* Features the Edna J. Brady collection (`/brady.html`), *The Mallacoota Mouth* back-issue catalogue (`/mouth.html`), and weekly digital editions index.
+* Features *The Mallacoota Mouth* back-issue catalogue (`/mouth.html`) and weekly digital editions index.
 
-### 8. Shop & Gallery (`/shop.html`)
+### 7. Shop & Gallery (`/shop.html`)
 * **Dedicated Storefront & Gallery**: Brings together local art, coastal photography, wilderness merchandise, and community makers for visitors and locals ([`lovemallacoota.au/shop`](https://lovemallacoota.au/shop)).
 * **Fine Art Panoramas & Ocean Prints**: High-resolution Mallacoota and Gabo Island panoramas printed on museum-grade cotton rag, fine-art canvas, and framed prints fulfilled by Australian fine-art lab [art.oze.au](https://art.oze.au/browse.html).
 * **Wilderness Apparel & Goods**: Wildlife-inspired t-shirts, hoodies, caps, totes, and mugs featuring Mallacoota pelicans, sea eagles, lyrebirds, and historic coastal emblems fulfilled on-demand via Redbubble.
@@ -156,8 +149,7 @@ Love Mallacoota (lovemallacoota.au)
 │   └── Creator Support & Local Makers
 │
 ├── Archive Hub                         /archive.html
-│   ├── Mallacoota Mouth Catalogue     /mouth.html
-│   └── Love of Mallacoota (1998)      /brady.html
+│   └── Mallacoota Mouth Catalogue     /mouth.html
 │
 ├── Submissions & Admin
 │   ├── Submit Article / Notice         /submit.html

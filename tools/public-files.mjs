@@ -42,7 +42,6 @@ export const publicFiles = [
   "audio/lawson-brady-camp.mp3",
   "audio/the-bar-lawson.mp3",
   "audio/farewell-to-barbara.mp3",
-  "pdf/Love-of-Mallacoota.pdf",
   ...publishedCrosswordPdfs(),
   "robots.txt",
   "site.webmanifest",

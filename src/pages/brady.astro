@@ -3,63 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import PageHero from "../components/PageHero.astro";
 
-const indexItems = [
-  { title: "Dedication", author: "Edna J. Brady", page: 1 },
-  { title: "Credits & Historical Acknowledgements", author: "Historical Society", page: 2 },
-  { title: "Mallacoota (Poem)", author: "Ted Harrington", page: 3 },
-  { title: "A Short History & Chronology", author: "Regional History", page: 4 },
-  { title: "Maps of Mallacoota (1900 & 1925)", author: "Historical Selectors Maps", page: 5 },
-  { title: "Map of Areas Mentioned", author: "Regional Map", page: 6 },
-  { title: "Old State School 3516 (c. 1910)", author: "Photo / Historical Society", page: 7 },
-  { title: "The Kurnai of South East Gippsland", author: "Aldo Massola / VAS Survey", page: 8 },
-  { title: "A Man from the Stone Age", author: "E.J. Brady (Dreams & Realities)", page: 9 },
-  { title: "Report on Mallacoota and Environs", author: "E.J. Brady (Australia Unlimited, 1929)", page: 12 },
-  { title: "Hills and the Sea", author: "E.J. Brady (The Overlander, 1926)", page: 13 },
-  { title: "Cinderella", author: "E.J. Brady (Dreams & Realities)", page: 14 },
-  { title: "Flo's Painting of the Camp & Mallacoota House", author: "Florence Jane Brady", page: 18 },
-  { title: "The Lake (Poem)", author: "E.J. Brady", page: 19 },
-  { title: "A Cruise in the Lady Loch: Genoa River", author: "The Age (1890)", page: 22 },
-  { title: "A Cruise in the Lady Loch: Farewell", author: "The Age (1890)", page: 28 },
-  { title: "The Cannery & Karbeethong Guest House", author: "Historical Records", page: 32 },
-  { title: "The Communal Farm: Description & Records", author: "Webb Thesis / Sun (1932) / Balance Sheets", page: 33 },
-  { title: "A Hard Doer", author: "E.J. Brady", page: 40 },
-  { title: "Gippsland Cattle & Wild Cattle (Poems)", author: "Louis Esson", page: 42 },
-  { title: "Swimming Cattle (Poem)", author: "Louis Esson", page: 44 },
-  { title: "Louis Esson & Australian Theatre / Diary", author: "Vance Palmer (1948)", page: 45 },
-  { title: "Australia Felix (Play)", author: "Louis Esson", page: 47 },
-  { title: "Nomad Chant & The White Crane", author: "Louis Esson", page: 52 },
-  { title: "Mallacoota House", author: "Historical Note", page: 54 },
-  { title: "Katharine Susannah Prichard in Mallacoota", author: "Child of the Hurricane", page: 55 },
-  { title: "Between the Lines (Memoir)", author: "Bernice Morris", page: 57 },
-  { title: "The Road Comes in to Mallacoota", author: "Historical Note & Photos", page: 58 },
-  { title: "Llewellyn Martin", author: "Hugh Brady / Nan Bridle", page: 59 },
-  { title: "Lawson in Mallacoota", author: "Edna J. Brady (1978)", page: 60 },
-  { title: "How Henry Lawson Saw Mallacoota", author: "Henry Lawson (Letter, 1910)", page: 61 },
-  { title: "Captain's Point (Poem)", author: "Henry Lawson (1910)", page: 63 },
-  { title: "Mallacoota Bar, Entrance and Channel", author: "Victor Dorron Memoirs (1966)", page: 64 },
-  { title: "The Bar & Mallacoota Bar (Poems)", author: "Henry Lawson (1910)", page: 66 },
-  { title: "Mallacoota Bar (Poem)", author: "E.J. Brady (The Bulletin, 1922)", page: 69 },
-  { title: "Karl Rasmus & Little Peter", author: "Victor Dorron / E.J. Brady", page: 71 },
-  { title: "Crossing In (Poem)", author: "E.J. Brady", page: 75 },
-  { title: "Mallacoota West: A Song of the Telephone", author: "Henry Lawson (1910)", page: 78 },
-  { title: "The Cutter Wongrabelle (Ballad)", author: "E.J. Brady", page: 80 },
-  { title: "South of Gabo & The Gale (Poems)", author: "E.J. Brady", page: 85 },
-  { title: "From the Beach & Nocturne (Poems)", author: "E.J. Brady", page: 88 },
-  { title: "Twilight & Sea Thought (Poems)", author: "E.J. Brady", page: 91 },
-  { title: "Colonial Fleets (Poem)", author: "E.J. Brady (1933)", page: 95 },
-  { title: "Boydtown, Eden & Ben Boyd's Tower", author: "Note & Henry Lawson Poem", page: 97 },
-  { title: "Did You See Us Sailing Past? & Twofold Bay", author: "Henry Lawson / E.J. Brady", page: 98 },
-  { title: "Coasts of Dream (Poem Extract)", author: "E.J. Brady", page: 101 },
-  { title: "Gabo Island Lighthouse & Childhood Memoirs", author: "Geoff Coles / A.W. Hutton (1862-1865)", page: 102 },
-  { title: "Memories of Gabo", author: "Eileen McKee & Mother's Diary", page: 104 },
-  { title: "The Wind That Blows by Gabo (Poem)", author: "E.J. Brady", page: 106 },
-  { title: "Florence Jane Brady & Family Legacy", author: "Edna J. Brady", page: 108 },
-  { title: "Brady (Tribute Poem & Obituary)", author: "Edward Harrington (1952)", page: 109 },
-];
+const officialSite = "https://loveofmallacoota.com/";
+const officialPdf =
+  "https://loveofmallacoota.com/wp-content/uploads/2020/03/Love-of-Mallacoota.pdf";
 ---
 <BaseLayout
   title="Love of Mallacoota (1998) - Edna J. Brady Collection"
-  description="Interactive archive index and document reader for Love of Mallacoota, compiled by Edna J. Brady in 1998."
+  description="Credit page for Love of Mallacoota, compiled by Edna J. Brady in 1998, with links to the author's official website and PDF."
   canonicalPath="/brady.html"
   active="archive"
 >
@@ -72,7 +22,6 @@ const indexItems = [
   <main style="max-width: 1400px; margin: 0 auto; padding: 0 1rem;">
     <Breadcrumbs trail={[{ name: "Archive", path: "/archive.html" }, { name: "Love of Mallacoota (1998)", path: "/brady.html" }]} />
 
-    {/* Acknowledgements & External Link Block */}
     <section class="glass-card sheen content-block reveal">
       <h2 class="section-title">Acknowledgements &amp; Credit</h2>
       <p class="section-sub">
@@ -82,232 +31,25 @@ const indexItems = [
         This collection brings together historical accounts, poetry by Henry Lawson, E.J. Brady, Louis Esson, and Ted Harrington, along with early maps, photographs, and memoirs. For further historical materials, photos, and family history, please visit the official website:
       </p>
       <div class="edition-actions">
-        <a class="btn btn-primary" href="https://loveofmallacoota.com/" target="_blank" rel="noopener noreferrer">
+        <a class="btn btn-primary" href={officialSite} target="_blank" rel="noopener noreferrer">
           Visit Love of Mallacoota Website →
         </a>
-        <a class="btn btn-ghost" href="https://loveofmallacoota.com/wp-content/uploads/2020/03/Love-of-Mallacoota.pdf" target="_blank" rel="noopener noreferrer">
+        <a class="btn btn-ghost" href={officialPdf} target="_blank" rel="noopener noreferrer">
           Download Original PDF (3.3 MB)
         </a>
       </div>
     </section>
 
-    {/* Interactive Reader Section */}
-    <section class="glass-card sheen content-block reveal" id="readerSection">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-        <div>
-          <h2 class="section-title" style="margin: 0;">Interactive Archive &amp; Document Reader</h2>
-          <p class="section-sub" style="margin: 0.25rem 0 0;">Click any chapter or page pill to jump directly to that page in the large PDF viewer.</p>
-        </div>
-        <div style="display: flex; gap: 0.5rem;">
-          <button id="toggleExpandBtn" type="button" class="btn btn-ghost" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;">
-            ↔ Toggle Full Width
-          </button>
-          <a id="openTabBtn" href="/pdf/Love-of-Mallacoota.pdf#page=1&pagemode=none&navpanes=0" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="padding: 0.4rem 0.85rem; font-size: 0.85rem;">
-            ↗ Open in New Tab
-          </a>
-        </div>
-      </div>
-
-      <div class="field full" style="margin-bottom: 1.25rem;">
-        <label for="searchInput" class="sr-only">Search index</label>
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="Search index by title, author, poem or topic (e.g., Henry Lawson, Gabo, Maps)..."
-          style="width: 100%; padding: 0.85rem 1.2rem; font-size: 1rem; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--card-bg); color: var(--text);"
-        />
-      </div>
-
-      <div id="bradyReaderGrid" class="brady-reader-grid">
-        {/* Table of Contents Column (Swapped: Title | Page | Author) */}
-        <div class="brady-toc-wrap">
-          <table class="archive-table" style="width: 100%; border-collapse: collapse;">
-            <thead>
-              <tr style="border-bottom: 2px solid var(--glass-border); text-align: left;">
-                <th style="padding: 0.6rem; color: var(--muted); font-size: 0.85rem;">Title / Section</th>
-                <th style="padding: 0.6rem; text-align: center; color: var(--muted); font-size: 0.85rem;">Page</th>
-                <th style="padding: 0.6rem; color: var(--muted); font-size: 0.85rem;">Author / Source</th>
-              </tr>
-            </thead>
-            <tbody id="indexTableBody">
-              {indexItems.map((item, idx) => (
-                <tr
-                  class={`brady-row ${idx === 0 ? "active-row" : ""}`}
-                  data-page={item.page}
-                  style="border-bottom: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: background 0.15s ease;"
-                >
-                  <td style="padding: 0.65rem 0.6rem; font-size: 0.92rem; font-weight: 600;">{item.title}</td>
-                  <td style="padding: 0.65rem 0.6rem; text-align: center;">
-                    <a
-                      href={`/pdf/Love-of-Mallacoota.pdf#page=${item.page}&pagemode=none&navpanes=0`}
-                      class="btn btn-ghost page-pill"
-                      data-page={item.page}
-                      style="padding: 0.2rem 0.65rem; font-size: 0.82rem; font-weight: 700; color: var(--accent); border-radius: 999px; white-space: nowrap;"
-                    >
-                      p. {item.page}
-                    </a>
-                  </td>
-                  <td style="padding: 0.65rem 0.6rem; font-size: 0.85rem; color: var(--muted);">{item.author}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* PDF Viewer Column (Large View Window, Sidebar Collapsed by default) */}
-        <div class="brady-pdf-container">
-          <div style="padding: 0.5rem 1rem; background: #1a2234; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--muted);">
-            <span id="currentViewingLabel">Currently Viewing: <strong>Dedication (Page 1)</strong></span>
-            <span style="font-size: 0.8rem; color: var(--accent);">PDF Document Viewer</span>
-          </div>
-          <iframe
-            id="pdfViewer"
-            src="/pdf/Love-of-Mallacoota.pdf?p=1#page=1&pagemode=none&navpanes=0&view=FitH"
-            title="Love of Mallacoota PDF Document"
-            style="width: 100%; height: 860px; border: none; background: #0f172a;"
-          ></iframe>
-        </div>
+    <section class="glass-card sheen content-block reveal">
+      <h2 class="section-title">Read the book</h2>
+      <p class="section-sub" style="margin-bottom: 1.25rem;">
+        The full book is published on Edna's own site. Use the download above, or open it directly from loveofmallacoota.com.
+      </p>
+      <div class="edition-actions">
+        <a class="btn btn-coral" href={officialPdf} target="_blank" rel="noopener noreferrer">
+          Open Love of Mallacoota PDF →
+        </a>
       </div>
     </section>
   </main>
-
-  <script slot="scripts" is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const searchInput = document.getElementById("searchInput");
-      const tableBody = document.getElementById("indexTableBody");
-      const pdfViewer = document.getElementById("pdfViewer");
-      const currentViewingLabel = document.getElementById("currentViewingLabel");
-      const openTabBtn = document.getElementById("openTabBtn");
-      const toggleExpandBtn = document.getElementById("toggleExpandBtn");
-      const readerGrid = document.getElementById("bradyReaderGrid");
-
-      // Jump to page helper
-      function jumpToPage(page, title) {
-        if (!pdfViewer) return;
-        
-        // Include pagemode=none and navpanes=0 to hide PDF thumbnail sidebar on load
-        const targetUrl = `/pdf/Love-of-Mallacoota.pdf?p=${page}#page=${page}&pagemode=none&navpanes=0&view=FitH`;
-        
-        // Force iframe refresh and hash jump
-        pdfViewer.src = targetUrl;
-        
-        if (openTabBtn) {
-          openTabBtn.href = targetUrl;
-        }
-
-        if (currentViewingLabel && title) {
-          currentViewingLabel.innerHTML = `Currently Viewing: <strong>${title} (Page ${page})</strong>`;
-        }
-
-        // Highlight active row
-        document.querySelectorAll(".brady-row").forEach(r => r.classList.remove("active-row"));
-        const activeRow = document.querySelector(`.brady-row[data-page="${page}"]`);
-        if (activeRow) {
-          activeRow.classList.add("active-row");
-        }
-
-        // Scroll to viewer on mobile / smaller screens
-        if (window.innerWidth < 1024) {
-          pdfViewer.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }
-
-      // Filter search box
-      if (searchInput && tableBody) {
-        searchInput.addEventListener("input", () => {
-          const query = searchInput.value.toLowerCase().trim();
-          const rows = tableBody.querySelectorAll("tr");
-          rows.forEach((row) => {
-            const text = row.textContent.toLowerCase();
-            row.style.display = text.includes(query) ? "" : "none";
-          });
-        });
-      }
-
-      // Table row & page pill click listener
-      if (tableBody) {
-        tableBody.addEventListener("click", (e) => {
-          const row = e.target.closest(".brady-row");
-          if (!row) return;
-          
-          e.preventDefault();
-          const page = row.getAttribute("data-page");
-          const titleEl = row.querySelector("td");
-          const title = titleEl ? titleEl.textContent : `Page ${page}`;
-
-          if (page) {
-            jumpToPage(page, title);
-          }
-        });
-      }
-
-      // Toggle Expand Full Width
-      if (toggleExpandBtn && readerGrid) {
-        let isExpanded = false;
-        toggleExpandBtn.addEventListener("click", () => {
-          isExpanded = !isExpanded;
-          if (isExpanded) {
-            readerGrid.classList.add("expanded-grid");
-            toggleExpandBtn.textContent = "↔ Reset Width";
-          } else {
-            readerGrid.classList.remove("expanded-grid");
-            toggleExpandBtn.textContent = "↔ Toggle Full Width";
-          }
-        });
-      }
-    });
-  </script>
-
-  <style>
-    .brady-reader-grid {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 1.5rem;
-      align-items: start;
-    }
-
-    .brady-toc-wrap {
-      max-height: 860px;
-      overflow-y: auto;
-      padding-right: 0.5rem;
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      background: var(--card-bg);
-    }
-
-    .brady-pdf-container {
-      position: sticky;
-      top: 1.5rem;
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      overflow: hidden;
-      background: #111;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-    }
-
-    .brady-row:hover {
-      background: rgba(36, 200, 232, 0.08) !important;
-    }
-
-    .brady-row.active-row {
-      background: rgba(36, 200, 232, 0.18) !important;
-      border-left: 4px solid var(--accent);
-    }
-
-    .expanded-grid {
-      grid-template-columns: 280px 1fr !important;
-    }
-
-    @media (max-width: 1024px) {
-      .brady-reader-grid {
-        grid-template-columns: 1fr !important;
-      }
-      .brady-pdf-container {
-        position: static !important;
-      }
-      #pdfViewer {
-        height: 650px !important;
-      }
-    }
-  </style>
 </BaseLayout>

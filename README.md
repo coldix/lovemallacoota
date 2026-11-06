@@ -54,11 +54,8 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * **Admin Dashboard (`/admin.html`)**: Maintains an administrative dashboard for single-click review, approval, publishing, or rejection of pending submissions.
 
 ### 3. Edna J. Brady *Love of Mallacoota* Collection (`/brady.html`)
-* Dedicated interactive page for Edna J. Brady's 1998 100+ page regional history compilation.
-* **Split-Pane Interactive Reader**:
-  * **Live Search**: Instant client-side filtering across 50+ chapters, poems, photos, and lighthouse memoirs by keyword, author, or title.
-  * **Large View Window & Reliable Jump**: 860px tall viewer with query cache-busting (`/pdf/Love-of-Mallacoota.pdf?p=X#page=X&pagemode=none&navpanes=0&view=FitH`) allowing instant jumps and collapsing PDF thumbnail sidebars on load.
-* **Credit & Outbound Link**: Gives thanks to Edna J. Brady and the family, featuring a direct link to the official website at [loveofmallacoota.com](https://loveofmallacoota.com/).
+* Credit page for Edna J. Brady's 1998 regional history compilation.
+* Thanks Edna and the Brady family, and links to the official site and PDF at [loveofmallacoota.com](https://loveofmallacoota.com/) rather than hosting a local copy or chapter index.
 
 ### 4. Community Directory (`/directory.html`)
 121 listings across 5 task-based sections, 81 of them with a photograph. Facebook groups are not listings; they appear in the edition under Around the Socials:

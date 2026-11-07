@@ -1,11 +1,11 @@
 {
   "week": "2026-w45",
-  "generatedAt": "2026-11-06T12:51:49.175Z",
+  "generatedAt": "2026-11-07T11:39:37.328Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-11-06T12:51:47.624Z",
+    "fetchedAt": "2026-11-07T11:39:35.943Z",
     "days": [
       {
         "date": "2026-11-02",
@@ -49,19 +49,19 @@
       },
       {
         "date": "2026-11-07",
-        "code": 80,
-        "summary": "Showers",
-        "maxC": 14.8,
-        "minC": 7.6,
-        "rainMm": 7.7
+        "code": 55,
+        "summary": "Heavy drizzle",
+        "maxC": 14.9,
+        "minC": 6.6,
+        "rainMm": 6.4
       },
       {
         "date": "2026-11-08",
-        "code": 80,
-        "summary": "Showers",
-        "maxC": 14.1,
-        "minC": 6.4,
-        "rainMm": 10.8
+        "code": 53,
+        "summary": "Drizzle",
+        "maxC": 14.5,
+        "minC": 6.1,
+        "rainMm": 9.1
       }
     ]
   },
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-11-06T12:51:48.267Z",
+    "fetchedAt": "2026-11-07T11:39:36.440Z",
     "extremes": [
       {
         "time": "2026-11-02T03:00",
@@ -1019,14 +1019,14 @@
     {
       "date": "Sun 8 Nov",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     },
     {
       "date": "Sun 8 Nov",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     }
   ],
   "trail": {

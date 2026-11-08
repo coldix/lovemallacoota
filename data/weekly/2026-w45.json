@@ -1,11 +1,11 @@
 {
   "week": "2026-w45",
-  "generatedAt": "2026-11-07T11:39:37.328Z",
+  "generatedAt": "2026-11-08T11:51:45.857Z",
   "weather": {
     "source": "Open-Meteo",
     "sourceUrl": "https://open-meteo.com/",
     "licence": "CC BY 4.0",
-    "fetchedAt": "2026-11-07T11:39:35.943Z",
+    "fetchedAt": "2026-11-08T11:51:44.626Z",
     "days": [
       {
         "date": "2026-11-02",
@@ -53,15 +53,15 @@
         "summary": "Heavy drizzle",
         "maxC": 14.9,
         "minC": 6.6,
-        "rainMm": 6.4
+        "rainMm": 6.2
       },
       {
         "date": "2026-11-08",
-        "code": 53,
-        "summary": "Drizzle",
-        "maxC": 14.5,
-        "minC": 6.1,
-        "rainMm": 9.1
+        "code": 80,
+        "summary": "Showers",
+        "maxC": 14.3,
+        "minC": 6.5,
+        "rainMm": 11.9
       }
     ]
   },
@@ -72,7 +72,7 @@
     "station": "model point near -37.54, 149.79",
     "datum": "mean sea level",
     "modelled": true,
-    "fetchedAt": "2026-11-07T11:39:36.440Z",
+    "fetchedAt": "2026-11-08T11:51:45.043Z",
     "extremes": [
       {
         "time": "2026-11-02T03:00",
@@ -167,22 +167,22 @@
       {
         "time": "2026-11-06T19:00",
         "type": "High",
-        "heightM": 0.5
+        "heightM": 0.51
       },
       {
         "time": "2026-11-07T01:00",
         "type": "Low",
-        "heightM": -0.38
+        "heightM": -0.37
       },
       {
         "time": "2026-11-07T07:00",
         "type": "High",
-        "heightM": 0.74
+        "heightM": 0.73
       },
       {
         "time": "2026-11-07T14:00",
         "type": "Low",
-        "heightM": -0.36
+        "heightM": -0.35
       },
       {
         "time": "2026-11-07T19:00",
@@ -197,7 +197,7 @@
       {
         "time": "2026-11-08T08:00",
         "type": "High",
-        "heightM": 0.69
+        "heightM": 0.68
       },
       {
         "time": "2026-11-08T14:00",
@@ -673,7 +673,7 @@
       },
       {
         "time": "2026-11-06T19:00",
-        "heightM": 0.5
+        "heightM": 0.51
       },
       {
         "time": "2026-11-06T20:00",
@@ -697,7 +697,7 @@
       },
       {
         "time": "2026-11-07T01:00",
-        "heightM": -0.38
+        "heightM": -0.37
       },
       {
         "time": "2026-11-07T02:00",
@@ -705,7 +705,7 @@
       },
       {
         "time": "2026-11-07T03:00",
-        "heightM": -0.07
+        "heightM": -0.06
       },
       {
         "time": "2026-11-07T04:00",
@@ -721,7 +721,7 @@
       },
       {
         "time": "2026-11-07T07:00",
-        "heightM": 0.74
+        "heightM": 0.73
       },
       {
         "time": "2026-11-07T08:00",
@@ -745,23 +745,23 @@
       },
       {
         "time": "2026-11-07T13:00",
-        "heightM": -0.35
+        "heightM": -0.34
       },
       {
         "time": "2026-11-07T14:00",
-        "heightM": -0.36
+        "heightM": -0.35
       },
       {
         "time": "2026-11-07T15:00",
-        "heightM": -0.25
+        "heightM": -0.23
       },
       {
         "time": "2026-11-07T16:00",
-        "heightM": -0.05
+        "heightM": -0.04
       },
       {
         "time": "2026-11-07T17:00",
-        "heightM": 0.17
+        "heightM": 0.18
       },
       {
         "time": "2026-11-07T18:00",
@@ -785,11 +785,11 @@
       },
       {
         "time": "2026-11-07T23:00",
-        "heightM": -0.07
+        "heightM": -0.08
       },
       {
         "time": "2026-11-08T00:00",
-        "heightM": -0.26
+        "heightM": -0.27
       },
       {
         "time": "2026-11-08T01:00",
@@ -797,7 +797,7 @@
       },
       {
         "time": "2026-11-08T02:00",
-        "heightM": -0.33
+        "heightM": -0.34
       },
       {
         "time": "2026-11-08T03:00",
@@ -805,23 +805,23 @@
       },
       {
         "time": "2026-11-08T04:00",
-        "heightM": 0.03
+        "heightM": 0.02
       },
       {
         "time": "2026-11-08T05:00",
-        "heightM": 0.29
+        "heightM": 0.28
       },
       {
         "time": "2026-11-08T06:00",
-        "heightM": 0.52
+        "heightM": 0.51
       },
       {
         "time": "2026-11-08T07:00",
-        "heightM": 0.67
+        "heightM": 0.66
       },
       {
         "time": "2026-11-08T08:00",
-        "heightM": 0.69
+        "heightM": 0.68
       },
       {
         "time": "2026-11-08T09:00",
@@ -837,7 +837,7 @@
       },
       {
         "time": "2026-11-08T12:00",
-        "heightM": -0.22
+        "heightM": -0.23
       },
       {
         "time": "2026-11-08T13:00",
@@ -853,7 +853,7 @@
       },
       {
         "time": "2026-11-08T16:00",
-        "heightM": -0.4
+        "heightM": -0.41
       },
       {
         "time": "2026-11-08T17:00",
@@ -965,8 +965,8 @@
     {
       "date": "Tue 3 Nov",
       "time": "10:00 am",
-      "title": "Library - Rhyme time",
-      "location": "Mallacoota Service Centre and Library"
+      "title": "Strength and Balance (a bit more support)",
+      "location": ""
     },
     {
       "date": "Wed 4 Nov",
@@ -983,26 +983,26 @@
     {
       "date": "Thu 5 Nov",
       "time": "9:30 am",
-      "title": "Bushcare Weeding Group",
-      "location": ""
-    },
-    {
-      "date": "Thu 5 Nov",
-      "time": "9:30 am",
       "title": "Wilderness Collective (CCR)",
       "location": "The Oval"
     },
     {
-      "date": "Fri 6 Nov",
+      "date": "Thu 5 Nov",
       "time": "9:30 am",
-      "title": "Playgroup",
-      "location": "Mallacoota Preschool and Toy Library"
+      "title": "Bushcare Weeding Group",
+      "location": ""
     },
     {
       "date": "Fri 6 Nov",
       "time": "9:30 am",
       "title": "Croquet (Reclink)",
       "location": "Mallacoota Golf and Country Club"
+    },
+    {
+      "date": "Fri 6 Nov",
+      "time": "9:30 am",
+      "title": "Playgroup",
+      "location": "Mallacoota Preschool and Toy Library"
     },
     {
       "date": "Sat 7 Nov",
@@ -1019,14 +1019,14 @@
     {
       "date": "Sun 8 Nov",
       "time": "9:00 am",
-      "title": "Church Service - St Peters",
-      "location": "St Peters Church"
+      "title": "Social Tennis",
+      "location": "Mallacoota Tennis Club"
     },
     {
       "date": "Sun 8 Nov",
       "time": "9:00 am",
-      "title": "Social Tennis",
-      "location": "Mallacoota Tennis Club"
+      "title": "Church Service - St Peters",
+      "location": "St Peters Church"
     }
   ],
   "trail": {

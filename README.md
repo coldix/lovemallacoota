@@ -51,7 +51,7 @@ The monthly community edition (`YY:MM`, e.g. Coota 26:09). Stories are added as 
 * **Guest & Contributor Safeguards**:
   * Authenticated contributors are published instantly upon passing automated policy checks.
   * Guest (unauthenticated) submissions require a valid email and phone number, automatically staging photos and placing articles in the `pending_approval` queue in the D1 database.
-* **Admin Dashboard (`/admin.html`)**: Maintains an administrative dashboard for single-click review, approval, publishing, or rejection of pending submissions.
+* **Admin Dashboard (`/admin.html`)**: Maintains an administrative dashboard for single-click review, approval, publishing, or rejection of pending submissions. It is closed to anyone who is not signed in through Cloudflare Access; see [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ### 3. Community Directory (`/directory.html`)
 121 listings across 5 task-based sections, 81 of them with a photograph. Facebook groups are not listings; they appear in the edition under Around the Socials:

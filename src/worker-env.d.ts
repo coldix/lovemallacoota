@@ -57,4 +57,17 @@ interface Env {
   DB?: D1Database;
   LISTING_RATE?: RateLimit;
   CONTACT_RATE?: RateLimit;
+  /**
+   * Comma-separated emails allowed to use /api/admin/*. A plain var, not a
+   * secret. Without it, or when the caller is not on the list, admin routes
+   * return 401.
+   */
+  ADMIN_EMAILS?: string;
+  /**
+   * Cloudflare Access team domain (e.g. "example.cloudflareaccess.com") and
+   * application audience. When both are set, admin routes verify the Access
+   * JWT instead of trusting the email header alone.
+   */
+  CF_ACCESS_TEAM_DOMAIN?: string;
+  CF_ACCESS_AUD?: string;
 }

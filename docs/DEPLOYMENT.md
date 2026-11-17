@@ -130,6 +130,34 @@ A Worker secret takes effect immediately and needs no deploy. The Turnstile
 any secret creates a new Worker version, which ends an attached `wrangler tail`
 — restart it before testing.
 
+## Admin dashboard
+
+`/admin.html` and `/api/admin/*` are closed unless Cloudflare Access has
+identified the caller as one of the addresses in the `ADMIN_EMAILS` Worker var
+(set in `wrangler.jsonc`). Requests with no credentials, or with an address that
+is not on that list, return 401. The old query-string `key` is no longer
+accepted.
+
+That header is only trustworthy when an Access application is in front of the
+admin page and the admin API. In Cloudflare Zero Trust, add an Access
+application for `lovemallacoota.au` covering `/admin.html` and `/api/admin/*`,
+and allow the same addresses as `ADMIN_EMAILS`. Sign-in can be Google or a
+one-time PIN, the same arrangement already described for contributors in
+[`WEEKLY-MOUTH.md`](WEEKLY-MOUTH.md).
+
+To have the Worker verify the Access JWT as well as the email header, set two
+more vars and redeploy:
+
+```sh
+npx wrangler vars put CF_ACCESS_TEAM_DOMAIN --env=""
+# value: <your-team>.cloudflareaccess.com
+npx wrangler vars put CF_ACCESS_AUD --env=""
+# value: the Application Audience (AUD) tag from the Access application
+```
+
+The same two names can be added to `wrangler.jsonc` instead. Until they are
+set, the Worker trusts `Cf-Access-Authenticated-User-Email` only.
+
 ## Rollback
 
 Use `wrangler versions list` followed by `wrangler rollback` to restore a previous

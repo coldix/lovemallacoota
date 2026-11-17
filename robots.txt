@@ -1,13 +1,15 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
 # AI crawlers welcome — structured site guide at /llms.txt, machine-readable
 # listing data under /data/*.json, and every page's meaning in JSON-LD.
 
-# Nothing here is disallowed by path. Pages that should not be indexed —
-# private management links, verification steps, the thank-you page — say so in
-# their own robots meta tag, which is authoritative and cannot drift from the
-# page the way a list of paths does.
+# /api/ only accepts form submissions and webhooks, so a crawler that treats
+# those addresses as pages gets a 405. Everything else that should not be
+# indexed — private management links, verification steps, the thank-you page —
+# says so in its own robots meta tag, which is authoritative and cannot drift
+# from the page the way a list of paths does.
 
 # Preview deployments serve this same file. They are kept out of the index by
 # an X-Robots-Tag header the Worker adds to every response on a hostname that

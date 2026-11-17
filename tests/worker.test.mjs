@@ -285,6 +285,32 @@ test("a listing that changed its name keeps its old address working", async () =
   );
 });
 
+test("renamed and mistyped listing slugs redirect to the current page", async () => {
+  const moves = [
+    [
+      "/listing/bega-valley-garage-doos.html",
+      "/listing/bega-valley-garage-doors.html",
+    ],
+    [
+      "/listing/mallacoota-and-district-tool-library.html",
+      "/listing/mallacoota-and-district-tool-library-madtl.html",
+    ],
+    [
+      "/listing/mallacoota-and-district-university-of-the-third-age-u3a.html",
+      "/listing/u3a-mallacoota.html",
+    ],
+    [
+      "/listing/the-mallacoota-wilderness-collective.html",
+      "/listing/the-wilderness-collective.html",
+    ],
+  ];
+  for (const [from, to] of moves) {
+    const response = await worker.fetch(new Request(`https://lovemallacoota.au${from}`), env);
+    assert.equal(response.status, 301, `${from} did not redirect`);
+    assert.equal(response.headers.get("Location"), `https://lovemallacoota.au${to}`);
+  }
+});
+
 test("a listing that closed is sent to its section, not left as a 404", async () => {
   const response = await worker.fetch(
     new Request("https://lovemallacoota.au/listing/mallamaurice-holiday-units.html"),

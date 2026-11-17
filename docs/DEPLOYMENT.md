@@ -132,31 +132,20 @@ any secret creates a new Worker version, which ends an attached `wrangler tail`
 
 ## Admin dashboard
 
-`/admin.html` and `/api/admin/*` are closed unless Cloudflare Access has
-identified the caller as one of the addresses in the `ADMIN_EMAILS` Worker var
-(set in `wrangler.jsonc`). Requests with no credentials, or with an address that
-is not on that list, return 401. The old query-string `key` is no longer
-accepted.
+`/admin.html` and `/api/admin/*` are protected by the Cloudflare Access
+application **Love Mallacoota admin** (team domain
+`quiet-tooth-f3e9.cloudflareaccess.com`). Unauthenticated requests are sent to
+the Access one-time PIN login. The allow-list is the reusable policy of the same
+name: `coota@lovemallacoota.au`, `coota@oze.com.au`, and `col@dixon.net.au`.
+The session lasts 24 hours.
 
-That header is only trustworthy when an Access application is in front of the
-admin page and the admin API. In Cloudflare Zero Trust, add an Access
-application for `lovemallacoota.au` covering `/admin.html` and `/api/admin/*`,
-and allow the same addresses as `ADMIN_EMAILS`. Sign-in can be Google or a
-one-time PIN, the same arrangement already described for contributors in
-[`WEEKLY-MOUTH.md`](WEEKLY-MOUTH.md).
+The Worker also checks the Access JWT, using `CF_ACCESS_TEAM_DOMAIN` and
+`CF_ACCESS_AUD` from `wrangler.jsonc`, and still refuses any caller whose email
+is not on `ADMIN_EMAILS`. The old query-string `key` is not accepted.
 
-To have the Worker verify the Access JWT as well as the email header, set two
-more vars and redeploy:
-
-```sh
-npx wrangler vars put CF_ACCESS_TEAM_DOMAIN --env=""
-# value: <your-team>.cloudflareaccess.com
-npx wrangler vars put CF_ACCESS_AUD --env=""
-# value: the Application Audience (AUD) tag from the Access application
-```
-
-The same two names can be added to `wrangler.jsonc` instead. Until they are
-set, the Worker trusts `Cf-Access-Authenticated-User-Email` only.
+A Google identity provider is not configured on this account, so sign-in is
+one-time PIN only. If Google is added later, it can be allowed on the same
+application without changing the email list.
 
 ## Rollback
 

@@ -32,7 +32,10 @@ import PageHero from "../components/PageHero.astro";
           const res = await fetch("/api/admin/pending");
           const data = await res.json();
           if (!res.ok || !data.ok) {
-            statusEl.textContent = data.error || "Could not load pending submissions.";
+            statusEl.textContent =
+              res.status === 401 || res.status === 403
+                ? "Sign in through Cloudflare Access to review submissions."
+                : (data.error || "Could not load pending submissions.");
             statusEl.className = "form-status error";
             return;
           }

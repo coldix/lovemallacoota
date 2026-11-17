@@ -93,6 +93,44 @@ const MOVED_PATHS = new Map([
   // MallaMaurice Holiday Units no longer operate. The listing is gone; the old
   // address sends people to Stay rather than a 404.
   ["/listing/mallamaurice-holiday-units.html", "/accom.html"],
+  // Typo in the first slug, then the later renames recorded on
+  // /directory-changes.html. Each old address still has a current page.
+  [
+    "/listing/bega-valley-garage-doos.html",
+    "/listing/bega-valley-garage-doors.html",
+  ],
+  [
+    "/listing/mallacoota-and-district-tool-library.html",
+    "/listing/mallacoota-and-district-tool-library-madtl.html",
+  ],
+  [
+    "/listing/mallacoota-and-district-business-and-tourism-association.html",
+    "/listing/mallacoota-district-business-and-tourism-association-mdbta.html",
+  ],
+  [
+    "/listing/mallacoota-and-district-university-of-the-third-age-u3a.html",
+    "/listing/u3a-mallacoota.html",
+  ],
+  [
+    "/listing/mallacoota-boardriders-club.html",
+    "/listing/mallacoota-boardriders.html",
+  ],
+  [
+    "/listing/mallacoota-halls-and-recreation-reserve-grounds-management-committee.html",
+    "/listing/mallacoota-halls-and-recreation-community-precinct-gum.html",
+  ],
+  [
+    "/listing/mallacoota-inlet-aged-care.html",
+    "/listing/mallacoota-inlet-aged-care-miac.html",
+  ],
+  [
+    "/listing/mallacoota-progress-association.html",
+    "/listing/mallacoota-progress-association-mpa.html",
+  ],
+  [
+    "/listing/the-mallacoota-wilderness-collective.html",
+    "/listing/the-wilderness-collective.html",
+  ],
   // Week 37 was opened for a few hours on Sunday night, then taken down. The
   // first weekly edition is archived; Coota is the live monthly.
   ["/edition/2026-w37.html", "/edition.html"],
@@ -168,13 +206,18 @@ const CSP = [
   "upgrade-insecure-requests",
 ].join("; ");
 
-function applySecurityHeaders(response: Response, hostname?: string): Response {
+function applySecurityHeaders(response: Response, url?: URL): Response {
   const secured = new Response(response.body, response);
   // The preview worker and the workers.dev hostname serve the production HTML.
   // The canonical tag points home, but a crawler should not have to take that
   // on trust: anything not on the real domain is told plainly not to index.
-  if (hostname && hostname !== CANONICAL_HOST) {
+  if (url && url.hostname !== CANONICAL_HOST) {
     secured.headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
+  // API routes are not pages. Search Console was fetching them as if they were
+  // and filing the 405s under "blocked due to other 4xx".
+  if (url?.pathname.startsWith("/api/") && !secured.headers.has("X-Robots-Tag")) {
+    secured.headers.set("X-Robots-Tag", "noindex");
   }
   secured.headers.set("X-Content-Type-Options", "nosniff");
   secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
@@ -201,7 +244,7 @@ export default {
     }
 
     if (url.pathname === "/api/submit") {
-      return applySecurityHeaders(await handleContactSubmit(request, env));
+      return applySecurityHeaders(await handleContactSubmit(request, env), url);
     }
 
     // Short paths to the Stripe payment links. The URLs are vars rather than
@@ -214,54 +257,65 @@ export default {
         env[payment];
       if (target) return Response.redirect(target, 302);
       return applySecurityHeaders(
-        new Response("That payment link is not configured yet.", { status: 503 })
+        new Response("That payment link is not configured yet.", { status: 503 }),
+        url
       );
     }
 
     if (url.pathname === "/api/checkout") {
-      return applySecurityHeaders(await handleCheckoutSession(request, env));
+      return applySecurityHeaders(await handleCheckoutSession(request, env), url);
     }
 
     if (url.pathname === "/api/stripe") {
-      return applySecurityHeaders(await handleStripeWebhook(request, env));
+      return applySecurityHeaders(await handleStripeWebhook(request, env), url);
     }
 
     if (url.pathname === "/api/article") {
-      return applySecurityHeaders(await handleArticleSubmit(request, env));
+      return applySecurityHeaders(await handleArticleSubmit(request, env), url);
     }
 
     if (url.pathname === "/api/listing") {
-      return applySecurityHeaders(await handleListingSubmit(request, env));
+      return applySecurityHeaders(await handleListingSubmit(request, env), url);
     }
 
     if (url.pathname === "/api/listing/verify") {
-      return applySecurityHeaders(await handleListingVerify(request, env));
+      return applySecurityHeaders(await handleListingVerify(request, env), url);
     }
 
     if (url.pathname === "/api/listing/manage") {
-      return applySecurityHeaders(await handleListingManage(request, env));
+      return applySecurityHeaders(await handleListingManage(request, env), url);
     }
 
     if (url.pathname === "/api/admin/pending") {
-      return applySecurityHeaders(await handleAdminPending(request, env));
+      return applySecurityHeaders(await handleAdminPending(request, env), url);
     }
 
     if (url.pathname === "/api/admin/approve") {
-      return applySecurityHeaders(await handleAdminApprove(request, env));
+      return applySecurityHeaders(await handleAdminApprove(request, env), url);
     }
 
     if (url.pathname === "/api/admin/reject") {
-      return applySecurityHeaders(await handleAdminReject(request, env));
+      return applySecurityHeaders(await handleAdminReject(request, env), url);
+    }
+
+    if (url.pathname.startsWith("/api/")) {
+      return applySecurityHeaders(
+        new Response(JSON.stringify({ ok: false, error: "Not found." }), {
+          status: 404,
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+        }),
+        url
+      );
     }
 
     if (weekFromPath(url.pathname)) {
-      return applySecurityHeaders(await handleEditionPdf(request, env, ctx), url.hostname);
+      return applySecurityHeaders(await handleEditionPdf(request, env, ctx), url);
     }
 
     const assetRequest = url.pathname === "/"
       ? new Request(new URL(`/index.html${url.search}`, url), request)
       : request;
     const response = await env.ASSETS.fetch(assetRequest);
-    return applySecurityHeaders(response, url.hostname);
+    return applySecurityHeaders(response, url);
   },
 } satisfies ExportedHandler<Env>;

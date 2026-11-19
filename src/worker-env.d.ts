@@ -70,4 +70,6 @@ interface Env {
    */
   CF_ACCESS_TEAM_DOMAIN?: string;
   CF_ACCESS_AUD?: string;
+  /** Client ID in the verified Access JWT for the pending queue service token. */
+  LM_PENDING_SERVICE_TOKEN_ID?: string;
 }

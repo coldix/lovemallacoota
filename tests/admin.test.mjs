@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { generateKeyPairSync, sign } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
@@ -97,6 +98,127 @@ test("when JWT verification is configured, the email header alone is not enough"
     locked
   );
   assert.equal(response.status, 401);
+});
+
+test("verified Access identities are authorised only for their admin routes", async (t) => {
+  const team = "test-team.cloudflareaccess.com";
+  const audience = "admin-app";
+  const serviceId = "pending-queue.access";
+  const locked = {
+    ...env,
+    CF_ACCESS_TEAM_DOMAIN: team,
+    CF_ACCESS_AUD: audience,
+    LM_PENDING_SERVICE_TOKEN_ID: serviceId,
+  };
+  const { privateKey, publicKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
+  const kid = "admin-test-key";
+  t.mock.method(globalThis, "fetch", async (url) => {
+    assert.equal(url, `https://${team}/cdn-cgi/access/certs`);
+    return Response.json({ keys: [{ ...publicKey.export({ format: "jwk" }), kid }] });
+  });
+
+  const claims = { iss: `https://${team}`, aud: [audience], exp: Math.floor(Date.now() / 1000) + 60 };
+  const serviceClaims = { type: "app", sub: "", common_name: serviceId };
+  const encode = (value) => Buffer.from(JSON.stringify(value)).toString("base64url");
+  const jwt = (identity) => {
+    const input = `${encode({ alg: "RS256", kid })}.${encode({ ...claims, ...identity })}`;
+    return `${input}.${sign("RSA-SHA256", Buffer.from(input), privateKey).toString("base64url")}`;
+  };
+  const serviceJwt = jwt(serviceClaims);
+  const personJwt = jwt({ email: "Coota@LoveMallacoota.au", sub: "test-person" });
+  const pending = "/api/admin/pending";
+
+  await t.test("the configured service token can read the queue", async () => {
+    const row = { id: "entry", payload: "{}", status: "held" };
+    const DB = {
+      prepare(query) {
+        assert.match(query, /^SELECT .* FROM submissions WHERE status IN /);
+        return { all: async () => ({ results: [row] }) };
+      },
+    };
+    const response = await worker.fetch(adminRequest(pending, { jwt: serviceJwt }), {
+      ...locked,
+      ADMIN_EMAILS: undefined,
+      DB,
+    });
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), {
+      ok: true,
+      submissions: [{ id: "entry", status: "held", data: {} }],
+    });
+  });
+
+  await t.test("the service token cannot use the dashboard, HEAD, or other admin routes", async () => {
+    const routes = [
+      [pending, "HEAD"],
+      ["/api/admin/approve", "POST"],
+      ["/api/admin/reject", "POST"],
+      ["/api/admin/other", "GET"],
+      ["/admin.html", "GET"],
+    ];
+    for (const [path, method] of routes) {
+      const response = await worker.fetch(adminRequest(path, { jwt: serviceJwt, method }), locked);
+      assert.equal(response.status, 401, `${method} ${path}`);
+    }
+    const approve = adminRequest("/api/admin/approve", {
+      jwt: jwt({ ...serviceClaims, email: "coota@lovemallacoota.au" }),
+      method: "POST",
+    });
+    assert.equal((await worker.fetch(approve, locked)).status, 401);
+  });
+
+  await t.test("allow-listed people can still read and moderate", async () => {
+    for (const [path, method] of [[pending, "GET"], [pending, "HEAD"], ["/admin.html", "GET"]]) {
+      const response = await worker.fetch(adminRequest(path, { jwt: personJwt, method }), locked);
+      assert.equal(response.status, 200, `${method} ${path}`);
+    }
+    const DB = {
+      prepare(query) {
+        return {
+          bind() {
+            if (query.startsWith("SELECT ")) {
+              return { first: async () => ({ kind: "listing", payload: "{}" }) };
+            }
+            assert.match(query, /^UPDATE submissions SET status = '(approved|rejected)'/);
+            return { run: async () => ({}) };
+          },
+        };
+      },
+    };
+    for (const path of ["/api/admin/approve", "/api/admin/reject"]) {
+      const request = new Request(`https://lovemallacoota.au${path}`, {
+        method: "POST",
+        headers: { "Cf-Access-Jwt-Assertion": personJwt },
+        body: JSON.stringify({ id: "entry" }),
+      });
+      assert.equal((await worker.fetch(request, { ...locked, DB })).status, 200, path);
+    }
+    const outsider = adminRequest(pending, { jwt: jwt({ email: "outsider@example.com" }) });
+    assert.equal((await worker.fetch(outsider, locked)).status, 401);
+  });
+
+  await t.test("missing, invalid, and unconfigured service credentials fail closed", async () => {
+    const [header, payload, signature] = serviceJwt.split(".");
+    const modifiedSignature = Buffer.from(signature, "base64url");
+    modifiedSignature[0] ^= 1;
+    const rejected = [
+      undefined,
+      "malformed",
+      `${header}.${payload}.${modifiedSignature.toString("base64url")}`,
+      jwt({ ...serviceClaims, aud: ["another-app"] }),
+      jwt({ ...serviceClaims, iss: "https://another-team.cloudflareaccess.com" }),
+      jwt({ ...serviceClaims, exp: claims.exp - 120 }),
+      jwt({ ...serviceClaims, common_name: "other-queue.access" }),
+    ];
+    for (const token of rejected) {
+      const request = adminRequest(pending, { jwt: token, email: "coota@lovemallacoota.au" });
+      assert.equal((await worker.fetch(request, locked)).status, 401);
+    }
+    const request = adminRequest(pending, { jwt: serviceJwt });
+    for (const changes of [{ LM_PENDING_SERVICE_TOKEN_ID: undefined }, { CF_ACCESS_AUD: undefined }]) {
+      assert.equal((await worker.fetch(request, { ...locked, ...changes })).status, 401);
+    }
+  });
 });
 
 test("approve and reject answer GET with 405 rather than 500", async () => {

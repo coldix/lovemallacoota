@@ -1,4 +1,4 @@
-import { handleAdminApprove, handleAdminPending, handleAdminReject } from "./admin.ts";
+import { adminUnauthorized, handleAdminApprove, handleAdminPending, handleAdminReject, isAdmin } from "./admin.ts";
 import { handleCheckoutSession } from "./checkout.ts";
 import { handleContactSubmit } from "./contact.ts";
 import { handleEditionPdf, weekFromPath } from "./edition-pdf.ts";
@@ -296,6 +296,10 @@ export default {
 
     if (url.pathname === "/api/admin/reject") {
       return applySecurityHeaders(await handleAdminReject(request, env), url);
+    }
+
+    if (url.pathname === "/admin.html" || url.pathname === "/api/admin" || url.pathname.startsWith("/api/admin/")) {
+      if (!(await isAdmin(request, env))) return applySecurityHeaders(adminUnauthorized(), url);
     }
 
     if (url.pathname.startsWith("/api/")) {

@@ -78,15 +78,12 @@ async function accessSigningKeys(team: string): Promise<Map<string, CryptoKey> |
   }
 }
 
-/**
- * Verify a Cloudflare Access JWT when the team domain and audience are
- * configured. Returns the email claim, or null if the token is missing or bad.
- */
-export async function verifiedAccessEmail(
+/** Return the claims from a verified Cloudflare Access JWT. */
+async function verifiedAccessClaims(
   request: Request,
   team: string,
   aud: string
-): Promise<string | null> {
+): Promise<Record<string, unknown> | null> {
   const token = request.headers.get("Cf-Access-Jwt-Assertion");
   if (!token) return null;
   const parts = token.split(".");
@@ -115,33 +112,49 @@ export async function verifiedAccessEmail(
   if (!audiences.includes(aud)) return null;
   if (typeof payload.exp !== "number" || payload.exp * 1000 <= Date.now()) return null;
 
-  const email = typeof payload.email === "string" ? payload.email.toLowerCase() : "";
-  return email.includes("@") ? email : null;
+  return payload;
 }
 
-/**
- * Admin routes fail closed. A request is allowed only when:
- *   - ADMIN_EMAILS is set (comma-separated allow-list), and
- *   - Cloudflare Access has identified the caller as one of those addresses.
- *
- * If CF_ACCESS_TEAM_DOMAIN and CF_ACCESS_AUD are set, the Access JWT is
- * verified. Otherwise the Worker trusts Cf-Access-Authenticated-User-Email,
- * which is only safe when an Access application sits in front of /admin.html
- * and /api/admin/*. There is no query-string key and no default allow.
- */
-export async function isAdmin(request: Request, env: Env): Promise<boolean> {
+async function hasAdminAccess(
+  request: Request,
+  env: Env,
+  allowPendingServiceToken: boolean
+): Promise<boolean> {
   const allowed = parseAdminEmails(env.ADMIN_EMAILS);
-  if (allowed.size === 0) return false;
-
   const team = teamDomain(env.CF_ACCESS_TEAM_DOMAIN);
   const aud = env.CF_ACCESS_AUD?.trim();
+  const pendingServiceTokenId = env.LM_PENDING_SERVICE_TOKEN_ID?.trim();
+
   if (team && aud) {
-    const email = await verifiedAccessEmail(request, team, aud);
-    return email != null && allowed.has(email);
+    const claims = await verifiedAccessClaims(request, team, aud);
+    if (!claims) return false;
+
+    // Access uses common_name for service tokens. Keep those callers out of
+    // the person allow-list even if a JWT also carries an email claim.
+    if (typeof claims.common_name === "string" && claims.common_name !== "") {
+      return allowPendingServiceToken &&
+        Boolean(pendingServiceTokenId) &&
+        claims.common_name === pendingServiceTokenId;
+    }
+
+    const email = typeof claims.email === "string" ? claims.email.toLowerCase() : "";
+    return allowed.has(email);
   }
 
+  // The legacy email header requires Access in front of the Worker. Service
+  // token support always requires cryptographic verification at the Worker.
+  if (pendingServiceTokenId || allowed.size === 0) return false;
   const email = accessEmail(request);
   return email != null && allowed.has(email);
+}
+
+/** Check that a person is on the admin email allow-list. */
+export function isAdmin(request: Request, env: Env): Promise<boolean> {
+  return hasAdminAccess(request, env, false);
+}
+
+export function adminUnauthorized(): Response {
+  return json({ ok: false, error: "Unauthorized access." }, 401);
 }
 
 export async function handleAdminPending(request: Request, env: Env): Promise<Response> {
@@ -149,9 +162,8 @@ export async function handleAdminPending(request: Request, env: Env): Promise<Re
     return json({ ok: false, error: "Use GET." }, 405);
   }
 
-  if (!(await isAdmin(request, env))) {
-    return json({ ok: false, error: "Unauthorized access." }, 401);
-  }
+  const allowServiceToken = request.method === "GET" && new URL(request.url).pathname === "/api/admin/pending";
+  if (!(await hasAdminAccess(request, env, allowServiceToken))) return adminUnauthorized();
 
   if (!env.DB) {
     return json({ ok: true, submissions: [] }, 200);
@@ -201,9 +213,7 @@ export async function handleAdminApprove(request: Request, env: Env): Promise<Re
     return json({ ok: false, error: "Use POST." }, 405);
   }
 
-  if (!(await isAdmin(request, env))) {
-    return json({ ok: false, error: "Unauthorized access." }, 401);
-  }
+  if (!(await isAdmin(request, env))) return adminUnauthorized();
 
   try {
     const body = (await request.json()) as { id: string };
@@ -260,9 +270,7 @@ export async function handleAdminReject(request: Request, env: Env): Promise<Res
     return json({ ok: false, error: "Use POST." }, 405);
   }
 
-  if (!(await isAdmin(request, env))) {
-    return json({ ok: false, error: "Unauthorized access." }, 401);
-  }
+  if (!(await isAdmin(request, env))) return adminUnauthorized();
 
   try {
     const body = (await request.json()) as { id: string };
